@@ -18,7 +18,7 @@
   <string name="format_hint_code">Aggiungi codice&#8230;</string>
   <string name="markdown_sheet_markdown_support">Supporto Markdown</string>
   <string name="markdown_sheet_markdown_support_subtitle">Consenti la formattazione Markdown</string>
-  <string name="home_option_sheet_title">Opzioni e impostazioni</string>
+  <string name="home_option_sheet_title">Impostazioni</string>
   <string name="home_option_export">Esporta note</string>
   <string name="home_option_export_subtitle">Esporta le note nella memoria del dispositivo</string>
   <string name="home_option_import">Importa note</string>

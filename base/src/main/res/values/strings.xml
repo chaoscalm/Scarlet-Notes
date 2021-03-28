@@ -67,7 +67,7 @@
   <string name="format_hint_code">Add Code&#8230;</string>
   <string name="format_hint_image">Click to add or change image</string>
 
-  <string name="home_option_sheet_title">Options and Settings</string>
+  <string name="home_option_sheet_title">Settings</string>
   <string name="home_option_ui_experience">Interface and Experience</string>
   <string name="home_option_ui_experience_subtitle">Choose how the app looks and feels.</string>
   <string name="home_option_about">About</string>
