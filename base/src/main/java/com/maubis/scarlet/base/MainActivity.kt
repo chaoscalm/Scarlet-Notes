@@ -220,12 +220,6 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
     val toolbarIconColor = sAppTheme.get(ThemeColorType.SECONDARY_TEXT)
     toolbarSearchIcon.setColorFilter(toolbarIconColor)
     toolbarSettingsIcon.setColorFilter(toolbarIconColor)
-
-    toolbarDebugIcon.visibility = visibility(BuildConfig.DEBUG)
-    toolbarDebugIcon.setColorFilter(toolbarIconColor)
-    toolbarDebugIcon.setOnClickListener {
-      performAction(MainActivityActions.TYPEFACE_PICKER)
-    }
   }
 
   fun setupRecyclerView() {
