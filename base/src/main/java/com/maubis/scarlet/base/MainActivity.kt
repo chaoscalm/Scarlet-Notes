@@ -30,7 +30,6 @@ import com.maubis.scarlet.base.main.*
 import com.maubis.scarlet.base.main.HomeNavigationMode
 import com.maubis.scarlet.base.main.SearchState
 import com.maubis.scarlet.base.main.recycler.EmptyRecyclerItem
-import com.maubis.scarlet.base.main.recycler.GenericRecyclerItem
 import com.maubis.scarlet.base.main.recycler.getAppUpdateInformationItem
 import com.maubis.scarlet.base.main.recycler.getBackupInformationItem
 import com.maubis.scarlet.base.main.recycler.getInstallProInformationItem
@@ -64,6 +63,7 @@ import com.maubis.scarlet.base.note.tag.view.TagsAndColorPickerViewHolder
 import com.maubis.scarlet.base.service.SyncedNoteBroadcastReceiver
 import com.maubis.scarlet.base.service.getNoteIntentFilter
 import com.maubis.scarlet.base.settings.sheet.STORE_KEY_LINE_COUNT
+import com.maubis.scarlet.base.settings.sheet.SettingsOptionsBottomSheet
 import com.maubis.scarlet.base.settings.sheet.SettingsOptionsBottomSheet.Companion.KEY_MARKDOWN_ENABLED
 import com.maubis.scarlet.base.settings.sheet.SettingsOptionsBottomSheet.Companion.KEY_MARKDOWN_HOME_ENABLED
 import com.maubis.scarlet.base.settings.sheet.sNoteItemLineCount
@@ -74,19 +74,13 @@ import com.maubis.scarlet.base.support.database.Migrator
 import com.maubis.scarlet.base.support.recycler.RecyclerItem
 import com.maubis.scarlet.base.support.sheets.openSheet
 import com.maubis.scarlet.base.support.specs.ToolbarColorConfig
-import com.maubis.scarlet.base.support.ui.SecuredActivity
-import com.maubis.scarlet.base.support.ui.ThemeColorType
-import com.maubis.scarlet.base.support.ui.sThemeIsAutomatic
-import com.maubis.scarlet.base.support.ui.setThemeFromSystem
+import com.maubis.scarlet.base.support.ui.*
 import com.maubis.scarlet.base.support.utils.shouldShowWhatsNewSheet
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.toolbar_main.*
 import kotlinx.android.synthetic.main.search_toolbar_main.*
 import kotlinx.android.synthetic.main.toolbar_trash_info.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.newSingleThreadContext
+import kotlinx.coroutines.*
 import java.util.concurrent.atomic.AtomicBoolean
 
 class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
@@ -98,8 +92,6 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
     private const val TAGS_UUIDS: String = "TAGS_UUIDS"
     private const val SEARCH_COLORS: String = "SEARCH_COLORS"
   }
-
-  private val singleThreadDispatcher = newSingleThreadContext("singleThreadDispatcher")
 
   private lateinit var recyclerView: RecyclerView
   private lateinit var adapter: NoteAppAdapter
@@ -122,8 +114,7 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
     // Migrate to the newer version of the tags
     Migrator(this).start()
 
-    state.mode = HomeNavigationMode.DEFAULT
-
+    setupMainToolbar()
     setupRecyclerView()
     setListeners()
 
@@ -213,6 +204,30 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
       })
   }
 
+  fun setupMainToolbar() {
+    toolbarSearchIcon.setOnClickListener {
+      enterSearchMode()
+    }
+
+    toolbarSettingsIcon.setOnClickListener {
+      SettingsOptionsBottomSheet.openSheet(this)
+    }
+
+    val titleColor = sAppTheme.get(ThemeColorType.SECONDARY_TEXT)
+    toolbarTitle.setTextColor(titleColor)
+    toolbarTitle.typeface = ApplicationBase.sAppTypeface.heading()
+
+    val toolbarIconColor = sAppTheme.get(ThemeColorType.SECONDARY_TEXT)
+    toolbarSearchIcon.setColorFilter(toolbarIconColor)
+    toolbarSettingsIcon.setColorFilter(toolbarIconColor)
+
+    toolbarDebugIcon.visibility = visibility(BuildConfig.DEBUG)
+    toolbarDebugIcon.setColorFilter(toolbarIconColor)
+    toolbarDebugIcon.setOnClickListener {
+      performAction(MainActivityActions.TYPEFACE_PICKER)
+    }
+  }
+
   fun setupRecyclerView() {
     val isTablet = resources.getBoolean(R.bool.is_tablet)
 
@@ -253,25 +268,36 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
   }
 
   fun onModeChange(mode: HomeNavigationMode) {
-    GlobalScope.launch(Dispatchers.Main) {
-      state.mode = mode
-      unifiedSearch()
-      notifyModeChange()
-    }
+    state.mode = mode
+    state.currentFolder = null
+    notifyFolderChange()
+    unifiedSearch()
+    updateToolbars()
   }
 
-  private fun notifyModeChange() {
-    val isTrash = state.mode === HomeNavigationMode.TRASH
+  private fun updateToolbars() {
+    toolbarTitle.text = getString(state.mode.toolbarTitleResourceId)
+    updateMainToolbarLeftIcon()
+
+    val isTrash = state.mode == HomeNavigationMode.TRASH
     trashNoticeToolbar.visibility = if (isTrash) View.VISIBLE else GONE
     setBottomToolbar()
   }
 
-  fun onFolderChange(folder: Folder?) {
-    GlobalScope.launch(Dispatchers.Main) {
-      state.currentFolder = folder
-      unifiedSearch()
-      notifyFolderChange()
+  private fun updateMainToolbarLeftIcon() {
+    toolbarLeftIcon.setImageDrawable(getDrawable(state.mode.toolbarIconResourceId))
+    if (state.mode != HomeNavigationMode.DEFAULT) {
+      val iconColor = sAppTheme.get(ThemeColorType.SECONDARY_TEXT)
+      toolbarLeftIcon.setColorFilter(iconColor)
     }
+    else
+      toolbarLeftIcon.clearColorFilter()
+  }
+
+  fun onFolderChange(folder: Folder?) {
+    state.currentFolder = folder
+    unifiedSearch()
+    notifyFolderChange()
   }
 
   private fun notifyFolderChange() {
@@ -293,8 +319,7 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
   private fun handleNewItems(notes: List<RecyclerItem>) {
     adapter.clearItems()
     if (!isInSearchMode) {
-      adapter.addItem(GenericRecyclerItem(RecyclerItem.Type.TOOLBAR))
-      addInformationItem(1)
+      addInformationItem()
     }
     if (notes.isEmpty()) {
       adapter.addItem(EmptyRecyclerItem())
@@ -305,7 +330,7 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
     }
   }
 
-  private fun addInformationItem(index: Int) {
+  private fun addInformationItem() {
     val informationItem = when {
       shouldShowMigrateToProAppInformationItem(this) -> getMigrateToProAppInformationItem(this)
       shouldShowSignInformationItem(this) -> getSignInInformationItem(this)
@@ -319,7 +344,7 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
     if (informationItem === null) {
       return
     }
-    adapter.addItem(informationItem, index)
+    adapter.addItem(informationItem, 0)
   }
 
   private suspend fun unifiedSearchSynchronous(): List<RecyclerItem> {
@@ -429,7 +454,7 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
     state.mode = if (state.mode == HomeNavigationMode.LOCKED) HomeNavigationMode.DEFAULT else state.mode
     state.tags.add(tag)
     unifiedSearch()
-    notifyModeChange()
+    updateToolbars()
   }
 
   override fun onResume() {
@@ -464,35 +489,32 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
 
   fun loadData() = onModeChange(state.mode)
 
-  fun enterSearchMode() {
+  private fun enterSearchMode() {
     isInSearchMode = true
     searchBox.setText(state.text)
+    mainToolbar.visibility = View.GONE
     searchToolbar.visibility = View.VISIBLE
     tryOpeningTheKeyboard()
     GlobalScope.launch(Dispatchers.Main) {
-      GlobalScope.async(Dispatchers.IO) { tagAndColorPicker.reset() }.await()
+      withContext(Dispatchers.IO) { tagAndColorPicker.reset() }
       tagAndColorPicker.notifyChanged()
     }
     searchBox.requestFocus()
   }
 
-  fun quitSearchMode() {
+  private fun quitSearchMode() {
     isInSearchMode = false
     searchBox.setText("")
     tryClosingTheKeyboard()
+    mainToolbar.visibility = View.VISIBLE
     searchToolbar.visibility = View.GONE
     state.clearSearchBar()
     loadData()
   }
 
   private fun startSearch(keyword: String) {
-    GlobalScope.launch(singleThreadDispatcher) {
-      state.text = keyword
-      val items = GlobalScope.async(Dispatchers.IO) { unifiedSearchSynchronous() }
-      GlobalScope.launch(Dispatchers.Main) {
-        handleNewItems(items.await())
-      }
-    }
+    state.text = keyword
+    unifiedSearch()
   }
 
   override fun onBackPressed() {
@@ -503,7 +525,6 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
       state.hasFilter() -> {
         state.clear()
         onModeChange(HomeNavigationMode.DEFAULT)
-        notifyFolderChange()
       }
       else -> super.onBackPressed()
     }
