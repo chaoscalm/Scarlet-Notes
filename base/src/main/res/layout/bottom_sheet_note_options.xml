@@ -87,18 +87,6 @@
             android:textColor="@color/light_tertiary_text"
             android:textSize="@dimen/font_size_small" />
 
-          <TextView
-            android:id="@+id/tags_content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tags_title"
-            android:layout_alignStart="@+id/tags_title"
-            android:layout_marginTop="@dimen/spacing_xsmall"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:textColor="@color/light_tertiary_text"
-            android:textSize="@dimen/font_size_large"
-            android:visibility="gone" />
         </RelativeLayout>
       </androidx.cardview.widget.CardView>
 

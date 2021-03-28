@@ -106,7 +106,7 @@ class NoteOptionsBottomSheet() : GridBottomSheetBase() {
     val selectCardSubtitle = dlg.findViewById<TextView>(R.id.select_notes_subtitle)
     selectCardSubtitle.typeface = sAppTypeface.title()
 
-    val tags = tagCardLayout.findViewById<TextView>(R.id.tags_content)
+    val tags = tagCardLayout.findViewById<TextView>(R.id.tags_title)
     tags.typeface = sAppTypeface.title()
     val tagSubtitle = tagCardLayout.findViewById<TextView>(R.id.tags_subtitle)
     tagSubtitle.typeface = sAppTypeface.title()
