@@ -6,14 +6,13 @@ shortcutHelper.filePath = '../shortcuts.xml'
 
 android {
     compileSdkVersion 28
-    buildToolsVersion '28.0.3'
 
     defaultConfig {
         applicationId "com.bijoysingh.quicknote"
-        minSdkVersion 21
-        targetSdkVersion 28
-        versionCode 156
-        versionName '7.5.4'
+        minSdkVersion rootProject.ext.appconfig_min_os_version
+        targetSdkVersion rootProject.ext.appconfig_target_os_version
+        versionCode rootProject.ext.appconfig_version_code
+        versionName rootProject.ext.appconfig_version
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
