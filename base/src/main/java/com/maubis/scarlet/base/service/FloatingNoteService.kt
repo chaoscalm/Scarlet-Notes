@@ -41,7 +41,7 @@ class FloatingNoteService : FloatingBubbleService() {
 
   override fun getConfig(): FloatingBubbleConfig {
     return FloatingBubbleConfig.Builder()
-      .bubbleIcon(ContextCompat.getDrawable(context, R.drawable.app_icon))
+      .bubbleIcon(ContextCompat.getDrawable(context, R.mipmap.ic_launcher))
       .removeBubbleIcon(
         ContextCompat.getDrawable(
           context,

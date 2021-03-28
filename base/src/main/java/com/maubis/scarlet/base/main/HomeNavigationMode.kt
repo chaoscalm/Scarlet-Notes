@@ -8,7 +8,7 @@ import com.maubis.scarlet.base.R
 enum class HomeNavigationMode {
   DEFAULT {
     override val toolbarTitleResourceId: Int = R.string.app_name
-    override val toolbarIconResourceId: Int = R.drawable.app_icon_round
+    override val toolbarIconResourceId: Int = R.mipmap.ic_launcher
   },
   TRASH {
     override val toolbarTitleResourceId: Int = R.string.nav_trash
