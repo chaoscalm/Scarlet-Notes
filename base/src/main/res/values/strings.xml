@@ -231,7 +231,6 @@
   <string name="whats_new_translate">Translate</string>
 
   <string name="whats_new_sheet_subtitle" translatable="false">A lot has changed in this update, here is a summary of those changes.</string>
-  <string name="whats_new_sheet_google_drive" translatable="false">Sign In with Drive. More Privacy.</string>
   <string name="whats_new_sheet_photo_share" translatable="false">Share Photos. To and From.</string>
   <string name="whats_new_sheet_note_color" translatable="false">More Note Colors.</string>
   <string name="whats_new_sheet_choose_fonts" translatable="false">Customise Fonts.</string>

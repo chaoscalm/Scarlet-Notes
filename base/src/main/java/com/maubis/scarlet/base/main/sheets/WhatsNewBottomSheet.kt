@@ -25,7 +25,6 @@ class WhatsNewBottomSheet : LithoBottomSheet() {
 
   override fun getComponent(componentContext: ComponentContext, dialog: Dialog): Component {
     val options = listOf(
-      if (FlavorUtils.isOpenSource()) null else GridSectionOptionItem(R.drawable.gdrive_icon, R.string.whats_new_sheet_google_drive, {}),
       GridSectionOptionItem(R.drawable.icon_share_image, R.string.whats_new_sheet_photo_share, {}),
       GridSectionOptionItem(R.drawable.ic_action_color, R.string.whats_new_sheet_note_color, {}),
       GridSectionOptionItem(R.drawable.icon_typeface, R.string.whats_new_sheet_choose_fonts, {}),
