@@ -42,7 +42,7 @@ class TypefaceController(context: Context) {
   fun getSetForType(context: Context, typefaceType: TypefaceType): TypefaceSet {
     return when (typefaceType) {
       TypefaceType.APP_DEFAULT -> TypefaceSet(
-        heading = ResourcesCompat.getFont(context, R.font.monserrat_bold) ?: Typeface.DEFAULT,
+        heading = ResourcesCompat.getFont(context, R.font.monserrat_medium) ?: Typeface.DEFAULT,
         subHeading = ResourcesCompat.getFont(context, R.font.monserrat_medium) ?: Typeface.DEFAULT,
         title = ResourcesCompat.getFont(context, R.font.monserrat) ?: Typeface.DEFAULT,
         text = ResourcesCompat.getFont(context, R.font.open_sans) ?: Typeface.DEFAULT,
