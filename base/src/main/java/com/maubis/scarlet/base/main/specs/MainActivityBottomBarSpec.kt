@@ -40,7 +40,6 @@ import com.maubis.scarlet.base.support.specs.bottomBarRoundIcon
 import com.maubis.scarlet.base.support.ui.ColorUtil
 import com.maubis.scarlet.base.support.ui.ThemeColorType
 import com.maubis.scarlet.base.support.utils.OsVersionUtils
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -50,7 +49,7 @@ object MainActivityBottomBarSpec {
   fun onCreate(
     context: ComponentContext,
     @Prop colorConfig: ToolbarColorConfig,
-    @Prop disableNewFolderButton: Boolean,
+    @Prop isInsideFolder: Boolean,
     @Prop isInTrash: Boolean
   ): Component {
     val activity = context.androidContext as MainActivity
@@ -74,16 +73,16 @@ object MainActivityBottomBarSpec {
       )
     }
     else {
-      row.child(bottomBarRoundIcon(context, colorConfig)
-          .iconRes(R.drawable.icon_add_notebook)
-          .alpha(if (disableNewFolderButton) 0.4f else 1.0f)
-          .isClickDisabled(disableNewFolderButton)
-          .onClick {
-            CreateOrEditFolderBottomSheet.openSheet(
-                activity,
-                FolderBuilder().emptyFolder(sNoteDefaultColor),
-                { _, _ -> activity.loadData() })
-          })
+      if (!isInsideFolder) {
+        row.child(bottomBarRoundIcon(context, colorConfig)
+                .iconRes(R.drawable.icon_add_notebook)
+                .onClick {
+                  CreateOrEditFolderBottomSheet.openSheet(
+                          activity,
+                          FolderBuilder().emptyFolder(sNoteDefaultColor),
+                          { _, _ -> activity.loadData() })
+                })
+      }
       row.child(bottomBarRoundIcon(context, colorConfig)
           .iconRes(R.drawable.icon_add_list)
           .onClick {

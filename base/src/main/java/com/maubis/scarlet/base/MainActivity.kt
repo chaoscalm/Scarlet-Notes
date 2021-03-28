@@ -574,7 +574,7 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
         componentContext,
         MainActivityBottomBar.create(componentContext)
           .colorConfig(ToolbarColorConfig())
-          .disableNewFolderButton(state.currentFolder != null)
+          .isInsideFolder(state.currentFolder != null)
           .isInTrash(state.mode == HomeNavigationMode.TRASH)
           .build()))
   }
