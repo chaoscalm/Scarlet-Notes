@@ -269,8 +269,6 @@
   <string name="widget_option_show_archived_notes_details">Consenti alle note archiviate di essere visualizzate nei widget della schermata principale</string>
   <string name="widget_option_show_trash_notes">Mostra note nel cestino</string>
   <string name="widget_option_show_trash_notes_details">Consenti alle note nel cestino di essere visualizzate nei widget della schermata principale</string>
-  <string name="home_option_faq_title">Aiuto e domande comuni</string>
-  <string name="home_option_faq_description">Trova assistenza su come utilizzare le funzionalità dell\'app</string>
   <string name="home_syncing_top_layout">Sincronizzazione</string>
   <string name="home_pending_backup_top_layout">Backup in sospeso</string>
   <string name="internal_settings_title">Opzioni sviluppatore</string>

@@ -1,8 +1,6 @@
 package com.maubis.scarlet.base.settings.sheet
 
 import android.app.Dialog
-import android.content.Intent
-import android.net.Uri
 import com.facebook.litho.ComponentContext
 import com.maubis.scarlet.base.MainActivity
 import com.maubis.scarlet.base.R
@@ -10,7 +8,6 @@ import com.maubis.scarlet.base.main.sheets.WhatsNewBottomSheet
 import com.maubis.scarlet.base.support.sheets.LithoOptionBottomSheet
 import com.maubis.scarlet.base.support.sheets.LithoOptionsItem
 import com.maubis.scarlet.base.support.sheets.openSheet
-import com.maubis.scarlet.base.support.utils.maybeThrow
 
 class AboutSettingsOptionsBottomSheet : LithoOptionBottomSheet() {
   override fun title(): Int = R.string.home_option_about
@@ -34,19 +31,6 @@ class AboutSettingsOptionsBottomSheet : LithoOptionBottomSheet() {
       listener = {
         openSheet(activity, OpenSourceBottomSheet())
         dismiss()
-      }
-    ))
-    options.add(LithoOptionsItem(
-      title = R.string.home_option_faq_title,
-      subtitle = R.string.home_option_faq_description,
-      icon = R.drawable.icon_help,
-      listener = {
-        try {
-          activity.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(SettingsOptionsBottomSheet.GITHUB_FAQ_URL)))
-          dismiss()
-        } catch (exception: Exception) {
-          maybeThrow(activity, exception)
-        }
       }
     ))
     options.add(LithoOptionsItem(

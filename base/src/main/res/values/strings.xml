@@ -380,9 +380,6 @@
 
   <!-- End: Widget Options Sheet -->
 
-  <string name="home_option_faq_title">Help and Common Questions</string>
-  <string name="home_option_faq_description">Find help on how to use the features in the app</string>
-
   <string name="home_syncing_top_layout">Syncing</string>
   <string name="home_pending_backup_top_layout">Pending Backup</string>
   <string name="pending_backup_local_state">Local</string>

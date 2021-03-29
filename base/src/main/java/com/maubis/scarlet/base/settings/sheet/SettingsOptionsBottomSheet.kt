@@ -109,7 +109,6 @@ class SettingsOptionsBottomSheet : LithoOptionBottomSheet() {
   }
 
   companion object {
-    const val GITHUB_FAQ_URL = "http://bijoysingh.github.io/Scarlet-Notes/faq/"
     const val KEY_MARKDOWN_ENABLED = "KEY_MARKDOWN_ENABLED"
     const val KEY_MARKDOWN_HOME_ENABLED = "KEY_MARKDOWN_HOME_ENABLED"
 
