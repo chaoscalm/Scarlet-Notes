@@ -1,5 +1,4 @@
 <resources>
-  <string name="maubis_apps" translatable="false">Maubis Apps</string>
   <string name="timestamp" translatable="false">dd month yyyy, hh:mm aa</string>
   <string name="title">Title</string>
   <string name="description">Content</string>
@@ -91,8 +90,6 @@
   <string name="home_option_auto_export_subtitle">Export notes frequently to external file as backup</string>
   <string name="home_option_about_page">About Us</string>
   <string name="home_option_about_page_subtitle">Know more about the app and the developers</string>
-  <string name="home_option_open_source_page">Open Source Project</string>
-  <string name="home_option_open_source_page_subtitle">Know more about the open source project</string>
   <string name="home_option_rate_and_review">Rate and Review</string>
   <string name="home_option_rate_and_review_subtitle">Tell us how much you liked the app</string>
   <string name="home_option_delete_notes_and_more">Delete Notes and More</string>
@@ -178,9 +175,6 @@
   <string name="about_page_app_version">App Version</string>
   <string name="about_page_about_app">About App</string>
 
-  <string name="osp_page_libraries">Libraries</string>
-  <string name="osp_page_about_osp">Open Source Project</string>
-
   <string name="reminder_sheet_reminder_date">Reminder Date</string>
   <string name="reminder_sheet_reminder_time">Reminder Time</string>
   <string name="reminder_sheet_repeat">Repeat Frequency</string>
@@ -190,9 +184,6 @@
   <string name="notification_channel_label">Note Notifications</string>
   <string name="notification_reminder_channel_label">Reminders and Alarms</string>
 
-  <string name="about_page_description_os">
-    %s is open source and anyone is open to contribute to making it better. It is currently built and maintained by %s.
-  </string>
   <string name="about_page_description">
     %s is a simple note taking app. It allows quick Rich Text input without making the experience very difficult to use. It makes multi-tasking a breeze.
   </string>

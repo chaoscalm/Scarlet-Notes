@@ -25,15 +25,6 @@ class AboutSettingsOptionsBottomSheet : LithoOptionBottomSheet() {
       }
     ))
     options.add(LithoOptionsItem(
-      title = R.string.home_option_open_source_page,
-      subtitle = R.string.home_option_open_source_page_subtitle,
-      icon = R.drawable.ic_code_white_48dp,
-      listener = {
-        openSheet(activity, OpenSourceBottomSheet())
-        dismiss()
-      }
-    ))
-    options.add(LithoOptionsItem(
       title = R.string.whats_new_title,
       subtitle = R.string.whats_new_subtitle,
       icon = R.drawable.ic_whats_new,
