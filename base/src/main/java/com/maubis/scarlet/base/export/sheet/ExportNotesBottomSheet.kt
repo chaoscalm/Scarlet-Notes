@@ -12,34 +12,18 @@ import com.facebook.yoga.YogaEdge
 import com.github.bijoysingh.starter.util.ToastHelper
 import com.maubis.scarlet.base.MainActivity
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppFlavor
 import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTheme
-import com.maubis.scarlet.base.export.support.GenericFileProvider
-import com.maubis.scarlet.base.export.support.NoteExporter
-import com.maubis.scarlet.base.export.support.PermissionUtils
-import com.maubis.scarlet.base.export.support.sAutoBackupMode
-import com.maubis.scarlet.base.export.support.sBackupLockedNotes
-import com.maubis.scarlet.base.export.support.sBackupMarkdown
-import com.maubis.scarlet.base.support.sheets.LithoBottomSheet
-import com.maubis.scarlet.base.support.sheets.LithoOptionsItem
-import com.maubis.scarlet.base.support.sheets.OptionItemLayout
-import com.maubis.scarlet.base.support.sheets.getLithoBottomSheetTitle
-import com.maubis.scarlet.base.support.sheets.openSheet
+import com.maubis.scarlet.base.export.support.*
+import com.maubis.scarlet.base.support.sheets.*
 import com.maubis.scarlet.base.support.specs.BottomSheetBar
 import com.maubis.scarlet.base.support.specs.separatorSpec
 import com.maubis.scarlet.base.support.ui.ThemeColorType
 import com.maubis.scarlet.base.support.ui.ThemedActivity
-import com.maubis.scarlet.base.support.utils.Flavor
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-val NOTES_EXPORT_FOLDER
-  get() = when (sAppFlavor) {
-    Flavor.NONE -> "MaterialNotes"
-    Flavor.LITE -> "Scarlet"
-    Flavor.PRO -> "ScarletPro"
-  }
+val NOTES_EXPORT_FOLDER = "ScarletNotes"
 val NOTES_EXPORT_FILENAME = "manual_backup"
 
 class ExportNotesBottomSheet : LithoBottomSheet() {

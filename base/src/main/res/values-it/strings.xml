@@ -130,10 +130,6 @@
   <string name="home_option_backup_options_subtitle">Backup, importazione ed esportazione delle note</string>
 
   <!-- Added in release v4.0.0 -->
-  <!-- Cloud Backup Hint -->
-  <string name="home_option_install_from_store">Installa dallo store</string>
-  <string name="home_option_install_from_store_subtitle">Installa l\'app dallo store di Google per effettuare la sincronizzazione con il cloud</string>
-
   <!-- No PinCode Sheet -->
   <string name="no_pincode_sheet_title">Nessun PIN impostato</string>
   <string name="no_pincode_sheet_details">Non hai impostato il PIN. Vuoi impostarlo ora?</string>
@@ -170,16 +166,9 @@
   <string name="whats_new_translate">Traduci</string>
 
   <!-- Login, Welcome Strings -->
-  <string name="home_option_login_with_app">Accedi all\'app</string>
-  <string name="home_option_login_with_app_subtitle">Accedi per il backup e la sincronizzazione con il cloud</string>
   <string name="home_option_logout_of_app">Disconnessione</string>
   <string name="home_option_logout_of_app_subtitle">Esci per interrompere il backup sul cloud</string>
   <string name="login_to_google_failed">Accesso a Google non riuscito</string>
-  <string name="material_notes_privacy_policy">Privacy policy</string>
-  <string name="material_notes_privacy_policy_subtitle">Privacy policy dell\'app per il contenuto</string>
-  <string name="install_pro_app">Installa la versione Pro</string>
-  <string name="why_install_pro">Perché installare la versione Pro</string>
-  <string name="why_install_pro_details">Supporta lo sviluppatore per i costi del server necessari ad eseguire la sincronizzazione con il cloud \n\n Ottieni prima le ultime funzionalità \n\n Alcune funzioni aggiuntive saranno disponibili solo per gli utenti Pro</string>
 
   <!-- Added for 4.5.3 -->
   <string name="format_action_copy">Copia</string>
@@ -231,11 +220,6 @@
   <string name="recent_notes">Note recenti</string>
   <string name="information_card_title">Informazione</string>
   <string name="information_new_app_update">Tocca per installare la versione più recente dell\'app</string>
-  <string name="information_install_pro">Tocca per passare a Scarlet Pro</string>
-  <string name="home_option_install_pro_app">Installa la versione Pro</string>
-  <string name="home_option_install_pro_app_details">Installa la versione Pro per sbloccare funzionalità e supportare lo sviluppatore</string>
-  <string name="home_option_migrate_to_pro">Migra le note su Scarlet Pro</string>
-  <string name="home_option_migrate_to_pro_details">Migra tutte le tue note sulla versione Pro</string>
   <string name="home_option_delete_notes_and_more">Elimina note e altro</string>
   <string name="home_option_delete_notes_and_more_details">Elimina note, tag e altri dati nell\'app</string>
   <string name="home_option_delete_all_notes">Elimina tutte le note</string>
@@ -263,7 +247,6 @@
   <string name="import_export_layout_folder_sync_details">Sincronizza tutte le note, i tag, ecc. in una cartella esterna</string>
   <string name="import_export_locked">Esporta note protette</string>
   <string name="sort_sheet_alphabetical">Alfabetico</string>
-  <string name="available_in_pro_only">Disponibile su Scarlet Pro</string>
   <string name="import_export_locked_details">Effettua anche il backup delle note che sono protette</string>
   <string name="home_option_editor_options_title">Opzioni dell\'editor</string>
   <string name="home_option_editor_options_description">Modifica le impostazioni dell\'editor delle note</string>

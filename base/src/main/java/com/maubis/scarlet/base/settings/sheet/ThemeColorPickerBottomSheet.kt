@@ -3,11 +3,7 @@ package com.maubis.scarlet.base.settings.sheet
 import android.app.Dialog
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
-import com.facebook.litho.ClickEvent
-import com.facebook.litho.Column
-import com.facebook.litho.Component
-import com.facebook.litho.ComponentContext
-import com.facebook.litho.Row
+import com.facebook.litho.*
 import com.facebook.litho.annotations.LayoutSpec
 import com.facebook.litho.annotations.OnCreateLayout
 import com.facebook.litho.annotations.OnEvent
@@ -17,22 +13,18 @@ import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.MainActivityActions
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTheme
-import com.maubis.scarlet.base.main.sheets.InstallProUpsellBottomSheet
 import com.maubis.scarlet.base.support.sheets.LithoBottomSheet
 import com.maubis.scarlet.base.support.sheets.LithoOptionsItem
 import com.maubis.scarlet.base.support.sheets.OptionItemLayout
 import com.maubis.scarlet.base.support.sheets.getLithoBottomSheetTitle
-import com.maubis.scarlet.base.support.sheets.openSheet
 import com.maubis.scarlet.base.support.specs.BottomSheetBar
 import com.maubis.scarlet.base.support.specs.EmptySpec
 import com.maubis.scarlet.base.support.specs.RoundIcon
 import com.maubis.scarlet.base.support.ui.Theme
 import com.maubis.scarlet.base.support.ui.ThemeManager.Companion.getThemeFromStore
-import com.maubis.scarlet.base.support.ui.ThemedActivity
 import com.maubis.scarlet.base.support.ui.sThemeDarkenNoteColor
 import com.maubis.scarlet.base.support.ui.sThemeIsAutomatic
 import com.maubis.scarlet.base.support.ui.setThemeFromSystem
-import com.maubis.scarlet.base.support.utils.FlavorUtils
 import com.maubis.scarlet.base.support.utils.OsVersionUtils
 
 @LayoutSpec
@@ -41,7 +33,6 @@ object ThemeColorPickerItemSpec {
   fun onCreate(
     context: ComponentContext,
     @Prop theme: Theme,
-    @Prop isDisabled: Boolean,
     @Prop isSelected: Boolean): Component {
 
     val icon = RoundIcon.create(context)
@@ -51,7 +42,6 @@ object ThemeColorPickerItemSpec {
       .onClick { }
       .flexGrow(1f)
       .isClickDisabled(true)
-      .alpha(if (isDisabled) 0.3f else 1f)
     when (isSelected) {
       true -> icon.iconRes(R.drawable.ic_done_white_48dp)
         .bgColorRes(R.color.colorAccent)
@@ -70,14 +60,9 @@ object ThemeColorPickerItemSpec {
 
   @OnEvent(ClickEvent::class)
   fun onItemClick(
-    context: ComponentContext,
-    @Prop theme: Theme,
-    @Prop isDisabled: Boolean,
-    @Prop onThemeSelected: (Theme) -> Unit) {
-    if (isDisabled) {
-      openSheet(context.androidContext as ThemedActivity, InstallProUpsellBottomSheet())
-      return
-    }
+          context: ComponentContext,
+          @Prop theme: Theme,
+          @Prop onThemeSelected: (Theme) -> Unit) {
     onThemeSelected(theme)
   }
 }
@@ -107,15 +92,10 @@ class ThemeColorPickerBottomSheet : LithoBottomSheet() {
               listener = {},
               isSelectable = true,
               selected = sThemeIsAutomatic,
-              actionIcon = if (FlavorUtils.isLite()) R.drawable.ic_rating else 0
+              actionIcon = 0
             ))
           .onClick {
             val context = componentContext.androidContext as AppCompatActivity
-            if (FlavorUtils.isLite()) {
-              openSheet(context, InstallProUpsellBottomSheet())
-              return@onClick
-            }
-
             sThemeIsAutomatic = !sThemeIsAutomatic
             if (sThemeIsAutomatic) {
               setThemeFromSystem(context)
@@ -136,15 +116,10 @@ class ThemeColorPickerBottomSheet : LithoBottomSheet() {
               listener = {},
               isSelectable = true,
               selected = sThemeDarkenNoteColor,
-              actionIcon = if (FlavorUtils.isLite()) R.drawable.ic_rating else 0
+              actionIcon = 0
             ))
           .onClick {
             val context = componentContext.androidContext as AppCompatActivity
-            if (FlavorUtils.isLite()) {
-              openSheet(context, InstallProUpsellBottomSheet())
-              return@onClick
-            }
-
             sThemeDarkenNoteColor = !sThemeDarkenNoteColor
             context.startActivity(MainActivityActions.COLOR_PICKER.intent(context))
             context.finish()
@@ -162,15 +137,9 @@ class ThemeColorPickerBottomSheet : LithoBottomSheet() {
             .paddingDip(YogaEdge.VERTICAL, 12f)
         }
 
-        val disabled = when {
-          !FlavorUtils.isLite() -> false
-          theme == Theme.DARK || theme == Theme.LIGHT -> false
-          else -> true
-        }
         flex?.child(
           ThemeColorPickerItem.create(componentContext)
             .theme(theme)
-            .isDisabled(disabled)
             .isSelected(theme.name == getThemeFromStore().name)
             .onThemeSelected { newTheme ->
               onThemeChange(newTheme)

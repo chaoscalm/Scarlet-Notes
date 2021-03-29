@@ -10,10 +10,7 @@ import com.maubis.scarlet.base.main.sheets.WhatsNewBottomSheet
 import com.maubis.scarlet.base.support.sheets.LithoOptionBottomSheet
 import com.maubis.scarlet.base.support.sheets.LithoOptionsItem
 import com.maubis.scarlet.base.support.sheets.openSheet
-import com.maubis.scarlet.base.support.utils.FlavorUtils
 import com.maubis.scarlet.base.support.utils.maybeThrow
-
-const val PRIVACY_POLICY_LINK = "https://www.iubenda.com/privacy-policy/8213521"
 
 class AboutSettingsOptionsBottomSheet : LithoOptionBottomSheet() {
   override fun title(): Int = R.string.home_option_about
@@ -61,21 +58,6 @@ class AboutSettingsOptionsBottomSheet : LithoOptionBottomSheet() {
         dismiss()
       }
     ))
-    options.add(
-      LithoOptionsItem(
-        title = R.string.material_notes_privacy_policy,
-        subtitle = R.string.material_notes_privacy_policy_subtitle,
-        icon = R.drawable.ic_privacy_policy,
-        listener = {
-          activity.startActivity(
-            Intent(
-              Intent.ACTION_VIEW,
-              Uri.parse(PRIVACY_POLICY_LINK)))
-          dismiss()
-        },
-        visible = FlavorUtils.isPlayStore()
-
-      ))
     options.add(LithoOptionsItem(
       title = R.string.internal_settings_title,
       subtitle = R.string.internal_settings_description,

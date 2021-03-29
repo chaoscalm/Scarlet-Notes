@@ -7,14 +7,12 @@ import com.maubis.scarlet.base.MainActivityActions
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppPreferences
 import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTheme
-import com.maubis.scarlet.base.main.sheets.InstallProUpsellBottomSheet
 import com.maubis.scarlet.base.performAction
 import com.maubis.scarlet.base.settings.sheet.SortingOptionsBottomSheet.Companion.getSortingState
 import com.maubis.scarlet.base.settings.sheet.SortingOptionsBottomSheet.Companion.getSortingTechniqueLabel
 import com.maubis.scarlet.base.support.sheets.LithoOptionBottomSheet
 import com.maubis.scarlet.base.support.sheets.LithoOptionsItem
 import com.maubis.scarlet.base.support.sheets.openSheet
-import com.maubis.scarlet.base.support.utils.FlavorUtils
 
 var sUIUseGridView: Boolean
   get() = sAppPreferences.get("KEY_LIST_VIEW", true)
@@ -91,13 +89,10 @@ class UISettingsOptionsBottomSheet : LithoOptionBottomSheet() {
         content = activity.getString(R.string.note_option_font_size_subtitle, sEditorTextSize),
         icon = R.drawable.ic_title_white_48dp,
         listener = {
-          when {
-            FlavorUtils.isLite() -> openSheet(activity, InstallProUpsellBottomSheet())
-            else -> openSheet(activity, FontSizeBottomSheet())
-          }
-          reset(activity, dialog)
+            openSheet(activity, FontSizeBottomSheet())
+            reset(activity, dialog)
         },
-        actionIcon = if (FlavorUtils.isLite()) R.drawable.ic_rating else 0
+        actionIcon = 0
       ))
     options.add(LithoOptionsItem(
       title = R.string.note_option_number_lines,
@@ -117,15 +112,10 @@ class UISettingsOptionsBottomSheet : LithoOptionBottomSheet() {
         },
         icon = R.drawable.ic_action_color,
         listener = {
-          if (FlavorUtils.isLite()) {
-            openSheet(activity, InstallProUpsellBottomSheet())
-            return@LithoOptionsItem
-          }
-
           sUIUseNoteColorAsBackground = !sUIUseNoteColorAsBackground
           reset(activity, dialog)
         },
-        actionIcon = if (FlavorUtils.isLite()) R.drawable.ic_rating else 0
+        actionIcon = 0
       ))
     options.add(
       LithoOptionsItem(

@@ -27,25 +27,8 @@ import com.maubis.scarlet.base.database.room.tag.Tag
 import com.maubis.scarlet.base.export.support.NoteExporter
 import com.maubis.scarlet.base.export.support.PermissionUtils
 import com.maubis.scarlet.base.main.*
-import com.maubis.scarlet.base.main.HomeNavigationMode
-import com.maubis.scarlet.base.main.SearchState
-import com.maubis.scarlet.base.main.recycler.EmptyRecyclerItem
-import com.maubis.scarlet.base.main.recycler.getAppUpdateInformationItem
-import com.maubis.scarlet.base.main.recycler.getBackupInformationItem
-import com.maubis.scarlet.base.main.recycler.getInstallProInformationItem
-import com.maubis.scarlet.base.main.recycler.getMigrateToProAppInformationItem
-import com.maubis.scarlet.base.main.recycler.getReviewInformationItem
-import com.maubis.scarlet.base.main.recycler.getSignInInformationItem
-import com.maubis.scarlet.base.main.recycler.getThemeInformationItem
-import com.maubis.scarlet.base.main.recycler.shouldShowAppUpdateInformationItem
-import com.maubis.scarlet.base.main.recycler.shouldShowBackupInformationItem
-import com.maubis.scarlet.base.main.recycler.shouldShowInstallProInformationItem
-import com.maubis.scarlet.base.main.recycler.shouldShowMigrateToProAppInformationItem
-import com.maubis.scarlet.base.main.recycler.shouldShowReviewInformationItem
-import com.maubis.scarlet.base.main.recycler.shouldShowSignInformationItem
-import com.maubis.scarlet.base.main.recycler.shouldShowThemeInformationItem
+import com.maubis.scarlet.base.main.recycler.*
 import com.maubis.scarlet.base.main.sheets.WhatsNewBottomSheet
-import com.maubis.scarlet.base.main.sheets.openDeleteTrashSheet
 import com.maubis.scarlet.base.main.specs.MainActivityBottomBar
 import com.maubis.scarlet.base.main.specs.MainActivityDisabledSync
 import com.maubis.scarlet.base.main.specs.MainActivityFolderBottomBar
@@ -77,8 +60,8 @@ import com.maubis.scarlet.base.support.specs.ToolbarColorConfig
 import com.maubis.scarlet.base.support.ui.*
 import com.maubis.scarlet.base.support.utils.shouldShowWhatsNewSheet
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.toolbar_main.*
 import kotlinx.android.synthetic.main.search_toolbar_main.*
+import kotlinx.android.synthetic.main.toolbar_main.*
 import kotlinx.android.synthetic.main.toolbar_trash_info.*
 import kotlinx.coroutines.*
 import java.util.concurrent.atomic.AtomicBoolean
@@ -326,11 +309,8 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
 
   private fun addInformationItem() {
     val informationItem = when {
-      shouldShowMigrateToProAppInformationItem(this) -> getMigrateToProAppInformationItem(this)
-      shouldShowSignInformationItem(this) -> getSignInInformationItem(this)
       shouldShowAppUpdateInformationItem() -> getAppUpdateInformationItem(this)
       shouldShowReviewInformationItem() -> getReviewInformationItem(this)
-      shouldShowInstallProInformationItem() -> getInstallProInformationItem(this)
       shouldShowThemeInformationItem() -> getThemeInformationItem(this)
       shouldShowBackupInformationItem() -> getBackupInformationItem(this)
       else -> null

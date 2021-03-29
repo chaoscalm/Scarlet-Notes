@@ -16,7 +16,6 @@ import com.maubis.scarlet.base.support.specs.GridSectionItem
 import com.maubis.scarlet.base.support.specs.GridSectionOptionItem
 import com.maubis.scarlet.base.support.specs.GridSectionView
 import com.maubis.scarlet.base.support.ui.ThemeColorType
-import com.maubis.scarlet.base.support.utils.FlavorUtils
 import com.maubis.scarlet.base.support.utils.OsVersionUtils
 
 const val WHATS_NEW_SHEET_INDEX = 11

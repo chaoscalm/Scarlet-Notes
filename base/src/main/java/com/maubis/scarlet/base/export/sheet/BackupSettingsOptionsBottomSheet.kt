@@ -9,12 +9,10 @@ import com.maubis.scarlet.base.export.activity.ImportNoteActivity
 import com.maubis.scarlet.base.export.support.PermissionUtils
 import com.maubis.scarlet.base.security.controller.PinLockController.isPinCodeEnabled
 import com.maubis.scarlet.base.security.sheets.openUnlockSheet
-import com.maubis.scarlet.base.security.sheets.openVerifySheet
 import com.maubis.scarlet.base.support.sheets.LithoOptionBottomSheet
 import com.maubis.scarlet.base.support.sheets.LithoOptionsItem
 import com.maubis.scarlet.base.support.sheets.openSheet
 import com.maubis.scarlet.base.support.ui.ThemedActivity
-import com.maubis.scarlet.base.support.utils.FlavorUtils
 
 class BackupSettingsOptionsBottomSheet : LithoOptionBottomSheet() {
   override fun title(): Int = R.string.home_option_backup_options
@@ -22,17 +20,6 @@ class BackupSettingsOptionsBottomSheet : LithoOptionBottomSheet() {
   override fun getOptions(componentContext: ComponentContext, dialog: Dialog): List<LithoOptionsItem> {
     val activity = context as MainActivity
     val options = ArrayList<LithoOptionsItem>()
-    options.add(
-      LithoOptionsItem(
-        title = R.string.home_option_install_from_store,
-        subtitle = R.string.home_option_install_from_store_subtitle,
-        icon = R.drawable.ic_action_play,
-        listener = {
-          IntentUtils.openAppPlayStore(context)
-          dismiss()
-        },
-        visible = FlavorUtils.isOpenSource()
-      ))
     options.add(LithoOptionsItem(
       title = R.string.home_option_export,
       subtitle = R.string.home_option_export_subtitle,

@@ -19,24 +19,15 @@ import com.maubis.scarlet.base.core.note.NoteBuilder
 import com.maubis.scarlet.base.core.note.NoteState
 import com.maubis.scarlet.base.core.note.getNoteState
 import com.maubis.scarlet.base.database.room.note.Note
-import com.maubis.scarlet.base.main.sheets.InstallProUpsellBottomSheet
 import com.maubis.scarlet.base.main.sheets.openDeleteNotePermanentlySheet
+import com.maubis.scarlet.base.note.*
 import com.maubis.scarlet.base.note.activity.INoteOptionSheetActivity
-import com.maubis.scarlet.base.note.copy
 import com.maubis.scarlet.base.note.creation.activity.NoteIntentRouterActivity
-import com.maubis.scarlet.base.note.edit
 import com.maubis.scarlet.base.note.folder.sheet.FolderChooserBottomSheet
-import com.maubis.scarlet.base.note.getFullText
-import com.maubis.scarlet.base.note.getTagString
-import com.maubis.scarlet.base.note.getTitleForSharing
-import com.maubis.scarlet.base.note.hasImages
 import com.maubis.scarlet.base.note.reminders.sheet.ReminderBottomSheet
-import com.maubis.scarlet.base.note.save
 import com.maubis.scarlet.base.note.selection.activity.KEY_SELECT_EXTRA_MODE
 import com.maubis.scarlet.base.note.selection.activity.KEY_SELECT_EXTRA_NOTE_ID
 import com.maubis.scarlet.base.note.selection.activity.SelectNotesActivity
-import com.maubis.scarlet.base.note.share
-import com.maubis.scarlet.base.note.shareImages
 import com.maubis.scarlet.base.note.tag.sheet.TagChooserBottomSheet
 import com.maubis.scarlet.base.notification.NotificationConfig
 import com.maubis.scarlet.base.notification.NotificationHandler
@@ -48,14 +39,13 @@ import com.maubis.scarlet.base.support.option.OptionsItem
 import com.maubis.scarlet.base.support.sheets.GridBottomSheetBase
 import com.maubis.scarlet.base.support.sheets.openSheet
 import com.maubis.scarlet.base.support.ui.ThemedActivity
-import com.maubis.scarlet.base.support.utils.FlavorUtils
 import com.maubis.scarlet.base.support.utils.OsVersionUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
-class NoteOptionsBottomSheet() : GridBottomSheetBase() {
+class NoteOptionsBottomSheet : GridBottomSheetBase() {
 
   var noteFn: () -> Note? = { null }
 
@@ -398,8 +388,8 @@ class NoteOptionsBottomSheet() : GridBottomSheetBase() {
         title = R.string.pin_to_launcher,
         subtitle = R.string.pin_to_launcher,
         icon = R.drawable.icon_shortcut,
-        listener = View.OnClickListener {
-          if (!FlavorUtils.isLite() && OsVersionUtils.canAddLauncherShortcuts()) {
+        listener = {
+          if (OsVersionUtils.canAddLauncherShortcuts()) {
             var title = note.getTitleForSharing()
             if (title.isBlank()) {
               title = note.getFullText().split("\n").firstOrNull() ?: "Note"
@@ -412,9 +402,7 @@ class NoteOptionsBottomSheet() : GridBottomSheetBase() {
               .setIntent(NoteIntentRouterActivity.view(note))
               .build()
             addShortcut(activity, shortcut)
-            return@OnClickListener
           }
-          openSheet(activity, InstallProUpsellBottomSheet())
         },
         visible = OsVersionUtils.canAddLauncherShortcuts(),
         invalid = activity.lockedContentIsHidden() && note.locked
@@ -462,11 +450,7 @@ class NoteOptionsBottomSheet() : GridBottomSheetBase() {
         subtitle = R.string.view_distraction_free,
         icon = R.drawable.ic_action_distraction_free,
         listener = View.OnClickListener {
-          if (!FlavorUtils.isLite()) {
             activity.startActivity(NoteIntentRouterActivity.view(activity, note, isDistractionFree = true))
-            return@OnClickListener
-          }
-          openSheet(activity, InstallProUpsellBottomSheet())
         },
         invalid = activity.lockedContentIsHidden() && note.locked
       ))
@@ -491,7 +475,7 @@ class NoteOptionsBottomSheet() : GridBottomSheetBase() {
           activity.updateNote(note)
           dismiss()
         },
-        visible = note.disableBackup && FlavorUtils.isPlayStore(),
+        visible = note.disableBackup,
         invalid = activity.lockedContentIsHidden() && note.locked
       ))
     options.add(
@@ -504,7 +488,7 @@ class NoteOptionsBottomSheet() : GridBottomSheetBase() {
           activity.updateNote(note)
           dismiss()
         },
-        visible = !note.disableBackup && FlavorUtils.isPlayStore(),
+        visible = !note.disableBackup,
         invalid = activity.lockedContentIsHidden() && note.locked
       ))
     return options

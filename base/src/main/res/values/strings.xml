@@ -95,10 +95,6 @@
   <string name="home_option_open_source_page_subtitle">Know more about the open source project</string>
   <string name="home_option_rate_and_review">Rate and Review</string>
   <string name="home_option_rate_and_review_subtitle">Tell us how much you liked the app</string>
-  <string name="home_option_install_pro_app">Install Pro App</string>
-  <string name="home_option_install_pro_app_details">Install the Pro App to unlock features and support developer</string>
-  <string name="home_option_migrate_to_pro">Migrate Notes to Scarlet Pro</string>
-  <string name="home_option_migrate_to_pro_details">Migrate all your notes to the pro app</string>
   <string name="home_option_delete_notes_and_more">Delete Notes and More</string>
   <string name="home_option_delete_notes_and_more_details">Delete notes, tags and other data in the app</string>
   <string name="home_option_delete_all_notes">Delete All Notes</string>
@@ -269,11 +265,6 @@
   <string name="note_option_font_size_subtitle">%d size of the text in the note viewer</string>
   <!-- End Note Text Size -->
 
-  <!-- Start Cloud Backup Hint -->
-  <string name="home_option_install_from_store">Install from Store</string>
-  <string name="home_option_install_from_store_subtitle">Install app from Google Store for Cloud Sync</string>
-  <!-- End -->
-
   <!-- Start No Pincode -->
   <string name="no_pincode_sheet_title">No PIN set</string>
   <string name="no_pincode_sheet_details">You have not set up the PIN. Would you like to set it up now?</string>
@@ -295,26 +286,13 @@
   <!-- Start Information -->
   <string name="information_card_title">Information</string>
   <string name="information_new_app_update">Tap to install the latest app version</string>
-  <string name="information_install_pro">Tap to upgrade to Scarlet Pro</string>
   <!-- End Information -->
 
   <!-- Start: Firebase Login Strings -->
-  <string name="home_option_login_with_app">Sign In to App</string>
-  <string name="home_option_login_with_app_subtitle">Sign In for cloud backup and synchronisation</string>
   <string name="home_option_logout_of_app">Sign Out</string>
   <string name="home_option_logout_of_app_subtitle">Sign Out to stop cloud backup</string>
   <string name="login_to_google_failed">Google Login Failed</string>
 
-  <string name="material_notes_privacy_policy">Privacy Policy</string>
-  <string name="material_notes_privacy_policy_subtitle">App privacy policy for the content</string>
-
-  <string name="install_pro_app">Install Pro App</string>
-  <string name="available_in_pro_only">Available on Scarlet Pro</string>
-
-  <string name="why_install_pro">Why Install Pro</string>
-  <string name="why_install_pro_details">
-     &#10004; Support developer for the massive server costs, to run the cloud sync \n\n&#10004; Get the latest features first \n\n&#10004; Some extra features will be available only to Pro users
-  </string>
   <!-- End: Firebase Login Strings -->
 
   <string name="forget_me_option_title" translatable="false">Forget Me</string>
