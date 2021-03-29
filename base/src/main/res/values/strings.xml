@@ -274,7 +274,6 @@
 
   <!-- Start Information -->
   <string name="information_card_title">Information</string>
-  <string name="information_new_app_update">Tap to install the latest app version</string>
   <!-- End Information -->
 
   <!-- Start: Firebase Login Strings -->

@@ -4,8 +4,6 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import com.maubis.scarlet.base.config.auth.IAuthenticator
 import com.maubis.scarlet.base.config.auth.NullAuthenticator
-import com.maubis.scarlet.base.config.remote.IRemoteConfigFetcher
-import com.maubis.scarlet.base.config.remote.NullRemoteConfigFetcher
 import com.maubis.scarlet.base.core.folder.IFolderActor
 import com.maubis.scarlet.base.core.folder.MaterialFolderActor
 import com.maubis.scarlet.base.core.note.INoteActor
@@ -43,8 +41,6 @@ open class MaterialNoteConfig(context: Context) : CoreConfig() {
   override fun foldersDatabase(): FoldersProvider = foldersProvider
 
   override fun folderActions(folder: Folder): IFolderActor = MaterialFolderActor(folder)
-
-  override fun remoteConfigFetcher(): IRemoteConfigFetcher = NullRemoteConfigFetcher()
 
   override fun remoteDatabaseState(): IRemoteDatabaseState {
     return object : IRemoteDatabaseState {

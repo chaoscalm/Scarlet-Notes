@@ -3,7 +3,6 @@ package com.maubis.scarlet.base.config
 import androidx.appcompat.app.AppCompatActivity
 import com.maubis.scarlet.base.config.ApplicationBase.Companion.instance
 import com.maubis.scarlet.base.config.auth.IAuthenticator
-import com.maubis.scarlet.base.config.remote.IRemoteConfigFetcher
 import com.maubis.scarlet.base.core.folder.IFolderActor
 import com.maubis.scarlet.base.core.note.INoteActor
 import com.maubis.scarlet.base.core.tag.ITagActor
@@ -33,8 +32,6 @@ abstract class CoreConfig {
   abstract fun tagActions(tag: Tag): ITagActor
 
   abstract fun folderActions(folder: Folder): IFolderActor
-
-  abstract fun remoteConfigFetcher(): IRemoteConfigFetcher
 
   abstract fun remoteDatabaseState(): IRemoteDatabaseState
 

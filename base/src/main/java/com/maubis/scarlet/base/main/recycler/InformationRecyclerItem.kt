@@ -1,10 +1,7 @@
 package com.maubis.scarlet.base.main.recycler
 
-import android.content.Context
-import com.github.bijoysingh.starter.util.IntentUtils
 import com.maubis.scarlet.base.MainActivity
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ApplicationBase
 import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppPreferences
 import com.maubis.scarlet.base.export.sheet.BackupSettingsOptionsBottomSheet
 import com.maubis.scarlet.base.settings.sheet.UISettingsOptionsBottomSheet
@@ -20,18 +17,6 @@ class InformationRecyclerItem(val icon: Int, val title: Int, val source: Int, va
 }
 
 fun probability(probability: Float): Boolean = Random().nextFloat() <= probability
-
-fun shouldShowAppUpdateInformationItem(): Boolean {
-  return !ApplicationBase.instance.remoteConfigFetcher().isLatestVersion()
-}
-
-fun getAppUpdateInformationItem(context: Context): InformationRecyclerItem {
-  return InformationRecyclerItem(
-    R.drawable.ic_info,
-    R.string.information_card_title,
-    R.string.information_new_app_update
-  ) { IntentUtils.openAppPlayStore(context) }
-}
 
 fun shouldShowThemeInformationItem(): Boolean {
   return probability(0.01f)

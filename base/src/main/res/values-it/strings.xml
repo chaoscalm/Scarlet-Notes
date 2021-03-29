@@ -212,7 +212,6 @@
   <string name="folder_option_change_notebook">Modifica blocco note</string>
   <string name="recent_notes">Note recenti</string>
   <string name="information_card_title">Informazione</string>
-  <string name="information_new_app_update">Tocca per installare la versione più recente dell\'app</string>
   <string name="home_option_delete_notes_and_more">Elimina note e altro</string>
   <string name="home_option_delete_notes_and_more_details">Elimina note, tag e altri dati nell\'app</string>
   <string name="home_option_delete_all_notes">Elimina tutte le note</string>
