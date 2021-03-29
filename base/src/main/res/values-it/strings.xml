@@ -25,8 +25,6 @@
   <string name="home_option_import_subtitle">Importa note dalla memoria del dispositivo</string>
   <string name="home_option_about_page">Chi siamo</string>
   <string name="home_option_about_page_subtitle">Scopri di più sull\'app e sugli sviluppatori</string>
-  <string name="home_option_rate_and_review">Valuta e recensisci</string>
-  <string name="home_option_rate_and_review_subtitle">Facci sapere quanto ti è piaciuta l\'app</string>
   <string name="permission_layout_give_permission">Concedi permessi</string>
   <string name="permission_layout_give_permission_details">L\'importazione e l\'esportazione richiedono il permesso di archiviazione. Si prega di concedere il permesso quando richiesto.</string>
   <string name="permission_layout_give_permission_ok">Concedi</string>

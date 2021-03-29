@@ -2,7 +2,6 @@ package com.maubis.scarlet.base.settings.sheet
 
 import android.app.Dialog
 import com.facebook.litho.ComponentContext
-import com.github.bijoysingh.starter.util.IntentUtils
 import com.maubis.scarlet.base.MainActivity
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.config.ApplicationBase
@@ -69,15 +68,6 @@ class SettingsOptionsBottomSheet : LithoOptionBottomSheet() {
       icon = R.drawable.ic_info,
       listener = {
         openSheet(activity, AboutSettingsOptionsBottomSheet())
-      }
-    ))
-    options.add(LithoOptionsItem(
-      title = R.string.home_option_rate_and_review,
-      subtitle = R.string.home_option_rate_and_review_subtitle,
-      icon = R.drawable.ic_rating,
-      listener = {
-        IntentUtils.openAppPlayStore(activity)
-        dismiss()
       }
     ))
     options.add(LithoOptionsItem(

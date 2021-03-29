@@ -12,12 +12,11 @@ import com.maubis.scarlet.base.support.recycler.RecyclerItem
 import com.maubis.scarlet.base.support.sheets.openSheet
 import java.util.*
 
-const val KEY_INFO_RATE_AND_REVIEW = "KEY_RATE_AND_REVIEW_INFO"
 const val KEY_THEME_OPTIONS = "KEY_THEME_OPTIONS"
 const val KEY_BACKUP_OPTIONS = "KEY_BACKUP_OPTIONS"
 
 class InformationRecyclerItem(val icon: Int, val title: Int, val source: Int, val function: () -> Unit) : RecyclerItem() {
-  override val type = RecyclerItem.Type.INFORMATION
+  override val type = Type.INFORMATION
 }
 
 fun probability(probability: Float): Boolean = Random().nextFloat() <= probability
@@ -32,22 +31,6 @@ fun getAppUpdateInformationItem(context: Context): InformationRecyclerItem {
     R.string.information_card_title,
     R.string.information_new_app_update
   ) { IntentUtils.openAppPlayStore(context) }
-}
-
-fun shouldShowReviewInformationItem(): Boolean {
-  return probability(0.01f)
-    && !sAppPreferences.get(KEY_INFO_RATE_AND_REVIEW, false)
-}
-
-fun getReviewInformationItem(context: Context): InformationRecyclerItem {
-  return InformationRecyclerItem(
-    R.drawable.ic_rating,
-    R.string.home_option_rate_and_review,
-    R.string.home_option_rate_and_review_subtitle
-  ) {
-    sAppPreferences.put(KEY_INFO_RATE_AND_REVIEW, true)
-    IntentUtils.openAppPlayStore(context)
-  }
 }
 
 fun shouldShowThemeInformationItem(): Boolean {

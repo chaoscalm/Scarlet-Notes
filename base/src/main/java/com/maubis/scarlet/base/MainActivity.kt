@@ -310,7 +310,6 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
   private fun addInformationItem() {
     val informationItem = when {
       shouldShowAppUpdateInformationItem() -> getAppUpdateInformationItem(this)
-      shouldShowReviewInformationItem() -> getReviewInformationItem(this)
       shouldShowThemeInformationItem() -> getThemeInformationItem(this)
       shouldShowBackupInformationItem() -> getBackupInformationItem(this)
       else -> null

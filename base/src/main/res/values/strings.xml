@@ -90,8 +90,6 @@
   <string name="home_option_auto_export_subtitle">Export notes frequently to external file as backup</string>
   <string name="home_option_about_page">About Us</string>
   <string name="home_option_about_page_subtitle">Know more about the app and the developers</string>
-  <string name="home_option_rate_and_review">Rate and Review</string>
-  <string name="home_option_rate_and_review_subtitle">Tell us how much you liked the app</string>
   <string name="home_option_delete_notes_and_more">Delete Notes and More</string>
   <string name="home_option_delete_notes_and_more_details">Delete notes, tags and other data in the app</string>
   <string name="home_option_delete_all_notes">Delete All Notes</string>
