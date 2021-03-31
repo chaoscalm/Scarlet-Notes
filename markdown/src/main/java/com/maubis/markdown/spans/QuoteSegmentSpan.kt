@@ -5,7 +5,7 @@ import android.graphics.Paint
 import android.graphics.Rect
 import android.text.Layout
 import android.text.style.LeadingMarginSpan
-import com.maubis.markdown.MarkdownConfig.Companion.config
+import com.maubis.markdown.MarkdownConfig
 
 class QuoteSegmentSpan : LeadingMarginSpan, ICustomSpan {
 
@@ -13,7 +13,7 @@ class QuoteSegmentSpan : LeadingMarginSpan, ICustomSpan {
   private val paint = Paint()
 
   override fun getLeadingMargin(first: Boolean): Int {
-    return config.spanConfig.quoteBlockLeadingMargin
+    return MarkdownConfig.spanConfig.quoteBlockLeadingMargin
   }
 
   override fun drawLeadingMargin(
@@ -31,11 +31,11 @@ class QuoteSegmentSpan : LeadingMarginSpan, ICustomSpan {
       layout: Layout) {
     paint.set(p)
     paint.style = Paint.Style.FILL
-    paint.color = config.spanConfig.quoteColor
-    paint.typeface = config.spanConfig.textTypeface
+    paint.color = MarkdownConfig.spanConfig.quoteColor
+    paint.typeface = MarkdownConfig.spanConfig.textTypeface
 
-    val startPosition = x + dir * config.spanConfig.quoteWidth
-    val endPosition = startPosition + dir * config.spanConfig.quoteWidth
+    val startPosition = x + dir * MarkdownConfig.spanConfig.quoteWidth
+    val endPosition = startPosition + dir * MarkdownConfig.spanConfig.quoteWidth
 
     rect.set(Math.min(startPosition, endPosition), top, Math.max(startPosition, endPosition), bottom)
     canvas.drawRect(rect, paint)

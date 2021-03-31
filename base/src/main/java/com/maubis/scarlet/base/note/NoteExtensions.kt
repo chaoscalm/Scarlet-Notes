@@ -4,21 +4,13 @@ import android.content.Context
 import com.google.gson.Gson
 import com.maubis.markdown.Markdown
 import com.maubis.markdown.MarkdownConfig
-import com.maubis.markdown.spannable.MarkdownType
-import com.maubis.markdown.spannable.bold
-import com.maubis.markdown.spannable.font
-import com.maubis.markdown.spannable.relativeSize
-import com.maubis.markdown.spannable.strike
+import com.maubis.markdown.spannable.*
 import com.maubis.scarlet.base.config.ApplicationBase
 import com.maubis.scarlet.base.config.CoreConfig
 import com.maubis.scarlet.base.config.CoreConfig.Companion.tagsDb
 import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.core.format.FormatType
-import com.maubis.scarlet.base.core.note.NoteState
-import com.maubis.scarlet.base.core.note.generateUUID
-import com.maubis.scarlet.base.core.note.getFormats
-import com.maubis.scarlet.base.core.note.getTagUUIDs
-import com.maubis.scarlet.base.core.note.isUnsaved
+import com.maubis.scarlet.base.core.note.*
 import com.maubis.scarlet.base.database.room.note.Note
 import com.maubis.scarlet.base.database.room.tag.Tag
 import com.maubis.scarlet.base.note.creation.activity.NoteIntentRouterActivity
@@ -75,19 +67,19 @@ internal fun markdownFormatForList(text: String): CharSequence {
     when (spanInfo.markdownType) {
       MarkdownType.HEADING_1 -> {
         spannable.relativeSize(1.2f, s, e)
-          .font(MarkdownConfig.config.spanConfig.headingTypeface, s, e)
+          .font(MarkdownConfig.spanConfig.headingTypeface, s, e)
           .bold(s, e)
         true
       }
       MarkdownType.HEADING_2 -> {
         spannable.relativeSize(1.1f, s, e)
-          .font(MarkdownConfig.config.spanConfig.headingTypeface, s, e)
+          .font(MarkdownConfig.spanConfig.headingTypeface, s, e)
           .bold(s, e)
         true
       }
       MarkdownType.HEADING_3 -> {
         spannable.relativeSize(1.0f, s, e)
-          .font(MarkdownConfig.config.spanConfig.headingTypeface, s, e)
+          .font(MarkdownConfig.spanConfig.headingTypeface, s, e)
           .bold(s, e)
         true
       }

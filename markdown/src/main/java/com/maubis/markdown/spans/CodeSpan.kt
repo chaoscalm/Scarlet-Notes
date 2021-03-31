@@ -1,9 +1,8 @@
 package com.maubis.markdown.spans
 
-import android.graphics.Typeface
 import android.text.TextPaint
 import android.text.style.MetricAffectingSpan
-import com.maubis.markdown.MarkdownConfig.Companion.config
+import com.maubis.markdown.MarkdownConfig
 
 class CodeSpan : MetricAffectingSpan(), ICustomSpan {
   override fun updateMeasureState(paint: TextPaint) {
@@ -12,8 +11,8 @@ class CodeSpan : MetricAffectingSpan(), ICustomSpan {
 
   override fun updateDrawState(paint: TextPaint) {
     setTextColor(paint)
-    paint.bgColor = config.spanConfig.codeBackgroundColor
-    paint.typeface = config.spanConfig.codeTypeface
+    paint.bgColor = MarkdownConfig.spanConfig.codeBackgroundColor
+    paint.typeface = MarkdownConfig.spanConfig.codeTypeface
     paint.textSize = paint.textSize * 0.87f
   }
 

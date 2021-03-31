@@ -7,7 +7,7 @@ import android.text.Layout
 import android.text.TextPaint
 import android.text.style.LeadingMarginSpan
 import android.text.style.MetricAffectingSpan
-import com.maubis.markdown.MarkdownConfig.Companion.config
+import com.maubis.markdown.MarkdownConfig
 
 class CodeSegmentSpan : MetricAffectingSpan(), LeadingMarginSpan, ICustomSpan {
   private val rect = Rect()
@@ -27,7 +27,7 @@ class CodeSegmentSpan : MetricAffectingSpan(), LeadingMarginSpan, ICustomSpan {
   }
 
   override fun getLeadingMargin(first: Boolean): Int {
-    return config.spanConfig.codeBlockLeadingMargin
+    return MarkdownConfig.spanConfig.codeBlockLeadingMargin
   }
 
   override fun drawLeadingMargin(
@@ -44,7 +44,7 @@ class CodeSegmentSpan : MetricAffectingSpan(), LeadingMarginSpan, ICustomSpan {
       first: Boolean,
       layout: Layout) {
     paint.style = Paint.Style.FILL
-    paint.color = config.spanConfig.codeBackgroundColor
+    paint.color = MarkdownConfig.spanConfig.codeBackgroundColor
 
     val leftPosition = when {
       dir > 0 -> x

@@ -1,10 +1,8 @@
 package com.maubis.markdown.inliner
 
-import com.maubis.markdown.MarkdownConfig.Companion.config
+import com.maubis.markdown.MarkdownConfig
 
 class TextInliner(val text: String) {
-
-  val inlineConfig = config.inlinerConfig
 
   private var textSegment = NormalInlineBuilder()
   private var currentInline = MarkdownInlineBuilder()
@@ -19,7 +17,7 @@ class TextInliner(val text: String) {
     processedSegments.add(MarkdownInlineBuilder())
 
     val allConfigurations = ArrayList<IInlineConfig>()
-    inlineConfig.configuration.forEach {
+    MarkdownConfig.inlinerConfig.configuration.forEach {
       if (it.type() !== MarkdownInlineType.INVALID && it.type() !== MarkdownInlineType.NORMAL) {
         allConfigurations.add(it)
       }

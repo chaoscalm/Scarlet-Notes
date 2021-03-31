@@ -8,7 +8,6 @@ import android.text.TextPaint
 import android.text.style.LeadingMarginSpan
 import android.text.style.MetricAffectingSpan
 import com.maubis.markdown.MarkdownConfig
-import com.maubis.markdown.MarkdownConfig.Companion.config
 
 class SeparatorSegmentSpan : MetricAffectingSpan(), LeadingMarginSpan, ICustomSpan {
   private val rect = Rect()
@@ -23,12 +22,12 @@ class SeparatorSegmentSpan : MetricAffectingSpan(), LeadingMarginSpan, ICustomSp
   }
 
   private fun setTextColor(paint: TextPaint) {
-    paint.color = MarkdownConfig.config.spanConfig.codeTextColor
+    paint.color = MarkdownConfig.spanConfig.codeTextColor
     paint.alpha = 100
   }
 
   override fun getLeadingMargin(first: Boolean): Int {
-    return MarkdownConfig.config.spanConfig.codeBlockLeadingMargin
+    return MarkdownConfig.spanConfig.codeBlockLeadingMargin
   }
 
   override fun drawLeadingMargin(
@@ -45,7 +44,7 @@ class SeparatorSegmentSpan : MetricAffectingSpan(), LeadingMarginSpan, ICustomSp
       first: Boolean,
       layout: Layout) {
     paint.style = Paint.Style.FILL
-    paint.color = MarkdownConfig.config.spanConfig.separatorColor
+    paint.color = MarkdownConfig.spanConfig.separatorColor
 
     val leftPosition = when {
       dir > 0 -> x
@@ -57,7 +56,7 @@ class SeparatorSegmentSpan : MetricAffectingSpan(), LeadingMarginSpan, ICustomSp
     }
 
     val middle = (top + bottom) / 2
-    val width = config.spanConfig.separatorWidth / 2
+    val width = MarkdownConfig.spanConfig.separatorWidth / 2
 
     rect.set(leftPosition, middle - width, rightPosition, middle + width)
     canvas.drawRect(rect, paint)

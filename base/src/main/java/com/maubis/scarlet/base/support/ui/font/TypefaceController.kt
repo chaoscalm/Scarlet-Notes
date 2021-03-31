@@ -64,11 +64,11 @@ class TypefaceController(context: Context) {
   }
 
   private fun setMarkdownConfig() {
-    MarkdownConfig.config.spanConfig.headingTypeface = subHeading()
-    MarkdownConfig.config.spanConfig.heading2Typeface = title()
-    MarkdownConfig.config.spanConfig.heading3Typeface = title()
-    MarkdownConfig.config.spanConfig.textTypeface = text()
-    MarkdownConfig.config.spanConfig.codeTypeface = code()
+    MarkdownConfig.spanConfig.headingTypeface = subHeading()
+    MarkdownConfig.spanConfig.heading2Typeface = title()
+    MarkdownConfig.spanConfig.heading3Typeface = title()
+    MarkdownConfig.spanConfig.textTypeface = text()
+    MarkdownConfig.spanConfig.codeTypeface = code()
   }
 
   private fun getTypefaceSetting(): TypefaceType {

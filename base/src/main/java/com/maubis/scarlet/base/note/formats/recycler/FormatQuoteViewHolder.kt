@@ -12,6 +12,6 @@ class FormatQuoteViewHolder(context: Context, view: View) : FormatTextViewHolder
 
   override fun populate(data: Format, config: FormatViewHolderConfig) {
     super.populate(data, config)
-    quoteColorView.setBackgroundColor(MarkdownConfig.config.spanConfig.quoteColor)
+    quoteColorView.setBackgroundColor(MarkdownConfig.spanConfig.quoteColor)
   }
 }

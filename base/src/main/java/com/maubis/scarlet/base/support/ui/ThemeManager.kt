@@ -92,14 +92,14 @@ class ThemeManager : IThemeManager {
   }
 
   private fun setMarkdownConfig(context: Context) {
-    MarkdownConfig.config.spanConfig.codeTextColor = get(ThemeColorType.SECONDARY_TEXT)
-    MarkdownConfig.config.spanConfig.codeBackgroundColor = get(context, R.color.code_light, R.color.code_dark)
-    MarkdownConfig.config.spanConfig.codeBlockLeadingMargin = DimensionManager.dpToPixels(context, 8)
-    MarkdownConfig.config.spanConfig.quoteColor = MarkdownConfig.config.spanConfig.codeBackgroundColor
-    MarkdownConfig.config.spanConfig.separatorColor = MarkdownConfig.config.spanConfig.codeBackgroundColor
-    MarkdownConfig.config.spanConfig.quoteWidth = DimensionManager.dpToPixels(context, 4)
-    MarkdownConfig.config.spanConfig.separatorWidth = DimensionManager.dpToPixels(context, 2)
-    MarkdownConfig.config.spanConfig.quoteBlockLeadingMargin = DimensionManager.dpToPixels(context, 8)
+    MarkdownConfig.spanConfig.codeTextColor = get(ThemeColorType.SECONDARY_TEXT)
+    MarkdownConfig.spanConfig.codeBackgroundColor = get(context, R.color.code_light, R.color.code_dark)
+    MarkdownConfig.spanConfig.codeBlockLeadingMargin = DimensionManager.dpToPixels(context, 8)
+    MarkdownConfig.spanConfig.quoteColor = MarkdownConfig.spanConfig.codeBackgroundColor
+    MarkdownConfig.spanConfig.separatorColor = MarkdownConfig.spanConfig.codeBackgroundColor
+    MarkdownConfig.spanConfig.quoteWidth = DimensionManager.dpToPixels(context, 4)
+    MarkdownConfig.spanConfig.separatorWidth = DimensionManager.dpToPixels(context, 2)
+    MarkdownConfig.spanConfig.quoteBlockLeadingMargin = DimensionManager.dpToPixels(context, 8)
   }
 
   private fun load(context: Context, type: ThemeColorType): Int {

@@ -1,10 +1,9 @@
 package com.maubis.markdown.segmenter
 
-import com.maubis.markdown.MarkdownConfig.Companion.config
+import com.maubis.markdown.MarkdownConfig
 
 class TextSegmenter(val text: String) {
 
-  private val segmentConfig = config.segmenterConfig
   private var currentSegment = MarkdownSegmentBuilder()
   private val processedSegments = ArrayList<MarkdownSegment>()
 
@@ -15,10 +14,10 @@ class TextSegmenter(val text: String) {
 
   private fun processSegments() {
     processedSegments.clear()
-    val allMultilineSegments = segmentConfig.configuration.filter { it is MultilineDelimiterSegment }
-    val allFullLineSegments = segmentConfig.configuration.filter { it is FullLineSegment }
-    val allMultilineStartSegments = segmentConfig.configuration.filter { it is MultilineStartSegment }
-    val allSingleLineSegments = segmentConfig.configuration.filter { it is LineStartSegment || it is LineDelimiterSegment }
+    val allMultilineSegments = MarkdownConfig.segmenterConfig.configuration.filter { it is MultilineDelimiterSegment }
+    val allFullLineSegments = MarkdownConfig.segmenterConfig.configuration.filter { it is FullLineSegment }
+    val allMultilineStartSegments = MarkdownConfig.segmenterConfig.configuration.filter { it is MultilineStartSegment }
+    val allSingleLineSegments = MarkdownConfig.segmenterConfig.configuration.filter { it is LineStartSegment || it is LineDelimiterSegment }
 
     val segments = text.split("\n")
     for (segment in segments) {
