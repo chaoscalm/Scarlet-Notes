@@ -83,7 +83,7 @@ class NotesProvider {
 
   fun getLastTimestamp(): Long {
     maybeLoadFromDB()
-    return notes.values.map { it.updateTimestamp }.max() ?: 0
+    return notes.values.map { it.updateTimestamp }.maxOrNull() ?: 0
   }
 
   fun unlockAll() {
