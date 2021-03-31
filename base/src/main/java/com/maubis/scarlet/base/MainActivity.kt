@@ -277,12 +277,12 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
 
   private fun notifyFolderChange() {
     val componentContext = ComponentContext(this)
-    lithoPreBottomToolbar.removeAllViews()
+    folderToolbar.removeAllViews()
     setBottomToolbar()
 
     val currentFolder = state.currentFolder
     if (currentFolder != null) {
-      lithoPreBottomToolbar.addView(LithoView.create(componentContext,
+      folderToolbar.addView(LithoView.create(componentContext,
           MainActivityFolderBottomBar.create(componentContext)
               .folder(currentFolder)
               .build()))
