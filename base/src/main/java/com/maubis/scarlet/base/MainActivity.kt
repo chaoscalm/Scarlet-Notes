@@ -30,7 +30,6 @@ import com.maubis.scarlet.base.main.*
 import com.maubis.scarlet.base.main.recycler.*
 import com.maubis.scarlet.base.main.sheets.WhatsNewBottomSheet
 import com.maubis.scarlet.base.main.specs.MainActivityBottomBar
-import com.maubis.scarlet.base.main.specs.MainActivityDisabledSync
 import com.maubis.scarlet.base.main.specs.MainActivityFolderBottomBar
 import com.maubis.scarlet.base.main.specs.MainActivitySyncingNow
 import com.maubis.scarlet.base.main.utils.MainSnackbar
@@ -225,7 +224,6 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
     vSwipeToRefresh.setOnRefreshListener {
       when {
         instance.authenticator().isLoggedIn(this)
-          && !instance.authenticator().isLegacyLoggedIn()
           && !lastSyncHappening.get() -> instance.authenticator().requestSync(true)
         else -> vSwipeToRefresh.isRefreshing = false
       }
@@ -289,8 +287,6 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
               .folder(currentFolder)
               .build()))
     }
-    else
-      notifyDisabledLegacySync()
   }
 
   private fun handleNewItems(notes: List<RecyclerItem>) {
@@ -359,25 +355,9 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
     return allItems
   }
 
-  private fun notifyDisabledLegacySync() {
-    val componentContext = ComponentContext(this)
-    lithoPreBottomToolbar.removeAllViews()
-    if (!instance.authenticator().isLegacyLoggedIn()) {
-      return
-    }
-
-    lithoPreBottomToolbar.addView(LithoView.create(componentContext,
-                                                   MainActivityDisabledSync.create(componentContext)
-                                                     .onClick {
-                                                       instance.authenticator().openTransferDataActivity(componentContext.androidContext)?.run()
-                                                     }
-                                                     .build()))
-  }
-
   fun notifySyncingInformation(isSyncHappening: Boolean, isSyncPending: Boolean) {
     val componentContext = ComponentContext(this)
-    if (!instance.authenticator().isLoggedIn(this)
-      || instance.authenticator().isLegacyLoggedIn()) {
+    if (!instance.authenticator().isLoggedIn(this)) {
       return
     }
 

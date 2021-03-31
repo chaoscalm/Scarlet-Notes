@@ -84,12 +84,6 @@ class SettingsOptionsBottomSheet : LithoOptionBottomSheet() {
         subtitle = R.string.home_option_logout_of_app_subtitle,
         icon = R.drawable.ic_sign_in_options,
         listener = {
-          if (ApplicationBase.instance.authenticator().isLegacyLoggedIn()) {
-            ApplicationBase.instance.authenticator().openTransferDataActivity(activity)?.run()
-            dismiss()
-            return@LithoOptionsItem
-          }
-
           ApplicationBase.instance.authenticator().openLogoutActivity(activity)?.run()
           dismiss()
         },

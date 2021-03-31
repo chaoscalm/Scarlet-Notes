@@ -4,12 +4,7 @@ import android.content.pm.ShortcutInfo
 import android.graphics.Color
 import android.graphics.drawable.Icon
 import android.text.Layout
-import com.facebook.litho.ClickEvent
-import com.facebook.litho.Column
-import com.facebook.litho.Component
-import com.facebook.litho.ComponentContext
-import com.facebook.litho.LongClickEvent
-import com.facebook.litho.Row
+import com.facebook.litho.*
 import com.facebook.litho.annotations.LayoutSpec
 import com.facebook.litho.annotations.OnCreateLayout
 import com.facebook.litho.annotations.OnEvent
@@ -40,8 +35,6 @@ import com.maubis.scarlet.base.support.specs.bottomBarRoundIcon
 import com.maubis.scarlet.base.support.ui.ColorUtil
 import com.maubis.scarlet.base.support.ui.ThemeColorType
 import com.maubis.scarlet.base.support.utils.OsVersionUtils
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 @LayoutSpec
 object MainActivityBottomBarSpec {
@@ -161,52 +154,6 @@ object MainActivityFolderBottomBarSpec {
     if (activity.state.currentFolder != null) {
       CreateOrEditFolderBottomSheet.openSheet(activity, folder) { _, _ -> activity.loadData() }
     }
-  }
-}
-
-@LayoutSpec
-object MainActivityDisabledSyncSpec {
-  @OnCreateLayout
-  fun onCreate(context: ComponentContext): Component {
-    val colorConfig = ToolbarColorConfig(
-      toolbarBackgroundColor = context.getColor(R.color.material_blue_grey_800),
-      toolbarIconColor = context.getColor(R.color.light_secondary_text)
-    )
-    val row = Row.create(context)
-      .widthPercent(100f)
-      .alignItems(YogaAlign.CENTER)
-      .paddingDip(YogaEdge.HORIZONTAL, 4f)
-    row.child(bottomBarRoundIcon(context, colorConfig)
-                .bgColor(Color.TRANSPARENT)
-                .iconRes(R.drawable.ic_info)
-                .onClick {
-                  GlobalScope.launch {
-
-                  }
-                })
-    row.child(
-      Column.create(context)
-        .flexGrow(1f)
-        .paddingDip(YogaEdge.ALL, 8f)
-        .child(
-          Text.create(context)
-            .typeface(sAppTypeface.subHeading())
-            .textRes(R.string.firebase_no_sync_warning)
-            .textSizeRes(R.dimen.font_size_normal)
-            .textColor(colorConfig.toolbarIconColor))
-        .child(
-          Text.create(context)
-            .typeface(sAppTypeface.title())
-            .textRes(R.string.firebase_no_sync_warning_details)
-            .textSizeRes(R.dimen.font_size_small)
-            .textColor(colorConfig.toolbarIconColor)))
-    row.clickHandler(MainActivityDisabledSync.onClickEvent(context))
-    return bottomBarCard(context, row.build(), colorConfig).build()
-  }
-
-  @OnEvent(ClickEvent::class)
-  fun onClickEvent(context: ComponentContext, @Prop onClick: () -> Unit) {
-    onClick()
   }
 }
 

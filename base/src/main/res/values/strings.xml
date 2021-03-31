@@ -283,9 +283,6 @@
 
   <!-- End: Firebase Login Strings -->
 
-  <string name="forget_me_option_title" translatable="false">Forget Me</string>
-  <string name="forget_me_option_details" translatable="false">Logout and remove all online data</string>
-
   <!-- Start Welcome Page -->
   <string name="welcome_page_app_name" translatable="false">Scarlet</string>
   <!-- End Welcome Page -->
@@ -430,9 +427,6 @@
   <string name="firebase_page_important_details">We used to store your information on Google Firebase. After logging in we will recover these to your device</string>
   <string name="firebase_page_not_sync_details">New notes and changes will NOT be synced over to Google Firebase, and you need to login on to Google Drive</string>
   <string name="firebase_page_remove_details">Once your notes are recovered, you can delete them from Google Firebase, and then switch over</string>
-
-  <string name="firebase_no_sync_warning">Your data is not being synced!</string>
-  <string name="firebase_no_sync_warning_details">Data Sync based on legacy login is disabled, consider switching over to Google Drive based sync.</string>
 
   <string name="firebase_removal_page_login_title">Transfer Data from Firebase to Drive</string>
   <string name="firebase_removal_page_clear_button">Clear Data and Sign Out</string>

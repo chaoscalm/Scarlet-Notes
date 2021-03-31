@@ -9,13 +9,9 @@ interface IAuthenticator {
 
   fun isLoggedIn(context: Context): Boolean
 
-  fun isLegacyLoggedIn(): Boolean
-
   fun userId(context: Context): String?
 
   fun openLoginActivity(context: Context): Runnable?
-
-  fun openForgetMeActivity(context: Context): Runnable?
 
   fun openTransferDataActivity(context: Context): Runnable?
 

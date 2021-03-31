@@ -4,7 +4,6 @@ import android.app.Dialog
 import com.facebook.litho.ComponentContext
 import com.maubis.scarlet.base.MainActivity
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ApplicationBase
 import com.maubis.scarlet.base.config.CoreConfig.Companion.foldersDb
 import com.maubis.scarlet.base.config.CoreConfig.Companion.notesDb
 import com.maubis.scarlet.base.config.CoreConfig.Companion.tagsDb
@@ -14,11 +13,7 @@ import com.maubis.scarlet.base.note.folder.delete
 import com.maubis.scarlet.base.note.tag.delete
 import com.maubis.scarlet.base.support.sheets.LithoOptionBottomSheet
 import com.maubis.scarlet.base.support.sheets.LithoOptionsItem
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 
 class DeleteAndMoreOptionsBottomSheet : LithoOptionBottomSheet() {
   override fun title(): Int = R.string.home_option_delete_notes_and_more
@@ -90,18 +85,6 @@ class DeleteAndMoreOptionsBottomSheet : LithoOptionBottomSheet() {
 
       }
     ))
-    val forgetMeClick = ApplicationBase.instance.authenticator().openForgetMeActivity(activity)
-    options.add(
-      LithoOptionsItem(
-        title = R.string.forget_me_option_title,
-        subtitle = R.string.forget_me_option_details,
-        icon = R.drawable.ic_action_forget_me,
-        listener = {
-          forgetMeClick?.run()
-          dismiss()
-        },
-        visible = forgetMeClick !== null && ApplicationBase.instance.authenticator().isLegacyLoggedIn()
-      ))
     return options
   }
 }

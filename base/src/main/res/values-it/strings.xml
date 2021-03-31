@@ -300,8 +300,6 @@
   <string name="firebase_page_important_details">Conservavamo i tuoi dati su Google Firebase. Dopo aver effettuato l\'accesso, li ripristineremo sul tuo dispositivo</string>
   <string name="firebase_page_not_sync_details">Le tue note NON verranno più sincronizzate con Google Firebase e dovrai accedere a Google Drive</string>
   <string name="firebase_page_remove_details">Una volta recuperate le note, è possibile eliminarle da Google Firebase ed effettuare la migrazione</string>
-  <string name="firebase_no_sync_warning">I tuoi dati non vengono sincronizzati!</string>
-  <string name="firebase_no_sync_warning_details">La sincronizzazione dei dati basata sull\'accesso legacy è disabilitata, considera la possibilità di passare alla sincronizzazione basata su Google Drive.</string>
   <string name="firebase_removal_page_login_title">Trasferisci dati da Firebase a Drive</string>
   <string name="firebase_removal_page_clear_button">Cancella dati ed esci</string>
   <string name="firebase_removal_page_clearing_button">Cancellazione e disconnessione</string>
@@ -315,8 +313,6 @@
   <string name="app_lock_title" translatable="false">Sblocca l\'app</string>
   <string name="app_lock_details_no_fingerprint" translatable="false">Inserisci il PIN di 4 cifre per effettuare lo sblocco</string>
   <string name="app_lock_details">Inserisci il PIN di 4 cifre o usa l\'impronta per effettuare lo sblocco</string>
-  <string name="forget_me_option_title">Dimenticami</string>
-  <string name="forget_me_option_details">Disconnettimi e rimuovi tutti i dati memorizzati online</string>
   <string name="install_pro_sheet_app_lock">Blocco dell\'app e sblocco singolo delle note.</string>
   <string name="install_pro_sheet_app_themes">Più temi.</string>
   <string name="install_pro_sheet_font_size">Selezione della dimensione del carattere.</string>
