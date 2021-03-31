@@ -4,11 +4,9 @@ import com.maubis.scarlet.base.BuildConfig
 import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppPreferences
 import com.maubis.scarlet.base.config.CoreConfig.Companion.notesDb
 import com.maubis.scarlet.base.main.sheets.WHATS_NEW_SHEET_INDEX
-import java.util.*
 
 const val KEY_LAST_KNOWN_APP_VERSION = "KEY_LAST_KNOWN_APP_VERSION"
 const val KEY_LAST_SHOWN_WHATS_NEW = "KEY_LAST_SHOWN_WHATS_NEW"
-const val KEY_INSTANCE_ID = "KEY_INSTANCE_ID"
 
 fun getCurrentVersionCode(): Int {
   return BuildConfig.VERSION_CODE
@@ -43,14 +41,4 @@ fun shouldShowWhatsNewSheet(): Boolean {
 
   // New users don't need to see the whats new screen
   return lastUsedAppVersion != 0
-}
-
-fun getInstanceID(): String {
-  val deviceId = sAppPreferences.get(KEY_INSTANCE_ID, "")
-  if (deviceId.isBlank()) {
-    val newDeviceId = UUID.randomUUID().toString()
-    sAppPreferences.put(KEY_INSTANCE_ID, newDeviceId)
-    return newDeviceId
-  }
-  return deviceId
 }
