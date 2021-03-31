@@ -144,7 +144,7 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
     finish()
   }
 
-  fun setListeners() {
+  private fun setListeners() {
     snackbar = MainSnackbar(bottomSnackbar) { loadData() }
     searchBackButton.setOnClickListener {
       onBackPressed()
@@ -186,7 +186,7 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
       })
   }
 
-  fun setupMainToolbar() {
+  private fun setupMainToolbar() {
     toolbarSearchIcon.setOnClickListener {
       enterSearchMode()
     }
@@ -204,7 +204,7 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
     toolbarSettingsIcon.setColorFilter(toolbarIconColor)
   }
 
-  fun setupRecyclerView() {
+  private fun setupRecyclerView() {
     val isTablet = resources.getBoolean(R.bool.is_tablet)
 
     val isMarkdownEnabled = sAppPreferences.get(KEY_MARKDOWN_ENABLED, true)
