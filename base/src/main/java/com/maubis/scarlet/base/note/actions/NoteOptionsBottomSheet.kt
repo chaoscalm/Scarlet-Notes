@@ -435,17 +435,6 @@ class NoteOptionsBottomSheet : GridBottomSheetBase() {
       ))
     options.add(
       OptionsItem(
-        title = R.string.voice_action_title,
-        subtitle = R.string.voice_action_title,
-        icon = R.drawable.ic_action_speak_aloud,
-        listener = View.OnClickListener {
-          TextToSpeechBottomSheet.openSheet(activity, note)
-          dismiss()
-        },
-        invalid = activity.lockedContentIsHidden() && note.locked
-      ))
-    options.add(
-      OptionsItem(
         title = R.string.view_distraction_free,
         subtitle = R.string.view_distraction_free,
         icon = R.drawable.ic_action_distraction_free,
