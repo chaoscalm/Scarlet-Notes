@@ -269,7 +269,6 @@
   <string name="delete_sheet_delete_selected_notes_permanently">Would you like to permanently delete these notes?</string>
   <string name="delete_sheet_delete_trash_yes">Delete</string>
   <string name="delete_sheet_delete_trash_no">Cancel</string>
-  <string name="trash_will_delete_automatically">Notes are deleted forever after 7 days</string>
   <!-- End Delete Notes -->
 
   <!-- Start Information -->

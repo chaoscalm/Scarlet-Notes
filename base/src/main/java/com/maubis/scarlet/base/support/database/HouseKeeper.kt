@@ -7,7 +7,6 @@ import com.maubis.scarlet.base.core.note.NoteImage.Companion.deleteIfExist
 import com.maubis.scarlet.base.core.note.ReminderInterval
 import com.maubis.scarlet.base.core.note.getReminderV2
 import com.maubis.scarlet.base.core.note.setReminderV2
-import com.maubis.scarlet.base.note.delete
 import com.maubis.scarlet.base.note.reminders.ReminderJob.Companion.nextJobTimestamp
 import com.maubis.scarlet.base.note.reminders.ReminderJob.Companion.scheduleJob
 import com.maubis.scarlet.base.note.save
@@ -19,7 +18,6 @@ import java.util.concurrent.TimeUnit
 class HouseKeeper(val context: Context) {
 
   private val houseKeeperTasks: Array<() -> Unit> = arrayOf(
-    { removeOlderClips() },
     { removeDecoupledFolders() },
     { removeOldReminders() },
     { deleteRedundantImageFiles() },
@@ -29,14 +27,6 @@ class HouseKeeper(val context: Context) {
   fun execute() {
     for (task in houseKeeperTasks) {
       task()
-    }
-  }
-
-  fun removeOlderClips(deltaTimeMs: Long = 604800000L) {
-    val notes = notesDb.database()
-      .getOldTrashedNotes(Calendar.getInstance().timeInMillis - deltaTimeMs)
-    for (note in notes) {
-      note.delete(context)
     }
   }
 

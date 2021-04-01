@@ -35,11 +35,6 @@
         android:layout_height="match_parent" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    <include
-      layout="@layout/toolbar_trash_info"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content" />
-
     <FrameLayout
       android:id="@+id/folderToolbar"
       android:layout_width="match_parent"

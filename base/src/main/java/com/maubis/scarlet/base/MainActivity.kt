@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import android.view.View.GONE
 import android.widget.GridLayout.VERTICAL
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -50,7 +49,6 @@ import com.maubis.scarlet.base.settings.sheet.SettingsOptionsBottomSheet.Compani
 import com.maubis.scarlet.base.settings.sheet.SettingsOptionsBottomSheet.Companion.KEY_MARKDOWN_HOME_ENABLED
 import com.maubis.scarlet.base.settings.sheet.sNoteItemLineCount
 import com.maubis.scarlet.base.settings.sheet.sUIUseGridView
-import com.maubis.scarlet.base.support.database.HouseKeeper
 import com.maubis.scarlet.base.support.database.HouseKeeperJob
 import com.maubis.scarlet.base.support.database.Migrator
 import com.maubis.scarlet.base.support.recycler.RecyclerItem
@@ -61,7 +59,6 @@ import com.maubis.scarlet.base.support.utils.shouldShowWhatsNewSheet
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.search_toolbar_main.*
 import kotlinx.android.synthetic.main.toolbar_main.*
-import kotlinx.android.synthetic.main.toolbar_trash_info.*
 import kotlinx.coroutines.*
 import java.util.concurrent.atomic.AtomicBoolean
 
@@ -253,9 +250,6 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
   private fun updateToolbars() {
     toolbarTitle.text = getString(state.mode.toolbarTitleResourceId)
     updateMainToolbarLeftIcon()
-
-    val isTrash = state.mode == HomeNavigationMode.TRASH
-    trashNoticeToolbar.visibility = if (isTrash) View.VISIBLE else GONE
     setBottomToolbar()
   }
 
@@ -496,7 +490,6 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
   override fun onStop() {
     super.onStop()
     if (PermissionUtils().getStoragePermissionManager(this).hasAllPermissions()) {
-      HouseKeeper(this).removeOlderClips()
       NoteExporter().tryAutoExport()
     }
   }
@@ -504,10 +497,6 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
   override fun notifyThemeChange() {
     setSystemTheme()
     containerLayoutMain.setBackgroundColor(getThemeColor())
-
-    val toolbarIconColor = sAppTheme.get(ThemeColorType.TOOLBAR_ICON)
-    deletesAutomatically.setTextColor(toolbarIconColor)
-
     setBottomToolbar()
   }
 

@@ -139,7 +139,6 @@
   <string name="delete_sheet_delete_note_permanently">Vuoi eliminare definitivamente questa nota?</string>
   <string name="delete_sheet_delete_trash_yes">Elimina</string>
   <string name="delete_sheet_delete_trash_no">Annulla</string>
-  <string name="trash_will_delete_automatically">Le note vengono cancellate definitivamente dopo 7 giorni</string>
 
 
   <!-- Added for 4.3.7 -->
