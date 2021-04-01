@@ -53,7 +53,6 @@ dependencies {
 
     api "com.github.bijoysingh:android-basics:5.1.0-x"
     api "com.github.bijoysingh:ui-basics:1.0.0-x"
-    api 'com.github.bijoysingh:floating-bubble:3.0.0'
 
     api 'com.evernote:android-job:1.2.6'
 

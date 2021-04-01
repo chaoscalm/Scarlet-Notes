@@ -7,7 +7,6 @@
   <string name="main_no_notes">Nessuna nota</string>
   <string name="main_no_notes_hint">Sembra che non hai aggiunto alcuna nota. Fai clic per aggiungere una nota.</string>
   <string name="edit_note">Modifica nota</string>
-  <string name="open_in_popup">Apri in pop-up</string>
   <string name="copy_note">Copia nota</string>
   <string name="send_note">Invia nota</string>
   <string name="choose_action">Scegli un\'azione&#8230;</string>
@@ -72,7 +71,6 @@
   <string name="tap_for_action_edit">Tocca per modificare la nota</string>
   <string name="tap_for_action_copy">Tocca per copiare il contenuto della nota negli appunti</string>
   <string name="tap_for_action_share">Tocca per condividere il contenuto della nota con altre app</string>
-  <string name="tap_for_action_popup">Tocca per aprire la nota in un popup</string>
   <string name="tap_for_action_delete">Tocca per eliminare la nota</string>
   <string name="tap_for_action_trash">Tocca per spostare la nota nel cestino</string>
   <string name="tap_for_action_not_trash">Tocca per rimuovere la nota dal cestino</string>

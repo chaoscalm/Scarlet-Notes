@@ -9,8 +9,6 @@ interface INoteActor {
 
   fun share(context: Context)
 
-  fun popup(activity: AppCompatActivity)
-
   fun disableBackup(activity: AppCompatActivity)
 
   fun enableBackup(activity: AppCompatActivity)

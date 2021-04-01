@@ -25,7 +25,6 @@
         android:resource="@xml/provider_paths" />
     </provider>
 
-    <service android:name=".service.FloatingNoteService" />
     <service android:name=".notification.NotificationIntentService" />
 
     <activity

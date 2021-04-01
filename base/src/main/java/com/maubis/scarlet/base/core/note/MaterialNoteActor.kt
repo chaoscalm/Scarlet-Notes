@@ -15,15 +15,9 @@ import com.maubis.scarlet.base.core.format.FormatBuilder
 import com.maubis.scarlet.base.database.room.note.Note
 import com.maubis.scarlet.base.export.data.ExportableNote
 import com.maubis.scarlet.base.main.activity.WidgetConfigureActivity
-import com.maubis.scarlet.base.note.deleteToSync
-import com.maubis.scarlet.base.note.getFullText
-import com.maubis.scarlet.base.note.getTitleForSharing
-import com.maubis.scarlet.base.note.mark
-import com.maubis.scarlet.base.note.save
-import com.maubis.scarlet.base.note.saveWithoutSync
+import com.maubis.scarlet.base.note.*
 import com.maubis.scarlet.base.notification.NotificationConfig
 import com.maubis.scarlet.base.notification.NotificationHandler
-import com.maubis.scarlet.base.service.FloatingNoteService
 import com.maubis.scarlet.base.support.utils.OsVersionUtils
 import com.maubis.scarlet.base.widget.AllNotesWidgetProvider.Companion.notifyAllChanged
 import kotlinx.coroutines.GlobalScope
@@ -41,10 +35,6 @@ open class MaterialNoteActor(val note: Note) : INoteActor {
       .setText(note.getFullText())
       .setChooserText(context.getString(R.string.share_using))
       .share()
-  }
-
-  override fun popup(activity: AppCompatActivity) {
-    FloatingNoteService.openNote(activity, note, true)
   }
 
   override fun offlineSave(context: Context) {

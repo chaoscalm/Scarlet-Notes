@@ -16,7 +16,6 @@
   <string name="edit_note">Edit Note</string>
   <string name="open_in_notification">Create Notification</string>
   <string name="share_images">Share Photos</string>
-  <string name="open_in_popup">Open In Popup</string>
   <string name="delete_note_permanently">Delete Permanently</string>
   <string name="copy_note">Copy Note</string>
   <string name="send_note">Send Note</string>
@@ -43,7 +42,6 @@
   <string name="tap_for_action_edit">Tap to open note for editing</string>
   <string name="tap_for_action_copy">Tap to copy note content to clipboard</string>
   <string name="tap_for_action_share">Tap to share note content to other apps</string>
-  <string name="tap_for_action_popup">Tap to open note in floating popup</string>
   <string name="tap_for_action_delete">Tap to delete the note</string>
   <string name="tap_for_action_trash">Tap to move note to trash</string>
   <string name="tap_for_action_not_trash">Tap to move note out of trash</string>

@@ -456,17 +456,6 @@ class NoteOptionsBottomSheet : GridBottomSheetBase() {
       ))
     options.add(
       OptionsItem(
-        title = R.string.open_in_popup,
-        subtitle = R.string.tap_for_action_popup,
-        icon = R.drawable.ic_bubble_chart_white_48dp,
-        listener = View.OnClickListener {
-          ApplicationBase.instance.noteActions(note).popup(activity)
-          dismiss()
-        },
-        invalid = activity.lockedContentIsHidden() && note.locked
-      ))
-    options.add(
-      OptionsItem(
         title = R.string.backup_note_enable,
         subtitle = R.string.backup_note_enable,
         icon = R.drawable.ic_action_backup,
