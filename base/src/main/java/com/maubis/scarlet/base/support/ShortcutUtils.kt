@@ -16,14 +16,12 @@ fun addShortcut(context: Context, shortcut: ShortcutInfo) {
     return
   }
 
-  shortcutManager.dynamicShortcuts = listOf(shortcut)
   if (shortcutManager.isRequestPinShortcutSupported) {
-    val pinShortcutInfo = ShortcutInfo.Builder(context, shortcut.id).build()
-    val pinnedShortcutCallbackIntent = shortcutManager.createShortcutResultIntent(pinShortcutInfo)
+    val pinnedShortcutCallbackIntent = shortcutManager.createShortcutResultIntent(shortcut)
 
     val successCallback = PendingIntent.getBroadcast(
       context, 0,
       pinnedShortcutCallbackIntent, 0)
-    shortcutManager.requestPinShortcut(pinShortcutInfo, successCallback.intentSender)
+    shortcutManager.requestPinShortcut(shortcut, successCallback.intentSender)
   }
 }
