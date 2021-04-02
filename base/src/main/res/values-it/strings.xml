@@ -183,7 +183,6 @@
   <string name="about_page_description">%s è una semplice app per prendere appunti. Permette di inserire rapidamente testo formattato senza rendere complicata l\'esperienza utente. Rende il multi-tasking un gioco da ragazzi.</string>
   <string name="about_page_about_us_details">Ciao, siamo una coppia di designer e programmatori che ha creato %s. Ci sforziamo di creare app progettate con cura, senza o con poca pubblicità, che siano di grande utilità per tutti!</string>
   <string name="note_option_number_lines_subtitle">%d linee sulla schermata principale</string>
-  <string name="view_distraction_free">Senza distrazioni</string>
 
   <!-- Added for 6.6.1 -->
   <string name="home_option_theme_color">Tema dell\'app</string>

@@ -40,7 +40,7 @@ class NoteIntentRouterActivity : AppCompatActivity() {
 
     val intent = when (data.getQueryParameter("is_edit", false)) {
       true -> edit(this, note)
-      false -> view(this, note, data.getQueryParameter("is_distraction_free", false))
+      false -> view(this, note)
     }
     startActivity(intent)
     return true
@@ -57,13 +57,6 @@ class NoteIntentRouterActivity : AppCompatActivity() {
 
   companion object {
 
-    private fun Boolean.toInt(): Int {
-      return when (this) {
-        true -> 1
-        else -> 0
-      }
-    }
-
     private fun Uri.getQueryParameter(key: String, defaultValue: Boolean): Boolean {
       val param = getQueryParameter(key)
       if (param === null) {
@@ -72,14 +65,13 @@ class NoteIntentRouterActivity : AppCompatActivity() {
       return param == "1"
     }
 
-    fun view(context: Context, note: Note, isDistractionFree: Boolean = false): Intent {
+    fun view(context: Context, note: Note): Intent {
       if (sEditorSkipNoteViewer) {
         return edit(context, note)
       }
 
       return Intent(context, ViewAdvancedNoteActivity::class.java)
         .putExtra(INTENT_KEY_NOTE_ID, note.uid)
-        .putExtra(INTENT_KEY_DISTRACTION_FREE, isDistractionFree)
     }
 
     fun edit(context: Context, note: Note): Intent {
@@ -92,12 +84,11 @@ class NoteIntentRouterActivity : AppCompatActivity() {
         .putExtra(CreateNoteActivity.INTENT_KEY_FOLDER, baseFolder)
     }
 
-    fun view(note: Note, isDistractionFree: Boolean = false): Intent {
+    fun view(note: Note): Intent {
       val uri = Uri.Builder()
         .scheme("scarlet")
         .authority("open_note")
         .appendQueryParameter("uuid", note.uuid)
-        .appendQueryParameter("is_distraction_free", isDistractionFree.toInt().toString())
         .build()
       return Intent(Intent.ACTION_VIEW, uri)
     }

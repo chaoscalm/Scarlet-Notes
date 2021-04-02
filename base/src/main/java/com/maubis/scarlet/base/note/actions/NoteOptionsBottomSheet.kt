@@ -435,16 +435,6 @@ class NoteOptionsBottomSheet : GridBottomSheetBase() {
       ))
     options.add(
       OptionsItem(
-        title = R.string.view_distraction_free,
-        subtitle = R.string.view_distraction_free,
-        icon = R.drawable.ic_action_distraction_free,
-        listener = View.OnClickListener {
-            activity.startActivity(NoteIntentRouterActivity.view(activity, note, isDistractionFree = true))
-        },
-        invalid = activity.lockedContentIsHidden() && note.locked
-      ))
-    options.add(
-      OptionsItem(
         title = R.string.backup_note_enable,
         subtitle = R.string.backup_note_enable,
         icon = R.drawable.ic_action_backup,
