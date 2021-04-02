@@ -1,8 +1,5 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'com.github.zellius.shortcut-helper'
-
-shortcutHelper.filePath = '../shortcuts.xml'
 
 android {
     compileSdkVersion 28
