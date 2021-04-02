@@ -26,5 +26,3 @@ android {
 dependencies {
     api project(':base')
 }
-
-apply plugin: 'kotlin-android-extensions'
