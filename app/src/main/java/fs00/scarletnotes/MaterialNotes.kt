@@ -1,4 +1,4 @@
-package com.bijoysingh.quicknote
+package fs00.scarletnotes
 
 import com.maubis.scarlet.base.config.ApplicationBase
 import com.maubis.scarlet.base.config.MaterialNoteConfig
@@ -9,6 +9,6 @@ class MaterialNotes : ApplicationBase() {
   override fun onCreate() {
     super.onCreate()
     instance = MaterialNoteConfig(this)
-    ExternalFolderSync.setup(this)
+      ExternalFolderSync.setup(this)
   }
 }

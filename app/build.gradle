@@ -8,7 +8,7 @@ android {
     compileSdkVersion 28
 
     defaultConfig {
-        applicationId "com.bijoysingh.quicknote"
+        applicationId "fs00.scarletnotes"
         minSdkVersion rootProject.ext.appconfig_min_os_version
         targetSdkVersion rootProject.ext.appconfig_target_os_version
         versionCode rootProject.ext.appconfig_version_code
