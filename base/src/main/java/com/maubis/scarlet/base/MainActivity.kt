@@ -142,7 +142,7 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
   }
 
   private fun setListeners() {
-    snackbar = MainSnackbar(bottomSnackbar) { loadData() }
+    snackbar = MainSnackbar(bottomSnackbar) { refreshItems() }
     searchBackButton.setOnClickListener {
       onBackPressed()
     }
@@ -243,7 +243,7 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
     state.mode = mode
     state.currentFolder = null
     notifyFolderChange()
-    unifiedSearch()
+    refreshItems()
     updateToolbars()
   }
 
@@ -265,11 +265,11 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
 
   fun onFolderChange(folder: Folder?) {
     state.currentFolder = folder
-    unifiedSearch()
+    refreshItems()
     notifyFolderChange()
   }
 
-  private fun notifyFolderChange() {
+  fun notifyFolderChange() {
     val componentContext = ComponentContext(this)
     folderToolbar.removeAllViews()
     setBottomToolbar()
@@ -335,7 +335,7 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
                             folder = it,
                             click = { onFolderChange(it) },
                             longClick = {
-                              CreateOrEditFolderBottomSheet.openSheet(this@MainActivity, it, { _, _ -> loadData() })
+                              CreateOrEditFolderBottomSheet.openSheet(this@MainActivity, it, { _, _ -> refreshItems() })
                             },
                             selected = state.currentFolder?.uuid == it.uuid,
                             contents = notesCount)
@@ -389,7 +389,7 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
     }
   }
 
-  private fun unifiedSearch() {
+  fun refreshItems() {
     GlobalScope.launch(Dispatchers.Main) {
       val items = GlobalScope.async(Dispatchers.IO) { unifiedSearchSynchronous() }
       handleNewItems(items.await())
@@ -399,14 +399,14 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
   fun openTag(tag: Tag) {
     state.mode = if (state.mode == HomeNavigationMode.LOCKED) HomeNavigationMode.DEFAULT else state.mode
     state.tags.add(tag)
-    unifiedSearch()
+    refreshItems()
     updateToolbars()
   }
 
   override fun onResume() {
     super.onResume()
     instance.startListener(this)
-    loadData()
+    refreshItems()
     registerNoteReceiver()
     notifyFolderChange()
 
@@ -455,12 +455,12 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
     mainToolbar.visibility = View.VISIBLE
     searchToolbar.visibility = View.GONE
     state.clearSearchBar()
-    loadData()
+    refreshItems()
   }
 
   private fun startSearch(keyword: String) {
     state.text = keyword
-    unifiedSearch()
+    refreshItems()
   }
 
   override fun onBackPressed() {
@@ -502,7 +502,7 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
 
   private fun registerNoteReceiver() {
     receiver = SyncedNoteBroadcastReceiver {
-      loadData()
+      refreshItems()
     }
     registerReceiver(receiver, getNoteIntentFilter())
   }
@@ -525,22 +525,22 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
    */
   override fun updateNote(note: Note) {
     note.save(this)
-    loadData()
+    refreshItems()
   }
 
   override fun markItem(note: Note, state: NoteState) {
     note.mark(this, state)
-    loadData()
+    refreshItems()
   }
 
   override fun moveItemToTrashOrDelete(note: Note) {
     snackbar.softUndo(this, note)
     note.softDelete(this)
-    loadData()
+    refreshItems()
   }
 
   override fun notifyTagsChanged(note: Note) {
-    loadData()
+    refreshItems()
   }
 
   override fun getSelectMode(note: Note): String {
@@ -548,7 +548,7 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
   }
 
   override fun notifyResetOrDismiss() {
-    loadData()
+    refreshItems()
   }
 
   override fun lockedContentIsHidden() = true

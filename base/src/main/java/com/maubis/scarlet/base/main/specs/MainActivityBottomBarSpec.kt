@@ -73,7 +73,7 @@ object MainActivityBottomBarSpec {
                   CreateOrEditFolderBottomSheet.openSheet(
                           activity,
                           FolderBuilder().emptyFolder(sNoteDefaultColor),
-                          { _, _ -> activity.loadData() })
+                          { _, _ -> activity.refreshItems() })
                 })
       }
       row.child(bottomBarRoundIcon(context, colorConfig)
@@ -152,7 +152,7 @@ object MainActivityFolderBottomBarSpec {
   fun onClickEvent(context: ComponentContext, @Prop folder: Folder) {
     val activity = context.androidContext as MainActivity
     if (activity.state.currentFolder != null) {
-      CreateOrEditFolderBottomSheet.openSheet(activity, folder) { _, _ -> activity.loadData() }
+      CreateOrEditFolderBottomSheet.openSheet(activity, folder) { _, _ -> activity.notifyFolderChange() }
     }
   }
 }
