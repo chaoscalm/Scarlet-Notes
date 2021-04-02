@@ -5,24 +5,24 @@ import com.maubis.scarlet.base.config.ApplicationBase.Companion.folderSync
 import com.maubis.scarlet.base.database.room.folder.Folder
 import com.maubis.scarlet.base.export.data.ExportableFolder
 
-open class MaterialFolderActor(val folder: Folder) : IFolderActor {
-  override fun offlineSave() {
+class FolderActor(val folder: Folder) {
+  fun offlineSave() {
     val id = ApplicationBase.instance.foldersDatabase().database().insertFolder(folder)
     folder.uid = if (folder.isUnsaved()) id.toInt() else folder.uid
 
     ApplicationBase.instance.foldersDatabase().notifyInsertFolder(folder)
   }
 
-  override fun onlineSave() {
+  fun onlineSave() {
     folderSync?.insert(ExportableFolder(folder))
   }
 
-  override fun save() {
+  fun save() {
     offlineSave()
     onlineSave()
   }
 
-  override fun offlineDelete() {
+  fun offlineDelete() {
     if (folder.isUnsaved()) {
       return
     }
@@ -31,7 +31,7 @@ open class MaterialFolderActor(val folder: Folder) : IFolderActor {
     folder.uid = 0
   }
 
-  override fun delete() {
+  fun delete() {
     offlineDelete()
     folderSync?.remove(ExportableFolder(folder))
   }

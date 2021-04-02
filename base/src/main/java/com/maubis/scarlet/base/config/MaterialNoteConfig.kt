@@ -4,12 +4,9 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import com.maubis.scarlet.base.config.auth.IAuthenticator
 import com.maubis.scarlet.base.config.auth.NullAuthenticator
-import com.maubis.scarlet.base.core.folder.IFolderActor
-import com.maubis.scarlet.base.core.folder.MaterialFolderActor
-import com.maubis.scarlet.base.core.note.INoteActor
-import com.maubis.scarlet.base.core.note.MaterialNoteActor
-import com.maubis.scarlet.base.core.tag.ITagActor
-import com.maubis.scarlet.base.core.tag.MaterialTagActor
+import com.maubis.scarlet.base.core.folder.FolderActor
+import com.maubis.scarlet.base.core.note.NoteActor
+import com.maubis.scarlet.base.core.tag.TagActor
 import com.maubis.scarlet.base.database.FoldersProvider
 import com.maubis.scarlet.base.database.NotesProvider
 import com.maubis.scarlet.base.database.TagsProvider
@@ -34,13 +31,13 @@ open class MaterialNoteConfig(context: Context) : CoreConfig() {
 
   override fun tagsDatabase(): TagsProvider = tagsProvider
 
-  override fun noteActions(note: Note): INoteActor = MaterialNoteActor(note)
+  override fun noteActions(note: Note) = NoteActor(note)
 
-  override fun tagActions(tag: Tag): ITagActor = MaterialTagActor(tag)
+  override fun tagActions(tag: Tag) = TagActor(tag)
 
   override fun foldersDatabase(): FoldersProvider = foldersProvider
 
-  override fun folderActions(folder: Folder): IFolderActor = MaterialFolderActor(folder)
+  override fun folderActions(folder: Folder) = FolderActor(folder)
 
   override fun remoteDatabaseState(): IRemoteDatabaseState {
     return object : IRemoteDatabaseState {

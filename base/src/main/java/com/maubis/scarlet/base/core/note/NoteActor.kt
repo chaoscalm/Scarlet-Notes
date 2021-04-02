@@ -24,12 +24,12 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.*
 
-open class MaterialNoteActor(val note: Note) : INoteActor {
-  override fun copy(context: Context) {
+class NoteActor(val note: Note) {
+  fun copy(context: Context) {
     TextUtils.copyToClipboard(context, note.getFullText())
   }
 
-  override fun share(context: Context) {
+  fun share(context: Context) {
     IntentUtils.ShareBuilder(context)
       .setSubject(note.getTitleForSharing())
       .setText(note.getFullText())
@@ -37,7 +37,7 @@ open class MaterialNoteActor(val note: Note) : INoteActor {
       .share()
   }
 
-  override fun offlineSave(context: Context) {
+  fun offlineSave(context: Context) {
     val id = notesDb.database().insertNote(note)
     note.uid = if (note.isUnsaved()) id.toInt() else note.uid
     notesDb.notifyInsertNote(note)
@@ -46,16 +46,16 @@ open class MaterialNoteActor(val note: Note) : INoteActor {
     }
   }
 
-  override fun onlineSave(context: Context) {
+  fun onlineSave(context: Context) {
     folderSync?.insert(ExportableNote(note))
   }
 
-  override fun save(context: Context) {
+  fun save(context: Context) {
     offlineSave(context)
     onlineSave(context)
   }
 
-  override fun softDelete(context: Context) {
+  fun softDelete(context: Context) {
     if (note.getNoteState() === NoteState.TRASH) {
       delete(context)
       return
@@ -63,7 +63,7 @@ open class MaterialNoteActor(val note: Note) : INoteActor {
     note.mark(context, NoteState.TRASH)
   }
 
-  override fun offlineDelete(context: Context) {
+  fun offlineDelete(context: Context) {
     sAppImageStorage.deleteAllFiles(note)
     if (note.isUnsaved()) {
       return
@@ -77,27 +77,27 @@ open class MaterialNoteActor(val note: Note) : INoteActor {
     }
   }
 
-  override fun disableBackup(activity: AppCompatActivity) {
+  fun disableBackup(activity: AppCompatActivity) {
     note.disableBackup = true
     note.saveWithoutSync(activity)
     note.deleteToSync(activity)
   }
 
-  override fun enableBackup(activity: AppCompatActivity) {
+  fun enableBackup(activity: AppCompatActivity) {
     note.disableBackup = false
     note.save(activity)
   }
 
-  override fun onlineDelete(context: Context) {
+  fun onlineDelete(context: Context) {
     folderSync?.remove(ExportableNote(note))
   }
 
-  override fun delete(context: Context) {
+  fun delete(context: Context) {
     offlineDelete(context)
     onlineDelete(context)
   }
 
-  protected fun onNoteDestroyed(context: Context) {
+  private fun onNoteDestroyed(context: Context) {
     WidgetConfigureActivity.notifyNoteChange(context, note)
     notifyAllChanged(context)
     val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager?
@@ -105,7 +105,7 @@ open class MaterialNoteActor(val note: Note) : INoteActor {
     ApplicationBase.sAppImageCache.deleteNote(note.uuid)
   }
 
-  protected fun onNoteUpdated(context: Context) {
+  private fun onNoteUpdated(context: Context) {
     WidgetConfigureActivity.notifyNoteChange(context, note)
     notifyAllChanged(context)
     val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager?

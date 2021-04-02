@@ -3,9 +3,9 @@ package com.maubis.scarlet.base.config
 import androidx.appcompat.app.AppCompatActivity
 import com.maubis.scarlet.base.config.ApplicationBase.Companion.instance
 import com.maubis.scarlet.base.config.auth.IAuthenticator
-import com.maubis.scarlet.base.core.folder.IFolderActor
-import com.maubis.scarlet.base.core.note.INoteActor
-import com.maubis.scarlet.base.core.tag.ITagActor
+import com.maubis.scarlet.base.core.folder.FolderActor
+import com.maubis.scarlet.base.core.note.NoteActor
+import com.maubis.scarlet.base.core.tag.TagActor
 import com.maubis.scarlet.base.database.FoldersProvider
 import com.maubis.scarlet.base.database.NotesProvider
 import com.maubis.scarlet.base.database.TagsProvider
@@ -27,11 +27,11 @@ abstract class CoreConfig {
 
   abstract fun foldersDatabase(): FoldersProvider
 
-  abstract fun noteActions(note: Note): INoteActor
+  abstract fun noteActions(note: Note): NoteActor
 
-  abstract fun tagActions(tag: Tag): ITagActor
+  abstract fun tagActions(tag: Tag): TagActor
 
-  abstract fun folderActions(folder: Folder): IFolderActor
+  abstract fun folderActions(folder: Folder): FolderActor
 
   abstract fun remoteDatabaseState(): IRemoteDatabaseState
 

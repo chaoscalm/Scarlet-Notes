@@ -4,23 +4,23 @@ import com.maubis.scarlet.base.config.ApplicationBase
 import com.maubis.scarlet.base.database.room.tag.Tag
 import com.maubis.scarlet.base.export.data.ExportableTag
 
-open class MaterialTagActor(val tag: Tag) : ITagActor {
-  override fun offlineSave() {
+class TagActor(val tag: Tag) {
+  fun offlineSave() {
     val id = ApplicationBase.instance.tagsDatabase().database().insertTag(tag)
     tag.uid = if (tag.isUnsaved()) id.toInt() else tag.uid
     ApplicationBase.instance.tagsDatabase().notifyInsertTag(tag)
   }
 
-  override fun onlineSave() {
+  fun onlineSave() {
     ApplicationBase.folderSync?.insert(ExportableTag(tag))
   }
 
-  override fun save() {
+  fun save() {
     offlineSave()
     onlineSave()
   }
 
-  override fun offlineDelete() {
+  fun offlineDelete() {
     if (tag.isUnsaved()) {
       return
     }
@@ -29,9 +29,8 @@ open class MaterialTagActor(val tag: Tag) : ITagActor {
     tag.uid = 0
   }
 
-  override fun delete() {
+  fun delete() {
     offlineDelete()
     ApplicationBase.folderSync?.remove(ExportableTag(tag))
   }
-
 }
