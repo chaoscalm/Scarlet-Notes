@@ -24,7 +24,6 @@ android {
             }
         }
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        resValue "string", "file_provider_name", "com.maubis.scarlet.pro.base.support.GenericFileProvider"
     }
 
     buildTypes {
