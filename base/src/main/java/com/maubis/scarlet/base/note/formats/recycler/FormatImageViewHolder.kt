@@ -5,8 +5,8 @@ import android.util.TypedValue
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.github.bijoysingh.starter.util.ToastHelper
 import com.github.bijoysingh.uibasics.views.UITextView
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppImageStorage
@@ -56,7 +56,7 @@ class FormatImageViewHolder(context: Context, view: View) : FormatViewHolderBase
       try {
         EasyImage.openCamera(context as AppCompatActivity, data.uid)
       } catch (exception: Exception) {
-        ToastHelper.show(context, "No camera app installed")
+        Toast.makeText(context, "No camera app installed", Toast.LENGTH_SHORT).show()
         maybeThrow(context as AppCompatActivity, exception)
       }
     }
@@ -64,7 +64,7 @@ class FormatImageViewHolder(context: Context, view: View) : FormatViewHolderBase
       try {
         EasyImage.openGallery(context as AppCompatActivity, data.uid)
       } catch (exception: Exception) {
-        ToastHelper.show(context, "No photo picker app installed")
+        Toast.makeText(context, "No photo picker app installed", Toast.LENGTH_SHORT).show()
         maybeThrow(context as AppCompatActivity, exception)
       }
     }

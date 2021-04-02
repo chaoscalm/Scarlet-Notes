@@ -3,13 +3,13 @@ package com.maubis.scarlet.base.export.sheet
 import android.app.Dialog
 import android.content.Intent
 import android.graphics.Typeface
+import android.widget.Toast
 import androidx.core.content.FileProvider
 import com.facebook.litho.Column
 import com.facebook.litho.Component
 import com.facebook.litho.ComponentContext
 import com.facebook.litho.widget.Text
 import com.facebook.yoga.YogaEdge
-import com.github.bijoysingh.starter.util.ToastHelper
 import com.maubis.scarlet.base.MainActivity
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTheme
@@ -69,8 +69,11 @@ class ExportNotesBottomSheet : LithoBottomSheet() {
                           val notes = NoteExporter().getExportContent()
                           val success = NoteExporter().saveToManualExportFile(notes)
                           GlobalScope.launch(Dispatchers.Main) {
-                            ToastHelper.show(
-                              activity, if (success) R.string.import_export_layout_exported else R.string.import_export_layout_export_failed)
+                            Toast.makeText(activity,
+                                if (success) R.string.import_export_layout_exported
+                                else R.string.import_export_layout_export_failed,
+                                Toast.LENGTH_SHORT
+                            ).show()
                             dismiss()
                           }
                         }
