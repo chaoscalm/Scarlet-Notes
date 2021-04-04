@@ -39,7 +39,7 @@ class NoteImage(context: Context) {
 
   fun getFile(noteUUID: String, imageFormat: Format): File {
     if (imageFormat.formatType != FormatType.IMAGE) {
-      maybeThrow("Format should be an Image")
+        maybeThrow(IllegalStateException("Format should be an Image"))
     }
     return getFile(noteUUID, imageFormat.text)
   }

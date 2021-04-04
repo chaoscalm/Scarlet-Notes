@@ -77,21 +77,6 @@ fun maybeThrow(exception: Exception) {
 
 /**
  * Throws in debug builds and stores the log trace to a fixed note in case of 'internal debug mode'.
- */
-fun maybeThrow(message: String) {
-  maybeThrow(IllegalStateException(message))
-}
-
-/**
- * Throws in debug builds and stores the log trace to a fixed note in case of 'internal debug mode'.
- * Else returns the provided value
- */
-fun <DataType> throwOrReturn(message: String, result: DataType): DataType {
-  return throwOrReturn(IllegalStateException(message), result)
-}
-
-/**
- * Throws in debug builds and stores the log trace to a fixed note in case of 'internal debug mode'.
  * Else returns the provided value
  */
 fun <DataType> throwOrReturn(exception: Exception, result: DataType): DataType {
