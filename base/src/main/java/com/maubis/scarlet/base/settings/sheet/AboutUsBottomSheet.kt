@@ -1,13 +1,12 @@
 package com.maubis.scarlet.base.settings.sheet
 
 import android.app.Dialog
-import android.util.Log
 import com.facebook.litho.Column
 import com.facebook.litho.Component
 import com.facebook.litho.ComponentContext
 import com.facebook.litho.widget.Text
 import com.facebook.yoga.YogaEdge
-import com.maubis.scarlet.base.MainActivity
+import com.maubis.scarlet.base.BuildConfig
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.config.ScarletApplication.Companion.appTheme
 import com.maubis.scarlet.base.config.ScarletApplication.Companion.appTypeface
@@ -18,16 +17,6 @@ import com.maubis.scarlet.base.support.ui.ThemeColorType
 class AboutUsBottomSheet : LithoBottomSheet() {
 
   override fun getComponent(componentContext: ComponentContext, dialog: Dialog): Component {
-    val activity = context as MainActivity
-
-    var version = "???"
-    try {
-      val pInfo = activity.packageManager.getPackageInfo(activity.packageName, 0)
-      version = pInfo.versionName
-    } catch (exception: Exception) {
-      Log.e("Scarlet", "Unable to retrieve app version", exception)
-    }
-
     val appName = getString(R.string.app_name)
     val aboutUsDetails = getString(R.string.about_page_about_us_details, appName)
     val aboutAppDetails = getString(R.string.about_page_description, appName)
@@ -73,7 +62,7 @@ class AboutUsBottomSheet : LithoBottomSheet() {
           .typeface(appTypeface.text())
           .textSizeRes(R.dimen.font_size_large)
           .marginDip(YogaEdge.BOTTOM, 16f)
-          .text(version)
+          .text(BuildConfig.VERSION_NAME)
           .textColor(appTheme.get(ThemeColorType.TERTIARY_TEXT)))
     return component.build()
   }
