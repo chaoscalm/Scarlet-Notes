@@ -47,10 +47,6 @@ fun Note.getMeta(): NoteMeta {
   }
 }
 
-fun Note.getReminder(): NoteReminder? {
-  return getMeta().reminder
-}
-
 fun Note.getReminderV2(): Reminder? {
   return getMeta().reminderV2
 }

@@ -50,7 +50,6 @@ import com.maubis.scarlet.base.settings.sheet.SettingsOptionsBottomSheet.Compani
 import com.maubis.scarlet.base.settings.sheet.sNoteItemLineCount
 import com.maubis.scarlet.base.settings.sheet.sUIUseGridView
 import com.maubis.scarlet.base.support.database.HouseKeeperJob
-import com.maubis.scarlet.base.support.database.Migrator
 import com.maubis.scarlet.base.support.recycler.RecyclerItem
 import com.maubis.scarlet.base.support.sheets.openSheet
 import com.maubis.scarlet.base.support.specs.ToolbarColorConfig
@@ -89,9 +88,6 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
     handleIntent()
-
-    // Migrate to the newer version of the tags
-    Migrator(this).start()
 
     setupMainToolbar()
     setupRecyclerView()
