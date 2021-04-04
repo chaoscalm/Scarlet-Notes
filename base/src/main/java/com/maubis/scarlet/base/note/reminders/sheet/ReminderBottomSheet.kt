@@ -16,7 +16,7 @@ import com.maubis.scarlet.base.core.note.setReminderV2
 import com.maubis.scarlet.base.database.room.note.Note
 import com.maubis.scarlet.base.main.sheets.GenericOptionsBottomSheet
 import com.maubis.scarlet.base.note.reminders.ReminderJob
-import com.maubis.scarlet.base.note.saveWithoutSync
+import com.maubis.scarlet.base.note.save
 import com.maubis.scarlet.base.support.sheets.LithoChooseOptionsItem
 import com.maubis.scarlet.base.support.ui.ThemeColorType
 import com.maubis.scarlet.base.support.ui.ThemedActivity
@@ -101,7 +101,7 @@ class ReminderBottomSheet : ThemedBottomSheetFragment() {
       ReminderJob.cancelJob(reminder.uid)
 
       note.meta = ""
-      note.saveWithoutSync(themedContext())
+      note.save(themedContext())
 
       dismiss()
     }
@@ -120,7 +120,7 @@ class ReminderBottomSheet : ThemedBottomSheetFragment() {
       reminder.uid = uid
 
       note.setReminderV2(reminder)
-      note.saveWithoutSync(themedContext())
+      note.save(themedContext())
 
       dismiss()
     }

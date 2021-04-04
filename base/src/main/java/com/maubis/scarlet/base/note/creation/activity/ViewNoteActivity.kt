@@ -216,7 +216,7 @@ open class ViewAdvancedNoteActivity : SecuredActivity(), INoteOptionSheetActivit
 
     note!!.description = FormatBuilder().getSmarterDescription(sectionPreservingSort(trueFormats))
     setNote()
-    maybeSaveNote(true)
+    saveNoteIfNeeded()
   }
 
   fun openMoreOptions() {
@@ -290,15 +290,12 @@ open class ViewAdvancedNoteActivity : SecuredActivity(), INoteOptionSheetActivit
 
   }
 
-  protected fun maybeSaveNote(sync: Boolean) {
+  protected fun saveNoteIfNeeded() {
     if (note!!.getFormats().isEmpty() && note!!.isUnsaved()) {
       return
     }
     note!!.updateTimestamp = Calendar.getInstance().timeInMillis
-    when (sync) {
-      true -> note!!.save(context)
-      false -> note!!.saveWithoutSync(context)
-    }
+    note!!.save(context)
   }
 
   fun notifyNoteChange() {

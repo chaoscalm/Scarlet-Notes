@@ -150,14 +150,6 @@
   <string name="import_export_layout_exporting">Exporting to file&#8230;</string>
   <string name="import_export_layout_exporting_done">Done</string>
   <string name="import_export_layout_exporting_share">Share</string>
-  <string name="import_export_layout_folder_sync_enable">Enable</string>
-  <string name="import_export_layout_folder_sync_disable">Disable</string>
-  <string name="import_export_layout_folder_sync">Enable Folder Sync</string>
-  <string name="import_export_layout_folder_sync_title">Folder Sync</string>
-  <string name="import_export_layout_folder_sync_description">Sync all your notes, tags and folders to an external folder. This helps you sync using other apps between devices, as well have a copy in case you need to delete the app.</string>
-  <string name="import_export_layout_folder_sync_folder">Exporting to Folder</string>
-  <string name="import_export_layout_folder_sync_details">Sync all the notes, tags, etc to an external folder</string>
-  <string name="import_export_layout_filename" translatable="false">MaterialNotes/BACKUP.txt</string>
   <string name="import_export_locked">Export locked notes</string>
   <string name="import_export_locked_details">Also backup the notes which are locked</string>
 

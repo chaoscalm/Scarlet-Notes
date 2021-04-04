@@ -3,19 +3,19 @@ package com.maubis.scarlet.base.core.note
 import android.app.NotificationManager
 import android.content.Context
 import android.os.AsyncTask
-import androidx.appcompat.app.AppCompatActivity
 import com.github.bijoysingh.starter.util.IntentUtils
 import com.github.bijoysingh.starter.util.TextUtils
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.config.ApplicationBase
 import com.maubis.scarlet.base.config.ApplicationBase.Companion.appImageStorage
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.folderSync
 import com.maubis.scarlet.base.config.ApplicationBase.Companion.instance
 import com.maubis.scarlet.base.core.format.FormatBuilder
 import com.maubis.scarlet.base.database.room.note.Note
-import com.maubis.scarlet.base.export.data.ExportableNote
 import com.maubis.scarlet.base.main.activity.WidgetConfigureActivity
-import com.maubis.scarlet.base.note.*
+import com.maubis.scarlet.base.note.getFullText
+import com.maubis.scarlet.base.note.getTitleForSharing
+import com.maubis.scarlet.base.note.mark
+import com.maubis.scarlet.base.note.save
 import com.maubis.scarlet.base.notification.NotificationConfig
 import com.maubis.scarlet.base.notification.NotificationHandler
 import com.maubis.scarlet.base.support.utils.OsVersionUtils
@@ -37,22 +37,13 @@ class NoteActor(val note: Note) {
       .share()
   }
 
-  fun offlineSave(context: Context) {
+  fun save(context: Context) {
     val id = instance.notesRepository.database().insertNote(note)
     note.uid = if (note.isUnsaved()) id.toInt() else note.uid
     instance.notesRepository.notifyInsertNote(note)
     GlobalScope.launch {
       onNoteUpdated(context)
     }
-  }
-
-  fun onlineSave(context: Context) {
-    folderSync?.insert(ExportableNote(note))
-  }
-
-  fun save(context: Context) {
-    offlineSave(context)
-    onlineSave(context)
   }
 
   fun softDelete(context: Context) {
@@ -63,7 +54,17 @@ class NoteActor(val note: Note) {
     note.mark(context, NoteState.TRASH)
   }
 
-  fun offlineDelete(context: Context) {
+  fun excludeFromBackups(context: Context) {
+    note.disableBackup = true
+    note.save(context)
+  }
+
+  fun includeInBackups(context: Context) {
+    note.disableBackup = false
+    note.save(context)
+  }
+
+  fun delete(context: Context) {
     appImageStorage.deleteAllFiles(note)
     if (note.isUnsaved()) {
       return
@@ -75,26 +76,6 @@ class NoteActor(val note: Note) {
     AsyncTask.execute {
       onNoteDestroyed(context)
     }
-  }
-
-  fun disableBackup(activity: AppCompatActivity) {
-    note.disableBackup = true
-    note.saveWithoutSync(activity)
-    note.deleteToSync(activity)
-  }
-
-  fun enableBackup(activity: AppCompatActivity) {
-    note.disableBackup = false
-    note.save(activity)
-  }
-
-  fun onlineDelete(context: Context) {
-    folderSync?.remove(ExportableNote(note))
-  }
-
-  fun delete(context: Context) {
-    offlineDelete(context)
-    onlineDelete(context)
   }
 
   private fun onNoteDestroyed(context: Context) {

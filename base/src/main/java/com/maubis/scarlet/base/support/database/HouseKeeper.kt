@@ -9,7 +9,6 @@ import com.maubis.scarlet.base.core.note.setReminderV2
 import com.maubis.scarlet.base.note.reminders.ReminderJob.Companion.nextJobTimestamp
 import com.maubis.scarlet.base.note.reminders.ReminderJob.Companion.scheduleJob
 import com.maubis.scarlet.base.note.save
-import com.maubis.scarlet.base.note.saveWithoutSync
 import java.io.File
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -55,14 +54,14 @@ class HouseKeeper(val context: Context) {
 
       if (reminder.interval == ReminderInterval.ONCE) {
         it.meta = ""
-        it.saveWithoutSync(context)
+        it.save(context)
         return@forEach
       }
 
       reminder.timestamp = nextJobTimestamp(reminder.timestamp, System.currentTimeMillis())
       reminder.uid = scheduleJob(it.uuid, reminder)
       it.setReminderV2(reminder)
-      it.saveWithoutSync(context)
+      it.save(context)
     }
   }
 

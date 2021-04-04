@@ -29,18 +29,6 @@ fun Tag.save() {
   ApplicationBase.instance.tagActions(this).save()
 }
 
-fun Tag.saveWithoutSync() {
-  ApplicationBase.instance.tagActions(this).offlineSave()
-}
-
-fun Tag.saveToSync() {
-  ApplicationBase.instance.tagActions(this).onlineSave()
-}
-
 fun Tag.delete() {
   ApplicationBase.instance.tagActions(this).delete()
-}
-
-fun Tag.deleteWithoutSync() {
-  ApplicationBase.instance.tagActions(this).offlineDelete()
 }

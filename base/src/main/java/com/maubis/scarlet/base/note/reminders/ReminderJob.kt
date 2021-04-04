@@ -9,7 +9,7 @@ import com.maubis.scarlet.base.core.note.Reminder
 import com.maubis.scarlet.base.core.note.ReminderInterval
 import com.maubis.scarlet.base.core.note.getReminderV2
 import com.maubis.scarlet.base.core.note.setReminderV2
-import com.maubis.scarlet.base.note.saveWithoutSync
+import com.maubis.scarlet.base.note.save
 import com.maubis.scarlet.base.notification.NotificationConfig
 import com.maubis.scarlet.base.notification.NotificationHandler
 import com.maubis.scarlet.base.notification.REMINDER_NOTIFICATION_CHANNEL_ID
@@ -38,10 +38,10 @@ class ReminderJob : Job() {
           ReminderInterval.DAILY)
         reminderV2.uid = scheduleJob(note.uuid, reminderV2)
         note.setReminderV2(reminderV2)
-        note.saveWithoutSync(context)
+        note.save(context)
       } else {
         note.meta = ""
-        note.saveWithoutSync(context)
+        note.save(context)
       }
     } catch (exception: Exception) {
       maybeThrow(exception)

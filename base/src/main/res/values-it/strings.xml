@@ -224,13 +224,6 @@
   <string name="home_option_export_markdown_subtitle">Esporta le note in formato Markdown (non è possibile importarle nuovamente nell\'app)</string>
   <string name="ui_options_note_background_color_settings_theme">Usa il colore del tema per lo sfondo</string>
   <string name="ui_options_note_background_color_settings_note">Usa il colore della nota per lo sfondo</string>
-  <string name="import_export_layout_folder_sync_enable">Abilita</string>
-  <string name="import_export_layout_folder_sync_disable">Disabilita</string>
-  <string name="import_export_layout_folder_sync">Abilita sincronizzazione cartella</string>
-  <string name="import_export_layout_folder_sync_title">Sincronizzazione cartella</string>
-  <string name="import_export_layout_folder_sync_description">Sincronizza tutte le note, i tag e le cartelle in una cartella esterna. Questo ti aiuta a sincronizzare i dati utilizzando altre app su più dispositivi, oltre ad averne una copia nel caso in cui tu decida di eliminare l\'app.</string>
-  <string name="import_export_layout_folder_sync_folder">Esportazione nella cartella</string>
-  <string name="import_export_layout_folder_sync_details">Sincronizza tutte le note, i tag, ecc. in una cartella esterna</string>
   <string name="import_export_locked">Esporta note protette</string>
   <string name="sort_sheet_alphabetical">Alfabetico</string>
   <string name="import_export_locked_details">Effettua anche il backup delle note che sono protette</string>

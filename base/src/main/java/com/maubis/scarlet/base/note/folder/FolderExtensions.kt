@@ -45,18 +45,6 @@ fun Folder.save() {
   ApplicationBase.instance.folderActions(this).save()
 }
 
-fun Folder.saveWithoutSync() {
-  ApplicationBase.instance.folderActions(this).offlineSave()
-}
-
-fun Folder.saveToSync() {
-  ApplicationBase.instance.folderActions(this).onlineSave()
-}
-
 fun Folder.delete() {
   ApplicationBase.instance.folderActions(this).delete()
-}
-
-fun Folder.deleteWithoutSync() {
-  ApplicationBase.instance.folderActions(this).offlineDelete()
 }

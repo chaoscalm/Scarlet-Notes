@@ -439,7 +439,7 @@ class NoteOptionsBottomSheet : GridBottomSheetBase() {
         subtitle = R.string.backup_note_enable,
         icon = R.drawable.ic_action_backup,
         listener = View.OnClickListener {
-          ApplicationBase.instance.noteActions(note).enableBackup(activity)
+          ApplicationBase.instance.noteActions(note).includeInBackups(activity)
           activity.updateNote(note)
           dismiss()
         },
@@ -452,7 +452,7 @@ class NoteOptionsBottomSheet : GridBottomSheetBase() {
         subtitle = R.string.backup_note_disable,
         icon = R.drawable.ic_action_backup_no,
         listener = View.OnClickListener {
-          ApplicationBase.instance.noteActions(note).disableBackup(activity)
+          ApplicationBase.instance.noteActions(note).excludeFromBackups(activity)
           activity.updateNote(note)
           dismiss()
         },

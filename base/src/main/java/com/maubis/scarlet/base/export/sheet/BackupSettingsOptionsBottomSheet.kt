@@ -56,21 +56,6 @@ class BackupSettingsOptionsBottomSheet : LithoOptionBottomSheet() {
         }
       }
     ))
-    options.add(LithoOptionsItem(
-      title = R.string.import_export_layout_folder_sync,
-      subtitle = R.string.import_export_layout_folder_sync_details,
-      icon = R.drawable.icon_folder_sync,
-      listener = {
-        val manager = PermissionUtils().getStoragePermissionManager(activity)
-        val hasAllPermissions = manager.hasAllPermissions()
-        when (hasAllPermissions) {
-          true -> {
-            openSheet(activity, ExternalFolderSyncBottomSheet())
-          }
-          false -> openSheet(activity, PermissionBottomSheet())
-        }
-      }
-    ))
     return options
   }
 

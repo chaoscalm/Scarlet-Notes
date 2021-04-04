@@ -306,10 +306,6 @@ fun Note.applySanityChecks() {
 
 fun Note.save(context: Context) {
   applySanityChecks()
-  if (disableBackup) {
-    saveWithoutSync(context)
-    return
-  }
   ApplicationBase.instance.noteActions(this).save(context)
 }
 
@@ -321,28 +317,8 @@ fun Note.unsafeSave_INTERNAL_USE_ONLY() {
   instance.notesRepository.notifyInsertNote(this)
 }
 
-fun Note.saveWithoutSync(context: Context) {
-  ApplicationBase.instance.noteActions(this).offlineSave(context)
-}
-
-fun Note.saveToSync(context: Context) {
-  ApplicationBase.instance.noteActions(this).onlineSave(context)
-}
-
 fun Note.delete(context: Context) {
-  if (disableBackup) {
-    deleteWithoutSync(context)
-    return
-  }
   ApplicationBase.instance.noteActions(this).delete(context)
-}
-
-fun Note.deleteWithoutSync(context: Context) {
-  ApplicationBase.instance.noteActions(this).offlineDelete(context)
-}
-
-fun Note.deleteToSync(context: Context) {
-  ApplicationBase.instance.noteActions(this).onlineDelete(context)
 }
 
 fun Note.softDelete(context: Context) {

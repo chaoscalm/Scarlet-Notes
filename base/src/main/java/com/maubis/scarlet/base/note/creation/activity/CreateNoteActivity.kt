@@ -26,7 +26,6 @@ import com.maubis.scarlet.base.note.creation.specs.NoteCreationTopBar
 import com.maubis.scarlet.base.note.delete
 import com.maubis.scarlet.base.note.formats.recycler.FormatImageViewHolder
 import com.maubis.scarlet.base.note.formats.recycler.FormatTextViewHolder
-import com.maubis.scarlet.base.note.saveToSync
 import com.maubis.scarlet.base.settings.sheet.ColorPickerBottomSheet
 import com.maubis.scarlet.base.settings.sheet.ColorPickerDefaultController
 import com.maubis.scarlet.base.support.recycler.SimpleItemTouchHelper
@@ -153,11 +152,8 @@ open class CreateNoteActivity : ViewAdvancedNoteActivity() {
   override fun onPause() {
     super.onPause()
     active = false
-    maybeUpdateNoteWithoutSync()
-    val destroyed = destroyIfNeeded()
-    if (!destroyed && !note!!.disableBackup) {
-      note!!.saveToSync(this)
-    }
+    updateNoteIfNeeded()
+    deleteIfEmpty()
   }
 
   override fun onBackPressed() {
@@ -174,18 +170,16 @@ open class CreateNoteActivity : ViewAdvancedNoteActivity() {
     // do nothing
   }
 
-  private fun destroyIfNeeded(): Boolean {
+  private fun deleteIfEmpty() {
     if (note!!.isUnsaved()) {
-      return true
+      return
     }
     if (note!!.getFormats().isEmpty()) {
       note!!.delete(this)
-      return true
     }
-    return false
   }
 
-  protected fun maybeUpdateNoteWithoutSync() {
+  protected fun updateNoteIfNeeded() {
     val currentNote = note
     if (currentNote === null || !formatsInitialised.get()) {
       return
@@ -201,7 +195,7 @@ open class CreateNoteActivity : ViewAdvancedNoteActivity() {
       else -> historyModified = false
     }
     currentNote.updateTimestamp = Calendar.getInstance().timeInMillis
-    maybeSaveNote(false)
+    saveNoteIfNeeded()
   }
 
   @Synchronized
@@ -227,7 +221,7 @@ open class CreateNoteActivity : ViewAdvancedNoteActivity() {
     handler.postDelayed(object : Runnable {
       override fun run() {
         if (active) {
-          maybeUpdateNoteWithoutSync()
+          updateNoteIfNeeded()
           fullScreenView()
           handler.postDelayed(this, HANDLER_UPDATE_TIME.toLong())
         }
@@ -386,7 +380,7 @@ open class CreateNoteActivity : ViewAdvancedNoteActivity() {
         Collections.swap(formats, i, i - 1)
       }
     }
-    maybeUpdateNoteWithoutSync()
+    updateNoteIfNeeded()
   }
 
   override fun deleteFormat(format: Format) {
@@ -397,7 +391,7 @@ open class CreateNoteActivity : ViewAdvancedNoteActivity() {
     focusedFormat = if (focusedFormat == null || focusedFormat!!.uid == format.uid) null else focusedFormat
     formats.removeAt(position)
     adapter.removeItem(position)
-    maybeUpdateNoteWithoutSync()
+    updateNoteIfNeeded()
   }
 
   override fun createOrChangeToNextFormat(format: Format) {
