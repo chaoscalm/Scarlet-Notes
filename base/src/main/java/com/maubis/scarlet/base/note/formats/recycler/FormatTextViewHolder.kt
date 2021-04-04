@@ -22,7 +22,7 @@ import com.maubis.scarlet.base.note.creation.sheet.sEditorLiveMarkdown
 import com.maubis.scarlet.base.note.creation.sheet.sEditorMoveHandles
 import com.maubis.scarlet.base.support.sheets.openSheet
 import com.maubis.scarlet.base.support.ui.visibility
-import com.maubis.scarlet.base.support.utils.maybeThrow
+import com.maubis.scarlet.base.support.utils.logAndMaybeDisplayError
 
 open class FormatTextViewHolder(context: Context, view: View) : FormatViewHolderBase(context, view), TextWatcher {
 
@@ -146,7 +146,7 @@ open class FormatTextViewHolder(context: Context, view: View) : FormatViewHolder
       val additionTokenLength = (if (markdownType.requiresNewLine) 1 else 0) + markdownType.startToken.length
       edit.setSelection(Math.min(startString.length + additionTokenLength, edit.text.length))
     } catch (exception: Exception) {
-      maybeThrow(context as AppCompatActivity, exception)
+      logAndMaybeDisplayError(context as AppCompatActivity, exception)
     }
   }
 

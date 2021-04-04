@@ -11,7 +11,7 @@ var sInternalShowTracesInSheet: Boolean
   get() = appPreferences.get(KEY_INTERNAL_SHOW_TRACES_IN_SHEET, false)
   set(value) = appPreferences.put(KEY_INTERNAL_SHOW_TRACES_IN_SHEET, value)
 
-fun maybeThrow(activity: AppCompatActivity, thrownException: Exception) {
+fun logAndMaybeDisplayError(activity: AppCompatActivity, thrownException: Exception) {
   if (sInternalShowTracesInSheet) {
     openSheet(activity, ExceptionBottomSheet().apply { this.exception = thrownException })
   }
@@ -20,13 +20,4 @@ fun maybeThrow(activity: AppCompatActivity, thrownException: Exception) {
 
 fun logNonCriticalError(exception: Exception) {
   Log.w("Scarlet", "Non-critical error detected", exception)
-}
-
-/**
- * Throws in debug builds and stores the log trace to a fixed note in case of 'internal debug mode'.
- * Else returns the provided value
- */
-fun <DataType> throwOrReturn(exception: Exception, result: DataType): DataType {
-  logNonCriticalError(exception)
-  return result
 }

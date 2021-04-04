@@ -16,7 +16,7 @@ import com.maubis.scarlet.base.main.sheets.openDeleteFormatDialog
 import com.maubis.scarlet.base.note.creation.sheet.FormatActionBottomSheet
 import com.maubis.scarlet.base.support.sheets.openSheet
 import com.maubis.scarlet.base.support.ui.visibility
-import com.maubis.scarlet.base.support.utils.maybeThrow
+import com.maubis.scarlet.base.support.utils.logAndMaybeDisplayError
 import pl.aprilapps.easyphotopicker.EasyImage
 import java.io.File
 
@@ -57,7 +57,7 @@ class FormatImageViewHolder(context: Context, view: View) : FormatViewHolderBase
         EasyImage.openCamera(context as AppCompatActivity, data.uid)
       } catch (exception: Exception) {
         Toast.makeText(context, "No camera app installed", Toast.LENGTH_SHORT).show()
-        maybeThrow(context as AppCompatActivity, exception)
+        logAndMaybeDisplayError(context as AppCompatActivity, exception)
       }
     }
     actionGallery.setOnClickListener {
@@ -65,7 +65,7 @@ class FormatImageViewHolder(context: Context, view: View) : FormatViewHolderBase
         EasyImage.openGallery(context as AppCompatActivity, data.uid)
       } catch (exception: Exception) {
         Toast.makeText(context, "No photo picker app installed", Toast.LENGTH_SHORT).show()
-        maybeThrow(context as AppCompatActivity, exception)
+        logAndMaybeDisplayError(context as AppCompatActivity, exception)
       }
     }
     actionMove.setColorFilter(config.iconColor)

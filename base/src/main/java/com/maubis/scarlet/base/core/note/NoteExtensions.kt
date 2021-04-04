@@ -5,7 +5,7 @@ import com.google.gson.Gson
 import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.core.format.FormatBuilder
 import com.maubis.scarlet.base.database.room.note.Note
-import com.maubis.scarlet.base.support.utils.throwOrReturn
+import com.maubis.scarlet.base.support.utils.logNonCriticalError
 
 fun Note.isUnsaved(): Boolean {
   return this.uid === null || this.uid == 0
@@ -35,7 +35,8 @@ fun Note.getNoteState(): NoteState {
   try {
     return NoteState.valueOf(this.state)
   } catch (exception: Exception) {
-    return throwOrReturn(exception, NoteState.DEFAULT)
+    logNonCriticalError(exception)
+    return NoteState.DEFAULT
   }
 }
 
@@ -43,7 +44,8 @@ fun Note.getMeta(): NoteMeta {
   try {
     return Gson().fromJson<NoteMeta>(this.meta, NoteMeta::class.java) ?: NoteMeta()
   } catch (exception: Exception) {
-    return throwOrReturn(exception, NoteMeta())
+    logNonCriticalError(exception)
+    return NoteMeta()
   }
 }
 

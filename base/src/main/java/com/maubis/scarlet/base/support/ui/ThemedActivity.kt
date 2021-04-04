@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTheme
 import com.maubis.scarlet.base.settings.sheet.sInternalEnableFullScreen
 import com.maubis.scarlet.base.support.utils.OsVersionUtils
-import com.maubis.scarlet.base.support.utils.maybeThrow
+import com.maubis.scarlet.base.support.utils.logAndMaybeDisplayError
 
 abstract class ThemedActivity : AppCompatActivity(), IThemeChangeListener {
 
@@ -79,7 +79,7 @@ abstract class ThemedActivity : AppCompatActivity(), IThemeChangeListener {
       val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
       inputMethodManager.hideSoftInputFromWindow(currentFocus!!.windowToken, 0)
     } catch (exception: Exception) {
-      maybeThrow(this, exception)
+      logAndMaybeDisplayError(this, exception)
     }
   }
 
@@ -88,7 +88,7 @@ abstract class ThemedActivity : AppCompatActivity(), IThemeChangeListener {
       val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
       inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
     } catch (exception: Exception) {
-      maybeThrow(this, exception)
+      logAndMaybeDisplayError(this, exception)
     }
   }
 }

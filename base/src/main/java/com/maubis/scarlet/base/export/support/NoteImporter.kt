@@ -14,7 +14,6 @@ import com.maubis.scarlet.base.note.folder.saveIfUnique
 import com.maubis.scarlet.base.note.save
 import com.maubis.scarlet.base.note.tag.saveIfUnique
 import com.maubis.scarlet.base.support.utils.logNonCriticalError
-import com.maubis.scarlet.base.support.utils.throwOrReturn
 import org.json.JSONArray
 import java.io.BufferedReader
 import java.io.File
@@ -122,7 +121,8 @@ class NoteImporter() {
       return fileContents.toString()
     } catch (exception: IOException) {
       reader.close()
-      return throwOrReturn(exception, "")
+      logNonCriticalError(exception)
+      return ""
     }
   }
 

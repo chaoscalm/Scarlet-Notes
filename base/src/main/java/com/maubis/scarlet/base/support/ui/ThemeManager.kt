@@ -9,7 +9,7 @@ import com.maubis.markdown.MarkdownConfig
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.config.ApplicationBase.Companion.appPreferences
 import com.maubis.scarlet.base.support.utils.OsVersionUtils
-import com.maubis.scarlet.base.support.utils.throwOrReturn
+import com.maubis.scarlet.base.support.utils.logNonCriticalError
 import java.lang.ref.WeakReference
 
 var sThemeLabel: String
@@ -140,7 +140,8 @@ class ThemeManager : IThemeManager {
       return try {
         Theme.valueOf(sThemeLabel)
       } catch (exception: Exception) {
-        throwOrReturn(exception, Theme.DARK)
+        logNonCriticalError(exception)
+        Theme.DARK
       }
     }
   }

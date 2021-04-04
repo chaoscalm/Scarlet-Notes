@@ -7,7 +7,7 @@ import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.config.ApplicationBase.Companion.appPreferences
 import com.maubis.scarlet.base.support.sheets.LithoOptionBottomSheet
 import com.maubis.scarlet.base.support.sheets.LithoOptionsItem
-import com.maubis.scarlet.base.support.utils.maybeThrow
+import com.maubis.scarlet.base.support.utils.logAndMaybeDisplayError
 import com.maubis.scarlet.base.support.utils.sInternalShowTracesInSheet
 
 const val KEY_INTERNAL_ENABLE_FULL_SCREEN = "internal_enable_full_screen"
@@ -67,7 +67,7 @@ class InternalSettingsOptionsBottomSheet : LithoOptionBottomSheet() {
       subtitle = R.string.internal_settings_fake_exceptions_description,
       icon = R.drawable.ic_info,
       listener = {
-        maybeThrow(activity, RuntimeException("Fake Exception for Testing"))
+        logAndMaybeDisplayError(activity, RuntimeException("Fake Exception for Testing"))
       }
     ))
     return options

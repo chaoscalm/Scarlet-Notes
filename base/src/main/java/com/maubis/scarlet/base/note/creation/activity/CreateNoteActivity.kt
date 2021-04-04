@@ -30,7 +30,7 @@ import com.maubis.scarlet.base.settings.sheet.ColorPickerBottomSheet
 import com.maubis.scarlet.base.settings.sheet.ColorPickerDefaultController
 import com.maubis.scarlet.base.support.recycler.SimpleItemTouchHelper
 import com.maubis.scarlet.base.support.specs.ToolbarColorConfig
-import com.maubis.scarlet.base.support.utils.maybeThrow
+import com.maubis.scarlet.base.support.utils.logAndMaybeDisplayError
 import kotlinx.android.synthetic.main.activity_advanced_note.*
 import pl.aprilapps.easyphotopicker.DefaultCallback
 import pl.aprilapps.easyphotopicker.EasyImage
@@ -144,7 +144,7 @@ open class CreateNoteActivity : ViewAdvancedNoteActivity() {
       }
 
       override fun onImagePickerError(exception: Exception, source: EasyImage.ImageSource, type: Int) {
-        maybeThrow(this@CreateNoteActivity, exception)
+        logAndMaybeDisplayError(this@CreateNoteActivity, exception)
       }
     })
   }
