@@ -253,8 +253,6 @@
   <string name="internal_settings_description">Modifica le impostazioni interne utilizzate per il debug</string>
   <string name="internal_settings_enable_show_exceptions_title">Mostra eccezioni</string>
   <string name="internal_settings_enable_show_exceptions_description">Mostra le eccezioni rilevate, se possibile, per consentirne l\'inoltro allo sviluppatore</string>
-  <string name="internal_settings_enable_throw_exceptions_title">Propaga eccezioni</string>
-  <string name="internal_settings_enable_throw_exceptions_description">Fa crashare l\'applicazione in caso di eccezioni. L\'opzione verrà ripristinata dopo 5 arresti anomali</string>
   <string name="internal_settings_enable_fullscreen_title">Abilita modalità schermo intero</string>
   <string name="internal_settings_enable_fullscreen_description">Rendi l\'app a schermo intero per consentire screenshot e registrazioni</string>
   <string name="internal_settings_show_uuid_title">Mostra UUID note</string>

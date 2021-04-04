@@ -367,9 +367,6 @@
   <string name="internal_settings_enable_show_exceptions_title">Show Exception Sheet</string>
   <string name="internal_settings_enable_show_exceptions_description">Show caught exceptions on a sheet if possible, to allow forwarding to Developer</string>
 
-  <string name="internal_settings_enable_throw_exceptions_title">Throw on Exceptions</string>
-  <string name="internal_settings_enable_throw_exceptions_description">Throw and crash the application on exceptions. Will be reset after 5 crashes</string>
-
   <string name="internal_settings_enable_fullscreen_title">Enable Fullscreen</string>
   <string name="internal_settings_enable_fullscreen_description">Make the app in fullscreen to allow screenshots and recordings</string>
 

@@ -9,7 +9,7 @@ import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.core.format.FormatBuilder
 import com.maubis.scarlet.base.core.format.FormatType
 import com.maubis.scarlet.base.database.room.note.Note
-import com.maubis.scarlet.base.support.utils.maybeThrow
+import com.maubis.scarlet.base.support.utils.logNonCriticalError
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -39,7 +39,7 @@ class NoteImage(context: Context) {
 
   fun getFile(noteUUID: String, imageFormat: Format): File {
     if (imageFormat.formatType != FormatType.IMAGE) {
-        maybeThrow(IllegalStateException("Format should be an Image"))
+        logNonCriticalError(IllegalStateException("Format should be an Image"))
     }
     return getFile(noteUUID, imageFormat.text)
   }
