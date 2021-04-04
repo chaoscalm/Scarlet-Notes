@@ -1,6 +1,7 @@
 package com.maubis.scarlet.base.settings.sheet
 
 import android.app.Dialog
+import android.util.Log
 import com.facebook.litho.Column
 import com.facebook.litho.Component
 import com.facebook.litho.ComponentContext
@@ -13,19 +14,18 @@ import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTypeface
 import com.maubis.scarlet.base.support.sheets.LithoBottomSheet
 import com.maubis.scarlet.base.support.sheets.getLithoBottomSheetTitle
 import com.maubis.scarlet.base.support.ui.ThemeColorType
-import com.maubis.scarlet.base.support.utils.maybeThrow
 
 class AboutUsBottomSheet : LithoBottomSheet() {
 
   override fun getComponent(componentContext: ComponentContext, dialog: Dialog): Component {
     val activity = context as MainActivity
 
-    var version = ""
+    var version = "???"
     try {
-      val pInfo = activity.getPackageManager().getPackageInfo(activity.getPackageName(), 0)
+      val pInfo = activity.packageManager.getPackageInfo(activity.packageName, 0)
       version = pInfo.versionName
     } catch (exception: Exception) {
-      maybeThrow(activity, exception)
+      Log.e("Scarlet", "Unable to retrieve app version", exception)
     }
 
     val appName = getString(R.string.app_name)
