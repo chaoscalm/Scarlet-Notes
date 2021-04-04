@@ -7,7 +7,10 @@ import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.config.ApplicationBase.Companion.appPreferences
 import com.maubis.scarlet.base.support.sheets.LithoOptionBottomSheet
 import com.maubis.scarlet.base.support.sheets.LithoOptionsItem
-import com.maubis.scarlet.base.support.utils.*
+import com.maubis.scarlet.base.support.utils.maybeThrow
+import com.maubis.scarlet.base.support.utils.sInternalShowTracesInSheet
+import com.maubis.scarlet.base.support.utils.sInternalThrowOnException
+import com.maubis.scarlet.base.support.utils.sInternalThrownExceptionCount
 
 const val KEY_INTERNAL_ENABLE_FULL_SCREEN = "internal_enable_full_screen"
 var sInternalEnableFullScreen: Boolean
@@ -48,18 +51,6 @@ class InternalSettingsOptionsBottomSheet : LithoOptionBottomSheet() {
         },
         isSelectable = true,
         selected = sInternalShowUUID
-      ))
-    options.add(
-      LithoOptionsItem(
-        title = R.string.internal_settings_enable_log_exceptions_title,
-        subtitle = R.string.internal_settings_enable_log_exceptions_description,
-        icon = R.drawable.ic_note_white_48dp,
-        listener = {
-          sInternalLogTracesToNote = !sInternalLogTracesToNote
-          reset(activity, dialog)
-        },
-        isSelectable = true,
-        selected = sInternalLogTracesToNote
       ))
     options.add(
       LithoOptionsItem(

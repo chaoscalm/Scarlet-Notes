@@ -9,7 +9,10 @@ import com.maubis.scarlet.base.config.ApplicationBase
 import com.maubis.scarlet.base.config.ApplicationBase.Companion.instance
 import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.core.format.FormatType
-import com.maubis.scarlet.base.core.note.*
+import com.maubis.scarlet.base.core.note.NoteState
+import com.maubis.scarlet.base.core.note.generateUUID
+import com.maubis.scarlet.base.core.note.getFormats
+import com.maubis.scarlet.base.core.note.getTagUUIDs
 import com.maubis.scarlet.base.database.room.note.Note
 import com.maubis.scarlet.base.database.room.tag.Tag
 import com.maubis.scarlet.base.note.creation.activity.NoteIntentRouterActivity
@@ -307,14 +310,6 @@ fun Note.applySanityChecks() {
 fun Note.save(context: Context) {
   applySanityChecks()
   ApplicationBase.instance.noteActions(this).save(context)
-}
-
-fun Note.unsafeSave_INTERNAL_USE_ONLY() {
-  applySanityChecks()
-
-  val id = instance.notesRepository.database().insertNote(this)
-  uid = if (isUnsaved()) id.toInt() else uid
-  instance.notesRepository.notifyInsertNote(this)
 }
 
 fun Note.delete(context: Context) {

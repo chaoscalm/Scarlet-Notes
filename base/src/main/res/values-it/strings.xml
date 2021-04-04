@@ -251,8 +251,6 @@
   <string name="home_pending_backup_top_layout">Backup in sospeso</string>
   <string name="internal_settings_title">Opzioni sviluppatore</string>
   <string name="internal_settings_description">Modifica le impostazioni interne utilizzate per il debug</string>
-  <string name="internal_settings_enable_log_exceptions_title">Registra eccezioni</string>
-  <string name="internal_settings_enable_log_exceptions_description">Registra le eccezioni rilevate su una nota fissata per consentirne l\'inoltro allo sviluppatore</string>
   <string name="internal_settings_enable_show_exceptions_title">Mostra eccezioni</string>
   <string name="internal_settings_enable_show_exceptions_description">Mostra le eccezioni rilevate, se possibile, per consentirne l\'inoltro allo sviluppatore</string>
   <string name="internal_settings_enable_throw_exceptions_title">Propaga eccezioni</string>

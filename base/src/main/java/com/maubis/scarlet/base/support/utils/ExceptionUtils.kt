@@ -3,25 +3,11 @@ package com.maubis.scarlet.base.support.utils
 import android.os.SystemClock
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.github.bijoysingh.starter.util.DateFormatter
 import com.maubis.scarlet.base.config.ApplicationBase.Companion.appPreferences
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.instance
-import com.maubis.scarlet.base.core.format.Format
-import com.maubis.scarlet.base.core.format.FormatBuilder
-import com.maubis.scarlet.base.core.format.FormatType
-import com.maubis.scarlet.base.core.note.NoteBuilder
-import com.maubis.scarlet.base.core.note.getFormats
-import com.maubis.scarlet.base.core.note.isUnsaved
 import com.maubis.scarlet.base.main.sheets.ExceptionBottomSheet
-import com.maubis.scarlet.base.note.unsafeSave_INTERNAL_USE_ONLY
 import com.maubis.scarlet.base.support.sheets.openSheet
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-
-const val KEY_INTERNAL_LOG_TRACES_TO_NOTE = "internal_log_traces_to_note"
-var sInternalLogTracesToNote: Boolean
-  get() = appPreferences.get(KEY_INTERNAL_LOG_TRACES_TO_NOTE, false)
-  set(value) = appPreferences.put(KEY_INTERNAL_LOG_TRACES_TO_NOTE, value)
 
 const val KEY_INTERNAL_SHOW_TRACES_IN_SHEET = "internal_show_traces_in_sheet"
 var sInternalShowTracesInSheet: Boolean
@@ -46,10 +32,6 @@ fun maybeThrow(activity: AppCompatActivity, thrownException: Exception) {
 }
 
 fun maybeThrow(exception: Exception) {
-  if (sInternalLogTracesToNote) {
-    storeToDebugNote(Log.getStackTraceString(exception))
-  }
-
   if (sInternalThrowOnException) {
     sInternalThrownExceptionCount += 1
     if (sInternalThrownExceptionCount <= 5) {
@@ -73,49 +55,4 @@ fun maybeThrow(exception: Exception) {
 fun <DataType> throwOrReturn(exception: Exception, result: DataType): DataType {
   maybeThrow(exception)
   return result
-}
-
-private fun storeToDebugNote(trace: String) {
-  GlobalScope.launch {
-    storeToDebugNoteSync(trace)
-  }
-}
-
-const val EXCEPTION_NOTE_KEY = "debug-note"
-const val EXCEPTION_NOTE_NUM_DATA_PER_EXCEPTION = 4
-const val EXCEPTION_NOTE_MAX_EXCEPTIONS = 20
-
-@Synchronized
-private fun storeToDebugNoteSync(trace: String) {
-  val note = instance.notesRepository.getByUUID(EXCEPTION_NOTE_KEY)
-    ?: NoteBuilder().emptyNote().apply {
-      uuid = EXCEPTION_NOTE_KEY
-      disableBackup = true
-    }
-
-  val initialFormats = note.getFormats().toMutableList()
-  if (note.isUnsaved() || initialFormats.isEmpty()) {
-    initialFormats.add(Format(FormatType.HEADING, "Note Exceptions"))
-  }
-
-  val additionalFormats = emptyList<Format>().toMutableList()
-  additionalFormats.add(Format(FormatType.SUB_HEADING, "Exception"))
-  additionalFormats.add(
-    Format(
-      FormatType.QUOTE,
-      "Throw at ${DateFormatter.getDate(System.currentTimeMillis())}"))
-  additionalFormats.add(
-    Format(
-      FormatType.CODE,
-      trace))
-  additionalFormats.add(Format(FormatType.SEPARATOR))
-
-  val maxFormatCount = 1 + EXCEPTION_NOTE_MAX_EXCEPTIONS * EXCEPTION_NOTE_NUM_DATA_PER_EXCEPTION
-  if (initialFormats.size > maxFormatCount) {
-    initialFormats.subList(0, maxFormatCount)
-  }
-
-  initialFormats.addAll(1, additionalFormats)
-  note.description = FormatBuilder().getDescription(initialFormats)
-  note.unsafeSave_INTERNAL_USE_ONLY()
 }

@@ -364,9 +364,6 @@
   <string name="internal_settings_title">Developer Options</string>
   <string name="internal_settings_description">Change internal settings to the application used for debugging</string>
 
-  <string name="internal_settings_enable_log_exceptions_title">Log Exceptions</string>
-  <string name="internal_settings_enable_log_exceptions_description">Log caught exceptions to a fixed note, to allow forwarding to Developer</string>
-
   <string name="internal_settings_enable_show_exceptions_title">Show Exception Sheet</string>
   <string name="internal_settings_enable_show_exceptions_description">Show caught exceptions on a sheet if possible, to allow forwarding to Developer</string>
 
