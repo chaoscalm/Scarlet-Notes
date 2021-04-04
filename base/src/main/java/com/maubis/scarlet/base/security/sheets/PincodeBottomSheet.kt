@@ -5,16 +5,8 @@ import android.text.InputType
 import android.text.Layout
 import android.view.inputmethod.EditorInfo
 import androidx.appcompat.app.AppCompatActivity
-import com.facebook.litho.ClickEvent
-import com.facebook.litho.Column
-import com.facebook.litho.Component
-import com.facebook.litho.ComponentContext
-import com.facebook.litho.Row
-import com.facebook.litho.annotations.FromEvent
-import com.facebook.litho.annotations.LayoutSpec
-import com.facebook.litho.annotations.OnCreateLayout
-import com.facebook.litho.annotations.OnEvent
-import com.facebook.litho.annotations.Prop
+import com.facebook.litho.*
+import com.facebook.litho.annotations.*
 import com.facebook.litho.widget.EditText
 import com.facebook.litho.widget.Image
 import com.facebook.litho.widget.Text
@@ -249,7 +241,7 @@ fun openVerifySheet(
       actionTitle = R.string.security_sheet_button_verify,
       onSuccess = onVerifySuccess,
       onFailure = onVerifyFailure,
-      isFingerprintEnabled = isBiometricEnabled()
+      isFingerprintEnabled = isBiometricEnabled(activity)
     )
   })
 }
@@ -278,7 +270,7 @@ fun openUnlockSheet(
       actionTitle = R.string.security_sheet_button_unlock,
       onSuccess = onUnlockSuccess,
       onFailure = onUnlockFailure,
-      isFingerprintEnabled = isBiometricEnabled()
+      isFingerprintEnabled = isBiometricEnabled(activity)
     )
   })
 }

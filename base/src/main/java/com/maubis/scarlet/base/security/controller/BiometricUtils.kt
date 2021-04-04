@@ -1,19 +1,20 @@
 package com.maubis.scarlet.base.security.controller
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sBiometricManager
 import com.maubis.scarlet.base.settings.sheet.sSecurityBiometricEnabled
 
-fun deviceHasBiometricEnabled(): Boolean {
-  return sBiometricManager.canAuthenticate() == BiometricManager.BIOMETRIC_SUCCESS
+fun deviceHasBiometricEnabled(context: Context): Boolean {
+  val biometricManager = BiometricManager.from(context)
+  return biometricManager.canAuthenticate() == BiometricManager.BIOMETRIC_SUCCESS
 }
 
-fun isBiometricEnabled() = sSecurityBiometricEnabled && deviceHasBiometricEnabled()
+fun isBiometricEnabled(context: Context) = sSecurityBiometricEnabled && deviceHasBiometricEnabled(context)
 
 fun showBiometricPrompt(
   activity: AppCompatActivity,

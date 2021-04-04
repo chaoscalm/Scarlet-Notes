@@ -30,7 +30,7 @@ class AppLockActivity : ThemedActivity() {
 
   private fun setView() {
     component = AppLockView.create(componentContext)
-      .fingerprintEnabled(isBiometricEnabled())
+      .fingerprintEnabled(isBiometricEnabled(this))
       .onTextChange { text ->
         passCodeEntered = text
       }
@@ -48,7 +48,7 @@ class AppLockActivity : ThemedActivity() {
     super.onResume()
     passCodeEntered = ""
 
-    if (isBiometricEnabled()) {
+    if (isBiometricEnabled(this)) {
       showBiometricPrompt(this, onSuccess = {
         PinLockController.notifyPinVerified()
         finish()

@@ -99,7 +99,7 @@ class SecurityOptionsBottomSheet : LithoOptionBottomSheet() {
         }
       ))
 
-    val hasFingerprint = deviceHasBiometricEnabled()
+    val hasFingerprint = deviceHasBiometricEnabled(requireContext())
     options.add(
       LithoOptionsItem(
         title = R.string.security_option_biometrics_enabled,
