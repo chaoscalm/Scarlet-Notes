@@ -253,8 +253,8 @@
   <string name="exception_sheet_crash_app">Fai crashare l\'app</string>
   <string name="exception_sheet_mail">Invia email</string>
   <string name="delete_sheet_delete_selected_notes_permanently">Vuoi eliminare definitivamente queste note?</string>
-  <string name="app_lock_title" translatable="false">Sblocca l\'app</string>
-  <string name="app_lock_details_no_fingerprint" translatable="false">Inserisci il PIN di 4 cifre per effettuare lo sblocco</string>
+  <string name="app_lock_title">Sblocca l\'app</string>
+  <string name="app_lock_details_no_fingerprint">Inserisci il PIN di 4 cifre per effettuare lo sblocco</string>
   <string name="app_lock_details">Inserisci il PIN di 4 cifre o usa l\'impronta per effettuare lo sblocco</string>
   <string name="install_pro_sheet_app_lock">Blocco dell\'app e sblocco singolo delle note.</string>
   <string name="install_pro_sheet_app_themes">Più temi.</string>
