@@ -19,8 +19,8 @@ import com.maubis.scarlet.base.support.utils.sDateFormat
 abstract class ApplicationBase : Application() {
   override fun onCreate() {
     super.onCreate()
+    instance = ApplicationConfig(this)
 
-    // Preferences
     sAppPreferences = VersionedStore.get(this, "USER_PREFERENCES", 1)
 
     sBiometricManager = BiometricManager.from(this)
@@ -44,7 +44,7 @@ abstract class ApplicationBase : Application() {
   }
 
   companion object {
-    lateinit var instance: CoreConfig
+    lateinit var instance: ApplicationConfig
 
     lateinit var sAppImageStorage: NoteImage
     lateinit var sAppImageCache: ImageCache

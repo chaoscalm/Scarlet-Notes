@@ -10,7 +10,7 @@ import com.facebook.litho.ComponentContext
 import com.facebook.litho.LithoView
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppImageStorage
-import com.maubis.scarlet.base.config.CoreConfig.Companion.foldersDb
+import com.maubis.scarlet.base.config.ApplicationConfig.Companion.foldersDb
 import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.core.format.FormatBuilder
 import com.maubis.scarlet.base.core.format.FormatType

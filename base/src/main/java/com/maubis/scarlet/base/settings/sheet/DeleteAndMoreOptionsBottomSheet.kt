@@ -4,9 +4,9 @@ import android.app.Dialog
 import com.facebook.litho.ComponentContext
 import com.maubis.scarlet.base.MainActivity
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.CoreConfig.Companion.foldersDb
-import com.maubis.scarlet.base.config.CoreConfig.Companion.notesDb
-import com.maubis.scarlet.base.config.CoreConfig.Companion.tagsDb
+import com.maubis.scarlet.base.config.ApplicationConfig.Companion.foldersDb
+import com.maubis.scarlet.base.config.ApplicationConfig.Companion.notesDb
+import com.maubis.scarlet.base.config.ApplicationConfig.Companion.tagsDb
 import com.maubis.scarlet.base.main.sheets.openDeleteAllXSheet
 import com.maubis.scarlet.base.note.delete
 import com.maubis.scarlet.base.note.folder.delete

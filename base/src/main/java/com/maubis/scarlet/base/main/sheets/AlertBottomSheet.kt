@@ -10,7 +10,7 @@ import com.maubis.scarlet.base.MainActivity
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppPreferences
 import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTheme
-import com.maubis.scarlet.base.config.CoreConfig
+import com.maubis.scarlet.base.config.ApplicationConfig
 import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.core.note.NoteState
 import com.maubis.scarlet.base.database.room.note.Note
@@ -131,7 +131,7 @@ fun openDeleteTrashSheet(activity: MainActivity) {
       positiveText = R.string.delete_sheet_delete_trash_yes,
       negativeText = R.string.delete_sheet_delete_trash_no,
       onPositiveClick = {
-        val notes = CoreConfig.notesDb.getByNoteState(arrayOf(NoteState.TRASH.name))
+        val notes = ApplicationConfig.notesDb.getByNoteState(arrayOf(NoteState.TRASH.name))
         for (note in notes) {
           note.delete(activity)
         }

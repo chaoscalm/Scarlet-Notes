@@ -1,8 +1,8 @@
 package com.maubis.scarlet.base.main
 
 import com.maubis.scarlet.base.config.ApplicationBase
-import com.maubis.scarlet.base.config.CoreConfig.Companion.foldersDb
-import com.maubis.scarlet.base.config.CoreConfig.Companion.notesDb
+import com.maubis.scarlet.base.config.ApplicationConfig.Companion.foldersDb
+import com.maubis.scarlet.base.config.ApplicationConfig.Companion.notesDb
 import com.maubis.scarlet.base.core.note.NoteState
 import com.maubis.scarlet.base.core.note.sort
 import com.maubis.scarlet.base.database.room.folder.Folder
@@ -73,7 +73,7 @@ fun filterFolder(notes: List<Note>, folder: Folder): List<Note> {
 }
 
 fun filterOutFolders(notes: List<Note>): List<Note> {
-  val allFoldersUUIDs = ApplicationBase.instance.foldersDatabase().getAll().map { it.uuid }
+  val allFoldersUUIDs = ApplicationBase.instance.foldersProvider.getAll().map { it.uuid }
   val sorting = SortingOptionsBottomSheet.getSortingState()
   val filteredNotes = notes.filter { !allFoldersUUIDs.contains(it.folder) }
   return sort(filteredNotes, sorting)

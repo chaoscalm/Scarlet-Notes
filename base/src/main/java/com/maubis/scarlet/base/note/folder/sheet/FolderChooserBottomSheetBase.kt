@@ -4,11 +4,7 @@ import android.app.Dialog
 import android.content.DialogInterface
 import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
-import com.facebook.litho.ClickEvent
-import com.facebook.litho.Column
-import com.facebook.litho.Component
-import com.facebook.litho.ComponentContext
-import com.facebook.litho.Row
+import com.facebook.litho.*
 import com.facebook.litho.annotations.LayoutSpec
 import com.facebook.litho.annotations.OnCreateLayout
 import com.facebook.litho.annotations.OnEvent
@@ -19,7 +15,7 @@ import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTheme
 import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTypeface
-import com.maubis.scarlet.base.config.CoreConfig
+import com.maubis.scarlet.base.config.ApplicationConfig
 import com.maubis.scarlet.base.core.folder.FolderBuilder
 import com.maubis.scarlet.base.database.room.folder.Folder
 import com.maubis.scarlet.base.support.sheets.LithoBottomSheet
@@ -149,7 +145,7 @@ abstract class FolderChooserBottomSheetBase : LithoBottomSheet() {
   private fun getFolderOptions(): List<FolderOptionsItem> {
     val activity = context as AppCompatActivity
     val options = ArrayList<FolderOptionsItem>()
-    for (folder in CoreConfig.foldersDb.getAll()) {
+    for (folder in ApplicationConfig.foldersDb.getAll()) {
       options.add(
         FolderOptionsItem(
           folder = folder,

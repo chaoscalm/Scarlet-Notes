@@ -10,7 +10,7 @@ import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.config.ApplicationBase
 import com.maubis.scarlet.base.config.ApplicationBase.Companion.folderSync
 import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppImageStorage
-import com.maubis.scarlet.base.config.CoreConfig.Companion.notesDb
+import com.maubis.scarlet.base.config.ApplicationConfig.Companion.notesDb
 import com.maubis.scarlet.base.core.format.FormatBuilder
 import com.maubis.scarlet.base.database.room.note.Note
 import com.maubis.scarlet.base.export.data.ExportableNote

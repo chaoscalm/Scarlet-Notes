@@ -70,6 +70,6 @@ class TagsProvider {
   }
 
   fun database(): TagDao {
-    return ApplicationBase.instance.database().tags()
+    return ApplicationBase.instance.database.tags()
   }
 }

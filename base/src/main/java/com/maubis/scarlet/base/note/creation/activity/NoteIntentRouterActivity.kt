@@ -33,7 +33,7 @@ class NoteIntentRouterActivity : AppCompatActivity() {
       return false
     }
 
-    val note = instance.notesDatabase().getByUUID(noteUUID)
+    val note = instance.notesProvider.getByUUID(noteUUID)
     if (note === null) {
       return false
     }

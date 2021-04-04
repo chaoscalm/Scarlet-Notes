@@ -21,11 +21,7 @@ import com.maubis.scarlet.base.note.folder.SelectorFolderRecyclerItem
 import com.maubis.scarlet.base.note.recycler.NoteAppAdapter
 import com.maubis.scarlet.base.note.recycler.NoteRecyclerItem
 import com.maubis.scarlet.base.note.recycler.getSelectableRecyclerItemControllerList
-import com.maubis.scarlet.base.settings.sheet.STORE_KEY_LINE_COUNT
-import com.maubis.scarlet.base.settings.sheet.SettingsOptionsBottomSheet
-import com.maubis.scarlet.base.settings.sheet.SortingOptionsBottomSheet
-import com.maubis.scarlet.base.settings.sheet.sNoteItemLineCount
-import com.maubis.scarlet.base.settings.sheet.sUIUseGridView
+import com.maubis.scarlet.base.settings.sheet.*
 import com.maubis.scarlet.base.support.recycler.RecyclerItem
 import com.maubis.scarlet.base.support.ui.SecuredActivity
 import com.maubis.scarlet.base.support.ui.ThemeColorType
@@ -60,7 +56,7 @@ abstract class SelectableNotesActivityBase : SecuredActivity(), INoteSelectorAct
         notes.forEach {
           val noteFolderId = it.note.folder
           if (lastFolder != noteFolderId) {
-            val folder = instance.foldersDatabase().getByUUID(noteFolderId)
+            val folder = instance.foldersProvider.getByUUID(noteFolderId)
             if (folder !== null) {
               items.add(SelectorFolderRecyclerItem(this@SelectableNotesActivityBase, folder))
               lastFolder = noteFolderId

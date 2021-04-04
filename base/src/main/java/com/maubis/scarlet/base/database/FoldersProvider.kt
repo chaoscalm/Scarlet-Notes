@@ -70,6 +70,6 @@ class FoldersProvider {
   }
 
   fun database(): FolderDao {
-    return ApplicationBase.instance.database().folders()
+    return ApplicationBase.instance.database.folders()
   }
 }

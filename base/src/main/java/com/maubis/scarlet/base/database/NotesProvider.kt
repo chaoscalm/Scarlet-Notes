@@ -111,6 +111,6 @@ class NotesProvider {
   }
 
   fun database(): NoteDao {
-    return ApplicationBase.instance.database().notes()
+    return ApplicationBase.instance.database.notes()
   }
 }

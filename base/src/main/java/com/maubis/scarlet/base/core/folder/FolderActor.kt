@@ -7,10 +7,10 @@ import com.maubis.scarlet.base.export.data.ExportableFolder
 
 class FolderActor(val folder: Folder) {
   fun offlineSave() {
-    val id = ApplicationBase.instance.foldersDatabase().database().insertFolder(folder)
+    val id = ApplicationBase.instance.foldersProvider.database().insertFolder(folder)
     folder.uid = if (folder.isUnsaved()) id.toInt() else folder.uid
 
-    ApplicationBase.instance.foldersDatabase().notifyInsertFolder(folder)
+    ApplicationBase.instance.foldersProvider.notifyInsertFolder(folder)
   }
 
   fun onlineSave() {
@@ -26,8 +26,8 @@ class FolderActor(val folder: Folder) {
     if (folder.isUnsaved()) {
       return
     }
-    ApplicationBase.instance.foldersDatabase().database().delete(folder)
-    ApplicationBase.instance.foldersDatabase().notifyDelete(folder)
+    ApplicationBase.instance.foldersProvider.database().delete(folder)
+    ApplicationBase.instance.foldersProvider.notifyDelete(folder)
     folder.uid = 0
   }
 

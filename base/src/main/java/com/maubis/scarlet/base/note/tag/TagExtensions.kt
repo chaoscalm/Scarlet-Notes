@@ -1,7 +1,7 @@
 package com.maubis.scarlet.base.note.tag
 
 import com.maubis.scarlet.base.config.ApplicationBase
-import com.maubis.scarlet.base.config.CoreConfig.Companion.tagsDb
+import com.maubis.scarlet.base.config.ApplicationConfig.Companion.tagsDb
 import com.maubis.scarlet.base.database.room.tag.Tag
 
 fun Tag.saveIfUnique() {

@@ -6,7 +6,7 @@ import com.facebook.litho.Component
 import com.facebook.litho.ComponentContext
 import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.CoreConfig
+import com.maubis.scarlet.base.config.ApplicationConfig
 import com.maubis.scarlet.base.core.note.getTagUUIDs
 import com.maubis.scarlet.base.core.tag.TagBuilder
 import com.maubis.scarlet.base.database.room.tag.Tag
@@ -75,7 +75,7 @@ class SelectedTagChooserBottomSheet : LithoBottomSheet() {
       }
       tags.removeAll(uuidsToRemove)
     }
-    for (tag in CoreConfig.tagsDb.getAll()) {
+    for (tag in ApplicationConfig.tagsDb.getAll()) {
       options.add(
         LithoTagOptionsItem(
           tag = tag,

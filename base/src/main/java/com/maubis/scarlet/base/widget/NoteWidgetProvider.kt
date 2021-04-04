@@ -12,7 +12,7 @@ class NoteWidgetProvider : AppWidgetProvider() {
     val N = appWidgetIds.size
     for (i in 0 until N) {
       val appWidgetId = appWidgetIds[i]
-      val widget = ApplicationBase.instance.database().widgets().getByID(appWidgetId)
+      val widget = ApplicationBase.instance.database.widgets().getByID(appWidgetId)
       if (widget === null) {
         continue
       }
@@ -30,11 +30,11 @@ class NoteWidgetProvider : AppWidgetProvider() {
     val N = appWidgetIds.size
     for (i in 0 until N) {
       val appWidgetId = appWidgetIds[i]
-      val widget = ApplicationBase.instance.database().widgets().getByID(appWidgetId)
+      val widget = ApplicationBase.instance.database.widgets().getByID(appWidgetId)
       if (widget === null) {
         continue
       }
-      ApplicationBase.instance.database().widgets().delete(widget)
+      ApplicationBase.instance.database.widgets().delete(widget)
     }
   }
 

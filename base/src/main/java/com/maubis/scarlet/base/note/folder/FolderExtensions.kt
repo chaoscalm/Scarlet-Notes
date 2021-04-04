@@ -1,7 +1,7 @@
 package com.maubis.scarlet.base.note.folder
 
 import com.maubis.scarlet.base.config.ApplicationBase
-import com.maubis.scarlet.base.config.CoreConfig.Companion.foldersDb
+import com.maubis.scarlet.base.config.ApplicationConfig.Companion.foldersDb
 import com.maubis.scarlet.base.database.room.folder.Folder
 import com.maubis.scarlet.base.support.utils.sDateFormat
 import java.util.*

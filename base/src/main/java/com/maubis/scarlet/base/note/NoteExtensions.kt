@@ -6,8 +6,8 @@ import com.maubis.markdown.Markdown
 import com.maubis.markdown.MarkdownConfig
 import com.maubis.markdown.spannable.*
 import com.maubis.scarlet.base.config.ApplicationBase
-import com.maubis.scarlet.base.config.CoreConfig
-import com.maubis.scarlet.base.config.CoreConfig.Companion.tagsDb
+import com.maubis.scarlet.base.config.ApplicationConfig
+import com.maubis.scarlet.base.config.ApplicationConfig.Companion.tagsDb
 import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.core.format.FormatType
 import com.maubis.scarlet.base.core.note.*
@@ -317,9 +317,9 @@ fun Note.save(context: Context) {
 fun Note.unsafeSave_INTERNAL_USE_ONLY() {
   applySanityChecks()
 
-  val id = CoreConfig.notesDb.database().insertNote(this)
+  val id = ApplicationConfig.notesDb.database().insertNote(this)
   uid = if (isUnsaved()) id.toInt() else uid
-  CoreConfig.notesDb.notifyInsertNote(this)
+  ApplicationConfig.notesDb.notifyInsertNote(this)
 }
 
 fun Note.saveWithoutSync(context: Context) {

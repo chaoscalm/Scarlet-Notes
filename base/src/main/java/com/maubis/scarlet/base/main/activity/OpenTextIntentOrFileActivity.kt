@@ -16,7 +16,6 @@ import com.maubis.markdown.Markdown
 import com.maubis.markdown.spannable.clearMarkdownSpans
 import com.maubis.markdown.spannable.setFormats
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ApplicationBase
 import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTheme
 import com.maubis.scarlet.base.core.note.NoteBuilder
 import com.maubis.scarlet.base.database.room.note.Note
@@ -82,11 +81,6 @@ class OpenTextIntentOrFileActivity : SecuredActivity() {
 
       }
     })
-  }
-
-  override fun onResume() {
-    super.onResume()
-    ApplicationBase.instance.startListener(this)
   }
 
   private fun setView() {

@@ -11,7 +11,7 @@ import android.widget.RemoteViews
 import androidx.core.content.ContextCompat
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.config.ApplicationBase
-import com.maubis.scarlet.base.config.CoreConfig.Companion.notesDb
+import com.maubis.scarlet.base.config.ApplicationConfig.Companion.notesDb
 import com.maubis.scarlet.base.database.room.note.Note
 import com.maubis.scarlet.base.database.room.widget.Widget
 import com.maubis.scarlet.base.note.creation.activity.ViewAdvancedNoteActivity
@@ -53,7 +53,7 @@ class WidgetConfigureActivity : SelectableNotesActivityBase(), INoteSelectorActi
 
   override fun onNoteClicked(note: Note) {
     val widget = Widget(appWidgetId, note.uuid)
-    ApplicationBase.instance.database().widgets().insert(widget)
+    ApplicationBase.instance.database.widgets().insert(widget)
     createWidget(widget)
   }
 
@@ -101,7 +101,7 @@ class WidgetConfigureActivity : SelectableNotesActivityBase(), INoteSelectorActi
       val application: Application = context.applicationContext as Application
       val ids = AppWidgetManager.getInstance(application).getAppWidgetIds(
         ComponentName(application, NoteWidgetProvider::class.java))
-      val widgets = ApplicationBase.instance.database().widgets().getByNote(note.uuid)
+      val widgets = ApplicationBase.instance.database.widgets().getByNote(note.uuid)
 
       val widgetIds = ArrayList<Int>()
       for (widget in widgets) {

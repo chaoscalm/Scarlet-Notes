@@ -2,11 +2,7 @@ package com.maubis.scarlet.base.main.sheets
 
 import android.app.Dialog
 import android.graphics.Typeface
-import com.facebook.litho.ClickEvent
-import com.facebook.litho.Column
-import com.facebook.litho.Component
-import com.facebook.litho.ComponentContext
-import com.facebook.litho.Row
+import com.facebook.litho.*
 import com.facebook.litho.annotations.LayoutSpec
 import com.facebook.litho.annotations.OnCreateLayout
 import com.facebook.litho.annotations.OnEvent
@@ -18,18 +14,13 @@ import com.maubis.scarlet.base.MainActivity
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTheme
 import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTypeface
-import com.maubis.scarlet.base.config.CoreConfig
+import com.maubis.scarlet.base.config.ApplicationConfig
 import com.maubis.scarlet.base.core.tag.TagBuilder
 import com.maubis.scarlet.base.database.room.tag.Tag
 import com.maubis.scarlet.base.main.HomeNavigationMode
 import com.maubis.scarlet.base.note.tag.sheet.CreateOrEditTagBottomSheet
 import com.maubis.scarlet.base.settings.sheet.SettingsOptionsBottomSheet
-import com.maubis.scarlet.base.support.sheets.LithoBottomSheet
-import com.maubis.scarlet.base.support.sheets.LithoLabelOptionsItem
-import com.maubis.scarlet.base.support.sheets.LithoOptionsItem
-import com.maubis.scarlet.base.support.sheets.OptionItemLayout
-import com.maubis.scarlet.base.support.sheets.OptionLabelItemLayout
-import com.maubis.scarlet.base.support.sheets.getLithoBottomSheetTitle
+import com.maubis.scarlet.base.support.sheets.*
 import com.maubis.scarlet.base.support.specs.RoundIcon
 import com.maubis.scarlet.base.support.ui.ThemeColorType
 
@@ -240,10 +231,10 @@ class HomeOptionsBottomSheet : LithoBottomSheet() {
   private fun getTagOptions(): List<LithoTagOptionsItem> {
     val activity = context as MainActivity
     val options = ArrayList<LithoTagOptionsItem>()
-    for (tag in CoreConfig.tagsDb.getAll()) {
+    for (tag in ApplicationConfig.tagsDb.getAll()) {
       options.add(LithoTagOptionsItem(
         tag = tag,
-        usages = CoreConfig.notesDb.getNoteCountByTag(tag.uuid),
+        usages = ApplicationConfig.notesDb.getNoteCountByTag(tag.uuid),
         listener = {
           activity.openTag(tag)
           dismiss()

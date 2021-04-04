@@ -2,7 +2,7 @@ package com.maubis.scarlet.base.database.remote
 
 import android.content.Context
 import com.github.bijoysingh.starter.util.TextUtils
-import com.maubis.scarlet.base.config.CoreConfig
+import com.maubis.scarlet.base.config.ApplicationConfig
 import com.maubis.scarlet.base.core.folder.FolderBuilder
 import com.maubis.scarlet.base.core.folder.IFolderContainer
 import com.maubis.scarlet.base.core.note.INoteContainer
@@ -23,7 +23,7 @@ import com.maubis.scarlet.base.service.sendNoteBroadcast
 object IRemoteDatabaseUtils {
   fun onRemoteInsert(context: Context, note: INoteContainer) {
     val notifiedNote = NoteBuilder().copy(note)
-    val existingNote = CoreConfig.notesDb.existingMatch(note)
+    val existingNote = ApplicationConfig.notesDb.existingMatch(note)
     val isSameAsExisting = existingNote !== null && notifiedNote.isEqual(existingNote)
 
     if (existingNote === null) {
@@ -42,7 +42,7 @@ object IRemoteDatabaseUtils {
 
   fun onRemoteInsert(context: Context, tag: ITagContainer) {
     val notifiedTag = TagBuilder().copy(tag)
-    val existingTag = CoreConfig.tagsDb.getByUUID(tag.uuid())
+    val existingTag = ApplicationConfig.tagsDb.getByUUID(tag.uuid())
     var isSameAsExisting = existingTag !== null
       && TextUtils.areEqualNullIsEmpty(notifiedTag.title, existingTag.title)
 
@@ -60,7 +60,7 @@ object IRemoteDatabaseUtils {
 
   fun onRemoteInsert(context: Context, folder: IFolderContainer) {
     val notifiedFolder = FolderBuilder().copy(folder)
-    val existingFolder = CoreConfig.foldersDb.getByUUID(folder.uuid())
+    val existingFolder = ApplicationConfig.foldersDb.getByUUID(folder.uuid())
     var isSameAsExisting = existingFolder !== null
       && TextUtils.areEqualNullIsEmpty(notifiedFolder.title, existingFolder.title)
       && (notifiedFolder.color == existingFolder.color)
@@ -83,7 +83,7 @@ object IRemoteDatabaseUtils {
   }
 
   fun onRemoteRemove(context: Context, note: INoteContainer) {
-    val existingNote = CoreConfig.notesDb.existingMatch(note)
+    val existingNote = ApplicationConfig.notesDb.existingMatch(note)
     if (existingNote !== null && !existingNote.disableBackup) {
       existingNote.deleteWithoutSync(context)
       sendNoteBroadcast(context, NoteBroadcast.NOTE_DELETED, existingNote.uuid)
@@ -91,7 +91,7 @@ object IRemoteDatabaseUtils {
   }
 
   fun onRemoteRemoveNote(context: Context, noteUUID: String) {
-    val existingNote = CoreConfig.notesDb.getByUUID(noteUUID)
+    val existingNote = ApplicationConfig.notesDb.getByUUID(noteUUID)
     if (existingNote !== null && !existingNote.disableBackup) {
       existingNote.deleteWithoutSync(context)
       sendNoteBroadcast(context, NoteBroadcast.NOTE_DELETED, existingNote.uuid)
@@ -103,7 +103,7 @@ object IRemoteDatabaseUtils {
   }
 
   fun onRemoteRemoveTag(context: Context, tagUUID: String) {
-    val existingTag = CoreConfig.tagsDb.getByUUID(tagUUID)
+    val existingTag = ApplicationConfig.tagsDb.getByUUID(tagUUID)
     if (existingTag !== null) {
       existingTag.deleteWithoutSync()
       sendNoteBroadcast(context, NoteBroadcast.TAG_DELETED, existingTag.uuid)
@@ -115,10 +115,10 @@ object IRemoteDatabaseUtils {
   }
 
   fun onRemoteRemoveFolder(context: Context, folderUUID: String) {
-    val existingFolder = CoreConfig.foldersDb.getByUUID(folderUUID)
+    val existingFolder = ApplicationConfig.foldersDb.getByUUID(folderUUID)
     if (existingFolder !== null) {
       existingFolder.deleteWithoutSync()
-      CoreConfig.notesDb.getAll().filter { it.folder == existingFolder.uuid }.forEach {
+      ApplicationConfig.notesDb.getAll().filter { it.folder == existingFolder.uuid }.forEach {
         it.folder = ""
         it.save(context)
       }

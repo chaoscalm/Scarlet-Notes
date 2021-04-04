@@ -3,7 +3,7 @@ package com.maubis.scarlet.base.note.folder
 import android.content.Context
 import androidx.core.content.ContextCompat
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.CoreConfig.Companion.notesDb
+import com.maubis.scarlet.base.config.ApplicationConfig.Companion.notesDb
 import com.maubis.scarlet.base.database.room.folder.Folder
 import com.maubis.scarlet.base.support.recycler.RecyclerItem
 import com.maubis.scarlet.base.support.ui.ColorUtil
