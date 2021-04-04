@@ -155,11 +155,6 @@
   <string name="whats_new_subtitle">Scopri cosa c\'è di nuovo negli ultimi aggiornamenti dell\'app</string>
   <string name="whats_new_translate">Traduci</string>
 
-  <!-- Login, Welcome Strings -->
-  <string name="home_option_logout_of_app">Disconnessione</string>
-  <string name="home_option_logout_of_app_subtitle">Esci per interrompere il backup sul cloud</string>
-  <string name="login_to_google_failed">Accesso a Google non riuscito</string>
-
   <!-- Added for 4.5.3 -->
   <string name="format_action_copy">Copia</string>
   <string name="format_action_title">Azioni blocco di testo</string>
@@ -168,9 +163,6 @@
   <string name="image_delete_all_devices">La cancellazione di questo elemento eliminerà l\'immagine da tutti i dispositivi.</string>
   <string name="image_not_on_current_device">Immagine non presente su questo dispositivo</string>
   <string name="image_cannot_be_loaded">L\'immagine non può essere caricata</string>
-  <string name="image_not_uploaded">Le immagini non sono sincronizzate</string>
-  <string name="image_not_uploaded_details">Le immagini non sono sincronizzate su tutti i dispositivi. Le tue immagini non verranno visualizzate sugli altri dispositivi!</string>
-  <string name="image_not_uploaded_i_understand">Capisco</string>
   <string name="home_option_auto_export">Esporta automaticamente</string>
   <string name="home_option_auto_export_subtitle">Esporta frequentemente le note in un file esterno come backup</string>
   <string name="format_hint_image">Clicca per aggiungere o cambiare immagine</string>
@@ -247,8 +239,6 @@
   <string name="widget_option_show_archived_notes_details">Consenti alle note archiviate di essere visualizzate nei widget della schermata principale</string>
   <string name="widget_option_show_trash_notes">Mostra note nel cestino</string>
   <string name="widget_option_show_trash_notes_details">Consenti alle note nel cestino di essere visualizzate nei widget della schermata principale</string>
-  <string name="home_syncing_top_layout">Sincronizzazione</string>
-  <string name="home_pending_backup_top_layout">Backup in sospeso</string>
   <string name="internal_settings_title">Opzioni sviluppatore</string>
   <string name="internal_settings_description">Modifica le impostazioni interne utilizzate per il debug</string>
   <string name="internal_settings_enable_show_exceptions_title">Mostra eccezioni</string>
@@ -262,35 +252,6 @@
   <string name="exception_sheet_title">Eccezione generata</string>
   <string name="exception_sheet_crash_app">Fai crashare l\'app</string>
   <string name="exception_sheet_mail">Invia email</string>
-  <string name="google_drive_page_connection_failed">Connessione fallita</string>
-  <string name="google_drive_page_login_title">Sincronizza su Google Drive</string>
-  <string name="google_drive_page_login_details">Google Drive ti consente di sincronizzare le tue note tra i dispositivi utilizzando il tuo account Google.</string>
-  <string name="google_drive_page_login_firebase_button">Hai effettuato l\'accesso a Google Firebase in precedenza?</string>
-  <string name="google_drive_page_login_button">Accedi a Google Drive</string>
-  <string name="google_drive_page_logging_in_button">Accesso in corso…</string>
-  <string name="google_drive_page_logout_title">Esci da Scarlet</string>
-  <string name="google_drive_page_logout_details">Smetti di sincronizzare note, tag e cartelle.</string>
-  <string name="google_drive_page_logout_no_sync_details">Interrompi la sincronizzazione di note, tag e cartelle su Google Drive.</string>
-  <string name="google_drive_page_logout_data_persists_details">I tuoi dati sull\'app e su Google Drive rimarranno al loro posto.</string>
-  <string name="google_drive_page_logout_button">Esci da Drive</string>
-  <string name="google_drive_page_logging_out_button">Disconnessione in corso…</string>
-  <string name="google_drive_page_login_lock_details">Note, tag e cartelle sono memorizzati sul tuo Google Drive, quindi solo tu puoi controllarne l\'accesso.</string>
-  <string name="google_drive_page_photo_details">Le tue foto vengono caricate e sincronizzate anche su tutti i dispositivi.</string>
-  <string name="firebase_page_login_title">Ripristina dati da Firebase</string>
-  <string name="firebase_page_login_button">Accedi con Google</string>
-  <string name="firebase_page_logging_in_button">Accesso in corso…</string>
-  <string name="firebase_page_important_details">Conservavamo i tuoi dati su Google Firebase. Dopo aver effettuato l\'accesso, li ripristineremo sul tuo dispositivo</string>
-  <string name="firebase_page_not_sync_details">Le tue note NON verranno più sincronizzate con Google Firebase e dovrai accedere a Google Drive</string>
-  <string name="firebase_page_remove_details">Una volta recuperate le note, è possibile eliminarle da Google Firebase ed effettuare la migrazione</string>
-  <string name="firebase_removal_page_login_title">Trasferisci dati da Firebase a Drive</string>
-  <string name="firebase_removal_page_clear_button">Cancella dati ed esci</string>
-  <string name="firebase_removal_page_clearing_button">Cancellazione e disconnessione</string>
-  <string name="firebase_removal_page_important_details">Conservavamo le tue informazioni su Google Firebase. Stiamo passando alla memorizzazione delle note nel tuo Google Drive.</string>
-  <string name="firebase_removal_page_more_privacy_details">Più privacy.</string>
-  <string name="firebase_removal_page_photo_upload_details">Sincronizzazione foto.</string>
-  <string name="firebase_removal_page_whats_next_details">Prossimi passi</string>
-  <string name="firebase_removal_page_remove_details">Prima elimineremo le tue note da Firebase e ti disconnetteremo.</string>
-  <string name="firebase_removal_page_next_details">Puoi quindi accedere a Google Drive e noi caricheremo i tuoi dati insieme alle immagini.</string>
   <string name="delete_sheet_delete_selected_notes_permanently">Vuoi eliminare definitivamente queste note?</string>
   <string name="app_lock_title" translatable="false">Sblocca l\'app</string>
   <string name="app_lock_details_no_fingerprint" translatable="false">Inserisci il PIN di 4 cifre per effettuare lo sblocco</string>
@@ -301,12 +262,6 @@
   <string name="install_pro_sheet_latest_updates">Aggiornamenti e richieste più veloci.</string>
   <string name="install_pro_sheet_widget_options">Più opzioni per i widget.</string>
   <string name="install_pro_sheet_viewer_bg">Colore di sfondo dinamico del visualizzatore note.</string>
-  <string name="pending_backup_local_state">Locale</string>
-  <string name="pending_backup_remote_state">Remoto</string>
-  <string name="pending_backup_state_created">Creato</string>
-  <string name="pending_backup_state_deleted">Eliminato</string>
-  <string name="pending_backup_state_unavailable">Non disponibile</string>
-  <string name="pending_backup_state_updated">Aggiornato</string>
   <string name="security_option_ask_pin_always">Richiedi sempre il PIN</string>
   <string name="security_option_ask_pin_always_details">Richiedi il PIN per ciascuna nota protetta, anche se è stato già inserito</string>
   <string name="security_option_lock_app">Abilita blocco dell\'applicazione</string>

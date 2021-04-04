@@ -1,6 +1,5 @@
 package com.maubis.scarlet.base
 
-import android.content.BroadcastReceiver
 import android.content.res.Configuration
 import android.os.Bundle
 import android.text.Editable
@@ -17,7 +16,6 @@ import com.maubis.scarlet.base.config.ScarletApplication
 import com.maubis.scarlet.base.config.ScarletApplication.Companion.appPreferences
 import com.maubis.scarlet.base.config.ScarletApplication.Companion.appTheme
 import com.maubis.scarlet.base.config.ScarletApplication.Companion.instance
-import com.maubis.scarlet.base.config.auth.IPendingUploadListener
 import com.maubis.scarlet.base.core.note.NoteState
 import com.maubis.scarlet.base.database.room.folder.Folder
 import com.maubis.scarlet.base.database.room.note.Note
@@ -29,7 +27,6 @@ import com.maubis.scarlet.base.main.recycler.*
 import com.maubis.scarlet.base.main.sheets.WhatsNewBottomSheet
 import com.maubis.scarlet.base.main.specs.MainActivityBottomBar
 import com.maubis.scarlet.base.main.specs.MainActivityFolderBottomBar
-import com.maubis.scarlet.base.main.specs.MainActivitySyncingNow
 import com.maubis.scarlet.base.main.utils.MainSnackbar
 import com.maubis.scarlet.base.note.activity.INoteOptionSheetActivity
 import com.maubis.scarlet.base.note.folder.FolderRecyclerItem
@@ -40,8 +37,6 @@ import com.maubis.scarlet.base.note.recycler.NoteRecyclerItem
 import com.maubis.scarlet.base.note.save
 import com.maubis.scarlet.base.note.softDelete
 import com.maubis.scarlet.base.note.tag.view.TagsAndColorPickerViewHolder
-import com.maubis.scarlet.base.service.SyncedNoteBroadcastReceiver
-import com.maubis.scarlet.base.service.getNoteIntentFilter
 import com.maubis.scarlet.base.settings.sheet.STORE_KEY_LINE_COUNT
 import com.maubis.scarlet.base.settings.sheet.SettingsOptionsBottomSheet
 import com.maubis.scarlet.base.settings.sheet.SettingsOptionsBottomSheet.Companion.KEY_MARKDOWN_ENABLED
@@ -58,7 +53,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.search_toolbar_main.*
 import kotlinx.android.synthetic.main.toolbar_main.*
 import kotlinx.coroutines.*
-import java.util.concurrent.atomic.AtomicBoolean
 
 class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
   companion object {
@@ -73,12 +67,7 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
   private lateinit var recyclerView: RecyclerView
   private lateinit var adapter: NoteAppAdapter
   private lateinit var snackbar: MainSnackbar
-
-  private lateinit var receiver: BroadcastReceiver
   private lateinit var tagAndColorPicker: TagsAndColorPickerViewHolder
-
-  private var lastSyncPending: AtomicBoolean = AtomicBoolean(false)
-  private var lastSyncHappening: AtomicBoolean = AtomicBoolean(false)
 
   val state: SearchState = SearchState(mode = HomeNavigationMode.DEFAULT)
   var isInSearchMode: Boolean = false
@@ -212,14 +201,6 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
       .setAdapter(adapter)
       .setLayoutManager(getLayoutManager(sUIUseGridView, isTablet))
       .build()
-
-    vSwipeToRefresh.setOnRefreshListener {
-      when {
-        instance.authenticator().isLoggedIn(this)
-          && !lastSyncHappening.get() -> instance.authenticator().requestSync(true)
-        else -> vSwipeToRefresh.isRefreshing = false
-      }
-    }
   }
 
   private fun getLayoutManager(isStaggeredView: Boolean, isTabletView: Boolean): RecyclerView.LayoutManager {
@@ -344,46 +325,6 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
     return allItems
   }
 
-  fun notifySyncingInformation(isSyncHappening: Boolean, isSyncPending: Boolean) {
-    val componentContext = ComponentContext(this)
-    if (!instance.authenticator().isLoggedIn(this)) {
-      return
-    }
-
-    if (lastSyncPending.getAndSet(isSyncPending) == isSyncPending
-      && lastSyncHappening.getAndSet(isSyncHappening) == isSyncHappening) {
-      return
-    }
-
-    if (!isSyncPending && !isSyncHappening) {
-      GlobalScope.launch(Dispatchers.Main) {
-        lithoSyncingBottomToolbar.removeAllViews()
-      }
-      return
-    }
-
-    GlobalScope.launch(Dispatchers.Main) {
-      lithoSyncingBottomToolbar.removeAllViews()
-      lithoSyncingBottomToolbar.addView(LithoView.create(componentContext,
-                                                         MainActivitySyncingNow.create(componentContext)
-                                                           .isSyncHappening(isSyncHappening)
-                                                           .onClick {
-                                                             if (!lastSyncHappening.get()) {
-                                                               instance.authenticator().requestSync(true)
-                                                             }
-                                                           }
-                                                           .onLongClick {
-                                                             if (!lastSyncHappening.get()) {
-                                                               instance.authenticator().showPendingSync(this@MainActivity)
-                                                             }
-                                                           }
-                                                           .build()))
-      if (!isSyncHappening && isSyncPending) {
-        instance.authenticator().requestSync(false)
-      }
-    }
-  }
-
   fun refreshItems() {
     GlobalScope.launch(Dispatchers.Main) {
       val items = GlobalScope.async(Dispatchers.IO) { unifiedSearchSynchronous() }
@@ -401,25 +342,10 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
   override fun onResume() {
     super.onResume()
     refreshItems()
-    registerNoteReceiver()
     notifyFolderChange()
 
     if (isInSearchMode)
       enterSearchMode()
-
-    instance.authenticator().setPendingUploadListener(object : IPendingUploadListener {
-      override fun onPendingSyncsUpdate(isSyncHappening: Boolean) {
-        notifySyncingInformation(isSyncHappening, lastSyncPending.get())
-        GlobalScope.launch(Dispatchers.Main) {
-          vSwipeToRefresh.isRefreshing = false
-        }
-      }
-
-      override fun onPendingStateUpdate(isDataSyncPending: Boolean) {
-        notifySyncingInformation(lastSyncHappening.get(), isDataSyncPending)
-      }
-    })
-    instance.authenticator().requestSync(false)
   }
 
   fun resetAndLoadData() {
@@ -470,12 +396,6 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
     }
   }
 
-  override fun onPause() {
-    super.onPause()
-    unregisterReceiver(receiver)
-    instance.authenticator().setPendingUploadListener(null)
-  }
-
   override fun onDestroy() {
     super.onDestroy()
     HouseKeeperJob.schedule()
@@ -492,13 +412,6 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
     setSystemTheme()
     containerLayoutMain.setBackgroundColor(getThemeColor())
     setBottomToolbar()
-  }
-
-  private fun registerNoteReceiver() {
-    receiver = SyncedNoteBroadcastReceiver {
-      refreshItems()
-    }
-    registerReceiver(receiver, getNoteIntentFilter())
   }
 
   private fun setBottomToolbar() {

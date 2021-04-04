@@ -9,14 +9,11 @@ import com.facebook.litho.annotations.LayoutSpec
 import com.facebook.litho.annotations.OnCreateLayout
 import com.facebook.litho.annotations.OnEvent
 import com.facebook.litho.annotations.Prop
-import com.facebook.litho.widget.Image
-import com.facebook.litho.widget.Progress
 import com.facebook.litho.widget.Text
 import com.facebook.yoga.YogaAlign
 import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.MainActivity
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ScarletApplication.Companion.appTheme
 import com.maubis.scarlet.base.config.ScarletApplication.Companion.appTypeface
 import com.maubis.scarlet.base.core.folder.FolderBuilder
 import com.maubis.scarlet.base.database.room.folder.Folder
@@ -33,7 +30,6 @@ import com.maubis.scarlet.base.support.specs.ToolbarColorConfig
 import com.maubis.scarlet.base.support.specs.bottomBarCard
 import com.maubis.scarlet.base.support.specs.bottomBarRoundIcon
 import com.maubis.scarlet.base.support.ui.ColorUtil
-import com.maubis.scarlet.base.support.ui.ThemeColorType
 import com.maubis.scarlet.base.support.utils.OsVersionUtils
 
 @LayoutSpec
@@ -154,69 +150,5 @@ object MainActivityFolderBottomBarSpec {
     if (activity.state.currentFolder != null) {
       CreateOrEditFolderBottomSheet.openSheet(activity, folder) { _, _ -> activity.notifyFolderChange() }
     }
-  }
-}
-
-@LayoutSpec
-object MainActivitySyncingNowSpec {
-  @OnCreateLayout
-  fun onCreate(context: ComponentContext, @Prop isSyncHappening: Boolean): Component {
-    val colorConfig = ToolbarColorConfig(
-      toolbarBackgroundColor = appTheme.get(ThemeColorType.TOOLBAR_BACKGROUND),
-      toolbarIconColor = appTheme.get(ThemeColorType.TOOLBAR_ICON)
-    )
-    val syncText = when (isSyncHappening) {
-      true -> R.string.home_syncing_top_layout
-      false -> R.string.home_pending_backup_top_layout
-    }
-    val syncIcon = when (isSyncHappening) {
-      true -> Progress.create(context)
-        .widthDip(24f)
-        .alpha(0.8f)
-        .marginDip(YogaEdge.END, 8f)
-        .color(colorConfig.toolbarIconColor)
-      false -> Image.create(context)
-        .heightDip(24f)
-        .widthDip(24f)
-        .marginDip(YogaEdge.END, 8f)
-        .alpha(0.8f)
-        .drawableRes(R.drawable.icon_folder_sync)
-    }
-
-    val row = Row.create(context)
-      .widthPercent(100f)
-      .alignItems(YogaAlign.CENTER)
-      .paddingDip(YogaEdge.HORIZONTAL, 8f)
-      .paddingDip(YogaEdge.VERTICAL, 8f)
-      .alpha(0.8f)
-      .child(EmptySpec.create(context).flexGrow(1f))
-      .child(
-        Row.create(context)
-          .alignItems(YogaAlign.CENTER)
-          .alignContent(YogaAlign.CENTER)
-          .paddingDip(YogaEdge.VERTICAL, 8f)
-          .paddingDip(YogaEdge.HORIZONTAL, 12f)
-          .backgroundRes(R.drawable.pending_sync_capsule)
-          .clickHandler(MainActivitySyncingNow.onClickEvent(context))
-          .longClickHandler(MainActivitySyncingNow.onLongClickEvent(context))
-          .child(syncIcon)
-          .child(
-            Text.create(context)
-              .typeface(appTypeface.title())
-              .textRes(syncText)
-              .textSizeRes(R.dimen.font_size_normal)
-              .textColorRes(R.color.light_secondary_text)))
-    return row.build()
-  }
-
-  @OnEvent(ClickEvent::class)
-  fun onClickEvent(context: ComponentContext, @Prop onClick: () -> Unit) {
-    onClick()
-  }
-
-  @OnEvent(LongClickEvent::class)
-  fun onLongClickEvent(context: ComponentContext, @Prop onLongClick: () -> Unit): Boolean {
-    onLongClick()
-    return true
   }
 }

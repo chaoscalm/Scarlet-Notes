@@ -1,8 +1,6 @@
 package com.maubis.scarlet.base.config
 
 import android.content.Context
-import com.maubis.scarlet.base.config.auth.IAuthenticator
-import com.maubis.scarlet.base.config.auth.NullAuthenticator
 import com.maubis.scarlet.base.core.folder.FolderActor
 import com.maubis.scarlet.base.core.note.NoteActor
 import com.maubis.scarlet.base.core.tag.TagActor
@@ -19,8 +17,6 @@ class ApplicationConfig(context: Context) {
   val notesRepository = NotesRepository()
   val tagsRepository = TagsRepository()
   val foldersRepository = FoldersRepository()
-
-  fun authenticator(): IAuthenticator = NullAuthenticator()
 
   fun noteActions(note: Note) = NoteActor(note)
   fun tagActions(tag: Tag) = TagActor(tag)

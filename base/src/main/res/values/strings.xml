@@ -231,9 +231,6 @@
   <string name="image_delete_all_devices">Deleting this item will delete the image from all the devices.</string>
   <string name="image_not_on_current_device">Image not on this device</string>
   <string name="image_cannot_be_loaded">Image cannot be loaded</string>
-  <string name="image_not_uploaded">Images are not synced</string>
-  <string name="image_not_uploaded_details">Images are not synced across devices. Your images will not show up on other devices while viewing the note!</string>
-  <string name="image_not_uploaded_i_understand">I Understand</string>
   <!-- End Whats New -->
 
   <!-- Start Note Text Size -->
@@ -262,13 +259,6 @@
   <!-- Start Information -->
   <string name="information_card_title">Information</string>
   <!-- End Information -->
-
-  <!-- Start: Firebase Login Strings -->
-  <string name="home_option_logout_of_app">Sign Out</string>
-  <string name="home_option_logout_of_app_subtitle">Sign Out to stop cloud backup</string>
-  <string name="login_to_google_failed">Google Login Failed</string>
-
-  <!-- End: Firebase Login Strings -->
 
   <!-- Start Welcome Page -->
   <string name="welcome_page_app_name" translatable="false">Scarlet</string>
@@ -303,7 +293,6 @@
   <string name="folder_option_change_notebook">Modify Notebook</string>
 
   <string name="recent_notes">Recent Notes</string>
-
 
   <!-- Start: Editor Option Sheet -->
   <string name="home_option_editor_options_title">Editor Options</string>
@@ -349,18 +338,7 @@
   <string name="widget_option_show_toolbar">Show Action Toolbar</string>
   <string name="widget_option_show_toolbar_details">Multi-notes widget shows the toolbar</string>
 
-
   <!-- End: Widget Options Sheet -->
-
-  <string name="home_syncing_top_layout">Syncing</string>
-  <string name="home_pending_backup_top_layout">Pending Backup</string>
-  <string name="pending_backup_local_state">Local</string>
-  <string name="pending_backup_remote_state">Remote</string>
-
-  <string name="pending_backup_state_unavailable">Unavailable</string>
-  <string name="pending_backup_state_created">Created</string>
-  <string name="pending_backup_state_deleted">Deleted</string>
-  <string name="pending_backup_state_updated">Updated</string>
 
   <!-- Start: Internal Settings Strings -->
   <string name="internal_settings_title">Developer Options</string>
@@ -381,44 +359,6 @@
   <string name="exception_sheet_title">Exception Thrown</string>
   <string name="exception_sheet_crash_app">Crash App</string>
   <string name="exception_sheet_mail">Mail</string>
-
-  <!-- Start: Google Login Strings -->
-  <string name="google_drive_page_connection_failed">Connection Failed</string>
-  <string name="google_drive_page_login_title">Sync on Google Drive</string>
-  <string name="google_drive_page_login_details">Google Drive allows you to sync your notes between devices using your own Google Drive account.</string>
-  <string name="google_drive_page_login_firebase_button">Logged into Google Firebase before?</string>
-  <string name="google_drive_page_login_button">Sign In to Google Drive</string>
-  <string name="google_drive_page_logging_in_button">Signing In&#8230;</string>
-
-  <string name="google_drive_page_logout_title">Sign Out of Scarlet</string>
-  <string name="google_drive_page_logout_details">Stop syncing notes, tags and folders.</string>
-  <string name="google_drive_page_logout_no_sync_details">Stop syncing your notes, tags and folders to your Google Drive.</string>
-  <string name="google_drive_page_logout_data_persists_details">Your data on the app and on Google Drive will still be there.</string>
-  <string name="google_drive_page_logout_button">Sign Out from Drive</string>
-  <string name="google_drive_page_logging_out_button">Signing Out&#8230;</string>
-
-  <string name="google_drive_page_login_lock_details">Notes, Tags and Folders are stored on your own Google Drive, so only you can control access to them.</string>
-  <string name="google_drive_page_photo_details">Your photos are uploaded and synced across devices as well.</string>
-
-  <!-- Start: New Firebase Login Strings -->
-  <string name="firebase_page_login_title">Restore Data from Firebase</string>
-  <string name="firebase_page_login_button">Sign In with Google</string>
-  <string name="firebase_page_logging_in_button">Signing In&#8230;</string>
-
-  <string name="firebase_page_important_details">We used to store your information on Google Firebase. After logging in we will recover these to your device</string>
-  <string name="firebase_page_not_sync_details">New notes and changes will NOT be synced over to Google Firebase, and you need to login on to Google Drive</string>
-  <string name="firebase_page_remove_details">Once your notes are recovered, you can delete them from Google Firebase, and then switch over</string>
-
-  <string name="firebase_removal_page_login_title">Transfer Data from Firebase to Drive</string>
-  <string name="firebase_removal_page_clear_button">Clear Data and Sign Out</string>
-  <string name="firebase_removal_page_clearing_button">Clearing and Signing Out</string>
-  <string name="firebase_removal_page_important_details">We used to store your information on Google Firebase. We are moving over to storing your notes in your Google Drive.</string>
-  <string name="firebase_removal_page_more_privacy_details">More Privacy.</string>
-  <string name="firebase_removal_page_photo_upload_details">Photo Sync.</string>
-  <string name="firebase_removal_page_whats_next_details">Next Steps</string>
-  <string name="firebase_removal_page_remove_details">We will first delete your notes from Firebase and log you out.</string>
-  <string name="firebase_removal_page_next_details">You can then log into Google Drive, and we will upload your data along with images.</string>
-
 
   <!-- Start: App Lock Activity -->
   <string name="app_lock_title">Unlock App</string>

@@ -8,7 +8,6 @@ import com.facebook.litho.widget.Text
 import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.MainActivity
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ScarletApplication.Companion.appPreferences
 import com.maubis.scarlet.base.config.ScarletApplication.Companion.appTheme
 import com.maubis.scarlet.base.config.ScarletApplication.Companion.instance
 import com.maubis.scarlet.base.core.format.Format
@@ -102,23 +101,6 @@ fun openDeleteFormatDialog(activity: ViewAdvancedNoteActivity, format: Format) {
       onPositiveClick = {
         activity.deleteFormat(format)
       },
-      onNegativeClick = {})
-  })
-}
-
-const val STORE_KEY_IMAGE_SYNC_NOTICE = "IMAGE_SYNC_NOTICE"
-var sImageSyncNoticeShown: Int
-  get() = appPreferences.get(STORE_KEY_IMAGE_SYNC_NOTICE, 0)
-  set(value) = appPreferences.put(STORE_KEY_IMAGE_SYNC_NOTICE, value)
-
-fun openImageNotSynced(activity: ThemedActivity) {
-  openSheet(activity, AlertBottomSheet().apply {
-    this.config = AlertSheetConfig(
-      title = R.string.image_not_uploaded,
-      description = R.string.image_not_uploaded_details,
-      positiveText = R.string.image_not_uploaded_i_understand,
-      negativeText = R.string.delete_sheet_delete_trash_no,
-      onPositiveClick = { sImageSyncNoticeShown = 1 },
       onNegativeClick = {})
   })
 }

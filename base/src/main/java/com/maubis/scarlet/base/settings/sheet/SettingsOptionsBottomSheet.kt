@@ -4,7 +4,6 @@ import android.app.Dialog
 import com.facebook.litho.ComponentContext
 import com.maubis.scarlet.base.MainActivity
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ScarletApplication
 import com.maubis.scarlet.base.export.sheet.BackupSettingsOptionsBottomSheet
 import com.maubis.scarlet.base.note.creation.sheet.EditorOptionsBottomSheet
 import com.maubis.scarlet.base.support.sheets.LithoOptionBottomSheet
@@ -18,8 +17,6 @@ class SettingsOptionsBottomSheet : LithoOptionBottomSheet() {
   override fun getOptions(componentContext: ComponentContext, dialog: Dialog): List<LithoOptionsItem> {
     val activity = context as MainActivity
     val options = ArrayList<LithoOptionsItem>()
-
-    val isLoggedIn = ScarletApplication.instance.authenticator().isLoggedIn(activity)
 
     options.add(LithoOptionsItem(
       title = R.string.home_option_ui_experience,
@@ -78,17 +75,6 @@ class SettingsOptionsBottomSheet : LithoOptionBottomSheet() {
         openSheet(activity, DeleteAndMoreOptionsBottomSheet())
       }
     ))
-    options.add(
-      LithoOptionsItem(
-        title = R.string.home_option_logout_of_app,
-        subtitle = R.string.home_option_logout_of_app_subtitle,
-        icon = R.drawable.ic_sign_in_options,
-        listener = {
-          ScarletApplication.instance.authenticator().openLogoutActivity(activity)?.run()
-          dismiss()
-        },
-        visible = isLoggedIn
-      ))
     return options
   }
 
