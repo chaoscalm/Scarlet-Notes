@@ -15,8 +15,8 @@ import com.facebook.yoga.YogaAlign
 import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.MainActivity
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTheme
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTypeface
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTheme
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTypeface
 import com.maubis.scarlet.base.security.controller.PinLockController
 import com.maubis.scarlet.base.security.controller.PinLockController.isPinCodeEnabled
 import com.maubis.scarlet.base.security.controller.PinLockController.needsLockCheck
@@ -61,7 +61,7 @@ object PincodeSheetViewSpec {
     @Prop data: PincodeSheetData,
     @Prop dismiss: () -> Unit): Component {
     val editBackground = when {
-      sAppTheme.isNightTheme() -> R.drawable.light_secondary_rounded_bg
+      appTheme.isNightTheme() -> R.drawable.light_secondary_rounded_bg
       else -> R.drawable.secondary_rounded_bg
     }
 
@@ -75,11 +75,11 @@ object PincodeSheetViewSpec {
           .marginDip(YogaEdge.HORIZONTAL, 0f))
       .child(
         Text.create(context)
-          .typeface(sAppTypeface.text())
+          .typeface(appTypeface.text())
           .textSizeRes(R.dimen.font_size_large)
           .textRes(R.string.app_lock_details)
           .marginDip(YogaEdge.BOTTOM, 16f)
-          .textColor(sAppTheme.get(ThemeColorType.TERTIARY_TEXT)))
+          .textColor(appTheme.get(ThemeColorType.TERTIARY_TEXT)))
       .child(
         EditText.create(context)
           .backgroundRes(editBackground)
@@ -90,8 +90,8 @@ object PincodeSheetViewSpec {
           .hint("****")
           .inputType(InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_VARIATION_PASSWORD)
           .textAlignment(Layout.Alignment.ALIGN_CENTER)
-          .typeface(sAppTypeface.text())
-          .textColor(sAppTheme.get(ThemeColorType.PRIMARY_TEXT))
+          .typeface(appTypeface.text())
+          .textColor(appTheme.get(ThemeColorType.PRIMARY_TEXT))
           .paddingDip(YogaEdge.HORIZONTAL, 22f)
           .paddingDip(YogaEdge.VERTICAL, 6f)
           .marginDip(YogaEdge.VERTICAL, 8f)
@@ -119,12 +119,12 @@ object PincodeSheetViewSpec {
             when {
               data.isRemoveButtonEnabled -> Text.create(context)
                 .textSizeRes(R.dimen.font_size_large)
-                .textColor(sAppTheme.get(ThemeColorType.HINT_TEXT))
+                .textColor(appTheme.get(ThemeColorType.HINT_TEXT))
                 .textRes(R.string.security_sheet_button_remove)
                 .textAlignment(Layout.Alignment.ALIGN_CENTER)
                 .paddingDip(YogaEdge.VERTICAL, 12f)
                 .paddingDip(YogaEdge.HORIZONTAL, 20f)
-                .typeface(sAppTypeface.title())
+                .typeface(appTypeface.title())
                 .clickHandler(PincodeSheetView.onRemoveClick(context))
               else -> null
             }
@@ -139,7 +139,7 @@ object PincodeSheetViewSpec {
               .textAlignment(Layout.Alignment.ALIGN_CENTER)
               .paddingDip(YogaEdge.VERTICAL, 12f)
               .paddingDip(YogaEdge.HORIZONTAL, 20f)
-              .typeface(sAppTypeface.title())
+              .typeface(appTypeface.title())
               .clickHandler(PincodeSheetView.onActionClick(context))))
     return component.build()
   }

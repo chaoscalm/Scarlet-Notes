@@ -8,9 +8,9 @@ import com.github.bijoysingh.starter.util.IntentUtils
 import com.github.bijoysingh.starter.util.TextUtils
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.config.ApplicationBase
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appImageStorage
 import com.maubis.scarlet.base.config.ApplicationBase.Companion.folderSync
 import com.maubis.scarlet.base.config.ApplicationBase.Companion.instance
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppImageStorage
 import com.maubis.scarlet.base.core.format.FormatBuilder
 import com.maubis.scarlet.base.database.room.note.Note
 import com.maubis.scarlet.base.export.data.ExportableNote
@@ -64,7 +64,7 @@ class NoteActor(val note: Note) {
   }
 
   fun offlineDelete(context: Context) {
-    sAppImageStorage.deleteAllFiles(note)
+    appImageStorage.deleteAllFiles(note)
     if (note.isUnsaved()) {
       return
     }
@@ -102,7 +102,7 @@ class NoteActor(val note: Note) {
     notifyAllChanged(context)
     val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager?
     notificationManager?.cancel(note.uid)
-    ApplicationBase.sAppImageCache.deleteNote(note.uuid)
+    ApplicationBase.appImageCache.deleteNote(note.uuid)
   }
 
   private fun onNoteUpdated(context: Context) {

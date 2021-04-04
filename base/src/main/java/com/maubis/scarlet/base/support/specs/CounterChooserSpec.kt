@@ -10,8 +10,8 @@ import com.facebook.litho.widget.Text
 import com.facebook.yoga.YogaAlign
 import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTheme
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTypeface
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTheme
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTypeface
 import com.maubis.scarlet.base.support.ui.ThemeColorType
 
 @LayoutSpec
@@ -32,10 +32,10 @@ object CounterChooserSpec {
       .child(
         Text.create(context)
           .text(value.toString())
-          .typeface(sAppTypeface.title())
+          .typeface(appTypeface.title())
           .textSizeRes(R.dimen.font_size_xxxlarge)
           .paddingDip(YogaEdge.HORIZONTAL, 12f)
-          .textColor(sAppTheme.get(ThemeColorType.TERTIARY_TEXT)))
+          .textColor(appTheme.get(ThemeColorType.TERTIARY_TEXT)))
       .child(bottomBarRoundIcon(context, ToolbarColorConfig())
                .iconRes(R.drawable.icon_more_counter)
                .onClick { onValueChange(Math.min(value + 1, maxValue)) })

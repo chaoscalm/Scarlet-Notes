@@ -9,8 +9,8 @@ import com.maubis.scarlet.base.config.ApplicationBase
 
 const val KEY_PREFERENCE_TYPEFACE = "typeface_setting"
 var sPreferenceTypeface: String
-  get() = ApplicationBase.sAppPreferences.get(KEY_PREFERENCE_TYPEFACE, TypefaceController.TypefaceType.APP_DEFAULT.name)
-  set(value) = ApplicationBase.sAppPreferences.put(KEY_PREFERENCE_TYPEFACE, value)
+  get() = ApplicationBase.appPreferences.get(KEY_PREFERENCE_TYPEFACE, TypefaceController.TypefaceType.APP_DEFAULT.name)
+  set(value) = ApplicationBase.appPreferences.put(KEY_PREFERENCE_TYPEFACE, value)
 
 class TypefaceController(context: Context) {
   enum class TypefaceType(val title: Int, val isLiteEnabled: Boolean) {

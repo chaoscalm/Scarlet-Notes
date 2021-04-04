@@ -13,9 +13,9 @@ import com.facebook.litho.widget.Text
 import com.facebook.yoga.YogaAlign
 import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.R
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTheme
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTypeface
 import com.maubis.scarlet.base.config.ApplicationBase.Companion.instance
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTheme
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTypeface
 import com.maubis.scarlet.base.core.folder.FolderBuilder
 import com.maubis.scarlet.base.database.room.folder.Folder
 import com.maubis.scarlet.base.support.sheets.LithoBottomSheet
@@ -35,8 +35,8 @@ data class FolderOptionsItem(
 object FolderItemLayoutSpec {
   @OnCreateLayout
   fun onCreate(context: ComponentContext, @Prop option: FolderOptionsItem): Component {
-    val titleColor = sAppTheme.get(ThemeColorType.SECONDARY_TEXT)
-    val selectedColor = when (sAppTheme.isNightTheme()) {
+    val titleColor = appTheme.get(ThemeColorType.SECONDARY_TEXT)
+    val selectedColor = when (appTheme.isNightTheme()) {
       true -> context.getColor(R.color.material_blue_400)
       false -> context.getColor(R.color.material_blue_700)
     }
@@ -52,14 +52,14 @@ object FolderItemLayoutSpec {
         bgColor = selectedColor
         bgAlpha = 200
         textColor = selectedColor
-        typeface = sAppTypeface.subHeading()
+        typeface = appTypeface.subHeading()
       }
       false -> {
         icon = R.drawable.ic_folder
         bgColor = titleColor
         bgAlpha = 15
         textColor = titleColor
-        typeface = sAppTypeface.title()
+        typeface = appTypeface.title()
       }
     }
 

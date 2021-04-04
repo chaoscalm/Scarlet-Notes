@@ -7,8 +7,8 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import com.github.bijoysingh.starter.recyclerview.RecyclerViewHolder
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTheme
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTypeface
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTheme
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTypeface
 import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.core.format.FormatType
 import com.maubis.scarlet.base.note.creation.activity.INTENT_KEY_NOTE_ID
@@ -53,24 +53,24 @@ abstract class FormatViewHolderBase(context: Context, view: View) : RecyclerView
     val linkColor: Int
     when {
       !sUIUseNoteColorAsBackground -> {
-        secondaryTextColor = sAppTheme.get(ThemeColorType.SECONDARY_TEXT)
-        tertiaryTextColor = sAppTheme.get(ThemeColorType.TERTIARY_TEXT)
-        iconColor = sAppTheme.get(ThemeColorType.TOOLBAR_ICON)
-        hintTextColor = sAppTheme.get(ThemeColorType.HINT_TEXT)
-        linkColor = sAppTheme.get(ThemeColorType.ACCENT_TEXT)
+        secondaryTextColor = appTheme.get(ThemeColorType.SECONDARY_TEXT)
+        tertiaryTextColor = appTheme.get(ThemeColorType.TERTIARY_TEXT)
+        iconColor = appTheme.get(ThemeColorType.TOOLBAR_ICON)
+        hintTextColor = appTheme.get(ThemeColorType.HINT_TEXT)
+        linkColor = appTheme.get(ThemeColorType.ACCENT_TEXT)
       }
       isLightBackground -> {
-        secondaryTextColor = sAppTheme.get(context, Theme.LIGHT, ThemeColorType.SECONDARY_TEXT)
-        tertiaryTextColor = sAppTheme.get(context, Theme.LIGHT, ThemeColorType.TERTIARY_TEXT)
-        iconColor = sAppTheme.get(context, Theme.LIGHT, ThemeColorType.TOOLBAR_ICON)
-        hintTextColor = sAppTheme.get(context, Theme.LIGHT, ThemeColorType.HINT_TEXT)
+        secondaryTextColor = appTheme.get(context, Theme.LIGHT, ThemeColorType.SECONDARY_TEXT)
+        tertiaryTextColor = appTheme.get(context, Theme.LIGHT, ThemeColorType.TERTIARY_TEXT)
+        iconColor = appTheme.get(context, Theme.LIGHT, ThemeColorType.TOOLBAR_ICON)
+        hintTextColor = appTheme.get(context, Theme.LIGHT, ThemeColorType.HINT_TEXT)
         linkColor = ContextCompat.getColor(context, R.color.colorAccentYellowLight)
       }
       else -> {
-        secondaryTextColor = sAppTheme.get(context, Theme.DARK, ThemeColorType.SECONDARY_TEXT)
-        tertiaryTextColor = sAppTheme.get(context, Theme.DARK, ThemeColorType.TERTIARY_TEXT)
-        iconColor = sAppTheme.get(context, Theme.DARK, ThemeColorType.TOOLBAR_ICON)
-        hintTextColor = sAppTheme.get(context, Theme.DARK, ThemeColorType.HINT_TEXT)
+        secondaryTextColor = appTheme.get(context, Theme.DARK, ThemeColorType.SECONDARY_TEXT)
+        tertiaryTextColor = appTheme.get(context, Theme.DARK, ThemeColorType.TERTIARY_TEXT)
+        iconColor = appTheme.get(context, Theme.DARK, ThemeColorType.TOOLBAR_ICON)
+        hintTextColor = appTheme.get(context, Theme.DARK, ThemeColorType.HINT_TEXT)
         linkColor = ContextCompat.getColor(context, R.color.colorAccentYellowDark)
       }
     }
@@ -92,7 +92,7 @@ abstract class FormatViewHolderBase(context: Context, view: View) : RecyclerView
         }
       }(),
       backgroundColor = when (data.formatType) {
-        FormatType.CODE, FormatType.IMAGE -> sAppTheme.get(context, R.color.code_light, R.color.code_dark)
+        FormatType.CODE, FormatType.IMAGE -> appTheme.get(context, R.color.code_light, R.color.code_dark)
         else -> ContextCompat.getColor(context, R.color.transparent)
       },
       secondaryTextColor = secondaryTextColor,
@@ -102,11 +102,11 @@ abstract class FormatViewHolderBase(context: Context, view: View) : RecyclerView
       accentColor = linkColor,
       noteUUID = extra?.getString(INTENT_KEY_NOTE_ID) ?: "default",
       typeface = when (data.formatType) {
-        FormatType.HEADING -> sAppTypeface.subHeading()
-        FormatType.SUB_HEADING -> sAppTypeface.title()
-        FormatType.HEADING_3 -> sAppTypeface.title()
-        FormatType.CODE -> sAppTypeface.code()
-        else -> sAppTypeface.text()
+        FormatType.HEADING -> appTypeface.subHeading()
+        FormatType.SUB_HEADING -> appTypeface.title()
+        FormatType.HEADING_3 -> appTypeface.title()
+        FormatType.CODE -> appTypeface.code()
+        else -> appTypeface.text()
       },
       typefaceStyle = when (data.formatType) {
         FormatType.HEADING, FormatType.SUB_HEADING, FormatType.HEADING_3 -> Typeface.BOLD

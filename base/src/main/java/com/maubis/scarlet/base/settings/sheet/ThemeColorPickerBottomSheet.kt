@@ -12,7 +12,7 @@ import com.facebook.yoga.YogaAlign
 import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.MainActivityActions
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTheme
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTheme
 import com.maubis.scarlet.base.support.sheets.LithoBottomSheet
 import com.maubis.scarlet.base.support.sheets.LithoOptionsItem
 import com.maubis.scarlet.base.support.sheets.OptionItemLayout
@@ -99,13 +99,13 @@ class ThemeColorPickerBottomSheet : LithoBottomSheet() {
             sThemeIsAutomatic = !sThemeIsAutomatic
             if (sThemeIsAutomatic) {
               setThemeFromSystem(context)
-              onThemeChange(sAppTheme.get())
+              onThemeChange(appTheme.get())
             }
             reset(context, dialog)
           })
     }
 
-    if (sAppTheme.isNightTheme()) {
+    if (appTheme.isNightTheme()) {
       column.child(
         OptionItemLayout.create(componentContext)
           .option(

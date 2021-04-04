@@ -9,7 +9,7 @@ import android.widget.TextView
 import com.github.bijoysingh.starter.async.MultiAsyncTask
 import com.github.bijoysingh.starter.recyclerview.RecyclerViewBuilder
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTheme
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTheme
 import com.maubis.scarlet.base.export.recycler.FileRecyclerItem
 import com.maubis.scarlet.base.export.support.NoteImporter
 import com.maubis.scarlet.base.note.recycler.NoteAppAdapter
@@ -94,12 +94,12 @@ class ImportNoteActivity : SecuredActivity() {
   }
 
   override fun notifyThemeChange() {
-    background.setBackgroundColor(sAppTheme.get(ThemeColorType.BACKGROUND))
-    backButton.setColorFilter(sAppTheme.get(ThemeColorType.TOOLBAR_ICON))
-    pageTitle.setTextColor(sAppTheme.get(ThemeColorType.TERTIARY_TEXT))
-    importFile.setTextColor(sAppTheme.get(ThemeColorType.TERTIARY_TEXT))
+    background.setBackgroundColor(appTheme.get(ThemeColorType.BACKGROUND))
+    backButton.setColorFilter(appTheme.get(ThemeColorType.TOOLBAR_ICON))
+    pageTitle.setTextColor(appTheme.get(ThemeColorType.TERTIARY_TEXT))
+    importFile.setTextColor(appTheme.get(ThemeColorType.TERTIARY_TEXT))
     importFile.setBackgroundResource(
-      if (sAppTheme.isNightTheme()) R.drawable.light_circular_border_bg
+      if (appTheme.isNightTheme()) R.drawable.light_circular_border_bg
       else R.drawable.dark_circular_border_bg)
   }
 }

@@ -3,16 +3,8 @@ package com.maubis.scarlet.base.security.activity
 import android.text.InputType
 import android.text.Layout
 import android.view.inputmethod.EditorInfo
-import com.facebook.litho.ClickEvent
-import com.facebook.litho.Column
-import com.facebook.litho.Component
-import com.facebook.litho.ComponentContext
-import com.facebook.litho.Row
-import com.facebook.litho.annotations.FromEvent
-import com.facebook.litho.annotations.LayoutSpec
-import com.facebook.litho.annotations.OnCreateLayout
-import com.facebook.litho.annotations.OnEvent
-import com.facebook.litho.annotations.Prop
+import com.facebook.litho.*
+import com.facebook.litho.annotations.*
 import com.facebook.litho.widget.EditText
 import com.facebook.litho.widget.Image
 import com.facebook.litho.widget.Text
@@ -20,8 +12,8 @@ import com.facebook.litho.widget.TextChangedEvent
 import com.facebook.yoga.YogaAlign
 import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTheme
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTypeface
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTheme
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTypeface
 import com.maubis.scarlet.base.support.specs.EmptySpec
 import com.maubis.scarlet.base.support.ui.ThemeColorType
 import com.maubis.scarlet.base.support.utils.getEditorActionListener
@@ -36,7 +28,7 @@ object AppLockViewSpec {
     @Prop onTextChange: (String) -> Unit,
     @Prop onClick: () -> Unit): Component {
     return Column.create(context)
-      .backgroundColor(sAppTheme.get(ThemeColorType.BACKGROUND))
+      .backgroundColor(appTheme.get(ThemeColorType.BACKGROUND))
       .child(
         AppLockContentView.create(context)
           .fingerprintEnabled(fingerprintEnabled)
@@ -67,7 +59,7 @@ object AppLockViewSpec {
               .textAlignment(Layout.Alignment.ALIGN_CENTER)
               .paddingDip(YogaEdge.VERTICAL, 12f)
               .paddingDip(YogaEdge.HORIZONTAL, 20f)
-              .typeface(sAppTypeface.title())
+              .typeface(appTypeface.title())
               .clickHandler(AppLockView.onUnlockClick(context))))
       .build()
   }
@@ -91,25 +83,25 @@ object AppLockContentViewSpec {
       else -> R.string.app_lock_details_no_fingerprint
     }
     val editBackground = when {
-      sAppTheme.isNightTheme() -> R.drawable.light_secondary_rounded_bg
+      appTheme.isNightTheme() -> R.drawable.light_secondary_rounded_bg
       else -> R.drawable.secondary_rounded_bg
     }
 
     return Column.create(context)
       .paddingDip(YogaEdge.ALL, 16f)
-      .backgroundColor(sAppTheme.get(ThemeColorType.BACKGROUND))
+      .backgroundColor(appTheme.get(ThemeColorType.BACKGROUND))
       .child(
         Text.create(context)
           .textSizeRes(R.dimen.font_size_xxlarge)
           .textRes(R.string.app_lock_title)
-          .textColor(sAppTheme.get(ThemeColorType.SECONDARY_TEXT))
-          .typeface(sAppTypeface.heading()))
+          .textColor(appTheme.get(ThemeColorType.SECONDARY_TEXT))
+          .typeface(appTypeface.heading()))
       .child(
         Text.create(context)
           .textSizeRes(R.dimen.font_size_large)
-          .textColor(sAppTheme.get(ThemeColorType.SECONDARY_TEXT))
+          .textColor(appTheme.get(ThemeColorType.SECONDARY_TEXT))
           .textRes(description)
-          .typeface(sAppTypeface.title()))
+          .typeface(appTypeface.title()))
       .child(EmptySpec.create(context).flexGrow(1f))
       .child(
         EditText.create(context)
@@ -121,8 +113,8 @@ object AppLockContentViewSpec {
           .alignSelf(YogaAlign.CENTER)
           .inputType(InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_VARIATION_PASSWORD)
           .textAlignment(Layout.Alignment.ALIGN_CENTER)
-          .typeface(sAppTypeface.text())
-          .textColor(sAppTheme.get(ThemeColorType.PRIMARY_TEXT))
+          .typeface(appTypeface.text())
+          .textColor(appTheme.get(ThemeColorType.PRIMARY_TEXT))
           .paddingDip(YogaEdge.HORIZONTAL, 22f)
           .paddingDip(YogaEdge.VERTICAL, 6f)
           .imeOptions(EditorInfo.IME_ACTION_DONE)

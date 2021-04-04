@@ -5,8 +5,8 @@ import com.facebook.litho.ComponentContext
 import com.maubis.scarlet.base.MainActivity
 import com.maubis.scarlet.base.MainActivityActions
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppPreferences
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTheme
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appPreferences
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTheme
 import com.maubis.scarlet.base.performAction
 import com.maubis.scarlet.base.settings.sheet.SortingOptionsBottomSheet.Companion.getSortingState
 import com.maubis.scarlet.base.settings.sheet.SortingOptionsBottomSheet.Companion.getSortingTechniqueLabel
@@ -15,16 +15,16 @@ import com.maubis.scarlet.base.support.sheets.LithoOptionsItem
 import com.maubis.scarlet.base.support.sheets.openSheet
 
 var sUIUseGridView: Boolean
-  get() = sAppPreferences.get("KEY_LIST_VIEW", true)
-  set(isGrid) = sAppPreferences.put("KEY_LIST_VIEW", isGrid)
+  get() = appPreferences.get("KEY_LIST_VIEW", true)
+  set(isGrid) = appPreferences.put("KEY_LIST_VIEW", isGrid)
 
 var sUIUseNoteColorAsBackground: Boolean
-  get() = sAppPreferences.get("KEY_NOTE_VIEWER_BG_COLOR", false)
-  set(value) = sAppPreferences.put("KEY_NOTE_VIEWER_BG_COLOR", value)
+  get() = appPreferences.get("KEY_NOTE_VIEWER_BG_COLOR", false)
+  set(value) = appPreferences.put("KEY_NOTE_VIEWER_BG_COLOR", value)
 
 var sUIMarkdownEnabledOnHome: Boolean
-  get() = sAppPreferences.get("KEY_MARKDOWN_HOME_ENABLED", true)
-  set(value) = sAppPreferences.put("KEY_MARKDOWN_HOME_ENABLED", value)
+  get() = appPreferences.get("KEY_MARKDOWN_HOME_ENABLED", true)
+  set(value) = appPreferences.put("KEY_MARKDOWN_HOME_ENABLED", value)
 
 class UISettingsOptionsBottomSheet : LithoOptionBottomSheet() {
   override fun title(): Int = R.string.home_option_ui_experience
@@ -35,7 +35,7 @@ class UISettingsOptionsBottomSheet : LithoOptionBottomSheet() {
     options.add(LithoOptionsItem(
       title = R.string.home_option_theme_color,
       subtitle = R.string.home_option_theme_color_subtitle,
-      icon = if (sAppTheme.isNightTheme()) R.drawable.night_mode_white_48dp else R.drawable.ic_action_day_mode,
+      icon = if (appTheme.isNightTheme()) R.drawable.night_mode_white_48dp else R.drawable.ic_action_day_mode,
       listener = {
         activity.performAction(MainActivityActions.COLOR_PICKER)
       }

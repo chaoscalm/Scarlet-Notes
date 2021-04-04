@@ -10,11 +10,11 @@ import com.github.bijoysingh.starter.recyclerview.RecyclerViewHolder
 import com.github.bijoysingh.starter.util.LocaleManager
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.config.ApplicationBase
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTheme
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTheme
 import com.maubis.scarlet.base.export.activity.ImportNoteActivity
 import com.maubis.scarlet.base.support.recycler.RecyclerItem
 import com.maubis.scarlet.base.support.ui.ThemeColorType
-import com.maubis.scarlet.base.support.utils.sDateFormat
+import com.maubis.scarlet.base.support.utils.dateFormat
 import java.io.File
 
 class FileImportViewHolder(context: Context, root: View)
@@ -26,31 +26,31 @@ class FileImportViewHolder(context: Context, root: View)
   private val fileSize: TextView = findViewById(R.id.file_size)
 
   init {
-    fileName.setTextColor(sAppTheme.get(ThemeColorType.SECONDARY_TEXT))
-    filePath.setTextColor(sAppTheme.get(ThemeColorType.HINT_TEXT))
-    fileDate.setTextColor(sAppTheme.get(ThemeColorType.TERTIARY_TEXT))
-    fileSize.setTextColor(sAppTheme.get(ThemeColorType.TERTIARY_TEXT))
+    fileName.setTextColor(appTheme.get(ThemeColorType.SECONDARY_TEXT))
+    filePath.setTextColor(appTheme.get(ThemeColorType.HINT_TEXT))
+    fileDate.setTextColor(appTheme.get(ThemeColorType.TERTIARY_TEXT))
+    fileSize.setTextColor(appTheme.get(ThemeColorType.TERTIARY_TEXT))
   }
 
   override fun populate(data: RecyclerItem, extra: Bundle?) {
     val item = data as FileRecyclerItem
     fileName.text = item.name
-    fileName.typeface = ApplicationBase.sAppTypeface.title()
+    fileName.typeface = ApplicationBase.appTypeface.title()
 
     filePath.text = getPath(item)
-    filePath.typeface = ApplicationBase.sAppTypeface.text()
+    filePath.typeface = ApplicationBase.appTypeface.text()
 
     fileDate.text = getSubtitleText(item.file)
-    fileDate.typeface = ApplicationBase.sAppTypeface.text()
+    fileDate.typeface = ApplicationBase.appTypeface.text()
 
     fileSize.text = getMetaText(item.file)
-    fileSize.typeface = ApplicationBase.sAppTypeface.text()
+    fileSize.typeface = ApplicationBase.appTypeface.text()
 
     root.setOnClickListener {
       (context as ImportNoteActivity).select(item)
     }
     root.setBackgroundColor(
-      if (item.selected) sAppTheme.get(
+      if (item.selected) appTheme.get(
         context, R.color.material_grey_100, R.color.dark_hint_text) else Color.TRANSPARENT)
   }
 
@@ -61,7 +61,7 @@ class FileImportViewHolder(context: Context, root: View)
   }
 
   private fun getSubtitleText(file: File): String {
-    return sDateFormat.readableFullTime(file.lastModified())
+    return dateFormat.readableFullTime(file.lastModified())
   }
 
   private fun getMetaText(file: File): String {

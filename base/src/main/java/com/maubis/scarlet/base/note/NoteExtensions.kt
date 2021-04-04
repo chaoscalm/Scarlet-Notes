@@ -23,7 +23,7 @@ import com.maubis.scarlet.base.support.BitmapHelper
 import com.maubis.scarlet.base.support.ui.ColorUtil
 import com.maubis.scarlet.base.support.ui.ThemedActivity
 import com.maubis.scarlet.base.support.ui.sThemeDarkenNoteColor
-import com.maubis.scarlet.base.support.utils.sDateFormat
+import com.maubis.scarlet.base.support.utils.dateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -188,7 +188,7 @@ fun Note.getDisplayTime(): String {
     Calendar.getInstance().timeInMillis - time < 1000 * 60 * 60 * 2 -> "hh:mm aa"
     else -> "dd MMMM"
   }
-  return sDateFormat.readableTime(format, time)
+  return dateFormat.readableTime(format, time)
 }
 
 fun Note.getTagString(): String {
@@ -276,7 +276,7 @@ fun Note.hasImages(): Boolean {
 fun Note.shareImages(context: Context) {
   val imageFormats = getFormats().filter { it.formatType == FormatType.IMAGE }
   val bitmaps = imageFormats
-    .map { ApplicationBase.sAppImageStorage.getFile(uuid, it.text) }
+    .map { ApplicationBase.appImageStorage.getFile(uuid, it.text) }
     .filter { it.exists() }
     .map { BitmapHelper.loadFromFile(it) }
     .filterNotNull()

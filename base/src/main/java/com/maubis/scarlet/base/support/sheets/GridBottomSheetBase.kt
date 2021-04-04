@@ -6,8 +6,8 @@ import android.widget.GridLayout
 import android.widget.TextView
 import com.github.bijoysingh.uibasics.views.UILabelView
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTheme
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTypeface
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTheme
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTypeface
 import com.maubis.scarlet.base.support.option.OptionsItem
 import com.maubis.scarlet.base.support.ui.ThemeColorType
 import com.maubis.scarlet.base.support.ui.ThemedBottomSheetFragment
@@ -37,7 +37,7 @@ abstract class GridBottomSheetBase : ThemedBottomSheetFragment() {
   fun setOptionTitle(dialog: Dialog, title: Int) {
     GlobalScope.launch(Dispatchers.Main) {
       val titleView = dialog.findViewById<TextView>(R.id.options_title)
-      titleView.setTextColor(sAppTheme.get(ThemeColorType.SECONDARY_TEXT))
+      titleView.setTextColor(appTheme.get(ThemeColorType.SECONDARY_TEXT))
       titleView.setText(title)
     }
   }
@@ -56,7 +56,7 @@ abstract class GridBottomSheetBase : ThemedBottomSheetFragment() {
       }
 
       val contentView = View.inflate(context, R.layout.layout_grid_item, null) as UILabelView
-      contentView.label.typeface = sAppTypeface.title()
+      contentView.label.typeface = appTypeface.title()
       contentView.setText(option.title)
       contentView.setImageResource(option.icon)
       contentView.setTextColor(getOptionsTitleColor(option.selected))

@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.flexbox.FlexboxLayout
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTheme
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTheme
 import com.maubis.scarlet.base.core.folder.isUnsaved
 import com.maubis.scarlet.base.database.room.folder.Folder
 import com.maubis.scarlet.base.note.folder.delete
@@ -48,9 +48,9 @@ class CreateOrEditFolderBottomSheet : ThemedBottomSheetFragment() {
     val removeBtn = dialog.findViewById<TextView>(R.id.action_remove_button)
     val colorFlexbox = dialog.findViewById<FlexboxLayout>(R.id.color_flexbox)
 
-    title.setTextColor(sAppTheme.get(ThemeColorType.SECONDARY_TEXT))
-    enterFolder.setTextColor(sAppTheme.get(ThemeColorType.SECONDARY_TEXT))
-    enterFolder.setHintTextColor(sAppTheme.get(ThemeColorType.HINT_TEXT))
+    title.setTextColor(appTheme.get(ThemeColorType.SECONDARY_TEXT))
+    enterFolder.setTextColor(appTheme.get(ThemeColorType.SECONDARY_TEXT))
+    enterFolder.setHintTextColor(appTheme.get(ThemeColorType.HINT_TEXT))
 
     title.setText(if (folder.isUnsaved()) R.string.folder_sheet_add_note else R.string.folder_sheet_edit_note)
     action.setOnClickListener {

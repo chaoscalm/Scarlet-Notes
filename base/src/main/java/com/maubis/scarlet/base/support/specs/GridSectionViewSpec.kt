@@ -3,23 +3,15 @@ package com.maubis.scarlet.base.support.specs
 import android.graphics.Color
 import android.text.Layout
 import android.text.TextUtils
-import com.facebook.litho.ClickEvent
-import com.facebook.litho.Column
-import com.facebook.litho.Component
-import com.facebook.litho.ComponentContext
-import com.facebook.litho.Row
-import com.facebook.litho.annotations.LayoutSpec
-import com.facebook.litho.annotations.OnCreateLayout
-import com.facebook.litho.annotations.OnEvent
-import com.facebook.litho.annotations.Prop
-import com.facebook.litho.annotations.ResType
+import com.facebook.litho.*
+import com.facebook.litho.annotations.*
 import com.facebook.litho.widget.SolidColor
 import com.facebook.litho.widget.Text
 import com.facebook.yoga.YogaAlign
 import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTheme
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTypeface
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTheme
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTypeface
 import com.maubis.scarlet.base.support.ui.ThemeColorType
 
 data class GridSectionItem(
@@ -66,7 +58,7 @@ object GridOptionSpec {
         Text.create(context)
           .textRes(option.label)
           .textAlignment(Layout.Alignment.ALIGN_CENTER)
-          .typeface(sAppTypeface.title())
+          .typeface(appTypeface.title())
           .textSizeRes(R.dimen.font_size_small)
           .paddingDip(YogaEdge.VERTICAL, 8f)
           .paddingDip(YogaEdge.HORIZONTAL, 16f)
@@ -95,13 +87,13 @@ object GridSectionViewSpec {
     @Prop(optional = true) maxLines: Int?,
     @Prop(optional = true) showSeparator: Boolean?): Component {
     val column = Column.create(context)
-    val primaryColor = sAppTheme.get(ThemeColorType.SECONDARY_TEXT)
+    val primaryColor = appTheme.get(ThemeColorType.SECONDARY_TEXT)
 
     if (section.title != 0) {
       column.child(
         Text.create(context)
           .textRes(section.title)
-          .typeface(sAppTypeface.title())
+          .typeface(appTypeface.title())
           .textSizeRes(R.dimen.font_size_normal)
           .maxLines(1)
           .ellipsize(TextUtils.TruncateAt.END)
@@ -148,7 +140,7 @@ object GridSectionViewSpec {
     if (showSeparator == true) {
       column.child(
         SolidColor.create(context)
-          .color(sAppTheme.get(ThemeColorType.PRIMARY_TEXT))
+          .color(appTheme.get(ThemeColorType.PRIMARY_TEXT))
           .heightDip(1.5f)
           .widthDip(196f)
           .alignSelf(YogaAlign.CENTER)

@@ -7,22 +7,22 @@ import androidx.core.content.ContextCompat
 import com.github.bijoysingh.starter.util.DimensionManager
 import com.maubis.markdown.MarkdownConfig
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppPreferences
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appPreferences
 import com.maubis.scarlet.base.support.utils.OsVersionUtils
 import com.maubis.scarlet.base.support.utils.throwOrReturn
 import java.lang.ref.WeakReference
 
 var sThemeLabel: String
-  get() = sAppPreferences.get("KEY_APP_THEME", Theme.DARK.name)
-  set(value) = sAppPreferences.put("KEY_APP_THEME", value)
+  get() = appPreferences.get("KEY_APP_THEME", Theme.DARK.name)
+  set(value) = appPreferences.put("KEY_APP_THEME", value)
 
 var sThemeIsAutomatic: Boolean
-  get() = sAppPreferences.get("automatic_theme", false)
-  set(value) = sAppPreferences.put("automatic_theme", value)
+  get() = appPreferences.get("automatic_theme", false)
+  set(value) = appPreferences.put("automatic_theme", value)
 
 var sThemeDarkenNoteColor: Boolean
-  get() = sAppPreferences.get("darken_note_color", false)
-  set(value) = sAppPreferences.put("darken_note_color", value)
+  get() = appPreferences.get("darken_note_color", false)
+  set(value) = appPreferences.put("darken_note_color", value)
 
 fun setThemeFromSystem(context: Context) {
   val configuration = context.resources.configuration

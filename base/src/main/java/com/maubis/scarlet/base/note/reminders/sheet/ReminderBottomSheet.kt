@@ -8,7 +8,7 @@ import android.widget.TextView
 import com.github.bijoysingh.starter.util.DateFormatter
 import com.github.bijoysingh.uibasics.views.UIActionView
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTheme
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTheme
 import com.maubis.scarlet.base.core.note.Reminder
 import com.maubis.scarlet.base.core.note.ReminderInterval
 import com.maubis.scarlet.base.core.note.getReminderV2
@@ -21,7 +21,7 @@ import com.maubis.scarlet.base.support.sheets.LithoChooseOptionsItem
 import com.maubis.scarlet.base.support.ui.ThemeColorType
 import com.maubis.scarlet.base.support.ui.ThemedActivity
 import com.maubis.scarlet.base.support.ui.ThemedBottomSheetFragment
-import com.maubis.scarlet.base.support.utils.sDateFormat
+import com.maubis.scarlet.base.support.utils.dateFormat
 import java.util.*
 
 // TODO: Upgrade to Litho
@@ -208,8 +208,8 @@ class ReminderBottomSheet : ThemedBottomSheetFragment() {
     val reminderRepeat = dlg.findViewById<UIActionView>(R.id.reminder_repeat)
 
     reminderRepeat.setSubtitle(getReminderIntervalLabel(reminder.interval))
-    reminderTime.setSubtitle(sDateFormat.readableTime(DateFormatter.Formats.HH_MM_A.format, reminder.timestamp))
-    reminderDate.setSubtitle(sDateFormat.readableTime(DateFormatter.Formats.DD_MMM_YYYY.format, reminder.timestamp))
+    reminderTime.setSubtitle(dateFormat.readableTime(DateFormatter.Formats.HH_MM_A.format, reminder.timestamp))
+    reminderDate.setSubtitle(dateFormat.readableTime(DateFormatter.Formats.DD_MMM_YYYY.format, reminder.timestamp))
     reminderDate.alpha = if (reminder.interval == ReminderInterval.ONCE) 1.0f else 0.5f
   }
 
@@ -223,9 +223,9 @@ class ReminderBottomSheet : ThemedBottomSheetFragment() {
     val reminderTime = dlg.findViewById<UIActionView>(R.id.reminder_time)
     val reminderRepeat = dlg.findViewById<UIActionView>(R.id.reminder_repeat)
 
-    val iconColor = sAppTheme.get(ThemeColorType.TOOLBAR_ICON)
-    val textColor = sAppTheme.get(ThemeColorType.TERTIARY_TEXT)
-    val titleColor = sAppTheme.get(ThemeColorType.SECTION_HEADER)
+    val iconColor = appTheme.get(ThemeColorType.TOOLBAR_ICON)
+    val textColor = appTheme.get(ThemeColorType.TERTIARY_TEXT)
+    val titleColor = appTheme.get(ThemeColorType.SECTION_HEADER)
 
     reminderDate.setTitleColor(titleColor)
     reminderDate.setSubtitleColor(textColor)

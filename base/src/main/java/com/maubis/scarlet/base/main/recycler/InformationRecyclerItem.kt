@@ -2,7 +2,7 @@ package com.maubis.scarlet.base.main.recycler
 
 import com.maubis.scarlet.base.MainActivity
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppPreferences
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appPreferences
 import com.maubis.scarlet.base.export.sheet.BackupSettingsOptionsBottomSheet
 import com.maubis.scarlet.base.settings.sheet.UISettingsOptionsBottomSheet
 import com.maubis.scarlet.base.support.recycler.RecyclerItem
@@ -20,7 +20,7 @@ fun probability(probability: Float): Boolean = Random().nextFloat() <= probabili
 
 fun shouldShowThemeInformationItem(): Boolean {
   return probability(0.01f)
-    && !sAppPreferences.get(KEY_THEME_OPTIONS, false)
+    && !appPreferences.get(KEY_THEME_OPTIONS, false)
 }
 
 fun getThemeInformationItem(activity: MainActivity): InformationRecyclerItem {
@@ -29,14 +29,14 @@ fun getThemeInformationItem(activity: MainActivity): InformationRecyclerItem {
     R.string.home_option_ui_experience,
     R.string.home_option_ui_experience_subtitle
   ) {
-    sAppPreferences.put(KEY_THEME_OPTIONS, true)
+    appPreferences.put(KEY_THEME_OPTIONS, true)
     openSheet(activity, UISettingsOptionsBottomSheet())
   }
 }
 
 fun shouldShowBackupInformationItem(): Boolean {
   return probability(0.01f)
-    && !sAppPreferences.get(KEY_BACKUP_OPTIONS, false)
+    && !appPreferences.get(KEY_BACKUP_OPTIONS, false)
 }
 
 fun getBackupInformationItem(activity: MainActivity): InformationRecyclerItem {
@@ -45,7 +45,7 @@ fun getBackupInformationItem(activity: MainActivity): InformationRecyclerItem {
     R.string.home_option_backup_options,
     R.string.home_option_backup_options_subtitle
   ) {
-    sAppPreferences.put(KEY_BACKUP_OPTIONS, true)
+    appPreferences.put(KEY_BACKUP_OPTIONS, true)
     openSheet(activity, BackupSettingsOptionsBottomSheet())
   }
 }

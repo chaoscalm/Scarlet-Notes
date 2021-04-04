@@ -1,8 +1,8 @@
 package com.maubis.scarlet.base.support.utils
 
 import com.maubis.scarlet.base.BuildConfig
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appPreferences
 import com.maubis.scarlet.base.config.ApplicationBase.Companion.instance
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppPreferences
 import com.maubis.scarlet.base.main.sheets.WHATS_NEW_SHEET_INDEX
 
 const val KEY_LAST_KNOWN_APP_VERSION = "KEY_LAST_KNOWN_APP_VERSION"
@@ -18,7 +18,7 @@ fun getCurrentVersionCode(): Int {
  * If nothing can be concluded it's 0 (assumes new user)
  */
 fun getLastUsedAppVersionCode(): Int {
-  val appVersion = sAppPreferences.get(KEY_LAST_KNOWN_APP_VERSION, 0)
+  val appVersion = appPreferences.get(KEY_LAST_KNOWN_APP_VERSION, 0)
   return when {
     appVersion > 0 -> appVersion
     instance.notesRepository.getCount() > 0 -> -1
@@ -27,7 +27,7 @@ fun getLastUsedAppVersionCode(): Int {
 }
 
 fun shouldShowWhatsNewSheet(): Boolean {
-  val lastShownWhatsNew = sAppPreferences.get(KEY_LAST_SHOWN_WHATS_NEW, 0)
+  val lastShownWhatsNew = appPreferences.get(KEY_LAST_SHOWN_WHATS_NEW, 0)
   if (lastShownWhatsNew >= WHATS_NEW_SHEET_INDEX) {
     // Already shown the latest
     return false
@@ -36,8 +36,8 @@ fun shouldShowWhatsNewSheet(): Boolean {
   val lastUsedAppVersion = getLastUsedAppVersionCode()
 
   // Update the values independent of the decision
-  sAppPreferences.put(KEY_LAST_SHOWN_WHATS_NEW, WHATS_NEW_SHEET_INDEX)
-  sAppPreferences.put(KEY_LAST_KNOWN_APP_VERSION, getCurrentVersionCode())
+  appPreferences.put(KEY_LAST_SHOWN_WHATS_NEW, WHATS_NEW_SHEET_INDEX)
+  appPreferences.put(KEY_LAST_KNOWN_APP_VERSION, getCurrentVersionCode())
 
   // New users don't need to see the whats new screen
   return lastUsedAppVersion != 0

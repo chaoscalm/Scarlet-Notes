@@ -12,9 +12,9 @@ import com.facebook.litho.LithoView
 import com.github.bijoysingh.starter.recyclerview.MultiRecyclerViewControllerItem
 import com.github.bijoysingh.starter.recyclerview.RecyclerViewBuilder
 import com.maubis.scarlet.base.R
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appPreferences
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTheme
 import com.maubis.scarlet.base.config.ApplicationBase.Companion.instance
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppPreferences
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTheme
 import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.core.format.FormatBuilder
 import com.maubis.scarlet.base.core.format.FormatType
@@ -131,8 +131,8 @@ open class ViewAdvancedNoteActivity : SecuredActivity(), INoteOptionSheetActivit
     val currentNote = note
     val bundle = Bundle()
     bundle.putBoolean(KEY_EDITABLE, editModeValue)
-    bundle.putBoolean(KEY_MARKDOWN_ENABLED, sAppPreferences.get(KEY_MARKDOWN_ENABLED, true))
-    bundle.putBoolean(KEY_NIGHT_THEME, sAppTheme.isNightTheme())
+    bundle.putBoolean(KEY_MARKDOWN_ENABLED, appPreferences.get(KEY_MARKDOWN_ENABLED, true))
+    bundle.putBoolean(KEY_NIGHT_THEME, appTheme.isNightTheme())
     bundle.putInt(STORE_KEY_TEXT_SIZE, sEditorTextSize)
     bundle.putInt(KEY_NOTE_COLOR, currentNote?.adjustedColor() ?: sNoteDefaultColor)
     bundle.putString(INTENT_KEY_NOTE_ID, currentNote?.uuid ?: generateUUID())
@@ -236,20 +236,20 @@ open class ViewAdvancedNoteActivity : SecuredActivity(), INoteOptionSheetActivit
     val noteColor = currentNote.adjustedColor()
     when {
       !sUIUseNoteColorAsBackground -> {
-        colorConfig.backgroundColor = sAppTheme.get(ThemeColorType.BACKGROUND)
-        colorConfig.toolbarIconColor = sAppTheme.get(ThemeColorType.TOOLBAR_ICON)
+        colorConfig.backgroundColor = appTheme.get(ThemeColorType.BACKGROUND)
+        colorConfig.toolbarIconColor = appTheme.get(ThemeColorType.TOOLBAR_ICON)
         colorConfig.statusBarColor = colorConfig.backgroundColor
-        colorConfig.toolbarBackgroundColor = sAppTheme.get(ThemeColorType.TOOLBAR_BACKGROUND)
+        colorConfig.toolbarBackgroundColor = appTheme.get(ThemeColorType.TOOLBAR_BACKGROUND)
       }
       ColorUtil.isLightColored(noteColor) -> {
         colorConfig.backgroundColor = noteColor
-        colorConfig.toolbarIconColor = sAppTheme.get(context, Theme.DARK, ThemeColorType.TOOLBAR_ICON)
+        colorConfig.toolbarIconColor = appTheme.get(context, Theme.DARK, ThemeColorType.TOOLBAR_ICON)
         colorConfig.statusBarColor = darkOrDarkerColor(noteColor)
         colorConfig.toolbarBackgroundColor = colorConfig.statusBarColor
       }
       else -> {
         colorConfig.backgroundColor = noteColor
-        colorConfig.toolbarIconColor = sAppTheme.get(context, Theme.DARK, ThemeColorType.TOOLBAR_ICON)
+        colorConfig.toolbarIconColor = appTheme.get(context, Theme.DARK, ThemeColorType.TOOLBAR_ICON)
         colorConfig.statusBarColor = darkOrDarkerColor(noteColor)
         colorConfig.toolbarBackgroundColor = colorConfig.statusBarColor
       }

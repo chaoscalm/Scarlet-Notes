@@ -3,11 +3,7 @@ package com.maubis.scarlet.base.support.sheets
 import android.app.Dialog
 import android.graphics.Color
 import android.graphics.Typeface
-import com.facebook.litho.ClickEvent
-import com.facebook.litho.Column
-import com.facebook.litho.Component
-import com.facebook.litho.ComponentContext
-import com.facebook.litho.Row
+import com.facebook.litho.*
 import com.facebook.litho.annotations.LayoutSpec
 import com.facebook.litho.annotations.OnCreateLayout
 import com.facebook.litho.annotations.OnEvent
@@ -16,8 +12,8 @@ import com.facebook.litho.widget.Text
 import com.facebook.yoga.YogaAlign
 import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTheme
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTypeface
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTheme
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTypeface
 import com.maubis.scarlet.base.support.specs.RoundIcon
 import com.maubis.scarlet.base.support.ui.ThemeColorType
 
@@ -32,7 +28,7 @@ object ChooseOptionItemLayoutSpec {
   fun onCreate(
     context: ComponentContext,
     @Prop option: LithoChooseOptionsItem): Component {
-    val titleColor = sAppTheme.get(ThemeColorType.SECONDARY_TEXT)
+    val titleColor = appTheme.get(ThemeColorType.SECONDARY_TEXT)
     val selectedColor = context.getColor(R.color.colorAccent)
 
     val row = Row.create(context)
@@ -44,7 +40,7 @@ object ChooseOptionItemLayoutSpec {
         Text.create(context)
           .textRes(option.title)
           .textSizeRes(R.dimen.font_size_normal)
-          .typeface(sAppTypeface.title())
+          .typeface(appTypeface.title())
           .textStyle(Typeface.BOLD)
           .textColor(titleColor)
           .flexGrow(1f))

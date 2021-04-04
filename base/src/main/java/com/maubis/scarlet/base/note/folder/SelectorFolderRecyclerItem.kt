@@ -3,7 +3,7 @@ package com.maubis.scarlet.base.note.folder
 import android.content.Context
 import androidx.core.content.ContextCompat
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTheme
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTheme
 import com.maubis.scarlet.base.database.room.folder.Folder
 import com.maubis.scarlet.base.support.recycler.RecyclerItem
 import com.maubis.scarlet.base.support.ui.ColorUtil
@@ -13,7 +13,7 @@ class SelectorFolderRecyclerItem(context: Context, val folder: Folder) : Recycle
 
   val isLightShaded = ColorUtil.isLightColored(folder.color)
   val title = folder.title
-  val titleColor = sAppTheme.get(ThemeColorType.TERTIARY_TEXT)
+  val titleColor = appTheme.get(ThemeColorType.TERTIARY_TEXT)
 
   val folderColor = folder.color
   val iconColor = when (isLightShaded) {

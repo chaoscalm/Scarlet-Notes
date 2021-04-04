@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.facebook.litho.ComponentContext
 import com.facebook.litho.LithoView
 import com.maubis.scarlet.base.R
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appImageStorage
 import com.maubis.scarlet.base.config.ApplicationBase.Companion.instance
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppImageStorage
 import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.core.format.FormatBuilder
 import com.maubis.scarlet.base.core.format.FormatType
@@ -139,7 +139,7 @@ open class CreateNoteActivity : ViewAdvancedNoteActivity() {
           return
         }
 
-        val targetFile = sAppImageStorage.renameOrCopy(note!!, imageFile)
+        val targetFile = appImageStorage.renameOrCopy(note!!, imageFile)
         val index = getFormatIndex(type)
         triggerImageLoaded(index, targetFile)
       }
@@ -301,7 +301,7 @@ open class CreateNoteActivity : ViewAdvancedNoteActivity() {
 
     val formatToChange = formats[position]
     if (!formatToChange.text.isBlank()) {
-      val noteImage = sAppImageStorage
+      val noteImage = appImageStorage
       deleteIfExist(noteImage.getFile(note!!.uuid, formatToChange.text))
     }
     formatToChange.text = file.name

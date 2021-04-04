@@ -10,8 +10,8 @@ import com.facebook.litho.ComponentContext
 import com.maubis.markdown.Markdown
 import com.maubis.scarlet.base.MainActivity
 import com.maubis.scarlet.base.R
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appPreferences
 import com.maubis.scarlet.base.config.ApplicationBase.Companion.instance
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppPreferences
 import com.maubis.scarlet.base.core.note.NoteState
 import com.maubis.scarlet.base.core.note.sort
 import com.maubis.scarlet.base.database.room.note.Note
@@ -30,33 +30,33 @@ import kotlinx.coroutines.launch
 
 const val STORE_KEY_WIDGET_ENABLE_FORMATTING = "widget_enable_formatting"
 var sWidgetEnableFormatting: Boolean
-  get() = sAppPreferences.get(STORE_KEY_WIDGET_ENABLE_FORMATTING, true)
-  set(value) = sAppPreferences.put(STORE_KEY_WIDGET_ENABLE_FORMATTING, value)
+  get() = appPreferences.get(STORE_KEY_WIDGET_ENABLE_FORMATTING, true)
+  set(value) = appPreferences.put(STORE_KEY_WIDGET_ENABLE_FORMATTING, value)
 
 const val STORE_KEY_WIDGET_SHOW_LOCKED_NOTES = "widget_show_locked_notes"
 var sWidgetShowLockedNotes: Boolean
-  get() = sAppPreferences.get(STORE_KEY_WIDGET_SHOW_LOCKED_NOTES, false)
-  set(value) = sAppPreferences.put(STORE_KEY_WIDGET_SHOW_LOCKED_NOTES, value)
+  get() = appPreferences.get(STORE_KEY_WIDGET_SHOW_LOCKED_NOTES, false)
+  set(value) = appPreferences.put(STORE_KEY_WIDGET_SHOW_LOCKED_NOTES, value)
 
 const val STORE_KEY_WIDGET_SHOW_ARCHIVED_NOTES = "widget_show_archived_notes"
 var sWidgetShowArchivedNotes: Boolean
-  get() = sAppPreferences.get(STORE_KEY_WIDGET_SHOW_ARCHIVED_NOTES, true)
-  set(value) = sAppPreferences.put(STORE_KEY_WIDGET_SHOW_ARCHIVED_NOTES, value)
+  get() = appPreferences.get(STORE_KEY_WIDGET_SHOW_ARCHIVED_NOTES, true)
+  set(value) = appPreferences.put(STORE_KEY_WIDGET_SHOW_ARCHIVED_NOTES, value)
 
 const val STORE_KEY_WIDGET_SHOW_TRASH_NOTES = "widget_show_trash_notes"
 var sWidgetShowDeletedNotes: Boolean
-  get() = sAppPreferences.get(STORE_KEY_WIDGET_SHOW_TRASH_NOTES, false)
-  set(value) = sAppPreferences.put(STORE_KEY_WIDGET_SHOW_TRASH_NOTES, value)
+  get() = appPreferences.get(STORE_KEY_WIDGET_SHOW_TRASH_NOTES, false)
+  set(value) = appPreferences.put(STORE_KEY_WIDGET_SHOW_TRASH_NOTES, value)
 
 const val STORE_KEY_WIDGET_BACKGROUND_COLOR = "widget_background_color_v1"
 var sWidgetBackgroundColor: Int
-  get() = sAppPreferences.get(STORE_KEY_WIDGET_BACKGROUND_COLOR, 0x65000000)
-  set(value) = sAppPreferences.put(STORE_KEY_WIDGET_BACKGROUND_COLOR, value)
+  get() = appPreferences.get(STORE_KEY_WIDGET_BACKGROUND_COLOR, 0x65000000)
+  set(value) = appPreferences.put(STORE_KEY_WIDGET_BACKGROUND_COLOR, value)
 
 const val STORE_KEY_WIDGET_SHOW_TOOLBAR = "widget_show_toolbar"
 var sWidgetShowToolbar: Boolean
-  get() = sAppPreferences.get(STORE_KEY_WIDGET_SHOW_TOOLBAR, true)
-  set(value) = sAppPreferences.put(STORE_KEY_WIDGET_SHOW_TOOLBAR, value)
+  get() = appPreferences.get(STORE_KEY_WIDGET_SHOW_TOOLBAR, true)
+  set(value) = appPreferences.put(STORE_KEY_WIDGET_SHOW_TOOLBAR, value)
 
 fun getWidgetNoteText(note: Note): CharSequence {
   if (note.locked && !sWidgetShowLockedNotes) {

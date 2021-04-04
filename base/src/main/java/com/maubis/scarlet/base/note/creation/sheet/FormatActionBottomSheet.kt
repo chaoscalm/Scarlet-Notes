@@ -5,7 +5,7 @@ import com.facebook.litho.ComponentContext
 import com.github.bijoysingh.starter.util.IntentUtils
 import com.github.bijoysingh.starter.util.TextUtils
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppImageStorage
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appImageStorage
 import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.core.format.FormatType
 import com.maubis.scarlet.base.core.note.NoteImage.Companion.deleteIfExist
@@ -80,7 +80,7 @@ class FormatActionBottomSheet : GridOptionBottomSheet() {
       listener = {
         activity.deleteFormat(format)
         if (format.formatType === FormatType.IMAGE && !format.text.isBlank()) {
-          deleteIfExist(sAppImageStorage.getFile(noteUUID, format))
+          deleteIfExist(appImageStorage.getFile(noteUUID, format))
         }
         dismiss()
       }

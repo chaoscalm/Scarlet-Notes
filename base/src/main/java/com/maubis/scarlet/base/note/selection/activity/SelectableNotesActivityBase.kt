@@ -11,9 +11,9 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.github.bijoysingh.starter.async.MultiAsyncTask
 import com.github.bijoysingh.starter.recyclerview.RecyclerViewBuilder
 import com.maubis.scarlet.base.R
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appPreferences
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTheme
 import com.maubis.scarlet.base.config.ApplicationBase.Companion.instance
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppPreferences
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTheme
 import com.maubis.scarlet.base.core.note.sort
 import com.maubis.scarlet.base.database.room.note.Note
 import com.maubis.scarlet.base.main.recycler.EmptyRecyclerItem
@@ -92,8 +92,8 @@ abstract class SelectableNotesActivityBase : SecuredActivity(), INoteSelectorAct
   fun setupRecyclerView() {
     val isTablet = resources.getBoolean(R.bool.is_tablet)
 
-    val isMarkdownEnabled = sAppPreferences.get(SettingsOptionsBottomSheet.KEY_MARKDOWN_ENABLED, true)
-    val isMarkdownHomeEnabled = sAppPreferences.get(SettingsOptionsBottomSheet.KEY_MARKDOWN_HOME_ENABLED, true)
+    val isMarkdownEnabled = appPreferences.get(SettingsOptionsBottomSheet.KEY_MARKDOWN_ENABLED, true)
+    val isMarkdownHomeEnabled = appPreferences.get(SettingsOptionsBottomSheet.KEY_MARKDOWN_HOME_ENABLED, true)
     val adapterExtra = Bundle()
     adapterExtra.putBoolean(SettingsOptionsBottomSheet.KEY_MARKDOWN_ENABLED, isMarkdownEnabled && isMarkdownHomeEnabled)
     adapterExtra.putInt(STORE_KEY_LINE_COUNT, sNoteItemLineCount)
@@ -113,7 +113,7 @@ abstract class SelectableNotesActivityBase : SecuredActivity(), INoteSelectorAct
     val containerLayout = findViewById<View>(R.id.container_layout)
     containerLayout.setBackgroundColor(getThemeColor())
 
-    val toolbarIconColor = sAppTheme.get(ThemeColorType.TOOLBAR_ICON);
+    val toolbarIconColor = appTheme.get(ThemeColorType.TOOLBAR_ICON);
     findViewById<ImageView>(R.id.back_button).setColorFilter(toolbarIconColor)
     findViewById<TextView>(R.id.toolbar_title).setTextColor(toolbarIconColor)
   }

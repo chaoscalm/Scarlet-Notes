@@ -8,8 +8,8 @@ import com.facebook.litho.ComponentContext
 import com.facebook.litho.widget.Text
 import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTheme
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTypeface
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTheme
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTypeface
 import com.maubis.scarlet.base.export.support.ExternalFolderSync
 import com.maubis.scarlet.base.export.support.sExternalFolderSync
 import com.maubis.scarlet.base.export.support.sFolderSyncBackupLocked
@@ -36,18 +36,18 @@ class ExternalFolderSyncBottomSheet : LithoBottomSheet() {
       .child(
         Text.create(componentContext)
           .textSizeRes(R.dimen.font_size_large)
-          .typeface(sAppTypeface.text())
+          .typeface(appTypeface.text())
           .textRes(R.string.import_export_layout_folder_sync_description)
           .paddingDip(YogaEdge.HORIZONTAL, 20f)
-          .textColor(sAppTheme.get(ThemeColorType.TERTIARY_TEXT)))
+          .textColor(appTheme.get(ThemeColorType.TERTIARY_TEXT)))
       .child(separatorSpec(componentContext).alpha(0.5f))
       .child(
         Text.create(componentContext)
           .textSizeRes(R.dimen.font_size_xlarge)
-          .typeface(sAppTypeface.title())
+          .typeface(appTypeface.title())
           .textRes(R.string.import_export_layout_folder_sync_folder)
           .paddingDip(YogaEdge.HORIZONTAL, 20f)
-          .textColor(sAppTheme.get(ThemeColorType.SECTION_HEADER)))
+          .textColor(appTheme.get(ThemeColorType.SECTION_HEADER)))
       .child(
         Text.create(componentContext)
           .textSizeRes(R.dimen.font_size_large)
@@ -55,7 +55,7 @@ class ExternalFolderSyncBottomSheet : LithoBottomSheet() {
           .typeface(Typeface.MONOSPACE)
           .paddingDip(YogaEdge.HORIZONTAL, 20f)
           .paddingDip(YogaEdge.VERTICAL, 8f)
-          .textColor(sAppTheme.get(ThemeColorType.TERTIARY_TEXT)))
+          .textColor(appTheme.get(ThemeColorType.TERTIARY_TEXT)))
       .child(separatorSpec(componentContext).alpha(0.5f))
 
     getOptions().forEach {

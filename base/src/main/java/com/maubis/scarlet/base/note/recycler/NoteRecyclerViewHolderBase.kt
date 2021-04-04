@@ -12,8 +12,8 @@ import androidx.cardview.widget.CardView
 import com.github.bijoysingh.starter.recyclerview.RecyclerViewHolder
 import com.github.bijoysingh.starter.util.TextUtils
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppImageStorage
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTypeface
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appImageStorage
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTypeface
 import com.maubis.scarlet.base.core.note.NoteState
 import com.maubis.scarlet.base.database.room.note.Note
 import com.maubis.scarlet.base.note.isNoteLockedButAppUnlocked
@@ -76,7 +76,7 @@ open class NoteRecyclerViewHolderBase(context: Context, view: View) : RecyclerVi
   }
 
   private fun setDescription(note: NoteRecyclerItem) {
-    description.setTypeface(sAppTypeface.text(), Typeface.NORMAL)
+    description.setTypeface(appTypeface.text(), Typeface.NORMAL)
     description.text = note.description
     description.maxLines = note.lineCount
     description.setTextColor(note.descriptionColor)
@@ -86,7 +86,7 @@ open class NoteRecyclerViewHolderBase(context: Context, view: View) : RecyclerVi
     val isImageAvailable = !note.imageSource.isBlank()
     image.visibility = visibility(isImageAvailable)
     if (isImageAvailable) {
-      sAppImageStorage.loadThumbnailFileToImageView(note.note.uuid, note.imageSource, image)
+      appImageStorage.loadThumbnailFileToImageView(note.note.uuid, note.imageSource, image)
     }
   }
 
@@ -119,7 +119,7 @@ open class NoteRecyclerViewHolderBase(context: Context, view: View) : RecyclerVi
   }
 
   private fun setMetaText(note: NoteRecyclerItem) {
-    tags.typeface = sAppTypeface.text()
+    tags.typeface = appTypeface.text()
     when {
       !TextUtils.isNullOrEmpty(note.tagsSource) -> {
         tags.setTextColor(note.tagsColor)

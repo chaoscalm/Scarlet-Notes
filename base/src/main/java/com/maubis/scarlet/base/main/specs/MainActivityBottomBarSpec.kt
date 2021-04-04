@@ -16,8 +16,8 @@ import com.facebook.yoga.YogaAlign
 import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.MainActivity
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTheme
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTypeface
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTheme
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTypeface
 import com.maubis.scarlet.base.core.folder.FolderBuilder
 import com.maubis.scarlet.base.database.room.folder.Folder
 import com.maubis.scarlet.base.main.sheets.HomeOptionsBottomSheet
@@ -133,7 +133,7 @@ object MainActivityFolderBottomBarSpec {
                 .onClick { activity.onFolderChange(null) })
     row.child(
       Text.create(context)
-        .typeface(sAppTypeface.title())
+        .typeface(appTypeface.title())
         .textAlignment(Layout.Alignment.ALIGN_CENTER)
         .flexGrow(1f)
         .text(folder.title)
@@ -162,8 +162,8 @@ object MainActivitySyncingNowSpec {
   @OnCreateLayout
   fun onCreate(context: ComponentContext, @Prop isSyncHappening: Boolean): Component {
     val colorConfig = ToolbarColorConfig(
-      toolbarBackgroundColor = sAppTheme.get(ThemeColorType.TOOLBAR_BACKGROUND),
-      toolbarIconColor = sAppTheme.get(ThemeColorType.TOOLBAR_ICON)
+      toolbarBackgroundColor = appTheme.get(ThemeColorType.TOOLBAR_BACKGROUND),
+      toolbarIconColor = appTheme.get(ThemeColorType.TOOLBAR_ICON)
     )
     val syncText = when (isSyncHappening) {
       true -> R.string.home_syncing_top_layout
@@ -202,7 +202,7 @@ object MainActivitySyncingNowSpec {
           .child(syncIcon)
           .child(
             Text.create(context)
-              .typeface(sAppTypeface.title())
+              .typeface(appTypeface.title())
               .textRes(syncText)
               .textSizeRes(R.dimen.font_size_normal)
               .textColorRes(R.color.light_secondary_text)))

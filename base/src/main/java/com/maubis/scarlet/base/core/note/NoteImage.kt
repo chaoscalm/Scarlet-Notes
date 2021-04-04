@@ -67,7 +67,7 @@ class NoteImage(context: Context) {
         return@launch
       }
 
-      val bitmap = ApplicationBase.sAppImageCache.loadFromCache(file)
+      val bitmap = ApplicationBase.appImageCache.loadFromCache(file)
       if (bitmap === null) {
         deleteIfExist(file)
         GlobalScope.launch(Dispatchers.Main) {
@@ -89,8 +89,8 @@ class NoteImage(context: Context) {
     image: ImageView,
     callback: ImageLoadCallback? = null) {
     GlobalScope.launch {
-      val thumbnailFile = ApplicationBase.sAppImageCache.thumbnailFile(noteUUID, imageUuid)
-      val persistentFile = ApplicationBase.sAppImageCache.persistentFile(noteUUID, imageUuid)
+      val thumbnailFile = ApplicationBase.appImageCache.thumbnailFile(noteUUID, imageUuid)
+      val persistentFile = ApplicationBase.appImageCache.persistentFile(noteUUID, imageUuid)
 
       if (!persistentFile.exists()) {
         GlobalScope.launch(Dispatchers.Main) {
@@ -101,7 +101,7 @@ class NoteImage(context: Context) {
       }
 
       if (thumbnailFile.exists()) {
-        val bitmap = ApplicationBase.sAppImageCache.loadFromCache(thumbnailFile)
+        val bitmap = ApplicationBase.appImageCache.loadFromCache(thumbnailFile)
         if (bitmap === null) {
           deleteIfExist(thumbnailFile)
           GlobalScope.launch(Dispatchers.Main) {
@@ -118,7 +118,7 @@ class NoteImage(context: Context) {
         return@launch
       }
 
-      val persistentBitmap = ApplicationBase.sAppImageCache.loadFromCache(persistentFile)
+      val persistentBitmap = ApplicationBase.appImageCache.loadFromCache(persistentFile)
       if (persistentBitmap === null) {
         deleteIfExist(persistentFile)
         GlobalScope.launch(Dispatchers.Main) {
@@ -128,7 +128,7 @@ class NoteImage(context: Context) {
         return@launch
       }
 
-      val compressedBitmap = ApplicationBase.sAppImageCache.saveThumbnail(thumbnailFile, persistentBitmap)
+      val compressedBitmap = ApplicationBase.appImageCache.saveThumbnail(thumbnailFile, persistentBitmap)
       GlobalScope.launch(Dispatchers.Main) {
         image.visibility = View.VISIBLE
         image.setImageBitmap(compressedBitmap)

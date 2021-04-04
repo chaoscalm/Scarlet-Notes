@@ -14,7 +14,7 @@ import com.github.bijoysingh.starter.util.RandomHelper
 import com.maubis.markdown.Markdown
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.config.ApplicationBase
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTypeface
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTypeface
 import com.maubis.scarlet.base.core.note.NoteBuilder
 import com.maubis.scarlet.base.core.note.NoteState
 import com.maubis.scarlet.base.core.note.getNoteState
@@ -92,14 +92,14 @@ class NoteOptionsBottomSheet : GridBottomSheetBase() {
     val selectCardLayout = dlg.findViewById<View>(R.id.select_notes_layout)
 
     val selectCardTitle = dlg.findViewById<TextView>(R.id.select_notes_title)
-    selectCardTitle.typeface = sAppTypeface.title()
+    selectCardTitle.typeface = appTypeface.title()
     val selectCardSubtitle = dlg.findViewById<TextView>(R.id.select_notes_subtitle)
-    selectCardSubtitle.typeface = sAppTypeface.title()
+    selectCardSubtitle.typeface = appTypeface.title()
 
     val tags = tagCardLayout.findViewById<TextView>(R.id.tags_title)
-    tags.typeface = sAppTypeface.title()
+    tags.typeface = appTypeface.title()
     val tagSubtitle = tagCardLayout.findViewById<TextView>(R.id.tags_subtitle)
-    tagSubtitle.typeface = sAppTypeface.title()
+    tagSubtitle.typeface = appTypeface.title()
 
     val tagContent = note.getTagString()
     if (tagContent.isNotBlank()) {

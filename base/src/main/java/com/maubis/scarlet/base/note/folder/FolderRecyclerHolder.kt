@@ -8,7 +8,7 @@ import androidx.cardview.widget.CardView
 import com.github.bijoysingh.starter.recyclerview.RecyclerViewHolder
 import com.github.bijoysingh.uibasics.views.UITextView
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTypeface
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTypeface
 import com.maubis.scarlet.base.support.recycler.RecyclerItem
 import com.maubis.scarlet.base.support.ui.ColorUtil.darkOrDarkerColor
 import com.maubis.scarlet.base.support.ui.sThemeDarkenNoteColor
@@ -31,16 +31,16 @@ class FolderRecyclerHolder(context: Context, view: View) : RecyclerViewHolder<Re
     val item = itemData as FolderRecyclerItem
     title.text = item.title
     title.setTextColor(item.titleColor)
-    title.typeface = sAppTypeface.title()
+    title.typeface = appTypeface.title()
 
     label.setText(item.label)
     label.setImageTint(item.labelColor)
     label.setTextColor(item.labelColor)
-    label.label.typeface = sAppTypeface.text()
+    label.label.typeface = appTypeface.text()
 
     timestamp.text = item.timestamp
     timestamp.setTextColor(item.timestampColor)
-    timestamp.typeface = sAppTypeface.text()
+    timestamp.typeface = appTypeface.text()
 
     val folderColor = when (sThemeDarkenNoteColor) {
       true -> darkOrDarkerColor(item.folder.color)

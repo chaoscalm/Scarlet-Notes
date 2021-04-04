@@ -4,17 +4,13 @@ import com.facebook.litho.ClickEvent
 import com.facebook.litho.Component
 import com.facebook.litho.ComponentContext
 import com.facebook.litho.Row
-import com.facebook.litho.annotations.LayoutSpec
-import com.facebook.litho.annotations.OnCreateLayout
-import com.facebook.litho.annotations.OnEvent
-import com.facebook.litho.annotations.Prop
-import com.facebook.litho.annotations.ResType
+import com.facebook.litho.annotations.*
 import com.facebook.litho.widget.Text
 import com.facebook.yoga.YogaAlign
 import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTheme
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTypeface
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTheme
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTypeface
 import com.maubis.scarlet.base.support.sheets.getLithoBottomSheetButton
 import com.maubis.scarlet.base.support.ui.ThemeColorType
 
@@ -37,11 +33,11 @@ object BottomSheetBarSpec {
       row.child(
         Text.create(context)
           .text(secondaryAction)
-          .typeface(sAppTypeface.title())
+          .typeface(appTypeface.title())
           .textSizeRes(R.dimen.font_size_large)
           .paddingDip(YogaEdge.VERTICAL, 6f)
           .paddingDip(YogaEdge.HORIZONTAL, 16f)
-          .textColor(sAppTheme.get(ThemeColorType.TERTIARY_TEXT))
+          .textColor(appTheme.get(ThemeColorType.TERTIARY_TEXT))
           .clickHandler(BottomSheetBar.onSecondaryClickEvent(context)))
     }
     row.child(EmptySpec.create(context).flexGrow(1f))
@@ -50,11 +46,11 @@ object BottomSheetBarSpec {
       row.child(
         Text.create(context)
           .text(tertiaryAction)
-          .typeface(sAppTypeface.title())
+          .typeface(appTypeface.title())
           .textSizeRes(R.dimen.font_size_large)
           .paddingDip(YogaEdge.VERTICAL, 6f)
           .paddingDip(YogaEdge.HORIZONTAL, 16f)
-          .textColor(sAppTheme.get(ThemeColorType.TERTIARY_TEXT))
+          .textColor(appTheme.get(ThemeColorType.TERTIARY_TEXT))
           .clickHandler(BottomSheetBar.onTertiaryClickEvent(context)))
     }
 

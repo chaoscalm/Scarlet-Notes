@@ -14,9 +14,9 @@ import com.facebook.litho.ComponentContext
 import com.facebook.litho.LithoView
 import com.github.bijoysingh.starter.recyclerview.RecyclerViewBuilder
 import com.maubis.scarlet.base.config.ApplicationBase
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appPreferences
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTheme
 import com.maubis.scarlet.base.config.ApplicationBase.Companion.instance
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppPreferences
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTheme
 import com.maubis.scarlet.base.config.auth.IPendingUploadListener
 import com.maubis.scarlet.base.core.note.NoteState
 import com.maubis.scarlet.base.database.room.folder.Folder
@@ -95,7 +95,7 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
     if (sThemeIsAutomatic) {
       setThemeFromSystem(this)
     }
-    sAppTheme.notifyChange(this)
+    appTheme.notifyChange(this)
 
     if (shouldShowWhatsNewSheet()) {
       openSheet(this, WhatsNewBottomSheet())
@@ -187,11 +187,11 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
       SettingsOptionsBottomSheet.openSheet(this)
     }
 
-    val titleColor = sAppTheme.get(ThemeColorType.SECONDARY_TEXT)
+    val titleColor = appTheme.get(ThemeColorType.SECONDARY_TEXT)
     toolbarTitle.setTextColor(titleColor)
-    toolbarTitle.typeface = ApplicationBase.sAppTypeface.heading()
+    toolbarTitle.typeface = ApplicationBase.appTypeface.heading()
 
-    val toolbarIconColor = sAppTheme.get(ThemeColorType.SECONDARY_TEXT)
+    val toolbarIconColor = appTheme.get(ThemeColorType.SECONDARY_TEXT)
     toolbarSearchIcon.setColorFilter(toolbarIconColor)
     toolbarSettingsIcon.setColorFilter(toolbarIconColor)
   }
@@ -199,8 +199,8 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
   private fun setupRecyclerView() {
     val isTablet = resources.getBoolean(R.bool.is_tablet)
 
-    val isMarkdownEnabled = sAppPreferences.get(KEY_MARKDOWN_ENABLED, true)
-    val isMarkdownHomeEnabled = sAppPreferences.get(KEY_MARKDOWN_HOME_ENABLED, true)
+    val isMarkdownEnabled = appPreferences.get(KEY_MARKDOWN_ENABLED, true)
+    val isMarkdownHomeEnabled = appPreferences.get(KEY_MARKDOWN_HOME_ENABLED, true)
     val adapterExtra = Bundle()
     adapterExtra.putBoolean(KEY_MARKDOWN_ENABLED, isMarkdownEnabled && isMarkdownHomeEnabled)
     adapterExtra.putInt(STORE_KEY_LINE_COUNT, sNoteItemLineCount)
@@ -251,7 +251,7 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
   private fun updateMainToolbarLeftIcon() {
     toolbarLeftIcon.setImageDrawable(getDrawable(state.mode.toolbarIconResourceId))
     if (state.mode != HomeNavigationMode.DEFAULT) {
-      val iconColor = sAppTheme.get(ThemeColorType.SECONDARY_TEXT)
+      val iconColor = appTheme.get(ThemeColorType.SECONDARY_TEXT)
       toolbarLeftIcon.setColorFilter(iconColor)
     }
     else

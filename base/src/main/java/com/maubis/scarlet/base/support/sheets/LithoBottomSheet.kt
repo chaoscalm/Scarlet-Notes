@@ -18,8 +18,8 @@ import com.facebook.yoga.YogaAlign
 import com.facebook.yoga.YogaEdge
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTheme
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTypeface
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTheme
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTypeface
 import com.maubis.scarlet.base.support.ui.BottomSheetTabletDialog
 import com.maubis.scarlet.base.support.ui.ThemeColorType
 
@@ -30,17 +30,17 @@ fun openSheet(activity: AppCompatActivity, sheet: LithoBottomSheet) {
 fun getLithoBottomSheetTitle(context: ComponentContext): Text.Builder {
   return Text.create(context)
     .textSizeRes(R.dimen.font_size_xxxlarge)
-    .typeface(sAppTypeface.heading())
+    .typeface(appTypeface.heading())
     .marginDip(YogaEdge.HORIZONTAL, 20f)
     .marginDip(YogaEdge.TOP, 18f)
     .marginDip(YogaEdge.BOTTOM, 8f)
     .textStyle(Typeface.BOLD)
-    .textColor(sAppTheme.get(ThemeColorType.PRIMARY_TEXT))
+    .textColor(appTheme.get(ThemeColorType.PRIMARY_TEXT))
 }
 
 fun getLithoBottomSheetButton(context: ComponentContext): Text.Builder {
   return Text.create(context)
-    .typeface(sAppTypeface.title())
+    .typeface(appTypeface.title())
     .textSizeRes(R.dimen.font_size_large)
     .paddingDip(YogaEdge.VERTICAL, 12f)
     .paddingDip(YogaEdge.HORIZONTAL, 24f)
@@ -85,7 +85,7 @@ abstract class LithoBottomSheet : BottomSheetDialogFragment() {
   }
 
   fun getFullComponent(componentContext: ComponentContext, dialog: Dialog, childComponent: Component) {
-    val topHandle = when (sAppTheme.isNightTheme()) {
+    val topHandle = when (appTheme.isNightTheme()) {
       true -> R.drawable.bottom_sheet_top_handle_dark
       false -> R.drawable.bottom_sheet_top_handle_light
     }
@@ -122,7 +122,7 @@ abstract class LithoBottomSheet : BottomSheetDialogFragment() {
 
   abstract fun getComponent(componentContext: ComponentContext, dialog: Dialog): Component
 
-  open fun backgroundColor(componentContext: ComponentContext) = sAppTheme.get(ThemeColorType.BACKGROUND)
+  open fun backgroundColor(componentContext: ComponentContext) = appTheme.get(ThemeColorType.BACKGROUND)
 
   open fun topMargin() = 16f
 

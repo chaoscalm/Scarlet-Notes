@@ -12,17 +12,17 @@ import com.maubis.scarlet.base.support.ui.ThemeManager
 import com.maubis.scarlet.base.support.ui.font.TypefaceController
 import com.maubis.scarlet.base.support.utils.DateFormatUtils
 import com.maubis.scarlet.base.support.utils.ImageCache
+import com.maubis.scarlet.base.support.utils.dateFormat
 import com.maubis.scarlet.base.support.utils.maybeThrow
-import com.maubis.scarlet.base.support.utils.sDateFormat
 
 abstract class ApplicationBase : Application() {
   override fun onCreate() {
     super.onCreate()
     instance = ApplicationConfig(this)
 
-    sAppPreferences = VersionedStore.get(this, "USER_PREFERENCES", 1)
+    appPreferences = VersionedStore.get(this, "USER_PREFERENCES", 1)
 
-    sDateFormat = DateFormatUtils(this)
+    dateFormat = DateFormatUtils(this)
     SoLoader.init(this, false)
     try {
       JobManager.create(this).addJobCreator(ReminderJobCreator())
@@ -31,25 +31,25 @@ abstract class ApplicationBase : Application() {
     }
 
     // Setup Image Cache
-    sAppImageStorage = NoteImage(this)
-    sAppImageCache = ImageCache(this)
+    appImageStorage = NoteImage(this)
+    appImageCache = ImageCache(this)
 
     // Setup Application Theme
-    sAppTheme = ThemeManager()
-    sAppTheme.setup(this)
-    sAppTypeface = TypefaceController(this)
+    appTheme = ThemeManager()
+    appTheme.setup(this)
+    appTypeface = TypefaceController(this)
   }
 
   companion object {
     lateinit var instance: ApplicationConfig
 
-    lateinit var sAppImageStorage: NoteImage
-    lateinit var sAppImageCache: ImageCache
+    lateinit var appImageStorage: NoteImage
+    lateinit var appImageCache: ImageCache
 
-    lateinit var sAppPreferences: Store
+    lateinit var appPreferences: Store
 
-    lateinit var sAppTheme: ThemeManager
-    lateinit var sAppTypeface: TypefaceController
+    lateinit var appTheme: ThemeManager
+    lateinit var appTypeface: TypefaceController
 
     var folderSync: FolderRemoteDatabase? = null
   }

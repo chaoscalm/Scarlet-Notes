@@ -10,8 +10,8 @@ import com.facebook.litho.widget.Text
 import com.facebook.yoga.YogaAlign
 import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTheme
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTypeface
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTheme
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTypeface
 import com.maubis.scarlet.base.support.sheets.LithoBottomSheet
 import com.maubis.scarlet.base.support.sheets.getLithoBottomSheetTitle
 import com.maubis.scarlet.base.support.specs.BottomSheetBar
@@ -29,10 +29,10 @@ object TypefacePickerItemSpec {
     @Prop typeface: TypefaceController.TypefaceType,
     @Prop isSelected: Boolean): Component {
 
-    val typefaceSet = sAppTypeface.getSetForType(context.androidContext, typeface)
+    val typefaceSet = appTypeface.getSetForType(context.androidContext, typeface)
     val fontColor = when (isSelected) {
-      true -> sAppTheme.get(ThemeColorType.ACCENT_TEXT)
-      false -> sAppTheme.get(ThemeColorType.SECONDARY_TEXT)
+      true -> appTheme.get(ThemeColorType.ACCENT_TEXT)
+      false -> appTheme.get(ThemeColorType.SECONDARY_TEXT)
     }
     val content = Column.create(context)
       .paddingDip(YogaEdge.ALL, 24f)
@@ -62,7 +62,7 @@ object TypefacePickerItemSpec {
           .textSizeRes(R.dimen.font_size_normal)
           .textColor(fontColor)
           .typeface(typefaceSet.text))
-      .background(LithoCircleDrawable(sAppTheme.get(ThemeColorType.BACKGROUND), 255, true))
+      .background(LithoCircleDrawable(appTheme.get(ThemeColorType.BACKGROUND), 255, true))
 
     val data = Column.create(context)
       .alignSelf(YogaAlign.CENTER)
@@ -74,8 +74,8 @@ object TypefacePickerItemSpec {
         Text.create(context)
           .textRes(typeface.title)
           .textSizeRes(R.dimen.font_size_normal)
-          .textColor(sAppTheme.get(ThemeColorType.PRIMARY_TEXT))
-          .typeface(sAppTypeface.title())
+          .textColor(appTheme.get(ThemeColorType.PRIMARY_TEXT))
+          .typeface(appTypeface.title())
           .marginDip(YogaEdge.TOP, 12f))
 
     val row = Row.create(context)

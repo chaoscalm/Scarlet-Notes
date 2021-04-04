@@ -12,9 +12,9 @@ import com.facebook.yoga.YogaAlign
 import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.MainActivity
 import com.maubis.scarlet.base.R
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTheme
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTypeface
 import com.maubis.scarlet.base.config.ApplicationBase.Companion.instance
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTheme
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTypeface
 import com.maubis.scarlet.base.core.tag.TagBuilder
 import com.maubis.scarlet.base.database.room.tag.Tag
 import com.maubis.scarlet.base.main.HomeNavigationMode
@@ -37,8 +37,8 @@ class LithoTagOptionsItem(
 object TagItemLayoutSpec {
   @OnCreateLayout
   fun onCreate(context: ComponentContext, @Prop option: LithoTagOptionsItem): Component {
-    val titleColor = sAppTheme.get(ThemeColorType.SECONDARY_TEXT)
-    val selectedColor = when (sAppTheme.isNightTheme()) {
+    val titleColor = appTheme.get(ThemeColorType.SECONDARY_TEXT)
+    val selectedColor = when (appTheme.isNightTheme()) {
       true -> context.getColor(R.color.material_blue_400)
       false -> context.getColor(R.color.material_blue_700)
     }
@@ -54,14 +54,14 @@ object TagItemLayoutSpec {
         bgColor = selectedColor
         bgAlpha = 200
         textColor = selectedColor
-        typeface = sAppTypeface.subHeading()
+        typeface = appTypeface.subHeading()
       }
       false -> {
         icon = R.drawable.ic_action_label_unselected
         bgColor = titleColor
         bgAlpha = 15
         textColor = titleColor
-        typeface = sAppTypeface.title()
+        typeface = appTypeface.title()
       }
     }
 

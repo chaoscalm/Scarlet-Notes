@@ -16,7 +16,7 @@ import com.maubis.markdown.Markdown
 import com.maubis.markdown.spannable.clearMarkdownSpans
 import com.maubis.markdown.spannable.setFormats
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTheme
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTheme
 import com.maubis.scarlet.base.core.note.NoteBuilder
 import com.maubis.scarlet.base.database.room.note.Note
 import com.maubis.scarlet.base.export.support.NoteImporter
@@ -135,15 +135,15 @@ class OpenTextIntentOrFileActivity : SecuredActivity() {
     val containerLayout = findViewById<View>(R.id.container_layout);
     containerLayout.setBackgroundColor(getThemeColor());
 
-    val toolbarIconColor = sAppTheme.get(ThemeColorType.TOOLBAR_ICON);
+    val toolbarIconColor = appTheme.get(ThemeColorType.TOOLBAR_ICON);
     backButton.setColorFilter(toolbarIconColor)
 
-    val textColor = sAppTheme.get(ThemeColorType.SECONDARY_TEXT)
+    val textColor = appTheme.get(ThemeColorType.SECONDARY_TEXT)
     filename.setTextColor(textColor)
     title.setTextColor(textColor)
     content.setTextColor(textColor)
 
-    val actionColor = sAppTheme.get(ThemeColorType.TOOLBAR_ICON)
+    val actionColor = appTheme.get(ThemeColorType.TOOLBAR_ICON)
     actionDone.setImageTint(actionColor)
     actionDone.setTextColor(actionColor)
   }

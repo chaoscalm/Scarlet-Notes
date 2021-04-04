@@ -3,11 +3,7 @@ package com.maubis.scarlet.base.support.sheets
 import android.app.Dialog
 import android.graphics.Color
 import android.graphics.Typeface.BOLD
-import com.facebook.litho.ClickEvent
-import com.facebook.litho.Column
-import com.facebook.litho.Component
-import com.facebook.litho.ComponentContext
-import com.facebook.litho.Row
+import com.facebook.litho.*
 import com.facebook.litho.annotations.LayoutSpec
 import com.facebook.litho.annotations.OnCreateLayout
 import com.facebook.litho.annotations.OnEvent
@@ -16,8 +12,8 @@ import com.facebook.litho.widget.Text
 import com.facebook.yoga.YogaAlign
 import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTheme
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTypeface
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTheme
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTypeface
 import com.maubis.scarlet.base.support.specs.RoundIcon
 import com.maubis.scarlet.base.support.ui.ThemeColorType
 
@@ -38,9 +34,9 @@ object OptionItemLayoutSpec {
   fun onCreate(
     context: ComponentContext,
     @Prop option: LithoOptionsItem): Component {
-    val titleColor = sAppTheme.get(ThemeColorType.SECONDARY_TEXT)
-    val subtitleColor = sAppTheme.get(ThemeColorType.HINT_TEXT)
-    val selectedColor = sAppTheme.get(ThemeColorType.ACCENT_TEXT)
+    val titleColor = appTheme.get(ThemeColorType.SECONDARY_TEXT)
+    val subtitleColor = appTheme.get(ThemeColorType.HINT_TEXT)
+    val selectedColor = appTheme.get(ThemeColorType.ACCENT_TEXT)
 
     val subtitle = when (option.subtitle) {
       0 -> option.content
@@ -70,14 +66,14 @@ object OptionItemLayoutSpec {
             Text.create(context)
               .textRes(option.title)
               .textSizeRes(R.dimen.font_size_normal)
-              .typeface(sAppTypeface.title())
+              .typeface(appTypeface.title())
               .textStyle(BOLD)
               .textColor(titleColor))
           .child(
             Text.create(context)
               .text(subtitle)
               .textSizeRes(R.dimen.font_size_small)
-              .typeface(sAppTypeface.title())
+              .typeface(appTypeface.title())
               .textColor(subtitleColor)))
 
     if (option.isSelectable) {
@@ -128,7 +124,7 @@ object OptionLabelItemLayoutSpec {
   fun onCreate(
     context: ComponentContext,
     @Prop option: LithoLabelOptionsItem): Component {
-    val titleColor = sAppTheme.get(ThemeColorType.SECONDARY_TEXT)
+    val titleColor = appTheme.get(ThemeColorType.SECONDARY_TEXT)
 
     val row = Column.create(context)
       .widthPercent(100f)
@@ -149,7 +145,7 @@ object OptionLabelItemLayoutSpec {
         Text.create(context)
           .textRes(option.title)
           .textSizeRes(R.dimen.font_size_normal)
-          .typeface(sAppTypeface.title())
+          .typeface(appTypeface.title())
           .textStyle(BOLD)
           .textColor(titleColor))
     row.clickHandler(OptionItemLayout.onItemClick(context))

@@ -9,8 +9,8 @@ import com.facebook.yoga.YogaEdge
 import com.github.bijoysingh.starter.util.IntentUtils
 import com.maubis.scarlet.base.MainActivity
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTheme
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTypeface
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTheme
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTypeface
 import com.maubis.scarlet.base.support.sheets.LithoBottomSheet
 import com.maubis.scarlet.base.support.sheets.getLithoBottomSheetTitle
 import com.maubis.scarlet.base.support.specs.BottomSheetBar
@@ -44,39 +44,39 @@ class AboutUsBottomSheet : LithoBottomSheet() {
           .marginDip(YogaEdge.HORIZONTAL, 0f))
       .child(
         Text.create(componentContext)
-          .typeface(sAppTypeface.text())
+          .typeface(appTypeface.text())
           .textSizeRes(R.dimen.font_size_large)
           .marginDip(YogaEdge.BOTTOM, 16f)
           .text(aboutUsDetails)
-          .textColor(sAppTheme.get(ThemeColorType.TERTIARY_TEXT)))
+          .textColor(appTheme.get(ThemeColorType.TERTIARY_TEXT)))
       .child(
         Text.create(componentContext)
           .textSizeRes(R.dimen.font_size_xlarge)
           .marginDip(YogaEdge.BOTTOM, 4f)
           .textRes(R.string.about_page_about_app)
-          .typeface(sAppTypeface.title())
-          .textColor(sAppTheme.get(ThemeColorType.SECTION_HEADER)))
+          .typeface(appTypeface.title())
+          .textColor(appTheme.get(ThemeColorType.SECTION_HEADER)))
       .child(
         Text.create(componentContext)
-          .typeface(sAppTypeface.text())
+          .typeface(appTypeface.text())
           .textSizeRes(R.dimen.font_size_large)
           .marginDip(YogaEdge.BOTTOM, 16f)
           .text(aboutAppDetails)
-          .textColor(sAppTheme.get(ThemeColorType.TERTIARY_TEXT)))
+          .textColor(appTheme.get(ThemeColorType.TERTIARY_TEXT)))
       .child(
         Text.create(componentContext)
           .textSizeRes(R.dimen.font_size_xlarge)
           .marginDip(YogaEdge.BOTTOM, 4f)
           .textRes(R.string.about_page_app_version)
-          .typeface(sAppTypeface.title())
-          .textColor(sAppTheme.get(ThemeColorType.SECTION_HEADER)))
+          .typeface(appTypeface.title())
+          .textColor(appTheme.get(ThemeColorType.SECTION_HEADER)))
       .child(
         Text.create(componentContext)
-          .typeface(sAppTypeface.text())
+          .typeface(appTypeface.text())
           .textSizeRes(R.dimen.font_size_large)
           .marginDip(YogaEdge.BOTTOM, 16f)
           .text(version)
-          .textColor(sAppTheme.get(ThemeColorType.TERTIARY_TEXT)))
+          .textColor(appTheme.get(ThemeColorType.TERTIARY_TEXT)))
       .child(BottomSheetBar.create(componentContext)
                .primaryActionRes(R.string.about_page_rate)
                .onPrimaryClick {

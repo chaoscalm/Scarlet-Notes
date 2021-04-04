@@ -8,9 +8,9 @@ import com.facebook.litho.widget.Text
 import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.MainActivity
 import com.maubis.scarlet.base.R
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appPreferences
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTheme
 import com.maubis.scarlet.base.config.ApplicationBase.Companion.instance
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppPreferences
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTheme
 import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.core.note.NoteState
 import com.maubis.scarlet.base.database.room.note.Note
@@ -63,7 +63,7 @@ class AlertBottomSheet : LithoBottomSheet() {
           .textSizeRes(R.dimen.font_size_large)
           .textRes(config.description)
           .marginDip(YogaEdge.BOTTOM, 16f)
-          .textColor(sAppTheme.get(ThemeColorType.TERTIARY_TEXT)))
+          .textColor(appTheme.get(ThemeColorType.TERTIARY_TEXT)))
       .child(BottomSheetBar.create(componentContext)
                .primaryActionRes(config.positiveText)
                .onPrimaryClick {
@@ -108,8 +108,8 @@ fun openDeleteFormatDialog(activity: ViewAdvancedNoteActivity, format: Format) {
 
 const val STORE_KEY_IMAGE_SYNC_NOTICE = "IMAGE_SYNC_NOTICE"
 var sImageSyncNoticeShown: Int
-  get() = sAppPreferences.get(STORE_KEY_IMAGE_SYNC_NOTICE, 0)
-  set(value) = sAppPreferences.put(STORE_KEY_IMAGE_SYNC_NOTICE, value)
+  get() = appPreferences.get(STORE_KEY_IMAGE_SYNC_NOTICE, 0)
+  set(value) = appPreferences.put(STORE_KEY_IMAGE_SYNC_NOTICE, value)
 
 fun openImageNotSynced(activity: ThemedActivity) {
   openSheet(activity, AlertBottomSheet().apply {

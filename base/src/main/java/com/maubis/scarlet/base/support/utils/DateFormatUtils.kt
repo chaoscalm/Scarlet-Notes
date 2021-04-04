@@ -5,7 +5,7 @@ import android.text.format.DateFormat
 import com.github.bijoysingh.starter.util.DateFormatter
 import java.util.*
 
-lateinit var sDateFormat: DateFormatUtils
+lateinit var dateFormat: DateFormatUtils
 
 class DateFormatUtils(context: Context) {
   private val is24HourFormat = DateFormat.is24HourFormat(context)

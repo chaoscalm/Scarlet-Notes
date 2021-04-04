@@ -1,10 +1,6 @@
 package com.maubis.scarlet.base.notification
 
-import android.app.Notification
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
-import android.app.TaskStackBuilder
+import android.app.*
 import android.content.Context
 import android.content.Context.NOTIFICATION_SERVICE
 import android.content.Intent
@@ -15,7 +11,7 @@ import androidx.core.app.NotificationCompat
 import com.github.bijoysingh.starter.util.TextUtils
 import com.maubis.scarlet.base.MainActivity
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTheme
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTheme
 import com.maubis.scarlet.base.database.room.note.Note
 import com.maubis.scarlet.base.note.creation.activity.CreateNoteActivity
 import com.maubis.scarlet.base.note.creation.activity.INTENT_KEY_NOTE_ID
@@ -100,16 +96,16 @@ class NotificationHandler(val context: Context) {
     contentView.setTextViewText(R.id.description, config.note.getTextForSharing())
     contentView.setTextViewText(R.id.timestamp, config.note.getDisplayTime())
 
-    val titleColor = sAppTheme.get(ThemeColorType.SECONDARY_TEXT)
-    val descColor = sAppTheme.get(ThemeColorType.TERTIARY_TEXT)
+    val titleColor = appTheme.get(ThemeColorType.SECONDARY_TEXT)
+    val descColor = appTheme.get(ThemeColorType.TERTIARY_TEXT)
     contentView.setTextColor(R.id.title, titleColor)
     contentView.setTextColor(R.id.description, titleColor)
     contentView.setTextColor(R.id.timestamp, descColor)
 
-    val backgroundColor = sAppTheme.get(ThemeColorType.BACKGROUND)
+    val backgroundColor = appTheme.get(ThemeColorType.BACKGROUND)
     contentView.setInt(R.id.root_layout, "setBackgroundColor", backgroundColor)
 
-    val iconColor = sAppTheme.get(ThemeColorType.TOOLBAR_ICON)
+    val iconColor = appTheme.get(ThemeColorType.TOOLBAR_ICON)
     contentView.setInt(R.id.options_button, "setColorFilter", iconColor)
     contentView.setInt(R.id.copy_button, "setColorFilter", iconColor)
     contentView.setInt(R.id.share_button, "setColorFilter", iconColor)

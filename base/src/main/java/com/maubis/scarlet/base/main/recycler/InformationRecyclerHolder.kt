@@ -7,7 +7,7 @@ import android.widget.TextView
 import com.github.bijoysingh.starter.recyclerview.RecyclerViewHolder
 import com.github.bijoysingh.uibasics.views.UITextView
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTypeface
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTypeface
 import com.maubis.scarlet.base.support.recycler.RecyclerItem
 
 class InformationRecyclerHolder(context: Context, itemView: View) : RecyclerViewHolder<RecyclerItem>(context, itemView) {
@@ -20,11 +20,11 @@ class InformationRecyclerHolder(context: Context, itemView: View) : RecyclerView
       return
     }
     title.setText(data.title)
-    title.label.typeface = sAppTypeface.title()
+    title.label.typeface = appTypeface.title()
     title.setImageResource(data.icon)
 
     text.setText(data.source)
-    text.typeface = sAppTypeface.text()
+    text.typeface = appTypeface.text()
 
     itemView.setOnClickListener {
       data.function()
