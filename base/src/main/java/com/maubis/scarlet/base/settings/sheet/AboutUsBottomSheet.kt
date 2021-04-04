@@ -6,14 +6,12 @@ import com.facebook.litho.Component
 import com.facebook.litho.ComponentContext
 import com.facebook.litho.widget.Text
 import com.facebook.yoga.YogaEdge
-import com.github.bijoysingh.starter.util.IntentUtils
 import com.maubis.scarlet.base.MainActivity
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTheme
 import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTypeface
 import com.maubis.scarlet.base.support.sheets.LithoBottomSheet
 import com.maubis.scarlet.base.support.sheets.getLithoBottomSheetTitle
-import com.maubis.scarlet.base.support.specs.BottomSheetBar
 import com.maubis.scarlet.base.support.ui.ThemeColorType
 import com.maubis.scarlet.base.support.utils.maybeThrow
 
@@ -77,16 +75,6 @@ class AboutUsBottomSheet : LithoBottomSheet() {
           .marginDip(YogaEdge.BOTTOM, 16f)
           .text(version)
           .textColor(appTheme.get(ThemeColorType.TERTIARY_TEXT)))
-      .child(BottomSheetBar.create(componentContext)
-               .primaryActionRes(R.string.about_page_rate)
-               .onPrimaryClick {
-                 try {
-                   IntentUtils.openAppPlayStore(activity)
-                   dismiss()
-                 } catch (exception: Exception) {
-                   maybeThrow(activity, exception)
-                 }
-               }.paddingDip(YogaEdge.VERTICAL, 8f))
     return component.build()
   }
 }

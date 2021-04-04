@@ -157,7 +157,6 @@
   <string name="file_size_mb" translatable="false">%s MB</string>
   <string name="file_size_gb" translatable="false">%s GB</string>
 
-  <string name="about_page_rate">Rate on Play Store</string>
   <string name="about_page_contribute">Contribute</string>
   <string name="about_page_app_version">App Version</string>
   <string name="about_page_about_app">About App</string>
