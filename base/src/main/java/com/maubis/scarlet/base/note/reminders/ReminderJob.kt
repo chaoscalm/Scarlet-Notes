@@ -1,5 +1,6 @@
 package com.maubis.scarlet.base.note.reminders
 
+import android.util.Log
 import com.evernote.android.job.Job
 import com.evernote.android.job.JobManager
 import com.evernote.android.job.JobRequest
@@ -13,17 +14,16 @@ import com.maubis.scarlet.base.note.save
 import com.maubis.scarlet.base.notification.NotificationConfig
 import com.maubis.scarlet.base.notification.NotificationHandler
 import com.maubis.scarlet.base.notification.REMINDER_NOTIFICATION_CHANNEL_ID
-import com.maubis.scarlet.base.support.utils.maybeThrow
 import java.util.*
 import java.util.concurrent.TimeUnit
 
 class ReminderJob : Job() {
 
-  override fun onRunJob(params: Params): Job.Result {
+  override fun onRunJob(params: Params): Result {
     val noteUUID = params.extras.getString(EXTRA_KEY_NOTE_UUID, "")
     val note = instance.notesRepository.getByUUID(noteUUID)
     if (note === null) {
-      return Job.Result.SUCCESS
+      return Result.SUCCESS
     }
 
     val handler = NotificationHandler(context)
@@ -44,10 +44,10 @@ class ReminderJob : Job() {
         note.save(context)
       }
     } catch (exception: Exception) {
-      maybeThrow(exception)
+      Log.e("Scarlet", "Error while updating note reminder", exception)
     }
 
-    return Job.Result.SUCCESS
+    return Result.SUCCESS
   }
 
   companion object {
