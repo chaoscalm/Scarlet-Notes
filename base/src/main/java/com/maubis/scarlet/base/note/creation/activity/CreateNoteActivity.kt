@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.facebook.litho.ComponentContext
 import com.facebook.litho.LithoView
 import com.maubis.scarlet.base.R
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.instance
 import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppImageStorage
-import com.maubis.scarlet.base.config.ApplicationConfig.Companion.foldersDb
 import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.core.format.FormatBuilder
 import com.maubis.scarlet.base.core.format.FormatType
@@ -70,7 +70,7 @@ open class CreateNoteActivity : ViewAdvancedNoteActivity() {
     if (folderUuid === null || folderUuid.isBlank()) {
       return
     }
-    val folder = foldersDb.getByUUID(folderUuid)
+    val folder = instance.foldersRepository.getByUUID(folderUuid)
     if (folder === null) {
       return
     }

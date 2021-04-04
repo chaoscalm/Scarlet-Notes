@@ -1,20 +1,20 @@
 package com.maubis.scarlet.base.note.folder
 
 import com.maubis.scarlet.base.config.ApplicationBase
-import com.maubis.scarlet.base.config.ApplicationConfig.Companion.foldersDb
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.instance
 import com.maubis.scarlet.base.database.room.folder.Folder
 import com.maubis.scarlet.base.support.utils.sDateFormat
 import java.util.*
 
 fun Folder.saveIfUnique() {
-  val existing = foldersDb.getByTitle(title)
+  val existing = instance.foldersRepository.getByTitle(title)
   if (existing !== null) {
     this.uid = existing.uid
     this.uuid = existing.uuid
     return
   }
 
-  val existingByUUID = foldersDb.getByUUID(uuid)
+  val existingByUUID = instance.foldersRepository.getByUUID(uuid)
   if (existingByUUID != null) {
     this.uid = existingByUUID.uid
     this.title = existingByUUID.title

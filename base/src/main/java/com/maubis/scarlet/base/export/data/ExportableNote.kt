@@ -1,7 +1,7 @@
 package com.maubis.scarlet.base.export.data
 
 import android.content.Context
-import com.maubis.scarlet.base.config.ApplicationConfig.Companion.notesDb
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.instance
 import com.maubis.scarlet.base.core.note.INoteContainer
 import com.maubis.scarlet.base.core.note.NoteBuilder
 import com.maubis.scarlet.base.core.note.generateUUID
@@ -60,7 +60,7 @@ class ExportableNote(
   )
 
   fun saveIfNeeded(context: Context) {
-    val existingNote = notesDb.existingMatch(this)
+    val existingNote = instance.notesRepository.existingMatch(this)
     if (existingNote !== null && existingNote.updateTimestamp > this.updateTimestamp) {
       return
     }

@@ -56,7 +56,7 @@ abstract class SelectableNotesActivityBase : SecuredActivity(), INoteSelectorAct
         notes.forEach {
           val noteFolderId = it.note.folder
           if (lastFolder != noteFolderId) {
-            val folder = instance.foldersProvider.getByUUID(noteFolderId)
+            val folder = instance.foldersRepository.getByUUID(noteFolderId)
             if (folder !== null) {
               items.add(SelectorFolderRecyclerItem(this@SelectableNotesActivityBase, folder))
               lastFolder = noteFolderId

@@ -4,7 +4,7 @@ import com.evernote.android.job.Job
 import com.evernote.android.job.JobManager
 import com.evernote.android.job.JobRequest
 import com.evernote.android.job.util.support.PersistableBundleCompat
-import com.maubis.scarlet.base.config.ApplicationConfig.Companion.notesDb
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.instance
 import com.maubis.scarlet.base.core.note.Reminder
 import com.maubis.scarlet.base.core.note.ReminderInterval
 import com.maubis.scarlet.base.core.note.getReminderV2
@@ -21,7 +21,7 @@ class ReminderJob : Job() {
 
   override fun onRunJob(params: Params): Job.Result {
     val noteUUID = params.extras.getString(EXTRA_KEY_NOTE_UUID, "")
-    val note = notesDb.getByUUID(noteUUID)
+    val note = instance.notesRepository.getByUUID(noteUUID)
     if (note === null) {
       return Job.Result.SUCCESS
     }

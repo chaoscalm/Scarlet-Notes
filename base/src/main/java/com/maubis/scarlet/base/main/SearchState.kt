@@ -1,8 +1,7 @@
 package com.maubis.scarlet.base.main
 
 import com.maubis.scarlet.base.config.ApplicationBase
-import com.maubis.scarlet.base.config.ApplicationConfig.Companion.foldersDb
-import com.maubis.scarlet.base.config.ApplicationConfig.Companion.notesDb
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.instance
 import com.maubis.scarlet.base.core.note.NoteState
 import com.maubis.scarlet.base.core.note.sort
 import com.maubis.scarlet.base.database.room.folder.Folder
@@ -73,7 +72,7 @@ fun filterFolder(notes: List<Note>, folder: Folder): List<Note> {
 }
 
 fun filterOutFolders(notes: List<Note>): List<Note> {
-  val allFoldersUUIDs = ApplicationBase.instance.foldersProvider.getAll().map { it.uuid }
+  val allFoldersUUIDs = ApplicationBase.instance.foldersRepository.getAll().map { it.uuid }
   val sorting = SortingOptionsBottomSheet.getSortingState()
   val filteredNotes = notes.filter { !allFoldersUUIDs.contains(it.folder) }
   return sort(filteredNotes, sorting)
@@ -97,17 +96,17 @@ fun filterDirectlyValidFolders(state: SearchState): List<Folder> {
     return emptyList()
   }
 
-  return foldersDb.getAll()
+  return instance.foldersRepository.getAll()
     .filter { state.colors.isEmpty() || state.colors.contains(it.color) }
     .filter { it.title.contains(state.text, true) }
 }
 
 fun getNotesForMode(state: SearchState): List<Note> {
   return when (state.mode) {
-    HomeNavigationMode.FAVOURITE -> notesDb.getByNoteState(arrayOf(NoteState.FAVOURITE.name))
-    HomeNavigationMode.ARCHIVED -> notesDb.getByNoteState(arrayOf(NoteState.ARCHIVED.name))
-    HomeNavigationMode.TRASH -> notesDb.getByNoteState(arrayOf(NoteState.TRASH.name))
-    HomeNavigationMode.DEFAULT -> notesDb.getByNoteState(arrayOf(NoteState.DEFAULT.name, NoteState.FAVOURITE.name))
-    HomeNavigationMode.LOCKED -> notesDb.getNoteByLocked(true)
+    HomeNavigationMode.FAVOURITE -> instance.notesRepository.getByNoteState(arrayOf(NoteState.FAVOURITE.name))
+    HomeNavigationMode.ARCHIVED -> instance.notesRepository.getByNoteState(arrayOf(NoteState.ARCHIVED.name))
+    HomeNavigationMode.TRASH -> instance.notesRepository.getByNoteState(arrayOf(NoteState.TRASH.name))
+    HomeNavigationMode.DEFAULT -> instance.notesRepository.getByNoteState(arrayOf(NoteState.DEFAULT.name, NoteState.FAVOURITE.name))
+    HomeNavigationMode.LOCKED -> instance.notesRepository.getNoteByLocked(true)
   }
 }

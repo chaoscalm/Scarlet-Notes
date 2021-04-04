@@ -5,7 +5,7 @@ import com.maubis.scarlet.base.database.room.tag.Tag
 import com.maubis.scarlet.base.database.room.tag.TagDao
 import java.util.concurrent.ConcurrentHashMap
 
-class TagsProvider {
+class TagsRepository {
 
   val tags = ConcurrentHashMap<String, Tag>()
 

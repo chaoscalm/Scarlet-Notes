@@ -111,7 +111,7 @@ const val EXCEPTION_NOTE_MAX_EXCEPTIONS = 20
 
 @Synchronized
 private fun storeToDebugNoteSync(trace: String) {
-  val note = instance.notesProvider.getByUUID(EXCEPTION_NOTE_KEY)
+  val note = instance.notesRepository.getByUUID(EXCEPTION_NOTE_KEY)
     ?: NoteBuilder().emptyNote().apply {
       uuid = EXCEPTION_NOTE_KEY
       disableBackup = true

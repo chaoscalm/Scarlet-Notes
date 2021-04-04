@@ -5,7 +5,7 @@ import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
 import com.maubis.scarlet.base.config.ApplicationBase
-import com.maubis.scarlet.base.config.ApplicationConfig.Companion.notesDb
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.instance
 import com.maubis.scarlet.base.support.INTENT_KEY_ACTION
 import com.maubis.scarlet.base.support.INTENT_KEY_NOTE_ID
 import com.maubis.scarlet.base.support.utils.throwOrReturn
@@ -32,7 +32,7 @@ class NotificationIntentService : IntentService("NotificationIntentService") {
       return
     }
 
-    val note = notesDb.getByID(noteId)
+    val note = instance.notesRepository.getByID(noteId)
     if (note === null) {
       return
     }

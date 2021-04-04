@@ -17,7 +17,6 @@ import com.maubis.scarlet.base.config.ApplicationBase
 import com.maubis.scarlet.base.config.ApplicationBase.Companion.instance
 import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppPreferences
 import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppTheme
-import com.maubis.scarlet.base.config.ApplicationConfig
 import com.maubis.scarlet.base.config.auth.IPendingUploadListener
 import com.maubis.scarlet.base.core.note.NoteState
 import com.maubis.scarlet.base.database.room.folder.Folder
@@ -123,10 +122,10 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
       state.colors = savedInstanceState.getIntegerArrayList(SEARCH_COLORS) ?: ArrayList()
       state.mode = HomeNavigationMode.values()[savedInstanceState.getInt(NAVIGATION_MODE)]
       savedInstanceState.getString(CURRENT_FOLDER_UUID)?.let {
-        state.currentFolder = instance.foldersProvider.getByUUID(it)
+        state.currentFolder = instance.foldersRepository.getByUUID(it)
       }
       savedInstanceState.getStringArrayList(TAGS_UUIDS)?.forEach {
-        instance.tagsProvider.getByUUID(it)?.let { state.tags.add(it) }
+        instance.tagsRepository.getByUUID(it)?.let { state.tags.add(it) }
       }
     }
   }
@@ -317,7 +316,7 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
 
     val allNotes = unifiedSearchWithoutFolder(state)
     val directAcceptableFolders = filterDirectlyValidFolders(state)
-    allItems.addAll(ApplicationConfig.foldersDb.getAll()
+    allItems.addAll(instance.foldersRepository.getAll()
                       .map {
                         GlobalScope.async(Dispatchers.IO) {
                           val isDirectFolder = directAcceptableFolders.contains(it)

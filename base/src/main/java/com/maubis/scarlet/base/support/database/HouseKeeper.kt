@@ -1,8 +1,7 @@
 package com.maubis.scarlet.base.support.database
 
 import android.content.Context
-import com.maubis.scarlet.base.config.ApplicationConfig.Companion.foldersDb
-import com.maubis.scarlet.base.config.ApplicationConfig.Companion.notesDb
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.instance
 import com.maubis.scarlet.base.core.note.NoteImage.Companion.deleteIfExist
 import com.maubis.scarlet.base.core.note.ReminderInterval
 import com.maubis.scarlet.base.core.note.getReminderV2
@@ -31,8 +30,8 @@ class HouseKeeper(val context: Context) {
   }
 
   private fun removeDecoupledFolders() {
-    val folders = foldersDb.getAll().map { it.uuid }
-    notesDb.getAll()
+    val folders = instance.foldersRepository.getAll().map { it.uuid }
+    instance.notesRepository.getAll()
       .filter { it.folder.isNotBlank() }
       .forEach {
         if (!folders.contains(it.folder)) {
@@ -43,7 +42,7 @@ class HouseKeeper(val context: Context) {
   }
 
   private fun removeOldReminders() {
-    notesDb.getAll().forEach {
+    instance.notesRepository.getAll().forEach {
       val reminder = it.getReminderV2()
       if (reminder === null) {
         return@forEach
@@ -68,7 +67,7 @@ class HouseKeeper(val context: Context) {
   }
 
   private fun deleteRedundantImageFiles() {
-    val uuids = notesDb.getAllUUIDs()
+    val uuids = instance.notesRepository.getAllUUIDs()
 
     val imagesFolder = File(context.filesDir, "images" + File.separator)
     val uuidFiles = imagesFolder.listFiles()
@@ -94,10 +93,10 @@ class HouseKeeper(val context: Context) {
   }
 
   private fun migrateZeroUidNotes() {
-    val note = notesDb.getByID(0)
+    val note = instance.notesRepository.getByID(0)
     if (note != null) {
-      notesDb.database().delete(note)
-      notesDb.notifyDelete(note)
+      instance.notesRepository.database().delete(note)
+      instance.notesRepository.notifyDelete(note)
       note.uid = null
       note.save(context)
     }

@@ -5,7 +5,7 @@ import com.maubis.scarlet.base.database.room.folder.Folder
 import com.maubis.scarlet.base.database.room.folder.FolderDao
 import java.util.concurrent.ConcurrentHashMap
 
-class FoldersProvider {
+class FoldersRepository {
 
   val folders = ConcurrentHashMap<String, Folder>()
 

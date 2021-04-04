@@ -6,9 +6,9 @@ import com.maubis.scarlet.base.export.data.ExportableTag
 
 class TagActor(val tag: Tag) {
   fun offlineSave() {
-    val id = ApplicationBase.instance.tagsProvider.database().insertTag(tag)
+    val id = ApplicationBase.instance.tagsRepository.database().insertTag(tag)
     tag.uid = if (tag.isUnsaved()) id.toInt() else tag.uid
-    ApplicationBase.instance.tagsProvider.notifyInsertTag(tag)
+    ApplicationBase.instance.tagsRepository.notifyInsertTag(tag)
   }
 
   fun onlineSave() {
@@ -24,8 +24,8 @@ class TagActor(val tag: Tag) {
     if (tag.isUnsaved()) {
       return
     }
-    ApplicationBase.instance.tagsProvider.database().delete(tag)
-    ApplicationBase.instance.tagsProvider.notifyDelete(tag)
+    ApplicationBase.instance.tagsRepository.database().delete(tag)
+    ApplicationBase.instance.tagsRepository.notifyDelete(tag)
     tag.uid = 0
   }
 

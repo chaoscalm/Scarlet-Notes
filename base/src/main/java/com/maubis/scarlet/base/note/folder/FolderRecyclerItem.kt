@@ -3,7 +3,7 @@ package com.maubis.scarlet.base.note.folder
 import android.content.Context
 import androidx.core.content.ContextCompat
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ApplicationConfig.Companion.notesDb
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.instance
 import com.maubis.scarlet.base.database.room.folder.Folder
 import com.maubis.scarlet.base.support.recycler.RecyclerItem
 import com.maubis.scarlet.base.support.ui.ColorUtil
@@ -29,7 +29,7 @@ class FolderRecyclerItem(
     false -> ContextCompat.getColor(context, R.color.light_hint_text)
   }
 
-  val usage = if (contents == -1) notesDb.getNoteCountByFolder(folder.uuid) else contents
+  val usage = if (contents == -1) instance.notesRepository.getNoteCountByFolder(folder.uuid) else contents
   val label = when {
     usage == 0 -> context.getString(R.string.folder_card_title)
     usage == 1 -> context.getString(R.string.folder_card_title_single_note)

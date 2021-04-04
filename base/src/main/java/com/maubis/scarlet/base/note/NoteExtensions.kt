@@ -6,8 +6,7 @@ import com.maubis.markdown.Markdown
 import com.maubis.markdown.MarkdownConfig
 import com.maubis.markdown.spannable.*
 import com.maubis.scarlet.base.config.ApplicationBase
-import com.maubis.scarlet.base.config.ApplicationConfig
-import com.maubis.scarlet.base.config.ApplicationConfig.Companion.tagsDb
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.instance
 import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.core.format.FormatType
 import com.maubis.scarlet.base.core.note.*
@@ -200,7 +199,7 @@ fun Note.getTagString(): String {
 fun Note.getTags(): Set<Tag> {
   val tags = HashSet<Tag>()
   for (tagID in getTagUUIDs()) {
-    val tag = tagsDb.getByUUID(tagID)
+    val tag = instance.tagsRepository.getByUUID(tagID)
     if (tag != null) {
       tags.add(tag)
     }
@@ -317,9 +316,9 @@ fun Note.save(context: Context) {
 fun Note.unsafeSave_INTERNAL_USE_ONLY() {
   applySanityChecks()
 
-  val id = ApplicationConfig.notesDb.database().insertNote(this)
+  val id = instance.notesRepository.database().insertNote(this)
   uid = if (isUnsaved()) id.toInt() else uid
-  ApplicationConfig.notesDb.notifyInsertNote(this)
+  instance.notesRepository.notifyInsertNote(this)
 }
 
 fun Note.saveWithoutSync(context: Context) {

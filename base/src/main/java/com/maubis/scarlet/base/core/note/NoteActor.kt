@@ -9,8 +9,8 @@ import com.github.bijoysingh.starter.util.TextUtils
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.config.ApplicationBase
 import com.maubis.scarlet.base.config.ApplicationBase.Companion.folderSync
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.instance
 import com.maubis.scarlet.base.config.ApplicationBase.Companion.sAppImageStorage
-import com.maubis.scarlet.base.config.ApplicationConfig.Companion.notesDb
 import com.maubis.scarlet.base.core.format.FormatBuilder
 import com.maubis.scarlet.base.database.room.note.Note
 import com.maubis.scarlet.base.export.data.ExportableNote
@@ -38,9 +38,9 @@ class NoteActor(val note: Note) {
   }
 
   fun offlineSave(context: Context) {
-    val id = notesDb.database().insertNote(note)
+    val id = instance.notesRepository.database().insertNote(note)
     note.uid = if (note.isUnsaved()) id.toInt() else note.uid
-    notesDb.notifyInsertNote(note)
+    instance.notesRepository.notifyInsertNote(note)
     GlobalScope.launch {
       onNoteUpdated(context)
     }
@@ -68,8 +68,8 @@ class NoteActor(val note: Note) {
     if (note.isUnsaved()) {
       return
     }
-    notesDb.database().delete(note)
-    notesDb.notifyDelete(note)
+    instance.notesRepository.database().delete(note)
+    instance.notesRepository.notifyDelete(note)
     note.description = FormatBuilder().getDescription(ArrayList())
     note.uid = 0
     AsyncTask.execute {

@@ -11,7 +11,7 @@ import android.widget.RemoteViews
 import androidx.core.content.ContextCompat
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.config.ApplicationBase
-import com.maubis.scarlet.base.config.ApplicationConfig.Companion.notesDb
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.instance
 import com.maubis.scarlet.base.database.room.note.Note
 import com.maubis.scarlet.base.database.room.widget.Widget
 import com.maubis.scarlet.base.note.creation.activity.ViewAdvancedNoteActivity
@@ -72,7 +72,7 @@ class WidgetConfigureActivity : SelectableNotesActivityBase(), INoteSelectorActi
 
   companion object {
     fun createNoteWidget(context: Context, widget: Widget) {
-      val note = notesDb.getByUUID(widget.noteUUID)
+      val note = instance.notesRepository.getByUUID(widget.noteUUID)
       val appWidgetManager = AppWidgetManager.getInstance(context)
       if (note === null || (note.locked && !sWidgetShowLockedNotes)) {
         val views = RemoteViews(context.getPackageName(), R.layout.widget_invalid_note)

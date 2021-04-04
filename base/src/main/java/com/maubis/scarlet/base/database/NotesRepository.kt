@@ -7,7 +7,7 @@ import com.maubis.scarlet.base.database.room.note.NoteDao
 import com.maubis.scarlet.base.note.applySanityChecks
 import java.util.concurrent.ConcurrentHashMap
 
-class NotesProvider {
+class NotesRepository {
 
   val notes = ConcurrentHashMap<String, Note>()
 

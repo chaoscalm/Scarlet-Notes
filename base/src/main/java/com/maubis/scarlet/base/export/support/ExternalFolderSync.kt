@@ -64,17 +64,17 @@ object ExternalFolderSync {
   fun loadFirstTime() {
     folderSync?.init(
       {
-        ApplicationBase.instance.notesProvider.getAll().forEach {
+        ApplicationBase.instance.notesRepository.getAll().forEach {
           folderSync?.insert(ExportableNote(it))
         }
       },
       {
-        ApplicationBase.instance.tagsProvider.getAll().forEach {
+        ApplicationBase.instance.tagsRepository.getAll().forEach {
           folderSync?.insert(ExportableTag(it))
         }
       },
       {
-        ApplicationBase.instance.foldersProvider.getAll().forEach {
+        ApplicationBase.instance.foldersRepository.getAll().forEach {
           folderSync?.insert(ExportableFolder(it))
         }
       })

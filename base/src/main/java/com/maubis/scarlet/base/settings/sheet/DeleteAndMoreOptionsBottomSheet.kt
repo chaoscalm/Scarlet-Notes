@@ -4,9 +4,7 @@ import android.app.Dialog
 import com.facebook.litho.ComponentContext
 import com.maubis.scarlet.base.MainActivity
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ApplicationConfig.Companion.foldersDb
-import com.maubis.scarlet.base.config.ApplicationConfig.Companion.notesDb
-import com.maubis.scarlet.base.config.ApplicationConfig.Companion.tagsDb
+import com.maubis.scarlet.base.config.ApplicationBase.Companion.instance
 import com.maubis.scarlet.base.main.sheets.openDeleteAllXSheet
 import com.maubis.scarlet.base.note.delete
 import com.maubis.scarlet.base.note.folder.delete
@@ -28,7 +26,7 @@ class DeleteAndMoreOptionsBottomSheet : LithoOptionBottomSheet() {
       listener = {
         openDeleteAllXSheet(activity, R.string.home_option_delete_all_notes_details) {
           GlobalScope.launch(Dispatchers.Main) {
-            withContext(Dispatchers.IO) { notesDb.getAll().forEach { it.delete(activity) } }
+            withContext(Dispatchers.IO) { instance.notesRepository.getAll().forEach { it.delete(activity) } }
             activity.resetAndLoadData()
             dismiss()
           }
@@ -42,7 +40,7 @@ class DeleteAndMoreOptionsBottomSheet : LithoOptionBottomSheet() {
       listener = {
         openDeleteAllXSheet(activity, R.string.home_option_delete_all_tags_details) {
           GlobalScope.launch(Dispatchers.Main) {
-            withContext(Dispatchers.IO) { tagsDb.getAll().forEach { it.delete() } }
+            withContext(Dispatchers.IO) { instance.tagsRepository.getAll().forEach { it.delete() } }
             activity.resetAndLoadData()
             dismiss()
           }
@@ -56,7 +54,7 @@ class DeleteAndMoreOptionsBottomSheet : LithoOptionBottomSheet() {
       listener = {
         openDeleteAllXSheet(activity, R.string.home_option_delete_all_folders_details) {
           GlobalScope.launch(Dispatchers.Main) {
-            withContext(Dispatchers.IO) { foldersDb.getAll().forEach { it.delete() } }
+            withContext(Dispatchers.IO) { instance.foldersRepository.getAll().forEach { it.delete() } }
             activity.resetAndLoadData()
             dismiss()
           }
@@ -70,9 +68,9 @@ class DeleteAndMoreOptionsBottomSheet : LithoOptionBottomSheet() {
       listener = {
         openDeleteAllXSheet(activity, R.string.home_option_delete_everything_details) {
           GlobalScope.launch(Dispatchers.Main) {
-            val notes = GlobalScope.async(Dispatchers.IO) { notesDb.getAll().forEach { it.delete(activity) } }
-            val tags = GlobalScope.async(Dispatchers.IO) { tagsDb.getAll().forEach { it.delete() } }
-            val folders = GlobalScope.async(Dispatchers.IO) { foldersDb.getAll().forEach { it.delete() } }
+            val notes = GlobalScope.async(Dispatchers.IO) { instance.notesRepository.getAll().forEach { it.delete(activity) } }
+            val tags = GlobalScope.async(Dispatchers.IO) { instance.tagsRepository.getAll().forEach { it.delete() } }
+            val folders = GlobalScope.async(Dispatchers.IO) { instance.foldersRepository.getAll().forEach { it.delete() } }
 
             notes.await()
             tags.await()
