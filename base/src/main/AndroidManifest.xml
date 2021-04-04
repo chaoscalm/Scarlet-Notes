@@ -16,8 +16,8 @@
       android:windowSoftInputMode="adjustResize" />
 
     <provider
-      android:name=".export.support.GenericFileProvider"
-      android:authorities="com.maubis.scarlet.base.export.support.GenericFileProvider"
+      android:name="com.maubis.scarlet.base.export.support.ScarletFileProvider"
+      android:authorities="fs00.scarletnotes.FileProvider"
       android:exported="false"
       android:grantUriPermissions="true">
       <meta-data

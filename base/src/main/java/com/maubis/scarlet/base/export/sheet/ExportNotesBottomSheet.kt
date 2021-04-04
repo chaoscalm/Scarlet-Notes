@@ -88,8 +88,7 @@ class ExportNotesBottomSheet : LithoBottomSheet() {
                             return@launch
                           }
 
-                          val uri = FileProvider.getUriForFile(activity, GenericFileProvider.PROVIDER, file)
-
+                          val uri = FileProvider.getUriForFile(activity, "fs00.scarletnotes.FileProvider", file)
                           val intent = Intent(Intent.ACTION_SEND)
                           intent.type = "text/plain"
                           intent.putExtra(Intent.EXTRA_STREAM, uri)
