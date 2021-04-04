@@ -1,1 +1,1 @@
-include ':app', ':base', ':markdown'
+include ':base', ':markdown'

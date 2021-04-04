@@ -1,4 +1,4 @@
-apply plugin: 'com.android.library'
+apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
@@ -7,11 +7,11 @@ android {
     compileSdkVersion rootProject.ext.appconfig_compile_sdk_version
 
     defaultConfig {
+        applicationId "fs00.scarletnotes"
         minSdkVersion rootProject.ext.appconfig_min_os_version
         targetSdkVersion rootProject.ext.appconfig_target_os_version
         versionCode rootProject.ext.appconfig_version_code
         versionName rootProject.ext.appconfig_version
-        buildConfigField "int", "VERSION_CODE", "${rootProject.ext.appconfig_version_code}"
 
         javaCompileOptions {
             annotationProcessorOptions {
