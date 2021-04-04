@@ -2,7 +2,6 @@ package com.maubis.scarlet.base.main.sheets
 
 import android.app.Dialog
 import android.content.Intent
-import android.net.Uri
 import android.util.Log
 import com.facebook.litho.Column
 import com.facebook.litho.Component
@@ -38,20 +37,12 @@ class ExceptionBottomSheet : LithoBottomSheet() {
           .marginDip(YogaEdge.BOTTOM, 16f)
           .textColor(appTheme.get(ThemeColorType.TERTIARY_TEXT)))
       .child(BottomSheetBar.create(componentContext)
-               .primaryActionRes(R.string.exception_sheet_crash_app)
+               .primaryActionRes(R.string.exception_sheet_share)
                .onPrimaryClick {
-                 throw exception
-               }.secondaryActionRes(R.string.exception_sheet_mail)
-               .onSecondaryClick {
-                 try {
-                   val intent = Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:team.thecodershub@gmail.com"))
-                   intent.putExtra(Intent.EXTRA_SUBJECT, "[Exception] The application threw an exception")
-                   intent.putExtra(Intent.EXTRA_TEXT, "Hi, my app threw this exception\n${Log.getStackTraceString(exception)}")
-                   startActivity(Intent.createChooser(intent, "Send email to developer..."))
-                 } catch (exception: Exception) {
-                   // Ignore this one ;)
-                 }
-                 dismiss()
+                 val intent = Intent(Intent.ACTION_SEND)
+                 intent.setType("text/plain");
+                 intent.putExtra(Intent.EXTRA_TEXT, Log.getStackTraceString(exception))
+                 startActivity(Intent.createChooser(intent, "Thrown exception"))
                }.paddingDip(YogaEdge.VERTICAL, 8f))
     return component.build()
   }

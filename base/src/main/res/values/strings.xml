@@ -357,8 +357,7 @@
   <string name="internal_settings_fake_exceptions_description">Throw a fake exception to test the exception features</string>
 
   <string name="exception_sheet_title">Exception Thrown</string>
-  <string name="exception_sheet_crash_app">Crash App</string>
-  <string name="exception_sheet_mail">Mail</string>
+  <string name="exception_sheet_share">Share</string>
 
   <!-- Start: App Lock Activity -->
   <string name="app_lock_title">Unlock App</string>
