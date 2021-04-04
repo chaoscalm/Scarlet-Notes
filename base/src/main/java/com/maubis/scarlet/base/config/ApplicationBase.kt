@@ -1,6 +1,7 @@
 package com.maubis.scarlet.base.config
 
 import android.app.Application
+import android.util.Log
 import com.evernote.android.job.JobManager
 import com.facebook.soloader.SoLoader
 import com.github.bijoysingh.starter.prefs.Store
@@ -12,7 +13,6 @@ import com.maubis.scarlet.base.support.ui.font.TypefaceController
 import com.maubis.scarlet.base.support.utils.DateFormatUtils
 import com.maubis.scarlet.base.support.utils.ImageCache
 import com.maubis.scarlet.base.support.utils.dateFormat
-import com.maubis.scarlet.base.support.utils.maybeThrow
 
 abstract class ApplicationBase : Application() {
   override fun onCreate() {
@@ -26,7 +26,7 @@ abstract class ApplicationBase : Application() {
     try {
       JobManager.create(this).addJobCreator(ReminderJobCreator())
     } catch (exception: Exception) {
-      maybeThrow(exception)
+      Log.e("Scarlet", "Unable to initialize job manager", exception)
     }
 
     // Setup Image Cache
