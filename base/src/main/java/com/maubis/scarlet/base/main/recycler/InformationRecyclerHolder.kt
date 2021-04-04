@@ -7,7 +7,7 @@ import android.widget.TextView
 import com.github.bijoysingh.starter.recyclerview.RecyclerViewHolder
 import com.github.bijoysingh.uibasics.views.UITextView
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTypeface
+import com.maubis.scarlet.base.config.ScarletApplication.Companion.appTypeface
 import com.maubis.scarlet.base.support.recycler.RecyclerItem
 
 class InformationRecyclerHolder(context: Context, itemView: View) : RecyclerViewHolder<RecyclerItem>(context, itemView) {

@@ -1,7 +1,7 @@
 package com.maubis.scarlet.base.support.database
 
 import android.content.Context
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.instance
+import com.maubis.scarlet.base.config.ScarletApplication.Companion.instance
 import com.maubis.scarlet.base.core.note.NoteImage.Companion.deleteIfExist
 import com.maubis.scarlet.base.core.note.ReminderInterval
 import com.maubis.scarlet.base.core.note.getReminderV2

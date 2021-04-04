@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTheme
+import com.maubis.scarlet.base.config.ScarletApplication.Companion.appTheme
 import com.maubis.scarlet.base.settings.sheet.sInternalEnableFullScreen
 import com.maubis.scarlet.base.support.utils.OsVersionUtils
 import com.maubis.scarlet.base.support.utils.logAndMaybeDisplayError

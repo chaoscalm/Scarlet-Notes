@@ -13,9 +13,9 @@ import com.facebook.litho.widget.Text
 import com.facebook.yoga.YogaAlign
 import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTheme
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTypeface
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.instance
+import com.maubis.scarlet.base.config.ScarletApplication.Companion.appTheme
+import com.maubis.scarlet.base.config.ScarletApplication.Companion.appTypeface
+import com.maubis.scarlet.base.config.ScarletApplication.Companion.instance
 import com.maubis.scarlet.base.core.folder.FolderBuilder
 import com.maubis.scarlet.base.database.room.folder.Folder
 import com.maubis.scarlet.base.support.sheets.LithoBottomSheet

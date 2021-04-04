@@ -2,8 +2,8 @@ package com.maubis.scarlet.base
 
 import android.content.Context
 import android.content.Intent
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTheme
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTypeface
+import com.maubis.scarlet.base.config.ScarletApplication.Companion.appTheme
+import com.maubis.scarlet.base.config.ScarletApplication.Companion.appTypeface
 import com.maubis.scarlet.base.settings.sheet.ThemeColorPickerBottomSheet
 import com.maubis.scarlet.base.settings.sheet.TypefacePickerBottomSheet
 import com.maubis.scarlet.base.support.sheets.openSheet

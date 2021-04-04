@@ -5,7 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.instance
+import com.maubis.scarlet.base.config.ScarletApplication.Companion.instance
 import com.maubis.scarlet.base.database.room.note.Note
 import com.maubis.scarlet.base.note.creation.sheet.sEditorSkipNoteViewer
 

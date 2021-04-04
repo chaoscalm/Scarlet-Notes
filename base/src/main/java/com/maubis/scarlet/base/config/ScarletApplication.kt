@@ -14,7 +14,7 @@ import com.maubis.scarlet.base.support.utils.DateFormatUtils
 import com.maubis.scarlet.base.support.utils.ImageCache
 import com.maubis.scarlet.base.support.utils.dateFormat
 
-abstract class ApplicationBase : Application() {
+class ScarletApplication : Application() {
   override fun onCreate() {
     super.onCreate()
     instance = ApplicationConfig(this)

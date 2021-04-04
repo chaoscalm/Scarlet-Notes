@@ -4,7 +4,7 @@ import android.app.Dialog
 import androidx.appcompat.app.AppCompatActivity
 import com.facebook.litho.ComponentContext
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.instance
+import com.maubis.scarlet.base.config.ScarletApplication.Companion.instance
 import com.maubis.scarlet.base.database.room.folder.Folder
 import com.maubis.scarlet.base.database.room.note.Note
 import com.maubis.scarlet.base.note.folder.delete

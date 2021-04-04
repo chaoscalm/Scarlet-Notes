@@ -12,7 +12,7 @@ import com.facebook.litho.widget.Text
 import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.MainActivity
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTheme
+import com.maubis.scarlet.base.config.ScarletApplication.Companion.appTheme
 import com.maubis.scarlet.base.export.support.*
 import com.maubis.scarlet.base.support.sheets.*
 import com.maubis.scarlet.base.support.specs.BottomSheetBar

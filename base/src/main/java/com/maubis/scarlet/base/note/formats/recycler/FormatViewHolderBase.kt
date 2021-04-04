@@ -7,8 +7,8 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import com.github.bijoysingh.starter.recyclerview.RecyclerViewHolder
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTheme
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTypeface
+import com.maubis.scarlet.base.config.ScarletApplication.Companion.appTheme
+import com.maubis.scarlet.base.config.ScarletApplication.Companion.appTypeface
 import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.core.format.FormatType
 import com.maubis.scarlet.base.note.creation.activity.INTENT_KEY_NOTE_ID

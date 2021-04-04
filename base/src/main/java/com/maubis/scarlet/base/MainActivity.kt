@@ -13,10 +13,10 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.facebook.litho.ComponentContext
 import com.facebook.litho.LithoView
 import com.github.bijoysingh.starter.recyclerview.RecyclerViewBuilder
-import com.maubis.scarlet.base.config.ApplicationBase
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.appPreferences
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTheme
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.instance
+import com.maubis.scarlet.base.config.ScarletApplication
+import com.maubis.scarlet.base.config.ScarletApplication.Companion.appPreferences
+import com.maubis.scarlet.base.config.ScarletApplication.Companion.appTheme
+import com.maubis.scarlet.base.config.ScarletApplication.Companion.instance
 import com.maubis.scarlet.base.config.auth.IPendingUploadListener
 import com.maubis.scarlet.base.core.note.NoteState
 import com.maubis.scarlet.base.database.room.folder.Folder
@@ -189,7 +189,7 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
 
     val titleColor = appTheme.get(ThemeColorType.SECONDARY_TEXT)
     toolbarTitle.setTextColor(titleColor)
-    toolbarTitle.typeface = ApplicationBase.appTypeface.heading()
+    toolbarTitle.typeface = ScarletApplication.appTypeface.heading()
 
     val toolbarIconColor = appTheme.get(ThemeColorType.SECONDARY_TEXT)
     toolbarSearchIcon.setColorFilter(toolbarIconColor)

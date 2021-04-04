@@ -6,9 +6,9 @@ import android.os.AsyncTask
 import com.github.bijoysingh.starter.util.IntentUtils
 import com.github.bijoysingh.starter.util.TextUtils
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ApplicationBase
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.appImageStorage
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.instance
+import com.maubis.scarlet.base.config.ScarletApplication
+import com.maubis.scarlet.base.config.ScarletApplication.Companion.appImageStorage
+import com.maubis.scarlet.base.config.ScarletApplication.Companion.instance
 import com.maubis.scarlet.base.core.format.FormatBuilder
 import com.maubis.scarlet.base.database.room.note.Note
 import com.maubis.scarlet.base.main.activity.WidgetConfigureActivity
@@ -83,7 +83,7 @@ class NoteActor(val note: Note) {
     notifyAllChanged(context)
     val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager?
     notificationManager?.cancel(note.uid)
-    ApplicationBase.appImageCache.deleteNote(note.uuid)
+    ScarletApplication.appImageCache.deleteNote(note.uuid)
   }
 
   private fun onNoteUpdated(context: Context) {

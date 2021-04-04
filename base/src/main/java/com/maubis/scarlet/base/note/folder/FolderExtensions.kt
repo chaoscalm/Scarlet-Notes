@@ -1,7 +1,7 @@
 package com.maubis.scarlet.base.note.folder
 
-import com.maubis.scarlet.base.config.ApplicationBase
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.instance
+import com.maubis.scarlet.base.config.ScarletApplication
+import com.maubis.scarlet.base.config.ScarletApplication.Companion.instance
 import com.maubis.scarlet.base.database.room.folder.Folder
 import com.maubis.scarlet.base.support.utils.dateFormat
 import java.util.*
@@ -42,9 +42,9 @@ fun Folder.getDisplayTime(): String {
  **************************************************************************************/
 
 fun Folder.save() {
-  ApplicationBase.instance.folderActions(this).save()
+  ScarletApplication.instance.folderActions(this).save()
 }
 
 fun Folder.delete() {
-  ApplicationBase.instance.folderActions(this).delete()
+  ScarletApplication.instance.folderActions(this).delete()
 }

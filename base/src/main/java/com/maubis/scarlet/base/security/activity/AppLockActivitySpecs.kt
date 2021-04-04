@@ -12,8 +12,8 @@ import com.facebook.litho.widget.TextChangedEvent
 import com.facebook.yoga.YogaAlign
 import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTheme
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTypeface
+import com.maubis.scarlet.base.config.ScarletApplication.Companion.appTheme
+import com.maubis.scarlet.base.config.ScarletApplication.Companion.appTypeface
 import com.maubis.scarlet.base.support.specs.EmptySpec
 import com.maubis.scarlet.base.support.ui.ThemeColorType
 import com.maubis.scarlet.base.support.utils.getEditorActionListener

@@ -8,7 +8,7 @@
   <uses-permission android:name="android.permission.USE_FINGERPRINT" />
 
   <application
-    android:name=".MaterialNotes"
+    android:name="com.maubis.scarlet.base.config.ScarletApplication"
     android:allowBackup="true"
     android:hardwareAccelerated="true"
     android:icon="@mipmap/ic_launcher"

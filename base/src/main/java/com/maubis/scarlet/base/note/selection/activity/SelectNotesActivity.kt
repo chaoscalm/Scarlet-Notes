@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.bijoysingh.starter.util.IntentUtils
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.instance
+import com.maubis.scarlet.base.config.ScarletApplication.Companion.instance
 import com.maubis.scarlet.base.database.room.note.Note
 import com.maubis.scarlet.base.main.HomeNavigationMode
 import com.maubis.scarlet.base.note.getFullText

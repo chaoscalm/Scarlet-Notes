@@ -1,6 +1,6 @@
 package com.maubis.scarlet.base.database
 
-import com.maubis.scarlet.base.config.ApplicationBase
+import com.maubis.scarlet.base.config.ScarletApplication
 import com.maubis.scarlet.base.database.room.folder.Folder
 import com.maubis.scarlet.base.database.room.folder.FolderDao
 import java.util.concurrent.ConcurrentHashMap
@@ -70,6 +70,6 @@ class FoldersRepository {
   }
 
   fun database(): FolderDao {
-    return ApplicationBase.instance.database.folders()
+    return ScarletApplication.instance.database.folders()
   }
 }

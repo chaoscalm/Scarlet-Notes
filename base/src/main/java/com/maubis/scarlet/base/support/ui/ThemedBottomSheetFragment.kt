@@ -12,7 +12,7 @@ import androidx.core.content.ContextCompat
 import com.github.bijoysingh.starter.fragments.SimpleBottomSheetFragment
 import com.maubis.scarlet.base.MainActivity
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTheme
+import com.maubis.scarlet.base.config.ScarletApplication.Companion.appTheme
 
 abstract class ThemedBottomSheetFragment : SimpleBottomSheetFragment() {
 

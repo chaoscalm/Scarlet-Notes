@@ -2,7 +2,7 @@ package com.maubis.scarlet.base.support.utils
 
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.appPreferences
+import com.maubis.scarlet.base.config.ScarletApplication.Companion.appPreferences
 import com.maubis.scarlet.base.main.sheets.ExceptionBottomSheet
 import com.maubis.scarlet.base.support.sheets.openSheet
 

@@ -9,7 +9,7 @@ import android.widget.TextView
 import com.github.bijoysingh.starter.async.MultiAsyncTask
 import com.github.bijoysingh.starter.recyclerview.RecyclerViewBuilder
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.appTheme
+import com.maubis.scarlet.base.config.ScarletApplication.Companion.appTheme
 import com.maubis.scarlet.base.export.recycler.FileRecyclerItem
 import com.maubis.scarlet.base.export.support.NoteImporter
 import com.maubis.scarlet.base.note.recycler.NoteAppAdapter

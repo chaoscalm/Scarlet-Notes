@@ -3,7 +3,7 @@ package com.maubis.scarlet.base.widget
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
-import com.maubis.scarlet.base.config.ApplicationBase
+import com.maubis.scarlet.base.config.ScarletApplication
 import com.maubis.scarlet.base.main.activity.WidgetConfigureActivity
 
 class NoteWidgetProvider : AppWidgetProvider() {
@@ -12,7 +12,7 @@ class NoteWidgetProvider : AppWidgetProvider() {
     val N = appWidgetIds.size
     for (i in 0 until N) {
       val appWidgetId = appWidgetIds[i]
-      val widget = ApplicationBase.instance.database.widgets().getByID(appWidgetId)
+      val widget = ScarletApplication.instance.database.widgets().getByID(appWidgetId)
       if (widget === null) {
         continue
       }
@@ -30,11 +30,11 @@ class NoteWidgetProvider : AppWidgetProvider() {
     val N = appWidgetIds.size
     for (i in 0 until N) {
       val appWidgetId = appWidgetIds[i]
-      val widget = ApplicationBase.instance.database.widgets().getByID(appWidgetId)
+      val widget = ScarletApplication.instance.database.widgets().getByID(appWidgetId)
       if (widget === null) {
         continue
       }
-      ApplicationBase.instance.database.widgets().delete(widget)
+      ScarletApplication.instance.database.widgets().delete(widget)
     }
   }
 

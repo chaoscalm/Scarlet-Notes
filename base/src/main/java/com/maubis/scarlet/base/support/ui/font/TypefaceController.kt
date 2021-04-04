@@ -5,12 +5,12 @@ import android.graphics.Typeface
 import androidx.core.content.res.ResourcesCompat
 import com.maubis.markdown.MarkdownConfig
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ApplicationBase
+import com.maubis.scarlet.base.config.ScarletApplication
 
 const val KEY_PREFERENCE_TYPEFACE = "typeface_setting"
 var sPreferenceTypeface: String
-  get() = ApplicationBase.appPreferences.get(KEY_PREFERENCE_TYPEFACE, TypefaceController.TypefaceType.APP_DEFAULT.name)
-  set(value) = ApplicationBase.appPreferences.put(KEY_PREFERENCE_TYPEFACE, value)
+  get() = ScarletApplication.appPreferences.get(KEY_PREFERENCE_TYPEFACE, TypefaceController.TypefaceType.APP_DEFAULT.name)
+  set(value) = ScarletApplication.appPreferences.put(KEY_PREFERENCE_TYPEFACE, value)
 
 class TypefaceController(context: Context) {
   enum class TypefaceType(val title: Int, val isLiteEnabled: Boolean) {

@@ -6,7 +6,7 @@ import com.facebook.litho.Component
 import com.facebook.litho.ComponentContext
 import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.instance
+import com.maubis.scarlet.base.config.ScarletApplication.Companion.instance
 import com.maubis.scarlet.base.core.note.getTagUUIDs
 import com.maubis.scarlet.base.core.tag.TagBuilder
 import com.maubis.scarlet.base.database.room.tag.Tag

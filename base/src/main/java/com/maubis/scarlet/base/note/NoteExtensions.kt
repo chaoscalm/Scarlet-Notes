@@ -5,8 +5,8 @@ import com.google.gson.Gson
 import com.maubis.markdown.Markdown
 import com.maubis.markdown.MarkdownConfig
 import com.maubis.markdown.spannable.*
-import com.maubis.scarlet.base.config.ApplicationBase
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.instance
+import com.maubis.scarlet.base.config.ScarletApplication
+import com.maubis.scarlet.base.config.ScarletApplication.Companion.instance
 import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.core.format.FormatType
 import com.maubis.scarlet.base.core.note.NoteState
@@ -268,7 +268,7 @@ fun Note.edit(context: Context) {
 }
 
 fun Note.share(context: Context) {
-  ApplicationBase.instance.noteActions(this).share(context)
+  ScarletApplication.instance.noteActions(this).share(context)
 }
 
 fun Note.hasImages(): Boolean {
@@ -279,7 +279,7 @@ fun Note.hasImages(): Boolean {
 fun Note.shareImages(context: Context) {
   val imageFormats = getFormats().filter { it.formatType == FormatType.IMAGE }
   val bitmaps = imageFormats
-    .map { ApplicationBase.appImageStorage.getFile(uuid, it.text) }
+    .map { ScarletApplication.appImageStorage.getFile(uuid, it.text) }
     .filter { it.exists() }
     .map { BitmapHelper.loadFromFile(it) }
     .filterNotNull()
@@ -290,7 +290,7 @@ fun Note.shareImages(context: Context) {
 }
 
 fun Note.copy(context: Context) {
-  ApplicationBase.instance.noteActions(this).copy(context)
+  ScarletApplication.instance.noteActions(this).copy(context)
 }
 
 /**************************************************************************************
@@ -309,13 +309,13 @@ fun Note.applySanityChecks() {
 
 fun Note.save(context: Context) {
   applySanityChecks()
-  ApplicationBase.instance.noteActions(this).save(context)
+  ScarletApplication.instance.noteActions(this).save(context)
 }
 
 fun Note.delete(context: Context) {
-  ApplicationBase.instance.noteActions(this).delete(context)
+  ScarletApplication.instance.noteActions(this).delete(context)
 }
 
 fun Note.softDelete(context: Context) {
-  ApplicationBase.instance.noteActions(this).softDelete(context)
+  ScarletApplication.instance.noteActions(this).softDelete(context)
 }

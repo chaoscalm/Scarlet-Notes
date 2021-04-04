@@ -1,8 +1,8 @@
 package com.maubis.scarlet.base.support.utils
 
 import com.maubis.scarlet.base.BuildConfig
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.appPreferences
-import com.maubis.scarlet.base.config.ApplicationBase.Companion.instance
+import com.maubis.scarlet.base.config.ScarletApplication.Companion.appPreferences
+import com.maubis.scarlet.base.config.ScarletApplication.Companion.instance
 import com.maubis.scarlet.base.main.sheets.WHATS_NEW_SHEET_INDEX
 
 const val KEY_LAST_KNOWN_APP_VERSION = "KEY_LAST_KNOWN_APP_VERSION"
