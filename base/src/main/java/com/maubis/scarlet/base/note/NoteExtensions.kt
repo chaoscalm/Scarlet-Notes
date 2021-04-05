@@ -5,8 +5,8 @@ import com.google.gson.Gson
 import com.maubis.markdown.Markdown
 import com.maubis.markdown.MarkdownConfig
 import com.maubis.markdown.spannable.*
-import com.maubis.scarlet.base.config.ScarletApplication
-import com.maubis.scarlet.base.config.ScarletApplication.Companion.instance
+import com.maubis.scarlet.base.config.ScarletApp
+import com.maubis.scarlet.base.config.ScarletApp.Companion.data
 import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.core.format.FormatType
 import com.maubis.scarlet.base.core.note.NoteState
@@ -202,7 +202,7 @@ fun Note.getTagString(): String {
 fun Note.getTags(): Set<Tag> {
   val tags = HashSet<Tag>()
   for (tagID in getTagUUIDs()) {
-    val tag = instance.tagsRepository.getByUUID(tagID)
+    val tag = data.tags.getByUUID(tagID)
     if (tag != null) {
       tags.add(tag)
     }
@@ -268,7 +268,7 @@ fun Note.edit(context: Context) {
 }
 
 fun Note.share(context: Context) {
-  ScarletApplication.instance.noteActions(this).share(context)
+  ScarletApp.data.noteActions(this).share(context)
 }
 
 fun Note.hasImages(): Boolean {
@@ -279,7 +279,7 @@ fun Note.hasImages(): Boolean {
 fun Note.shareImages(context: Context) {
   val imageFormats = getFormats().filter { it.formatType == FormatType.IMAGE }
   val bitmaps = imageFormats
-    .map { ScarletApplication.appImageStorage.getFile(uuid, it.text) }
+    .map { ScarletApp.imageStorage.getFile(uuid, it.text) }
     .filter { it.exists() }
     .map { BitmapHelper.loadFromFile(it) }
     .filterNotNull()
@@ -290,7 +290,7 @@ fun Note.shareImages(context: Context) {
 }
 
 fun Note.copy(context: Context) {
-  ScarletApplication.instance.noteActions(this).copy(context)
+  ScarletApp.data.noteActions(this).copy(context)
 }
 
 /**************************************************************************************
@@ -309,13 +309,13 @@ fun Note.applySanityChecks() {
 
 fun Note.save(context: Context) {
   applySanityChecks()
-  ScarletApplication.instance.noteActions(this).save(context)
+  ScarletApp.data.noteActions(this).save(context)
 }
 
 fun Note.delete(context: Context) {
-  ScarletApplication.instance.noteActions(this).delete(context)
+  ScarletApp.data.noteActions(this).delete(context)
 }
 
 fun Note.softDelete(context: Context) {
-  ScarletApplication.instance.noteActions(this).softDelete(context)
+  ScarletApp.data.noteActions(this).softDelete(context)
 }

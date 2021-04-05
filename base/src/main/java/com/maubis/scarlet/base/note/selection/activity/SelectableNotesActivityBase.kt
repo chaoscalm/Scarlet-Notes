@@ -11,9 +11,9 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.github.bijoysingh.starter.async.MultiAsyncTask
 import com.github.bijoysingh.starter.recyclerview.RecyclerViewBuilder
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ScarletApplication.Companion.appPreferences
-import com.maubis.scarlet.base.config.ScarletApplication.Companion.appTheme
-import com.maubis.scarlet.base.config.ScarletApplication.Companion.instance
+import com.maubis.scarlet.base.config.ScarletApp.Companion.appPreferences
+import com.maubis.scarlet.base.config.ScarletApp.Companion.appTheme
+import com.maubis.scarlet.base.config.ScarletApp.Companion.data
 import com.maubis.scarlet.base.core.note.sort
 import com.maubis.scarlet.base.database.room.note.Note
 import com.maubis.scarlet.base.main.recycler.EmptyRecyclerItem
@@ -56,7 +56,7 @@ abstract class SelectableNotesActivityBase : SecuredActivity(), INoteSelectorAct
         notes.forEach {
           val noteFolderId = it.note.folder
           if (lastFolder != noteFolderId) {
-            val folder = instance.foldersRepository.getByUUID(noteFolderId)
+            val folder = data.folders.getByUUID(noteFolderId)
             if (folder !== null) {
               items.add(SelectorFolderRecyclerItem(this@SelectableNotesActivityBase, folder))
               lastFolder = noteFolderId

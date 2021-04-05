@@ -6,8 +6,8 @@ import androidx.core.content.ContextCompat
 import com.google.android.flexbox.FlexboxLayout
 import com.maubis.scarlet.base.MainActivity
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ScarletApplication.Companion.appTypeface
-import com.maubis.scarlet.base.config.ScarletApplication.Companion.instance
+import com.maubis.scarlet.base.config.ScarletApp.Companion.appTypeface
+import com.maubis.scarlet.base.config.ScarletApp.Companion.data
 import com.maubis.scarlet.base.database.room.tag.Tag
 import com.maubis.scarlet.base.settings.view.ColorView
 
@@ -22,10 +22,10 @@ class TagsAndColorPickerViewHolder(
 
   fun reset() {
     tags.clear()
-    tags.addAll(instance.tagsRepository.search(""))
+    tags.addAll(data.tags.search(""))
 
     colors.clear()
-    colors.addAll(instance.notesRepository.getAll().map { it.color })
+    colors.addAll(data.notes.getAll().map { it.color })
   }
 
   fun notifyChanged() {

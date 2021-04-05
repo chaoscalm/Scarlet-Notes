@@ -10,8 +10,8 @@ import com.facebook.litho.ComponentContext
 import com.maubis.markdown.Markdown
 import com.maubis.scarlet.base.MainActivity
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ScarletApplication.Companion.appPreferences
-import com.maubis.scarlet.base.config.ScarletApplication.Companion.instance
+import com.maubis.scarlet.base.config.ScarletApp.Companion.appPreferences
+import com.maubis.scarlet.base.config.ScarletApp.Companion.data
 import com.maubis.scarlet.base.core.note.NoteState
 import com.maubis.scarlet.base.core.note.sort
 import com.maubis.scarlet.base.database.room.note.Note
@@ -80,7 +80,7 @@ fun getWidgetNotes(): List<Note> {
   }
 
   val sorting = SortingOptionsBottomSheet.getSortingState()
-  return sort(instance.notesRepository.getByNoteState(state.toTypedArray())
+  return sort(data.notes.getByNoteState(state.toTypedArray())
                 .filter { note -> (!note.locked || sWidgetShowLockedNotes) }, sorting)
 }
 

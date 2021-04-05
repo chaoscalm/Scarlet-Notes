@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.bijoysingh.starter.util.IntentUtils
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ScarletApplication.Companion.instance
+import com.maubis.scarlet.base.config.ScarletApp.Companion.data
 import com.maubis.scarlet.base.database.room.note.Note
 import com.maubis.scarlet.base.main.HomeNavigationMode
 import com.maubis.scarlet.base.note.getFullText
@@ -33,7 +33,7 @@ class SelectNotesActivity : SelectableNotesActivityBase() {
     if (extras != null) {
       val noteId = getIntent().getIntExtra(KEY_SELECT_EXTRA_NOTE_ID, 0)
       if (noteId != 0) {
-        val note = instance.notesRepository.getByID(noteId)
+        val note = data.notes.getByID(noteId)
         if (note !== null) {
           orderingNoteIds.add(noteId)
           selectedNotes.put(noteId, note)
@@ -86,7 +86,7 @@ class SelectNotesActivity : SelectableNotesActivityBase() {
 
   fun refreshSelectedNotes() {
     for (key in selectedNotes.keys.toList()) {
-      val note = instance.notesRepository.getByID(key)
+      val note = data.notes.getByID(key)
       if (note === null) {
         selectedNotes.remove(key)
         continue
@@ -120,7 +120,7 @@ class SelectNotesActivity : SelectableNotesActivityBase() {
 
   override fun isNoteSelected(note: Note): Boolean = orderingNoteIds.contains(note.uid)
 
-  override fun getNotes(): List<Note> = instance.notesRepository.getAll()
+  override fun getNotes(): List<Note> = data.notes.getAll()
 
   fun getOrderedSelectedNotes(): List<Note> {
     val notes = ArrayList<Note>()

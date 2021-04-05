@@ -13,9 +13,9 @@ import com.facebook.litho.widget.Text
 import com.facebook.yoga.YogaAlign
 import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ScarletApplication.Companion.appTheme
-import com.maubis.scarlet.base.config.ScarletApplication.Companion.appTypeface
-import com.maubis.scarlet.base.config.ScarletApplication.Companion.instance
+import com.maubis.scarlet.base.config.ScarletApp.Companion.appTheme
+import com.maubis.scarlet.base.config.ScarletApp.Companion.appTypeface
+import com.maubis.scarlet.base.config.ScarletApp.Companion.data
 import com.maubis.scarlet.base.core.folder.FolderBuilder
 import com.maubis.scarlet.base.database.room.folder.Folder
 import com.maubis.scarlet.base.support.sheets.LithoBottomSheet
@@ -145,7 +145,7 @@ abstract class FolderChooserBottomSheetBase : LithoBottomSheet() {
   private fun getFolderOptions(): List<FolderOptionsItem> {
     val activity = context as AppCompatActivity
     val options = ArrayList<FolderOptionsItem>()
-    for (folder in instance.foldersRepository.getAll()) {
+    for (folder in data.folders.getAll()) {
       options.add(
         FolderOptionsItem(
           folder = folder,

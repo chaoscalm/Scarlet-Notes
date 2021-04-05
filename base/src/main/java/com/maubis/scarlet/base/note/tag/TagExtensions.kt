@@ -1,18 +1,18 @@
 package com.maubis.scarlet.base.note.tag
 
-import com.maubis.scarlet.base.config.ScarletApplication
-import com.maubis.scarlet.base.config.ScarletApplication.Companion.instance
+import com.maubis.scarlet.base.config.ScarletApp
+import com.maubis.scarlet.base.config.ScarletApp.Companion.data
 import com.maubis.scarlet.base.database.room.tag.Tag
 
 fun Tag.saveIfUnique() {
-  val existing = instance.tagsRepository.getByTitle(title)
+  val existing = data.tags.getByTitle(title)
   if (existing !== null) {
     this.uid = existing.uid
     this.uuid = existing.uuid
     return
   }
 
-  val existingByUUID = instance.tagsRepository.getByUUID(uuid)
+  val existingByUUID = data.tags.getByUUID(uuid)
   if (existingByUUID != null) {
     this.uid = existingByUUID.uid
     this.title = existingByUUID.title
@@ -26,9 +26,9 @@ fun Tag.saveIfUnique() {
  **************************************************************************************/
 
 fun Tag.save() {
-  ScarletApplication.instance.tagActions(this).save()
+  ScarletApp.data.tagActions(this).save()
 }
 
 fun Tag.delete() {
-  ScarletApplication.instance.tagActions(this).delete()
+  ScarletApp.data.tagActions(this).delete()
 }

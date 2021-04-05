@@ -9,8 +9,8 @@ import android.widget.TextView
 import com.github.bijoysingh.starter.recyclerview.RecyclerViewHolder
 import com.github.bijoysingh.starter.util.LocaleManager
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ScarletApplication
-import com.maubis.scarlet.base.config.ScarletApplication.Companion.appTheme
+import com.maubis.scarlet.base.config.ScarletApp
+import com.maubis.scarlet.base.config.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.export.activity.ImportNoteActivity
 import com.maubis.scarlet.base.support.recycler.RecyclerItem
 import com.maubis.scarlet.base.support.ui.ThemeColorType
@@ -35,16 +35,16 @@ class FileImportViewHolder(context: Context, root: View)
   override fun populate(data: RecyclerItem, extra: Bundle?) {
     val item = data as FileRecyclerItem
     fileName.text = item.name
-    fileName.typeface = ScarletApplication.appTypeface.title()
+    fileName.typeface = ScarletApp.appTypeface.title()
 
     filePath.text = getPath(item)
-    filePath.typeface = ScarletApplication.appTypeface.text()
+    filePath.typeface = ScarletApp.appTypeface.text()
 
     fileDate.text = getSubtitleText(item.file)
-    fileDate.typeface = ScarletApplication.appTypeface.text()
+    fileDate.typeface = ScarletApp.appTypeface.text()
 
     fileSize.text = getMetaText(item.file)
-    fileSize.typeface = ScarletApplication.appTypeface.text()
+    fileSize.typeface = ScarletApp.appTypeface.text()
 
     root.setOnClickListener {
       (context as ImportNoteActivity).select(item)

@@ -8,7 +8,7 @@ import com.facebook.litho.Component
 import com.facebook.litho.ComponentContext
 import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ScarletApplication.Companion.instance
+import com.maubis.scarlet.base.config.ScarletApp.Companion.data
 import com.maubis.scarlet.base.core.note.getTagUUIDs
 import com.maubis.scarlet.base.core.tag.TagBuilder
 import com.maubis.scarlet.base.database.room.note.Note
@@ -67,7 +67,7 @@ class TagChooserBottomSheet : LithoBottomSheet() {
     val activity = context as AppCompatActivity
     val options = ArrayList<LithoTagOptionsItem>()
     val tags = note!!.getTagUUIDs()
-    for (tag in instance.tagsRepository.getAll()) {
+    for (tag in data.tags.getAll()) {
       options.add(
         LithoTagOptionsItem(
           tag = tag,

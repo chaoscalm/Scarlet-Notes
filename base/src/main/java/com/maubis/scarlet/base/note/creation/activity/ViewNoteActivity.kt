@@ -12,9 +12,9 @@ import com.facebook.litho.LithoView
 import com.github.bijoysingh.starter.recyclerview.MultiRecyclerViewControllerItem
 import com.github.bijoysingh.starter.recyclerview.RecyclerViewBuilder
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ScarletApplication.Companion.appPreferences
-import com.maubis.scarlet.base.config.ScarletApplication.Companion.appTheme
-import com.maubis.scarlet.base.config.ScarletApplication.Companion.instance
+import com.maubis.scarlet.base.config.ScarletApp.Companion.appPreferences
+import com.maubis.scarlet.base.config.ScarletApp.Companion.appTheme
+import com.maubis.scarlet.base.config.ScarletApp.Companion.data
 import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.core.format.FormatBuilder
 import com.maubis.scarlet.base.core.format.FormatType
@@ -90,7 +90,7 @@ open class ViewAdvancedNoteActivity : SecuredActivity(), INoteOptionSheetActivit
         noteId = savedInstanceState.getInt(INTENT_KEY_NOTE_ID, 0)
       }
       if (noteId != 0) {
-        note = instance.notesRepository.getByID(noteId)
+        note = data.notes.getByID(noteId)
       }
       if (note === null) {
         note = NoteBuilder().emptyNote(sNoteDefaultColor)
@@ -119,7 +119,7 @@ open class ViewAdvancedNoteActivity : SecuredActivity(), INoteOptionSheetActivit
 
   protected open fun onResumeAction() {
     GlobalScope.launch(Dispatchers.IO) {
-      note = instance.notesRepository.getByID(intent.getIntExtra(INTENT_KEY_NOTE_ID, 0))
+      note = data.notes.getByID(intent.getIntExtra(INTENT_KEY_NOTE_ID, 0))
       when {
         note == null -> finish()
         else -> GlobalScope.launch(Dispatchers.Main) { setNote() }

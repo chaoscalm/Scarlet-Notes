@@ -4,8 +4,8 @@ import android.app.IntentService
 import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
-import com.maubis.scarlet.base.config.ScarletApplication
-import com.maubis.scarlet.base.config.ScarletApplication.Companion.instance
+import com.maubis.scarlet.base.config.ScarletApp
+import com.maubis.scarlet.base.config.ScarletApp.Companion.data
 import com.maubis.scarlet.base.support.INTENT_KEY_ACTION
 import com.maubis.scarlet.base.support.INTENT_KEY_NOTE_ID
 import com.maubis.scarlet.base.support.utils.logNonCriticalError
@@ -32,16 +32,16 @@ class NotificationIntentService : IntentService("NotificationIntentService") {
       return
     }
 
-    val note = instance.notesRepository.getByID(noteId)
+    val note = data.notes.getByID(noteId)
     if (note === null) {
       return
     }
 
     when (action) {
-      NoteAction.COPY -> ScarletApplication.instance.noteActions(note).copy(context)
-      NoteAction.SHARE -> ScarletApplication.instance.noteActions(note).share(context)
+      NoteAction.COPY -> ScarletApp.data.noteActions(note).copy(context)
+      NoteAction.SHARE -> ScarletApp.data.noteActions(note).share(context)
       NoteAction.DELETE -> {
-        ScarletApplication.instance.noteActions(note).softDelete(context)
+        ScarletApp.data.noteActions(note).softDelete(context)
         val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.cancel(note.uid)
       }

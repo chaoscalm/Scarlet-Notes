@@ -12,10 +12,10 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.facebook.litho.ComponentContext
 import com.facebook.litho.LithoView
 import com.github.bijoysingh.starter.recyclerview.RecyclerViewBuilder
-import com.maubis.scarlet.base.config.ScarletApplication
-import com.maubis.scarlet.base.config.ScarletApplication.Companion.appPreferences
-import com.maubis.scarlet.base.config.ScarletApplication.Companion.appTheme
-import com.maubis.scarlet.base.config.ScarletApplication.Companion.instance
+import com.maubis.scarlet.base.config.ScarletApp
+import com.maubis.scarlet.base.config.ScarletApp.Companion.appPreferences
+import com.maubis.scarlet.base.config.ScarletApp.Companion.appTheme
+import com.maubis.scarlet.base.config.ScarletApp.Companion.data
 import com.maubis.scarlet.base.core.note.NoteState
 import com.maubis.scarlet.base.database.room.folder.Folder
 import com.maubis.scarlet.base.database.room.note.Note
@@ -104,10 +104,10 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
       state.colors = savedInstanceState.getIntegerArrayList(SEARCH_COLORS) ?: ArrayList()
       state.mode = HomeNavigationMode.values()[savedInstanceState.getInt(NAVIGATION_MODE)]
       savedInstanceState.getString(CURRENT_FOLDER_UUID)?.let {
-        state.currentFolder = instance.foldersRepository.getByUUID(it)
+        state.currentFolder = data.folders.getByUUID(it)
       }
       savedInstanceState.getStringArrayList(TAGS_UUIDS)?.forEach {
-        instance.tagsRepository.getByUUID(it)?.let { state.tags.add(it) }
+        data.tags.getByUUID(it)?.let { state.tags.add(it) }
       }
     }
   }
@@ -171,7 +171,7 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
 
     val titleColor = appTheme.get(ThemeColorType.SECONDARY_TEXT)
     toolbarTitle.setTextColor(titleColor)
-    toolbarTitle.typeface = ScarletApplication.appTypeface.heading()
+    toolbarTitle.typeface = ScarletApp.appTypeface.heading()
 
     val toolbarIconColor = appTheme.get(ThemeColorType.SECONDARY_TEXT)
     toolbarSearchIcon.setColorFilter(toolbarIconColor)
@@ -290,7 +290,7 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
 
     val allNotes = unifiedSearchWithoutFolder(state)
     val directAcceptableFolders = filterDirectlyValidFolders(state)
-    allItems.addAll(instance.foldersRepository.getAll()
+    allItems.addAll(data.folders.getAll()
                       .map {
                         GlobalScope.async(Dispatchers.IO) {
                           val isDirectFolder = directAcceptableFolders.contains(it)

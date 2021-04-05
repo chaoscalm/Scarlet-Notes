@@ -1,6 +1,6 @@
 package com.maubis.scarlet.base.database
 
-import com.maubis.scarlet.base.config.ScarletApplication
+import com.maubis.scarlet.base.config.ScarletApp
 import com.maubis.scarlet.base.database.room.tag.Tag
 import com.maubis.scarlet.base.database.room.tag.TagDao
 import java.util.concurrent.ConcurrentHashMap
@@ -70,6 +70,6 @@ class TagsRepository {
   }
 
   fun database(): TagDao {
-    return ScarletApplication.instance.database.tags()
+    return ScarletApp.data.database.tags()
   }
 }

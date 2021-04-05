@@ -1,6 +1,6 @@
 package com.maubis.scarlet.base.database
 
-import com.maubis.scarlet.base.config.ScarletApplication
+import com.maubis.scarlet.base.config.ScarletApp
 import com.maubis.scarlet.base.core.note.INoteContainer
 import com.maubis.scarlet.base.database.room.note.Note
 import com.maubis.scarlet.base.database.room.note.NoteDao
@@ -111,6 +111,6 @@ class NotesRepository {
   }
 
   fun database(): NoteDao {
-    return ScarletApplication.instance.database.notes()
+    return ScarletApp.data.database.notes()
   }
 }

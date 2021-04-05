@@ -7,7 +7,7 @@ import androidx.core.content.ContextCompat
 import com.github.bijoysingh.starter.util.DimensionManager
 import com.maubis.markdown.MarkdownConfig
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ScarletApplication.Companion.appPreferences
+import com.maubis.scarlet.base.config.ScarletApp.Companion.appPreferences
 import com.maubis.scarlet.base.support.utils.OsVersionUtils
 import com.maubis.scarlet.base.support.utils.logNonCriticalError
 import java.lang.ref.WeakReference

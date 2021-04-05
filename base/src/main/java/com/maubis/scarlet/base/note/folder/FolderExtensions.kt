@@ -1,20 +1,20 @@
 package com.maubis.scarlet.base.note.folder
 
-import com.maubis.scarlet.base.config.ScarletApplication
-import com.maubis.scarlet.base.config.ScarletApplication.Companion.instance
+import com.maubis.scarlet.base.config.ScarletApp
+import com.maubis.scarlet.base.config.ScarletApp.Companion.data
 import com.maubis.scarlet.base.database.room.folder.Folder
 import com.maubis.scarlet.base.support.utils.dateFormat
 import java.util.*
 
 fun Folder.saveIfUnique() {
-  val existing = instance.foldersRepository.getByTitle(title)
+  val existing = data.folders.getByTitle(title)
   if (existing !== null) {
     this.uid = existing.uid
     this.uuid = existing.uuid
     return
   }
 
-  val existingByUUID = instance.foldersRepository.getByUUID(uuid)
+  val existingByUUID = data.folders.getByUUID(uuid)
   if (existingByUUID != null) {
     this.uid = existingByUUID.uid
     this.title = existingByUUID.title
@@ -42,9 +42,9 @@ fun Folder.getDisplayTime(): String {
  **************************************************************************************/
 
 fun Folder.save() {
-  ScarletApplication.instance.folderActions(this).save()
+  ScarletApp.data.folderActions(this).save()
 }
 
 fun Folder.delete() {
-  ScarletApplication.instance.folderActions(this).delete()
+  ScarletApp.data.folderActions(this).delete()
 }

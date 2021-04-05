@@ -14,10 +14,10 @@ import com.maubis.scarlet.base.support.utils.DateFormatUtils
 import com.maubis.scarlet.base.support.utils.ImageCache
 import com.maubis.scarlet.base.support.utils.dateFormat
 
-class ScarletApplication : Application() {
+class ScarletApp : Application() {
   override fun onCreate() {
     super.onCreate()
-    instance = ApplicationConfig(this)
+    data = ApplicationData(this)
 
     appPreferences = VersionedStore.get(this, "USER_PREFERENCES", 1)
 
@@ -30,8 +30,8 @@ class ScarletApplication : Application() {
     }
 
     // Setup Image Cache
-    appImageStorage = NoteImage(this)
-    appImageCache = ImageCache(this)
+    imageStorage = NoteImage(this)
+    imageCache = ImageCache(this)
 
     // Setup Application Theme
     appTheme = ThemeManager()
@@ -40,10 +40,10 @@ class ScarletApplication : Application() {
   }
 
   companion object {
-    lateinit var instance: ApplicationConfig
+    lateinit var data: ApplicationData
 
-    lateinit var appImageStorage: NoteImage
-    lateinit var appImageCache: ImageCache
+    lateinit var imageStorage: NoteImage
+    lateinit var imageCache: ImageCache
 
     lateinit var appPreferences: Store
 

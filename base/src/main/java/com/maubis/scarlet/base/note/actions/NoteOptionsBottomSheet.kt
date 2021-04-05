@@ -13,8 +13,8 @@ import androidx.core.content.ContextCompat
 import com.github.bijoysingh.starter.util.RandomHelper
 import com.maubis.markdown.Markdown
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ScarletApplication
-import com.maubis.scarlet.base.config.ScarletApplication.Companion.appTypeface
+import com.maubis.scarlet.base.config.ScarletApp
+import com.maubis.scarlet.base.config.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.core.note.NoteBuilder
 import com.maubis.scarlet.base.core.note.NoteState
 import com.maubis.scarlet.base.core.note.getNoteState
@@ -439,7 +439,7 @@ class NoteOptionsBottomSheet : GridBottomSheetBase() {
         subtitle = R.string.backup_note_enable,
         icon = R.drawable.ic_action_backup,
         listener = View.OnClickListener {
-          ScarletApplication.instance.noteActions(note).includeInBackups(activity)
+          ScarletApp.data.noteActions(note).includeInBackups(activity)
           activity.updateNote(note)
           dismiss()
         },
@@ -452,7 +452,7 @@ class NoteOptionsBottomSheet : GridBottomSheetBase() {
         subtitle = R.string.backup_note_disable,
         icon = R.drawable.ic_action_backup_no,
         listener = View.OnClickListener {
-          ScarletApplication.instance.noteActions(note).excludeFromBackups(activity)
+          ScarletApp.data.noteActions(note).excludeFromBackups(activity)
           activity.updateNote(note)
           dismiss()
         },

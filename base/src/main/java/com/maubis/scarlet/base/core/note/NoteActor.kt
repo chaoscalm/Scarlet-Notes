@@ -6,9 +6,9 @@ import android.os.AsyncTask
 import com.github.bijoysingh.starter.util.IntentUtils
 import com.github.bijoysingh.starter.util.TextUtils
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ScarletApplication
-import com.maubis.scarlet.base.config.ScarletApplication.Companion.appImageStorage
-import com.maubis.scarlet.base.config.ScarletApplication.Companion.instance
+import com.maubis.scarlet.base.config.ScarletApp
+import com.maubis.scarlet.base.config.ScarletApp.Companion.data
+import com.maubis.scarlet.base.config.ScarletApp.Companion.imageStorage
 import com.maubis.scarlet.base.core.format.FormatBuilder
 import com.maubis.scarlet.base.database.room.note.Note
 import com.maubis.scarlet.base.main.activity.WidgetConfigureActivity
@@ -38,9 +38,9 @@ class NoteActor(val note: Note) {
   }
 
   fun save(context: Context) {
-    val id = instance.notesRepository.database().insertNote(note)
+    val id = data.notes.database().insertNote(note)
     note.uid = if (note.isUnsaved()) id.toInt() else note.uid
-    instance.notesRepository.notifyInsertNote(note)
+    data.notes.notifyInsertNote(note)
     GlobalScope.launch {
       onNoteUpdated(context)
     }
@@ -65,12 +65,12 @@ class NoteActor(val note: Note) {
   }
 
   fun delete(context: Context) {
-    appImageStorage.deleteAllFiles(note)
+    imageStorage.deleteAllFiles(note)
     if (note.isUnsaved()) {
       return
     }
-    instance.notesRepository.database().delete(note)
-    instance.notesRepository.notifyDelete(note)
+    data.notes.database().delete(note)
+    data.notes.notifyDelete(note)
     note.description = FormatBuilder().getDescription(ArrayList())
     note.uid = 0
     AsyncTask.execute {
@@ -83,7 +83,7 @@ class NoteActor(val note: Note) {
     notifyAllChanged(context)
     val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager?
     notificationManager?.cancel(note.uid)
-    ScarletApplication.appImageCache.deleteNote(note.uuid)
+    ScarletApp.imageCache.deleteNote(note.uuid)
   }
 
   private fun onNoteUpdated(context: Context) {

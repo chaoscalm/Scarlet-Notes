@@ -12,9 +12,9 @@ import com.facebook.yoga.YogaAlign
 import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.MainActivity
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ScarletApplication.Companion.appTheme
-import com.maubis.scarlet.base.config.ScarletApplication.Companion.appTypeface
-import com.maubis.scarlet.base.config.ScarletApplication.Companion.instance
+import com.maubis.scarlet.base.config.ScarletApp.Companion.appTheme
+import com.maubis.scarlet.base.config.ScarletApp.Companion.appTypeface
+import com.maubis.scarlet.base.config.ScarletApp.Companion.data
 import com.maubis.scarlet.base.core.tag.TagBuilder
 import com.maubis.scarlet.base.database.room.tag.Tag
 import com.maubis.scarlet.base.main.HomeNavigationMode
@@ -231,10 +231,10 @@ class HomeOptionsBottomSheet : LithoBottomSheet() {
   private fun getTagOptions(): List<LithoTagOptionsItem> {
     val activity = context as MainActivity
     val options = ArrayList<LithoTagOptionsItem>()
-    for (tag in instance.tagsRepository.getAll()) {
+    for (tag in data.tags.getAll()) {
       options.add(LithoTagOptionsItem(
         tag = tag,
-        usages = instance.notesRepository.getNoteCountByTag(tag.uuid),
+        usages = data.notes.getNoteCountByTag(tag.uuid),
         listener = {
           activity.openTag(tag)
           dismiss()

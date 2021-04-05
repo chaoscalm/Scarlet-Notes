@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.github.bijoysingh.starter.recyclerview.RecyclerViewHolder
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ScarletApplication.Companion.appTypeface
+import com.maubis.scarlet.base.config.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.main.recycler.setFullSpan
 import com.maubis.scarlet.base.support.recycler.RecyclerItem
 import com.maubis.scarlet.base.support.ui.CircleDrawable

@@ -2,7 +2,7 @@ package com.maubis.scarlet.base.support.ui
 
 import android.graphics.*
 import com.facebook.litho.drawable.ComparableDrawable
-import com.maubis.scarlet.base.config.ScarletApplication.Companion.appTheme
+import com.maubis.scarlet.base.config.ScarletApp.Companion.appTheme
 
 class LithoCircleDrawable(color: Int, alpha: Int = 255, val showBorder: Boolean = false) : ComparableDrawable() {
   private val mPaint: Paint

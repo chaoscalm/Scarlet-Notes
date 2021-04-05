@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.github.bijoysingh.uibasics.views.UITextView
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ScarletApplication.Companion.appImageStorage
+import com.maubis.scarlet.base.config.ScarletApp.Companion.imageStorage
 import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.core.note.ImageLoadCallback
 import com.maubis.scarlet.base.main.sheets.openDeleteFormatDialog
@@ -85,7 +85,7 @@ class FormatImageViewHolder(context: Context, view: View) : FormatViewHolderBase
     when {
       fileName.isBlank() -> image.visibility = View.GONE
       else -> {
-        val file = appImageStorage.getFile(config.noteUUID, data)
+        val file = imageStorage.getFile(config.noteUUID, data)
         when (file.exists()) {
           true -> populateFile(file)
           false -> {
@@ -100,7 +100,7 @@ class FormatImageViewHolder(context: Context, view: View) : FormatViewHolderBase
   }
 
   fun populateFile(file: File) {
-    appImageStorage.loadPersistentFileToImageView(image, file, object : ImageLoadCallback {
+    imageStorage.loadPersistentFileToImageView(image, file, object : ImageLoadCallback {
       override fun onSuccess() {
         noImageMessage.visibility = View.GONE
       }

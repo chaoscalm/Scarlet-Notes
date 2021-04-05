@@ -11,7 +11,7 @@ import androidx.core.app.NotificationCompat
 import com.github.bijoysingh.starter.util.TextUtils
 import com.maubis.scarlet.base.MainActivity
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ScarletApplication.Companion.appTheme
+import com.maubis.scarlet.base.config.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.database.room.note.Note
 import com.maubis.scarlet.base.note.creation.activity.CreateNoteActivity
 import com.maubis.scarlet.base.note.creation.activity.INTENT_KEY_NOTE_ID
