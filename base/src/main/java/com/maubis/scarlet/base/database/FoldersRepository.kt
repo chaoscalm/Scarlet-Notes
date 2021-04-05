@@ -1,11 +1,10 @@
 package com.maubis.scarlet.base.database
 
-import com.maubis.scarlet.base.config.ScarletApp
 import com.maubis.scarlet.base.database.room.folder.Folder
 import com.maubis.scarlet.base.database.room.folder.FolderDao
 import java.util.concurrent.ConcurrentHashMap
 
-class FoldersRepository {
+class FoldersRepository(val database: FolderDao) {
 
   val folders = ConcurrentHashMap<String, Folder>()
 
@@ -60,16 +59,12 @@ class FoldersRepository {
     if (folders.isNotEmpty()) {
       return
     }
-    database().all.forEach {
+    database.all.forEach {
       folders[it.uuid] = it
     }
   }
 
   fun clear() {
     folders.clear()
-  }
-
-  fun database(): FolderDao {
-    return ScarletApp.data.database.folders()
   }
 }

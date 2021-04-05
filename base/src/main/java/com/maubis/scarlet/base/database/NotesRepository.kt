@@ -1,13 +1,12 @@
 package com.maubis.scarlet.base.database
 
-import com.maubis.scarlet.base.config.ScarletApp
 import com.maubis.scarlet.base.core.note.INoteContainer
 import com.maubis.scarlet.base.database.room.note.Note
 import com.maubis.scarlet.base.database.room.note.NoteDao
 import com.maubis.scarlet.base.note.applySanityChecks
 import java.util.concurrent.ConcurrentHashMap
 
-class NotesRepository {
+class NotesRepository(val database: NoteDao) {
 
   val notes = ConcurrentHashMap<String, Note>()
 
@@ -86,10 +85,6 @@ class NotesRepository {
     return notes.values.map { it.updateTimestamp }.maxOrNull() ?: 0
   }
 
-  fun unlockAll() {
-    maybeLoadFromDB()
-  }
-
   fun existingMatch(noteContainer: INoteContainer): Note? {
     maybeLoadFromDB()
     return getByUUID(noteContainer.uuid())
@@ -100,7 +95,7 @@ class NotesRepository {
     if (notes.isNotEmpty()) {
       return
     }
-    database().all.forEach {
+    database.all.forEach {
       it.applySanityChecks()
       notes[it.uuid] = it
     }
@@ -108,9 +103,5 @@ class NotesRepository {
 
   fun clear() {
     notes.clear()
-  }
-
-  fun database(): NoteDao {
-    return ScarletApp.data.database.notes()
   }
 }

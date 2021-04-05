@@ -14,11 +14,11 @@ import com.maubis.scarlet.base.database.room.tag.Tag
 import com.maubis.scarlet.base.database.room.widget.WidgetDao
 
 class ApplicationData(context: Context) {
-  val database: AppDatabase = AppDatabase.createDatabase(context)
+  private val database: AppDatabase = AppDatabase.createDatabase(context)
 
-  val notes = NotesRepository()
-  val tags = TagsRepository()
-  val folders = FoldersRepository()
+  val notes = NotesRepository(database.notes())
+  val tags = TagsRepository(database.tags())
+  val folders = FoldersRepository(database.folders())
   val widgets: WidgetDao = database.widgets()
 
   fun noteActions(note: Note) = NoteActor(note)

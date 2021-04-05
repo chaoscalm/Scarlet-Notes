@@ -1,11 +1,10 @@
 package com.maubis.scarlet.base.database
 
-import com.maubis.scarlet.base.config.ScarletApp
 import com.maubis.scarlet.base.database.room.tag.Tag
 import com.maubis.scarlet.base.database.room.tag.TagDao
 import java.util.concurrent.ConcurrentHashMap
 
-class TagsRepository {
+class TagsRepository(val database: TagDao) {
 
   val tags = ConcurrentHashMap<String, Tag>()
 
@@ -60,16 +59,12 @@ class TagsRepository {
     if (tags.isNotEmpty()) {
       return
     }
-    database().all.forEach {
+    database.all.forEach {
       tags[it.uuid] = it
     }
   }
 
   fun clear() {
     tags.clear()
-  }
-
-  fun database(): TagDao {
-    return ScarletApp.data.database.tags()
   }
 }

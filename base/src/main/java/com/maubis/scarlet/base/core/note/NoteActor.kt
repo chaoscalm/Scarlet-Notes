@@ -38,7 +38,7 @@ class NoteActor(val note: Note) {
   }
 
   fun save(context: Context) {
-    val id = data.notes.database().insertNote(note)
+    val id = data.notes.database.insertNote(note)
     note.uid = if (note.isUnsaved()) id.toInt() else note.uid
     data.notes.notifyInsertNote(note)
     GlobalScope.launch {
@@ -69,7 +69,7 @@ class NoteActor(val note: Note) {
     if (note.isUnsaved()) {
       return
     }
-    data.notes.database().delete(note)
+    data.notes.database.delete(note)
     data.notes.notifyDelete(note)
     note.description = FormatBuilder().getDescription(ArrayList())
     note.uid = 0

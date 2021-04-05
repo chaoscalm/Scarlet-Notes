@@ -94,7 +94,7 @@ class HouseKeeper(val context: Context) {
   private fun migrateZeroUidNotes() {
     val note = data.notes.getByID(0)
     if (note != null) {
-      data.notes.database().delete(note)
+      data.notes.database.delete(note)
       data.notes.notifyDelete(note)
       note.uid = null
       note.save(context)
