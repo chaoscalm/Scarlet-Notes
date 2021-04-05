@@ -1,19 +1,35 @@
 package com.maubis.scarlet.base.database
 
+import com.maubis.scarlet.base.core.tag.isUnsaved
 import com.maubis.scarlet.base.database.room.tag.Tag
 import com.maubis.scarlet.base.database.room.tag.TagDao
 import java.util.concurrent.ConcurrentHashMap
 
-class TagsRepository(val database: TagDao) {
+class TagsRepository(private val database: TagDao) {
 
-  val tags = ConcurrentHashMap<String, Tag>()
+  private val tags = ConcurrentHashMap<String, Tag>()
 
-  fun notifyInsertTag(tag: Tag) {
+  fun save(tag: Tag) {
+    val id = database.insertTag(tag)
+    tag.uid = if (tag.isUnsaved()) id.toInt() else tag.uid
+    notifyInsertTag(tag)
+  }
+
+  fun delete(tag: Tag) {
+    if (tag.isUnsaved()) {
+      return
+    }
+    database.delete(tag)
+    notifyDelete(tag)
+    tag.uid = 0
+  }
+
+  private fun notifyInsertTag(tag: Tag) {
     maybeLoadFromDB()
     tags[tag.uuid] = tag
   }
 
-  fun notifyDelete(tag: Tag) {
+  private fun notifyDelete(tag: Tag) {
     maybeLoadFromDB()
     tags.remove(tag.uuid)
   }
@@ -55,7 +71,7 @@ class TagsRepository(val database: TagDao) {
   }
 
   @Synchronized
-  fun maybeLoadFromDB() {
+  private fun maybeLoadFromDB() {
     if (tags.isNotEmpty()) {
       return
     }
