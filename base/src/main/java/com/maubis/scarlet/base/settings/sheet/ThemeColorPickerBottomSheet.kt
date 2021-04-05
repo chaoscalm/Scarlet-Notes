@@ -12,7 +12,6 @@ import com.facebook.yoga.YogaAlign
 import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
-import com.maubis.scarlet.base.home.MainActivityActions
 import com.maubis.scarlet.base.support.sheets.LithoBottomSheet
 import com.maubis.scarlet.base.support.sheets.LithoOptionsItem
 import com.maubis.scarlet.base.support.sheets.OptionItemLayout
@@ -119,10 +118,9 @@ class ThemeColorPickerBottomSheet : LithoBottomSheet() {
               actionIcon = 0
             ))
           .onClick {
-            val context = componentContext.androidContext as AppCompatActivity
+            val activity = componentContext.androidContext as AppCompatActivity
             sThemeDarkenNoteColor = !sThemeDarkenNoteColor
-            context.startActivity(MainActivityActions.COLOR_PICKER.intent(context))
-            context.finish()
+            activity.recreate()
           })
     }
 

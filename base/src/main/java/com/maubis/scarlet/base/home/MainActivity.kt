@@ -1,6 +1,5 @@
 package com.maubis.scarlet.base.home
 
-import android.content.res.Configuration
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -68,16 +67,15 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
     super.onCreate(savedInstanceState)
     views = ActivityMainBinding.inflate(layoutInflater)
     setContentView(views.root)
-    handleIntent()
-
-    setupMainToolbar()
-    setupRecyclerView()
-    setListeners()
 
     if (sThemeIsAutomatic) {
       setThemeFromSystem(this)
     }
     appTheme.notifyChange(this)
+
+    setupMainToolbar()
+    setupRecyclerView()
+    setListeners()
   }
 
   override fun onSaveInstanceState(outState: Bundle) {
@@ -106,12 +104,6 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
         data.tags.getByUUID(it)?.let { state.tags.add(it) }
       }
     }
-  }
-
-  override fun onConfigurationChanged(configuration: Configuration) {
-    super.onConfigurationChanged(configuration)
-    startActivity(MainActivityActions.NIL.intent(this))
-    finish()
   }
 
   private fun setListeners() {
