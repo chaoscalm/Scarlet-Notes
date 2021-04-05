@@ -31,7 +31,6 @@ import com.maubis.scarlet.base.settings.sheet.ColorPickerDefaultController
 import com.maubis.scarlet.base.support.recycler.SimpleItemTouchHelper
 import com.maubis.scarlet.base.support.specs.ToolbarColorConfig
 import com.maubis.scarlet.base.support.utils.logAndMaybeDisplayError
-import kotlinx.android.synthetic.main.activity_advanced_note.*
 import pl.aprilapps.easyphotopicker.DefaultCallback
 import pl.aprilapps.easyphotopicker.EasyImage
 import java.io.File
@@ -79,7 +78,7 @@ open class CreateNoteActivity : ViewAdvancedNoteActivity() {
   private fun setTouchListener() {
     val callback = SimpleItemTouchHelper(adapter)
     val touchHelper = ItemTouchHelper(callback)
-    touchHelper.attachToRecyclerView(formatsView)
+    touchHelper.attachToRecyclerView(views.formatsRecyclerView)
   }
 
   override fun setNote() {
@@ -111,9 +110,9 @@ open class CreateNoteActivity : ViewAdvancedNoteActivity() {
   }
 
   override fun setTopToolbar() {
-    lithoTopToolbar.removeAllViews()
+    views.lithoTopToolbar.removeAllViews()
     val componentContext = ComponentContext(this)
-    lithoTopToolbar.addView(
+    views.lithoTopToolbar.addView(
       LithoView.create(
         componentContext,
         NoteCreationTopBar.create(componentContext).build()))
@@ -121,8 +120,8 @@ open class CreateNoteActivity : ViewAdvancedNoteActivity() {
 
   override fun setBottomToolbar() {
     val componentContext = ComponentContext(this)
-    lithoBottomToolbar.removeAllViews()
-    lithoBottomToolbar.addView(
+    views.lithoBottomToolbar.removeAllViews()
+    views.lithoBottomToolbar.addView(
       LithoView.create(
         componentContext,
         NoteCreationBottomBar.create(componentContext)
@@ -256,7 +255,7 @@ open class CreateNoteActivity : ViewAdvancedNoteActivity() {
 
     val newPosition = position + 1
     addEmptyItem(newPosition, type)
-    formatsView.layoutManager?.scrollToPosition(newPosition)
+    views.formatsRecyclerView.layoutManager?.scrollToPosition(newPosition)
     focus(newPosition)
   }
 
@@ -343,9 +342,9 @@ open class CreateNoteActivity : ViewAdvancedNoteActivity() {
   }
 
   private fun findViewHolderAtPositionAggressively(position: Int): RecyclerView.ViewHolder? {
-    var holder: RecyclerView.ViewHolder? = formatsView.findViewHolderForAdapterPosition(position)
+    var holder: RecyclerView.ViewHolder? = views.formatsRecyclerView.findViewHolderForAdapterPosition(position)
     if (holder == null) {
-      holder = formatsView.findViewHolderForLayoutPosition(position)
+      holder = views.formatsRecyclerView.findViewHolderForLayoutPosition(position)
       if (holder == null) {
         return null
       }

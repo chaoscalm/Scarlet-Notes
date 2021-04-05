@@ -5,13 +5,10 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.view.View
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.facebook.litho.ComponentContext
 import com.facebook.litho.LithoView
 import com.github.bijoysingh.starter.recyclerview.MultiRecyclerViewControllerItem
-import com.github.bijoysingh.starter.recyclerview.RecyclerViewBuilder
-import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appPreferences
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.data
@@ -21,6 +18,7 @@ import com.maubis.scarlet.base.core.format.FormatType
 import com.maubis.scarlet.base.core.format.sectionPreservingSort
 import com.maubis.scarlet.base.core.note.*
 import com.maubis.scarlet.base.database.room.note.Note
+import com.maubis.scarlet.base.databinding.ActivityAdvancedNoteBinding
 import com.maubis.scarlet.base.note.*
 import com.maubis.scarlet.base.note.actions.NoteOptionsBottomSheet
 import com.maubis.scarlet.base.note.activity.INoteOptionSheetActivity
@@ -39,9 +37,7 @@ import com.maubis.scarlet.base.settings.sheet.sUIUseNoteColorAsBackground
 import com.maubis.scarlet.base.support.specs.ToolbarColorConfig
 import com.maubis.scarlet.base.support.ui.*
 import com.maubis.scarlet.base.support.ui.ColorUtil.darkOrDarkerColor
-import com.maubis.scarlet.base.support.utils.bind
 import com.maubis.scarlet.base.widget.getPendingIntentWithStack
-import kotlinx.android.synthetic.main.activity_advanced_note.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -64,24 +60,20 @@ open class ViewAdvancedNoteActivity : SecuredActivity(), INoteOptionSheetActivit
   protected lateinit var formats: MutableList<Format>
   protected val formatsInitialised = AtomicBoolean(false)
 
-  protected lateinit var context: Context
+  protected lateinit var views: ActivityAdvancedNoteBinding
   protected lateinit var adapter: FormatAdapter
-  protected lateinit var formatsView: RecyclerView
 
   val creationFinished = AtomicBoolean(false)
   val colorConfig = NoteViewColorConfig()
   var lastKnownNoteColor = 0
-
-  val rootView: View by bind(R.id.root_layout)
 
   protected open val editModeValue: Boolean
     get() = false
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_advanced_note)
-    context = this
-
+    views = ActivityAdvancedNoteBinding.inflate(layoutInflater)
+    setContentView(views.root)
     setRecyclerView()
 
     GlobalScope.launch(Dispatchers.IO) {
@@ -182,10 +174,9 @@ open class ViewAdvancedNoteActivity : SecuredActivity(), INoteOptionSheetActivit
 
   private fun setRecyclerView() {
     adapter = FormatAdapter(this)
-    formatsView = RecyclerViewBuilder(this)
-      .setAdapter(adapter)
-      .setView(this, R.id.advanced_note_recycler)
-      .build()
+    views.formatsRecyclerView.adapter = adapter
+    views.formatsRecyclerView.layoutManager = LinearLayoutManager(this)
+    views.formatsRecyclerView.setHasFixedSize(false)
   }
 
   open fun setFormat(format: Format) {
@@ -224,7 +215,7 @@ open class ViewAdvancedNoteActivity : SecuredActivity(), INoteOptionSheetActivit
   }
 
   fun openEditor() {
-    context.startActivity(NoteIntentRouterActivity.edit(context, note!!))
+    startActivity(NoteIntentRouterActivity.edit(this, note!!))
   }
 
   protected open fun notifyToolbarColor() {
@@ -243,21 +234,21 @@ open class ViewAdvancedNoteActivity : SecuredActivity(), INoteOptionSheetActivit
       }
       ColorUtil.isLightColored(noteColor) -> {
         colorConfig.backgroundColor = noteColor
-        colorConfig.toolbarIconColor = appTheme.get(context, Theme.DARK, ThemeColorType.TOOLBAR_ICON)
+        colorConfig.toolbarIconColor = appTheme.get(this, Theme.DARK, ThemeColorType.TOOLBAR_ICON)
         colorConfig.statusBarColor = darkOrDarkerColor(noteColor)
         colorConfig.toolbarBackgroundColor = colorConfig.statusBarColor
       }
       else -> {
         colorConfig.backgroundColor = noteColor
-        colorConfig.toolbarIconColor = appTheme.get(context, Theme.DARK, ThemeColorType.TOOLBAR_ICON)
+        colorConfig.toolbarIconColor = appTheme.get(this, Theme.DARK, ThemeColorType.TOOLBAR_ICON)
         colorConfig.statusBarColor = darkOrDarkerColor(noteColor)
         colorConfig.toolbarBackgroundColor = colorConfig.statusBarColor
       }
     }
 
     setSystemTheme(colorConfig.statusBarColor)
-    rootView.setBackgroundColor(colorConfig.backgroundColor)
-    formatsView.setBackgroundColor(colorConfig.backgroundColor)
+    views.root.setBackgroundColor(colorConfig.backgroundColor)
+    views.formatsRecyclerView.setBackgroundColor(colorConfig.backgroundColor)
 
     resetBundle()
     adapter.notifyDataSetChanged()
@@ -267,9 +258,9 @@ open class ViewAdvancedNoteActivity : SecuredActivity(), INoteOptionSheetActivit
   }
 
   protected open fun setBottomToolbar() {
-    lithoBottomToolbar.removeAllViews()
+    views.lithoBottomToolbar.removeAllViews()
     val componentContext = ComponentContext(this)
-    lithoBottomToolbar.addView(
+    views.lithoBottomToolbar.addView(
       LithoView.create(
         componentContext,
         NoteViewBottomBar.create(componentContext)
@@ -278,9 +269,9 @@ open class ViewAdvancedNoteActivity : SecuredActivity(), INoteOptionSheetActivit
   }
 
   protected open fun setTopToolbar() {
-    lithoTopToolbar.removeAllViews()
+    views.lithoTopToolbar.removeAllViews()
     val componentContext = ComponentContext(this)
-    lithoTopToolbar.addView(
+    views.lithoTopToolbar.addView(
       LithoView.create(
         componentContext,
         NoteViewTopBar.create(componentContext).build()))
@@ -295,7 +286,7 @@ open class ViewAdvancedNoteActivity : SecuredActivity(), INoteOptionSheetActivit
       return
     }
     note!!.updateTimestamp = Calendar.getInstance().timeInMillis
-    note!!.save(context)
+    note!!.save(this)
   }
 
   fun notifyNoteChange() {
@@ -335,7 +326,7 @@ open class ViewAdvancedNoteActivity : SecuredActivity(), INoteOptionSheetActivit
       return intent
     }
 
-    fun getIntentWithStack(context: Context, note: Note): PendingIntent? {
+    fun getIntentWithStack(context: Context, note: Note): PendingIntent {
       val intent = Intent(context, ViewAdvancedNoteActivity::class.java)
       intent.putExtra(INTENT_KEY_NOTE_ID, note.uid)
       return getPendingIntentWithStack(context, 5000 + note.uid, intent)
@@ -356,7 +347,7 @@ open class ViewAdvancedNoteActivity : SecuredActivity(), INoteOptionSheetActivit
   }
 
   override fun moveItemToTrashOrDelete(note: Note) {
-    note.softDelete(context)
+    note.softDelete(this)
     finish()
   }
 
