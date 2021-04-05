@@ -23,10 +23,6 @@ fun Note.isEqual(note: Note): Boolean {
     && this.folder == note.folder
 }
 
-/**************************************************************************************
- ********************************* Object Functions ***********************************
- **************************************************************************************/
-
 fun Note.getFormats(): List<Format> {
   return FormatBuilder().getFormats(this.description)
 }
@@ -42,7 +38,7 @@ fun Note.getNoteState(): NoteState {
 
 fun Note.getMeta(): NoteMeta {
   try {
-    return Gson().fromJson<NoteMeta>(this.meta, NoteMeta::class.java) ?: NoteMeta()
+    return Gson().fromJson(this.meta, NoteMeta::class.java) ?: NoteMeta()
   } catch (exception: Exception) {
     logNonCriticalError(exception)
     return NoteMeta()

@@ -3,17 +3,12 @@ package com.maubis.scarlet.base.core.note
 import android.app.NotificationManager
 import android.content.Context
 import android.os.AsyncTask
-import com.github.bijoysingh.starter.util.IntentUtils
-import com.github.bijoysingh.starter.util.TextUtils
-import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.config.ScarletApp
 import com.maubis.scarlet.base.config.ScarletApp.Companion.data
 import com.maubis.scarlet.base.config.ScarletApp.Companion.imageStorage
 import com.maubis.scarlet.base.core.format.FormatBuilder
 import com.maubis.scarlet.base.database.room.note.Note
 import com.maubis.scarlet.base.main.activity.WidgetConfigureActivity
-import com.maubis.scarlet.base.note.getFullText
-import com.maubis.scarlet.base.note.getTitleForSharing
 import com.maubis.scarlet.base.note.mark
 import com.maubis.scarlet.base.note.save
 import com.maubis.scarlet.base.notification.NotificationConfig
@@ -25,18 +20,6 @@ import kotlinx.coroutines.launch
 import java.util.*
 
 class NoteActor(val note: Note) {
-  fun copy(context: Context) {
-    TextUtils.copyToClipboard(context, note.getFullText())
-  }
-
-  fun share(context: Context) {
-    IntentUtils.ShareBuilder(context)
-      .setSubject(note.getTitleForSharing())
-      .setText(note.getFullText())
-      .setChooserText(context.getString(R.string.share_using))
-      .share()
-  }
-
   fun save(context: Context) {
     val id = data.notes.database.insertNote(note)
     note.uid = if (note.isUnsaved()) id.toInt() else note.uid

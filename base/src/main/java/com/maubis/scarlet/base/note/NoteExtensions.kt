@@ -1,10 +1,13 @@
 package com.maubis.scarlet.base.note
 
 import android.content.Context
+import com.github.bijoysingh.starter.util.IntentUtils
+import com.github.bijoysingh.starter.util.TextUtils
 import com.google.gson.Gson
 import com.maubis.markdown.Markdown
 import com.maubis.markdown.MarkdownConfig
 import com.maubis.markdown.spannable.*
+import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.config.ScarletApp
 import com.maubis.scarlet.base.config.ScarletApp.Companion.data
 import com.maubis.scarlet.base.core.format.Format
@@ -267,10 +270,6 @@ fun Note.edit(context: Context) {
   context.startActivity(NoteIntentRouterActivity.edit(context, this))
 }
 
-fun Note.share(context: Context) {
-  ScarletApp.data.noteActions(this).share(context)
-}
-
 fun Note.hasImages(): Boolean {
   val imageFormats = getFormats().filter { it.formatType == FormatType.IMAGE }
   return imageFormats.isNotEmpty()
@@ -290,7 +289,15 @@ fun Note.shareImages(context: Context) {
 }
 
 fun Note.copy(context: Context) {
-  ScarletApp.data.noteActions(this).copy(context)
+  TextUtils.copyToClipboard(context, getFullText())
+}
+
+fun Note.share(context: Context) {
+  IntentUtils.ShareBuilder(context)
+          .setSubject(getTitleForSharing())
+          .setText(getFullText())
+          .setChooserText(context.getString(R.string.share_using))
+          .share()
 }
 
 /**************************************************************************************

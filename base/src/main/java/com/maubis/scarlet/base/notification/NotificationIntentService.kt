@@ -6,6 +6,8 @@ import android.content.Context
 import android.content.Intent
 import com.maubis.scarlet.base.config.ScarletApp
 import com.maubis.scarlet.base.config.ScarletApp.Companion.data
+import com.maubis.scarlet.base.note.copy
+import com.maubis.scarlet.base.note.share
 import com.maubis.scarlet.base.support.INTENT_KEY_ACTION
 import com.maubis.scarlet.base.support.INTENT_KEY_NOTE_ID
 import com.maubis.scarlet.base.support.utils.logNonCriticalError
@@ -38,8 +40,8 @@ class NotificationIntentService : IntentService("NotificationIntentService") {
     }
 
     when (action) {
-      NoteAction.COPY -> ScarletApp.data.noteActions(note).copy(context)
-      NoteAction.SHARE -> ScarletApp.data.noteActions(note).share(context)
+      NoteAction.COPY -> note.copy(context)
+      NoteAction.SHARE -> note.share(context)
       NoteAction.DELETE -> {
         ScarletApp.data.noteActions(note).softDelete(context)
         val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
