@@ -151,9 +151,6 @@
 
 
   <!-- Added for 4.3.8 -->
-  <string name="whats_new_title">Cosa c\'è di nuovo</string>
-  <string name="whats_new_subtitle">Scopri cosa c\'è di nuovo negli ultimi aggiornamenti dell\'app</string>
-  <string name="whats_new_translate">Traduci</string>
 
   <!-- Added for 4.5.3 -->
   <string name="format_action_copy">Copia</string>
@@ -255,12 +252,6 @@
   <string name="app_lock_title">Sblocca l\'app</string>
   <string name="app_lock_details_no_fingerprint">Inserisci il PIN di 4 cifre per effettuare lo sblocco</string>
   <string name="app_lock_details">Inserisci il PIN di 4 cifre o usa l\'impronta per effettuare lo sblocco</string>
-  <string name="install_pro_sheet_app_lock">Blocco dell\'app e sblocco singolo delle note.</string>
-  <string name="install_pro_sheet_app_themes">Più temi.</string>
-  <string name="install_pro_sheet_font_size">Selezione della dimensione del carattere.</string>
-  <string name="install_pro_sheet_latest_updates">Aggiornamenti e richieste più veloci.</string>
-  <string name="install_pro_sheet_widget_options">Più opzioni per i widget.</string>
-  <string name="install_pro_sheet_viewer_bg">Colore di sfondo dinamico del visualizzatore note.</string>
   <string name="security_option_ask_pin_always">Richiedi sempre il PIN</string>
   <string name="security_option_ask_pin_always_details">Richiedi il PIN per ciascuna nota protetta, anche se è stato già inserito</string>
   <string name="security_option_lock_app">Abilita blocco dell\'applicazione</string>
@@ -294,7 +285,6 @@
   <string name="theme_dark_notes_details">Rende automaticamente più scuri i colori delle note e delle cartelle</string>
   <string name="editor_option_skip_view_note">Salta visualizzatore note</string>
   <string name="editor_option_skip_view_note_details">Salta il visualizzatore delle note e passa direttamente all\'editor</string>
-  <string name="install_pro_sheet_note_options">Più azioni per le note.</string>
   <string name="security_option_biometrics_enabled">Sblocca con autenticazione biometrica</string>
   <string name="security_option_biometrics_enabled_subtitle">Consenti lo sblocco con un\'impronta digitale o altri identificatori biometrici</string>
   <string name="security_option_biometrics_disabled">Autenticazione biometrica disabilitata</string>

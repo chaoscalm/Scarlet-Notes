@@ -24,7 +24,6 @@ import com.maubis.scarlet.base.export.support.NoteExporter
 import com.maubis.scarlet.base.export.support.PermissionUtils
 import com.maubis.scarlet.base.main.*
 import com.maubis.scarlet.base.main.recycler.*
-import com.maubis.scarlet.base.main.sheets.WhatsNewBottomSheet
 import com.maubis.scarlet.base.main.specs.MainActivityBottomBar
 import com.maubis.scarlet.base.main.specs.MainActivityFolderBottomBar
 import com.maubis.scarlet.base.main.utils.MainSnackbar
@@ -45,10 +44,8 @@ import com.maubis.scarlet.base.settings.sheet.sNoteItemLineCount
 import com.maubis.scarlet.base.settings.sheet.sUIUseGridView
 import com.maubis.scarlet.base.support.database.HouseKeeperJob
 import com.maubis.scarlet.base.support.recycler.RecyclerItem
-import com.maubis.scarlet.base.support.sheets.openSheet
 import com.maubis.scarlet.base.support.specs.ToolbarColorConfig
 import com.maubis.scarlet.base.support.ui.*
-import com.maubis.scarlet.base.support.utils.shouldShowWhatsNewSheet
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.search_toolbar_main.*
 import kotlinx.android.synthetic.main.toolbar_main.*
@@ -85,10 +82,6 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
       setThemeFromSystem(this)
     }
     appTheme.notifyChange(this)
-
-    if (shouldShowWhatsNewSheet()) {
-      openSheet(this, WhatsNewBottomSheet())
-    }
   }
 
   override fun onSaveInstanceState(outState: Bundle) {

@@ -4,7 +4,6 @@ import android.app.Dialog
 import com.facebook.litho.ComponentContext
 import com.maubis.scarlet.base.MainActivity
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.main.sheets.WhatsNewBottomSheet
 import com.maubis.scarlet.base.support.sheets.LithoOptionBottomSheet
 import com.maubis.scarlet.base.support.sheets.LithoOptionsItem
 import com.maubis.scarlet.base.support.sheets.openSheet
@@ -21,15 +20,6 @@ class AboutSettingsOptionsBottomSheet : LithoOptionBottomSheet() {
       icon = R.drawable.ic_info,
       listener = {
         openSheet(activity, AboutUsBottomSheet())
-        dismiss()
-      }
-    ))
-    options.add(LithoOptionsItem(
-      title = R.string.whats_new_title,
-      subtitle = R.string.whats_new_subtitle,
-      icon = R.drawable.ic_whats_new,
-      listener = {
-        openSheet(activity, WhatsNewBottomSheet())
         dismiss()
       }
     ))
