@@ -2,8 +2,8 @@ package com.maubis.scarlet.base.support.utils
 
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.maubis.scarlet.base.config.ScarletApp.Companion.appPreferences
-import com.maubis.scarlet.base.main.sheets.ExceptionBottomSheet
+import com.maubis.scarlet.base.ScarletApp.Companion.appPreferences
+import com.maubis.scarlet.base.home.sheets.ExceptionBottomSheet
 import com.maubis.scarlet.base.support.sheets.openSheet
 
 const val KEY_INTERNAL_SHOW_TRACES_IN_SHEET = "internal_show_traces_in_sheet"

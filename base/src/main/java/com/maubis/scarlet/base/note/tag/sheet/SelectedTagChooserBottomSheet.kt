@@ -6,12 +6,12 @@ import com.facebook.litho.Component
 import com.facebook.litho.ComponentContext
 import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ScarletApp.Companion.data
+import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.core.note.getTagUUIDs
 import com.maubis.scarlet.base.core.tag.TagBuilder
 import com.maubis.scarlet.base.database.room.tag.Tag
-import com.maubis.scarlet.base.main.sheets.LithoTagOptionsItem
-import com.maubis.scarlet.base.main.sheets.TagItemLayout
+import com.maubis.scarlet.base.home.sheets.LithoTagOptionsItem
+import com.maubis.scarlet.base.home.sheets.TagItemLayout
 import com.maubis.scarlet.base.note.selection.activity.SelectNotesActivity
 import com.maubis.scarlet.base.support.sheets.LithoBottomSheet
 import com.maubis.scarlet.base.support.sheets.LithoOptionsItem

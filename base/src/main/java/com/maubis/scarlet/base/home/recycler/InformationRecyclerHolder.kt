@@ -1,4 +1,4 @@
-package com.maubis.scarlet.base.main.recycler
+package com.maubis.scarlet.base.home.recycler
 
 import android.content.Context
 import android.os.Bundle
@@ -7,7 +7,7 @@ import android.widget.TextView
 import com.github.bijoysingh.starter.recyclerview.RecyclerViewHolder
 import com.github.bijoysingh.uibasics.views.UITextView
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ScarletApp.Companion.appTypeface
+import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.support.recycler.RecyclerItem
 
 class InformationRecyclerHolder(context: Context, itemView: View) : RecyclerViewHolder<RecyclerItem>(context, itemView) {

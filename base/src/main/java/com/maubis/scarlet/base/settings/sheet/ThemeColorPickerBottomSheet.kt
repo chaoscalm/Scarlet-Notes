@@ -10,9 +10,9 @@ import com.facebook.litho.annotations.OnEvent
 import com.facebook.litho.annotations.Prop
 import com.facebook.yoga.YogaAlign
 import com.facebook.yoga.YogaEdge
-import com.maubis.scarlet.base.MainActivityActions
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ScarletApp.Companion.appTheme
+import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
+import com.maubis.scarlet.base.home.MainActivityActions
 import com.maubis.scarlet.base.support.sheets.LithoBottomSheet
 import com.maubis.scarlet.base.support.sheets.LithoOptionsItem
 import com.maubis.scarlet.base.support.sheets.OptionItemLayout

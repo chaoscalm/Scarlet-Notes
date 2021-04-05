@@ -12,8 +12,8 @@ import androidx.cardview.widget.CardView
 import com.github.bijoysingh.starter.recyclerview.RecyclerViewHolder
 import com.github.bijoysingh.starter.util.TextUtils
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ScarletApp.Companion.appTypeface
-import com.maubis.scarlet.base.config.ScarletApp.Companion.imageStorage
+import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
+import com.maubis.scarlet.base.ScarletApp.Companion.imageStorage
 import com.maubis.scarlet.base.core.note.NoteState
 import com.maubis.scarlet.base.database.room.note.Note
 import com.maubis.scarlet.base.note.isNoteLockedButAppUnlocked

@@ -4,8 +4,8 @@ import android.os.AsyncTask
 import android.os.Environment
 import com.github.bijoysingh.starter.util.FileManager
 import com.google.gson.Gson
-import com.maubis.scarlet.base.config.ScarletApp.Companion.appPreferences
-import com.maubis.scarlet.base.config.ScarletApp.Companion.data
+import com.maubis.scarlet.base.ScarletApp.Companion.appPreferences
+import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.export.data.*
 import com.maubis.scarlet.base.export.sheet.NOTES_EXPORT_FILENAME
 import com.maubis.scarlet.base.export.sheet.NOTES_EXPORT_FOLDER

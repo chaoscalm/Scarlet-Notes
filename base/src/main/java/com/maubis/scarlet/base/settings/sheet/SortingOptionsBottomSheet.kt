@@ -2,10 +2,10 @@ package com.maubis.scarlet.base.settings.sheet
 
 import android.app.Dialog
 import com.facebook.litho.ComponentContext
-import com.maubis.scarlet.base.MainActivity
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ScarletApp.Companion.appPreferences
+import com.maubis.scarlet.base.ScarletApp.Companion.appPreferences
 import com.maubis.scarlet.base.core.note.SortingTechnique
+import com.maubis.scarlet.base.home.MainActivity
 import com.maubis.scarlet.base.support.sheets.LithoChooseOptionBottomSheet
 import com.maubis.scarlet.base.support.sheets.LithoChooseOptionsItem
 

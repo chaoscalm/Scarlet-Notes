@@ -1,4 +1,4 @@
-package com.maubis.scarlet.base.main.activity
+package com.maubis.scarlet.base.widget
 
 import android.app.Activity
 import android.app.Application
@@ -10,15 +10,14 @@ import android.os.Bundle
 import android.widget.RemoteViews
 import androidx.core.content.ContextCompat
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ScarletApp
-import com.maubis.scarlet.base.config.ScarletApp.Companion.data
+import com.maubis.scarlet.base.ScarletApp
+import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.database.room.note.Note
 import com.maubis.scarlet.base.database.room.widget.Widget
 import com.maubis.scarlet.base.note.creation.activity.ViewAdvancedNoteActivity
 import com.maubis.scarlet.base.note.selection.activity.INoteSelectorActivity
 import com.maubis.scarlet.base.note.selection.activity.SelectableNotesActivityBase
 import com.maubis.scarlet.base.support.ui.ColorUtil
-import com.maubis.scarlet.base.widget.NoteWidgetProvider
 import com.maubis.scarlet.base.widget.sheet.getWidgetNoteText
 import com.maubis.scarlet.base.widget.sheet.getWidgetNotes
 import com.maubis.scarlet.base.widget.sheet.sWidgetShowLockedNotes

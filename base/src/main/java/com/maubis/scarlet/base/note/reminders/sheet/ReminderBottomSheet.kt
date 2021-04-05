@@ -8,13 +8,13 @@ import android.widget.TextView
 import com.github.bijoysingh.starter.util.DateFormatter
 import com.github.bijoysingh.uibasics.views.UIActionView
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ScarletApp.Companion.appTheme
+import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.core.note.Reminder
 import com.maubis.scarlet.base.core.note.ReminderInterval
 import com.maubis.scarlet.base.core.note.getReminderV2
 import com.maubis.scarlet.base.core.note.setReminderV2
 import com.maubis.scarlet.base.database.room.note.Note
-import com.maubis.scarlet.base.main.sheets.GenericOptionsBottomSheet
+import com.maubis.scarlet.base.home.sheets.GenericOptionsBottomSheet
 import com.maubis.scarlet.base.note.reminders.ReminderJob
 import com.maubis.scarlet.base.note.save
 import com.maubis.scarlet.base.support.sheets.LithoChooseOptionsItem

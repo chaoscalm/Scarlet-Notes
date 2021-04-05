@@ -8,7 +8,7 @@ import androidx.cardview.widget.CardView
 import com.github.bijoysingh.starter.recyclerview.RecyclerViewHolder
 import com.github.bijoysingh.uibasics.views.UITextView
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ScarletApp.Companion.appTypeface
+import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.support.recycler.RecyclerItem
 import com.maubis.scarlet.base.support.ui.ColorUtil.darkOrDarkerColor
 import com.maubis.scarlet.base.support.ui.sThemeDarkenNoteColor

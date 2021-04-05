@@ -1,4 +1,4 @@
-package com.maubis.scarlet.base.main.specs
+package com.maubis.scarlet.base.home
 
 import android.content.pm.ShortcutInfo
 import android.graphics.Color
@@ -12,13 +12,12 @@ import com.facebook.litho.annotations.Prop
 import com.facebook.litho.widget.Text
 import com.facebook.yoga.YogaAlign
 import com.facebook.yoga.YogaEdge
-import com.maubis.scarlet.base.MainActivity
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ScarletApp.Companion.appTypeface
+import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.core.folder.FolderBuilder
 import com.maubis.scarlet.base.database.room.folder.Folder
-import com.maubis.scarlet.base.main.sheets.HomeOptionsBottomSheet
-import com.maubis.scarlet.base.main.sheets.openDeleteTrashSheet
+import com.maubis.scarlet.base.home.sheets.HomeOptionsBottomSheet
+import com.maubis.scarlet.base.home.sheets.openDeleteTrashSheet
 import com.maubis.scarlet.base.note.creation.activity.CreateNoteActivity
 import com.maubis.scarlet.base.note.creation.activity.NoteIntentRouterActivity
 import com.maubis.scarlet.base.note.creation.sheet.sNoteDefaultColor

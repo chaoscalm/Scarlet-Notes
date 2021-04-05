@@ -10,10 +10,10 @@ import com.facebook.litho.Component
 import com.facebook.litho.ComponentContext
 import com.facebook.litho.widget.Text
 import com.facebook.yoga.YogaEdge
-import com.maubis.scarlet.base.MainActivity
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ScarletApp.Companion.appTheme
+import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.export.support.*
+import com.maubis.scarlet.base.home.MainActivity
 import com.maubis.scarlet.base.support.sheets.*
 import com.maubis.scarlet.base.support.specs.BottomSheetBar
 import com.maubis.scarlet.base.support.specs.separatorSpec

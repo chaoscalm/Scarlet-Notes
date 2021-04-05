@@ -5,7 +5,7 @@ import android.graphics.Typeface
 import androidx.core.content.res.ResourcesCompat
 import com.maubis.markdown.MarkdownConfig
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ScarletApp
+import com.maubis.scarlet.base.ScarletApp
 
 const val KEY_PREFERENCE_TYPEFACE = "typeface_setting"
 var sPreferenceTypeface: String

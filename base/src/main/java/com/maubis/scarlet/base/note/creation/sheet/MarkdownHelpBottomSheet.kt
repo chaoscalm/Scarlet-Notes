@@ -8,8 +8,8 @@ import com.facebook.litho.widget.Text
 import com.facebook.yoga.YogaEdge
 import com.maubis.markdown.Markdown
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ScarletApp.Companion.appTheme
-import com.maubis.scarlet.base.config.ScarletApp.Companion.appTypeface
+import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
+import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.support.sheets.LithoBottomSheet
 import com.maubis.scarlet.base.support.sheets.getLithoBottomSheetTitle
 import com.maubis.scarlet.base.support.ui.ThemeColorType

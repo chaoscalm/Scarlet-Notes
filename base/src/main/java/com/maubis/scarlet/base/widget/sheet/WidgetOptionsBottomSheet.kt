@@ -8,13 +8,13 @@ import android.content.Intent
 import android.graphics.Color
 import com.facebook.litho.ComponentContext
 import com.maubis.markdown.Markdown
-import com.maubis.scarlet.base.MainActivity
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ScarletApp.Companion.appPreferences
-import com.maubis.scarlet.base.config.ScarletApp.Companion.data
+import com.maubis.scarlet.base.ScarletApp.Companion.appPreferences
+import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.core.note.NoteState
 import com.maubis.scarlet.base.core.note.sort
 import com.maubis.scarlet.base.database.room.note.Note
+import com.maubis.scarlet.base.home.MainActivity
 import com.maubis.scarlet.base.note.getFullTextForDirectMarkdownRender
 import com.maubis.scarlet.base.settings.sheet.ColorPickerBottomSheet
 import com.maubis.scarlet.base.settings.sheet.ColorPickerDefaultController

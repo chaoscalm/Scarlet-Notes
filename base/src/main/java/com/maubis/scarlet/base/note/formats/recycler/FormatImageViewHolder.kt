@@ -9,10 +9,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.github.bijoysingh.uibasics.views.UITextView
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ScarletApp.Companion.imageStorage
+import com.maubis.scarlet.base.ScarletApp.Companion.imageStorage
 import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.core.note.ImageLoadCallback
-import com.maubis.scarlet.base.main.sheets.openDeleteFormatDialog
+import com.maubis.scarlet.base.home.sheets.openDeleteFormatDialog
 import com.maubis.scarlet.base.note.creation.sheet.FormatActionBottomSheet
 import com.maubis.scarlet.base.support.sheets.openSheet
 import com.maubis.scarlet.base.support.ui.visibility

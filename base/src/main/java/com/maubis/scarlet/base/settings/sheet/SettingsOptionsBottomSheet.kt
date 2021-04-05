@@ -2,9 +2,9 @@ package com.maubis.scarlet.base.settings.sheet
 
 import android.app.Dialog
 import com.facebook.litho.ComponentContext
-import com.maubis.scarlet.base.MainActivity
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.export.sheet.BackupSettingsOptionsBottomSheet
+import com.maubis.scarlet.base.home.MainActivity
 import com.maubis.scarlet.base.note.creation.sheet.EditorOptionsBottomSheet
 import com.maubis.scarlet.base.support.sheets.LithoOptionBottomSheet
 import com.maubis.scarlet.base.support.sheets.LithoOptionsItem

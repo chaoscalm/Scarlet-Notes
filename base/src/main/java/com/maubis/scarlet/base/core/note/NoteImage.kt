@@ -4,7 +4,7 @@ import android.content.Context
 import android.view.View
 import android.widget.ImageView
 import com.github.bijoysingh.starter.util.RandomHelper
-import com.maubis.scarlet.base.config.ScarletApp
+import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.core.format.FormatBuilder
 import com.maubis.scarlet.base.core.format.FormatType

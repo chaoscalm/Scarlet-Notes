@@ -6,7 +6,7 @@ import android.view.View.VISIBLE
 import android.widget.EditText
 import android.widget.TextView
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ScarletApp.Companion.appTheme
+import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.core.tag.isUnsaved
 import com.maubis.scarlet.base.database.room.tag.Tag
 import com.maubis.scarlet.base.note.tag.delete

@@ -12,7 +12,7 @@ import com.facebook.litho.widget.SolidColor
 import com.facebook.yoga.YogaAlign
 import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ScarletApp.Companion.appTheme
+import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.support.ui.ThemeColorType
 
 object EmptySpec {

@@ -1,4 +1,4 @@
-package com.maubis.scarlet.base
+package com.maubis.scarlet.base.home
 
 import android.content.res.Configuration
 import android.os.Bundle
@@ -12,21 +12,19 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.facebook.litho.ComponentContext
 import com.facebook.litho.LithoView
 import com.github.bijoysingh.starter.recyclerview.RecyclerViewBuilder
-import com.maubis.scarlet.base.config.ScarletApp
-import com.maubis.scarlet.base.config.ScarletApp.Companion.appPreferences
-import com.maubis.scarlet.base.config.ScarletApp.Companion.appTheme
-import com.maubis.scarlet.base.config.ScarletApp.Companion.data
+import com.maubis.scarlet.base.R
+import com.maubis.scarlet.base.ScarletApp
+import com.maubis.scarlet.base.ScarletApp.Companion.appPreferences
+import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
+import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.core.note.NoteState
 import com.maubis.scarlet.base.database.room.folder.Folder
 import com.maubis.scarlet.base.database.room.note.Note
 import com.maubis.scarlet.base.database.room.tag.Tag
 import com.maubis.scarlet.base.export.support.NoteExporter
 import com.maubis.scarlet.base.export.support.PermissionUtils
-import com.maubis.scarlet.base.main.*
-import com.maubis.scarlet.base.main.recycler.*
-import com.maubis.scarlet.base.main.specs.MainActivityBottomBar
-import com.maubis.scarlet.base.main.specs.MainActivityFolderBottomBar
-import com.maubis.scarlet.base.main.utils.MainSnackbar
+import com.maubis.scarlet.base.home.*
+import com.maubis.scarlet.base.home.recycler.*
 import com.maubis.scarlet.base.note.activity.INoteOptionSheetActivity
 import com.maubis.scarlet.base.note.folder.FolderRecyclerItem
 import com.maubis.scarlet.base.note.folder.sheet.CreateOrEditFolderBottomSheet
@@ -63,7 +61,7 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
 
   private lateinit var recyclerView: RecyclerView
   private lateinit var adapter: NoteAppAdapter
-  private lateinit var snackbar: MainSnackbar
+  private lateinit var snackbar: NoteDeletionSnackbar
   private lateinit var tagAndColorPicker: TagsAndColorPickerViewHolder
 
   val state: SearchState = SearchState(mode = HomeNavigationMode.DEFAULT)
@@ -119,7 +117,7 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
   }
 
   private fun setListeners() {
-    snackbar = MainSnackbar(bottomSnackbar) { refreshItems() }
+    snackbar = NoteDeletionSnackbar(bottomSnackbar) { refreshItems() }
     searchBackButton.setOnClickListener {
       onBackPressed()
     }

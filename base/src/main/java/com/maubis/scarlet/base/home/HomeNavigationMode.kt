@@ -1,4 +1,4 @@
-package com.maubis.scarlet.base.main
+package com.maubis.scarlet.base.home
 
 import com.maubis.scarlet.base.R
 

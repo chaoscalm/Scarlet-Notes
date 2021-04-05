@@ -1,4 +1,4 @@
-package com.maubis.scarlet.base.main.sheets
+package com.maubis.scarlet.base.home.sheets
 
 import android.app.Dialog
 import com.facebook.litho.Column
@@ -6,13 +6,13 @@ import com.facebook.litho.Component
 import com.facebook.litho.ComponentContext
 import com.facebook.litho.widget.Text
 import com.facebook.yoga.YogaEdge
-import com.maubis.scarlet.base.MainActivity
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ScarletApp.Companion.appTheme
-import com.maubis.scarlet.base.config.ScarletApp.Companion.data
+import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
+import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.core.note.NoteState
 import com.maubis.scarlet.base.database.room.note.Note
+import com.maubis.scarlet.base.home.MainActivity
 import com.maubis.scarlet.base.note.creation.activity.ViewAdvancedNoteActivity
 import com.maubis.scarlet.base.note.delete
 import com.maubis.scarlet.base.support.sheets.LithoBottomSheet

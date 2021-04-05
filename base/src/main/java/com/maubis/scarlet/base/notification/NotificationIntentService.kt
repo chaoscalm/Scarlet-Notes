@@ -4,8 +4,8 @@ import android.app.IntentService
 import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
-import com.maubis.scarlet.base.config.ScarletApp
-import com.maubis.scarlet.base.config.ScarletApp.Companion.data
+import com.maubis.scarlet.base.ScarletApp
+import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.note.copy
 import com.maubis.scarlet.base.note.share
 import com.maubis.scarlet.base.support.INTENT_KEY_ACTION

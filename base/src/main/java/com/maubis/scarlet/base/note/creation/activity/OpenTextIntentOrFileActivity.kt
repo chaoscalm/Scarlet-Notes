@@ -1,4 +1,4 @@
-package com.maubis.scarlet.base.main.activity
+package com.maubis.scarlet.base.note.creation.activity
 
 import android.content.Context
 import android.content.Intent
@@ -16,19 +16,15 @@ import com.maubis.markdown.Markdown
 import com.maubis.markdown.spannable.clearMarkdownSpans
 import com.maubis.markdown.spannable.setFormats
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ScarletApp.Companion.appTheme
+import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.core.note.NoteBuilder
 import com.maubis.scarlet.base.database.room.note.Note
 import com.maubis.scarlet.base.export.support.NoteImporter
-import com.maubis.scarlet.base.note.creation.activity.ViewAdvancedNoteActivity
 import com.maubis.scarlet.base.note.save
 import com.maubis.scarlet.base.support.ui.SecuredActivity
 import com.maubis.scarlet.base.support.ui.ThemeColorType
 import com.maubis.scarlet.base.support.utils.bind
 import java.io.InputStreamReader
-
-const val KEEP_PACKAGE = "com.google.android.keep"
-const val INTENT_KEY_DIRECT_NOTES_TRANSFER = "direct_notes_transfer"
 
 class OpenTextIntentOrFileActivity : SecuredActivity() {
 

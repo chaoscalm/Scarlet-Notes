@@ -8,8 +8,8 @@ import com.maubis.markdown.Markdown
 import com.maubis.markdown.MarkdownConfig
 import com.maubis.markdown.spannable.*
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ScarletApp
-import com.maubis.scarlet.base.config.ScarletApp.Companion.data
+import com.maubis.scarlet.base.ScarletApp
+import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.core.format.FormatType
 import com.maubis.scarlet.base.core.note.NoteState

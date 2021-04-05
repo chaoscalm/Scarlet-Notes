@@ -3,10 +3,10 @@ package com.maubis.scarlet.base.export.sheet
 import android.app.Dialog
 import com.facebook.litho.ComponentContext
 import com.github.bijoysingh.starter.util.IntentUtils
-import com.maubis.scarlet.base.MainActivity
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.export.activity.ImportNoteActivity
 import com.maubis.scarlet.base.export.support.PermissionUtils
+import com.maubis.scarlet.base.home.MainActivity
 import com.maubis.scarlet.base.security.controller.PinLockController.isPinCodeEnabled
 import com.maubis.scarlet.base.security.sheets.openUnlockSheet
 import com.maubis.scarlet.base.support.sheets.LithoOptionBottomSheet

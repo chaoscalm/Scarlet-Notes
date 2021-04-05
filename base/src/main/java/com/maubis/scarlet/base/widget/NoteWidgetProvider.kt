@@ -3,8 +3,7 @@ package com.maubis.scarlet.base.widget
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
-import com.maubis.scarlet.base.config.ScarletApp
-import com.maubis.scarlet.base.main.activity.WidgetConfigureActivity
+import com.maubis.scarlet.base.ScarletApp
 
 class NoteWidgetProvider : AppWidgetProvider() {
 

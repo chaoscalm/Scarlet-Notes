@@ -3,7 +3,7 @@ package com.maubis.scarlet.base.settings.sheet
 import android.app.Dialog
 import com.facebook.litho.ComponentContext
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ScarletApp.Companion.appPreferences
+import com.maubis.scarlet.base.ScarletApp.Companion.appPreferences
 import com.maubis.scarlet.base.security.controller.PinLockController.isPinCodeEnabled
 import com.maubis.scarlet.base.security.controller.deviceHasBiometricEnabled
 import com.maubis.scarlet.base.security.sheets.openCreateSheet

@@ -1,4 +1,4 @@
-package com.maubis.scarlet.base.config
+package com.maubis.scarlet.base
 
 import android.app.Application
 import android.util.Log
@@ -7,6 +7,7 @@ import com.facebook.soloader.SoLoader
 import com.github.bijoysingh.starter.prefs.Store
 import com.github.bijoysingh.starter.prefs.VersionedStore
 import com.maubis.scarlet.base.core.note.NoteImage
+import com.maubis.scarlet.base.database.ApplicationData
 import com.maubis.scarlet.base.note.reminders.ReminderJobCreator
 import com.maubis.scarlet.base.support.ui.ThemeManager
 import com.maubis.scarlet.base.support.ui.font.TypefaceController

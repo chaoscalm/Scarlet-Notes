@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.facebook.litho.ComponentContext
 import com.facebook.litho.LithoView
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ScarletApp.Companion.data
-import com.maubis.scarlet.base.config.ScarletApp.Companion.imageStorage
+import com.maubis.scarlet.base.ScarletApp.Companion.data
+import com.maubis.scarlet.base.ScarletApp.Companion.imageStorage
 import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.core.format.FormatBuilder
 import com.maubis.scarlet.base.core.format.FormatType

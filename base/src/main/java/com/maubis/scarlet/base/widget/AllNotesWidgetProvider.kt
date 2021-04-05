@@ -9,8 +9,8 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.widget.RemoteViews
-import com.maubis.scarlet.base.MainActivity
 import com.maubis.scarlet.base.R
+import com.maubis.scarlet.base.home.MainActivity
 import com.maubis.scarlet.base.note.creation.activity.CreateListNoteActivity
 import com.maubis.scarlet.base.note.creation.activity.CreateNoteActivity
 import com.maubis.scarlet.base.note.creation.activity.ViewAdvancedNoteActivity

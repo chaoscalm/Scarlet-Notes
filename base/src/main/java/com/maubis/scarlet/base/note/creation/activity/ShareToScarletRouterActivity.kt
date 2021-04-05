@@ -6,8 +6,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Parcelable
 import androidx.appcompat.app.AppCompatActivity
-import com.maubis.scarlet.base.MainActivity
-import com.maubis.scarlet.base.config.ScarletApp.Companion.imageStorage
+import com.maubis.scarlet.base.ScarletApp.Companion.imageStorage
 import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.core.format.FormatBuilder
 import com.maubis.scarlet.base.core.format.FormatType
@@ -15,12 +14,14 @@ import com.maubis.scarlet.base.core.note.NoteBuilder
 import com.maubis.scarlet.base.core.note.getFormats
 import com.maubis.scarlet.base.database.room.note.Note
 import com.maubis.scarlet.base.export.support.NoteImporter
-import com.maubis.scarlet.base.main.activity.INTENT_KEY_DIRECT_NOTES_TRANSFER
-import com.maubis.scarlet.base.main.activity.KEEP_PACKAGE
+import com.maubis.scarlet.base.home.MainActivity
 import com.maubis.scarlet.base.note.save
 import com.maubis.scarlet.base.support.BitmapHelper
 import com.maubis.scarlet.base.support.utils.OsVersionUtils
 import java.io.File
+
+const val KEEP_PACKAGE = "com.google.android.keep"
+const val INTENT_KEY_DIRECT_NOTES_TRANSFER = "direct_notes_transfer"
 
 class ShareToScarletRouterActivity : AppCompatActivity() {
 

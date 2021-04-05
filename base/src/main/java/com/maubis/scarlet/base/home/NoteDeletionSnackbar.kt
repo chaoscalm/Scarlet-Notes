@@ -1,4 +1,4 @@
-package com.maubis.scarlet.base.main.utils
+package com.maubis.scarlet.base.home
 
 import android.content.Context
 import android.os.Handler
@@ -13,7 +13,7 @@ import com.maubis.scarlet.base.core.note.getNoteState
 import com.maubis.scarlet.base.database.room.note.Note
 import com.maubis.scarlet.base.note.save
 
-class MainSnackbar(val layout: LinearLayout, val alwaysRunnable: () -> Unit) {
+class NoteDeletionSnackbar(val layout: LinearLayout, val alwaysRunnable: () -> Unit) {
 
   val handler = Handler()
   val runnable = {

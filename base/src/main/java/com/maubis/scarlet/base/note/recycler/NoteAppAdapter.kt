@@ -5,8 +5,8 @@ import com.github.bijoysingh.starter.recyclerview.MultiRecyclerViewAdapter
 import com.github.bijoysingh.starter.recyclerview.MultiRecyclerViewControllerItem
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.export.recycler.FileImportViewHolder
-import com.maubis.scarlet.base.main.recycler.EmptyRecyclerHolder
-import com.maubis.scarlet.base.main.recycler.InformationRecyclerHolder
+import com.maubis.scarlet.base.home.recycler.EmptyRecyclerHolder
+import com.maubis.scarlet.base.home.recycler.InformationRecyclerHolder
 import com.maubis.scarlet.base.note.folder.FolderRecyclerHolder
 import com.maubis.scarlet.base.note.folder.SelectorFolderRecyclerHolder
 import com.maubis.scarlet.base.note.selection.recycler.SelectableNoteRecyclerViewHolder

@@ -1,7 +1,7 @@
 package com.maubis.scarlet.base.export.data
 
 import android.content.Context
-import com.maubis.scarlet.base.config.ScarletApp.Companion.data
+import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.core.note.INoteContainer
 import com.maubis.scarlet.base.core.note.NoteBuilder
 import com.maubis.scarlet.base.core.note.generateUUID

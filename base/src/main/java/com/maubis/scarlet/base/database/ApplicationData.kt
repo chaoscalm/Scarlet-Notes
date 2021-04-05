@@ -1,10 +1,7 @@
-package com.maubis.scarlet.base.config
+package com.maubis.scarlet.base.database
 
 import android.content.Context
 import com.maubis.scarlet.base.core.note.NoteActor
-import com.maubis.scarlet.base.database.FoldersRepository
-import com.maubis.scarlet.base.database.NotesRepository
-import com.maubis.scarlet.base.database.TagsRepository
 import com.maubis.scarlet.base.database.room.AppDatabase
 import com.maubis.scarlet.base.database.room.note.Note
 import com.maubis.scarlet.base.database.room.widget.WidgetDao

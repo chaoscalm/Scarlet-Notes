@@ -1,4 +1,4 @@
-package com.maubis.scarlet.base.main.sheets
+package com.maubis.scarlet.base.home.sheets
 
 import android.app.Dialog
 import android.graphics.Typeface
@@ -10,14 +10,14 @@ import com.facebook.litho.annotations.Prop
 import com.facebook.litho.widget.Text
 import com.facebook.yoga.YogaAlign
 import com.facebook.yoga.YogaEdge
-import com.maubis.scarlet.base.MainActivity
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ScarletApp.Companion.appTheme
-import com.maubis.scarlet.base.config.ScarletApp.Companion.appTypeface
-import com.maubis.scarlet.base.config.ScarletApp.Companion.data
+import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
+import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
+import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.core.tag.TagBuilder
 import com.maubis.scarlet.base.database.room.tag.Tag
-import com.maubis.scarlet.base.main.HomeNavigationMode
+import com.maubis.scarlet.base.home.HomeNavigationMode
+import com.maubis.scarlet.base.home.MainActivity
 import com.maubis.scarlet.base.note.tag.sheet.CreateOrEditTagBottomSheet
 import com.maubis.scarlet.base.settings.sheet.SettingsOptionsBottomSheet
 import com.maubis.scarlet.base.support.sheets.*

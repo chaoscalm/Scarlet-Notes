@@ -5,7 +5,7 @@ import com.evernote.android.job.Job
 import com.evernote.android.job.JobManager
 import com.evernote.android.job.JobRequest
 import com.evernote.android.job.util.support.PersistableBundleCompat
-import com.maubis.scarlet.base.config.ScarletApp.Companion.data
+import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.core.note.Reminder
 import com.maubis.scarlet.base.core.note.ReminderInterval
 import com.maubis.scarlet.base.core.note.getReminderV2

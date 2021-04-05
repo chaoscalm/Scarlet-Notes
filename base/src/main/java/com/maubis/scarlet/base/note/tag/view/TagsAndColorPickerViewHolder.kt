@@ -4,18 +4,18 @@ import android.view.View
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.google.android.flexbox.FlexboxLayout
-import com.maubis.scarlet.base.MainActivity
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ScarletApp.Companion.appTypeface
-import com.maubis.scarlet.base.config.ScarletApp.Companion.data
+import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
+import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.database.room.tag.Tag
+import com.maubis.scarlet.base.home.MainActivity
 import com.maubis.scarlet.base.settings.view.ColorView
 
 class TagsAndColorPickerViewHolder(
-  val activity: MainActivity,
-  val flexbox: FlexboxLayout,
-  val onTagClick: (Tag) -> Unit,
-  val onColorClick: (Int) -> Unit) {
+        val activity: MainActivity,
+        val flexbox: FlexboxLayout,
+        val onTagClick: (Tag) -> Unit,
+        val onColorClick: (Int) -> Unit) {
 
   val tags = emptySet<Tag>().toMutableSet()
   val colors = emptySet<Int>().toMutableSet()

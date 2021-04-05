@@ -11,12 +11,12 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.github.bijoysingh.starter.async.MultiAsyncTask
 import com.github.bijoysingh.starter.recyclerview.RecyclerViewBuilder
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ScarletApp.Companion.appPreferences
-import com.maubis.scarlet.base.config.ScarletApp.Companion.appTheme
-import com.maubis.scarlet.base.config.ScarletApp.Companion.data
+import com.maubis.scarlet.base.ScarletApp.Companion.appPreferences
+import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
+import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.core.note.sort
 import com.maubis.scarlet.base.database.room.note.Note
-import com.maubis.scarlet.base.main.recycler.EmptyRecyclerItem
+import com.maubis.scarlet.base.home.recycler.EmptyRecyclerItem
 import com.maubis.scarlet.base.note.folder.SelectorFolderRecyclerItem
 import com.maubis.scarlet.base.note.recycler.NoteAppAdapter
 import com.maubis.scarlet.base.note.recycler.NoteRecyclerItem

@@ -7,8 +7,8 @@ import android.content.Context
 import android.content.Intent
 import android.widget.RemoteViews
 import androidx.core.app.TaskStackBuilder
-import com.maubis.scarlet.base.MainActivity
 import com.maubis.scarlet.base.R
+import com.maubis.scarlet.base.home.MainActivity
 import com.maubis.scarlet.base.note.creation.activity.CreateListNoteActivity
 import com.maubis.scarlet.base.note.creation.activity.CreateNoteActivity
 

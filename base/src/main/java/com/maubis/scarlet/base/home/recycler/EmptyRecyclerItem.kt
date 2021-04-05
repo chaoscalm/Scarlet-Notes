@@ -1,4 +1,4 @@
-package com.maubis.scarlet.base.main.recycler
+package com.maubis.scarlet.base.home.recycler
 
 import com.maubis.scarlet.base.support.recycler.RecyclerItem
 

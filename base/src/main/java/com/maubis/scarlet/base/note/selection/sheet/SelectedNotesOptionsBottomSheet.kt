@@ -10,14 +10,10 @@ import com.maubis.scarlet.base.core.format.FormatBuilder
 import com.maubis.scarlet.base.core.format.sectionPreservingSort
 import com.maubis.scarlet.base.core.note.NoteState
 import com.maubis.scarlet.base.core.note.getFormats
-import com.maubis.scarlet.base.main.sheets.AlertBottomSheet
-import com.maubis.scarlet.base.main.sheets.AlertSheetConfig
-import com.maubis.scarlet.base.note.addTag
-import com.maubis.scarlet.base.note.delete
+import com.maubis.scarlet.base.home.sheets.AlertBottomSheet
+import com.maubis.scarlet.base.home.sheets.AlertSheetConfig
+import com.maubis.scarlet.base.note.*
 import com.maubis.scarlet.base.note.folder.sheet.SelectedFolderChooseOptionsBottomSheet
-import com.maubis.scarlet.base.note.mark
-import com.maubis.scarlet.base.note.removeTag
-import com.maubis.scarlet.base.note.save
 import com.maubis.scarlet.base.note.selection.activity.SelectNotesActivity
 import com.maubis.scarlet.base.note.tag.sheet.SelectedTagChooserBottomSheet
 import com.maubis.scarlet.base.security.sheets.openUnlockSheet

@@ -1,4 +1,4 @@
-package com.maubis.scarlet.base.main.recycler
+package com.maubis.scarlet.base.home.recycler
 
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.github.bijoysingh.starter.recyclerview.RecyclerViewHolder

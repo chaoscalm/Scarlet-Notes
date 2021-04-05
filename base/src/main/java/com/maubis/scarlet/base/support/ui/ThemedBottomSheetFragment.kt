@@ -10,9 +10,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import com.github.bijoysingh.starter.fragments.SimpleBottomSheetFragment
-import com.maubis.scarlet.base.MainActivity
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ScarletApp.Companion.appTheme
+import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
+import com.maubis.scarlet.base.home.MainActivity
 
 abstract class ThemedBottomSheetFragment : SimpleBottomSheetFragment() {
 

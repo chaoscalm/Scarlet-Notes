@@ -1,10 +1,10 @@
-package com.maubis.scarlet.base.main.recycler
+package com.maubis.scarlet.base.home.recycler
 
 import android.content.Context
 import android.os.Bundle
 import android.view.View
 import com.github.bijoysingh.starter.recyclerview.RecyclerViewHolder
-import com.maubis.scarlet.base.MainActivity
+import com.maubis.scarlet.base.home.MainActivity
 import com.maubis.scarlet.base.note.creation.activity.CreateNoteActivity
 import com.maubis.scarlet.base.support.recycler.RecyclerItem
 

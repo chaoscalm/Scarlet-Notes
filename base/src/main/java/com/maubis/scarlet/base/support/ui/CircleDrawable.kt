@@ -2,7 +2,7 @@ package com.maubis.scarlet.base.support.ui
 
 import android.graphics.*
 import android.graphics.drawable.Drawable
-import com.maubis.scarlet.base.config.ScarletApp.Companion.appTheme
+import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 
 class CircleDrawable(color: Int, showBorder: Boolean = true) : Drawable() {
   private val paint: Paint

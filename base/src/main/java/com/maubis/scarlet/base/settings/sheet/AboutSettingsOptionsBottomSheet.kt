@@ -2,8 +2,8 @@ package com.maubis.scarlet.base.settings.sheet
 
 import android.app.Dialog
 import com.facebook.litho.ComponentContext
-import com.maubis.scarlet.base.MainActivity
 import com.maubis.scarlet.base.R
+import com.maubis.scarlet.base.home.MainActivity
 import com.maubis.scarlet.base.support.sheets.LithoOptionBottomSheet
 import com.maubis.scarlet.base.support.sheets.LithoOptionsItem
 import com.maubis.scarlet.base.support.sheets.openSheet

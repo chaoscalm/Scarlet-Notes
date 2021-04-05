@@ -3,8 +3,8 @@ package com.maubis.scarlet.base.note.recycler
 import android.content.Context
 import android.os.Bundle
 import android.view.View
-import com.maubis.scarlet.base.MainActivity
 import com.maubis.scarlet.base.database.room.note.Note
+import com.maubis.scarlet.base.home.MainActivity
 import com.maubis.scarlet.base.note.actions.NoteOptionsBottomSheet
 import com.maubis.scarlet.base.note.copy
 import com.maubis.scarlet.base.note.creation.activity.NoteIntentRouterActivity

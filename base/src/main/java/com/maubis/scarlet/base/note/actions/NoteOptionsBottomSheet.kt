@@ -13,13 +13,13 @@ import androidx.core.content.ContextCompat
 import com.github.bijoysingh.starter.util.RandomHelper
 import com.maubis.markdown.Markdown
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.config.ScarletApp
-import com.maubis.scarlet.base.config.ScarletApp.Companion.appTypeface
+import com.maubis.scarlet.base.ScarletApp
+import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.core.note.NoteBuilder
 import com.maubis.scarlet.base.core.note.NoteState
 import com.maubis.scarlet.base.core.note.getNoteState
 import com.maubis.scarlet.base.database.room.note.Note
-import com.maubis.scarlet.base.main.sheets.openDeleteNotePermanentlySheet
+import com.maubis.scarlet.base.home.sheets.openDeleteNotePermanentlySheet
 import com.maubis.scarlet.base.note.*
 import com.maubis.scarlet.base.note.activity.INoteOptionSheetActivity
 import com.maubis.scarlet.base.note.creation.activity.NoteIntentRouterActivity
