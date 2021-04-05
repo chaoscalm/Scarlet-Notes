@@ -37,14 +37,10 @@ fun Folder.getDisplayTime(): String {
   return dateFormat.readableTime(format, time)
 }
 
-/**************************************************************************************
- ******************************* Database Functions ********************************
- **************************************************************************************/
-
 fun Folder.save() {
-  ScarletApp.data.folderActions(this).save()
+  ScarletApp.data.folders.save(this)
 }
 
 fun Folder.delete() {
-  ScarletApp.data.folderActions(this).delete()
+  ScarletApp.data.folders.delete(this)
 }
