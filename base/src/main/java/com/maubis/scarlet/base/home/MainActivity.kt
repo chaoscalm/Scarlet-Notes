@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.facebook.litho.ComponentContext
 import com.facebook.litho.LithoView
-import com.github.bijoysingh.starter.recyclerview.RecyclerViewBuilder
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.ScarletApp.Companion.appPreferences
@@ -21,6 +20,7 @@ import com.maubis.scarlet.base.core.note.NoteState
 import com.maubis.scarlet.base.database.room.folder.Folder
 import com.maubis.scarlet.base.database.room.note.Note
 import com.maubis.scarlet.base.database.room.tag.Tag
+import com.maubis.scarlet.base.databinding.ActivityMainBinding
 import com.maubis.scarlet.base.export.support.NoteExporter
 import com.maubis.scarlet.base.export.support.PermissionUtils
 import com.maubis.scarlet.base.home.*
@@ -44,9 +44,6 @@ import com.maubis.scarlet.base.support.database.HouseKeeperJob
 import com.maubis.scarlet.base.support.recycler.RecyclerItem
 import com.maubis.scarlet.base.support.specs.ToolbarColorConfig
 import com.maubis.scarlet.base.support.ui.*
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.search_toolbar_main.*
-import kotlinx.android.synthetic.main.toolbar_main.*
 import kotlinx.coroutines.*
 
 class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
@@ -59,7 +56,7 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
     private const val SEARCH_COLORS: String = "SEARCH_COLORS"
   }
 
-  private lateinit var recyclerView: RecyclerView
+  private lateinit var views: ActivityMainBinding
   private lateinit var adapter: NoteAppAdapter
   private lateinit var snackbar: NoteDeletionSnackbar
   private lateinit var tagAndColorPicker: TagsAndColorPickerViewHolder
@@ -69,7 +66,8 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_main)
+    views = ActivityMainBinding.inflate(layoutInflater)
+    setContentView(views.root)
     handleIntent()
 
     setupMainToolbar()
@@ -117,12 +115,10 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
   }
 
   private fun setListeners() {
-    snackbar = NoteDeletionSnackbar(bottomSnackbar) { refreshItems() }
-    searchBackButton.setOnClickListener {
-      onBackPressed()
-    }
-    searchCloseIcon.setOnClickListener { onBackPressed() }
-    searchBox.addTextChangedListener(object : TextWatcher {
+    snackbar = NoteDeletionSnackbar(views.bottomSnackbar) { refreshItems() }
+    views.searchToolbar.backButton.setOnClickListener { onBackPressed() }
+    views.searchToolbar.closeIcon.setOnClickListener { onBackPressed() }
+    views.searchToolbar.textField.addTextChangedListener(object : TextWatcher {
       override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
 
       override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
@@ -133,13 +129,13 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
     })
     tagAndColorPicker = TagsAndColorPickerViewHolder(
       this,
-      tagsFlexBox,
+      views.searchToolbar.tagsFlexBox,
       { tag ->
         val isTagSelected = state.tags.filter { it.uuid == tag.uuid }.isNotEmpty()
         when (isTagSelected) {
           true -> {
             state.tags.removeAll { it.uuid == tag.uuid }
-            startSearch(searchBox.text.toString())
+            startSearch(views.searchToolbar.textField.text.toString())
             tagAndColorPicker.notifyChanged()
           }
           false -> {
@@ -154,26 +150,26 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
           false -> state.colors.add(color)
         }
         tagAndColorPicker.notifyChanged()
-        startSearch(searchBox.text.toString())
+        startSearch(views.searchToolbar.textField.text.toString())
       })
   }
 
   private fun setupMainToolbar() {
-    toolbarSearchIcon.setOnClickListener {
+    views.mainToolbar.searchIcon.setOnClickListener {
       enterSearchMode()
     }
 
-    toolbarSettingsIcon.setOnClickListener {
+    views.mainToolbar.settingsIcon.setOnClickListener {
       SettingsOptionsBottomSheet.openSheet(this)
     }
 
     val titleColor = appTheme.get(ThemeColorType.SECONDARY_TEXT)
-    toolbarTitle.setTextColor(titleColor)
-    toolbarTitle.typeface = ScarletApp.appTypeface.heading()
+    views.mainToolbar.title.setTextColor(titleColor)
+    views.mainToolbar.title.typeface = ScarletApp.appTypeface.heading()
 
     val toolbarIconColor = appTheme.get(ThemeColorType.SECONDARY_TEXT)
-    toolbarSearchIcon.setColorFilter(toolbarIconColor)
-    toolbarSettingsIcon.setColorFilter(toolbarIconColor)
+    views.mainToolbar.searchIcon.setColorFilter(toolbarIconColor)
+    views.mainToolbar.settingsIcon.setColorFilter(toolbarIconColor)
   }
 
   private fun setupRecyclerView() {
@@ -181,17 +177,16 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
 
     val isMarkdownEnabled = appPreferences.get(KEY_MARKDOWN_ENABLED, true)
     val isMarkdownHomeEnabled = appPreferences.get(KEY_MARKDOWN_HOME_ENABLED, true)
-    val adapterExtra = Bundle()
-    adapterExtra.putBoolean(KEY_MARKDOWN_ENABLED, isMarkdownEnabled && isMarkdownHomeEnabled)
-    adapterExtra.putInt(STORE_KEY_LINE_COUNT, sNoteItemLineCount)
+    val adapterExtra = Bundle().apply {
+      putBoolean(KEY_MARKDOWN_ENABLED, isMarkdownEnabled && isMarkdownHomeEnabled)
+      putInt(STORE_KEY_LINE_COUNT, sNoteItemLineCount)
+    }
 
     adapter = NoteAppAdapter(this, sUIUseGridView, isTablet)
     adapter.setExtra(adapterExtra)
-    recyclerView = RecyclerViewBuilder(this)
-      .setView(this, R.id.recycler_view)
-      .setAdapter(adapter)
-      .setLayoutManager(getLayoutManager(sUIUseGridView, isTablet))
-      .build()
+    views.recyclerView.layoutManager = getLayoutManager(sUIUseGridView, isTablet)
+    views.recyclerView.adapter = adapter
+    views.recyclerView.setHasFixedSize(false)
   }
 
   private fun getLayoutManager(isStaggeredView: Boolean, isTabletView: Boolean): RecyclerView.LayoutManager {
@@ -215,19 +210,19 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
   }
 
   private fun updateToolbars() {
-    toolbarTitle.text = getString(state.mode.toolbarTitleResourceId)
+    views.mainToolbar.title.text = getString(state.mode.toolbarTitleResourceId)
     updateMainToolbarLeftIcon()
     setBottomToolbar()
   }
 
   private fun updateMainToolbarLeftIcon() {
-    toolbarLeftIcon.setImageDrawable(getDrawable(state.mode.toolbarIconResourceId))
+    views.mainToolbar.leftIcon.setImageDrawable(getDrawable(state.mode.toolbarIconResourceId))
     if (state.mode != HomeNavigationMode.DEFAULT) {
       val iconColor = appTheme.get(ThemeColorType.SECONDARY_TEXT)
-      toolbarLeftIcon.setColorFilter(iconColor)
+      views.mainToolbar.leftIcon.setColorFilter(iconColor)
     }
     else
-      toolbarLeftIcon.clearColorFilter()
+      views.mainToolbar.leftIcon.clearColorFilter()
   }
 
   fun onFolderChange(folder: Folder?) {
@@ -238,12 +233,12 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
 
   fun notifyFolderChange() {
     val componentContext = ComponentContext(this)
-    folderToolbar.removeAllViews()
+    views.folderToolbar.removeAllViews()
     setBottomToolbar()
 
     val currentFolder = state.currentFolder
     if (currentFolder != null) {
-      folderToolbar.addView(LithoView.create(componentContext,
+      views.folderToolbar.addView(LithoView.create(componentContext,
           MainActivityFolderBottomBar.create(componentContext)
               .folder(currentFolder)
               .build()))
@@ -348,23 +343,23 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
 
   private fun enterSearchMode() {
     isInSearchMode = true
-    searchBox.setText(state.text)
-    mainToolbar.visibility = View.GONE
-    searchToolbar.visibility = View.VISIBLE
+    views.searchToolbar.textField.setText(state.text)
+    views.mainToolbar.root.visibility = View.GONE
+    views.searchToolbar.root.visibility = View.VISIBLE
     tryOpeningTheKeyboard()
     GlobalScope.launch(Dispatchers.Main) {
       withContext(Dispatchers.IO) { tagAndColorPicker.reset() }
       tagAndColorPicker.notifyChanged()
     }
-    searchBox.requestFocus()
+    views.searchToolbar.textField.requestFocus()
   }
 
   private fun quitSearchMode() {
     isInSearchMode = false
-    searchBox.setText("")
+    views.searchToolbar.textField.setText("")
     tryClosingTheKeyboard()
-    mainToolbar.visibility = View.VISIBLE
-    searchToolbar.visibility = View.GONE
+    views.mainToolbar.root.visibility = View.VISIBLE
+    views.searchToolbar.root.visibility = View.GONE
     state.clearSearchBar()
     refreshItems()
   }
@@ -376,8 +371,8 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
 
   override fun onBackPressed() {
     when {
-      isInSearchMode && searchBox.text.toString().isBlank() -> quitSearchMode()
-      isInSearchMode -> searchBox.setText("")
+      isInSearchMode && views.searchToolbar.textField.text.toString().isBlank() -> quitSearchMode()
+      isInSearchMode -> views.searchToolbar.textField.setText("")
       state.currentFolder != null -> onFolderChange(null)
       state.hasFilter() -> {
         state.clear()
@@ -401,14 +396,14 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
 
   override fun notifyThemeChange() {
     setSystemTheme()
-    containerLayoutMain.setBackgroundColor(getThemeColor())
+    views.containerLayoutMain.setBackgroundColor(getThemeColor())
     setBottomToolbar()
   }
 
   private fun setBottomToolbar() {
     val componentContext = ComponentContext(this)
-    lithoBottomToolbar.removeAllViews()
-    lithoBottomToolbar.addView(
+    views.lithoBottomToolbar.removeAllViews()
+    views.lithoBottomToolbar.addView(
       LithoView.create(
         componentContext,
         MainActivityBottomBar.create(componentContext)

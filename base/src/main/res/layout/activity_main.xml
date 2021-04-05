@@ -11,9 +11,11 @@
     android:orientation="vertical">
 
     <include
+      android:id="@+id/mainToolbar"
       layout="@layout/toolbar_main" />
 
     <include
+      android:id="@+id/searchToolbar"
       layout="@layout/search_toolbar_main"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
@@ -24,7 +26,7 @@
       android:visibility="gone" />
 
     <androidx.recyclerview.widget.RecyclerView
-      android:id="@+id/recycler_view"
+      android:id="@+id/recyclerView"
       android:layout_width="match_parent"
       android:layout_height="0dp"
       android:layout_weight="1"/>
