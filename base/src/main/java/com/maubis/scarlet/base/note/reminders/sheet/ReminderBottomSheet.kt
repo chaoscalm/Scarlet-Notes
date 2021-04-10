@@ -24,7 +24,6 @@ import com.maubis.scarlet.base.support.ui.ThemedBottomSheetFragment
 import com.maubis.scarlet.base.support.utils.dateFormat
 import java.util.*
 
-// TODO: Upgrade to Litho
 class ReminderBottomSheet : ThemedBottomSheetFragment() {
 
   var selectedNote: Note? = null
