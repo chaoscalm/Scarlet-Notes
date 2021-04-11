@@ -3,10 +3,10 @@ package com.maubis.scarlet.base.note.formats.recycler
 import android.content.Context
 import android.view.View
 import android.widget.ImageView
+import androidx.core.view.isVisible
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.core.format.FormatType
-import com.maubis.scarlet.base.support.ui.visibility
 
 class FormatBulletViewHolder(context: Context, view: View) : FormatTextViewHolder(context, view) {
 
@@ -21,18 +21,18 @@ class FormatBulletViewHolder(context: Context, view: View) : FormatTextViewHolde
     when (data.formatType) {
       FormatType.BULLET_1 -> {
         icon.setImageResource(R.drawable.icon_bullet_1)
-        firstMargin.visibility = visibility(false)
-        secondMargin.visibility = visibility(false)
+        firstMargin.isVisible = false
+        secondMargin.isVisible = false
       }
       FormatType.BULLET_2 -> {
         icon.setImageResource(R.drawable.icon_bullet_2)
-        firstMargin.visibility = visibility(false)
-        secondMargin.visibility = visibility(true)
+        firstMargin.isVisible = false
+        secondMargin.isVisible = true
       }
       FormatType.BULLET_3 -> {
         icon.setImageResource(R.drawable.icon_bullet_3)
-        firstMargin.visibility = visibility(true)
-        secondMargin.visibility = visibility(true)
+        firstMargin.isVisible = true
+        secondMargin.isVisible = true
       }
       else -> {
       } // Ignore other cases

@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import com.github.bijoysingh.uibasics.views.UITextView
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.imageStorage
@@ -15,7 +16,6 @@ import com.maubis.scarlet.base.core.note.ImageLoadCallback
 import com.maubis.scarlet.base.home.sheets.openDeleteFormatDialog
 import com.maubis.scarlet.base.note.creation.sheet.FormatActionBottomSheet
 import com.maubis.scarlet.base.support.sheets.openSheet
-import com.maubis.scarlet.base.support.ui.visibility
 import com.maubis.scarlet.base.support.utils.logAndMaybeDisplayError
 import pl.aprilapps.easyphotopicker.EasyImage
 import java.io.File
@@ -75,7 +75,7 @@ class FormatImageViewHolder(context: Context, view: View) : FormatViewHolderBase
         format = data
       })
     }
-    imageToolbar.visibility = visibility(config.editable)
+    imageToolbar.isVisible = config.editable
 
     val imageToolbarBg = config.backgroundColor
     imageToolbar.setBackgroundColor(imageToolbarBg)
@@ -90,7 +90,7 @@ class FormatImageViewHolder(context: Context, view: View) : FormatViewHolderBase
           true -> populateFile(file)
           false -> {
             noImageMessage.setText(R.string.image_not_on_current_device)
-            noImageMessage.visibility = visibility(config.editable)
+            noImageMessage.isVisible = config.editable
             image.visibility = View.GONE
             imageToolbar.visibility = View.GONE
           }

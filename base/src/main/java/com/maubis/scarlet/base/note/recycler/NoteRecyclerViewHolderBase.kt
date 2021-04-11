@@ -9,6 +9,7 @@ import android.view.View.VISIBLE
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.core.view.isVisible
 import com.github.bijoysingh.starter.recyclerview.RecyclerViewHolder
 import com.github.bijoysingh.starter.util.TextUtils
 import com.maubis.scarlet.base.R
@@ -18,7 +19,6 @@ import com.maubis.scarlet.base.core.note.NoteState
 import com.maubis.scarlet.base.database.room.note.Note
 import com.maubis.scarlet.base.note.isNoteLockedButAppUnlocked
 import com.maubis.scarlet.base.support.recycler.RecyclerItem
-import com.maubis.scarlet.base.support.ui.visibility
 import com.maubis.scarlet.base.support.utils.trim
 
 open class NoteRecyclerViewHolderBase(context: Context, view: View) : RecyclerViewHolder<RecyclerItem>(context, view) {
@@ -84,32 +84,32 @@ open class NoteRecyclerViewHolderBase(context: Context, view: View) : RecyclerVi
 
   private fun setImage(note: NoteRecyclerItem) {
     val isImageAvailable = !note.imageSource.isBlank()
-    image.visibility = visibility(isImageAvailable)
+    image.isVisible = isImageAvailable
     if (isImageAvailable) {
       imageStorage.loadThumbnailFileToImageView(note.note.uuid, note.imageSource, image)
     }
   }
 
   private fun setIndicators(note: NoteRecyclerItem) {
-    pinIndicator.visibility = visibility(note.note.pinned)
-    reminderIndicator.visibility = visibility(note.hasReminder)
-    backupIndicator.visibility = visibility(note.disableBackup)
+    pinIndicator.isVisible = note.note.pinned
+    reminderIndicator.isVisible = note.hasReminder
+    backupIndicator.isVisible = note.disableBackup
     when (note.state) {
       NoteState.FAVOURITE -> {
-        stateIndicator.visibility = View.VISIBLE
+        stateIndicator.visibility = VISIBLE
         stateIndicator.setImageResource(R.drawable.ic_favorite_white_48dp)
       }
       NoteState.ARCHIVED -> {
-        stateIndicator.visibility = View.VISIBLE
+        stateIndicator.visibility = VISIBLE
         stateIndicator.setImageResource(R.drawable.ic_archive_white_48dp)
       }
       NoteState.TRASH -> {
-        stateIndicator.visibility = View.VISIBLE
+        stateIndicator.visibility = VISIBLE
         stateIndicator.setImageResource(R.drawable.ic_delete_white_48dp)
       }
       NoteState.DEFAULT -> stateIndicator.visibility = GONE
     }
-    unlockIndicator.visibility = visibility(note.note.locked)
+    unlockIndicator.isVisible = note.note.locked
 
     pinIndicator.setColorFilter(note.indicatorColor)
     stateIndicator.setColorFilter(note.indicatorColor)

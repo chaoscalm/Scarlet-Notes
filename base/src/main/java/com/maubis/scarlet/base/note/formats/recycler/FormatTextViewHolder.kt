@@ -10,6 +10,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import com.maubis.markdown.Markdown
 import com.maubis.markdown.spannable.clearMarkdownSpans
 import com.maubis.markdown.spannable.setFormats
@@ -21,7 +22,6 @@ import com.maubis.scarlet.base.note.creation.sheet.FormatActionBottomSheet
 import com.maubis.scarlet.base.note.creation.sheet.sEditorLiveMarkdown
 import com.maubis.scarlet.base.note.creation.sheet.sEditorMoveHandles
 import com.maubis.scarlet.base.support.sheets.openSheet
-import com.maubis.scarlet.base.support.ui.visibility
 import com.maubis.scarlet.base.support.utils.logAndMaybeDisplayError
 
 open class FormatTextViewHolder(context: Context, view: View) : FormatViewHolderBase(context, view), TextWatcher {
@@ -59,14 +59,14 @@ open class FormatTextViewHolder(context: Context, view: View) : FormatViewHolder
     text.setLinkTextColor(config.accentColor)
     text.setTextIsSelectable(true)
     text.setTypeface(config.typeface, config.typefaceStyle)
-    text.visibility = visibility(!config.editable)
+    text.isVisible = !config.editable
 
     edit.setTextSize(TypedValue.COMPLEX_UNIT_SP, fontSize)
     edit.setTextColor(config.secondaryTextColor)
     edit.setHintTextColor(config.hintTextColor)
     edit.setBackgroundColor(config.backgroundColor)
     edit.setTypeface(config.typeface, config.typefaceStyle)
-    edit.visibility = visibility(config.editable)
+    edit.isVisible = config.editable
     edit.isEnabled = config.editable
     showHintWhenTextIsEmpty()
 
@@ -77,7 +77,7 @@ open class FormatTextViewHolder(context: Context, view: View) : FormatViewHolder
     }
 
     actionMove.setColorFilter(config.iconColor)
-    actionMove.visibility = visibility(config.editable)
+    actionMove.isVisible = config.editable
     actionMove.setOnClickListener {
       openSheet(activity, FormatActionBottomSheet().apply {
         noteUUID = config.noteUUID

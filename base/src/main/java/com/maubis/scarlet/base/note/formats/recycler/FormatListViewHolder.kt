@@ -6,10 +6,10 @@ import android.text.InputType
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.ImageView
+import androidx.core.view.isVisible
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.core.format.FormatType
-import com.maubis.scarlet.base.support.ui.visibility
 import com.maubis.scarlet.base.support.utils.getEditorActionListener
 
 class FormatListViewHolder(context: Context, view: View) : FormatTextViewHolder(context, view) {
@@ -48,7 +48,7 @@ class FormatListViewHolder(context: Context, view: View) : FormatTextViewHolder(
       } // Ignore other cases
     }
 
-    close.visibility = visibility(config.editable)
+    close.isVisible = config.editable
     close.setColorFilter(config.iconColor)
     close.alpha = 0.8f
     close.setOnClickListener {
