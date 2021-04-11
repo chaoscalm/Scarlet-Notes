@@ -1,4 +1,4 @@
-package com.maubis.scarlet.base.support.ui
+package com.maubis.scarlet.base.support.utils
 
 import android.graphics.Color
 import androidx.core.graphics.ColorUtils

@@ -36,7 +36,8 @@ import com.maubis.scarlet.base.settings.sEditorTextSize
 import com.maubis.scarlet.base.settings.sUIUseNoteColorAsBackground
 import com.maubis.scarlet.base.support.specs.ToolbarColorConfig
 import com.maubis.scarlet.base.support.ui.*
-import com.maubis.scarlet.base.support.ui.ColorUtil.darkOrDarkerColor
+import com.maubis.scarlet.base.support.utils.ColorUtil
+import com.maubis.scarlet.base.support.utils.ColorUtil.darkOrDarkerColor
 import com.maubis.scarlet.base.widget.getPendingIntentWithStack
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope

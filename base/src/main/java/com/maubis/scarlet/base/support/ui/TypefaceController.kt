@@ -1,4 +1,4 @@
-package com.maubis.scarlet.base.support.ui.font
+package com.maubis.scarlet.base.support.ui
 
 import android.content.Context
 import android.graphics.Typeface

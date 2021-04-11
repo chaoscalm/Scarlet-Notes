@@ -18,8 +18,8 @@ import com.maubis.scarlet.base.support.specs.BottomSheetBar
 import com.maubis.scarlet.base.support.specs.EmptySpec
 import com.maubis.scarlet.base.support.ui.LithoCircleDrawable
 import com.maubis.scarlet.base.support.ui.ThemeColorType
-import com.maubis.scarlet.base.support.ui.font.TypefaceController
-import com.maubis.scarlet.base.support.ui.font.sPreferenceTypeface
+import com.maubis.scarlet.base.support.ui.TypefaceController
+import com.maubis.scarlet.base.support.ui.sPreferenceTypeface
 
 @LayoutSpec
 object TypefacePickerItemSpec {

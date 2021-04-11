@@ -16,7 +16,7 @@ import com.maubis.scarlet.base.support.specs.BottomSheetBar
 import com.maubis.scarlet.base.support.specs.EmptySpec
 import com.maubis.scarlet.base.support.specs.RoundIcon
 import com.maubis.scarlet.base.support.specs.separatorSpec
-import com.maubis.scarlet.base.support.ui.ColorUtil
+import com.maubis.scarlet.base.support.utils.ColorUtil
 
 class ColorPickerDefaultController(
   val title: Int = R.string.note_option_default_color,

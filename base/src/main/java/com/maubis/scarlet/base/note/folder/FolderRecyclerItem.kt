@@ -6,7 +6,7 @@ import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.database.room.folder.Folder
 import com.maubis.scarlet.base.support.recycler.RecyclerItem
-import com.maubis.scarlet.base.support.ui.ColorUtil
+import com.maubis.scarlet.base.support.utils.ColorUtil
 
 class FolderRecyclerItem(
   context: Context,

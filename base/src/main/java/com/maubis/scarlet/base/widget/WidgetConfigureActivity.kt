@@ -19,7 +19,7 @@ import com.maubis.scarlet.base.note.getTextForWidget
 import com.maubis.scarlet.base.note.selection.INoteSelectorActivity
 import com.maubis.scarlet.base.note.selection.SelectableNotesActivityBase
 import com.maubis.scarlet.base.settings.sWidgetShowLockedNotes
-import com.maubis.scarlet.base.support.ui.ColorUtil
+import com.maubis.scarlet.base.support.utils.ColorUtil
 
 class WidgetConfigureActivity : SelectableNotesActivityBase(), INoteSelectorActivity {
 

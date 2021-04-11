@@ -12,7 +12,7 @@ import com.maubis.scarlet.base.settings.SortingOptionsBottomSheet.Companion.getS
 import com.maubis.scarlet.base.support.sheets.LithoOptionBottomSheet
 import com.maubis.scarlet.base.support.sheets.LithoOptionsItem
 import com.maubis.scarlet.base.support.sheets.openSheet
-import com.maubis.scarlet.base.support.ui.font.sPreferenceTypeface
+import com.maubis.scarlet.base.support.ui.sPreferenceTypeface
 import com.maubis.scarlet.base.support.ui.sThemeLabel
 
 var sUIUseGridView: Boolean

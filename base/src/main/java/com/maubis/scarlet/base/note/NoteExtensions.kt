@@ -24,9 +24,9 @@ import com.maubis.scarlet.base.security.PinLockController.needsLockCheck
 import com.maubis.scarlet.base.security.openUnlockSheet
 import com.maubis.scarlet.base.settings.*
 import com.maubis.scarlet.base.support.BitmapHelper
-import com.maubis.scarlet.base.support.ui.ColorUtil
 import com.maubis.scarlet.base.support.ui.ThemedActivity
 import com.maubis.scarlet.base.support.ui.sThemeDarkenNoteColor
+import com.maubis.scarlet.base.support.utils.ColorUtil
 import com.maubis.scarlet.base.support.utils.dateFormat
 import java.util.*
 import kotlin.collections.ArrayList

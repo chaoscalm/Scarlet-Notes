@@ -28,7 +28,7 @@ import com.maubis.scarlet.base.support.specs.EmptySpec
 import com.maubis.scarlet.base.support.specs.ToolbarColorConfig
 import com.maubis.scarlet.base.support.specs.bottomBarCard
 import com.maubis.scarlet.base.support.specs.bottomBarRoundIcon
-import com.maubis.scarlet.base.support.ui.ColorUtil
+import com.maubis.scarlet.base.support.utils.ColorUtil
 import com.maubis.scarlet.base.support.utils.OsVersionUtils
 
 @LayoutSpec

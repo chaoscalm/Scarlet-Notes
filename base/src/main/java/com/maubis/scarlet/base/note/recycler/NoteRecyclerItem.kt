@@ -10,7 +10,7 @@ import com.maubis.scarlet.base.database.room.note.Note
 import com.maubis.scarlet.base.note.*
 import com.maubis.scarlet.base.settings.sNoteItemLineCount
 import com.maubis.scarlet.base.support.recycler.RecyclerItem
-import com.maubis.scarlet.base.support.ui.ColorUtil
+import com.maubis.scarlet.base.support.utils.ColorUtil
 
 class NoteRecyclerItem(context: Context, val note: Note) : RecyclerItem() {
 

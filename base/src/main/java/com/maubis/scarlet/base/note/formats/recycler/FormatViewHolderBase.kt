@@ -18,9 +18,9 @@ import com.maubis.scarlet.base.settings.STORE_KEY_TEXT_SIZE
 import com.maubis.scarlet.base.settings.SettingsOptionsBottomSheet
 import com.maubis.scarlet.base.settings.TEXT_SIZE_DEFAULT
 import com.maubis.scarlet.base.settings.sUIUseNoteColorAsBackground
-import com.maubis.scarlet.base.support.ui.ColorUtil
 import com.maubis.scarlet.base.support.ui.Theme
 import com.maubis.scarlet.base.support.ui.ThemeColorType
+import com.maubis.scarlet.base.support.utils.ColorUtil
 
 const val KEY_EDITABLE = "KEY_EDITABLE"
 const val KEY_NOTE_COLOR = "KEY_NOTE_COLOR"
