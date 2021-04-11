@@ -10,7 +10,7 @@ import com.maubis.scarlet.base.note.copy
 import com.maubis.scarlet.base.note.creation.activity.NoteIntentRouterActivity
 import com.maubis.scarlet.base.note.edit
 import com.maubis.scarlet.base.note.share
-import com.maubis.scarlet.base.security.sheets.openUnlockSheet
+import com.maubis.scarlet.base.security.openUnlockSheet
 import com.maubis.scarlet.base.support.ui.ThemedActivity
 
 class NoteRecyclerHolder(context: Context, view: View) : NoteRecyclerViewHolderBase(context, view) {

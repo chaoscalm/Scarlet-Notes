@@ -18,8 +18,8 @@ import com.maubis.scarlet.base.core.tag.TagBuilder
 import com.maubis.scarlet.base.database.room.tag.Tag
 import com.maubis.scarlet.base.home.HomeNavigationMode
 import com.maubis.scarlet.base.home.MainActivity
-import com.maubis.scarlet.base.note.tag.sheet.CreateOrEditTagBottomSheet
-import com.maubis.scarlet.base.settings.sheet.SettingsOptionsBottomSheet
+import com.maubis.scarlet.base.note.tag.CreateOrEditTagBottomSheet
+import com.maubis.scarlet.base.settings.SettingsOptionsBottomSheet
 import com.maubis.scarlet.base.support.sheets.*
 import com.maubis.scarlet.base.support.specs.RoundIcon
 import com.maubis.scarlet.base.support.ui.ThemeColorType

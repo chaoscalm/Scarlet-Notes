@@ -1,8 +1,8 @@
 package com.maubis.scarlet.base.support.ui
 
 import android.content.Intent
-import com.maubis.scarlet.base.security.activity.AppLockActivity
-import com.maubis.scarlet.base.security.controller.PinLockController
+import com.maubis.scarlet.base.security.AppLockActivity
+import com.maubis.scarlet.base.security.PinLockController
 
 abstract class SecuredActivity : ThemedActivity() {
   override fun onResume() {

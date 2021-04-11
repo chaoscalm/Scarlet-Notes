@@ -9,7 +9,7 @@ import com.maubis.scarlet.base.home.recycler.EmptyRecyclerHolder
 import com.maubis.scarlet.base.home.recycler.InformationRecyclerHolder
 import com.maubis.scarlet.base.note.folder.FolderRecyclerHolder
 import com.maubis.scarlet.base.note.folder.SelectorFolderRecyclerHolder
-import com.maubis.scarlet.base.note.selection.recycler.SelectableNoteRecyclerViewHolder
+import com.maubis.scarlet.base.note.selection.SelectableNoteRecyclerViewHolder
 import com.maubis.scarlet.base.support.recycler.RecyclerItem
 import java.util.*
 

@@ -9,7 +9,7 @@ import com.maubis.scarlet.base.database.room.note.Note
 import com.maubis.scarlet.base.database.room.tag.Tag
 import com.maubis.scarlet.base.note.getFullText
 import com.maubis.scarlet.base.note.isNoteLockedButAppUnlocked
-import com.maubis.scarlet.base.settings.sheet.SortingOptionsBottomSheet
+import com.maubis.scarlet.base.settings.SortingOptionsBottomSheet
 
 class SearchState(
   var text: String = "",

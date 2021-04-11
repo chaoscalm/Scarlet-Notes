@@ -15,12 +15,11 @@ import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.database.room.note.Note
 import com.maubis.scarlet.base.database.room.widget.Widget
 import com.maubis.scarlet.base.note.creation.activity.ViewAdvancedNoteActivity
-import com.maubis.scarlet.base.note.selection.activity.INoteSelectorActivity
-import com.maubis.scarlet.base.note.selection.activity.SelectableNotesActivityBase
+import com.maubis.scarlet.base.note.getTextForWidget
+import com.maubis.scarlet.base.note.selection.INoteSelectorActivity
+import com.maubis.scarlet.base.note.selection.SelectableNotesActivityBase
+import com.maubis.scarlet.base.settings.sWidgetShowLockedNotes
 import com.maubis.scarlet.base.support.ui.ColorUtil
-import com.maubis.scarlet.base.widget.sheet.getWidgetNoteText
-import com.maubis.scarlet.base.widget.sheet.getWidgetNotes
-import com.maubis.scarlet.base.widget.sheet.sWidgetShowLockedNotes
 
 class WidgetConfigureActivity : SelectableNotesActivityBase(), INoteSelectorActivity {
 
@@ -82,7 +81,7 @@ class WidgetConfigureActivity : SelectableNotesActivityBase(), INoteSelectorActi
       val pendingIntent = ViewAdvancedNoteActivity.getIntentWithStack(context, note)
       val views = RemoteViews(context.getPackageName(), R.layout.widget_layout)
 
-      views.setTextViewText(R.id.description, getWidgetNoteText(note))
+      views.setTextViewText(R.id.description, note.getTextForWidget())
       views.setInt(R.id.container_layout, "setBackgroundColor", note.color)
 
       val isLightShaded = ColorUtil.isLightColored(note.color)

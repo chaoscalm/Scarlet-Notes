@@ -14,10 +14,10 @@ import com.maubis.scarlet.base.core.format.FormatType
 import com.maubis.scarlet.base.note.creation.activity.INTENT_KEY_NOTE_ID
 import com.maubis.scarlet.base.note.creation.activity.ViewAdvancedNoteActivity
 import com.maubis.scarlet.base.note.creation.sheet.sNoteDefaultColor
-import com.maubis.scarlet.base.settings.sheet.STORE_KEY_TEXT_SIZE
-import com.maubis.scarlet.base.settings.sheet.SettingsOptionsBottomSheet
-import com.maubis.scarlet.base.settings.sheet.TEXT_SIZE_DEFAULT
-import com.maubis.scarlet.base.settings.sheet.sUIUseNoteColorAsBackground
+import com.maubis.scarlet.base.settings.STORE_KEY_TEXT_SIZE
+import com.maubis.scarlet.base.settings.SettingsOptionsBottomSheet
+import com.maubis.scarlet.base.settings.TEXT_SIZE_DEFAULT
+import com.maubis.scarlet.base.settings.sUIUseNoteColorAsBackground
 import com.maubis.scarlet.base.support.ui.ColorUtil
 import com.maubis.scarlet.base.support.ui.Theme
 import com.maubis.scarlet.base.support.ui.ThemeColorType

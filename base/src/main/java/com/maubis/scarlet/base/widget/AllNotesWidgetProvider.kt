@@ -14,9 +14,9 @@ import com.maubis.scarlet.base.home.MainActivity
 import com.maubis.scarlet.base.note.creation.activity.CreateListNoteActivity
 import com.maubis.scarlet.base.note.creation.activity.CreateNoteActivity
 import com.maubis.scarlet.base.note.creation.activity.ViewAdvancedNoteActivity
+import com.maubis.scarlet.base.settings.sWidgetBackgroundColor
+import com.maubis.scarlet.base.settings.sWidgetShowToolbar
 import com.maubis.scarlet.base.support.ui.visibility
-import com.maubis.scarlet.base.widget.sheet.sWidgetBackgroundColor
-import com.maubis.scarlet.base.widget.sheet.sWidgetShowToolbar
 
 class AllNotesWidgetProvider : AppWidgetProvider() {
 

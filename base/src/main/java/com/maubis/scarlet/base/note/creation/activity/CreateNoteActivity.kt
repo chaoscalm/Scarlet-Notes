@@ -26,8 +26,8 @@ import com.maubis.scarlet.base.note.creation.specs.NoteCreationTopBar
 import com.maubis.scarlet.base.note.delete
 import com.maubis.scarlet.base.note.formats.recycler.FormatImageViewHolder
 import com.maubis.scarlet.base.note.formats.recycler.FormatTextViewHolder
-import com.maubis.scarlet.base.settings.sheet.ColorPickerBottomSheet
-import com.maubis.scarlet.base.settings.sheet.ColorPickerDefaultController
+import com.maubis.scarlet.base.settings.ColorPickerBottomSheet
+import com.maubis.scarlet.base.settings.ColorPickerDefaultController
 import com.maubis.scarlet.base.support.recycler.SimpleItemTouchHelper
 import com.maubis.scarlet.base.support.specs.ToolbarColorConfig
 import com.maubis.scarlet.base.support.utils.logAndMaybeDisplayError

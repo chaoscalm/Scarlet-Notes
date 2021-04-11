@@ -7,8 +7,8 @@ import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.export.activity.ImportNoteActivity
 import com.maubis.scarlet.base.export.support.PermissionUtils
 import com.maubis.scarlet.base.home.MainActivity
-import com.maubis.scarlet.base.security.controller.PinLockController.isPinCodeEnabled
-import com.maubis.scarlet.base.security.sheets.openUnlockSheet
+import com.maubis.scarlet.base.security.PinLockController.isPinCodeEnabled
+import com.maubis.scarlet.base.security.openUnlockSheet
 import com.maubis.scarlet.base.support.sheets.LithoOptionBottomSheet
 import com.maubis.scarlet.base.support.sheets.LithoOptionsItem
 import com.maubis.scarlet.base.support.sheets.openSheet

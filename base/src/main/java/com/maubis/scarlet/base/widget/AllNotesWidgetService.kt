@@ -8,11 +8,31 @@ import android.widget.RemoteViews
 import android.widget.RemoteViewsService
 import androidx.core.content.ContextCompat
 import com.maubis.scarlet.base.R
+import com.maubis.scarlet.base.ScarletApp
+import com.maubis.scarlet.base.core.note.NoteState
+import com.maubis.scarlet.base.core.note.sort
 import com.maubis.scarlet.base.database.room.note.Note
 import com.maubis.scarlet.base.note.creation.activity.INTENT_KEY_NOTE_ID
+import com.maubis.scarlet.base.note.getTextForWidget
+import com.maubis.scarlet.base.settings.SortingOptionsBottomSheet
+import com.maubis.scarlet.base.settings.sWidgetShowArchivedNotes
+import com.maubis.scarlet.base.settings.sWidgetShowDeletedNotes
+import com.maubis.scarlet.base.settings.sWidgetShowLockedNotes
 import com.maubis.scarlet.base.support.ui.ColorUtil
-import com.maubis.scarlet.base.widget.sheet.getWidgetNoteText
-import com.maubis.scarlet.base.widget.sheet.getWidgetNotes
+
+fun getWidgetNotes(): List<Note> {
+  val state = listOf(NoteState.DEFAULT.name, NoteState.FAVOURITE.name).toMutableList()
+  if (sWidgetShowArchivedNotes) {
+    state.add(NoteState.ARCHIVED.name)
+  }
+  if (sWidgetShowDeletedNotes) {
+    state.add(NoteState.TRASH.name)
+  }
+
+  val sorting = SortingOptionsBottomSheet.getSortingState()
+  return sort(ScarletApp.data.notes.getByNoteState(state.toTypedArray())
+          .filter { note -> (!note.locked || sWidgetShowLockedNotes) }, sorting)
+}
 
 class AllNotesWidgetService : RemoteViewsService() {
   override fun onGetViewFactory(intent: Intent?): RemoteViewsFactory {
@@ -52,7 +72,7 @@ class AllNotesRemoteViewsFactory(val context: Context) : RemoteViewsService.Remo
 
     val views = RemoteViews(context.getPackageName(), R.layout.item_widget_note)
 
-    views.setTextViewText(R.id.description, getWidgetNoteText(note))
+    views.setTextViewText(R.id.description, note.getTextForWidget())
     views.setInt(R.id.container_layout, "setBackgroundColor", note.color)
 
     val isLightShaded = ColorUtil.isLightColored(note.color)

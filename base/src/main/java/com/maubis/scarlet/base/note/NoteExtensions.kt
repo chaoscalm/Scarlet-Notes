@@ -20,11 +20,9 @@ import com.maubis.scarlet.base.database.room.note.Note
 import com.maubis.scarlet.base.database.room.tag.Tag
 import com.maubis.scarlet.base.note.creation.activity.NoteIntentRouterActivity
 import com.maubis.scarlet.base.note.creation.sheet.sNoteDefaultColor
-import com.maubis.scarlet.base.security.controller.PinLockController.needsLockCheck
-import com.maubis.scarlet.base.security.sheets.openUnlockSheet
-import com.maubis.scarlet.base.settings.sheet.sInternalShowUUID
-import com.maubis.scarlet.base.settings.sheet.sSecurityAppLockEnabled
-import com.maubis.scarlet.base.settings.sheet.sUIMarkdownEnabledOnHome
+import com.maubis.scarlet.base.security.PinLockController.needsLockCheck
+import com.maubis.scarlet.base.security.openUnlockSheet
+import com.maubis.scarlet.base.settings.*
 import com.maubis.scarlet.base.support.BitmapHelper
 import com.maubis.scarlet.base.support.ui.ColorUtil
 import com.maubis.scarlet.base.support.ui.ThemedActivity
@@ -183,6 +181,18 @@ fun Note.getLockedAwareTextForHomeList(): CharSequence {
   }
 }
 
+fun Note.getTextForWidget(): CharSequence {
+  if (locked && !sWidgetShowLockedNotes) {
+    return "******************\n***********\n****************"
+  }
+
+  val text = getFullTextForDirectMarkdownRender()
+  return when (sWidgetEnableFormatting) {
+    true -> Markdown.render(text, true)
+    false -> text
+  }
+}
+
 fun Note.getDisplayTime(): String {
   val time = when {
     (this.updateTimestamp != 0L) -> this.updateTimestamp
@@ -199,7 +209,7 @@ fun Note.getDisplayTime(): String {
 
 fun Note.getTagString(): String {
   val tags = getTags()
-  return tags.map { it -> "` ${it.title} `" }.joinToString(separator = " ")
+  return tags.map { "` ${it.title} `" }.joinToString(separator = " ")
 }
 
 fun Note.getTags(): Set<Tag> {

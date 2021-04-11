@@ -14,7 +14,7 @@ import com.maubis.scarlet.base.core.folder.isUnsaved
 import com.maubis.scarlet.base.database.room.folder.Folder
 import com.maubis.scarlet.base.note.folder.delete
 import com.maubis.scarlet.base.note.folder.save
-import com.maubis.scarlet.base.settings.view.ColorView
+import com.maubis.scarlet.base.settings.ColorView
 import com.maubis.scarlet.base.support.sheets.openSheet
 import com.maubis.scarlet.base.support.ui.ThemeColorType
 import com.maubis.scarlet.base.support.ui.ThemedActivity
