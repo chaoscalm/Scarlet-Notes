@@ -5,6 +5,11 @@
 # For more details, see
 #   http://developer.android.com/guide/developing/tools/proguard.html
 
--keepattributes LineNumberTable,SourceFile
+-dontwarn com.android.volley.**
+-dontwarn com.google.android.gms.**
+-dontwarn java.lang.instrument.*
+-dontwarn sun.misc.SignalHandler
+
+-dontobfuscate
 -keep class com.facebook.yoga.** { *; }
 -keep class com.maubis.scarlet.** { *; }
