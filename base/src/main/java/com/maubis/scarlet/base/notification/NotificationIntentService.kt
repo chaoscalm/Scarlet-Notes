@@ -7,10 +7,11 @@ import android.content.Intent
 import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.note.copy
+import com.maubis.scarlet.base.note.creation.activity.INTENT_KEY_NOTE_ID
 import com.maubis.scarlet.base.note.share
-import com.maubis.scarlet.base.support.INTENT_KEY_ACTION
-import com.maubis.scarlet.base.support.INTENT_KEY_NOTE_ID
 import com.maubis.scarlet.base.support.utils.logNonCriticalError
+
+const val INTENT_KEY_ACTION = "ACTION"
 
 class NotificationIntentService : IntentService("NotificationIntentService") {
 

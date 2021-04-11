@@ -20,7 +20,6 @@ import com.maubis.scarlet.base.note.creation.activity.ViewAdvancedNoteActivity
 import com.maubis.scarlet.base.note.getDisplayTime
 import com.maubis.scarlet.base.note.getTextForSharing
 import com.maubis.scarlet.base.note.getTitleForSharing
-import com.maubis.scarlet.base.support.INTENT_KEY_ACTION
 import com.maubis.scarlet.base.support.ui.ThemeColorType
 import com.maubis.scarlet.base.support.utils.OsVersionUtils
 
