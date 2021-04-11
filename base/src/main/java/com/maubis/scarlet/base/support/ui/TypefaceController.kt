@@ -13,11 +13,11 @@ var sPreferenceTypeface: String
   set(value) = ScarletApp.appPreferences.put(KEY_PREFERENCE_TYPEFACE, value)
 
 class TypefaceController(context: Context) {
-  enum class TypefaceType(val title: Int, val isLiteEnabled: Boolean) {
-    APP_DEFAULT(R.string.typeface_title_app_default, true),
-    OS_DEFAULT(R.string.typeface_title_os_default, true),
-    MONOSPACE(R.string.typeface_title_monospace, false),
-    SERIF_TITLE(R.string.typeface_title_serif, false),
+  enum class TypefaceType(val title: Int) {
+    APP_DEFAULT(R.string.typeface_title_app_default),
+    OS_DEFAULT(R.string.typeface_title_os_default),
+    MONOSPACE(R.string.typeface_title_monospace),
+    SERIF_TITLE(R.string.typeface_title_serif),
   }
 
   data class TypefaceSet(
