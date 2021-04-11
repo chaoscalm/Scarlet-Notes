@@ -3,6 +3,7 @@ package com.maubis.scarlet.base.support.utils
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -22,16 +23,10 @@ class ImageCache(context: Context) {
     thumbnailFolder.mkdirs()
     persistentFolder.mkdirs()
 
-    GlobalScope.launch {
+    GlobalScope.launch(Dispatchers.IO) {
       val files = thumbnailFolder.listFiles()
       files?.forEach { thumbnailCacheSize.addAndGet(it.length()) }
-      performEviction()
     }
-  }
-
-  fun imagesForNote(noteUUID: String): Array<File> {
-    val folder = File(persistentFolder, noteUUID)
-    return folder.listFiles() ?: emptyArray<File>()
   }
 
   fun deleteNote(noteUUID: String) {
@@ -61,14 +56,6 @@ class ImageCache(context: Context) {
     return null
   }
 
-  fun saveToCache(cacheFile: File, bitmap: Bitmap) {
-    val fOut = FileOutputStream(cacheFile)
-    val compressedBitmap = sampleBitmap(bitmap)
-    compressedBitmap.compress(Bitmap.CompressFormat.PNG, 75, fOut)
-    fOut.flush()
-    fOut.close()
-  }
-
   fun saveThumbnail(cacheFile: File, bitmap: Bitmap): Bitmap {
     if (cacheFile.exists()) {
       thumbnailCacheSize.addAndGet(-cacheFile.length())
@@ -93,7 +80,7 @@ class ImageCache(context: Context) {
 
   private fun sampleBitmap(bitmap: Bitmap): Bitmap {
     val cropDimension = Math.min(bitmap.width, bitmap.height)
-    var destinationBitmap = Bitmap.createBitmap(bitmap, 0, 0, cropDimension, cropDimension)
+    val destinationBitmap = Bitmap.createBitmap(bitmap, 0, 0, cropDimension, cropDimension)
     return Bitmap.createScaledBitmap(destinationBitmap, 256, 256, false)
   }
 
