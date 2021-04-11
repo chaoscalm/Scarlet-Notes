@@ -34,7 +34,6 @@ import com.maubis.scarlet.base.security.openUnlockSheet
 import com.maubis.scarlet.base.settings.ColorPickerBottomSheet
 import com.maubis.scarlet.base.settings.ColorPickerDefaultController
 import com.maubis.scarlet.base.support.addShortcut
-import com.maubis.scarlet.base.support.option.OptionsItem
 import com.maubis.scarlet.base.support.sheets.GridBottomSheetBase
 import com.maubis.scarlet.base.support.sheets.openSheet
 import com.maubis.scarlet.base.support.ui.ThemedActivity
@@ -145,113 +144,113 @@ class NoteOptionsBottomSheet : GridBottomSheetBase() {
     val options = ArrayList<OptionsItem>()
     options.add(
       OptionsItem(
-        title = R.string.restore_note,
-        subtitle = R.string.tap_for_action_not_trash,
-        icon = R.drawable.ic_restore,
-        listener = View.OnClickListener {
-          activity.markItem(note, NoteState.DEFAULT)
-          dismiss()
-        },
-        visible = note.getNoteState() == NoteState.TRASH
+              title = R.string.restore_note,
+              subtitle = R.string.tap_for_action_not_trash,
+              icon = R.drawable.ic_restore,
+              visible = note.getNoteState() == NoteState.TRASH,
+              listener = View.OnClickListener {
+                  activity.markItem(note, NoteState.DEFAULT)
+                  dismiss()
+              }
       ))
     options.add(OptionsItem(
-      title = R.string.edit_note,
-      subtitle = R.string.tap_for_action_edit,
-      icon = R.drawable.ic_edit_white_48dp,
-      listener = View.OnClickListener {
-        note.edit(activity)
-        dismiss()
-      }
+            title = R.string.edit_note,
+            subtitle = R.string.tap_for_action_edit,
+            icon = R.drawable.ic_edit_white_48dp,
+            listener = View.OnClickListener {
+                note.edit(activity)
+                dismiss()
+            }
     ))
     options.add(
       OptionsItem(
-        title = R.string.not_favourite_note,
-        subtitle = R.string.tap_for_action_not_favourite,
-        icon = R.drawable.ic_favorite_white_48dp,
-        listener = View.OnClickListener {
-          activity.markItem(note, NoteState.DEFAULT)
-          dismiss()
-        },
-        visible = note.getNoteState() == NoteState.FAVOURITE
+              title = R.string.not_favourite_note,
+              subtitle = R.string.tap_for_action_not_favourite,
+              icon = R.drawable.ic_favorite_white_48dp,
+              visible = note.getNoteState() == NoteState.FAVOURITE,
+              listener = View.OnClickListener {
+                  activity.markItem(note, NoteState.DEFAULT)
+                  dismiss()
+              }
       ))
     options.add(
       OptionsItem(
-        title = R.string.favourite_note,
-        subtitle = R.string.tap_for_action_favourite,
-        icon = R.drawable.ic_favorite_border_white_48dp,
-        listener = View.OnClickListener {
-          activity.markItem(note, NoteState.FAVOURITE)
-          dismiss()
-        },
-        visible = note.getNoteState() != NoteState.FAVOURITE
+              title = R.string.favourite_note,
+              subtitle = R.string.tap_for_action_favourite,
+              icon = R.drawable.ic_favorite_border_white_48dp,
+              visible = note.getNoteState() != NoteState.FAVOURITE,
+              listener = View.OnClickListener {
+                  activity.markItem(note, NoteState.FAVOURITE)
+                  dismiss()
+              }
       ))
     options.add(
       OptionsItem(
-        title = R.string.unarchive_note,
-        subtitle = R.string.tap_for_action_not_archive,
-        icon = R.drawable.ic_archive_white_48dp,
-        listener = View.OnClickListener {
-          activity.markItem(note, NoteState.DEFAULT)
-          dismiss()
-        },
-        visible = note.getNoteState() == NoteState.ARCHIVED
+              title = R.string.unarchive_note,
+              subtitle = R.string.tap_for_action_not_archive,
+              icon = R.drawable.ic_archive_white_48dp,
+              visible = note.getNoteState() == NoteState.ARCHIVED,
+              listener = View.OnClickListener {
+                  activity.markItem(note, NoteState.DEFAULT)
+                  dismiss()
+              }
       ))
     options.add(
       OptionsItem(
-        title = R.string.archive_note,
-        subtitle = R.string.tap_for_action_archive,
-        icon = R.drawable.ic_archive_white_48dp,
-        listener = View.OnClickListener {
-          activity.markItem(note, NoteState.ARCHIVED)
-          dismiss()
-        },
-        visible = note.getNoteState() != NoteState.ARCHIVED
+              title = R.string.archive_note,
+              subtitle = R.string.tap_for_action_archive,
+              icon = R.drawable.ic_archive_white_48dp,
+              visible = note.getNoteState() != NoteState.ARCHIVED,
+              listener = View.OnClickListener {
+                  activity.markItem(note, NoteState.ARCHIVED)
+                  dismiss()
+              }
       ))
     options.add(
       OptionsItem(
-        title = R.string.send_note,
-        subtitle = R.string.tap_for_action_share,
-        icon = R.drawable.ic_share_white_48dp,
-        listener = View.OnClickListener {
-          note.share(activity)
-          dismiss()
-        },
-        invalid = activity.lockedContentIsHidden() && note.locked
+              title = R.string.send_note,
+              subtitle = R.string.tap_for_action_share,
+              icon = R.drawable.ic_share_white_48dp,
+              invalid = activity.lockedContentIsHidden() && note.locked,
+              listener = View.OnClickListener {
+                  note.share(activity)
+                  dismiss()
+              }
       ))
     options.add(
       OptionsItem(
-        title = R.string.copy_note,
-        subtitle = R.string.tap_for_action_copy,
-        icon = R.drawable.ic_content_copy_white_48dp,
-        listener = View.OnClickListener {
-          note.copy(activity)
-          dismiss()
-        },
-        invalid = activity.lockedContentIsHidden() && note.locked
+              title = R.string.copy_note,
+              subtitle = R.string.tap_for_action_copy,
+              icon = R.drawable.ic_content_copy_white_48dp,
+              invalid = activity.lockedContentIsHidden() && note.locked,
+              listener = View.OnClickListener {
+                  note.copy(activity)
+                  dismiss()
+              }
       ))
     options.add(
       OptionsItem(
-        title = R.string.delete_note_permanently,
-        subtitle = R.string.tap_for_action_delete,
-        icon = R.drawable.ic_delete_permanently,
-        listener = View.OnClickListener {
-          activity.moveItemToTrashOrDelete(note)
-          dismiss()
-        },
-        visible = note.getNoteState() == NoteState.TRASH,
-        invalid = activity.lockedContentIsHidden() && note.locked
+              title = R.string.delete_note_permanently,
+              subtitle = R.string.tap_for_action_delete,
+              icon = R.drawable.ic_delete_permanently,
+              visible = note.getNoteState() == NoteState.TRASH,
+              invalid = activity.lockedContentIsHidden() && note.locked,
+              listener = View.OnClickListener {
+                  activity.moveItemToTrashOrDelete(note)
+                  dismiss()
+              }
       ))
     options.add(
       OptionsItem(
-        title = R.string.trash_note,
-        subtitle = R.string.tap_for_action_trash,
-        icon = R.drawable.ic_delete_white_48dp,
-        listener = View.OnClickListener {
-          activity.moveItemToTrashOrDelete(note)
-          dismiss()
-        },
-        visible = note.getNoteState() != NoteState.TRASH,
-        invalid = activity.lockedContentIsHidden() && note.locked
+              title = R.string.trash_note,
+              subtitle = R.string.tap_for_action_trash,
+              icon = R.drawable.ic_delete_white_48dp,
+              visible = note.getNoteState() != NoteState.TRASH,
+              invalid = activity.lockedContentIsHidden() && note.locked,
+              listener = View.OnClickListener {
+                  activity.moveItemToTrashOrDelete(note)
+                  dismiss()
+              }
       ))
     return options
   }
@@ -264,66 +263,66 @@ class NoteOptionsBottomSheet : GridBottomSheetBase() {
 
     val options = ArrayList<OptionsItem>()
     options.add(OptionsItem(
-      title = R.string.choose_note_color,
-      subtitle = R.string.tap_for_action_color,
-      icon = R.drawable.ic_action_color,
-      listener = View.OnClickListener {
-        val config = ColorPickerDefaultController(
-          title = R.string.choose_note_color,
-          colors = listOf(
-            activity.resources.getIntArray(R.array.bright_colors), activity.resources.getIntArray(R.array.bright_colors_accent)),
-          selectedColor = note.color,
-          onColorSelected = { color ->
-            note.color = color
-            activity.updateNote(note)
-          }
-        )
-        com.maubis.scarlet.base.support.sheets.openSheet(activity, ColorPickerBottomSheet().apply { this.config = config })
-        dismiss()
-      }
+            title = R.string.choose_note_color,
+            subtitle = R.string.tap_for_action_color,
+            icon = R.drawable.ic_action_color,
+            listener = View.OnClickListener {
+                val config = ColorPickerDefaultController(
+                        title = R.string.choose_note_color,
+                        colors = listOf(
+                                activity.resources.getIntArray(R.array.bright_colors), activity.resources.getIntArray(R.array.bright_colors_accent)),
+                        selectedColor = note.color,
+                        onColorSelected = { color ->
+                            note.color = color
+                            activity.updateNote(note)
+                        }
+                )
+                openSheet(activity, ColorPickerBottomSheet().apply { this.config = config })
+                dismiss()
+            }
     ))
     options.add(OptionsItem(
-      title = if (note.folder.isBlank()) R.string.folder_option_add_to_notebook else R.string.folder_option_change_notebook,
-      subtitle = R.string.folder_option_add_to_notebook,
-      icon = R.drawable.ic_folder,
-      listener = View.OnClickListener {
-        com.maubis.scarlet.base.support.sheets.openSheet(activity, FolderChooserBottomSheet().apply {
-          this.note = note
-          this.dismissListener = {
-            activity.notifyResetOrDismiss()
-          }
-        })
-        dismiss()
-      }
+            title = if (note.folder.isBlank()) R.string.folder_option_add_to_notebook else R.string.folder_option_change_notebook,
+            subtitle = R.string.folder_option_add_to_notebook,
+            icon = R.drawable.ic_folder,
+            listener = View.OnClickListener {
+                openSheet(activity, FolderChooserBottomSheet().apply {
+                    this.note = note
+                    this.dismissListener = {
+                        activity.notifyResetOrDismiss()
+                    }
+                })
+                dismiss()
+            }
     ))
     options.add(
       OptionsItem(
-        title = R.string.lock_note,
-        subtitle = R.string.lock_note,
-        icon = R.drawable.ic_action_lock,
-        listener = View.OnClickListener {
-          note.locked = true
-          activity.updateNote(note)
-          dismiss()
-        },
-        visible = !note.locked
+              title = R.string.lock_note,
+              subtitle = R.string.lock_note,
+              icon = R.drawable.ic_action_lock,
+              visible = !note.locked,
+              listener = View.OnClickListener {
+                  note.locked = true
+                  activity.updateNote(note)
+                  dismiss()
+              }
       ))
     options.add(
       OptionsItem(
-        title = R.string.unlock_note,
-        subtitle = R.string.unlock_note,
-        icon = R.drawable.ic_action_unlock,
-        listener = View.OnClickListener {
-          openUnlockSheet(
-            activity = activity,
-            onUnlockSuccess = {
-              note.locked = false
-              activity.updateNote(note)
-              dismiss()
-            },
-            onUnlockFailure = { })
-        },
-        visible = note.locked
+              title = R.string.unlock_note,
+              subtitle = R.string.unlock_note,
+              icon = R.drawable.ic_action_unlock,
+              visible = note.locked,
+              listener = View.OnClickListener {
+                  openUnlockSheet(
+                          activity = activity,
+                          onUnlockSuccess = {
+                              note.locked = false
+                              activity.updateNote(note)
+                              dismiss()
+                          },
+                          onUnlockFailure = { })
+              }
       ))
     return options
   }
@@ -336,127 +335,126 @@ class NoteOptionsBottomSheet : GridBottomSheetBase() {
 
     val options = ArrayList<OptionsItem>()
     options.add(OptionsItem(
-      title = if (note.pinned) R.string.unpin_note else R.string.pin_note,
-      subtitle = if (note.pinned) R.string.unpin_note else R.string.pin_note,
-      icon = R.drawable.ic_pin,
-      listener = View.OnClickListener {
-        note.pinned = !note.pinned
-        activity.updateNote(note)
-        dismiss()
-      }
+            title = if (note.pinned) R.string.unpin_note else R.string.pin_note,
+            subtitle = if (note.pinned) R.string.unpin_note else R.string.pin_note,
+            icon = R.drawable.ic_pin,
+            listener = View.OnClickListener {
+                note.pinned = !note.pinned
+                activity.updateNote(note)
+                dismiss()
+            }
     ))
     options.add(
       OptionsItem(
-        title = R.string.share_images,
-        subtitle = R.string.share_images,
-        icon = R.drawable.icon_share_image,
-        listener = View.OnClickListener {
-          note.shareImages(activity)
-          dismiss()
-        },
-        visible = note.hasImages(),
-        invalid = activity.lockedContentIsHidden() && note.locked
+              title = R.string.share_images,
+              subtitle = R.string.share_images,
+              icon = R.drawable.icon_share_image,
+              visible = note.hasImages(),
+              invalid = activity.lockedContentIsHidden() && note.locked,
+              listener = View.OnClickListener {
+                  note.shareImages(activity)
+                  dismiss()
+              }
       ))
     options.add(
       OptionsItem(
-        title = R.string.open_in_notification,
-        subtitle = R.string.open_in_notification,
-        icon = R.drawable.ic_action_notification,
-        listener = View.OnClickListener {
-          val handler = NotificationHandler(themedContext())
-          handler.openNotification(NotificationConfig(note = note))
-          dismiss()
-        },
-        invalid = activity.lockedContentIsHidden() && note.locked
+              title = R.string.open_in_notification,
+              subtitle = R.string.open_in_notification,
+              icon = R.drawable.ic_action_notification,
+              invalid = activity.lockedContentIsHidden() && note.locked,
+              listener = View.OnClickListener {
+                  val handler = NotificationHandler(themedContext())
+                  handler.openNotification(NotificationConfig(note = note))
+                  dismiss()
+              }
       ))
     options.add(
       OptionsItem(
-        title = R.string.delete_note_permanently,
-        subtitle = R.string.delete_note_permanently,
-        icon = R.drawable.ic_delete_permanently,
-        listener = View.OnClickListener {
-          openDeleteNotePermanentlySheet(activity, note, { activity.notifyResetOrDismiss() })
-          dismiss()
-        },
-        visible = note.getNoteState() !== NoteState.TRASH,
-        invalid = activity.lockedContentIsHidden() && note.locked
+              title = R.string.delete_note_permanently,
+              subtitle = R.string.delete_note_permanently,
+              icon = R.drawable.ic_delete_permanently,
+              visible = note.getNoteState() !== NoteState.TRASH,
+              invalid = activity.lockedContentIsHidden() && note.locked,
+              listener = View.OnClickListener {
+                  openDeleteNotePermanentlySheet(activity, note, { activity.notifyResetOrDismiss() })
+                  dismiss()
+              }
       ))
 
     options.add(
       OptionsItem(
-        title = R.string.pin_to_launcher,
-        subtitle = R.string.pin_to_launcher,
-        icon = R.drawable.icon_shortcut,
-        listener = {
+              title = R.string.pin_to_launcher,
+              subtitle = R.string.pin_to_launcher,
+              icon = R.drawable.icon_shortcut,
+              visible = OsVersionUtils.canAddLauncherShortcuts(),
+              invalid = activity.lockedContentIsHidden() && note.locked
+      ) {
           if (OsVersionUtils.canAddLauncherShortcuts()) {
-            var title = note.getTitleForSharing()
-            if (title.isBlank()) {
-              title = note.getFullText().split("\n").firstOrNull() ?: "Note"
-            }
+              var title = note.getTitleForSharing()
+              if (title.isBlank()) {
+                  title = note.getFullText().split("\n").firstOrNull() ?: "Note"
+              }
 
-            val shortcut = ShortcutInfo.Builder(activity, "scarlet_notes___${note.uuid}")
-              .setShortLabel(title)
-              .setLongLabel(title)
-              .setIcon(Icon.createWithResource(activity, R.mipmap.open_note_launcher))
-              .setIntent(NoteIntentRouterActivity.view(note))
-              .build()
-            addShortcut(activity, shortcut)
+              val shortcut = ShortcutInfo.Builder(activity, "scarlet_notes___${note.uuid}")
+                      .setShortLabel(title)
+                      .setLongLabel(title)
+                      .setIcon(Icon.createWithResource(activity, R.mipmap.open_note_launcher))
+                      .setIntent(NoteIntentRouterActivity.view(note))
+                      .build()
+              addShortcut(activity, shortcut)
           }
-        },
-        visible = OsVersionUtils.canAddLauncherShortcuts(),
-        invalid = activity.lockedContentIsHidden() && note.locked
+      })
+    options.add(
+      OptionsItem(
+              title = R.string.reminder,
+              subtitle = R.string.reminder,
+              icon = R.drawable.ic_action_reminder_icon,
+              invalid = activity.lockedContentIsHidden() && note.locked,
+              listener = View.OnClickListener {
+                  ReminderBottomSheet.openSheet(activity, note)
+                  dismiss()
+              }
       ))
     options.add(
       OptionsItem(
-        title = R.string.reminder,
-        subtitle = R.string.reminder,
-        icon = R.drawable.ic_action_reminder_icon,
-        listener = View.OnClickListener {
-          ReminderBottomSheet.openSheet(activity, note)
-          dismiss()
-        },
-        invalid = activity.lockedContentIsHidden() && note.locked
+              title = R.string.duplicate,
+              subtitle = R.string.duplicate,
+              icon = R.drawable.ic_duplicate,
+              invalid = activity.lockedContentIsHidden() && note.locked,
+              listener = View.OnClickListener {
+                  val copiedNote = NoteBuilder().copy(note)
+                  copiedNote.uid = null
+                  copiedNote.uuid = RandomHelper.getRandomString(24)
+                  copiedNote.save(activity)
+                  activity.notifyResetOrDismiss()
+                  dismiss()
+              }
       ))
     options.add(
       OptionsItem(
-        title = R.string.duplicate,
-        subtitle = R.string.duplicate,
-        icon = R.drawable.ic_duplicate,
-        listener = View.OnClickListener {
-          val copiedNote = NoteBuilder().copy(note)
-          copiedNote.uid = null
-          copiedNote.uuid = RandomHelper.getRandomString(24)
-          copiedNote.save(activity)
-          activity.notifyResetOrDismiss()
-          dismiss()
-        },
-        invalid = activity.lockedContentIsHidden() && note.locked
+              title = R.string.backup_note_enable,
+              subtitle = R.string.backup_note_enable,
+              icon = R.drawable.ic_action_backup,
+              visible = note.disableBackup,
+              invalid = activity.lockedContentIsHidden() && note.locked,
+              listener = View.OnClickListener {
+                  ScarletApp.data.noteActions(note).includeInBackups(activity)
+                  activity.updateNote(note)
+                  dismiss()
+              }
       ))
     options.add(
       OptionsItem(
-        title = R.string.backup_note_enable,
-        subtitle = R.string.backup_note_enable,
-        icon = R.drawable.ic_action_backup,
-        listener = View.OnClickListener {
-          ScarletApp.data.noteActions(note).includeInBackups(activity)
-          activity.updateNote(note)
-          dismiss()
-        },
-        visible = note.disableBackup,
-        invalid = activity.lockedContentIsHidden() && note.locked
-      ))
-    options.add(
-      OptionsItem(
-        title = R.string.backup_note_disable,
-        subtitle = R.string.backup_note_disable,
-        icon = R.drawable.ic_action_backup_no,
-        listener = View.OnClickListener {
-          ScarletApp.data.noteActions(note).excludeFromBackups(activity)
-          activity.updateNote(note)
-          dismiss()
-        },
-        visible = !note.disableBackup,
-        invalid = activity.lockedContentIsHidden() && note.locked
+              title = R.string.backup_note_disable,
+              subtitle = R.string.backup_note_disable,
+              icon = R.drawable.ic_action_backup_no,
+              visible = !note.disableBackup,
+              invalid = activity.lockedContentIsHidden() && note.locked,
+              listener = View.OnClickListener {
+                  ScarletApp.data.noteActions(note).excludeFromBackups(activity)
+                  activity.updateNote(note)
+                  dismiss()
+              }
       ))
     return options
   }

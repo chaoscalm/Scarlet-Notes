@@ -8,7 +8,7 @@ import com.github.bijoysingh.uibasics.views.UILabelView
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
-import com.maubis.scarlet.base.support.option.OptionsItem
+import com.maubis.scarlet.base.note.actions.OptionsItem
 import com.maubis.scarlet.base.support.ui.ThemeColorType
 import com.maubis.scarlet.base.support.ui.ThemedBottomSheetFragment
 import kotlinx.coroutines.Dispatchers
@@ -40,11 +40,6 @@ abstract class GridBottomSheetBase : ThemedBottomSheetFragment() {
       titleView.setTextColor(appTheme.get(ThemeColorType.SECONDARY_TEXT))
       titleView.setText(title)
     }
-  }
-
-  fun setOptions(dialog: Dialog, options: List<OptionsItem>) {
-    val layoutGrid = dialog.findViewById<GridLayout>(R.id.grid_layout);
-    setOptions(layoutGrid, options)
   }
 
   fun setOptions(layoutGrid: GridLayout, options: List<OptionsItem>) {
