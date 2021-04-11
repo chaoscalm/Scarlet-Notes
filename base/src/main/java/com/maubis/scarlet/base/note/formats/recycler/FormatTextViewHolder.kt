@@ -19,8 +19,8 @@ import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.core.format.FormatType
 import com.maubis.scarlet.base.core.format.MarkdownType
 import com.maubis.scarlet.base.note.creation.sheet.FormatActionBottomSheet
-import com.maubis.scarlet.base.note.creation.sheet.sEditorLiveMarkdown
-import com.maubis.scarlet.base.note.creation.sheet.sEditorMoveHandles
+import com.maubis.scarlet.base.settings.sEditorLiveMarkdown
+import com.maubis.scarlet.base.settings.sEditorMoveHandles
 import com.maubis.scarlet.base.support.sheets.openSheet
 import com.maubis.scarlet.base.support.utils.logAndMaybeDisplayError
 

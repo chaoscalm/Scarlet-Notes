@@ -1,20 +1,8 @@
 package com.maubis.scarlet.base.note.creation.specs
 
 import android.graphics.Color
-import com.facebook.litho.ClickEvent
-import com.facebook.litho.Component
-import com.facebook.litho.ComponentContext
-import com.facebook.litho.EventHandler
-import com.facebook.litho.Row
-import com.facebook.litho.StateValue
-import com.facebook.litho.annotations.LayoutSpec
-import com.facebook.litho.annotations.OnCreateInitialState
-import com.facebook.litho.annotations.OnCreateLayout
-import com.facebook.litho.annotations.OnEvent
-import com.facebook.litho.annotations.OnUpdateState
-import com.facebook.litho.annotations.Param
-import com.facebook.litho.annotations.Prop
-import com.facebook.litho.annotations.State
+import com.facebook.litho.*
+import com.facebook.litho.annotations.*
 import com.facebook.litho.widget.EmptyComponent
 import com.facebook.litho.widget.HorizontalScroll
 import com.facebook.yoga.YogaAlign
@@ -26,8 +14,8 @@ import com.maubis.scarlet.base.note.copy
 import com.maubis.scarlet.base.note.creation.activity.CreateNoteActivity
 import com.maubis.scarlet.base.note.creation.activity.ViewAdvancedNoteActivity
 import com.maubis.scarlet.base.note.creation.sheet.MarkdownHelpBottomSheet
-import com.maubis.scarlet.base.note.creation.sheet.sEditorMarkdownDefault
 import com.maubis.scarlet.base.note.share
+import com.maubis.scarlet.base.settings.sEditorMarkdownDefault
 import com.maubis.scarlet.base.support.sheets.openSheet
 import com.maubis.scarlet.base.support.specs.EmptySpec
 import com.maubis.scarlet.base.support.specs.ToolbarColorConfig

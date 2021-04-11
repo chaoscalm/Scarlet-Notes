@@ -22,7 +22,6 @@ import com.maubis.scarlet.base.databinding.ActivityAdvancedNoteBinding
 import com.maubis.scarlet.base.note.*
 import com.maubis.scarlet.base.note.actions.INoteOptionSheetActivity
 import com.maubis.scarlet.base.note.actions.NoteOptionsBottomSheet
-import com.maubis.scarlet.base.note.creation.sheet.sNoteDefaultColor
 import com.maubis.scarlet.base.note.creation.specs.NoteViewBottomBar
 import com.maubis.scarlet.base.note.creation.specs.NoteViewTopBar
 import com.maubis.scarlet.base.note.formats.FormatAdapter
@@ -33,6 +32,7 @@ import com.maubis.scarlet.base.note.formats.recycler.KEY_NOTE_COLOR
 import com.maubis.scarlet.base.settings.STORE_KEY_TEXT_SIZE
 import com.maubis.scarlet.base.settings.SettingsOptionsBottomSheet.Companion.KEY_MARKDOWN_ENABLED
 import com.maubis.scarlet.base.settings.sEditorTextSize
+import com.maubis.scarlet.base.settings.sNoteDefaultColor
 import com.maubis.scarlet.base.settings.sUIUseNoteColorAsBackground
 import com.maubis.scarlet.base.support.specs.ToolbarColorConfig
 import com.maubis.scarlet.base.support.ui.*

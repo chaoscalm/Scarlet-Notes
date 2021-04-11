@@ -1,6 +1,6 @@
 package com.maubis.scarlet.base.core.format
 
-import com.maubis.scarlet.base.note.creation.sheet.sEditorMoveChecked
+import com.maubis.scarlet.base.settings.sEditorMoveChecked
 import org.json.JSONObject
 import java.util.*
 

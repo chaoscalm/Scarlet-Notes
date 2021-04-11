@@ -7,7 +7,7 @@ import androidx.core.view.isVisible
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.note.creation.sheet.FormatActionBottomSheet
-import com.maubis.scarlet.base.note.creation.sheet.sEditorMoveHandles
+import com.maubis.scarlet.base.settings.sEditorMoveHandles
 import com.maubis.scarlet.base.support.sheets.openSheet
 
 class FormatSeparatorViewHolder(context: Context, view: View) : FormatViewHolderBase(context, view) {

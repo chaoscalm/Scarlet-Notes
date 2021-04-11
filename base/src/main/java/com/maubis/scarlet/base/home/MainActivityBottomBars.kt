@@ -20,8 +20,8 @@ import com.maubis.scarlet.base.home.sheets.HomeOptionsBottomSheet
 import com.maubis.scarlet.base.home.sheets.openDeleteTrashSheet
 import com.maubis.scarlet.base.note.creation.activity.CreateNoteActivity
 import com.maubis.scarlet.base.note.creation.activity.NoteIntentRouterActivity
-import com.maubis.scarlet.base.note.creation.sheet.sNoteDefaultColor
 import com.maubis.scarlet.base.note.folder.sheet.CreateOrEditFolderBottomSheet
+import com.maubis.scarlet.base.settings.sNoteDefaultColor
 import com.maubis.scarlet.base.support.addShortcut
 import com.maubis.scarlet.base.support.sheets.openSheet
 import com.maubis.scarlet.base.support.specs.EmptySpec

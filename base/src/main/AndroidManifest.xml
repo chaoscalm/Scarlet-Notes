@@ -36,7 +36,7 @@
       android:windowSoftInputMode="adjustResize" />
 
     <provider
-      android:name=".export.support.ScarletFileProvider"
+      android:name=".backup.support.ScarletFileProvider"
       android:authorities="fs00.scarletnotes.FileProvider"
       android:exported="false"
       android:grantUriPermissions="true">
@@ -74,7 +74,7 @@
           android:scheme="scarlet" />
       </intent-filter>
     </activity>
-    <activity android:name=".export.activity.ImportNoteActivity" />
+    <activity android:name=".backup.activity.ImportNoteActivity" />
     <activity android:name=".note.creation.activity.ShareToScarletRouterActivity">
       <intent-filter>
         <action android:name="android.intent.action.SEND_MULTIPLE" />

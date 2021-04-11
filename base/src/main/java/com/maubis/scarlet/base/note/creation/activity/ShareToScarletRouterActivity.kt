@@ -7,13 +7,13 @@ import android.os.Bundle
 import android.os.Parcelable
 import androidx.appcompat.app.AppCompatActivity
 import com.maubis.scarlet.base.ScarletApp.Companion.imageStorage
+import com.maubis.scarlet.base.backup.support.NoteImporter
 import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.core.format.FormatBuilder
 import com.maubis.scarlet.base.core.format.FormatType
 import com.maubis.scarlet.base.core.note.NoteBuilder
 import com.maubis.scarlet.base.core.note.getFormats
 import com.maubis.scarlet.base.database.room.note.Note
-import com.maubis.scarlet.base.export.support.NoteImporter
 import com.maubis.scarlet.base.home.MainActivity
 import com.maubis.scarlet.base.note.save
 import com.maubis.scarlet.base.support.BitmapHelper

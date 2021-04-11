@@ -1,12 +1,10 @@
-package com.maubis.scarlet.base.note.creation.sheet
+package com.maubis.scarlet.base.settings
 
 import android.app.Dialog
 import com.facebook.litho.ComponentContext
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appPreferences
 import com.maubis.scarlet.base.home.MainActivity
-import com.maubis.scarlet.base.settings.ColorPickerBottomSheet
-import com.maubis.scarlet.base.settings.ColorPickerDefaultController
 import com.maubis.scarlet.base.support.sheets.LithoOptionBottomSheet
 import com.maubis.scarlet.base.support.sheets.LithoOptionsItem
 import com.maubis.scarlet.base.support.sheets.openSheet

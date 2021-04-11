@@ -7,7 +7,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.database.room.note.Note
-import com.maubis.scarlet.base.note.creation.sheet.sEditorSkipNoteViewer
+import com.maubis.scarlet.base.settings.sEditorSkipNoteViewer
 
 class NoteIntentRouterActivity : AppCompatActivity() {
 
