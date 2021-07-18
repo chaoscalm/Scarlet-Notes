@@ -2,25 +2,11 @@ package com.maubis.scarlet.base.support.ui
 
 import android.content.Context
 import android.graphics.Typeface
-import androidx.core.content.edit
 import androidx.core.content.res.ResourcesCompat
 import com.maubis.markdown.MarkdownConfig
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.ScarletApp
-
-const val KEY_PREFERENCE_TYPEFACE = "typeface_setting"
-var sPreferenceTypeface: String
-  get() = ScarletApp.appPreferences.getString(KEY_PREFERENCE_TYPEFACE, TypefaceController.TypefaceType.APP_DEFAULT.name)!!
-  set(value) = ScarletApp.appPreferences.edit { putString(KEY_PREFERENCE_TYPEFACE, value) }
 
 class TypefaceController(context: Context) {
-  enum class TypefaceType(val title: Int) {
-    APP_DEFAULT(R.string.typeface_title_app_default),
-    OS_DEFAULT(R.string.typeface_title_os_default),
-    MONOSPACE(R.string.typeface_title_monospace),
-    SERIF_TITLE(R.string.typeface_title_serif),
-  }
-
   data class TypefaceSet(
     val heading: Typeface = Typeface.DEFAULT,
     val subHeading: Typeface = Typeface.DEFAULT,
@@ -29,39 +15,16 @@ class TypefaceController(context: Context) {
     val code: Typeface = Typeface.MONOSPACE
   )
 
-  private var mTypefaceSet: TypefaceSet = TypefaceSet()
+  private val appTypefaces: TypefaceSet = TypefaceSet(
+      heading = ResourcesCompat.getFont(context, R.font.monserrat_medium)!!,
+      subHeading = ResourcesCompat.getFont(context, R.font.monserrat_medium)!!,
+      title = ResourcesCompat.getFont(context, R.font.monserrat)!!,
+      text = ResourcesCompat.getFont(context, R.font.open_sans)!!,
+      code = Typeface.MONOSPACE
+  )
 
   init {
-    notifyChange(context)
-  }
-
-  fun notifyChange(context: Context) {
-    mTypefaceSet = getSetForType(context, getTypefaceSetting())
     setMarkdownConfig()
-  }
-
-  fun getSetForType(context: Context, typefaceType: TypefaceType): TypefaceSet {
-    return when (typefaceType) {
-      TypefaceType.APP_DEFAULT -> TypefaceSet(
-        heading = ResourcesCompat.getFont(context, R.font.monserrat_medium) ?: Typeface.DEFAULT,
-        subHeading = ResourcesCompat.getFont(context, R.font.monserrat_medium) ?: Typeface.DEFAULT,
-        title = ResourcesCompat.getFont(context, R.font.monserrat) ?: Typeface.DEFAULT,
-        text = ResourcesCompat.getFont(context, R.font.open_sans) ?: Typeface.DEFAULT,
-        code = Typeface.MONOSPACE)
-      TypefaceType.OS_DEFAULT -> TypefaceSet()
-      TypefaceType.MONOSPACE -> TypefaceSet(
-        heading = ResourcesCompat.getFont(context, R.font.mono_bold_xml) ?: Typeface.MONOSPACE,
-        subHeading = ResourcesCompat.getFont(context, R.font.mono_medium_xml) ?: Typeface.MONOSPACE,
-        title = ResourcesCompat.getFont(context, R.font.mono_regular_xml) ?: Typeface.MONOSPACE,
-        text = ResourcesCompat.getFont(context, R.font.mono_regular_xml) ?: Typeface.MONOSPACE,
-        code = Typeface.MONOSPACE)
-      TypefaceType.SERIF_TITLE -> TypefaceSet(
-        heading = ResourcesCompat.getFont(context, R.font.serif_bold_xml) ?: Typeface.SERIF,
-        subHeading = ResourcesCompat.getFont(context, R.font.serif_bold_xml) ?: Typeface.SERIF,
-        title = ResourcesCompat.getFont(context, R.font.serif_regular_xml) ?: Typeface.SERIF,
-        text = ResourcesCompat.getFont(context, R.font.open_sans) ?: Typeface.DEFAULT,
-        code = Typeface.MONOSPACE)
-    }
   }
 
   private fun setMarkdownConfig() {
@@ -72,21 +35,13 @@ class TypefaceController(context: Context) {
     MarkdownConfig.spanConfig.codeTypeface = code()
   }
 
-  private fun getTypefaceSetting(): TypefaceType {
-    return try {
-      TypefaceType.valueOf(sPreferenceTypeface)
-    } catch (exception: Exception) {
-      TypefaceType.APP_DEFAULT
-    }
-  }
+  fun heading(): Typeface = appTypefaces.heading
 
-  fun heading(): Typeface = mTypefaceSet.heading
+  fun subHeading(): Typeface = appTypefaces.subHeading
 
-  fun subHeading(): Typeface = mTypefaceSet.subHeading
+  fun title(): Typeface = appTypefaces.title
 
-  fun title(): Typeface = mTypefaceSet.title
+  fun text(): Typeface = appTypefaces.text
 
-  fun text(): Typeface = mTypefaceSet.text
-
-  fun code(): Typeface = mTypefaceSet.code
+  fun code(): Typeface = appTypefaces.code
 }

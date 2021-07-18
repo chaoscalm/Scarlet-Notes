@@ -6,14 +6,12 @@ import com.facebook.litho.ComponentContext
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appPreferences
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
-import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.home.MainActivity
 import com.maubis.scarlet.base.settings.SortingOptionsBottomSheet.Companion.getSortingState
 import com.maubis.scarlet.base.settings.SortingOptionsBottomSheet.Companion.getSortingTechniqueLabel
 import com.maubis.scarlet.base.support.sheets.LithoOptionBottomSheet
 import com.maubis.scarlet.base.support.sheets.LithoOptionsItem
 import com.maubis.scarlet.base.support.sheets.openSheet
-import com.maubis.scarlet.base.support.ui.sPreferenceTypeface
 import com.maubis.scarlet.base.support.ui.sThemeLabel
 
 var sUIUseGridView: Boolean
@@ -44,22 +42,6 @@ class UISettingsOptionsBottomSheet : LithoOptionBottomSheet() {
                   if (sThemeLabel != theme.name) {
                       sThemeLabel = theme.name
                       appTheme.notifyChange(activity)
-                      activity.recreate()
-                  }
-              }
-          })
-      }
-    ))
-    options.add(LithoOptionsItem(
-      title = R.string.home_option_typeface,
-      subtitle = R.string.home_option_typeface_subtitle,
-      icon = R.drawable.icon_typeface,
-      listener = {
-          openSheet(activity, TypefacePickerBottomSheet().apply {
-              this.onTypefaceChange = { typeface ->
-                  if (sPreferenceTypeface != typeface.name) {
-                      sPreferenceTypeface = typeface.name
-                      appTypeface.notifyChange(activity)
                       activity.recreate()
                   }
               }
