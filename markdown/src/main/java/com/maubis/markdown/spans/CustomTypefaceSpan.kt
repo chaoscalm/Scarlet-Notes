@@ -8,14 +8,14 @@ import android.text.style.TypefaceSpan
 class CustomTypefaceSpan(val tface: Typeface) : TypefaceSpan("san-serif"), ICustomSpan {
 
   override fun updateDrawState(paint: TextPaint) {
-    applyTypeFace(paint, tface)
+    applyTypeFace(paint)
   }
 
   override fun updateMeasureState(paint: TextPaint) {
-    applyTypeFace(paint, tface)
+    applyTypeFace(paint)
   }
 
-  private fun applyTypeFace(paint: Paint, typeface: Typeface) {
+  private fun applyTypeFace(paint: Paint) {
     val oldStyle = paint.typeface?.style ?: 0
     val isFake = oldStyle and tface.style.inv()
     if (isFake and Typeface.BOLD != 0) {
