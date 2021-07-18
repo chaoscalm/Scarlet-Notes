@@ -10,11 +10,13 @@ import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.backup.data.*
 import com.maubis.scarlet.base.backup.sheet.NOTES_EXPORT_FILENAME
 import com.maubis.scarlet.base.backup.sheet.NOTES_EXPORT_FOLDER
+import com.maubis.scarlet.base.core.format.FormatType
+import com.maubis.scarlet.base.core.note.getFormats
+import com.maubis.scarlet.base.database.room.note.Note
 import com.maubis.scarlet.base.support.utils.dateFormat
 import java.io.File
 
 const val KEY_NOTE_VERSION = "KEY_NOTE_VERSION"
-const val KEY_BACKUP_LOCATION = "KEY_BACKUP_LOCATION"
 const val KEY_AUTO_BACKUP_LAST_TIMESTAMP = "KEY_AUTO_BACKUP_LAST_TIMESTAMP"
 
 const val EXPORT_NOTE_SEPARATOR = ">S>C>A>R>L>E>T>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>N>O>T>E>S>"
@@ -38,8 +40,7 @@ var sAutoBackupMode: Boolean
   get() = appPreferences.getBoolean(STORE_KEY_AUTO_BACKUP_MODE, false)
   set(value) = appPreferences.edit { putBoolean(STORE_KEY_AUTO_BACKUP_MODE, value) }
 
-class NoteExporter() {
-
+class NoteExporter {
   fun getExportContent(): String {
     if (sBackupMarkdown) {
       return getMarkdownExportContent()
@@ -64,6 +65,41 @@ class NoteExporter() {
         totalText += "\n\n$EXPORT_NOTE_SEPARATOR\n\n"
       }
     return totalText
+  }
+
+  /**
+   * Converts the note's internal description format into markdown which can be used to export.
+   */
+  private fun Note.toExportedMarkdown(): String {
+    val markdownBuilder = StringBuilder()
+    getFormats().forEach { format ->
+      val text = format.text
+      val formatMarkdown = when (format.formatType) {
+        FormatType.NUMBERED_LIST -> "- $text"
+        FormatType.HEADING -> "# $text"
+        FormatType.HEADING_3 -> "### $text"
+        FormatType.BULLET_1 -> "- $text"
+        FormatType.BULLET_2 -> "  - $text"
+        FormatType.BULLET_3 -> "    - $text"
+        FormatType.CHECKLIST_CHECKED -> "[x] $text"
+        FormatType.CHECKLIST_UNCHECKED -> "[ ] $text"
+        FormatType.SUB_HEADING -> "## $text"
+        FormatType.CODE -> "```\n$text\n```"
+        FormatType.QUOTE -> "> $text"
+        // TODO: Fix the fact that markdown parsing wont parse this correctly
+        FormatType.IMAGE -> "<image>$text</image>"
+        FormatType.SEPARATOR -> "\n---\n"
+        FormatType.TEXT -> text
+
+        // NOTE: All the following states should never happen at this place
+
+        FormatType.TAG -> ""
+        FormatType.EMPTY -> ""
+      }
+      markdownBuilder.append(formatMarkdown)
+      markdownBuilder.append("\n")
+    }
+    return markdownBuilder.toString().trim()
   }
 
   fun tryAutoExport() {
@@ -92,7 +128,7 @@ class NoteExporter() {
       "$NOTES_EXPORT_FILENAME ${dateFormat.getTimestampForBackup()}")
   }
 
-  fun getOrCreateFileForExport(filename: String): File? {
+  private fun getOrCreateFileForExport(filename: String): File? {
     val folder = createFolder()
     if (folder === null) {
       return null
