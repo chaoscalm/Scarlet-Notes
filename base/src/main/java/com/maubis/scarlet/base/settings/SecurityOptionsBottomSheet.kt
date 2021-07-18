@@ -1,6 +1,7 @@
 package com.maubis.scarlet.base.settings
 
 import android.app.Dialog
+import androidx.core.content.edit
 import com.facebook.litho.ComponentContext
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appPreferences
@@ -18,17 +19,17 @@ const val KEY_APP_LOCK_ENABLED = "app_lock_enabled"
 const val KEY_ASK_PIN_ALWAYS = "ask_pin_always"
 
 var sSecurityCode: String
-  get() = appPreferences.get(KEY_SECURITY_CODE, "")
-  set(value) = appPreferences.put(KEY_SECURITY_CODE, value)
+  get() = appPreferences.getString(KEY_SECURITY_CODE, "")!!
+  set(value) = appPreferences.edit { putString(KEY_SECURITY_CODE, value) }
 var sSecurityBiometricEnabled: Boolean
-  get() = appPreferences.get(KEY_FINGERPRINT_ENABLED, true)
-  set(value) = appPreferences.put(KEY_FINGERPRINT_ENABLED, value)
+  get() = appPreferences.getBoolean(KEY_FINGERPRINT_ENABLED, true)
+  set(value) = appPreferences.edit { putBoolean(KEY_FINGERPRINT_ENABLED, value) }
 var sSecurityAppLockEnabled: Boolean
-  get() = appPreferences.get(KEY_APP_LOCK_ENABLED, false)
-  set(value) = appPreferences.put(KEY_APP_LOCK_ENABLED, value)
+  get() = appPreferences.getBoolean(KEY_APP_LOCK_ENABLED, false)
+  set(value) = appPreferences.edit { putBoolean(KEY_APP_LOCK_ENABLED, value) }
 var sSecurityAskPinAlways: Boolean
-  get() = appPreferences.get(KEY_ASK_PIN_ALWAYS, true)
-  set(value) = appPreferences.put(KEY_ASK_PIN_ALWAYS, value)
+  get() = appPreferences.getBoolean(KEY_ASK_PIN_ALWAYS, true)
+  set(value) = appPreferences.edit { putBoolean(KEY_ASK_PIN_ALWAYS, value) }
 
 class SecurityOptionsBottomSheet : LithoOptionBottomSheet() {
   override fun title(): Int = R.string.security_option_title

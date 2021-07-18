@@ -1,6 +1,7 @@
 package com.maubis.scarlet.base.settings
 
 import android.app.Dialog
+import androidx.core.content.edit
 import com.facebook.litho.ComponentContext
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appPreferences
@@ -16,16 +17,16 @@ import com.maubis.scarlet.base.support.ui.sPreferenceTypeface
 import com.maubis.scarlet.base.support.ui.sThemeLabel
 
 var sUIUseGridView: Boolean
-  get() = appPreferences.get("KEY_LIST_VIEW", true)
-  set(isGrid) = appPreferences.put("KEY_LIST_VIEW", isGrid)
+  get() = appPreferences.getBoolean("KEY_LIST_VIEW", true)
+  set(isGrid) = appPreferences.edit { putBoolean("KEY_LIST_VIEW", isGrid) }
 
 var sUIUseNoteColorAsBackground: Boolean
-  get() = appPreferences.get("KEY_NOTE_VIEWER_BG_COLOR", false)
-  set(value) = appPreferences.put("KEY_NOTE_VIEWER_BG_COLOR", value)
+  get() = appPreferences.getBoolean("KEY_NOTE_VIEWER_BG_COLOR", false)
+  set(value) = appPreferences.edit { putBoolean("KEY_NOTE_VIEWER_BG_COLOR", value) }
 
 var sUIMarkdownEnabledOnHome: Boolean
-  get() = appPreferences.get("KEY_MARKDOWN_HOME_ENABLED", true)
-  set(value) = appPreferences.put("KEY_MARKDOWN_HOME_ENABLED", value)
+  get() = appPreferences.getBoolean("KEY_MARKDOWN_HOME_ENABLED", true)
+  set(value) = appPreferences.edit { putBoolean("KEY_MARKDOWN_HOME_ENABLED", value) }
 
 class UISettingsOptionsBottomSheet : LithoOptionBottomSheet() {
   override fun title(): Int = R.string.home_option_ui_experience

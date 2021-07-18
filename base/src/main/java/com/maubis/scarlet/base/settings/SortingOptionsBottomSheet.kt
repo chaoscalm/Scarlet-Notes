@@ -1,6 +1,7 @@
 package com.maubis.scarlet.base.settings
 
 import android.app.Dialog
+import androidx.core.content.edit
 import com.facebook.litho.ComponentContext
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appPreferences
@@ -38,7 +39,7 @@ class SortingOptionsBottomSheet : LithoChooseOptionBottomSheet() {
     const val KEY_SORTING_TECHNIQUE = "KEY_SORTING_TECHNIQUE"
 
     fun getSortingState(): SortingTechnique {
-      return SortingTechnique.values()[appPreferences.get(KEY_SORTING_TECHNIQUE, SortingTechnique.LAST_MODIFIED.ordinal)]
+      return SortingTechnique.values()[appPreferences.getInt(KEY_SORTING_TECHNIQUE, SortingTechnique.LAST_MODIFIED.ordinal)]
     }
 
     fun getSortingTechniqueLabel(technique: SortingTechnique): Int {
@@ -53,7 +54,7 @@ class SortingOptionsBottomSheet : LithoChooseOptionBottomSheet() {
     }
 
     fun setSortingState(sortingTechnique: SortingTechnique) {
-      appPreferences.put(KEY_SORTING_TECHNIQUE, sortingTechnique.ordinal)
+      appPreferences.edit { putInt(KEY_SORTING_TECHNIQUE, sortingTechnique.ordinal) }
     }
 
     fun openSheet(activity: MainActivity, listener: () -> Unit) {

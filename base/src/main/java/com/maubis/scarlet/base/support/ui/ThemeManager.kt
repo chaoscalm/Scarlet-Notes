@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.res.Configuration
 import android.graphics.Color
 import androidx.core.content.ContextCompat
+import androidx.core.content.edit
 import com.github.bijoysingh.starter.util.DimensionManager
 import com.maubis.markdown.MarkdownConfig
 import com.maubis.scarlet.base.R
@@ -14,16 +15,16 @@ import com.maubis.scarlet.base.support.utils.logNonCriticalError
 import java.lang.ref.WeakReference
 
 var sThemeLabel: String
-  get() = appPreferences.get("KEY_APP_THEME", Theme.DARK.name)
-  set(value) = appPreferences.put("KEY_APP_THEME", value)
+  get() = appPreferences.getString("KEY_APP_THEME", Theme.DARK.name)!!
+  set(value) = appPreferences.edit { putString("KEY_APP_THEME", value) }
 
 var sThemeIsAutomatic: Boolean
-  get() = appPreferences.get("automatic_theme", false)
-  set(value) = appPreferences.put("automatic_theme", value)
+  get() = appPreferences.getBoolean("automatic_theme", false)
+  set(value) = appPreferences.edit { putBoolean("automatic_theme", value) }
 
 var sThemeDarkenNoteColor: Boolean
-  get() = appPreferences.get("darken_note_color", false)
-  set(value) = appPreferences.put("darken_note_color", value)
+  get() = appPreferences.getBoolean("darken_note_color", false)
+  set(value) = appPreferences.edit { putBoolean("darken_note_color", value) }
 
 fun setThemeFromSystem(context: Context) {
   val configuration = context.resources.configuration

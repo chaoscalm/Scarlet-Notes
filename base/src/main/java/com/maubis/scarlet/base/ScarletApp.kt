@@ -1,11 +1,11 @@
 package com.maubis.scarlet.base
 
 import android.app.Application
+import android.content.SharedPreferences
+import android.preference.PreferenceManager
 import android.util.Log
 import com.evernote.android.job.JobManager
 import com.facebook.soloader.SoLoader
-import com.github.bijoysingh.starter.prefs.Store
-import com.github.bijoysingh.starter.prefs.VersionedStore
 import com.maubis.scarlet.base.core.note.NoteImage
 import com.maubis.scarlet.base.database.ApplicationData
 import com.maubis.scarlet.base.note.reminders.ReminderJobCreator
@@ -20,7 +20,7 @@ class ScarletApp : Application() {
     super.onCreate()
     data = ApplicationData(this)
 
-    appPreferences = VersionedStore.get(this, "USER_PREFERENCES", 1)
+    appPreferences = PreferenceManager.getDefaultSharedPreferences(this)
 
     dateFormat = DateFormatUtils(this)
     SoLoader.init(this, false)
@@ -46,7 +46,7 @@ class ScarletApp : Application() {
     lateinit var imageStorage: NoteImage
     lateinit var imageCache: ImageCache
 
-    lateinit var appPreferences: Store
+    lateinit var appPreferences: SharedPreferences
 
     lateinit var appTheme: ThemeManager
     lateinit var appTypeface: TypefaceController

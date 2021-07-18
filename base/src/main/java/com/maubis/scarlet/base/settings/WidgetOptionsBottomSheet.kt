@@ -6,6 +6,7 @@ import android.appwidget.AppWidgetManager
 import android.content.ComponentName
 import android.content.Intent
 import android.graphics.Color
+import androidx.core.content.edit
 import com.facebook.litho.ComponentContext
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appPreferences
@@ -21,33 +22,33 @@ import kotlinx.coroutines.launch
 
 const val STORE_KEY_WIDGET_ENABLE_FORMATTING = "widget_enable_formatting"
 var sWidgetEnableFormatting: Boolean
-  get() = appPreferences.get(STORE_KEY_WIDGET_ENABLE_FORMATTING, true)
-  set(value) = appPreferences.put(STORE_KEY_WIDGET_ENABLE_FORMATTING, value)
+  get() = appPreferences.getBoolean(STORE_KEY_WIDGET_ENABLE_FORMATTING, true)
+  set(value) = appPreferences.edit { putBoolean(STORE_KEY_WIDGET_ENABLE_FORMATTING, value) }
 
 const val STORE_KEY_WIDGET_SHOW_LOCKED_NOTES = "widget_show_locked_notes"
 var sWidgetShowLockedNotes: Boolean
-  get() = appPreferences.get(STORE_KEY_WIDGET_SHOW_LOCKED_NOTES, false)
-  set(value) = appPreferences.put(STORE_KEY_WIDGET_SHOW_LOCKED_NOTES, value)
+  get() = appPreferences.getBoolean(STORE_KEY_WIDGET_SHOW_LOCKED_NOTES, false)
+  set(value) = appPreferences.edit { putBoolean(STORE_KEY_WIDGET_SHOW_LOCKED_NOTES, value) }
 
 const val STORE_KEY_WIDGET_SHOW_ARCHIVED_NOTES = "widget_show_archived_notes"
 var sWidgetShowArchivedNotes: Boolean
-  get() = appPreferences.get(STORE_KEY_WIDGET_SHOW_ARCHIVED_NOTES, true)
-  set(value) = appPreferences.put(STORE_KEY_WIDGET_SHOW_ARCHIVED_NOTES, value)
+  get() = appPreferences.getBoolean(STORE_KEY_WIDGET_SHOW_ARCHIVED_NOTES, true)
+  set(value) = appPreferences.edit { putBoolean(STORE_KEY_WIDGET_SHOW_ARCHIVED_NOTES, value) }
 
 const val STORE_KEY_WIDGET_SHOW_TRASH_NOTES = "widget_show_trash_notes"
 var sWidgetShowDeletedNotes: Boolean
-  get() = appPreferences.get(STORE_KEY_WIDGET_SHOW_TRASH_NOTES, false)
-  set(value) = appPreferences.put(STORE_KEY_WIDGET_SHOW_TRASH_NOTES, value)
+  get() = appPreferences.getBoolean(STORE_KEY_WIDGET_SHOW_TRASH_NOTES, false)
+  set(value) = appPreferences.edit { putBoolean(STORE_KEY_WIDGET_SHOW_TRASH_NOTES, value) }
 
 const val STORE_KEY_WIDGET_BACKGROUND_COLOR = "widget_background_color_v1"
 var sWidgetBackgroundColor: Int
-  get() = appPreferences.get(STORE_KEY_WIDGET_BACKGROUND_COLOR, 0x65000000)
-  set(value) = appPreferences.put(STORE_KEY_WIDGET_BACKGROUND_COLOR, value)
+  get() = appPreferences.getInt(STORE_KEY_WIDGET_BACKGROUND_COLOR, 0x65000000)
+  set(value) = appPreferences.edit { putInt(STORE_KEY_WIDGET_BACKGROUND_COLOR, value) }
 
 const val STORE_KEY_WIDGET_SHOW_TOOLBAR = "widget_show_toolbar"
 var sWidgetShowToolbar: Boolean
-  get() = appPreferences.get(STORE_KEY_WIDGET_SHOW_TOOLBAR, true)
-  set(value) = appPreferences.put(STORE_KEY_WIDGET_SHOW_TOOLBAR, value)
+  get() = appPreferences.getBoolean(STORE_KEY_WIDGET_SHOW_TOOLBAR, true)
+  set(value) = appPreferences.edit { putBoolean(STORE_KEY_WIDGET_SHOW_TOOLBAR, value) }
 
 class WidgetOptionsBottomSheet : LithoOptionBottomSheet() {
   override fun title(): Int = R.string.home_option_widget_options_title

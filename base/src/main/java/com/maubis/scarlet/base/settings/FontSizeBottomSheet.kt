@@ -1,6 +1,7 @@
 package com.maubis.scarlet.base.settings
 
 import android.app.Dialog
+import androidx.core.content.edit
 import com.facebook.litho.Column
 import com.facebook.litho.Component
 import com.facebook.litho.ComponentContext
@@ -23,8 +24,8 @@ const val TEXT_SIZE_MIN = 12
 const val TEXT_SIZE_MAX = 24
 
 var sEditorTextSize: Int
-  get() = appPreferences.get(STORE_KEY_TEXT_SIZE, TEXT_SIZE_DEFAULT)
-  set(value) = appPreferences.put(STORE_KEY_TEXT_SIZE, value)
+  get() = appPreferences.getInt(STORE_KEY_TEXT_SIZE, TEXT_SIZE_DEFAULT)
+  set(value) = appPreferences.edit { putInt(STORE_KEY_TEXT_SIZE, value) }
 
 class FontSizeBottomSheet : LithoBottomSheet() {
 

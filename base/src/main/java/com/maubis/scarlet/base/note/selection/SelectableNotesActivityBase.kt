@@ -92,8 +92,8 @@ abstract class SelectableNotesActivityBase : SecuredActivity(), INoteSelectorAct
   fun setupRecyclerView() {
     val isTablet = resources.getBoolean(R.bool.is_tablet)
 
-    val isMarkdownEnabled = appPreferences.get(SettingsOptionsBottomSheet.KEY_MARKDOWN_ENABLED, true)
-    val isMarkdownHomeEnabled = appPreferences.get(SettingsOptionsBottomSheet.KEY_MARKDOWN_HOME_ENABLED, true)
+    val isMarkdownEnabled = appPreferences.getBoolean(SettingsOptionsBottomSheet.KEY_MARKDOWN_ENABLED, true)
+    val isMarkdownHomeEnabled = appPreferences.getBoolean(SettingsOptionsBottomSheet.KEY_MARKDOWN_HOME_ENABLED, true)
     val adapterExtra = Bundle()
     adapterExtra.putBoolean(SettingsOptionsBottomSheet.KEY_MARKDOWN_ENABLED, isMarkdownEnabled && isMarkdownHomeEnabled)
     adapterExtra.putInt(STORE_KEY_LINE_COUNT, sNoteItemLineCount)

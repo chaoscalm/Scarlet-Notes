@@ -1,6 +1,7 @@
 package com.maubis.scarlet.base.settings
 
 import android.app.Dialog
+import androidx.core.content.edit
 import com.facebook.litho.Column
 import com.facebook.litho.Component
 import com.facebook.litho.ComponentContext
@@ -22,8 +23,8 @@ const val LINE_COUNT_MIN = 2
 const val LINE_COUNT_MAX = 15
 
 var sNoteItemLineCount: Int
-  get() = appPreferences.get(STORE_KEY_LINE_COUNT, LINE_COUNT_DEFAULT)
-  set(value) = appPreferences.put(STORE_KEY_LINE_COUNT, value)
+  get() = appPreferences.getInt(STORE_KEY_LINE_COUNT, LINE_COUNT_DEFAULT)
+  set(value) = appPreferences.edit { putInt(STORE_KEY_LINE_COUNT, value) }
 
 class LineCountBottomSheet : LithoBottomSheet() {
 

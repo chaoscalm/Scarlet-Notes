@@ -2,6 +2,7 @@ package com.maubis.scarlet.base.support.ui
 
 import android.content.Context
 import android.graphics.Typeface
+import androidx.core.content.edit
 import androidx.core.content.res.ResourcesCompat
 import com.maubis.markdown.MarkdownConfig
 import com.maubis.scarlet.base.R
@@ -9,8 +10,8 @@ import com.maubis.scarlet.base.ScarletApp
 
 const val KEY_PREFERENCE_TYPEFACE = "typeface_setting"
 var sPreferenceTypeface: String
-  get() = ScarletApp.appPreferences.get(KEY_PREFERENCE_TYPEFACE, TypefaceController.TypefaceType.APP_DEFAULT.name)
-  set(value) = ScarletApp.appPreferences.put(KEY_PREFERENCE_TYPEFACE, value)
+  get() = ScarletApp.appPreferences.getString(KEY_PREFERENCE_TYPEFACE, TypefaceController.TypefaceType.APP_DEFAULT.name)!!
+  set(value) = ScarletApp.appPreferences.edit { putString(KEY_PREFERENCE_TYPEFACE, value) }
 
 class TypefaceController(context: Context) {
   enum class TypefaceType(val title: Int) {

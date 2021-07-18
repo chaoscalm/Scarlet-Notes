@@ -167,8 +167,8 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
   private fun setupRecyclerView() {
     val isTablet = resources.getBoolean(R.bool.is_tablet)
 
-    val isMarkdownEnabled = appPreferences.get(KEY_MARKDOWN_ENABLED, true)
-    val isMarkdownHomeEnabled = appPreferences.get(KEY_MARKDOWN_HOME_ENABLED, true)
+    val isMarkdownEnabled = appPreferences.getBoolean(KEY_MARKDOWN_ENABLED, true)
+    val isMarkdownHomeEnabled = appPreferences.getBoolean(KEY_MARKDOWN_HOME_ENABLED, true)
     val adapterExtra = Bundle().apply {
       putBoolean(KEY_MARKDOWN_ENABLED, isMarkdownEnabled && isMarkdownHomeEnabled)
       putInt(STORE_KEY_LINE_COUNT, sNoteItemLineCount)

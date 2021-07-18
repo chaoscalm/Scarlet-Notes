@@ -1,6 +1,7 @@
 package com.maubis.scarlet.base.security
 
 import android.app.Dialog
+import androidx.core.content.edit
 import com.facebook.litho.Column
 import com.facebook.litho.Component
 import com.facebook.litho.ComponentContext
@@ -18,8 +19,8 @@ import com.maubis.scarlet.base.support.ui.ThemedActivity
 
 const val STORE_KEY_NO_PIN_ASK = "KEY_NO_PIN_ASK"
 var sNoPinSetupNoticeShown: Boolean
-  get() = appPreferences.get(STORE_KEY_NO_PIN_ASK, false)
-  set(value) = appPreferences.put(STORE_KEY_NO_PIN_ASK, value)
+  get() = appPreferences.getBoolean(STORE_KEY_NO_PIN_ASK, false)
+  set(value) = appPreferences.edit { putBoolean(STORE_KEY_NO_PIN_ASK, value) }
 
 class NoPincodeBottomSheet : LithoBottomSheet() {
   var onSuccess: () -> Unit = {}

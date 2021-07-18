@@ -1,6 +1,7 @@
 package com.maubis.scarlet.base.settings
 
 import android.app.Dialog
+import androidx.core.content.edit
 import com.facebook.litho.ComponentContext
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appPreferences
@@ -10,32 +11,32 @@ import com.maubis.scarlet.base.support.sheets.LithoOptionsItem
 import com.maubis.scarlet.base.support.sheets.openSheet
 
 var sEditorLiveMarkdown: Boolean
-  get() = appPreferences.get("editor_live_markdown", true)
-  set(value) = appPreferences.put("editor_live_markdown", value)
+  get() = appPreferences.getBoolean("editor_live_markdown", true)
+  set(value) = appPreferences.edit { putBoolean("editor_live_markdown", value) }
 
 var sEditorMoveChecked: Boolean
-  get() = appPreferences.get("editor_move_checked_items", true)
-  set(value) = appPreferences.put("editor_move_checked_items", value)
+  get() = appPreferences.getBoolean("editor_move_checked_items", true)
+  set(value) = appPreferences.edit { putBoolean("editor_move_checked_items", value) }
 
 var sEditorMarkdownDefault: Boolean
-  get() = appPreferences.get("editor_markdown_default", false)
-  set(value) = appPreferences.put("editor_markdown_default", value)
+  get() = appPreferences.getBoolean("editor_markdown_default", false)
+  set(value) = appPreferences.edit { putBoolean("editor_markdown_default", value) }
 
 var sEditorSkipNoteViewer: Boolean
-  get() = appPreferences.get("skip_note_viewer", false)
-  set(value) = appPreferences.put("skip_note_viewer", value)
+  get() = appPreferences.getBoolean("skip_note_viewer", false)
+  set(value) = appPreferences.edit { putBoolean("skip_note_viewer", value) }
 
 var sEditorMoveHandles: Boolean
-  get() = appPreferences.get("editor_move_handles", true)
-  set(value) = appPreferences.put("editor_move_handles", value)
+  get() = appPreferences.getBoolean("editor_move_handles", true)
+  set(value) = appPreferences.edit { putBoolean("editor_move_handles", value) }
 
 var sEditorMarkdownEnabled: Boolean
-  get() = appPreferences.get("KEY_MARKDOWN_ENABLED", true)
-  set(value) = appPreferences.put("KEY_MARKDOWN_ENABLED", value)
+  get() = appPreferences.getBoolean("KEY_MARKDOWN_ENABLED", true)
+  set(value) = appPreferences.edit { putBoolean("KEY_MARKDOWN_ENABLED", value) }
 
 var sNoteDefaultColor: Int
-  get() = appPreferences.get("KEY_NOTE_DEFAULT_COLOR", (0xFFD32F2F).toInt())
-  set(value) = appPreferences.put("KEY_NOTE_DEFAULT_COLOR", value)
+  get() = appPreferences.getInt("KEY_NOTE_DEFAULT_COLOR", (0xFFD32F2F).toInt())
+  set(value) = appPreferences.edit { putInt("KEY_NOTE_DEFAULT_COLOR", value) }
 
 class EditorOptionsBottomSheet : LithoOptionBottomSheet() {
 

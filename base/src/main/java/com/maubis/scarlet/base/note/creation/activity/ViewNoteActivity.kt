@@ -124,7 +124,7 @@ open class ViewAdvancedNoteActivity : SecuredActivity(), INoteOptionSheetActivit
     val currentNote = note
     val bundle = Bundle()
     bundle.putBoolean(KEY_EDITABLE, editModeValue)
-    bundle.putBoolean(KEY_MARKDOWN_ENABLED, appPreferences.get(KEY_MARKDOWN_ENABLED, true))
+    bundle.putBoolean(KEY_MARKDOWN_ENABLED, appPreferences.getBoolean(KEY_MARKDOWN_ENABLED, true))
     bundle.putBoolean(KEY_NIGHT_THEME, appTheme.isNightTheme())
     bundle.putInt(STORE_KEY_TEXT_SIZE, sEditorTextSize)
     bundle.putInt(KEY_NOTE_COLOR, currentNote?.adjustedColor() ?: sNoteDefaultColor)

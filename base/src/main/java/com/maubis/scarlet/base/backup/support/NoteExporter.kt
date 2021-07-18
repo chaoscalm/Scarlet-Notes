@@ -2,6 +2,7 @@ package com.maubis.scarlet.base.backup.support
 
 import android.os.AsyncTask
 import android.os.Environment
+import androidx.core.content.edit
 import com.github.bijoysingh.starter.util.FileManager
 import com.google.gson.Gson
 import com.maubis.scarlet.base.ScarletApp.Companion.appPreferences
@@ -24,18 +25,18 @@ const val AUTO_BACKUP_INTERVAL_MS = 1000 * 60 * 60 * 6 // 6 hours update
 
 const val STORE_KEY_BACKUP_MARKDOWN = "KEY_BACKUP_MARKDOWN"
 var sBackupMarkdown: Boolean
-  get() = appPreferences.get(STORE_KEY_BACKUP_MARKDOWN, false)
-  set(value) = appPreferences.put(STORE_KEY_BACKUP_MARKDOWN, value)
+  get() = appPreferences.getBoolean(STORE_KEY_BACKUP_MARKDOWN, false)
+  set(value) = appPreferences.edit { putBoolean(STORE_KEY_BACKUP_MARKDOWN, value) }
 
 const val STORE_KEY_BACKUP_LOCKED = "KEY_BACKUP_LOCKED"
 var sBackupLockedNotes: Boolean
-  get() = appPreferences.get(STORE_KEY_BACKUP_LOCKED, true)
-  set(value) = appPreferences.put(STORE_KEY_BACKUP_LOCKED, value)
+  get() = appPreferences.getBoolean(STORE_KEY_BACKUP_LOCKED, true)
+  set(value) = appPreferences.edit { putBoolean(STORE_KEY_BACKUP_LOCKED, value) }
 
 const val STORE_KEY_AUTO_BACKUP_MODE = "KEY_AUTO_BACKUP_MODE"
 var sAutoBackupMode: Boolean
-  get() = appPreferences.get(STORE_KEY_AUTO_BACKUP_MODE, false)
-  set(value) = appPreferences.put(STORE_KEY_AUTO_BACKUP_MODE, value)
+  get() = appPreferences.getBoolean(STORE_KEY_AUTO_BACKUP_MODE, false)
+  set(value) = appPreferences.edit { putBoolean(STORE_KEY_AUTO_BACKUP_MODE, value) }
 
 class NoteExporter() {
 
@@ -70,7 +71,7 @@ class NoteExporter() {
       if (!sAutoBackupMode) {
         return@execute
       }
-      val lastBackup = appPreferences.get(KEY_AUTO_BACKUP_LAST_TIMESTAMP, 0L)
+      val lastBackup = appPreferences.getLong(KEY_AUTO_BACKUP_LAST_TIMESTAMP, 0L)
       val lastTimestamp = data.notes.getLastTimestamp()
       if (lastBackup + AUTO_BACKUP_INTERVAL_MS >= lastTimestamp) {
         return@execute
@@ -82,8 +83,7 @@ class NoteExporter() {
         return@execute
       }
       saveToFile(exportFile, getExportContent())
-      appPreferences
-        .put(KEY_AUTO_BACKUP_LAST_TIMESTAMP, System.currentTimeMillis())
+      appPreferences.edit { putLong(KEY_AUTO_BACKUP_LAST_TIMESTAMP, System.currentTimeMillis()) }
     }
   }
 
