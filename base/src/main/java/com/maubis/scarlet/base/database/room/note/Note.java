@@ -13,13 +13,7 @@ public class Note {
   @PrimaryKey(autoGenerate = true)
   public Integer uid;
 
-  @Deprecated
-  public String title = "";
-
   public String description = "";
-
-  @Deprecated
-  public String displayTimestamp = "";
 
   public Long timestamp;
 
