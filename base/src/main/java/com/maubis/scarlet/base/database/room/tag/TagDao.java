@@ -14,9 +14,6 @@ public interface TagDao {
   @Insert(onConflict = OnConflictStrategy.REPLACE)
   long insertTag(Tag tag);
 
-  @Insert(onConflict = OnConflictStrategy.REPLACE)
-  void insertTags(Tag... tag);
-
   @Delete
   void delete(Tag tag);
 

@@ -34,24 +34,9 @@ class FoldersRepository(private val database: FolderDao) {
     folders.remove(folder.uuid)
   }
 
-  fun getCount(): Int {
-    maybeLoadFromDB()
-    return folders.size
-  }
-
-  fun getUUIDs(): List<String> {
-    maybeLoadFromDB()
-    return folders.values.map { it.uuid }
-  }
-
   fun getAll(): List<Folder> {
     maybeLoadFromDB()
     return folders.values.toList()
-  }
-
-  fun getByID(uid: Int): Folder? {
-    maybeLoadFromDB()
-    return folders.values.firstOrNull { it.uid == uid }
   }
 
   fun getByUUID(uuid: String): Folder? {
@@ -64,12 +49,6 @@ class FoldersRepository(private val database: FolderDao) {
     return folders.values.firstOrNull { it.title == title }
   }
 
-  fun search(string: String): List<Folder> {
-    maybeLoadFromDB()
-    return folders.values
-      .filter { string.isBlank() || it.title.contains(string, true) }
-  }
-
   @Synchronized
   private fun maybeLoadFromDB() {
     if (folders.isNotEmpty()) {
@@ -78,9 +57,5 @@ class FoldersRepository(private val database: FolderDao) {
     database.all.forEach {
       folders[it.uuid] = it
     }
-  }
-
-  fun clear() {
-    folders.clear()
   }
 }

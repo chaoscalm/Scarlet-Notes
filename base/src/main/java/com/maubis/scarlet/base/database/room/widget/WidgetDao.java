@@ -22,7 +22,4 @@ public interface WidgetDao {
 
   @Query("SELECT * FROM widget WHERE noteUUID = :uuid")
   List<Widget> getByNote(String uuid);
-
-  @Query("SELECT * FROM widget")
-  List<Widget> getAll();
 }

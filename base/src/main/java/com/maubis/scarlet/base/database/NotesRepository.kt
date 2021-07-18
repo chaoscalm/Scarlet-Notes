@@ -20,16 +20,6 @@ class NotesRepository(val database: NoteDao) {
     notes.remove(note.uuid)
   }
 
-  fun getCount(): Int {
-    maybeLoadFromDB()
-    return notes.size
-  }
-
-  fun getUUIDs(): List<String> {
-    maybeLoadFromDB()
-    return notes.values.map { it.uuid }
-  }
-
   fun getAll(): List<Note> {
     maybeLoadFromDB()
     return notes.values.toList()
@@ -45,11 +35,6 @@ class NotesRepository(val database: NoteDao) {
     return notes.values.filter { it.locked == locked }
   }
 
-  fun getNoteByTag(uuid: String): List<Note> {
-    maybeLoadFromDB()
-    return notes.values.filter { it.tags?.contains(uuid) ?: false }
-  }
-
   fun getNoteCountByTag(uuid: String): Int {
     maybeLoadFromDB()
     return notes.values.count { it.tags?.contains(uuid) ?: false }
@@ -58,11 +43,6 @@ class NotesRepository(val database: NoteDao) {
   fun getNoteCountByFolder(uuid: String): Int {
     maybeLoadFromDB()
     return notes.values.count { it.folder == uuid }
-  }
-
-  fun getNotesByFolder(uuid: String): List<Note> {
-    maybeLoadFromDB()
-    return notes.values.filter { it.folder == uuid }
   }
 
   fun getByID(uid: Int): Note? {
@@ -99,9 +79,5 @@ class NotesRepository(val database: NoteDao) {
       it.applySanityChecks()
       notes[it.uuid] = it
     }
-  }
-
-  fun clear() {
-    notes.clear()
   }
 }

@@ -34,24 +34,9 @@ class TagsRepository(private val database: TagDao) {
     tags.remove(tag.uuid)
   }
 
-  fun getCount(): Int {
-    maybeLoadFromDB()
-    return tags.size
-  }
-
-  fun getUUIDs(): List<String> {
-    maybeLoadFromDB()
-    return tags.values.map { it.uuid }
-  }
-
   fun getAll(): List<Tag> {
     maybeLoadFromDB()
     return tags.values.toList()
-  }
-
-  fun getByID(uid: Int): Tag? {
-    maybeLoadFromDB()
-    return tags.values.firstOrNull { it.uid == uid }
   }
 
   fun getByUUID(uuid: String): Tag? {
@@ -78,9 +63,5 @@ class TagsRepository(private val database: TagDao) {
     database.all.forEach {
       tags[it.uuid] = it
     }
-  }
-
-  fun clear() {
-    tags.clear()
   }
 }
