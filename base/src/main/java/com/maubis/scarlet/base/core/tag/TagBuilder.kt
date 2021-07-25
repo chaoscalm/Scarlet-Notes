@@ -5,17 +5,12 @@ import com.maubis.scarlet.base.database.entities.Tag
 
 class TagBuilder() {
   fun emptyTag(): Tag {
-    val tag = Tag()
+    val tag = Tag("", RandomHelper.getRandomString(24))
     tag.uid = 0
-    tag.title = ""
-    tag.uuid = RandomHelper.getRandomString(24)
     return tag
   }
 
   fun copy(tagContainer: ITagContainer): Tag {
-    val tag = emptyTag()
-    tag.uuid = tagContainer.uuid()
-    tag.title = tagContainer.title()
-    return tag
+    return Tag(tagContainer.title(), tagContainer.uuid())
   }
 }

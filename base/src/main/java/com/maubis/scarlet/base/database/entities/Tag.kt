@@ -1,15 +1,11 @@
-package com.maubis.scarlet.base.database.entities;
+package com.maubis.scarlet.base.database.entities
 
-import androidx.room.Entity;
-import androidx.room.Index;
-import androidx.room.PrimaryKey;
+import androidx.room.Entity
+import androidx.room.Index
+import androidx.room.PrimaryKey
 
-@Entity(tableName = "tag", indices = {@Index("uid")})
-public class Tag {
-  @PrimaryKey(autoGenerate = true)
-  public int uid;
-
-  public String title;
-
-  public String uuid;
+@Entity(tableName = "tag", indices = [Index("uid")])
+class Tag(var title: String, var uuid: String) {
+    @PrimaryKey(autoGenerate = true)
+    var uid = 0
 }
