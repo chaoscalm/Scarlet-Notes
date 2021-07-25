@@ -3,7 +3,6 @@ package com.maubis.scarlet.base.note
 import android.content.Context
 import com.github.bijoysingh.starter.util.IntentUtils
 import com.github.bijoysingh.starter.util.TextUtils
-import com.google.gson.Gson
 import com.maubis.markdown.Markdown
 import com.maubis.markdown.MarkdownConfig
 import com.maubis.markdown.spannable.*
@@ -29,18 +28,6 @@ import com.maubis.scarlet.base.support.utils.ColorUtil
 import com.maubis.scarlet.base.support.utils.dateFormat
 import java.util.*
 import kotlin.collections.ArrayList
-
-fun Note.log(): String {
-  val log = HashMap<String, Any>()
-  log["note"] = this
-  log["_text"] = getFullText()
-  log["_image"] = getImageFile()
-  log["_fullText"] = getFullText()
-  log["_displayTime"] = getDisplayTime()
-  log["_tag"] = getTagString()
-  log["_formats"] = getFormats()
-  return Gson().toJson(log)
-}
 
 /**************************************************************************************
  ************* Content and Display Information Functions Functions ********************
