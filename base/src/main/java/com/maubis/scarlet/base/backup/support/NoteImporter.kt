@@ -10,7 +10,6 @@ import com.maubis.scarlet.base.backup.data.ExportableNote
 import com.maubis.scarlet.base.core.note.NoteBuilder
 import com.maubis.scarlet.base.database.entities.Folder
 import com.maubis.scarlet.base.database.entities.Tag
-import com.maubis.scarlet.base.note.folder.saveIfUnique
 import com.maubis.scarlet.base.note.save
 import com.maubis.scarlet.base.support.utils.logNonCriticalError
 import org.json.JSONArray

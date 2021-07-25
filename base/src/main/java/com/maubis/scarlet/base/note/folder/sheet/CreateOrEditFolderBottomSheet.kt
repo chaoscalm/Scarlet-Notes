@@ -10,10 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.flexbox.FlexboxLayout
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
-import com.maubis.scarlet.base.core.folder.isUnsaved
 import com.maubis.scarlet.base.database.entities.Folder
-import com.maubis.scarlet.base.note.folder.delete
-import com.maubis.scarlet.base.note.folder.save
 import com.maubis.scarlet.base.settings.ColorView
 import com.maubis.scarlet.base.support.sheets.openSheet
 import com.maubis.scarlet.base.support.ui.ThemeColorType

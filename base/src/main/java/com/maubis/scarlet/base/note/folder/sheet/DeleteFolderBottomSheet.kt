@@ -7,7 +7,6 @@ import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.database.entities.Folder
 import com.maubis.scarlet.base.database.entities.Note
-import com.maubis.scarlet.base.note.folder.delete
 import com.maubis.scarlet.base.note.save
 import com.maubis.scarlet.base.note.softDelete
 import com.maubis.scarlet.base.support.sheets.LithoOptionBottomSheet

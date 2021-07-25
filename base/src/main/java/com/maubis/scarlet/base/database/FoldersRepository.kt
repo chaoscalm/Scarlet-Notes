@@ -1,6 +1,5 @@
 package com.maubis.scarlet.base.database
 
-import com.maubis.scarlet.base.core.folder.isUnsaved
 import com.maubis.scarlet.base.database.daos.FolderDao
 import com.maubis.scarlet.base.database.entities.Folder
 import java.util.concurrent.ConcurrentHashMap
