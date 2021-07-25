@@ -1,6 +1,5 @@
 package com.maubis.scarlet.base.database
 
-import com.maubis.scarlet.base.core.tag.isUnsaved
 import com.maubis.scarlet.base.database.daos.TagDao
 import com.maubis.scarlet.base.database.entities.Tag
 import java.util.concurrent.ConcurrentHashMap

@@ -7,7 +7,6 @@ import android.widget.EditText
 import android.widget.TextView
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
-import com.maubis.scarlet.base.core.tag.isUnsaved
 import com.maubis.scarlet.base.database.entities.Tag
 import com.maubis.scarlet.base.support.ui.ThemeColorType
 import com.maubis.scarlet.base.support.ui.ThemedActivity

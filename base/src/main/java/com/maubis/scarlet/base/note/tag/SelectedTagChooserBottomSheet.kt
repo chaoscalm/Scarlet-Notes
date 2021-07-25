@@ -8,7 +8,6 @@ import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.core.note.getTagUUIDs
-import com.maubis.scarlet.base.core.tag.TagBuilder
 import com.maubis.scarlet.base.database.entities.Tag
 import com.maubis.scarlet.base.home.sheets.LithoTagOptionsItem
 import com.maubis.scarlet.base.home.sheets.TagItemLayout
@@ -43,7 +42,7 @@ class SelectedTagChooserBottomSheet : LithoBottomSheet() {
       subtitle = 0,
       icon = R.drawable.icon_add_note,
       listener = {
-          CreateOrEditTagBottomSheet.openSheet(activity, TagBuilder().emptyTag()) { tag, _ ->
+          CreateOrEditTagBottomSheet.openSheet(activity, Tag.empty()) { tag, _ ->
               onActionListener(tag, true)
               reset(activity, dialog)
           }

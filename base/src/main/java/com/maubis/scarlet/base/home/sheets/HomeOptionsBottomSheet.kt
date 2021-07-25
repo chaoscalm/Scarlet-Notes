@@ -14,7 +14,6 @@ import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.ScarletApp.Companion.data
-import com.maubis.scarlet.base.core.tag.TagBuilder
 import com.maubis.scarlet.base.database.entities.Tag
 import com.maubis.scarlet.base.home.HomeNavigationMode
 import com.maubis.scarlet.base.home.MainActivity
@@ -165,7 +164,7 @@ class HomeOptionsBottomSheet : LithoBottomSheet() {
       title = R.string.tag_sheet_new_tag_button,
       subtitle = 0,
       icon = R.drawable.icon_add_note,
-      listener = { CreateOrEditTagBottomSheet.openSheet(activity, TagBuilder().emptyTag()) { _, _ -> reset(activity, dialog) } })
+      listener = { CreateOrEditTagBottomSheet.openSheet(activity, Tag.empty()) { _, _ -> reset(activity, dialog) } })
     tagsComponent.child(OptionItemLayout.create(componentContext).option(addTag).onClick { addTag.listener() })
 
     component.child(tagsComponent)
