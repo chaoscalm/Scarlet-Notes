@@ -7,8 +7,8 @@ import com.github.bijoysingh.starter.json.SafeJson
 import com.google.gson.Gson
 import com.maubis.scarlet.base.backup.data.ExportableFileFormat
 import com.maubis.scarlet.base.backup.data.ExportableNote
-import com.maubis.scarlet.base.core.folder.FolderBuilder
 import com.maubis.scarlet.base.core.note.NoteBuilder
+import com.maubis.scarlet.base.database.entities.Folder
 import com.maubis.scarlet.base.database.entities.Tag
 import com.maubis.scarlet.base.note.folder.saveIfUnique
 import com.maubis.scarlet.base.note.save
@@ -40,7 +40,13 @@ class NoteImporter() {
           it.saveIfNeeded(context)
         }
         fileFormat.folders?.forEach {
-          val folder = FolderBuilder().copy(it)
+          val folder = Folder().apply {
+            uuid = it.uuid
+            title = it.title
+            timestamp = it.timestamp
+            updateTimestamp = it.updateTimestamp
+            color = it.color
+          }
           folder.saveIfUnique()
         }
         return

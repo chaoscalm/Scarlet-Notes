@@ -16,8 +16,8 @@ import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.ScarletApp.Companion.data
-import com.maubis.scarlet.base.core.folder.FolderBuilder
 import com.maubis.scarlet.base.database.entities.Folder
+import com.maubis.scarlet.base.settings.sNoteDefaultColor
 import com.maubis.scarlet.base.support.sheets.LithoBottomSheet
 import com.maubis.scarlet.base.support.sheets.LithoOptionsItem
 import com.maubis.scarlet.base.support.sheets.OptionItemLayout
@@ -127,7 +127,7 @@ abstract class FolderChooserBottomSheetBase : LithoBottomSheet() {
       subtitle = 0,
       icon = R.drawable.icon_add_notebook,
       listener = {
-        CreateOrEditFolderBottomSheet.openSheet(activity, FolderBuilder().emptyFolder()) { folder, _ ->
+        CreateOrEditFolderBottomSheet.openSheet(activity, Folder(sNoteDefaultColor)) { folder, _ ->
           onFolderSelected(folder)
           reset(activity, dialog)
         }
