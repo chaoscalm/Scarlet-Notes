@@ -9,7 +9,7 @@ import com.maubis.scarlet.base.backup.data.ExportableFileFormat
 import com.maubis.scarlet.base.backup.data.ExportableNote
 import com.maubis.scarlet.base.core.folder.FolderBuilder
 import com.maubis.scarlet.base.core.note.NoteBuilder
-import com.maubis.scarlet.base.core.tag.TagBuilder
+import com.maubis.scarlet.base.database.entities.Tag
 import com.maubis.scarlet.base.note.folder.saveIfUnique
 import com.maubis.scarlet.base.note.save
 import com.maubis.scarlet.base.note.tag.saveIfUnique
@@ -34,8 +34,8 @@ class NoteImporter() {
           return
         }
         fileFormat.tags.forEach {
-          val tag = TagBuilder().copy(it)
-          tag.saveIfUnique()
+            val tag = Tag(it.title, it.uuid)
+            tag.saveIfUnique()
         }
         fileFormat.notes.forEach {
           it.saveIfNeeded(context)
