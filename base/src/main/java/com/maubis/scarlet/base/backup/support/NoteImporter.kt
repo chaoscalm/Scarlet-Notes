@@ -132,8 +132,8 @@ class NoteImporter() {
   }
 
   private fun isValidFile(filePath: String, validExtension: String): Boolean {
-    return filePath.endsWith("." + validExtension)
-      || filePath.endsWith("." + validExtension.toUpperCase())
+    return filePath.endsWith("." + validExtension) ||
+            filePath.endsWith("." + validExtension.uppercase())
   }
 
 }
