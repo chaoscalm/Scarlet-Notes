@@ -8,7 +8,6 @@ import com.maubis.scarlet.base.core.note.generateUUID
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.database.entities.Tag
 import com.maubis.scarlet.base.note.save
-import com.maubis.scarlet.base.note.tag.save
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.Serializable

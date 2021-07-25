@@ -12,7 +12,6 @@ import com.maubis.scarlet.base.core.note.NoteBuilder
 import com.maubis.scarlet.base.database.entities.Tag
 import com.maubis.scarlet.base.note.folder.saveIfUnique
 import com.maubis.scarlet.base.note.save
-import com.maubis.scarlet.base.note.tag.saveIfUnique
 import com.maubis.scarlet.base.support.utils.logNonCriticalError
 import org.json.JSONArray
 import java.io.BufferedReader
