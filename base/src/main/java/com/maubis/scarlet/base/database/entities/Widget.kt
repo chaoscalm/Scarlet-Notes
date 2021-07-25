@@ -1,22 +1,11 @@
-package com.maubis.scarlet.base.database.entities;
+package com.maubis.scarlet.base.database.entities
 
-import androidx.room.Entity;
-import androidx.room.Index;
-import androidx.room.PrimaryKey;
+import androidx.room.Entity
+import androidx.room.Index
+import androidx.room.PrimaryKey
 
-@Entity(tableName = "widget", indices = {@Index("widgetId")})
-public class Widget {
-
-  @PrimaryKey
-  public int widgetId;
-
-  public String noteUUID;
-
-  public Widget() {
-  }
-
-  public Widget(int widgetId, String noteId) {
-    this.widgetId = widgetId;
-    this.noteUUID = noteId;
-  }
-}
+@Entity(tableName = "widget", indices = [Index("widgetId")])
+class Widget(
+  @PrimaryKey var widgetId: Int,
+  var noteUUID: String
+)

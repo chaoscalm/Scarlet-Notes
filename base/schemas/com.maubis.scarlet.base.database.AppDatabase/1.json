@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "e2818bd077e443fa84120571799c1dc7",
+    "identityHash": "987aaf061e05ea5d70301363466080d1",
     "entities": [
       {
         "tableName": "note",
@@ -148,7 +148,7 @@
       },
       {
         "tableName": "widget",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`widgetId` INTEGER NOT NULL, `noteUUID` TEXT, PRIMARY KEY(`widgetId`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`widgetId` INTEGER NOT NULL, `noteUUID` TEXT NOT NULL, PRIMARY KEY(`widgetId`))",
         "fields": [
           {
             "fieldPath": "widgetId",
@@ -160,7 +160,7 @@
             "fieldPath": "noteUUID",
             "columnName": "noteUUID",
             "affinity": "TEXT",
-            "notNull": false
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -244,7 +244,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'e2818bd077e443fa84120571799c1dc7')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '987aaf061e05ea5d70301363466080d1')"
     ]
   }
 }
