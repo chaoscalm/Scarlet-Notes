@@ -7,7 +7,7 @@ import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.core.note.generateUUID
 
 @Entity(tableName = "tag", indices = [Index("uid")])
-class Tag(var title: String, var uuid: String) {
+class Tag(var title: String = "", var uuid: String = generateUUID()) {
     @PrimaryKey(autoGenerate = true)
     var uid = 0
 
@@ -38,9 +38,5 @@ class Tag(var title: String, var uuid: String) {
 
     fun delete() {
         ScarletApp.data.tags.delete(this)
-    }
-
-    companion object {
-        fun empty() = Tag("", generateUUID())
     }
 }

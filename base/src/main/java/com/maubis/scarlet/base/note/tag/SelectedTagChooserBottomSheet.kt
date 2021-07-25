@@ -42,9 +42,9 @@ class SelectedTagChooserBottomSheet : LithoBottomSheet() {
       subtitle = 0,
       icon = R.drawable.icon_add_note,
       listener = {
-          CreateOrEditTagBottomSheet.openSheet(activity, Tag.empty()) { tag, _ ->
-              onActionListener(tag, true)
-              reset(activity, dialog)
+          CreateOrEditTagBottomSheet.openSheet(activity, Tag()) { tag, _ ->
+            onActionListener(tag, true)
+            reset(activity, dialog)
           }
       })
     tagsComponent.child(OptionItemLayout.create(componentContext)

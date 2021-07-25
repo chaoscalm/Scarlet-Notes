@@ -52,7 +52,7 @@ class TagChooserBottomSheet : LithoBottomSheet() {
       title = R.string.tag_sheet_new_tag_button,
       subtitle = 0,
       icon = R.drawable.icon_add_note,
-      listener = { CreateOrEditTagBottomSheet.openSheet(activity, Tag.empty()) { _, _ -> reset(activity, dialog) } })
+      listener = { CreateOrEditTagBottomSheet.openSheet(activity, Tag()) { _, _ -> reset(activity, dialog) } })
     tagsComponent.child(OptionItemLayout.create(componentContext)
                           .option(addTag)
                           .backgroundRes(R.drawable.accent_rounded_bg)
