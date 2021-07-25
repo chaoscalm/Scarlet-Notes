@@ -26,8 +26,7 @@ fun Folder.saveIfUnique() {
 fun Folder.getDisplayTime(): String {
   val time = when {
     (this.updateTimestamp != 0L) -> this.updateTimestamp
-    (this.timestamp != null) -> this.timestamp
-    else -> 0
+    else -> this.timestamp
   }
 
   val format = when {

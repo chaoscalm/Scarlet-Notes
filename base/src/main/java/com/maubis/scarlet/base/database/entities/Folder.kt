@@ -1,25 +1,17 @@
-package com.maubis.scarlet.base.database.entities;
+package com.maubis.scarlet.base.database.entities
 
-import androidx.room.Entity;
-import androidx.room.Index;
-import androidx.room.PrimaryKey;
+import androidx.room.Entity
+import androidx.room.Index
+import androidx.room.PrimaryKey
+import com.github.bijoysingh.starter.util.RandomHelper
 
-/**
- * Underlying Database, difficult to migrate to Kotlin without breaking the Database.
- * Hence all the functions should be in NoteKExtensions
- */
-@Entity(tableName = "folder", indices = {@Index("uid")})
-public class Folder {
-  @PrimaryKey(autoGenerate = true)
-  public int uid;
-
-  public String title;
-
-  public Long timestamp;
-
-  public long updateTimestamp;
-
-  public Integer color;
-
-  public String uuid;
+@Entity(tableName = "folder", indices = [Index("uid")])
+class Folder {
+    @PrimaryKey(autoGenerate = true)
+    var uid = 0
+    var title: String = ""
+    var timestamp: Long = System.currentTimeMillis()
+    var updateTimestamp: Long = System.currentTimeMillis()
+    var color: Int = 0
+    var uuid: String = RandomHelper.getRandomString(24)
 }

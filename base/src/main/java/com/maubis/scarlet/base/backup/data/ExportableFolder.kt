@@ -19,11 +19,11 @@ class ExportableFolder(
   override fun uuid(): String = uuid
 
   constructor(folder: Folder) : this(
-          folder.uuid ?: "",
-          folder.title ?: "",
-          folder.timestamp ?: 0,
+          folder.uuid,
+          folder.title,
+          folder.timestamp,
           folder.updateTimestamp,
-          folder.color ?: 0)
+          folder.color)
 
   // Default failsafe constructor for Gson to use
   constructor() : this(

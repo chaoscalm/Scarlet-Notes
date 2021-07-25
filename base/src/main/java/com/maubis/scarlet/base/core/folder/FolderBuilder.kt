@@ -1,6 +1,5 @@
 package com.maubis.scarlet.base.core.folder
 
-import com.github.bijoysingh.starter.util.RandomHelper
 import com.maubis.scarlet.base.database.entities.Folder
 
 class FolderBuilder() {
@@ -10,11 +9,6 @@ class FolderBuilder() {
 
   fun emptyFolder(color: Int): Folder {
     val folder = Folder()
-    folder.uid = 0
-    folder.title = ""
-    folder.uuid = RandomHelper.getRandomString(24)
-    folder.timestamp = System.currentTimeMillis()
-    folder.updateTimestamp = System.currentTimeMillis()
     folder.color = color
     return folder
   }
