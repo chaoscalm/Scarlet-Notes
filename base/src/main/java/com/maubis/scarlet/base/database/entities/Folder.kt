@@ -3,8 +3,8 @@ package com.maubis.scarlet.base.database.entities
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import com.github.bijoysingh.starter.util.RandomHelper
 import com.maubis.scarlet.base.ScarletApp
+import com.maubis.scarlet.base.core.note.generateUUID
 import com.maubis.scarlet.base.support.utils.dateFormat
 import java.util.*
 
@@ -16,7 +16,7 @@ class Folder() {
     var timestamp: Long = System.currentTimeMillis()
     var updateTimestamp: Long = System.currentTimeMillis()
     var color: Int = 0
-    var uuid: String = RandomHelper.getRandomString(24)
+    var uuid: String = generateUUID()
 
     constructor(color: Int) : this() {
         this.color = color

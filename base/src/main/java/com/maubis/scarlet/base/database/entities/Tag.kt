@@ -3,8 +3,8 @@ package com.maubis.scarlet.base.database.entities
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import com.github.bijoysingh.starter.util.RandomHelper
 import com.maubis.scarlet.base.ScarletApp
+import com.maubis.scarlet.base.core.note.generateUUID
 
 @Entity(tableName = "tag", indices = [Index("uid")])
 class Tag(var title: String, var uuid: String) {
@@ -41,6 +41,6 @@ class Tag(var title: String, var uuid: String) {
     }
 
     companion object {
-        fun empty() = Tag("", RandomHelper.getRandomString(24))
+        fun empty() = Tag("", generateUUID())
     }
 }
