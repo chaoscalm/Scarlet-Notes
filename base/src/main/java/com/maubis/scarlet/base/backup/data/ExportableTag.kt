@@ -1,7 +1,6 @@
 package com.maubis.scarlet.base.backup.data
 
 import com.maubis.scarlet.base.core.note.generateUUID
-import com.maubis.scarlet.base.core.tag.ITagContainer
 import com.maubis.scarlet.base.database.entities.Tag
 import org.json.JSONObject
 import java.io.Serializable
@@ -9,11 +8,7 @@ import java.io.Serializable
 class ExportableTag(
   var uuid: String,
   var title: String
-) : Serializable, ITagContainer {
-
-  override fun title(): String = title
-
-  override fun uuid(): String = uuid
+) : Serializable {
 
   // Default failsafe constructor for Gson to use
   constructor() : this("invalid", "")
