@@ -1,4 +1,4 @@
-package com.maubis.scarlet.base.database.room;
+package com.maubis.scarlet.base.database;
 
 import android.content.Context;
 
@@ -6,14 +6,14 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-import com.maubis.scarlet.base.database.room.folder.Folder;
-import com.maubis.scarlet.base.database.room.folder.FolderDao;
-import com.maubis.scarlet.base.database.room.note.Note;
-import com.maubis.scarlet.base.database.room.note.NoteDao;
-import com.maubis.scarlet.base.database.room.tag.Tag;
-import com.maubis.scarlet.base.database.room.tag.TagDao;
-import com.maubis.scarlet.base.database.room.widget.Widget;
-import com.maubis.scarlet.base.database.room.widget.WidgetDao;
+import com.maubis.scarlet.base.database.daos.FolderDao;
+import com.maubis.scarlet.base.database.daos.NoteDao;
+import com.maubis.scarlet.base.database.daos.TagDao;
+import com.maubis.scarlet.base.database.daos.WidgetDao;
+import com.maubis.scarlet.base.database.entities.Folder;
+import com.maubis.scarlet.base.database.entities.Note;
+import com.maubis.scarlet.base.database.entities.Tag;
+import com.maubis.scarlet.base.database.entities.Widget;
 
 @Database(entities = {Note.class, Tag.class, Widget.class, Folder.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {

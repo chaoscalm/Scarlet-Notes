@@ -1,8 +1,8 @@
 package com.maubis.scarlet.base.database
 
 import com.maubis.scarlet.base.core.note.INoteContainer
-import com.maubis.scarlet.base.database.room.note.Note
-import com.maubis.scarlet.base.database.room.note.NoteDao
+import com.maubis.scarlet.base.database.daos.NoteDao
+import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.note.applySanityChecks
 import java.util.concurrent.ConcurrentHashMap
 

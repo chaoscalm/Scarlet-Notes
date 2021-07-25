@@ -2,9 +2,8 @@ package com.maubis.scarlet.base.database
 
 import android.content.Context
 import com.maubis.scarlet.base.core.note.NoteActor
-import com.maubis.scarlet.base.database.room.AppDatabase
-import com.maubis.scarlet.base.database.room.note.Note
-import com.maubis.scarlet.base.database.room.widget.WidgetDao
+import com.maubis.scarlet.base.database.daos.WidgetDao
+import com.maubis.scarlet.base.database.entities.Note
 
 class ApplicationData(context: Context) {
   private val database: AppDatabase = AppDatabase.createDatabase(context)

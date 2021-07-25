@@ -1,7 +1,7 @@
 package com.maubis.scarlet.base.backup.data
 
 import com.maubis.scarlet.base.core.folder.IFolderContainer
-import com.maubis.scarlet.base.database.room.folder.Folder
+import com.maubis.scarlet.base.database.entities.Folder
 import java.io.Serializable
 import java.util.*
 

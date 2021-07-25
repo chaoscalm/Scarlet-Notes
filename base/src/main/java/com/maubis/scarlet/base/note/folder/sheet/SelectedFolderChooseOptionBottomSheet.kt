@@ -1,7 +1,7 @@
 package com.maubis.scarlet.base.note.folder.sheet
 
 import com.facebook.litho.ComponentContext
-import com.maubis.scarlet.base.database.room.folder.Folder
+import com.maubis.scarlet.base.database.entities.Folder
 import com.maubis.scarlet.base.note.selection.SelectNotesActivity
 
 class SelectedFolderChooseOptionsBottomSheet : FolderChooserBottomSheetBase() {

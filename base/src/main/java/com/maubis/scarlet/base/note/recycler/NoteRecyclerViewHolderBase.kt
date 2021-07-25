@@ -16,7 +16,7 @@ import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.ScarletApp.Companion.imageStorage
 import com.maubis.scarlet.base.core.note.NoteState
-import com.maubis.scarlet.base.database.room.note.Note
+import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.note.isNoteLockedButAppUnlocked
 import com.maubis.scarlet.base.support.recycler.RecyclerItem
 import com.maubis.scarlet.base.support.utils.trim

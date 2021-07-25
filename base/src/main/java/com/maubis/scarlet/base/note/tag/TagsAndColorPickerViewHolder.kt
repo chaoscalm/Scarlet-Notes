@@ -7,7 +7,7 @@ import com.google.android.flexbox.FlexboxLayout
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.ScarletApp.Companion.data
-import com.maubis.scarlet.base.database.room.tag.Tag
+import com.maubis.scarlet.base.database.entities.Tag
 import com.maubis.scarlet.base.home.MainActivity
 import com.maubis.scarlet.base.settings.ColorView
 

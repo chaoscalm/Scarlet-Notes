@@ -1,6 +1,6 @@
 package com.maubis.scarlet.base.note.selection
 
-import com.maubis.scarlet.base.database.room.note.Note
+import com.maubis.scarlet.base.database.entities.Note
 
 interface INoteSelectorActivity {
   fun onNoteClicked(note: Note)

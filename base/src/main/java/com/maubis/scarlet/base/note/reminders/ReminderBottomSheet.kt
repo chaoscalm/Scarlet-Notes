@@ -13,7 +13,7 @@ import com.maubis.scarlet.base.core.note.Reminder
 import com.maubis.scarlet.base.core.note.ReminderInterval
 import com.maubis.scarlet.base.core.note.getReminderV2
 import com.maubis.scarlet.base.core.note.setReminderV2
-import com.maubis.scarlet.base.database.room.note.Note
+import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.home.sheets.GenericOptionsBottomSheet
 import com.maubis.scarlet.base.note.save
 import com.maubis.scarlet.base.support.sheets.LithoChooseOptionsItem

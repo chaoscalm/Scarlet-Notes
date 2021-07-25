@@ -1,10 +1,12 @@
-package com.maubis.scarlet.base.database.room.tag;
+package com.maubis.scarlet.base.database.daos;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+
+import com.maubis.scarlet.base.database.entities.Tag;
 
 import java.util.List;
 

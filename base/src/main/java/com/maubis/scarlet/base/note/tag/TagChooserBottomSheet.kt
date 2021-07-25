@@ -11,7 +11,7 @@ import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.core.note.getTagUUIDs
 import com.maubis.scarlet.base.core.tag.TagBuilder
-import com.maubis.scarlet.base.database.room.note.Note
+import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.home.sheets.LithoTagOptionsItem
 import com.maubis.scarlet.base.home.sheets.TagItemLayout
 import com.maubis.scarlet.base.note.save

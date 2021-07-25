@@ -1,4 +1,4 @@
-package com.maubis.scarlet.base.database.room.tag;
+package com.maubis.scarlet.base.database.entities;
 
 import androidx.room.Entity;
 import androidx.room.Index;

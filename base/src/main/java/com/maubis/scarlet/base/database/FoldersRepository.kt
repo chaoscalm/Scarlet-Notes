@@ -1,8 +1,8 @@
 package com.maubis.scarlet.base.database
 
 import com.maubis.scarlet.base.core.folder.isUnsaved
-import com.maubis.scarlet.base.database.room.folder.Folder
-import com.maubis.scarlet.base.database.room.folder.FolderDao
+import com.maubis.scarlet.base.database.daos.FolderDao
+import com.maubis.scarlet.base.database.entities.Folder
 import java.util.concurrent.ConcurrentHashMap
 
 class FoldersRepository(private val database: FolderDao) {

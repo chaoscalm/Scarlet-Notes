@@ -20,7 +20,7 @@ import com.maubis.scarlet.base.core.note.NoteImage.Companion.deleteIfExist
 import com.maubis.scarlet.base.core.note.getFormats
 import com.maubis.scarlet.base.core.note.isEqual
 import com.maubis.scarlet.base.core.note.isUnsaved
-import com.maubis.scarlet.base.database.room.note.Note
+import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.note.creation.specs.NoteCreationBottomBar
 import com.maubis.scarlet.base.note.creation.specs.NoteCreationTopBar
 import com.maubis.scarlet.base.note.delete

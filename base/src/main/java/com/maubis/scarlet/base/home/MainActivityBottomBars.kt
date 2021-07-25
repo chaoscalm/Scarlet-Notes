@@ -15,7 +15,7 @@ import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.core.folder.FolderBuilder
-import com.maubis.scarlet.base.database.room.folder.Folder
+import com.maubis.scarlet.base.database.entities.Folder
 import com.maubis.scarlet.base.home.sheets.HomeOptionsBottomSheet
 import com.maubis.scarlet.base.home.sheets.openDeleteTrashSheet
 import com.maubis.scarlet.base.note.creation.activity.CreateNoteActivity

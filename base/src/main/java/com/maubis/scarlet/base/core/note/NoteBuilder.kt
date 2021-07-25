@@ -6,7 +6,7 @@ import com.google.gson.Gson
 import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.core.format.FormatBuilder
 import com.maubis.scarlet.base.core.format.FormatType
-import com.maubis.scarlet.base.database.room.note.Note
+import com.maubis.scarlet.base.database.entities.Note
 import java.util.*
 
 fun generateUUID() = UUID.randomUUID().toString()

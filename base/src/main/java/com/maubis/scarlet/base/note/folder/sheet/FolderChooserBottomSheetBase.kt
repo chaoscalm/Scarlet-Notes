@@ -17,7 +17,7 @@ import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.core.folder.FolderBuilder
-import com.maubis.scarlet.base.database.room.folder.Folder
+import com.maubis.scarlet.base.database.entities.Folder
 import com.maubis.scarlet.base.support.sheets.LithoBottomSheet
 import com.maubis.scarlet.base.support.sheets.LithoOptionsItem
 import com.maubis.scarlet.base.support.sheets.OptionItemLayout
@@ -27,9 +27,9 @@ import com.maubis.scarlet.base.support.ui.ThemeColorType
 import com.maubis.scarlet.base.support.ui.ThemedActivity
 
 data class FolderOptionsItem(
-  val folder: Folder,
-  val isSelected: Boolean = false,
-  val listener: () -> Unit = {})
+        val folder: Folder,
+        val isSelected: Boolean = false,
+        val listener: () -> Unit = {})
 
 @LayoutSpec
 object FolderItemLayoutSpec {

@@ -1,6 +1,6 @@
 package com.maubis.scarlet.base.core.note
 
-import com.maubis.scarlet.base.database.room.note.Note
+import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.note.getFullText
 
 enum class SortingTechnique() {

@@ -15,7 +15,7 @@ import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.core.tag.TagBuilder
-import com.maubis.scarlet.base.database.room.tag.Tag
+import com.maubis.scarlet.base.database.entities.Tag
 import com.maubis.scarlet.base.home.HomeNavigationMode
 import com.maubis.scarlet.base.home.MainActivity
 import com.maubis.scarlet.base.note.tag.CreateOrEditTagBottomSheet
@@ -25,12 +25,12 @@ import com.maubis.scarlet.base.support.specs.RoundIcon
 import com.maubis.scarlet.base.support.ui.ThemeColorType
 
 class LithoTagOptionsItem(
-  val tag: Tag,
-  val usages: Int = 0,
-  val isSelected: Boolean = false,
-  val isEditable: Boolean = false,
-  val editListener: () -> Unit = {},
-  val listener: () -> Unit = {}) {
+        val tag: Tag,
+        val usages: Int = 0,
+        val isSelected: Boolean = false,
+        val isEditable: Boolean = false,
+        val editListener: () -> Unit = {},
+        val listener: () -> Unit = {}) {
 }
 
 @LayoutSpec

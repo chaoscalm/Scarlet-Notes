@@ -12,8 +12,8 @@ import androidx.core.content.ContextCompat
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.ScarletApp.Companion.data
-import com.maubis.scarlet.base.database.room.note.Note
-import com.maubis.scarlet.base.database.room.widget.Widget
+import com.maubis.scarlet.base.database.entities.Note
+import com.maubis.scarlet.base.database.entities.Widget
 import com.maubis.scarlet.base.note.creation.activity.ViewAdvancedNoteActivity
 import com.maubis.scarlet.base.note.getTextForWidget
 import com.maubis.scarlet.base.note.selection.INoteSelectorActivity

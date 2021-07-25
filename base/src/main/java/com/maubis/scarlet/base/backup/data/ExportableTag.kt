@@ -3,7 +3,7 @@ package com.maubis.scarlet.base.backup.data
 import com.maubis.scarlet.base.core.note.generateUUID
 import com.maubis.scarlet.base.core.tag.ITagContainer
 import com.maubis.scarlet.base.core.tag.TagBuilder
-import com.maubis.scarlet.base.database.room.tag.Tag
+import com.maubis.scarlet.base.database.entities.Tag
 import org.json.JSONObject
 import java.io.Serializable
 

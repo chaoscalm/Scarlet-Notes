@@ -3,7 +3,7 @@ package com.maubis.scarlet.base.note.selection
 import android.content.Context
 import android.os.Bundle
 import android.view.View
-import com.maubis.scarlet.base.database.room.note.Note
+import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.note.recycler.NoteRecyclerItem
 import com.maubis.scarlet.base.note.recycler.NoteRecyclerViewHolderBase
 import com.maubis.scarlet.base.support.recycler.RecyclerItem

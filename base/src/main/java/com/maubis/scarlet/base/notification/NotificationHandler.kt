@@ -11,7 +11,7 @@ import androidx.core.app.NotificationCompat
 import com.github.bijoysingh.starter.util.TextUtils
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
-import com.maubis.scarlet.base.database.room.note.Note
+import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.home.MainActivity
 import com.maubis.scarlet.base.note.creation.activity.CreateNoteActivity
 import com.maubis.scarlet.base.note.creation.activity.INTENT_KEY_NOTE_ID
@@ -29,8 +29,8 @@ const val NOTE_NOTIFICATION_CHANNEL_ID = "NOTE_NOTIFICATION_CHANNEL";
 const val REMINDER_NOTIFICATION_CHANNEL_ID = "REMINDER_NOTIFICATION_CHANNEL";
 
 class NotificationConfig(
-  val note: Note,
-  val channel: String = NOTE_NOTIFICATION_CHANNEL_ID
+        val note: Note,
+        val channel: String = NOTE_NOTIFICATION_CHANNEL_ID
 )
 
 class NotificationHandler(val context: Context) {

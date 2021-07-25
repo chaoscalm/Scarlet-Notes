@@ -6,7 +6,7 @@ import com.github.bijoysingh.starter.util.IntentUtils
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.data
-import com.maubis.scarlet.base.database.room.note.Note
+import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.home.HomeNavigationMode
 import com.maubis.scarlet.base.note.getFullText
 import com.maubis.scarlet.base.support.sheets.openSheet

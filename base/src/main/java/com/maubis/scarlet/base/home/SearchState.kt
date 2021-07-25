@@ -4,19 +4,19 @@ import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.core.note.NoteState
 import com.maubis.scarlet.base.core.note.sort
-import com.maubis.scarlet.base.database.room.folder.Folder
-import com.maubis.scarlet.base.database.room.note.Note
-import com.maubis.scarlet.base.database.room.tag.Tag
+import com.maubis.scarlet.base.database.entities.Folder
+import com.maubis.scarlet.base.database.entities.Note
+import com.maubis.scarlet.base.database.entities.Tag
 import com.maubis.scarlet.base.note.getFullText
 import com.maubis.scarlet.base.note.isNoteLockedButAppUnlocked
 import com.maubis.scarlet.base.settings.SortingOptionsBottomSheet
 
 class SearchState(
-  var text: String = "",
-  var mode: HomeNavigationMode = HomeNavigationMode.DEFAULT,
-  var currentFolder: Folder? = null,
-  var colors: MutableList<Int> = emptyList<Int>().toMutableList(),
-  var tags: MutableList<Tag> = emptyList<Tag>().toMutableList()) {
+        var text: String = "",
+        var mode: HomeNavigationMode = HomeNavigationMode.DEFAULT,
+        var currentFolder: Folder? = null,
+        var colors: MutableList<Int> = emptyList<Int>().toMutableList(),
+        var tags: MutableList<Tag> = emptyList<Tag>().toMutableList()) {
 
   fun hasFilter(): Boolean {
     return currentFolder != null

@@ -17,7 +17,7 @@ import com.maubis.scarlet.base.core.format.FormatBuilder
 import com.maubis.scarlet.base.core.format.FormatType
 import com.maubis.scarlet.base.core.format.sectionPreservingSort
 import com.maubis.scarlet.base.core.note.*
-import com.maubis.scarlet.base.database.room.note.Note
+import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.databinding.ActivityAdvancedNoteBinding
 import com.maubis.scarlet.base.note.*
 import com.maubis.scarlet.base.note.actions.INoteOptionSheetActivity

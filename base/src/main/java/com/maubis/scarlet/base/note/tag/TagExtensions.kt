@@ -1,7 +1,7 @@
 package com.maubis.scarlet.base.note.tag
 
 import com.maubis.scarlet.base.ScarletApp.Companion.data
-import com.maubis.scarlet.base.database.room.tag.Tag
+import com.maubis.scarlet.base.database.entities.Tag
 
 fun Tag.saveIfUnique() {
   val existing = data.tags.getByTitle(title)

@@ -1,10 +1,12 @@
-package com.maubis.scarlet.base.database.room.widget;
+package com.maubis.scarlet.base.database.daos;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+
+import com.maubis.scarlet.base.database.entities.Widget;
 
 import java.util.List;
 

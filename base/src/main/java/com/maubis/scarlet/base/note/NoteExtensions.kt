@@ -16,8 +16,8 @@ import com.maubis.scarlet.base.core.note.NoteState
 import com.maubis.scarlet.base.core.note.generateUUID
 import com.maubis.scarlet.base.core.note.getFormats
 import com.maubis.scarlet.base.core.note.getTagUUIDs
-import com.maubis.scarlet.base.database.room.note.Note
-import com.maubis.scarlet.base.database.room.tag.Tag
+import com.maubis.scarlet.base.database.entities.Note
+import com.maubis.scarlet.base.database.entities.Tag
 import com.maubis.scarlet.base.note.creation.activity.NoteIntentRouterActivity
 import com.maubis.scarlet.base.security.PinLockController.needsLockCheck
 import com.maubis.scarlet.base.security.openUnlockSheet
