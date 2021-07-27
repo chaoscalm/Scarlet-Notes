@@ -44,7 +44,7 @@ class ReminderBottomSheet : ThemedBottomSheetFragment() {
     }
 
     val calendar = Calendar.getInstance()
-    reminder = note.getReminderV2() ?: Reminder(
+    reminder = note.getReminder() ?: Reminder(
       0,
       calendar.timeInMillis,
       ReminderInterval.ONCE)
@@ -114,7 +114,7 @@ class ReminderBottomSheet : ThemedBottomSheetFragment() {
 
       reminder.uid = uid
 
-      note.setReminderV2(reminder)
+      note.setReminder(reminder)
       note.save(themedContext())
 
       dismiss()

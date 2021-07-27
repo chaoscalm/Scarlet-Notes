@@ -38,7 +38,7 @@ class HouseKeeper(val context: Context) {
 
   private fun removeOldReminders() {
     data.notes.getAll().forEach {
-      val reminder = it.getReminderV2()
+      val reminder = it.getReminder()
       if (reminder === null) {
         return@forEach
       }
@@ -56,7 +56,7 @@ class HouseKeeper(val context: Context) {
 
       reminder.timestamp = nextJobTimestamp(reminder.timestamp, System.currentTimeMillis())
       reminder.uid = scheduleJob(it.uuid, reminder)
-      it.setReminderV2(reminder)
+      it.setReminder(reminder)
       it.save(context)
     }
   }

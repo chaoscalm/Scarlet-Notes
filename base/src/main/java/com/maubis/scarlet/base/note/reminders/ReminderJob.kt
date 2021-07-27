@@ -26,14 +26,14 @@ class ReminderJob : Job() {
     handler.openNotification(NotificationConfig(note, REMINDER_NOTIFICATION_CHANNEL_ID))
 
     try {
-      val reminder = note.getReminderV2()
+      val reminder = note.getReminder()
       if (reminder?.interval == ReminderInterval.DAILY) {
         val reminderV2 = Reminder(
           0,
           nextJobTimestamp(reminder.timestamp, System.currentTimeMillis()),
           ReminderInterval.DAILY)
         reminderV2.uid = scheduleJob(note.uuid, reminderV2)
-        note.setReminderV2(reminderV2)
+        note.setReminder(reminderV2)
         note.save(context)
       } else {
         note.meta = ""

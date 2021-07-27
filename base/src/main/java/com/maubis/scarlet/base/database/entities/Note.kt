@@ -61,11 +61,11 @@ class Note {
         }
     }
 
-    fun getReminderV2(): Reminder? {
+    fun getReminder(): Reminder? {
         return getMeta().reminderV2
     }
 
-    fun setReminderV2(reminder: Reminder) {
+    fun setReminder(reminder: Reminder) {
         val noteMeta = NoteMeta()
         noteMeta.reminderV2 = reminder
         meta = Gson().toJson(noteMeta)
