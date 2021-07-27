@@ -11,8 +11,6 @@ import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.core.format.FormatType
-import com.maubis.scarlet.base.core.note.getFormats
-import com.maubis.scarlet.base.core.note.getTagUUIDs
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.database.entities.NoteState
 import com.maubis.scarlet.base.database.entities.Tag
@@ -292,20 +290,4 @@ fun Note.share(context: Context) {
           .setText(getFullText())
           .setChooserText(context.getString(R.string.share_using))
           .share()
-}
-
-/**************************************************************************************
- ******************************* Database Functions ********************************
- **************************************************************************************/
-
-fun Note.save(context: Context) {
-  ScarletApp.data.noteActions(this).save(context)
-}
-
-fun Note.delete(context: Context) {
-  ScarletApp.data.noteActions(this).delete(context)
-}
-
-fun Note.softDelete(context: Context) {
-  ScarletApp.data.noteActions(this).softDelete(context)
 }

@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.core.content.ContextCompat
 import com.maubis.markdown.Markdown
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.core.note.getReminderV2
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.note.*
 import com.maubis.scarlet.base.settings.sNoteItemLineCount

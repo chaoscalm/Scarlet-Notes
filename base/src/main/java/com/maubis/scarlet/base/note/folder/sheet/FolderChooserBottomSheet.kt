@@ -3,7 +3,6 @@ package com.maubis.scarlet.base.note.folder.sheet
 import com.facebook.litho.ComponentContext
 import com.maubis.scarlet.base.database.entities.Folder
 import com.maubis.scarlet.base.database.entities.Note
-import com.maubis.scarlet.base.note.save
 
 class FolderChooserBottomSheet : FolderChooserBottomSheetBase() {
 

@@ -12,10 +12,8 @@ import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.core.format.FormatBuilder
 import com.maubis.scarlet.base.core.format.FormatType
 import com.maubis.scarlet.base.core.note.NoteBuilder
-import com.maubis.scarlet.base.core.note.getFormats
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.home.MainActivity
-import com.maubis.scarlet.base.note.save
 import com.maubis.scarlet.base.support.BitmapHelper
 import com.maubis.scarlet.base.support.utils.OsVersionUtils
 import java.io.File

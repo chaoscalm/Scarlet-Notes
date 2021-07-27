@@ -11,11 +11,8 @@ import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.core.note.Reminder
 import com.maubis.scarlet.base.core.note.ReminderInterval
-import com.maubis.scarlet.base.core.note.getReminderV2
-import com.maubis.scarlet.base.core.note.setReminderV2
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.home.sheets.GenericOptionsBottomSheet
-import com.maubis.scarlet.base.note.save
 import com.maubis.scarlet.base.support.sheets.LithoChooseOptionsItem
 import com.maubis.scarlet.base.support.ui.ThemeColorType
 import com.maubis.scarlet.base.support.ui.ThemedActivity

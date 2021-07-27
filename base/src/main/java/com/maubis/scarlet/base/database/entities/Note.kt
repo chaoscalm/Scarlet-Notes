@@ -1,11 +1,19 @@
 package com.maubis.scarlet.base.database.entities
 
+import android.content.Context
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
+import com.github.bijoysingh.starter.util.TextUtils
+import com.google.gson.Gson
+import com.maubis.scarlet.base.ScarletApp
+import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.core.format.FormatBuilder
+import com.maubis.scarlet.base.core.note.NoteMeta
+import com.maubis.scarlet.base.core.note.Reminder
 import com.maubis.scarlet.base.core.note.generateUUID
 import com.maubis.scarlet.base.settings.sNoteDefaultColor
+import com.maubis.scarlet.base.support.utils.logNonCriticalError
 
 @Entity(tableName = "note", indices = [Index("uid")])
 class Note {
@@ -23,6 +31,61 @@ class Note {
     var disableBackup: Boolean = false
     var tags: String = ""
     var folder: String = ""
+
+    fun isUnsaved(): Boolean {
+        return this.uid == 0
+    }
+
+    fun isEqual(note: Note): Boolean {
+        return TextUtils.areEqualNullIsEmpty(this.description, note.description)
+                && TextUtils.areEqualNullIsEmpty(this.uuid, note.uuid)
+                && TextUtils.areEqualNullIsEmpty(this.tags, note.tags)
+                && this.timestamp == note.timestamp
+                && this.color == note.color
+                && this.state == note.state
+                && this.locked == note.locked
+                && this.pinned == note.pinned
+                && this.folder == note.folder
+    }
+
+    fun getFormats(): List<Format> {
+        return FormatBuilder().getFormats(this.description)
+    }
+
+    private fun getMeta(): NoteMeta {
+        return try {
+            Gson().fromJson(this.meta, NoteMeta::class.java) ?: NoteMeta()
+        } catch (exception: Exception) {
+            logNonCriticalError(exception)
+            NoteMeta()
+        }
+    }
+
+    fun getReminderV2(): Reminder? {
+        return getMeta().reminderV2
+    }
+
+    fun setReminderV2(reminder: Reminder) {
+        val noteMeta = NoteMeta()
+        noteMeta.reminderV2 = reminder
+        meta = Gson().toJson(noteMeta)
+    }
+
+    fun getTagUUIDs(): MutableSet<String> {
+        return tags.split(",").filter { it.isNotBlank() }.toMutableSet()
+    }
+
+    fun save(context: Context) {
+        ScarletApp.data.noteActions(this).save(context)
+    }
+
+    fun delete(context: Context) {
+        ScarletApp.data.noteActions(this).delete(context)
+    }
+
+    fun softDelete(context: Context) {
+        ScarletApp.data.noteActions(this).softDelete(context)
+    }
 }
 
 enum class NoteState {

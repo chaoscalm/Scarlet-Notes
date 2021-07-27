@@ -17,13 +17,9 @@ import com.maubis.scarlet.base.core.format.FormatType
 import com.maubis.scarlet.base.core.format.MarkdownType
 import com.maubis.scarlet.base.core.note.NoteBuilder
 import com.maubis.scarlet.base.core.note.NoteImage.Companion.deleteIfExist
-import com.maubis.scarlet.base.core.note.getFormats
-import com.maubis.scarlet.base.core.note.isEqual
-import com.maubis.scarlet.base.core.note.isUnsaved
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.note.creation.specs.NoteCreationBottomBar
 import com.maubis.scarlet.base.note.creation.specs.NoteCreationTopBar
-import com.maubis.scarlet.base.note.delete
 import com.maubis.scarlet.base.note.formats.recycler.FormatImageViewHolder
 import com.maubis.scarlet.base.note.formats.recycler.FormatTextViewHolder
 import com.maubis.scarlet.base.settings.ColorPickerBottomSheet

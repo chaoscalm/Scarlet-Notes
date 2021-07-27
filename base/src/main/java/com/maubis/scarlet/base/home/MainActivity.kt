@@ -30,8 +30,6 @@ import com.maubis.scarlet.base.note.folder.sheet.CreateOrEditFolderBottomSheet
 import com.maubis.scarlet.base.note.mark
 import com.maubis.scarlet.base.note.recycler.NoteAppAdapter
 import com.maubis.scarlet.base.note.recycler.NoteRecyclerItem
-import com.maubis.scarlet.base.note.save
-import com.maubis.scarlet.base.note.softDelete
 import com.maubis.scarlet.base.note.tag.TagsAndColorPickerViewHolder
 import com.maubis.scarlet.base.settings.STORE_KEY_LINE_COUNT
 import com.maubis.scarlet.base.settings.SettingsOptionsBottomSheet

@@ -11,7 +11,6 @@ import com.maubis.scarlet.base.backup.data.*
 import com.maubis.scarlet.base.backup.sheet.NOTES_EXPORT_FILENAME
 import com.maubis.scarlet.base.backup.sheet.NOTES_EXPORT_FOLDER
 import com.maubis.scarlet.base.core.format.FormatType
-import com.maubis.scarlet.base.core.note.getFormats
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.support.utils.dateFormat
 import java.io.File

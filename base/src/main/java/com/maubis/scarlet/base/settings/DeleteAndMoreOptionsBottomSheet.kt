@@ -6,7 +6,6 @@ import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.home.MainActivity
 import com.maubis.scarlet.base.home.sheets.openDeleteAllXSheet
-import com.maubis.scarlet.base.note.delete
 import com.maubis.scarlet.base.support.sheets.LithoOptionBottomSheet
 import com.maubis.scarlet.base.support.sheets.LithoOptionsItem
 import kotlinx.coroutines.*

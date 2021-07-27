@@ -8,9 +8,6 @@ import com.evernote.android.job.util.support.PersistableBundleCompat
 import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.core.note.Reminder
 import com.maubis.scarlet.base.core.note.ReminderInterval
-import com.maubis.scarlet.base.core.note.getReminderV2
-import com.maubis.scarlet.base.core.note.setReminderV2
-import com.maubis.scarlet.base.note.save
 import com.maubis.scarlet.base.notification.NotificationConfig
 import com.maubis.scarlet.base.notification.NotificationHandler
 import com.maubis.scarlet.base.notification.REMINDER_NOTIFICATION_CHANNEL_ID

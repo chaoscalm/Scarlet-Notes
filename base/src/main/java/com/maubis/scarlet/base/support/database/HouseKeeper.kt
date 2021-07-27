@@ -4,11 +4,8 @@ import android.content.Context
 import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.core.note.NoteImage.Companion.deleteIfExist
 import com.maubis.scarlet.base.core.note.ReminderInterval
-import com.maubis.scarlet.base.core.note.getReminderV2
-import com.maubis.scarlet.base.core.note.setReminderV2
 import com.maubis.scarlet.base.note.reminders.ReminderJob.Companion.nextJobTimestamp
 import com.maubis.scarlet.base.note.reminders.ReminderJob.Companion.scheduleJob
-import com.maubis.scarlet.base.note.save
 import java.io.File
 import java.util.*
 import java.util.concurrent.TimeUnit
