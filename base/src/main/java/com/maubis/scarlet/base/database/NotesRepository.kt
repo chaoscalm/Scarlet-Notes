@@ -75,7 +75,7 @@ class NotesRepository(val database: NoteDao) {
     if (notes.isNotEmpty()) {
       return
     }
-    database.all.forEach {
+    database.getAll().forEach {
       it.applySanityChecks()
       notes[it.uuid] = it
     }

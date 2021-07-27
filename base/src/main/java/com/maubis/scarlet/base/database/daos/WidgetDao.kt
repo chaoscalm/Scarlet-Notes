@@ -1,27 +1,19 @@
-package com.maubis.scarlet.base.database.daos;
+package com.maubis.scarlet.base.database.daos
 
-import androidx.room.Dao;
-import androidx.room.Delete;
-import androidx.room.Insert;
-import androidx.room.OnConflictStrategy;
-import androidx.room.Query;
-
-import com.maubis.scarlet.base.database.entities.Widget;
-
-import java.util.List;
+import androidx.room.*
+import com.maubis.scarlet.base.database.entities.Widget
 
 @Dao
-public interface WidgetDao {
+interface WidgetDao {
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(widget: Widget): Long
 
-  @Insert(onConflict = OnConflictStrategy.REPLACE)
-  long insert(Widget widget);
+    @Delete
+    fun delete(tag: Widget)
 
-  @Delete
-  void delete(Widget tag);
+    @Query("SELECT * FROM widget WHERE widgetId = :uid LIMIT 1")
+    fun getByID(uid: Int): Widget
 
-  @Query("SELECT * FROM widget WHERE widgetId = :uid LIMIT 1")
-  Widget getByID(int uid);
-
-  @Query("SELECT * FROM widget WHERE noteUUID = :uuid")
-  List<Widget> getByNote(String uuid);
+    @Query("SELECT * FROM widget WHERE noteUUID = :uuid")
+    fun getByNote(uuid: String): List<Widget>
 }

@@ -59,7 +59,7 @@ class TagsRepository(private val database: TagDao) {
     if (tags.isNotEmpty()) {
       return
     }
-    database.all.forEach {
+    database.getAll().forEach {
       tags[it.uuid] = it
     }
   }

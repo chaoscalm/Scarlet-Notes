@@ -53,7 +53,7 @@ class FoldersRepository(private val database: FolderDao) {
     if (folders.isNotEmpty()) {
       return
     }
-    database.all.forEach {
+    database.getAll().forEach {
       folders[it.uuid] = it
     }
   }

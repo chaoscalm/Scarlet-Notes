@@ -1,24 +1,16 @@
-package com.maubis.scarlet.base.database.daos;
+package com.maubis.scarlet.base.database.daos
 
-import androidx.room.Dao;
-import androidx.room.Delete;
-import androidx.room.Insert;
-import androidx.room.OnConflictStrategy;
-import androidx.room.Query;
-
-import com.maubis.scarlet.base.database.entities.Note;
-
-import java.util.List;
+import androidx.room.*
+import com.maubis.scarlet.base.database.entities.Note
 
 @Dao
-public interface NoteDao {
+interface NoteDao {
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertNote(note: Note): Long
 
-  @Insert(onConflict = OnConflictStrategy.REPLACE)
-  long insertNote(Note note);
+    @Delete
+    fun delete(note: Note)
 
-  @Delete
-  void delete(Note note);
-
-  @Query("SELECT * FROM note ORDER BY pinned DESC, timestamp DESC")
-  List<Note> getAll();
+    @Query("SELECT * FROM note ORDER BY pinned DESC, timestamp DESC")
+    fun getAll(): List<Note>
 }

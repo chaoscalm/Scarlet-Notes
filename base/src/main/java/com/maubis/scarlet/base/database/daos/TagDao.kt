@@ -1,33 +1,25 @@
-package com.maubis.scarlet.base.database.daos;
+package com.maubis.scarlet.base.database.daos
 
-import androidx.room.Dao;
-import androidx.room.Delete;
-import androidx.room.Insert;
-import androidx.room.OnConflictStrategy;
-import androidx.room.Query;
-
-import com.maubis.scarlet.base.database.entities.Tag;
-
-import java.util.List;
+import androidx.room.*
+import com.maubis.scarlet.base.database.entities.Tag
 
 @Dao
-public interface TagDao {
+interface TagDao {
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertTag(tag: Tag): Long
 
-  @Insert(onConflict = OnConflictStrategy.REPLACE)
-  long insertTag(Tag tag);
+    @Delete
+    fun delete(tag: Tag)
 
-  @Delete
-  void delete(Tag tag);
+    @Query("SELECT count(*) FROM tag")
+    fun getCount(): Int
 
-  @Query("SELECT count(*) FROM tag")
-  int getCount();
+    @Query("SELECT * FROM tag ORDER BY uid")
+    fun getAll(): List<Tag>
 
-  @Query("SELECT * FROM tag ORDER BY uid")
-  List<Tag> getAll();
+    @Query("SELECT * FROM tag WHERE uid = :uid LIMIT 1")
+    fun getByID(uid: Int): Tag
 
-  @Query("SELECT * FROM tag WHERE uid = :uid LIMIT 1")
-  Tag getByID(int uid);
-
-  @Query("SELECT * FROM tag WHERE uuid = :uuid LIMIT 1")
-  Tag getByUUID(String uuid);
+    @Query("SELECT * FROM tag WHERE uuid = :uuid LIMIT 1")
+    fun getByUUID(uuid: String): Tag
 }

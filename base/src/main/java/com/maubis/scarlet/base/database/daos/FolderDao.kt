@@ -1,24 +1,16 @@
-package com.maubis.scarlet.base.database.daos;
+package com.maubis.scarlet.base.database.daos
 
-import androidx.room.Dao;
-import androidx.room.Delete;
-import androidx.room.Insert;
-import androidx.room.OnConflictStrategy;
-import androidx.room.Query;
-
-import com.maubis.scarlet.base.database.entities.Folder;
-
-import java.util.List;
+import androidx.room.*
+import com.maubis.scarlet.base.database.entities.Folder
 
 @Dao
-public interface FolderDao {
+interface FolderDao {
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertFolder(note: Folder): Long
 
-  @Insert(onConflict = OnConflictStrategy.REPLACE)
-  long insertFolder(Folder note);
+    @Delete
+    fun delete(note: Folder)
 
-  @Delete
-  void delete(Folder note);
-
-  @Query("SELECT * FROM folder ORDER BY timestamp DESC")
-  List<Folder> getAll();
+    @Query("SELECT * FROM folder ORDER BY timestamp DESC")
+    fun getAll(): List<Folder>
 }
