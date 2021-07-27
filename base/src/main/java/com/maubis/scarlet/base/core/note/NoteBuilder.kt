@@ -2,12 +2,10 @@ package com.maubis.scarlet.base.core.note
 
 import com.github.bijoysingh.starter.util.RandomHelper
 import com.github.bijoysingh.starter.util.TextUtils
-import com.google.gson.Gson
 import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.core.format.FormatBuilder
 import com.maubis.scarlet.base.core.format.FormatType
 import com.maubis.scarlet.base.database.entities.Note
-import com.maubis.scarlet.base.database.entities.NoteState
 import java.util.*
 
 fun generateUUID() = UUID.randomUUID().toString()
@@ -66,22 +64,6 @@ class NoteBuilder {
       }
     }
     return formats
-  }
-
-  fun copy(noteContainer: INoteContainer): Note {
-    val note = Note()
-    note.uuid = noteContainer.uuid()
-    note.description = noteContainer.description()
-    note.timestamp = noteContainer.timestamp()
-    note.updateTimestamp = Math.max(note.updateTimestamp, note.timestamp)
-    note.color = noteContainer.color()
-    note.state = runCatching { NoteState.valueOf(noteContainer.state()) }.getOrDefault(NoteState.DEFAULT)
-    note.locked = noteContainer.locked()
-    note.pinned = noteContainer.pinned()
-    note.tags = noteContainer.tags()
-    note.meta = Gson().toJson(noteContainer.meta())
-    note.folder = noteContainer.folder()
-    return note
   }
 
   fun copy(reference: Note): Note {

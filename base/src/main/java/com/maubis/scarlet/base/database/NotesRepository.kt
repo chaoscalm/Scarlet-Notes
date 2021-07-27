@@ -1,6 +1,5 @@
 package com.maubis.scarlet.base.database
 
-import com.maubis.scarlet.base.core.note.INoteContainer
 import com.maubis.scarlet.base.database.daos.NoteDao
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.database.entities.NoteState
@@ -63,11 +62,6 @@ class NotesRepository(val database: NoteDao) {
   fun getLastTimestamp(): Long {
     maybeLoadFromDB()
     return notes.values.map { it.updateTimestamp }.maxOrNull() ?: 0
-  }
-
-  fun existingMatch(noteContainer: INoteContainer): Note? {
-    maybeLoadFromDB()
-    return getByUUID(noteContainer.uuid())
   }
 
   @Synchronized

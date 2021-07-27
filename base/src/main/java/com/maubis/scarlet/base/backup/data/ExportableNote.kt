@@ -1,16 +1,17 @@
 package com.maubis.scarlet.base.backup.data
 
 import android.content.Context
+import com.google.gson.Gson
 import com.maubis.scarlet.base.ScarletApp.Companion.data
-import com.maubis.scarlet.base.core.note.INoteContainer
-import com.maubis.scarlet.base.core.note.NoteBuilder
 import com.maubis.scarlet.base.core.note.generateUUID
 import com.maubis.scarlet.base.database.entities.Note
+import com.maubis.scarlet.base.database.entities.NoteState
 import com.maubis.scarlet.base.database.entities.Tag
 import com.maubis.scarlet.base.note.save
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.Serializable
+import kotlin.math.max
 
 class ExportableNote(
   var uuid: String,
@@ -22,30 +23,7 @@ class ExportableNote(
   var tags: String,
   var meta: Map<String, Any>,
   var folder: String
-) : Serializable, INoteContainer {
-
-  override fun uuid(): String = uuid
-
-  override fun description(): String = description
-
-  override fun timestamp(): Long = timestamp
-
-  override fun updateTimestamp(): Long = updateTimestamp
-
-  override fun color(): Int = color
-
-  override fun state(): String = state
-
-  override fun tags(): String = tags
-
-  override fun meta(): Map<String, Any> = emptyMap()
-
-  override fun locked(): Boolean = false
-
-  override fun pinned(): Boolean = false
-
-  override fun folder(): String = folder
-
+) : Serializable {
   constructor(note: Note) : this(
     note.uuid,
     note.description,
@@ -59,13 +37,27 @@ class ExportableNote(
   )
 
   fun saveIfNeeded(context: Context) {
-    val existingNote = data.notes.existingMatch(this)
+    val existingNote = data.notes.getByUUID(uuid)
     if (existingNote !== null && existingNote.updateTimestamp > this.updateTimestamp) {
       return
     }
 
-    val note = NoteBuilder().copy(this)
+    val note = createNote()
     note.save(context)
+  }
+
+  private fun createNote(): Note {
+    val note = Note()
+    note.uuid = uuid
+    note.description = description
+    note.timestamp = timestamp
+    note.updateTimestamp = max(updateTimestamp, timestamp)
+    note.color = color
+    note.state = runCatching { NoteState.valueOf(state) }.getOrDefault(NoteState.DEFAULT)
+    note.tags = tags
+    note.meta = Gson().toJson(meta)
+    note.folder = folder
+    return note
   }
 
   companion object {
