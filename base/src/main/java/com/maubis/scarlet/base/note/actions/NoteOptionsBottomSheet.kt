@@ -10,13 +10,13 @@ import android.widget.LinearLayout
 import android.widget.LinearLayout.VERTICAL
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import com.github.bijoysingh.starter.util.RandomHelper
 import com.maubis.markdown.Markdown
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.core.note.NoteBuilder
 import com.maubis.scarlet.base.core.note.NoteState
+import com.maubis.scarlet.base.core.note.generateUUID
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.home.sheets.openDeleteNotePermanentlySheet
 import com.maubis.scarlet.base.note.*
@@ -423,7 +423,7 @@ class NoteOptionsBottomSheet : GridBottomSheetBase() {
               listener = View.OnClickListener {
                   val copiedNote = NoteBuilder().copy(note)
                   copiedNote.uid = 0
-                  copiedNote.uuid = RandomHelper.getRandomString(24)
+                  copiedNote.uuid = generateUUID()
                   copiedNote.save(activity)
                   activity.notifyResetOrDismiss()
                   dismiss()
