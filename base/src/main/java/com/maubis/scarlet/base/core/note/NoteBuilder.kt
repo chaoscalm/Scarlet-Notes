@@ -19,7 +19,7 @@ class NoteBuilder {
     val note = Note()
     note.uuid = generateUUID()
     note.state = NoteState.DEFAULT
-    note.timestamp = Calendar.getInstance().timeInMillis
+    note.timestamp = System.currentTimeMillis()
     note.updateTimestamp = note.timestamp
     note.color = -0xff8695
     note.folder = ""

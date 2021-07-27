@@ -14,7 +14,6 @@ import com.maubis.scarlet.base.note.save
 import com.maubis.scarlet.base.notification.NotificationConfig
 import com.maubis.scarlet.base.notification.NotificationHandler
 import com.maubis.scarlet.base.notification.REMINDER_NOTIFICATION_CHANNEL_ID
-import java.util.*
 import java.util.concurrent.TimeUnit
 
 class ReminderJob : Job() {
@@ -58,7 +57,7 @@ class ReminderJob : Job() {
       val extras = PersistableBundleCompat()
       extras.putString(EXTRA_KEY_NOTE_UUID, noteUuid)
 
-      var deltaTime = reminder.timestamp - Calendar.getInstance().timeInMillis
+      var deltaTime = reminder.timestamp - System.currentTimeMillis()
       if (reminder.interval == ReminderInterval.DAILY && deltaTime > TimeUnit.DAYS.toMillis(1)) {
         deltaTime = deltaTime % TimeUnit.DAYS.toMillis(1)
       }

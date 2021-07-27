@@ -2,7 +2,6 @@ package com.maubis.scarlet.base.backup.data
 
 import com.maubis.scarlet.base.database.entities.Folder
 import java.io.Serializable
-import java.util.*
 
 class ExportableFolder(
   val uuid: String,
@@ -23,7 +22,7 @@ class ExportableFolder(
   constructor() : this(
           "invalid",
           "",
-          Calendar.getInstance().timeInMillis,
-          Calendar.getInstance().timeInMillis,
+          System.currentTimeMillis(),
+          System.currentTimeMillis(),
           -0xff8695)
 }

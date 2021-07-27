@@ -286,7 +286,7 @@ open class ViewAdvancedNoteActivity : SecuredActivity(), INoteOptionSheetActivit
     if (note!!.getFormats().isEmpty() && note!!.isUnsaved()) {
       return
     }
-    note!!.updateTimestamp = Calendar.getInstance().timeInMillis
+    note!!.updateTimestamp = System.currentTimeMillis()
     note!!.save(this)
   }
 

@@ -193,7 +193,7 @@ open class CreateNoteActivity : ViewAdvancedNoteActivity() {
       !historyModified -> addNoteToHistory(NoteBuilder().copy(currentNote))
       else -> historyModified = false
     }
-    currentNote.updateTimestamp = Calendar.getInstance().timeInMillis
+    currentNote.updateTimestamp = System.currentTimeMillis()
     saveNoteIfNeeded()
   }
 

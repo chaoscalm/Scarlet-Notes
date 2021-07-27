@@ -187,7 +187,7 @@ fun Note.getDisplayTime(): String {
   }
 
   val format = when {
-    Calendar.getInstance().timeInMillis - time < 1000 * 60 * 60 * 2 -> "hh:mm aa"
+    System.currentTimeMillis() - time < 1000 * 60 * 60 * 2 -> "hh:mm aa"
     else -> "dd MMMM"
   }
   return dateFormat.readableTime(format, time)
@@ -249,7 +249,7 @@ fun Note.adjustedColor(): Int {
 
 fun Note.mark(context: Context, noteState: NoteState) {
   this.state = noteState
-  this.updateTimestamp = Calendar.getInstance().timeInMillis
+  this.updateTimestamp = System.currentTimeMillis()
   save(context)
 }
 

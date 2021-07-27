@@ -28,7 +28,7 @@ class ReminderBottomSheet : ThemedBottomSheetFragment() {
   var selectedNote: Note? = null
   var reminder: Reminder = Reminder(
     0,
-    Calendar.getInstance().timeInMillis,
+    System.currentTimeMillis(),
     ReminderInterval.ONCE)
 
   override fun getBackgroundView(): Int {

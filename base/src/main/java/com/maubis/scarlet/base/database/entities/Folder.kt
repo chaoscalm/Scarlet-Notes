@@ -6,7 +6,6 @@ import androidx.room.PrimaryKey
 import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.core.note.generateUUID
 import com.maubis.scarlet.base.support.utils.dateFormat
-import java.util.*
 
 @Entity(tableName = "folder", indices = [Index("uid")])
 class Folder() {
@@ -50,7 +49,7 @@ class Folder() {
         }
 
         val format = when {
-            Calendar.getInstance().timeInMillis - time < 1000 * 60 * 60 * 2 -> "hh:mm aa"
+            System.currentTimeMillis() - time < 1000 * 60 * 60 * 2 -> "hh:mm aa"
             else -> "dd MMMM"
         }
         return dateFormat.readableTime(format, time)
