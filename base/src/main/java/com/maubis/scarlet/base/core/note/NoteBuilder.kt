@@ -88,7 +88,7 @@ class NoteBuilder {
     note.timestamp = noteContainer.timestamp()
     note.updateTimestamp = Math.max(note.updateTimestamp, note.timestamp)
     note.color = noteContainer.color()
-    note.state = NoteState.valueOf(noteContainer.state())
+    note.state = runCatching { NoteState.valueOf(noteContainer.state()) }.getOrDefault(NoteState.DEFAULT)
     note.locked = noteContainer.locked()
     note.pinned = noteContainer.pinned()
     note.tags = noteContainer.tags()
