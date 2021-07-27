@@ -6,12 +6,12 @@ import java.util.concurrent.ConcurrentHashMap
 
 class FoldersRepository(private val database: FolderDao) {
 
-  private val folders = ConcurrentHashMap<String, Folder>()
+  private val folders: ConcurrentHashMap<String, Folder> by lazy { loadFoldersFromDB() }
 
   fun save(folder: Folder) {
     val id = database.insertFolder(folder)
     folder.uid = if (folder.isUnsaved()) id.toInt() else folder.uid
-    notifyInsertFolder(folder)
+    folders[folder.uuid] = folder
   }
 
   fun delete(folder: Folder) {
@@ -19,42 +19,25 @@ class FoldersRepository(private val database: FolderDao) {
       return
     }
     database.delete(folder)
-    notifyDelete(folder)
+    folders.remove(folder.uuid)
     folder.uid = 0
   }
 
-  private fun notifyInsertFolder(folder: Folder) {
-    maybeLoadFromDB()
-    folders[folder.uuid] = folder
-  }
-
-  private fun notifyDelete(folder: Folder) {
-    maybeLoadFromDB()
-    folders.remove(folder.uuid)
-  }
-
   fun getAll(): List<Folder> {
-    maybeLoadFromDB()
     return folders.values.toList()
   }
 
   fun getByUUID(uuid: String): Folder? {
-    maybeLoadFromDB()
     return folders[uuid]
   }
 
   fun getByTitle(title: String): Folder? {
-    maybeLoadFromDB()
     return folders.values.firstOrNull { it.title == title }
   }
 
-  @Synchronized
-  private fun maybeLoadFromDB() {
-    if (folders.isNotEmpty()) {
-      return
-    }
-    database.getAll().forEach {
-      folders[it.uuid] = it
-    }
+  private fun loadFoldersFromDB(): ConcurrentHashMap<String, Folder> {
+    val foldersMap = ConcurrentHashMap<String, Folder>()
+    database.getAll().forEach { foldersMap[it.uuid] = it }
+    return foldersMap
   }
 }

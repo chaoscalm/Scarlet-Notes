@@ -6,12 +6,12 @@ import java.util.concurrent.ConcurrentHashMap
 
 class TagsRepository(private val database: TagDao) {
 
-  private val tags = ConcurrentHashMap<String, Tag>()
+  private val tags: ConcurrentHashMap<String, Tag> by lazy { loadTagsFromDB() }
 
   fun save(tag: Tag) {
     val id = database.insertTag(tag)
     tag.uid = if (tag.isUnsaved()) id.toInt() else tag.uid
-    notifyInsertTag(tag)
+    tags[tag.uuid] = tag
   }
 
   fun delete(tag: Tag) {
@@ -19,48 +19,30 @@ class TagsRepository(private val database: TagDao) {
       return
     }
     database.delete(tag)
-    notifyDelete(tag)
+    tags.remove(tag.uuid)
     tag.uid = 0
   }
 
-  private fun notifyInsertTag(tag: Tag) {
-    maybeLoadFromDB()
-    tags[tag.uuid] = tag
-  }
-
-  private fun notifyDelete(tag: Tag) {
-    maybeLoadFromDB()
-    tags.remove(tag.uuid)
-  }
-
   fun getAll(): List<Tag> {
-    maybeLoadFromDB()
     return tags.values.toList()
   }
 
   fun getByUUID(uuid: String): Tag? {
-    maybeLoadFromDB()
     return tags[uuid]
   }
 
   fun getByTitle(title: String): Tag? {
-    maybeLoadFromDB()
     return tags.values.firstOrNull { it.title == title }
   }
 
   fun search(string: String): List<Tag> {
-    maybeLoadFromDB()
     return tags.values
-      .filter { string.isBlank() || it.title.contains(string, true) }
+            .filter { string.isBlank() || it.title.contains(string, true) }
   }
 
-  @Synchronized
-  private fun maybeLoadFromDB() {
-    if (tags.isNotEmpty()) {
-      return
-    }
-    database.getAll().forEach {
-      tags[it.uuid] = it
-    }
+  private fun loadTagsFromDB(): ConcurrentHashMap<String, Tag> {
+    val tagsMap = ConcurrentHashMap<String, Tag>()
+    database.getAll().forEach { tagsMap[it.uuid] = it }
+    return tagsMap
   }
 }
