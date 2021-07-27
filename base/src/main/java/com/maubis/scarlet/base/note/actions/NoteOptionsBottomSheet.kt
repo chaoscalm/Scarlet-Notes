@@ -15,9 +15,9 @@ import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.core.note.NoteBuilder
-import com.maubis.scarlet.base.core.note.NoteState
 import com.maubis.scarlet.base.core.note.generateUUID
 import com.maubis.scarlet.base.database.entities.Note
+import com.maubis.scarlet.base.database.entities.NoteState
 import com.maubis.scarlet.base.home.sheets.openDeleteNotePermanentlySheet
 import com.maubis.scarlet.base.note.*
 import com.maubis.scarlet.base.note.creation.activity.NoteIntentRouterActivity

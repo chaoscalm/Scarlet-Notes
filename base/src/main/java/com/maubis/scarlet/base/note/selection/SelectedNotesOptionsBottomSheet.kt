@@ -8,8 +8,8 @@ import com.github.bijoysingh.starter.util.TextUtils
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.core.format.FormatBuilder
 import com.maubis.scarlet.base.core.format.sectionPreservingSort
-import com.maubis.scarlet.base.core.note.NoteState
 import com.maubis.scarlet.base.core.note.getFormats
+import com.maubis.scarlet.base.database.entities.NoteState
 import com.maubis.scarlet.base.home.sheets.AlertBottomSheet
 import com.maubis.scarlet.base.home.sheets.AlertSheetConfig
 import com.maubis.scarlet.base.note.*

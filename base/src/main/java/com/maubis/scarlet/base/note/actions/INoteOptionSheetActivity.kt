@@ -1,7 +1,7 @@
 package com.maubis.scarlet.base.note.actions
 
-import com.maubis.scarlet.base.core.note.NoteState
 import com.maubis.scarlet.base.database.entities.Note
+import com.maubis.scarlet.base.database.entities.NoteState
 
 interface INoteOptionSheetActivity {
   fun updateNote(note: Note)

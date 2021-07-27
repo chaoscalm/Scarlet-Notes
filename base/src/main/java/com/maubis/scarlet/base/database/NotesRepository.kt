@@ -1,9 +1,9 @@
 package com.maubis.scarlet.base.database
 
 import com.maubis.scarlet.base.core.note.INoteContainer
-import com.maubis.scarlet.base.core.note.NoteState
 import com.maubis.scarlet.base.database.daos.NoteDao
 import com.maubis.scarlet.base.database.entities.Note
+import com.maubis.scarlet.base.database.entities.NoteState
 import java.util.concurrent.ConcurrentHashMap
 
 class NotesRepository(val database: NoteDao) {

@@ -10,8 +10,8 @@ import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.core.format.Format
-import com.maubis.scarlet.base.core.note.NoteState
 import com.maubis.scarlet.base.database.entities.Note
+import com.maubis.scarlet.base.database.entities.NoteState
 import com.maubis.scarlet.base.home.MainActivity
 import com.maubis.scarlet.base.note.creation.activity.ViewAdvancedNoteActivity
 import com.maubis.scarlet.base.note.delete

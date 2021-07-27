@@ -4,7 +4,6 @@ import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.maubis.scarlet.base.core.format.FormatBuilder
-import com.maubis.scarlet.base.core.note.NoteState
 import com.maubis.scarlet.base.core.note.generateUUID
 import com.maubis.scarlet.base.settings.sNoteDefaultColor
 
@@ -24,4 +23,11 @@ class Note {
     var disableBackup: Boolean = false
     var tags: String = ""
     var folder: String = ""
+}
+
+enum class NoteState {
+    DEFAULT,
+    TRASH,
+    FAVOURITE,
+    ARCHIVED,
 }

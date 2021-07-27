@@ -2,10 +2,10 @@ package com.maubis.scarlet.base.home
 
 import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.ScarletApp.Companion.data
-import com.maubis.scarlet.base.core.note.NoteState
 import com.maubis.scarlet.base.core.note.sort
 import com.maubis.scarlet.base.database.entities.Folder
 import com.maubis.scarlet.base.database.entities.Note
+import com.maubis.scarlet.base.database.entities.NoteState
 import com.maubis.scarlet.base.database.entities.Tag
 import com.maubis.scarlet.base.note.getFullText
 import com.maubis.scarlet.base.note.isNoteLockedButAppUnlocked

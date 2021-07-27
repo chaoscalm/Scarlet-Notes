@@ -17,9 +17,9 @@ import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.backup.support.NoteExporter
 import com.maubis.scarlet.base.backup.support.PermissionUtils
-import com.maubis.scarlet.base.core.note.NoteState
 import com.maubis.scarlet.base.database.entities.Folder
 import com.maubis.scarlet.base.database.entities.Note
+import com.maubis.scarlet.base.database.entities.NoteState
 import com.maubis.scarlet.base.database.entities.Tag
 import com.maubis.scarlet.base.databinding.ActivityMainBinding
 import com.maubis.scarlet.base.home.*

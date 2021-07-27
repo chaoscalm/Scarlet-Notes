@@ -8,8 +8,8 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.core.note.NoteBuilder
-import com.maubis.scarlet.base.core.note.NoteState
 import com.maubis.scarlet.base.database.entities.Note
+import com.maubis.scarlet.base.database.entities.NoteState
 import com.maubis.scarlet.base.note.save
 
 class NoteDeletionSnackbar(val layout: LinearLayout, val alwaysRunnable: () -> Unit) {

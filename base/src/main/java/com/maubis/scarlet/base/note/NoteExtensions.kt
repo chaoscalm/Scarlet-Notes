@@ -11,10 +11,10 @@ import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.core.format.FormatType
-import com.maubis.scarlet.base.core.note.NoteState
 import com.maubis.scarlet.base.core.note.getFormats
 import com.maubis.scarlet.base.core.note.getTagUUIDs
 import com.maubis.scarlet.base.database.entities.Note
+import com.maubis.scarlet.base.database.entities.NoteState
 import com.maubis.scarlet.base.database.entities.Tag
 import com.maubis.scarlet.base.note.creation.activity.NoteIntentRouterActivity
 import com.maubis.scarlet.base.security.PinLockController.needsLockCheck
