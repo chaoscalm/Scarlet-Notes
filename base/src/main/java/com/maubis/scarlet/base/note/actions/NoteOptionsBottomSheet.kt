@@ -423,7 +423,7 @@ class NoteOptionsBottomSheet : GridBottomSheetBase() {
               invalid = activity.lockedContentIsHidden() && note.locked,
               listener = View.OnClickListener {
                   val copiedNote = NoteBuilder().copy(note)
-                  copiedNote.uid = null
+                  copiedNote.uid = 0
                   copiedNote.uuid = RandomHelper.getRandomString(24)
                   copiedNote.save(activity)
                   activity.notifyResetOrDismiss()

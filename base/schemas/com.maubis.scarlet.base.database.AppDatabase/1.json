@@ -2,17 +2,17 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "ed938370fe5cdc9fb7808a3464a9f796",
+    "identityHash": "24065dfd8d0a3e435a221fb3950d052f",
     "entities": [
       {
         "tableName": "note",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`uid` INTEGER PRIMARY KEY AUTOINCREMENT, `description` TEXT, `timestamp` INTEGER, `color` INTEGER, `state` TEXT, `locked` INTEGER NOT NULL, `tags` TEXT, `updateTimestamp` INTEGER NOT NULL, `pinned` INTEGER NOT NULL, `uuid` TEXT, `meta` TEXT, `disableBackup` INTEGER NOT NULL, `folder` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`uid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `description` TEXT, `timestamp` INTEGER, `color` INTEGER, `state` TEXT, `locked` INTEGER NOT NULL, `tags` TEXT, `updateTimestamp` INTEGER NOT NULL, `pinned` INTEGER NOT NULL, `uuid` TEXT, `meta` TEXT, `disableBackup` INTEGER NOT NULL, `folder` TEXT)",
         "fields": [
           {
             "fieldPath": "uid",
             "columnName": "uid",
             "affinity": "INTEGER",
-            "notNull": false
+            "notNull": true
           },
           {
             "fieldPath": "description",
@@ -244,7 +244,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'ed938370fe5cdc9fb7808a3464a9f796')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '24065dfd8d0a3e435a221fb3950d052f')"
     ]
   }
 }

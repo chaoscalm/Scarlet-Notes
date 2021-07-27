@@ -18,8 +18,7 @@ class HouseKeeper(val context: Context) {
   private val houseKeeperTasks: Array<() -> Unit> = arrayOf(
     { removeDecoupledFolders() },
     { removeOldReminders() },
-    { deleteRedundantImageFiles() },
-    { migrateZeroUidNotes() }
+    { deleteRedundantImageFiles() }
   )
 
   fun execute() {
@@ -88,16 +87,6 @@ class HouseKeeper(val context: Context) {
       for (file in noteFolder.listFiles()) {
         deleteIfExist(file)
       }
-    }
-  }
-
-  private fun migrateZeroUidNotes() {
-    val note = data.notes.getByID(0)
-    if (note != null) {
-      data.notes.database.delete(note)
-      data.notes.notifyDelete(note)
-      note.uid = null
-      note.save(context)
     }
   }
 }

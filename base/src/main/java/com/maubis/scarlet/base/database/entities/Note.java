@@ -11,7 +11,7 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "note", indices = {@Index("uid")})
 public class Note {
   @PrimaryKey(autoGenerate = true)
-  public Integer uid;
+  public int uid;
 
   public String description = "";
 
