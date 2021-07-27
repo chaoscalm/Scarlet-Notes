@@ -13,7 +13,7 @@ class Folder() {
     var uid = 0
     var title: String = ""
     var timestamp: Long = System.currentTimeMillis()
-    var updateTimestamp: Long = System.currentTimeMillis()
+    var updateTimestamp: Long = timestamp
     var color: Int = 0
     var uuid: String = generateUUID()
 
