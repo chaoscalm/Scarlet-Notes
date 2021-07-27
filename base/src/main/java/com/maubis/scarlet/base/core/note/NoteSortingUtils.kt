@@ -3,7 +3,7 @@ package com.maubis.scarlet.base.core.note
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.note.getFullText
 
-enum class SortingTechnique() {
+enum class SortingTechnique {
   LAST_MODIFIED,
   NEWEST_FIRST,
   OLDEST_FIRST,
@@ -43,7 +43,7 @@ fun sort(notes: List<Note>, sortingTechnique: SortingTechnique): List<Note> {
 
       val sortValue = when {
         (note.pinned || content.isBlank()) -> 0
-        else -> content[0].toUpperCase().toInt()
+        else -> content[0].uppercaseChar().code
       }
       ComparablePair(sortValue, note.updateTimestamp)
     }
@@ -58,15 +58,15 @@ fun sort(notes: List<Note>, sortingTechnique: SortingTechnique): List<Note> {
         }
       }
       notes.sortedByDescending {
-        val noteTagScore = it.getTagUUIDs().sumBy { tag ->
+        val noteTagScore = it.getTagUUIDs().sumOf { tag ->
           tagCounterMap[tag] ?: 0
         }
-        ComparablePair(ComparablePair(noteTagScore, it.tags ?: ""), it.updateTimestamp)
+        ComparablePair(ComparablePair(noteTagScore, it.tags), it.updateTimestamp)
       }
     }
     SortingTechnique.NEWEST_FIRST -> notes.sortedByDescending { note ->
       if (note.pinned) Long.MAX_VALUE
-      else note.timestamp ?: note.updateTimestamp
+      else note.timestamp
     }
   }
 }

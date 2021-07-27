@@ -12,7 +12,6 @@ import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.core.format.FormatType
 import com.maubis.scarlet.base.core.note.NoteState
-import com.maubis.scarlet.base.core.note.generateUUID
 import com.maubis.scarlet.base.core.note.getFormats
 import com.maubis.scarlet.base.core.note.getTagUUIDs
 import com.maubis.scarlet.base.database.entities.Note
@@ -182,8 +181,7 @@ fun Note.getTextForWidget(): CharSequence {
 fun Note.getDisplayTime(): String {
   val time = when {
     (this.updateTimestamp != 0L) -> this.updateTimestamp
-    (this.timestamp != null) -> this.timestamp
-    else -> 0
+    else -> this.timestamp
   }
 
   val format = when {
@@ -238,8 +236,8 @@ fun Note.removeTag(tag: Tag) {
 
 fun Note.adjustedColor(): Int {
   return when (sThemeDarkenNoteColor) {
-    true -> ColorUtil.darkOrDarkerColor(color ?: sNoteDefaultColor)
-    false -> color ?: sNoteDefaultColor
+    true -> ColorUtil.darkOrDarkerColor(color)
+    false -> color
   }
 }
 
@@ -300,18 +298,7 @@ fun Note.share(context: Context) {
  ******************************* Database Functions ********************************
  **************************************************************************************/
 
-fun Note.applySanityChecks() {
-  folder = folder ?: ""
-  description = description ?: ""
-  timestamp = timestamp ?: System.currentTimeMillis()
-  color = color ?: sNoteDefaultColor
-  state = state ?: NoteState.DEFAULT
-  tags = tags ?: ""
-  uuid = uuid ?: generateUUID()
-}
-
 fun Note.save(context: Context) {
-  applySanityChecks()
   ScarletApp.data.noteActions(this).save(context)
 }
 

@@ -12,26 +12,12 @@ import java.util.*
 fun generateUUID() = UUID.randomUUID().toString()
 
 class NoteBuilder {
-  /**
-   * Generate blank note with default configuration
-   */
-  fun emptyNote(): Note {
-    val note = Note()
-    note.uuid = generateUUID()
-    note.state = NoteState.DEFAULT
-    note.timestamp = System.currentTimeMillis()
-    note.updateTimestamp = note.timestamp
-    note.color = -0xff8695
-    note.folder = ""
-    note.description = FormatBuilder().getDescription(emptyList())
-    return note
-  }
 
   /**
    * Generate blank note with color
    */
   fun emptyNote(color: Int): Note {
-    val note = emptyNote()
+    val note = Note()
     note.color = color
     return note
   }
@@ -40,7 +26,7 @@ class NoteBuilder {
    * Generate blank note from basic title and description
    */
   fun gen(title: String, description: String): Note {
-    val note = emptyNote()
+    val note = Note()
     val formats = ArrayList<Format>()
     if (!TextUtils.isNullOrEmpty(title)) {
       formats.add(Format(FormatType.HEADING, title))
@@ -54,7 +40,7 @@ class NoteBuilder {
    * Generate blank note from basic title and description
    */
   fun gen(title: String, formatSource: List<Format>): Note {
-    val note = emptyNote()
+    val note = Note()
     val formats = ArrayList<Format>()
     if (!TextUtils.isNullOrEmpty(title)) {
       formats.add(Format(FormatType.HEADING, title))
@@ -82,7 +68,7 @@ class NoteBuilder {
   }
 
   fun copy(noteContainer: INoteContainer): Note {
-    val note = emptyNote()
+    val note = Note()
     note.uuid = noteContainer.uuid()
     note.description = noteContainer.description()
     note.timestamp = noteContainer.timestamp()
@@ -98,7 +84,7 @@ class NoteBuilder {
   }
 
   fun copy(reference: Note): Note {
-    val note = emptyNote()
+    val note = Note()
     note.uid = reference.uid
     note.uuid = reference.uuid
     note.state = reference.state

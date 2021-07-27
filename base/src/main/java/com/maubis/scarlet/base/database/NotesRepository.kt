@@ -4,7 +4,6 @@ import com.maubis.scarlet.base.core.note.INoteContainer
 import com.maubis.scarlet.base.core.note.NoteState
 import com.maubis.scarlet.base.database.daos.NoteDao
 import com.maubis.scarlet.base.database.entities.Note
-import com.maubis.scarlet.base.note.applySanityChecks
 import java.util.concurrent.ConcurrentHashMap
 
 class NotesRepository(val database: NoteDao) {
@@ -38,7 +37,7 @@ class NotesRepository(val database: NoteDao) {
 
   fun getNoteCountByTag(uuid: String): Int {
     maybeLoadFromDB()
-    return notes.values.count { it.tags?.contains(uuid) ?: false }
+    return notes.values.count { it.tags.contains(uuid) }
   }
 
   fun getNoteCountByFolder(uuid: String): Int {
@@ -77,7 +76,6 @@ class NotesRepository(val database: NoteDao) {
       return
     }
     database.getAll().forEach {
-      it.applySanityChecks()
       notes[it.uuid] = it
     }
   }
