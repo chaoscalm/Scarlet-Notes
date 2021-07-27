@@ -18,7 +18,7 @@ class NoteBuilder {
   fun emptyNote(): Note {
     val note = Note()
     note.uuid = generateUUID()
-    note.state = NoteState.DEFAULT.name
+    note.state = NoteState.DEFAULT
     note.timestamp = Calendar.getInstance().timeInMillis
     note.updateTimestamp = note.timestamp
     note.color = -0xff8695
@@ -88,7 +88,7 @@ class NoteBuilder {
     note.timestamp = noteContainer.timestamp()
     note.updateTimestamp = Math.max(note.updateTimestamp, note.timestamp)
     note.color = noteContainer.color()
-    note.state = noteContainer.state()
+    note.state = NoteState.valueOf(noteContainer.state())
     note.locked = noteContainer.locked()
     note.pinned = noteContainer.pinned()
     note.tags = noteContainer.tags()

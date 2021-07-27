@@ -4,6 +4,8 @@ import androidx.room.Entity;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
+import com.maubis.scarlet.base.core.note.NoteState;
+
 /**
  * Underlying Database, difficult to migrate to Kotlin without breaking the Database.
  * Hence all the functions should be in NoteKExtensions
@@ -19,7 +21,7 @@ public class Note {
 
   public Integer color;
 
-  public String state;
+  public NoteState state;
 
   public boolean locked;
 

@@ -113,7 +113,7 @@ fun openDeleteTrashSheet(activity: MainActivity) {
       positiveText = R.string.delete_sheet_delete_trash_yes,
       negativeText = R.string.delete_sheet_delete_trash_no,
       onPositiveClick = {
-        val notes = data.notes.getByNoteState(arrayOf(NoteState.TRASH.name))
+        val notes = data.notes.getByNoteState(arrayOf(NoteState.TRASH))
         for (note in notes) {
           note.delete(activity)
         }

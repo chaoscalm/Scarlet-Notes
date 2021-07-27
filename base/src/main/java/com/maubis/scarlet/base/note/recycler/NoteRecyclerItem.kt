@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.core.content.ContextCompat
 import com.maubis.markdown.Markdown
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.core.note.getNoteState
 import com.maubis.scarlet.base.core.note.getReminderV2
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.note.*
@@ -24,7 +23,7 @@ class NoteRecyclerItem(context: Context, val note: Note) : RecyclerItem() {
     false -> ContextCompat.getColor(context, R.color.light_primary_text)
   }
 
-  val state = note.getNoteState()
+  val state = note.state
   val indicatorColor = when (isLightShaded) {
     true -> ContextCompat.getColor(context, R.color.dark_tertiary_text)
     false -> ContextCompat.getColor(context, R.color.light_tertiary_text)

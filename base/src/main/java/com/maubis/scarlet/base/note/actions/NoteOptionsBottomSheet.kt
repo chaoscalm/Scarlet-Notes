@@ -17,7 +17,6 @@ import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.core.note.NoteBuilder
 import com.maubis.scarlet.base.core.note.NoteState
-import com.maubis.scarlet.base.core.note.getNoteState
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.home.sheets.openDeleteNotePermanentlySheet
 import com.maubis.scarlet.base.note.*
@@ -147,7 +146,7 @@ class NoteOptionsBottomSheet : GridBottomSheetBase() {
               title = R.string.restore_note,
               subtitle = R.string.tap_for_action_not_trash,
               icon = R.drawable.ic_restore,
-              visible = note.getNoteState() == NoteState.TRASH,
+              visible = note.state == NoteState.TRASH,
               listener = View.OnClickListener {
                   activity.markItem(note, NoteState.DEFAULT)
                   dismiss()
@@ -167,7 +166,7 @@ class NoteOptionsBottomSheet : GridBottomSheetBase() {
               title = R.string.not_favourite_note,
               subtitle = R.string.tap_for_action_not_favourite,
               icon = R.drawable.ic_favorite_white_48dp,
-              visible = note.getNoteState() == NoteState.FAVOURITE,
+              visible = note.state == NoteState.FAVOURITE,
               listener = View.OnClickListener {
                   activity.markItem(note, NoteState.DEFAULT)
                   dismiss()
@@ -178,7 +177,7 @@ class NoteOptionsBottomSheet : GridBottomSheetBase() {
               title = R.string.favourite_note,
               subtitle = R.string.tap_for_action_favourite,
               icon = R.drawable.ic_favorite_border_white_48dp,
-              visible = note.getNoteState() != NoteState.FAVOURITE,
+              visible = note.state != NoteState.FAVOURITE,
               listener = View.OnClickListener {
                   activity.markItem(note, NoteState.FAVOURITE)
                   dismiss()
@@ -189,7 +188,7 @@ class NoteOptionsBottomSheet : GridBottomSheetBase() {
               title = R.string.unarchive_note,
               subtitle = R.string.tap_for_action_not_archive,
               icon = R.drawable.ic_archive_white_48dp,
-              visible = note.getNoteState() == NoteState.ARCHIVED,
+              visible = note.state == NoteState.ARCHIVED,
               listener = View.OnClickListener {
                   activity.markItem(note, NoteState.DEFAULT)
                   dismiss()
@@ -200,7 +199,7 @@ class NoteOptionsBottomSheet : GridBottomSheetBase() {
               title = R.string.archive_note,
               subtitle = R.string.tap_for_action_archive,
               icon = R.drawable.ic_archive_white_48dp,
-              visible = note.getNoteState() != NoteState.ARCHIVED,
+              visible = note.state != NoteState.ARCHIVED,
               listener = View.OnClickListener {
                   activity.markItem(note, NoteState.ARCHIVED)
                   dismiss()
@@ -233,7 +232,7 @@ class NoteOptionsBottomSheet : GridBottomSheetBase() {
               title = R.string.delete_note_permanently,
               subtitle = R.string.tap_for_action_delete,
               icon = R.drawable.ic_delete_permanently,
-              visible = note.getNoteState() == NoteState.TRASH,
+              visible = note.state == NoteState.TRASH,
               invalid = activity.lockedContentIsHidden() && note.locked,
               listener = View.OnClickListener {
                   activity.moveItemToTrashOrDelete(note)
@@ -245,7 +244,7 @@ class NoteOptionsBottomSheet : GridBottomSheetBase() {
               title = R.string.trash_note,
               subtitle = R.string.tap_for_action_trash,
               icon = R.drawable.ic_delete_white_48dp,
-              visible = note.getNoteState() != NoteState.TRASH,
+              visible = note.state != NoteState.TRASH,
               invalid = activity.lockedContentIsHidden() && note.locked,
               listener = View.OnClickListener {
                   activity.moveItemToTrashOrDelete(note)
@@ -373,7 +372,7 @@ class NoteOptionsBottomSheet : GridBottomSheetBase() {
               title = R.string.delete_note_permanently,
               subtitle = R.string.delete_note_permanently,
               icon = R.drawable.ic_delete_permanently,
-              visible = note.getNoteState() !== NoteState.TRASH,
+              visible = note.state !== NoteState.TRASH,
               invalid = activity.lockedContentIsHidden() && note.locked,
               listener = View.OnClickListener {
                   openDeleteNotePermanentlySheet(activity, note, { activity.notifyResetOrDismiss() })

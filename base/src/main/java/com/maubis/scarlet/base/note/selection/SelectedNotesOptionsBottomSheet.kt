@@ -36,7 +36,7 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
     val activity = componentContext.androidContext as SelectNotesActivity
     val options = ArrayList<GridSectionOptionItem>()
 
-    val allItemsInTrash = !activity.getAllSelectedNotes().any { it.state !== NoteState.TRASH.name }
+    val allItemsInTrash = !activity.getAllSelectedNotes().any { it.state != NoteState.TRASH }
     options.add(
       GridSectionOptionItem(
         label = R.string.restore_note,
@@ -50,7 +50,7 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
         visible = allItemsInTrash
       ))
 
-    val allItemsInFavourite = !activity.getAllSelectedNotes().any { it.state !== NoteState.FAVOURITE.name }
+    val allItemsInFavourite = !activity.getAllSelectedNotes().any { it.state != NoteState.FAVOURITE }
     options.add(
       GridSectionOptionItem(
         label = R.string.not_favourite_note,
@@ -76,7 +76,7 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
         visible = !allItemsInFavourite
       ))
 
-    val allItemsInArchived = !activity.getAllSelectedNotes().any { it.state !== NoteState.ARCHIVED.name }
+    val allItemsInArchived = !activity.getAllSelectedNotes().any { it.state != NoteState.ARCHIVED }
     options.add(
       GridSectionOptionItem(
         label = R.string.unarchive_note,

@@ -9,7 +9,6 @@ import android.widget.TextView
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.core.note.NoteBuilder
 import com.maubis.scarlet.base.core.note.NoteState
-import com.maubis.scarlet.base.core.note.getNoteState
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.note.save
 
@@ -30,7 +29,7 @@ class NoteDeletionSnackbar(val layout: LinearLayout, val alwaysRunnable: () -> U
   }
 
   fun softUndo(context: Context, note: Note) {
-    if (note.getNoteState() === NoteState.TRASH) {
+    if (note.state === NoteState.TRASH) {
       undoMoveNoteToTrash(context, note)
       return
     }

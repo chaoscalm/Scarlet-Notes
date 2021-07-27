@@ -21,16 +21,16 @@ import com.maubis.scarlet.base.settings.sWidgetShowLockedNotes
 import com.maubis.scarlet.base.support.utils.ColorUtil
 
 fun getWidgetNotes(): List<Note> {
-  val state = listOf(NoteState.DEFAULT.name, NoteState.FAVOURITE.name).toMutableList()
+  val states = mutableListOf(NoteState.DEFAULT, NoteState.FAVOURITE)
   if (sWidgetShowArchivedNotes) {
-    state.add(NoteState.ARCHIVED.name)
+    states.add(NoteState.ARCHIVED)
   }
   if (sWidgetShowDeletedNotes) {
-    state.add(NoteState.TRASH.name)
+    states.add(NoteState.TRASH)
   }
 
   val sorting = SortingOptionsBottomSheet.getSortingState()
-  return sort(ScarletApp.data.notes.getByNoteState(state.toTypedArray())
+  return sort(ScarletApp.data.notes.getByNoteState(states.toTypedArray())
           .filter { note -> (!note.locked || sWidgetShowLockedNotes) }, sorting)
 }
 

@@ -248,7 +248,7 @@ fun Note.adjustedColor(): Int {
  **************************************************************************************/
 
 fun Note.mark(context: Context, noteState: NoteState) {
-  this.state = noteState.name
+  this.state = noteState
   this.updateTimestamp = Calendar.getInstance().timeInMillis
   save(context)
 }
@@ -305,7 +305,7 @@ fun Note.applySanityChecks() {
   description = description ?: ""
   timestamp = timestamp ?: System.currentTimeMillis()
   color = color ?: sNoteDefaultColor
-  state = state ?: NoteState.DEFAULT.name
+  state = state ?: NoteState.DEFAULT
   tags = tags ?: ""
   uuid = uuid ?: generateUUID()
 }

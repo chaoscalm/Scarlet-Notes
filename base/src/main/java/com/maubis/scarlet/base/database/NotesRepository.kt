@@ -1,6 +1,7 @@
 package com.maubis.scarlet.base.database
 
 import com.maubis.scarlet.base.core.note.INoteContainer
+import com.maubis.scarlet.base.core.note.NoteState
 import com.maubis.scarlet.base.database.daos.NoteDao
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.note.applySanityChecks
@@ -25,7 +26,7 @@ class NotesRepository(val database: NoteDao) {
     return notes.values.toList()
   }
 
-  fun getByNoteState(states: Array<String>): List<Note> {
+  fun getByNoteState(states: Array<NoteState>): List<Note> {
     maybeLoadFromDB()
     return notes.values.filter { states.contains(it.state) }
   }

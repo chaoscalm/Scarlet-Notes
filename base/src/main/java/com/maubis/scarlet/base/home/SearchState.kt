@@ -103,10 +103,10 @@ fun filterDirectlyValidFolders(state: SearchState): List<Folder> {
 
 fun getNotesForMode(state: SearchState): List<Note> {
   return when (state.mode) {
-    HomeNavigationMode.FAVOURITE -> data.notes.getByNoteState(arrayOf(NoteState.FAVOURITE.name))
-    HomeNavigationMode.ARCHIVED -> data.notes.getByNoteState(arrayOf(NoteState.ARCHIVED.name))
-    HomeNavigationMode.TRASH -> data.notes.getByNoteState(arrayOf(NoteState.TRASH.name))
-    HomeNavigationMode.DEFAULT -> data.notes.getByNoteState(arrayOf(NoteState.DEFAULT.name, NoteState.FAVOURITE.name))
+    HomeNavigationMode.FAVOURITE -> data.notes.getByNoteState(arrayOf(NoteState.FAVOURITE))
+    HomeNavigationMode.ARCHIVED -> data.notes.getByNoteState(arrayOf(NoteState.ARCHIVED))
+    HomeNavigationMode.TRASH -> data.notes.getByNoteState(arrayOf(NoteState.TRASH))
+    HomeNavigationMode.DEFAULT -> data.notes.getByNoteState(arrayOf(NoteState.DEFAULT, NoteState.FAVOURITE))
     HomeNavigationMode.LOCKED -> data.notes.getNoteByLocked(true)
   }
 }

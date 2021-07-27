@@ -30,7 +30,7 @@ class NoteActor(val note: Note) {
   }
 
   fun softDelete(context: Context) {
-    if (note.getNoteState() === NoteState.TRASH) {
+    if (note.state === NoteState.TRASH) {
       delete(context)
       return
     }

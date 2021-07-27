@@ -52,7 +52,7 @@ class ExportableNote(
     note.timestamp,
     note.updateTimestamp,
     note.color,
-    note.state,
+    note.state.name,
     note.tags ?: "",
     emptyMap(),
     note.folder

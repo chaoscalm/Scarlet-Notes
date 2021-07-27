@@ -12,12 +12,12 @@ fun Note.isUnsaved(): Boolean {
 }
 
 fun Note.isEqual(note: Note): Boolean {
-  return TextUtils.areEqualNullIsEmpty(this.state, note.state)
-    && TextUtils.areEqualNullIsEmpty(this.description, note.description)
+  return TextUtils.areEqualNullIsEmpty(this.description, note.description)
     && TextUtils.areEqualNullIsEmpty(this.uuid, note.uuid)
     && TextUtils.areEqualNullIsEmpty(this.tags, note.tags)
     && this.timestamp.toLong() == note.timestamp.toLong()
     && this.color.toInt() == note.color.toInt()
+    && this.state == note.state
     && this.locked == note.locked
     && this.pinned == note.pinned
     && this.folder == note.folder
@@ -25,15 +25,6 @@ fun Note.isEqual(note: Note): Boolean {
 
 fun Note.getFormats(): List<Format> {
   return FormatBuilder().getFormats(this.description)
-}
-
-fun Note.getNoteState(): NoteState {
-  try {
-    return NoteState.valueOf(this.state)
-  } catch (exception: Exception) {
-    logNonCriticalError(exception)
-    return NoteState.DEFAULT
-  }
 }
 
 fun Note.getMeta(): NoteMeta {
