@@ -29,8 +29,8 @@ const val NOTE_NOTIFICATION_CHANNEL_ID = "NOTE_NOTIFICATION_CHANNEL";
 const val REMINDER_NOTIFICATION_CHANNEL_ID = "REMINDER_NOTIFICATION_CHANNEL";
 
 class NotificationConfig(
-        val note: Note,
-        val channel: String = NOTE_NOTIFICATION_CHANNEL_ID
+    val note: Note,
+    val channel: String = NOTE_NOTIFICATION_CHANNEL_ID
 )
 
 class NotificationHandler(private val context: Context) {
@@ -50,6 +50,10 @@ class NotificationHandler(private val context: Context) {
         openNotification(config)
       }
     }
+  }
+
+  fun cancelNotification(id: Int) {
+    notificationManager.cancel(id)
   }
 
   fun openNotification(config: NotificationConfig) {

@@ -1,6 +1,5 @@
 package com.maubis.scarlet.base.database
 
-import android.app.NotificationManager
 import android.content.Context
 import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.database.daos.NoteDao
@@ -12,7 +11,7 @@ import com.maubis.scarlet.base.widget.AllNotesWidgetProvider
 import com.maubis.scarlet.base.widget.WidgetConfigureActivity
 import java.util.concurrent.ConcurrentHashMap
 
-class NotesRepository(private val database: NoteDao, private val notificationManager: NotificationManager) {
+class NotesRepository(private val database: NoteDao, private val notificationHandler: NotificationHandler) {
 
   private val notes: ConcurrentHashMap<String, Note> by lazy { loadNotesFromDB() }
 
@@ -75,13 +74,13 @@ class NotesRepository(private val database: NoteDao, private val notificationMan
   private fun onNoteUpdated(note: Note, context: Context) {
     WidgetConfigureActivity.notifyNoteChange(context, note)
     AllNotesWidgetProvider.notifyAllChanged(context)
-    NotificationHandler(context).updateExistingNotification(NotificationConfig(note))
+    notificationHandler.updateExistingNotification(NotificationConfig(note))
   }
 
   private fun onNoteDestroyed(note: Note, context: Context) {
     WidgetConfigureActivity.notifyNoteChange(context, note)
     AllNotesWidgetProvider.notifyAllChanged(context)
-    notificationManager.cancel(note.uid)
+    notificationHandler.cancelNotification(note.uid)
     ScarletApp.imageCache.deleteNote(note.uuid)
   }
 
