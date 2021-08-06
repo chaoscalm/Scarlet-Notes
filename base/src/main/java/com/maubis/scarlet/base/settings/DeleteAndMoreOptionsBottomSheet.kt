@@ -8,7 +8,10 @@ import com.maubis.scarlet.base.home.MainActivity
 import com.maubis.scarlet.base.home.sheets.openDeleteAllXSheet
 import com.maubis.scarlet.base.support.sheets.LithoOptionBottomSheet
 import com.maubis.scarlet.base.support.sheets.LithoOptionsItem
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class DeleteAndMoreOptionsBottomSheet : LithoOptionBottomSheet() {
   override fun title(): Int = R.string.home_option_delete_notes_and_more
@@ -65,13 +68,11 @@ class DeleteAndMoreOptionsBottomSheet : LithoOptionBottomSheet() {
       listener = {
         openDeleteAllXSheet(activity, R.string.home_option_delete_everything_details) {
           GlobalScope.launch(Dispatchers.Main) {
-            val notes = GlobalScope.async(Dispatchers.IO) { data.notes.getAll().forEach { it.delete(activity) } }
-            val tags = GlobalScope.async(Dispatchers.IO) { data.tags.getAll().forEach { it.delete() } }
-            val folders = GlobalScope.async(Dispatchers.IO) { data.folders.getAll().forEach { it.delete() } }
-
-            notes.await()
-            tags.await()
-            folders.await()
+            withContext(Dispatchers.IO) {
+              data.notes.getAll().forEach { it.delete(activity) }
+              data.tags.getAll().forEach { it.delete() }
+              data.folders.getAll().forEach { it.delete() }
+            }
 
             activity.resetAndLoadData()
             dismiss()
