@@ -12,6 +12,7 @@ import com.maubis.scarlet.base.core.format.FormatBuilder
 import com.maubis.scarlet.base.core.note.NoteMeta
 import com.maubis.scarlet.base.core.note.Reminder
 import com.maubis.scarlet.base.core.note.generateUUID
+import com.maubis.scarlet.base.note.mark
 import com.maubis.scarlet.base.settings.sNoteDefaultColor
 import com.maubis.scarlet.base.support.utils.logNonCriticalError
 
@@ -76,15 +77,19 @@ class Note {
     }
 
     fun save(context: Context) {
-        ScarletApp.data.noteActions(this).save(context)
+        ScarletApp.data.notes.save(this, context)
     }
 
     fun delete(context: Context) {
-        ScarletApp.data.noteActions(this).delete(context)
+        ScarletApp.data.notes.delete(this, context)
     }
 
     fun softDelete(context: Context) {
-        ScarletApp.data.noteActions(this).softDelete(context)
+        if (state === NoteState.TRASH) {
+            delete(context)
+            return
+        }
+        mark(context, NoteState.TRASH)
     }
 }
 

@@ -4,7 +4,6 @@ import android.app.IntentService
 import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
-import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.note.copy
 import com.maubis.scarlet.base.note.creation.activity.INTENT_KEY_NOTE_ID
@@ -44,7 +43,7 @@ class NotificationIntentService : IntentService("NotificationIntentService") {
       NoteAction.COPY -> note.copy(context)
       NoteAction.SHARE -> note.share(context)
       NoteAction.DELETE -> {
-        ScarletApp.data.noteActions(note).softDelete(context)
+        note.softDelete(context)
         val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.cancel(note.uid)
       }

@@ -12,7 +12,6 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.maubis.markdown.Markdown
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.core.note.NoteBuilder
 import com.maubis.scarlet.base.core.note.generateUUID
@@ -437,7 +436,8 @@ class NoteOptionsBottomSheet : GridBottomSheetBase() {
               visible = note.disableBackup,
               invalid = activity.lockedContentIsHidden() && note.locked,
               listener = View.OnClickListener {
-                  ScarletApp.data.noteActions(note).includeInBackups(activity)
+                  note.disableBackup = false
+                  note.save(activity)
                   activity.updateNote(note)
                   dismiss()
               }
@@ -450,7 +450,8 @@ class NoteOptionsBottomSheet : GridBottomSheetBase() {
               visible = !note.disableBackup,
               invalid = activity.lockedContentIsHidden() && note.locked,
               listener = View.OnClickListener {
-                  ScarletApp.data.noteActions(note).excludeFromBackups(activity)
+                  note.disableBackup = true
+                  note.save(activity)
                   activity.updateNote(note)
                   dismiss()
               }
