@@ -8,7 +8,6 @@ import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.database.entities.NoteState
 import com.maubis.scarlet.base.notification.NotificationConfig
 import com.maubis.scarlet.base.notification.NotificationHandler
-import com.maubis.scarlet.base.support.utils.OsVersionUtils
 import com.maubis.scarlet.base.widget.AllNotesWidgetProvider
 import com.maubis.scarlet.base.widget.WidgetConfigureActivity
 import java.util.concurrent.ConcurrentHashMap
@@ -76,14 +75,7 @@ class NotesRepository(private val database: NoteDao, private val notificationMan
   private fun onNoteUpdated(note: Note, context: Context) {
     WidgetConfigureActivity.notifyNoteChange(context, note)
     AllNotesWidgetProvider.notifyAllChanged(context)
-    if (OsVersionUtils.canExtractActiveNotifications()) {
-      for (notification in notificationManager.activeNotifications) {
-        if (notification.id == note.uid) {
-          val handler = NotificationHandler(context)
-          handler.openNotification(NotificationConfig(note = note))
-        }
-      }
-    }
+    NotificationHandler(context).updateExistingNotification(NotificationConfig(note))
   }
 
   private fun onNoteDestroyed(note: Note, context: Context) {

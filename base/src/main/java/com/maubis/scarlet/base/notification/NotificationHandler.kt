@@ -33,12 +33,23 @@ class NotificationConfig(
         val channel: String = NOTE_NOTIFICATION_CHANNEL_ID
 )
 
-class NotificationHandler(val context: Context) {
+class NotificationHandler(private val context: Context) {
 
-  val notificationManager = context.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+  private val notificationManager = context.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
 
   init {
     createNotificationChannel()
+  }
+
+  fun updateExistingNotification(config: NotificationConfig) {
+    if (!OsVersionUtils.canExtractActiveNotifications())
+      return
+
+    for (notification in notificationManager.activeNotifications) {
+      if (notification.id == config.note.uid) {
+        openNotification(config)
+      }
+    }
   }
 
   fun openNotification(config: NotificationConfig) {
@@ -69,22 +80,17 @@ class NotificationHandler(val context: Context) {
       return
     }
 
-    val manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager?
-    if (manager === null) {
-      return
-    }
-
     val channel = NotificationChannel(
-      NOTE_NOTIFICATION_CHANNEL_ID,
-      context.getString(R.string.notification_channel_label),
-      NotificationManager.IMPORTANCE_MIN)
-    manager.createNotificationChannel(channel)
+            NOTE_NOTIFICATION_CHANNEL_ID,
+            context.getString(R.string.notification_channel_label),
+            NotificationManager.IMPORTANCE_MIN)
+    notificationManager.createNotificationChannel(channel)
 
     val channelForReminder = NotificationChannel(
-      REMINDER_NOTIFICATION_CHANNEL_ID,
-      context.getString(R.string.notification_reminder_channel_label),
-      NotificationManager.IMPORTANCE_HIGH)
-    manager.createNotificationChannel(channelForReminder)
+            REMINDER_NOTIFICATION_CHANNEL_ID,
+            context.getString(R.string.notification_reminder_channel_label),
+            NotificationManager.IMPORTANCE_HIGH)
+    notificationManager.createNotificationChannel(channelForReminder)
   }
 
   fun getRemoteView(config: NotificationConfig): RemoteViews {
