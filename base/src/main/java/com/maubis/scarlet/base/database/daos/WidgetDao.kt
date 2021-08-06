@@ -12,7 +12,7 @@ interface WidgetDao {
     fun delete(tag: Widget)
 
     @Query("SELECT * FROM widget WHERE widgetId = :uid LIMIT 1")
-    fun getByID(uid: Int): Widget
+    fun getByID(uid: Int): Widget?
 
     @Query("SELECT * FROM widget WHERE noteUUID = :uuid")
     fun getByNote(uuid: String): List<Widget>
