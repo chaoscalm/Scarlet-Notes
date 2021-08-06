@@ -2,9 +2,7 @@ package com.maubis.scarlet.base.database
 
 import android.app.NotificationManager
 import android.content.Context
-import android.os.AsyncTask
 import com.maubis.scarlet.base.ScarletApp
-import com.maubis.scarlet.base.core.format.FormatBuilder
 import com.maubis.scarlet.base.database.daos.NoteDao
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.database.entities.NoteState
@@ -13,9 +11,6 @@ import com.maubis.scarlet.base.notification.NotificationHandler
 import com.maubis.scarlet.base.support.utils.OsVersionUtils
 import com.maubis.scarlet.base.widget.AllNotesWidgetProvider
 import com.maubis.scarlet.base.widget.WidgetConfigureActivity
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 
 class NotesRepository(private val database: NoteDao, private val notificationManager: NotificationManager) {
@@ -62,9 +57,7 @@ class NotesRepository(private val database: NoteDao, private val notificationMan
     val id = database.insertNote(note)
     note.uid = if (note.isUnsaved()) id.toInt() else note.uid
     notes[note.uuid] = note
-    GlobalScope.launch {
-      onNoteUpdated(note, context)
-    }
+    onNoteUpdated(note, context)
   }
 
   fun delete(note: Note, context: Context) {
@@ -74,11 +67,7 @@ class NotesRepository(private val database: NoteDao, private val notificationMan
     }
     database.delete(note)
     notes.remove(note.uuid)
-    note.description = FormatBuilder().getDescription(ArrayList())
-    note.uid = 0
-    AsyncTask.execute {
-      onNoteDestroyed(note, context)
-    }
+    onNoteDestroyed(note, context)
   }
 
   private fun onNoteUpdated(note: Note, context: Context) {
