@@ -33,7 +33,7 @@ class Note {
     var tags: String = ""
     var folder: String = ""
 
-    fun isUnsaved(): Boolean {
+    fun isNew(): Boolean {
         return this.uid == 0
     }
 

@@ -54,15 +54,18 @@ class NotesRepository(private val database: NoteDao, private val notificationMan
   }
 
   fun save(note: Note, context: Context) {
+    val isUpdatingExistingNote = !note.isNew()
     val id = database.insertNote(note)
-    note.uid = if (note.isUnsaved()) id.toInt() else note.uid
+    note.uid = id.toInt()
     notes[note.uuid] = note
-    onNoteUpdated(note, context)
+    if (isUpdatingExistingNote) {
+      onNoteUpdated(note, context)
+    }
   }
 
   fun delete(note: Note, context: Context) {
     ScarletApp.imageStorage.deleteAllFiles(note)
-    if (note.isUnsaved()) {
+    if (note.isNew()) {
       return
     }
     database.delete(note)

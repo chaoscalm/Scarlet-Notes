@@ -284,7 +284,7 @@ open class ViewAdvancedNoteActivity : SecuredActivity(), INoteOptionSheetActivit
   }
 
   protected fun saveNoteIfNeeded() {
-    if (note!!.getFormats().isEmpty() && note!!.isUnsaved()) {
+    if (note!!.getFormats().isEmpty() && note!!.isNew()) {
       return
     }
     note!!.updateTimestamp = System.currentTimeMillis()
