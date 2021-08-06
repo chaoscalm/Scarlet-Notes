@@ -320,8 +320,6 @@ open class ViewAdvancedNoteActivity : SecuredActivity(), INoteOptionSheetActivit
   fun note() = note!!
 
   companion object {
-    const val HANDLER_UPDATE_TIME = 1000
-
     fun getIntent(context: Context, note: Note): Intent {
       val intent = Intent(context, ViewAdvancedNoteActivity::class.java)
       intent.putExtra(INTENT_KEY_NOTE_ID, note.uid)

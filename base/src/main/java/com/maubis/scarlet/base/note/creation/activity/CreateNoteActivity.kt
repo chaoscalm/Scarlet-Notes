@@ -407,6 +407,7 @@ open class CreateNoteActivity : ViewAdvancedNoteActivity() {
   }
 
   companion object {
+    const val HANDLER_UPDATE_TIME = 4000
     const val INTENT_KEY_FOLDER = "key_folder"
 
     fun getNewNoteIntent(
