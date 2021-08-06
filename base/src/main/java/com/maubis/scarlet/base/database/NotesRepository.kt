@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 
-class NotesRepository(private val database: NoteDao) {
+class NotesRepository(private val database: NoteDao, private val notificationManager: NotificationManager) {
 
   private val notes: ConcurrentHashMap<String, Note> by lazy { loadNotesFromDB() }
 
@@ -84,8 +84,7 @@ class NotesRepository(private val database: NoteDao) {
   private fun onNoteUpdated(note: Note, context: Context) {
     WidgetConfigureActivity.notifyNoteChange(context, note)
     AllNotesWidgetProvider.notifyAllChanged(context)
-    val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager?
-    if (OsVersionUtils.canExtractActiveNotifications() && notificationManager != null) {
+    if (OsVersionUtils.canExtractActiveNotifications()) {
       for (notification in notificationManager.activeNotifications) {
         if (notification.id == note.uid) {
           val handler = NotificationHandler(context)
@@ -98,8 +97,7 @@ class NotesRepository(private val database: NoteDao) {
   private fun onNoteDestroyed(note: Note, context: Context) {
     WidgetConfigureActivity.notifyNoteChange(context, note)
     AllNotesWidgetProvider.notifyAllChanged(context)
-    val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager?
-    notificationManager?.cancel(note.uid)
+    notificationManager.cancel(note.uid)
     ScarletApp.imageCache.deleteNote(note.uuid)
   }
 
