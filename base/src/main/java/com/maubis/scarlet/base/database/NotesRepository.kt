@@ -20,12 +20,48 @@ import java.util.concurrent.ConcurrentHashMap
 
 class NotesRepository(private val database: NoteDao) {
 
-  private val notes = ConcurrentHashMap<String, Note>()
+  private val notes: ConcurrentHashMap<String, Note> by lazy { loadNotesFromDB() }
+
+  fun getAll(): List<Note> {
+    return notes.values.toList()
+  }
+
+  fun getByNoteState(states: Array<NoteState>): List<Note> {
+    return notes.values.filter { states.contains(it.state) }
+  }
+
+  fun getNoteByLocked(locked: Boolean): List<Note> {
+    return notes.values.filter { it.locked == locked }
+  }
+
+  fun getNoteCountByTag(uuid: String): Int {
+    return notes.values.count { it.tags.contains(uuid) }
+  }
+
+  fun getNoteCountByFolder(uuid: String): Int {
+    return notes.values.count { it.folder == uuid }
+  }
+
+  fun getByID(uid: Int): Note? {
+    return notes.values.firstOrNull { it.uid == uid }
+  }
+
+  fun getByUUID(uuid: String): Note? {
+    return notes[uuid]
+  }
+
+  fun getAllUUIDs(): List<String> {
+    return notes.keys.toList()
+  }
+
+  fun getLastTimestamp(): Long {
+    return notes.values.map { it.updateTimestamp }.maxOrNull() ?: 0
+  }
 
   fun save(note: Note, context: Context) {
     val id = database.insertNote(note)
     note.uid = if (note.isUnsaved()) id.toInt() else note.uid
-    notifyInsertNote(note)
+    notes[note.uuid] = note
     GlobalScope.launch {
       onNoteUpdated(note, context)
     }
@@ -37,67 +73,12 @@ class NotesRepository(private val database: NoteDao) {
       return
     }
     database.delete(note)
-    notifyDelete(note)
+    notes.remove(note.uuid)
     note.description = FormatBuilder().getDescription(ArrayList())
     note.uid = 0
     AsyncTask.execute {
       onNoteDestroyed(note, context)
     }
-  }
-
-  private fun notifyInsertNote(note: Note) {
-    maybeLoadFromDB()
-    notes[note.uuid] = note
-  }
-
-  private fun notifyDelete(note: Note) {
-    maybeLoadFromDB()
-    notes.remove(note.uuid)
-  }
-
-  fun getAll(): List<Note> {
-    maybeLoadFromDB()
-    return notes.values.toList()
-  }
-
-  fun getByNoteState(states: Array<NoteState>): List<Note> {
-    maybeLoadFromDB()
-    return notes.values.filter { states.contains(it.state) }
-  }
-
-  fun getNoteByLocked(locked: Boolean): List<Note> {
-    maybeLoadFromDB()
-    return notes.values.filter { it.locked == locked }
-  }
-
-  fun getNoteCountByTag(uuid: String): Int {
-    maybeLoadFromDB()
-    return notes.values.count { it.tags.contains(uuid) }
-  }
-
-  fun getNoteCountByFolder(uuid: String): Int {
-    maybeLoadFromDB()
-    return notes.values.count { it.folder == uuid }
-  }
-
-  fun getByID(uid: Int): Note? {
-    maybeLoadFromDB()
-    return notes.values.firstOrNull { it.uid == uid }
-  }
-
-  fun getByUUID(uuid: String): Note? {
-    maybeLoadFromDB()
-    return notes[uuid]
-  }
-
-  fun getAllUUIDs(): List<String> {
-    maybeLoadFromDB()
-    return notes.keys.toList()
-  }
-
-  fun getLastTimestamp(): Long {
-    maybeLoadFromDB()
-    return notes.values.map { it.updateTimestamp }.maxOrNull() ?: 0
   }
 
   private fun onNoteUpdated(note: Note, context: Context) {
@@ -122,13 +103,9 @@ class NotesRepository(private val database: NoteDao) {
     ScarletApp.imageCache.deleteNote(note.uuid)
   }
 
-  @Synchronized
-  fun maybeLoadFromDB() {
-    if (notes.isNotEmpty()) {
-      return
-    }
-    database.getAll().forEach {
-      notes[it.uuid] = it
-    }
+  private fun loadNotesFromDB(): ConcurrentHashMap<String, Note> {
+    val notesMap = ConcurrentHashMap<String, Note>()
+    database.getAll().forEach { notesMap[it.uuid] = it }
+    return notesMap
   }
 }
