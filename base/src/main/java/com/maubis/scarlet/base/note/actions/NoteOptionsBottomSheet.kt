@@ -6,10 +6,8 @@ import android.content.pm.ShortcutInfo
 import android.graphics.drawable.Icon
 import android.view.View
 import android.widget.LinearLayout
-import android.widget.LinearLayout.VERTICAL
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import com.maubis.markdown.Markdown
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.core.note.NoteBuilder
@@ -35,10 +33,6 @@ import com.maubis.scarlet.base.support.sheets.GridBottomSheetBase
 import com.maubis.scarlet.base.support.sheets.openSheet
 import com.maubis.scarlet.base.support.ui.ThemedActivity
 import com.maubis.scarlet.base.support.utils.OsVersionUtils
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
 
 class NoteOptionsBottomSheet : GridBottomSheetBase() {
 
@@ -93,25 +87,6 @@ class NoteOptionsBottomSheet : GridBottomSheetBase() {
     tags.typeface = appTypeface.title()
     val tagSubtitle = tagCardLayout.findViewById<TextView>(R.id.tags_subtitle)
     tagSubtitle.typeface = appTypeface.title()
-
-    val tagContent = note.getTagString()
-    if (tagContent.isNotBlank()) {
-      GlobalScope.launch(Dispatchers.Main) {
-        val text = GlobalScope.async(Dispatchers.IO) { Markdown.renderSegment(tagContent, true) }
-        tags.visibility = View.VISIBLE
-        tagSubtitle.visibility = View.GONE
-        tags.text = text.await()
-
-        groupCardLayout.orientation = VERTICAL
-
-        val params = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
-        val margin = activity.resources.getDimension(R.dimen.spacing_xxsmall).toInt()
-        params.setMargins(margin, margin, margin, margin)
-        tagCardLayout.layoutParams = params
-
-        selectCardLayout.layoutParams = params
-      }
-    }
     tagCardLayout.setOnClickListener {
       openSheet(activity, TagChooserBottomSheet().apply {
         this.note = note
@@ -143,7 +118,7 @@ class NoteOptionsBottomSheet : GridBottomSheetBase() {
               subtitle = R.string.tap_for_action_not_trash,
               icon = R.drawable.ic_restore,
               visible = note.state == NoteState.TRASH,
-              listener = View.OnClickListener {
+              listener = {
                   activity.markItem(note, NoteState.DEFAULT)
                   dismiss()
               }
@@ -152,7 +127,7 @@ class NoteOptionsBottomSheet : GridBottomSheetBase() {
             title = R.string.edit_note,
             subtitle = R.string.tap_for_action_edit,
             icon = R.drawable.ic_edit_white_48dp,
-            listener = View.OnClickListener {
+            listener = {
                 note.edit(activity)
                 dismiss()
             }
@@ -163,7 +138,7 @@ class NoteOptionsBottomSheet : GridBottomSheetBase() {
               subtitle = R.string.tap_for_action_not_favourite,
               icon = R.drawable.ic_favorite_white_48dp,
               visible = note.state == NoteState.FAVOURITE,
-              listener = View.OnClickListener {
+              listener = {
                   activity.markItem(note, NoteState.DEFAULT)
                   dismiss()
               }
@@ -174,7 +149,7 @@ class NoteOptionsBottomSheet : GridBottomSheetBase() {
               subtitle = R.string.tap_for_action_favourite,
               icon = R.drawable.ic_favorite_border_white_48dp,
               visible = note.state != NoteState.FAVOURITE,
-              listener = View.OnClickListener {
+              listener = {
                   activity.markItem(note, NoteState.FAVOURITE)
                   dismiss()
               }
@@ -185,7 +160,7 @@ class NoteOptionsBottomSheet : GridBottomSheetBase() {
               subtitle = R.string.tap_for_action_not_archive,
               icon = R.drawable.ic_archive_white_48dp,
               visible = note.state == NoteState.ARCHIVED,
-              listener = View.OnClickListener {
+              listener = {
                   activity.markItem(note, NoteState.DEFAULT)
                   dismiss()
               }
@@ -196,7 +171,7 @@ class NoteOptionsBottomSheet : GridBottomSheetBase() {
               subtitle = R.string.tap_for_action_archive,
               icon = R.drawable.ic_archive_white_48dp,
               visible = note.state != NoteState.ARCHIVED,
-              listener = View.OnClickListener {
+              listener = {
                   activity.markItem(note, NoteState.ARCHIVED)
                   dismiss()
               }
@@ -207,7 +182,7 @@ class NoteOptionsBottomSheet : GridBottomSheetBase() {
               subtitle = R.string.tap_for_action_share,
               icon = R.drawable.ic_share_white_48dp,
               invalid = activity.lockedContentIsHidden() && note.locked,
-              listener = View.OnClickListener {
+              listener = {
                   note.share(activity)
                   dismiss()
               }
@@ -218,7 +193,7 @@ class NoteOptionsBottomSheet : GridBottomSheetBase() {
               subtitle = R.string.tap_for_action_copy,
               icon = R.drawable.ic_content_copy_white_48dp,
               invalid = activity.lockedContentIsHidden() && note.locked,
-              listener = View.OnClickListener {
+              listener = {
                   note.copy(activity)
                   dismiss()
               }
@@ -230,7 +205,7 @@ class NoteOptionsBottomSheet : GridBottomSheetBase() {
               icon = R.drawable.ic_delete_permanently,
               visible = note.state == NoteState.TRASH,
               invalid = activity.lockedContentIsHidden() && note.locked,
-              listener = View.OnClickListener {
+              listener = {
                   activity.moveItemToTrashOrDelete(note)
                   dismiss()
               }
@@ -242,7 +217,7 @@ class NoteOptionsBottomSheet : GridBottomSheetBase() {
               icon = R.drawable.ic_delete_white_48dp,
               visible = note.state != NoteState.TRASH,
               invalid = activity.lockedContentIsHidden() && note.locked,
-              listener = View.OnClickListener {
+              listener = {
                   activity.moveItemToTrashOrDelete(note)
                   dismiss()
               }
@@ -261,7 +236,7 @@ class NoteOptionsBottomSheet : GridBottomSheetBase() {
             title = R.string.choose_note_color,
             subtitle = R.string.tap_for_action_color,
             icon = R.drawable.ic_action_color,
-            listener = View.OnClickListener {
+            listener = {
                 val config = ColorPickerDefaultController(
                         title = R.string.choose_note_color,
                         colors = listOf(
@@ -280,7 +255,7 @@ class NoteOptionsBottomSheet : GridBottomSheetBase() {
             title = if (note.folder.isBlank()) R.string.folder_option_add_to_notebook else R.string.folder_option_change_notebook,
             subtitle = R.string.folder_option_add_to_notebook,
             icon = R.drawable.ic_folder,
-            listener = View.OnClickListener {
+            listener = {
                 openSheet(activity, FolderChooserBottomSheet().apply {
                     this.note = note
                     this.dismissListener = {
@@ -296,7 +271,7 @@ class NoteOptionsBottomSheet : GridBottomSheetBase() {
               subtitle = R.string.lock_note,
               icon = R.drawable.ic_action_lock,
               visible = !note.locked,
-              listener = View.OnClickListener {
+              listener = {
                   note.locked = true
                   activity.updateNote(note)
                   dismiss()
@@ -308,7 +283,7 @@ class NoteOptionsBottomSheet : GridBottomSheetBase() {
               subtitle = R.string.unlock_note,
               icon = R.drawable.ic_action_unlock,
               visible = note.locked,
-              listener = View.OnClickListener {
+              listener = {
                   openUnlockSheet(
                           activity = activity,
                           onUnlockSuccess = {
@@ -333,7 +308,7 @@ class NoteOptionsBottomSheet : GridBottomSheetBase() {
             title = if (note.pinned) R.string.unpin_note else R.string.pin_note,
             subtitle = if (note.pinned) R.string.unpin_note else R.string.pin_note,
             icon = R.drawable.ic_pin,
-            listener = View.OnClickListener {
+            listener = {
                 note.pinned = !note.pinned
                 activity.updateNote(note)
                 dismiss()
@@ -346,7 +321,7 @@ class NoteOptionsBottomSheet : GridBottomSheetBase() {
               icon = R.drawable.icon_share_image,
               visible = note.hasImages(),
               invalid = activity.lockedContentIsHidden() && note.locked,
-              listener = View.OnClickListener {
+              listener = {
                   note.shareImages(activity)
                   dismiss()
               }
@@ -357,7 +332,7 @@ class NoteOptionsBottomSheet : GridBottomSheetBase() {
               subtitle = R.string.open_in_notification,
               icon = R.drawable.ic_action_notification,
               invalid = activity.lockedContentIsHidden() && note.locked,
-              listener = View.OnClickListener {
+              listener = {
                   val handler = NotificationHandler(themedContext())
                   handler.openNotification(NotificationConfig(note = note))
                   dismiss()
@@ -370,7 +345,7 @@ class NoteOptionsBottomSheet : GridBottomSheetBase() {
               icon = R.drawable.ic_delete_permanently,
               visible = note.state !== NoteState.TRASH,
               invalid = activity.lockedContentIsHidden() && note.locked,
-              listener = View.OnClickListener {
+              listener = {
                   openDeleteNotePermanentlySheet(activity, note, { activity.notifyResetOrDismiss() })
                   dismiss()
               }
@@ -405,7 +380,7 @@ class NoteOptionsBottomSheet : GridBottomSheetBase() {
               subtitle = R.string.reminder,
               icon = R.drawable.ic_action_reminder_icon,
               invalid = activity.lockedContentIsHidden() && note.locked,
-              listener = View.OnClickListener {
+              listener = {
                   ReminderBottomSheet.openSheet(activity, note)
                   dismiss()
               }
@@ -416,7 +391,7 @@ class NoteOptionsBottomSheet : GridBottomSheetBase() {
               subtitle = R.string.duplicate,
               icon = R.drawable.ic_duplicate,
               invalid = activity.lockedContentIsHidden() && note.locked,
-              listener = View.OnClickListener {
+              listener = {
                   val copiedNote = NoteBuilder().copy(note)
                   copiedNote.uid = 0
                   copiedNote.uuid = generateUUID()
@@ -432,7 +407,7 @@ class NoteOptionsBottomSheet : GridBottomSheetBase() {
               icon = R.drawable.ic_action_backup,
               visible = note.disableBackup,
               invalid = activity.lockedContentIsHidden() && note.locked,
-              listener = View.OnClickListener {
+              listener = {
                   note.disableBackup = false
                   note.save(activity)
                   activity.updateNote(note)
@@ -446,7 +421,7 @@ class NoteOptionsBottomSheet : GridBottomSheetBase() {
               icon = R.drawable.ic_action_backup_no,
               visible = !note.disableBackup,
               invalid = activity.lockedContentIsHidden() && note.locked,
-              listener = View.OnClickListener {
+              listener = {
                   note.disableBackup = true
                   note.save(activity)
                   activity.updateNote(note)
