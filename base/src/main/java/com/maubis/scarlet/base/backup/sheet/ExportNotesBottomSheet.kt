@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.Typeface
 import android.widget.Toast
 import androidx.core.content.FileProvider
+import androidx.lifecycle.lifecycleScope
 import com.facebook.litho.Column
 import com.facebook.litho.Component
 import com.facebook.litho.ComponentContext
@@ -20,8 +21,8 @@ import com.maubis.scarlet.base.support.specs.separatorSpec
 import com.maubis.scarlet.base.support.ui.ThemeColorType
 import com.maubis.scarlet.base.support.ui.ThemedActivity
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 val NOTES_EXPORT_FOLDER = "ScarletNotes"
 val NOTES_EXPORT_FILENAME = "manual_backup"
@@ -65,10 +66,10 @@ class ExportNotesBottomSheet : LithoBottomSheet() {
     component.child(BottomSheetBar.create(componentContext)
                       .primaryActionRes(R.string.import_export_layout_exporting_done)
                       .onPrimaryClick {
-                        GlobalScope.launch {
+                        activity.lifecycleScope.launch(Dispatchers.IO) {
                           val notes = NoteExporter().getExportContent()
                           val success = NoteExporter().saveToManualExportFile(notes)
-                          GlobalScope.launch(Dispatchers.Main) {
+                          withContext(Dispatchers.Main) {
                             Toast.makeText(activity,
                                 if (success) R.string.import_export_layout_exported
                                 else R.string.import_export_layout_export_failed,
@@ -80,7 +81,7 @@ class ExportNotesBottomSheet : LithoBottomSheet() {
                       }
                       .secondaryActionRes(R.string.import_export_layout_exporting_share)
                       .onSecondaryClick {
-                        GlobalScope.launch {
+                        activity.lifecycleScope.launch(Dispatchers.IO) {
                           val notes = NoteExporter().getExportContent()
                           NoteExporter().saveToManualExportFile(notes)
 
@@ -94,9 +95,7 @@ class ExportNotesBottomSheet : LithoBottomSheet() {
                           intent.putExtra(Intent.EXTRA_STREAM, uri)
                           startActivity(Intent.createChooser(intent, getString(R.string.share_using)))
 
-                          GlobalScope.launch(Dispatchers.Main) {
-                            dismiss()
-                          }
+                          withContext(Dispatchers.Main) { dismiss() }
                         }
                       }
                       .paddingDip(YogaEdge.HORIZONTAL, 20f)

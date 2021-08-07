@@ -16,9 +16,6 @@ import com.maubis.scarlet.base.support.sheets.LithoOptionsItem
 import com.maubis.scarlet.base.support.sheets.openSheet
 import com.maubis.scarlet.base.widget.AllNotesWidgetProvider
 import com.maubis.scarlet.base.widget.NoteWidgetProvider
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
 
 const val STORE_KEY_WIDGET_ENABLE_FORMATTING = "widget_enable_formatting"
 var sWidgetEnableFormatting: Boolean
@@ -145,38 +142,27 @@ class WidgetOptionsBottomSheet : LithoOptionBottomSheet() {
     return options
   }
 
-  fun notifyWidgetConfigChanged(activity: MainActivity) {
-    GlobalScope.launch {
-      val singleNoteBroadcastIntent = GlobalScope.async {
-        val application: Application = activity.applicationContext as Application
-        val ids = AppWidgetManager.getInstance(application).getAppWidgetIds(
-          ComponentName(application, NoteWidgetProvider::class.java))
+  private fun notifyWidgetConfigChanged(activity: MainActivity) {
+    val application: Application = activity.applicationContext as Application
+    val ids = AppWidgetManager.getInstance(application).getAppWidgetIds(
+      ComponentName(application, NoteWidgetProvider::class.java))
 
-        val intent = Intent(application, NoteWidgetProvider::class.java)
-        intent.action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
-        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids)
-        intent
-      }
+    val singleNoteBroadcastIntent = Intent(application, NoteWidgetProvider::class.java)
+    singleNoteBroadcastIntent.action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
+    singleNoteBroadcastIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids)
 
-      AllNotesWidgetProvider.notifyAllChanged(activity)
-      activity.sendBroadcast(singleNoteBroadcastIntent.await())
-    }
+    AllNotesWidgetProvider.notifyAllChanged(activity)
+    activity.sendBroadcast(singleNoteBroadcastIntent)
   }
 
-  fun notifyAllNotesConfigChanged(activity: MainActivity) {
-    GlobalScope.launch {
-      val allNotesBroadcastIntent = GlobalScope.async {
-        val application: Application = activity.applicationContext as Application
-        val ids = AppWidgetManager.getInstance(application).getAppWidgetIds(
-          ComponentName(application, AllNotesWidgetProvider::class.java))
+  private fun notifyAllNotesConfigChanged(activity: MainActivity) {
+    val application: Application = activity.applicationContext as Application
+    val ids = AppWidgetManager.getInstance(application).getAppWidgetIds(
+      ComponentName(application, AllNotesWidgetProvider::class.java))
 
-        val intent = Intent(application, AllNotesWidgetProvider::class.java)
-        intent.action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
-        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids)
-        intent
-      }
-
-      activity.sendBroadcast(allNotesBroadcastIntent.await())
-    }
+    val allNotesBroadcastIntent = Intent(application, AllNotesWidgetProvider::class.java)
+    allNotesBroadcastIntent.action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
+    allNotesBroadcastIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids)
+    activity.sendBroadcast(allNotesBroadcastIntent)
   }
 }

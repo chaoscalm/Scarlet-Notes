@@ -1,6 +1,7 @@
 package com.maubis.scarlet.base.settings
 
 import android.app.Dialog
+import androidx.lifecycle.lifecycleScope
 import com.facebook.litho.ComponentContext
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.data
@@ -9,7 +10,6 @@ import com.maubis.scarlet.base.home.sheets.openDeleteAllXSheet
 import com.maubis.scarlet.base.support.sheets.LithoOptionBottomSheet
 import com.maubis.scarlet.base.support.sheets.LithoOptionsItem
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -25,7 +25,7 @@ class DeleteAndMoreOptionsBottomSheet : LithoOptionBottomSheet() {
       icon = R.drawable.ic_note_white_48dp,
       listener = {
         openDeleteAllXSheet(activity, R.string.home_option_delete_all_notes_details) {
-          GlobalScope.launch(Dispatchers.Main) {
+          activity.lifecycleScope.launch {
             withContext(Dispatchers.IO) { data.notes.getAll().forEach { it.delete(activity) } }
             activity.resetAndLoadData()
             dismiss()
@@ -39,7 +39,7 @@ class DeleteAndMoreOptionsBottomSheet : LithoOptionBottomSheet() {
       icon = R.drawable.ic_action_tags,
       listener = {
         openDeleteAllXSheet(activity, R.string.home_option_delete_all_tags_details) {
-          GlobalScope.launch(Dispatchers.Main) {
+          activity.lifecycleScope.launch {
             withContext(Dispatchers.IO) { data.tags.getAll().forEach { it.delete() } }
             activity.resetAndLoadData()
             dismiss()
@@ -53,7 +53,7 @@ class DeleteAndMoreOptionsBottomSheet : LithoOptionBottomSheet() {
       icon = R.drawable.ic_folder,
       listener = {
         openDeleteAllXSheet(activity, R.string.home_option_delete_all_folders_details) {
-          GlobalScope.launch(Dispatchers.Main) {
+          activity.lifecycleScope.launch {
             withContext(Dispatchers.IO) { data.folders.getAll().forEach { it.delete() } }
             activity.resetAndLoadData()
             dismiss()
@@ -67,7 +67,7 @@ class DeleteAndMoreOptionsBottomSheet : LithoOptionBottomSheet() {
       icon = R.drawable.ic_delete_permanently,
       listener = {
         openDeleteAllXSheet(activity, R.string.home_option_delete_everything_details) {
-          GlobalScope.launch(Dispatchers.Main) {
+          activity.lifecycleScope.launch {
             withContext(Dispatchers.IO) {
               data.notes.getAll().forEach { it.delete(activity) }
               data.tags.getAll().forEach { it.delete() }

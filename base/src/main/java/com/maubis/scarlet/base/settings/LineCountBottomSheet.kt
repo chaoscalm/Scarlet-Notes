@@ -13,9 +13,6 @@ import com.maubis.scarlet.base.support.sheets.LithoBottomSheet
 import com.maubis.scarlet.base.support.sheets.getLithoBottomSheetTitle
 import com.maubis.scarlet.base.support.specs.BottomSheetBar
 import com.maubis.scarlet.base.support.specs.CounterChooser
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 const val STORE_KEY_LINE_COUNT = "KEY_LINE_COUNT"
 const val LINE_COUNT_DEFAULT = 7
@@ -44,8 +41,8 @@ class LineCountBottomSheet : LithoBottomSheet() {
                .maxValue(LINE_COUNT_MAX)
                .onValueChange { value ->
                  sNoteItemLineCount = value
-                 GlobalScope.launch(Dispatchers.Main) { reset(activity, dialog) }
-                 GlobalScope.launch(Dispatchers.Main) { activity.notifyAdapterExtraChanged() }
+                 reset(activity, dialog)
+                 activity.notifyAdapterExtraChanged()
                }
                .paddingDip(YogaEdge.VERTICAL, 16f))
       .child(BottomSheetBar.create(componentContext)

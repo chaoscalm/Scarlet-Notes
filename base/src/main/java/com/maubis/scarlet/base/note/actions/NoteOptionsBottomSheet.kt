@@ -5,7 +5,6 @@ import android.content.Intent
 import android.content.pm.ShortcutInfo
 import android.graphics.drawable.Icon
 import android.view.View
-import android.widget.GridLayout
 import android.widget.LinearLayout
 import android.widget.LinearLayout.VERTICAL
 import android.widget.TextView
@@ -69,10 +68,8 @@ class NoteOptionsBottomSheet : GridBottomSheetBase() {
       { noteForAction: Note -> getNotePropertyOptions(noteForAction) },
       { noteForAction: Note -> getOptions(noteForAction) })
     gridOptionFunctions.forEachIndexed { index, function ->
-      GlobalScope.launch(Dispatchers.Main) {
-        val items = GlobalScope.async(Dispatchers.IO) { function(note) }
-        setOptions(dialog.findViewById<GridLayout>(gridLayoutIds[index]), items.await())
-      }
+      val items = function(note)
+      setOptions(dialog.findViewById(gridLayoutIds[index]), items)
     }
   }
 
