@@ -5,6 +5,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.widget.GridLayout.VERTICAL
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -264,50 +265,45 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
     adapter.addItem(informationItem, 0)
   }
 
-  private suspend fun unifiedSearchSynchronous(): List<RecyclerItem> {
+  private fun unifiedSearchSynchronous(): List<RecyclerItem> {
     val allItems = emptyList<RecyclerItem>().toMutableList()
     if (state.currentFolder != null) {
       val allNotes = unifiedSearchSynchronous(state)
-      allItems.addAll(allNotes
-                        .map { GlobalScope.async(Dispatchers.IO) { NoteRecyclerItem(this@MainActivity, it) } }
-                        .map { it.await() })
+      allItems.addAll(allNotes.map { NoteRecyclerItem(this, it) })
       return allItems
     }
 
     val allNotes = unifiedSearchWithoutFolder(state)
     val directAcceptableFolders = filterDirectlyValidFolders(state)
-    allItems.addAll(data.folders.getAll()
-                      .map {
-                        GlobalScope.async(Dispatchers.IO) {
-                          val isDirectFolder = directAcceptableFolders.contains(it)
-                          val notesCount = filterFolder(allNotes, it).size
-                          if (state.hasFilter() && notesCount == 0 && !isDirectFolder) {
-                            return@async null
-                          }
+    allItems.addAll(
+        data.folders.getAll()
+            .map {
+                val isDirectFolder = directAcceptableFolders.contains(it)
+                val notesCount = filterFolder(allNotes, it).size
+                if (state.hasFilter() && notesCount == 0 && !isDirectFolder) {
+                  return@map null
+                }
 
-                          FolderRecyclerItem(
-                            context = this@MainActivity,
-                            folder = it,
-                            click = { onFolderChange(it) },
-                            longClick = {
-                              CreateOrEditFolderBottomSheet.openSheet(this@MainActivity, it, { _, _ -> refreshItems() })
-                            },
-                            selected = state.currentFolder?.uuid == it.uuid,
-                            contents = notesCount)
-                        }
-                      }
-                      .map { it.await() }
-                      .filterNotNull())
-    allItems.addAll(filterOutFolders(allNotes)
-                      .map { GlobalScope.async(Dispatchers.IO) { NoteRecyclerItem(this@MainActivity, it) } }
-                      .map { it.await() })
+                FolderRecyclerItem(
+                  context = this,
+                  folder = it,
+                  click = { onFolderChange(it) },
+                  longClick = {
+                    CreateOrEditFolderBottomSheet.openSheet(this, it, { _, _ -> refreshItems() })
+                  },
+                  selected = state.currentFolder?.uuid == it.uuid,
+                  contents = notesCount)
+            }
+            .filterNotNull()
+    )
+    allItems.addAll(filterOutFolders(allNotes).map { NoteRecyclerItem(this, it) })
     return allItems
   }
 
   fun refreshItems() {
-    GlobalScope.launch(Dispatchers.Main) {
-      val items = GlobalScope.async(Dispatchers.IO) { unifiedSearchSynchronous() }
-      handleNewItems(items.await())
+    lifecycleScope.launch {
+      val items = withContext(Dispatchers.IO) { unifiedSearchSynchronous() }
+      handleNewItems(items)
     }
   }
 
@@ -340,11 +336,11 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
     views.mainToolbar.root.visibility = View.GONE
     views.searchToolbar.root.visibility = View.VISIBLE
     tryOpeningTheKeyboard()
-    GlobalScope.launch(Dispatchers.Main) {
+    views.searchToolbar.textField.requestFocus()
+    lifecycleScope.launch {
       withContext(Dispatchers.IO) { tagAndColorPicker.reset() }
       tagAndColorPicker.notifyChanged()
     }
-    views.searchToolbar.textField.requestFocus()
   }
 
   private fun quitSearchMode() {
