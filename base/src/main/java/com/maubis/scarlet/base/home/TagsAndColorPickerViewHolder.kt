@@ -1,4 +1,4 @@
-package com.maubis.scarlet.base.note.tag
+package com.maubis.scarlet.base.home
 
 import android.view.View
 import android.widget.TextView
@@ -8,7 +8,6 @@ import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.database.entities.Tag
-import com.maubis.scarlet.base.home.MainActivity
 import com.maubis.scarlet.base.settings.ColorView
 
 class TagsAndColorPickerViewHolder(

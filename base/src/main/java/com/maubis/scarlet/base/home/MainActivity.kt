@@ -30,7 +30,6 @@ import com.maubis.scarlet.base.note.folder.sheet.CreateOrEditFolderBottomSheet
 import com.maubis.scarlet.base.note.mark
 import com.maubis.scarlet.base.note.recycler.NoteAppAdapter
 import com.maubis.scarlet.base.note.recycler.NoteRecyclerItem
-import com.maubis.scarlet.base.note.tag.TagsAndColorPickerViewHolder
 import com.maubis.scarlet.base.settings.STORE_KEY_LINE_COUNT
 import com.maubis.scarlet.base.settings.SettingsOptionsBottomSheet
 import com.maubis.scarlet.base.settings.SettingsOptionsBottomSheet.Companion.KEY_MARKDOWN_ENABLED
@@ -154,12 +153,16 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
     }
 
     val titleColor = appTheme.get(ThemeColorType.SECONDARY_TEXT)
+    val hintColor = appTheme.get(ThemeColorType.TERTIARY_TEXT)
     views.mainToolbar.title.setTextColor(titleColor)
     views.mainToolbar.title.typeface = ScarletApp.appTypeface.heading()
-
-    val toolbarIconColor = appTheme.get(ThemeColorType.SECONDARY_TEXT)
-    views.mainToolbar.searchIcon.setColorFilter(toolbarIconColor)
-    views.mainToolbar.settingsIcon.setColorFilter(toolbarIconColor)
+    views.mainToolbar.searchIcon.setColorFilter(titleColor)
+    views.mainToolbar.settingsIcon.setColorFilter(titleColor)
+    views.searchToolbar.textField.setTextColor(titleColor)
+    views.searchToolbar.textField.setHintTextColor(hintColor)
+    views.searchToolbar.separator.setBackgroundColor(hintColor)
+    views.searchToolbar.backButton.setColorFilter(titleColor)
+    views.searchToolbar.closeIcon.setColorFilter(titleColor)
   }
 
   private fun setupRecyclerView() {
