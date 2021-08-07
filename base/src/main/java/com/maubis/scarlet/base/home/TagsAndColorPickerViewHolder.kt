@@ -5,10 +5,12 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.google.android.flexbox.FlexboxLayout
 import com.maubis.scarlet.base.R
+import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.database.entities.Tag
 import com.maubis.scarlet.base.settings.ColorView
+import com.maubis.scarlet.base.support.ui.ThemeColorType
 
 class TagsAndColorPickerViewHolder(
         val activity: MainActivity,
@@ -41,22 +43,26 @@ class TagsAndColorPickerViewHolder(
   private fun setTags() {
     val length = tags.size
     tags.toList()
-      .subList(0, Math.min(length, 6))
-      .forEach {
-        val tag = it
+      .subList(0, length.coerceAtMost(6))
+      .forEach { tag ->
         val tagView = View.inflate(activity, R.layout.layout_flexbox_tag_item, null) as View
         val text = tagView.findViewById<TextView>(R.id.tag_text)
-
-        if (activity.state.tags.filter { it.uuid == tag.uuid }.isNotEmpty()) {
-          text.setBackgroundResource(R.drawable.flexbox_selected_tag_item_bg)
-          text.setTextColor(ContextCompat.getColor(activity, R.color.colorAccent))
-        }
-
-        text.text = it.title
+        text.text = tag.title
         text.typeface = appTypeface.title()
-        tagView.setOnClickListener {
-          onTagClick(tag)
+
+        val backgroundDrawable = activity.getDrawable(R.drawable.flexbox_selected_tag_item_bg)!!
+        if (activity.state.tags.any { it.uuid == tag.uuid }) {
+          val accentColor = ContextCompat.getColor(activity, R.color.colorAccent)
+          backgroundDrawable.setTint(accentColor)
+          text.setTextColor(accentColor)
+        } else {
+          val themeColor = appTheme.get(ThemeColorType.TERTIARY_TEXT)
+          backgroundDrawable.setTint(themeColor)
+          text.setTextColor(themeColor)
         }
+        text.background = backgroundDrawable
+
+        tagView.setOnClickListener { onTagClick(tag) }
         flexbox.addView(tagView)
       }
   }
@@ -64,14 +70,11 @@ class TagsAndColorPickerViewHolder(
   private fun setColors() {
     val length = colors.size
     colors.toList()
-      .subList(0, Math.min(length, 6))
-      .forEach {
-        val color = it
+      .subList(0, length.coerceAtMost(6))
+      .forEach { color ->
         val colorView = ColorView(activity, R.layout.layout_color_small)
         colorView.setColor(color, activity.state.colors.contains(color))
-        colorView.setOnClickListener {
-          onColorClick(color)
-        }
+        colorView.setOnClickListener { onColorClick(color) }
         flexbox.addView(colorView)
       }
   }
