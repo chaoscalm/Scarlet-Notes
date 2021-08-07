@@ -52,7 +52,7 @@ open class CreateNoteActivity : ViewAdvancedNoteActivity() {
 
   override fun onCreationFinished() {
     super.onCreationFinished()
-    history.add(NoteBuilder().copy(note!!))
+    history.add(NoteBuilder().copy(note))
     setFolderFromIntent()
   }
 
@@ -68,7 +68,7 @@ open class CreateNoteActivity : ViewAdvancedNoteActivity() {
     if (folder === null) {
       return
     }
-    note!!.folder = folder.uuid
+    note.folder = folder.uuid
   }
 
   private fun setTouchListener() {
@@ -77,8 +77,8 @@ open class CreateNoteActivity : ViewAdvancedNoteActivity() {
     touchHelper.attachToRecyclerView(views.formatsRecyclerView)
   }
 
-  override fun setNote() {
-    super.setNote()
+  override fun displayNote() {
+    super.displayNote()
     maxUid = formats.size + 1
 
     val isEmpty = formats.isEmpty()
@@ -133,7 +133,7 @@ open class CreateNoteActivity : ViewAdvancedNoteActivity() {
           return
         }
 
-        val targetFile = imageStorage.renameOrCopy(note!!, imageFile)
+        val targetFile = imageStorage.renameOrCopy(note, imageFile)
         val index = getFormatIndex(type)
         triggerImageLoaded(index, targetFile)
       }
@@ -166,30 +166,29 @@ open class CreateNoteActivity : ViewAdvancedNoteActivity() {
   }
 
   private fun deleteIfEmpty() {
-    if (note!!.isNew()) {
+    if (note.isNew()) {
       return
     }
-    if (note!!.getFormats().isEmpty()) {
-      note!!.delete(this)
+    if (note.getFormats().isEmpty()) {
+      note.delete(this)
     }
   }
 
   protected fun updateNoteIfNeeded() {
-    val currentNote = note
-    if (currentNote === null || !formatsInitialised.get()) {
+    if (!formatsInitialised.get()) {
       return
     }
 
-    val vLastNoteInstance = history.getOrNull(historyIndex) ?: currentNote
-    currentNote.description = FormatBuilder().getSmarterDescription(formats)
+    val vLastNoteInstance = history.getOrNull(historyIndex) ?: note
+    note.description = FormatBuilder().getSmarterDescription(formats)
 
     // Ignore update if nothing changed. It allows for one undo per few seconds
     when {
-      !historyModified && currentNote.isEqual(vLastNoteInstance) -> return
-      !historyModified -> addNoteToHistory(NoteBuilder().copy(currentNote))
+      !historyModified && note.isEqual(vLastNoteInstance) -> return
+      !historyModified -> addNoteToHistory(NoteBuilder().copy(note))
       else -> historyModified = false
     }
-    currentNote.updateTimestamp = System.currentTimeMillis()
+    note.updateTimestamp = System.currentTimeMillis()
     saveNoteIfNeeded()
   }
 
@@ -289,9 +288,9 @@ open class CreateNoteActivity : ViewAdvancedNoteActivity() {
     holder.populateFile(file)
 
     val formatToChange = formats[position]
-    if (!formatToChange.text.isBlank()) {
+    if (formatToChange.text.isNotBlank()) {
       val noteImage = imageStorage
-      deleteIfExist(noteImage.getFile(note!!.uuid, formatToChange.text))
+      deleteIfExist(noteImage.getFile(note.uuid, formatToChange.text))
     }
     formatToChange.text = file.name
     setFormat(formatToChange)
@@ -302,14 +301,14 @@ open class CreateNoteActivity : ViewAdvancedNoteActivity() {
       true -> {
         historyIndex = if (historyIndex == 0) 0 else (historyIndex - 1)
         note = NoteBuilder().copy(history.get(historyIndex))
-        setNote()
+        displayNote()
         historyModified = true
       }
       false -> {
         val maxHistoryIndex = history.size - 1
         historyIndex = if (historyIndex == maxHistoryIndex) maxHistoryIndex else (historyIndex + 1)
         note = NoteBuilder().copy(history.get(historyIndex))
-        setNote()
+        displayNote()
         historyModified = true
       }
     }
@@ -319,7 +318,7 @@ open class CreateNoteActivity : ViewAdvancedNoteActivity() {
     val config = ColorPickerDefaultController(
       title = R.string.choose_note_color,
       colors = listOf(resources.getIntArray(R.array.bright_colors), resources.getIntArray(R.array.bright_colors_accent)),
-      selectedColor = note!!.color,
+      selectedColor = note.color,
       onColorSelected = { color ->
         setNoteColor(color)
       }
@@ -352,7 +351,7 @@ open class CreateNoteActivity : ViewAdvancedNoteActivity() {
     if (lastKnownNoteColor == color) {
       return
     }
-    note!!.color = color
+    note.color = color
     notifyToolbarColor()
     lastKnownNoteColor = color
   }

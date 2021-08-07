@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.facebook.litho.ComponentContext
 import com.facebook.litho.LithoView
@@ -41,8 +42,8 @@ import com.maubis.scarlet.base.support.utils.ColorUtil
 import com.maubis.scarlet.base.support.utils.ColorUtil.darkOrDarkerColor
 import com.maubis.scarlet.base.widget.getPendingIntentWithStack
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.*
 import java.util.concurrent.atomic.AtomicBoolean
 
@@ -58,14 +59,13 @@ open class ViewAdvancedNoteActivity : SecuredActivity(), INoteOptionSheetActivit
 
   var focusedFormat: Format? = null
 
-  protected var note: Note? = null
+  protected lateinit var note: Note
   protected lateinit var formats: MutableList<Format>
   protected val formatsInitialised = AtomicBoolean(false)
 
   protected lateinit var views: ActivityAdvancedNoteBinding
   protected lateinit var adapter: FormatAdapter
 
-  val creationFinished = AtomicBoolean(false)
   val colorConfig = NoteViewColorConfig()
   var lastKnownNoteColor = 0
 
@@ -78,33 +78,22 @@ open class ViewAdvancedNoteActivity : SecuredActivity(), INoteOptionSheetActivit
     setContentView(views.root)
     setRecyclerView()
 
-    GlobalScope.launch(Dispatchers.IO) {
-      var noteId = intent.getIntExtra(INTENT_KEY_NOTE_ID, 0)
-      if (noteId == 0 && savedInstanceState != null) {
-        noteId = savedInstanceState.getInt(INTENT_KEY_NOTE_ID, 0)
-      }
-      if (noteId != 0) {
-        note = data.notes.getByID(noteId)
-      }
-      if (note === null) {
-        note = NoteBuilder().emptyNote(sNoteDefaultColor)
-      }
-      GlobalScope.launch(Dispatchers.Main) {
-        resetBundle()
-        setNote()
-        notifyThemeChange()
-        onCreationFinished()
-      }
-      creationFinished.set(true)
+    var noteId = intent.getIntExtra(INTENT_KEY_NOTE_ID, 0)
+    if (noteId == 0 && savedInstanceState != null) {
+      noteId = savedInstanceState.getInt(INTENT_KEY_NOTE_ID, 0)
     }
+    if (noteId != 0) {
+      note = data.notes.getByID(noteId) ?: NoteBuilder().emptyNote(sNoteDefaultColor)
+    }
+    resetBundle()
+    displayNote()
+    notifyThemeChange()
+    onCreationFinished()
   }
 
   override fun onResume() {
     super.onResume()
 
-    if (!creationFinished.get()) {
-      return
-    }
     onResumeAction()
     notifyThemeChange()
   }
@@ -112,39 +101,35 @@ open class ViewAdvancedNoteActivity : SecuredActivity(), INoteOptionSheetActivit
   protected open fun onCreationFinished() {}
 
   protected open fun onResumeAction() {
-    GlobalScope.launch(Dispatchers.IO) {
-      note = data.notes.getByID(intent.getIntExtra(INTENT_KEY_NOTE_ID, 0))
-      when {
-        note == null -> finish()
-        else -> GlobalScope.launch(Dispatchers.Main) { setNote() }
+    lifecycleScope.launch(Dispatchers.IO) {
+      when (val reloadedNote = data.notes.getByID(intent.getIntExtra(INTENT_KEY_NOTE_ID, 0))) {
+          null -> finish()
+          else -> {
+            note = reloadedNote
+            withContext(Dispatchers.Main) { displayNote() }
+          }
       }
     }
   }
 
   private fun resetBundle() {
-    val currentNote = note
     val bundle = Bundle()
     bundle.putBoolean(KEY_EDITABLE, editModeValue)
     bundle.putBoolean(KEY_MARKDOWN_ENABLED, appPreferences.getBoolean(KEY_MARKDOWN_ENABLED, true))
     bundle.putBoolean(KEY_NIGHT_THEME, appTheme.isNightTheme())
     bundle.putInt(STORE_KEY_TEXT_SIZE, sEditorTextSize)
-    bundle.putInt(KEY_NOTE_COLOR, currentNote?.adjustedColor() ?: sNoteDefaultColor)
-    bundle.putString(INTENT_KEY_NOTE_ID, currentNote?.uuid ?: generateUUID())
+    bundle.putInt(KEY_NOTE_COLOR, note.adjustedColor())
+    bundle.putString(INTENT_KEY_NOTE_ID, note.uuid)
     adapter.setExtra(bundle)
   }
 
-  protected open fun setNote() {
-    val currentNote = note
-    if (currentNote === null) {
-      return
-    }
-
-    setNoteColor(currentNote.color)
+  protected open fun displayNote() {
+    setNoteColor(note.color)
     adapter.clearItems()
 
     formats = when (editModeValue) {
-      true -> currentNote.getFormats()
-      false -> currentNote.getSmartFormats()
+      true -> note.getFormats()
+      false -> note.getSmartFormats()
     }.toMutableList()
     adapter.addItems(formats)
     formatsInitialised.set(true)
@@ -156,12 +141,7 @@ open class ViewAdvancedNoteActivity : SecuredActivity(), INoteOptionSheetActivit
   }
 
   private fun maybeAddTags() {
-    val currentNote = note
-    if (currentNote === null) {
-      return
-    }
-
-    val tagLabel = currentNote.getTagString()
+    val tagLabel = note.getTagString()
     if (tagLabel.isEmpty()) {
       return
     }
@@ -190,7 +170,7 @@ open class ViewAdvancedNoteActivity : SecuredActivity(), INoteOptionSheetActivit
   }
 
   open fun setFormatChecked(format: Format, checked: Boolean) {
-    val trueFormats = note!!.getFormats().toMutableList()
+    val trueFormats = note.getFormats().toMutableList()
     val truePosition = trueFormats.indexOfFirst { it.uid == format.uid }
     if (truePosition == -1) {
       return
@@ -207,26 +187,21 @@ open class ViewAdvancedNoteActivity : SecuredActivity(), INoteOptionSheetActivit
 
     trueFormats[truePosition] = format
 
-    note!!.description = FormatBuilder().getSmarterDescription(sectionPreservingSort(trueFormats))
-    setNote()
+    note.description = FormatBuilder().getSmarterDescription(sectionPreservingSort(trueFormats))
+    displayNote()
     saveNoteIfNeeded()
   }
 
   fun openMoreOptions() {
-    NoteOptionsBottomSheet.openSheet(this@ViewAdvancedNoteActivity, note!!)
+    NoteOptionsBottomSheet.openSheet(this@ViewAdvancedNoteActivity, note)
   }
 
   fun openEditor() {
-    startActivity(NoteIntentRouterActivity.edit(this, note!!))
+    startActivity(NoteIntentRouterActivity.edit(this, note))
   }
 
   protected open fun notifyToolbarColor() {
-    val currentNote = note
-    if (currentNote === null) {
-      return
-    }
-
-    val noteColor = currentNote.adjustedColor()
+    val noteColor = note.adjustedColor()
     when {
       !sUIUseNoteColorAsBackground -> {
         colorConfig.backgroundColor = appTheme.get(ThemeColorType.BACKGROUND)
@@ -284,14 +259,14 @@ open class ViewAdvancedNoteActivity : SecuredActivity(), INoteOptionSheetActivit
   }
 
   protected fun saveNoteIfNeeded() {
-    if (note!!.getFormats().isEmpty() && note!!.isNew()) {
+    if (note.getFormats().isEmpty() && note.isNew()) {
       return
     }
-    note!!.updateTimestamp = System.currentTimeMillis()
-    note!!.save(this)
+    note.updateTimestamp = System.currentTimeMillis()
+    note.save(this)
   }
 
-  fun notifyNoteChange() {
+  private fun notifyNoteChange() {
     notifyToolbarColor()
   }
 
@@ -314,10 +289,10 @@ open class ViewAdvancedNoteActivity : SecuredActivity(), INoteOptionSheetActivit
 
   override fun onSaveInstanceState(savedInstanceState: Bundle) {
     super.onSaveInstanceState(savedInstanceState)
-    savedInstanceState.putInt(INTENT_KEY_NOTE_ID, if (note == null || note!!.uid == null) 0 else note!!.uid)
+    savedInstanceState.putInt(INTENT_KEY_NOTE_ID, note.uid)
   }
 
-  fun note() = note!!
+  fun note() = note
 
   companion object {
     fun getIntent(context: Context, note: Note): Intent {
@@ -352,7 +327,7 @@ open class ViewAdvancedNoteActivity : SecuredActivity(), INoteOptionSheetActivit
   }
 
   override fun notifyTagsChanged(note: Note) {
-    setNote()
+    displayNote()
   }
 
   override fun getSelectMode(note: Note): String {
