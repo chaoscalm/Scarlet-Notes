@@ -82,8 +82,10 @@ open class ViewAdvancedNoteActivity : SecuredActivity(), INoteOptionSheetActivit
     if (noteId == 0 && savedInstanceState != null) {
       noteId = savedInstanceState.getInt(INTENT_KEY_NOTE_ID, 0)
     }
-    if (noteId != 0) {
-      note = data.notes.getByID(noteId) ?: NoteBuilder().emptyNote(sNoteDefaultColor)
+    note = if (noteId != 0) {
+      data.notes.getByID(noteId) ?: NoteBuilder().emptyNote(sNoteDefaultColor)
+    } else {
+      NoteBuilder().emptyNote(sNoteDefaultColor)
     }
     resetBundle()
     displayNote()
