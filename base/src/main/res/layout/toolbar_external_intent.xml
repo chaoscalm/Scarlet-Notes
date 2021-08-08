@@ -8,16 +8,16 @@
   android:padding="@dimen/spacing_small">
 
   <ImageView
-    android:id="@+id/back_button"
+    android:id="@+id/backButton"
     android:layout_width="@dimen/icon_size_large"
     android:layout_height="@dimen/icon_size_large"
     style="@style/BorderlessBackgroundView"
     android:padding="@dimen/spacing_xsmall"
     android:src="@drawable/ic_close_white_48dp"
-    android:tint="@color/material_grey_600" />
+    ui:tint="@color/material_grey_600" />
 
   <TextView
-    android:id="@+id/filename"
+    android:id="@+id/fileName"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_weight="1"
@@ -29,7 +29,7 @@
     android:textStyle="bold" />
 
   <com.github.bijoysingh.uibasics.views.UITextView
-    android:id="@+id/import_or_edit_to_app"
+    android:id="@+id/importButton"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     style="@style/BorderlessBackgroundView"

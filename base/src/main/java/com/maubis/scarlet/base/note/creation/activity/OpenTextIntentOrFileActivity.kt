@@ -1,17 +1,13 @@
 package com.maubis.scarlet.base.note.creation.activity
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.SpannableString
 import android.text.TextWatcher
 import android.view.View
-import android.widget.ImageView
 import android.widget.TextView
-import com.github.bijoysingh.starter.async.MultiAsyncTask
-import com.github.bijoysingh.starter.util.TextUtils
-import com.github.bijoysingh.uibasics.views.UITextView
+import androidx.lifecycle.lifecycleScope
 import com.maubis.markdown.Markdown
 import com.maubis.markdown.spannable.clearMarkdownSpans
 import com.maubis.markdown.spannable.setFormats
@@ -19,51 +15,39 @@ import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.backup.support.NoteImporter
 import com.maubis.scarlet.base.core.note.NoteBuilder
-import com.maubis.scarlet.base.database.entities.Note
+import com.maubis.scarlet.base.databinding.ActivityExternalIntentBinding
 import com.maubis.scarlet.base.support.ui.SecuredActivity
 import com.maubis.scarlet.base.support.ui.ThemeColorType
-import com.maubis.scarlet.base.support.utils.bind
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.InputStreamReader
 
 class OpenTextIntentOrFileActivity : SecuredActivity() {
 
-  lateinit var context: Context
-
   var filenameText: String = ""
-  var titleText: String = ""
   var contentText: String = ""
 
-  val filename: TextView by bind(R.id.filename)
-  val title: TextView by bind(R.id.title)
-  val content: TextView by bind(R.id.description)
-  val backButton: ImageView by bind(R.id.back_button)
-  val actionDone: UITextView by bind(R.id.import_or_edit_to_app)
+  private lateinit var views: ActivityExternalIntentBinding
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    context = this
-    val shouldHandleIntent = handleIntent()
-    if (!shouldHandleIntent) {
+    val hasFileIntent = handleFileIntent(intent)
+    if (!hasFileIntent) {
       finish()
       return
     }
 
-    setContentView(R.layout.activity_external_intent)
-    setView()
+    views = ActivityExternalIntentBinding.inflate(layoutInflater)
+    setContentView(views.root)
+    setupListeners()
     notifyThemeChange()
 
     val spannable = SpannableString(contentText)
     spannable.setFormats(Markdown.getSpanInfo(contentText).spans)
-    content.setText(spannable, TextView.BufferType.SPANNABLE)
-
-    title.setText(titleText)
-    title.visibility = if (TextUtils.isNullOrEmpty(titleText)) View.GONE else View.VISIBLE
-    filename.setText(filenameText)
-
-    content.addTextChangedListener(object : TextWatcher {
-      override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-      }
+    views.content.setText(spannable, TextView.BufferType.SPANNABLE)
+    views.content.addTextChangedListener(object : TextWatcher {
+      override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
       override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {
         if (text is Editable) {
@@ -72,41 +56,24 @@ class OpenTextIntentOrFileActivity : SecuredActivity() {
         }
       }
 
-      override fun afterTextChanged(text: Editable) {
-
-      }
+      override fun afterTextChanged(text: Editable) {}
     })
+    views.toolbar.fileName.text = filenameText
   }
 
-  private fun setView() {
-    backButton.setOnClickListener { onBackPressed() }
-    actionDone.setOnClickListener {
-      MultiAsyncTask.execute(object : MultiAsyncTask.Task<Note> {
-        override fun handle(result: Note?) {
-          if (result !== null) {
-            startActivity(ViewAdvancedNoteActivity.getIntent(context, result))
-          }
-          finish()
-        }
-
-        override fun run(): Note {
-          val note = NoteBuilder().gen(titleText, contentText)
-          note.save(context)
-          return note
-        }
-      })
+  private fun setupListeners() {
+    views.toolbar.backButton.setOnClickListener { onBackPressed() }
+    views.toolbar.importButton.setOnClickListener {
+      lifecycleScope.launch {
+        val note = NoteBuilder().gen(title = "", contentText)
+        withContext(Dispatchers.IO) { note.save(this@OpenTextIntentOrFileActivity) }
+        startActivity(ViewAdvancedNoteActivity.getIntent(this@OpenTextIntentOrFileActivity, note))
+        finish()
+      }
     }
   }
 
-  fun handleIntent(): Boolean {
-    val hasFileIntent = handleFileIntent(intent)
-    if (hasFileIntent) {
-      return true
-    }
-    return false
-  }
-
-  fun handleFileIntent(intent: Intent): Boolean {
+  private fun handleFileIntent(intent: Intent): Boolean {
     val data = intent.data
     val lastPathSegment = data?.lastPathSegment
     if (data === null || lastPathSegment === null) {
@@ -125,21 +92,20 @@ class OpenTextIntentOrFileActivity : SecuredActivity() {
   }
 
   override fun notifyThemeChange() {
-    setSystemTheme();
+    setSystemTheme()
 
-    val containerLayout = findViewById<View>(R.id.container_layout);
-    containerLayout.setBackgroundColor(getThemeColor());
+    val containerLayout = findViewById<View>(R.id.container_layout)
+    containerLayout.setBackgroundColor(getThemeColor())
 
-    val toolbarIconColor = appTheme.get(ThemeColorType.TOOLBAR_ICON);
-    backButton.setColorFilter(toolbarIconColor)
+    val toolbarIconColor = appTheme.get(ThemeColorType.TOOLBAR_ICON)
+    views.toolbar.backButton.setColorFilter(toolbarIconColor)
 
     val textColor = appTheme.get(ThemeColorType.SECONDARY_TEXT)
-    filename.setTextColor(textColor)
-    title.setTextColor(textColor)
-    content.setTextColor(textColor)
+    views.toolbar.fileName.setTextColor(textColor)
+    views.content.setTextColor(textColor)
 
     val actionColor = appTheme.get(ThemeColorType.TOOLBAR_ICON)
-    actionDone.setImageTint(actionColor)
-    actionDone.setTextColor(actionColor)
+    views.toolbar.importButton.setImageTint(actionColor)
+    views.toolbar.importButton.setTextColor(actionColor)
   }
 }
