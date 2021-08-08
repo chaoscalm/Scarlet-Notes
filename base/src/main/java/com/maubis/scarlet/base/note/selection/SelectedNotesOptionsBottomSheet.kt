@@ -269,7 +269,7 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
           formats.addAll(noteToAdd.getFormats())
           noteToAdd.delete(activity)
         }
-        note.description = FormatBuilder().getDescription(sectionPreservingSort(formats))
+        note.content = FormatBuilder().getContent(sectionPreservingSort(formats))
         note.save(activity)
         activity.finish()
       }

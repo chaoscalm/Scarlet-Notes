@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "f3f372a04c0868211e1dc476f75b8492",
+    "identityHash": "fb58c8bb4dbc6407e21cdab7725f8de8",
     "entities": [
       {
         "tableName": "note",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`uid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `description` TEXT NOT NULL, `timestamp` INTEGER NOT NULL, `color` INTEGER NOT NULL, `state` TEXT NOT NULL, `locked` INTEGER NOT NULL, `tags` TEXT NOT NULL, `updateTimestamp` INTEGER NOT NULL, `pinned` INTEGER NOT NULL, `uuid` TEXT NOT NULL, `meta` TEXT NOT NULL, `disableBackup` INTEGER NOT NULL, `folder` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`uid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `content` TEXT NOT NULL, `color` INTEGER NOT NULL, `state` TEXT NOT NULL, `timestamp` INTEGER NOT NULL, `updateTimestamp` INTEGER NOT NULL, `locked` INTEGER NOT NULL, `pinned` INTEGER NOT NULL, `uuid` TEXT NOT NULL, `meta` TEXT NOT NULL, `disableBackup` INTEGER NOT NULL, `tags` TEXT NOT NULL, `folder` TEXT NOT NULL)",
         "fields": [
           {
             "fieldPath": "uid",
@@ -15,15 +15,9 @@
             "notNull": true
           },
           {
-            "fieldPath": "description",
-            "columnName": "description",
+            "fieldPath": "content",
+            "columnName": "content",
             "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "timestamp",
-            "columnName": "timestamp",
-            "affinity": "INTEGER",
             "notNull": true
           },
           {
@@ -39,20 +33,20 @@
             "notNull": true
           },
           {
-            "fieldPath": "locked",
-            "columnName": "locked",
+            "fieldPath": "timestamp",
+            "columnName": "timestamp",
             "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "tags",
-            "columnName": "tags",
-            "affinity": "TEXT",
             "notNull": true
           },
           {
             "fieldPath": "updateTimestamp",
             "columnName": "updateTimestamp",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "locked",
+            "columnName": "locked",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -78,6 +72,12 @@
             "fieldPath": "disableBackup",
             "columnName": "disableBackup",
             "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "tags",
+            "columnName": "tags",
+            "affinity": "TEXT",
             "notNull": true
           },
           {
@@ -244,7 +244,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f3f372a04c0868211e1dc476f75b8492')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'fb58c8bb4dbc6407e21cdab7725f8de8')"
     ]
   }
 }

@@ -50,7 +50,7 @@ class NoteImage(context: Context) {
   }
 
   fun deleteAllFiles(note: Note) {
-    for (format in FormatBuilder().getFormats(note.description)) {
+    for (format in FormatBuilder().getFormats(note.content)) {
       if (format.formatType === FormatType.IMAGE) {
         val file = getFile(note.uuid, format)
         deleteIfExist(file)

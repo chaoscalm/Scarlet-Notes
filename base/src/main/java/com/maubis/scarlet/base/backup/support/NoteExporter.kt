@@ -67,7 +67,7 @@ class NoteExporter {
   }
 
   /**
-   * Converts the note's internal description format into markdown which can be used to export.
+   * Converts the note's internal content format into markdown which can be used to export.
    */
   private fun Note.toExportedMarkdown(): String {
     val markdownBuilder = StringBuilder()

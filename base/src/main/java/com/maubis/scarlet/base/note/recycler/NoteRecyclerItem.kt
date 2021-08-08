@@ -16,8 +16,8 @@ class NoteRecyclerItem(context: Context, val note: Note) : RecyclerItem() {
   val backgroundColor = note.adjustedColor()
   val isLightShaded = ColorUtil.isLightColored(backgroundColor)
 
-  val description = note.getLockedAwareTextForHomeList()
-  val descriptionColor = when (isLightShaded) {
+  val content = note.getLockedAwareTextForHomeList()
+  val contentColor = when (isLightShaded) {
     true -> ContextCompat.getColor(context, R.color.dark_tertiary_text)
     false -> ContextCompat.getColor(context, R.color.light_primary_text)
   }

@@ -180,7 +180,7 @@ open class CreateNoteActivity : ViewAdvancedNoteActivity() {
     }
 
     val vLastNoteInstance = history.getOrNull(historyIndex) ?: note
-    note.description = FormatBuilder().getSmarterDescription(formats)
+    note.content = FormatBuilder().getSmarterContent(formats)
 
     // Ignore update if nothing changed. It allows for one undo per few seconds
     when {
@@ -199,13 +199,13 @@ open class CreateNoteActivity : ViewAdvancedNoteActivity() {
     }
 
     history.add(note)
-    historySize += note.description.length
+    historySize += note.content.length
     historyIndex += 1
 
     // 0.5MB limit on history
     if (historySize >= 1024 * 512 || history.size >= 15) {
       val item = history.removeAt(0)
-      historySize -= item.description.length
+      historySize -= item.content.length
       historyIndex -= 1
     }
   }

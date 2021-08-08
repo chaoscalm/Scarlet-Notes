@@ -19,7 +19,7 @@ class FormatBuilder {
     return format
   }
 
-  fun getDescription(formats: List<Format>): String {
+  fun getContent(formats: List<Format>): String {
     val array = JSONArray()
     for (format in formats) {
       val json = format.toJson()
@@ -31,7 +31,7 @@ class FormatBuilder {
     return JSONObject(cache).toString()
   }
 
-  fun getSmarterDescription(formats: List<Format>): String {
+  fun getSmarterContent(formats: List<Format>): String {
     val extractedFormats = emptyList<Format>().toMutableList()
     for (format in formats) {
       if (format.formatType != FormatType.TEXT) {
@@ -45,7 +45,7 @@ class FormatBuilder {
           MarkdownSegmentType.CHECKLIST_UNCHECKED))
       extractedFormats.addAll(moreFormats)
     }
-    return getDescription(extractedFormats)
+    return getContent(extractedFormats)
   }
 
   fun getFormats(note: String): List<Format> {

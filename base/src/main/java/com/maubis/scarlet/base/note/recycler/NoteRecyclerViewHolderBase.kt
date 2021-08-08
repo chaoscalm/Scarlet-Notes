@@ -26,7 +26,7 @@ open class NoteRecyclerViewHolderBase(context: Context, view: View) : RecyclerVi
   protected val view: CardView
   protected val tags: TextView
   protected val image: ImageView
-  protected val description: TextView
+  protected val content: TextView
   protected val edit: ImageView
   protected val share: ImageView
   protected val delete: ImageView
@@ -44,7 +44,7 @@ open class NoteRecyclerViewHolderBase(context: Context, view: View) : RecyclerVi
     this.view = view as CardView
     tags = view.findViewById(R.id.tags)
     image = view.findViewById(R.id.image)
-    description = view.findViewById(R.id.description)
+    content = view.findViewById(R.id.description)
     share = view.findViewById(R.id.share_button)
     delete = view.findViewById(R.id.delete_button)
     copy = view.findViewById(R.id.copy_button)
@@ -60,7 +60,7 @@ open class NoteRecyclerViewHolderBase(context: Context, view: View) : RecyclerVi
 
   override fun populate(itemData: RecyclerItem, extra: Bundle?) {
     val item = itemData as NoteRecyclerItem
-    setDescription(item)
+    setContent(item)
     setImage(item)
     setIndicators(item)
     setMetaText(item)
@@ -75,11 +75,11 @@ open class NoteRecyclerViewHolderBase(context: Context, view: View) : RecyclerVi
     setActionBar(item, extra)
   }
 
-  private fun setDescription(note: NoteRecyclerItem) {
-    description.setTypeface(appTypeface.text(), Typeface.NORMAL)
-    description.text = note.description
-    description.maxLines = note.lineCount
-    description.setTextColor(note.descriptionColor)
+  private fun setContent(note: NoteRecyclerItem) {
+    content.setTypeface(appTypeface.text(), Typeface.NORMAL)
+    content.text = note.content
+    content.maxLines = note.lineCount
+    content.setTextColor(note.contentColor)
   }
 
   private fun setImage(note: NoteRecyclerItem) {

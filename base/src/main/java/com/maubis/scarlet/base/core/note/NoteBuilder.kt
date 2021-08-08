@@ -31,7 +31,7 @@ class NoteBuilder {
       formats.add(Format(FormatType.HEADING, title))
     }
     formats.add(Format(FormatType.TEXT, description))
-    note.description = FormatBuilder().getDescription(formats)
+    note.content = FormatBuilder().getContent(formats)
     return note
   }
 
@@ -45,7 +45,7 @@ class NoteBuilder {
       formats.add(Format(FormatType.HEADING, title))
     }
     formats.addAll(formatSource)
-    note.description = FormatBuilder().getDescription(formats)
+    note.content = FormatBuilder().getContent(formats)
     return note
   }
 
@@ -71,7 +71,7 @@ class NoteBuilder {
     note.uid = reference.uid
     note.uuid = reference.uuid
     note.state = reference.state
-    note.description = reference.description
+    note.content = reference.content
     note.timestamp = reference.timestamp
     note.updateTimestamp = reference.updateTimestamp
     note.color = reference.color

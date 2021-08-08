@@ -25,7 +25,7 @@ class ExportableNote(
 ) : Serializable {
   constructor(note: Note) : this(
     note.uuid,
-    note.description,
+    note.content,
     note.timestamp,
     note.updateTimestamp,
     note.color,
@@ -48,7 +48,7 @@ class ExportableNote(
   private fun createNote(): Note {
     val note = Note()
     note.uuid = uuid
-    note.description = description
+    note.content = description
     note.timestamp = timestamp
     note.updateTimestamp = max(updateTimestamp, timestamp)
     note.color = color

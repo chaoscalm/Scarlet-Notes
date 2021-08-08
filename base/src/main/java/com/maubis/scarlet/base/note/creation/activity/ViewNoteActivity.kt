@@ -189,7 +189,7 @@ open class ViewAdvancedNoteActivity : SecuredActivity(), INoteOptionSheetActivit
 
     trueFormats[truePosition] = format
 
-    note.description = FormatBuilder().getSmarterDescription(sectionPreservingSort(trueFormats))
+    note.content = FormatBuilder().getSmarterContent(sectionPreservingSort(trueFormats))
     displayNote()
     saveNoteIfNeeded()
   }

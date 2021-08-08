@@ -20,7 +20,7 @@ import com.maubis.scarlet.base.support.utils.logNonCriticalError
 class Note {
     @PrimaryKey(autoGenerate = true)
     var uid: Int = 0
-    var description: String = FormatBuilder().getDescription(emptyList())
+    var content: String = FormatBuilder().getContent(emptyList())
     var color: Int = sNoteDefaultColor
     var state: NoteState = NoteState.DEFAULT
     var timestamp: Long = System.currentTimeMillis()
@@ -38,7 +38,7 @@ class Note {
     }
 
     fun isEqual(note: Note): Boolean {
-        return TextUtils.areEqualNullIsEmpty(this.description, note.description)
+        return TextUtils.areEqualNullIsEmpty(this.content, note.content)
                 && TextUtils.areEqualNullIsEmpty(this.uuid, note.uuid)
                 && TextUtils.areEqualNullIsEmpty(this.tags, note.tags)
                 && this.timestamp == note.timestamp
@@ -50,7 +50,7 @@ class Note {
     }
 
     fun getFormats(): List<Format> {
-        return FormatBuilder().getFormats(this.description)
+        return FormatBuilder().getFormats(this.content)
     }
 
     private fun getMeta(): NoteMeta {

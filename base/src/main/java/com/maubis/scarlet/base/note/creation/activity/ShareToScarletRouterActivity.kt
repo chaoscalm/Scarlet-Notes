@@ -80,7 +80,7 @@ class ShareToScarletRouterActivity : AppCompatActivity() {
     for (image in images.reversed()) {
       formats.add(0, Format(FormatType.IMAGE, image.name))
     }
-    note.description = FormatBuilder().getSmarterDescription(formats)
+    note.content = FormatBuilder().getSmarterContent(formats)
     note.save(this)
     return note
   }
