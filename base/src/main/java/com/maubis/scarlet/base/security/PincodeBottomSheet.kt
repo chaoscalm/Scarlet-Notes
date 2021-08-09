@@ -1,16 +1,16 @@
 package com.maubis.scarlet.base.security
 
 import android.app.Dialog
+import android.content.res.ColorStateList
+import android.text.InputFilter
 import android.text.InputType
 import android.text.Layout
+import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.appcompat.app.AppCompatActivity
 import com.facebook.litho.*
 import com.facebook.litho.annotations.*
-import com.facebook.litho.widget.EditText
-import com.facebook.litho.widget.Image
-import com.facebook.litho.widget.Text
-import com.facebook.litho.widget.TextChangedEvent
+import com.facebook.litho.widget.*
 import com.facebook.yoga.YogaAlign
 import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.R
@@ -27,7 +27,6 @@ import com.maubis.scarlet.base.support.sheets.openSheet
 import com.maubis.scarlet.base.support.specs.EmptySpec
 import com.maubis.scarlet.base.support.ui.ThemeColorType
 import com.maubis.scarlet.base.support.ui.ThemedActivity
-import com.maubis.scarlet.base.support.utils.getEditorActionListener
 import com.maubis.scarlet.base.support.utils.isBiometricEnabled
 import com.maubis.scarlet.base.support.utils.showBiometricPrompt
 
@@ -80,26 +79,22 @@ object PincodeSheetViewSpec {
           .marginDip(YogaEdge.BOTTOM, 16f)
           .textColor(appTheme.get(ThemeColorType.TERTIARY_TEXT)))
       .child(
-        EditText.create(context)
+        TextInput.create(context)
           .backgroundRes(editBackground)
           .textSizeRes(R.dimen.font_size_xlarge)
           .minWidthDip(128f)
-          .maxLength(4)
+          .inputFilter(InputFilter.LengthFilter(4))
           .alignSelf(YogaAlign.CENTER)
           .hint("****")
           .inputType(InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_VARIATION_PASSWORD)
-          .textAlignment(Layout.Alignment.ALIGN_CENTER)
+          .textAlignment(View.TEXT_ALIGNMENT_CENTER)
           .typeface(appTypeface.text())
-          .textColor(appTheme.get(ThemeColorType.PRIMARY_TEXT))
+          .textColorStateList(ColorStateList.valueOf(appTheme.get(ThemeColorType.PRIMARY_TEXT)))
           .paddingDip(YogaEdge.HORIZONTAL, 22f)
           .paddingDip(YogaEdge.VERTICAL, 6f)
           .marginDip(YogaEdge.VERTICAL, 8f)
           .imeOptions(EditorInfo.IME_ACTION_DONE)
-          .editorActionListener(getEditorActionListener({
-                                                          data.onActionClicked(sPincodeSheetPasscodeEntered)
-                                                          dismiss()
-                                                          true
-                                                        }))
+          .editorActionEventHandler(PincodeSheetView.onPinEditorAction(context))
           .textChangedEventHandler(PincodeSheetView.onTextChangeListener(context)))
       .child(
         Row.create(context)
@@ -141,6 +136,15 @@ object PincodeSheetViewSpec {
               .typeface(appTypeface.title())
               .clickHandler(PincodeSheetView.onActionClick(context))))
     return component.build()
+  }
+
+  @OnEvent(EditorActionEvent::class)
+  fun onPinEditorAction(context: ComponentContext,
+                        @Prop data: PincodeSheetData,
+                        @Prop dismiss: () -> Unit): Boolean {
+    data.onActionClicked(sPincodeSheetPasscodeEntered)
+    dismiss()
+    return true
   }
 
   @OnEvent(TextChangedEvent::class)

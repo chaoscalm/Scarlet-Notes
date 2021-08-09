@@ -1,14 +1,14 @@
 package com.maubis.scarlet.base.security
 
+import android.content.res.ColorStateList
+import android.text.InputFilter
 import android.text.InputType
 import android.text.Layout
+import android.view.View
 import android.view.inputmethod.EditorInfo
 import com.facebook.litho.*
 import com.facebook.litho.annotations.*
-import com.facebook.litho.widget.EditText
-import com.facebook.litho.widget.Image
-import com.facebook.litho.widget.Text
-import com.facebook.litho.widget.TextChangedEvent
+import com.facebook.litho.widget.*
 import com.facebook.yoga.YogaAlign
 import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.R
@@ -16,7 +16,6 @@ import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.support.specs.EmptySpec
 import com.maubis.scarlet.base.support.ui.ThemeColorType
-import com.maubis.scarlet.base.support.utils.getEditorActionListener
 
 @LayoutSpec
 object AppLockViewSpec {
@@ -104,32 +103,34 @@ object AppLockContentViewSpec {
           .typeface(appTypeface.title()))
       .child(EmptySpec.create(context).flexGrow(1f))
       .child(
-        EditText.create(context)
+        TextInput.create(context)
           .backgroundRes(editBackground)
           .textSizeRes(R.dimen.font_size_xlarge)
           .minWidthDip(128f)
-          .maxLength(4)
+          .inputFilter(InputFilter.LengthFilter(4))
           .hint("****")
           .alignSelf(YogaAlign.CENTER)
           .inputType(InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_VARIATION_PASSWORD)
-          .textAlignment(Layout.Alignment.ALIGN_CENTER)
+          .textAlignment(View.TEXT_ALIGNMENT_CENTER)
           .typeface(appTypeface.text())
-          .textColor(appTheme.get(ThemeColorType.PRIMARY_TEXT))
+          .textColorStateList(ColorStateList.valueOf(appTheme.get(ThemeColorType.PRIMARY_TEXT)))
           .paddingDip(YogaEdge.HORIZONTAL, 22f)
           .paddingDip(YogaEdge.VERTICAL, 6f)
           .imeOptions(EditorInfo.IME_ACTION_DONE)
-          .editorActionListener(getEditorActionListener({
-                                                          onClick()
-                                                          true
-                                                        }))
+          .editorActionEventHandler(AppLockContentView.onPinEditorAction(context))
           .textChangedEventHandler(AppLockContentView.onTextChanged(context)))
       .child(EmptySpec.create(context).flexGrow(1f))
       .build()
+  }
+
+  @OnEvent(EditorActionEvent::class)
+  fun onPinEditorAction(context: ComponentContext, @Prop onClick: () -> Unit): Boolean {
+    onClick()
+    return true
   }
 
   @OnEvent(TextChangedEvent::class)
   fun onTextChanged(context: ComponentContext, @FromEvent text: String, @Prop onTextChange: (String) -> Unit) {
     onTextChange(text)
   }
-
 }
