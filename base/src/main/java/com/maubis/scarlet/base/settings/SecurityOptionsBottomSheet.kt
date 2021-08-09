@@ -69,11 +69,9 @@ class SecurityOptionsBottomSheet : LithoOptionBottomSheet() {
             else -> openCreatePasswordDialog(dialog)
           }
         },
+        isSelectable = true,
         selected = sSecurityAppLockEnabled,
-        actionIcon = when {
-          sSecurityAppLockEnabled -> R.drawable.ic_done_white_48dp
-          else -> 0
-        }
+        actionIcon = R.drawable.ic_done_white_48dp
       ))
 
     options.add(
@@ -93,11 +91,9 @@ class SecurityOptionsBottomSheet : LithoOptionBottomSheet() {
             else -> openCreatePasswordDialog(dialog)
           }
         },
+        isSelectable = true,
         selected = sSecurityAskPinAlways,
-        actionIcon = when {
-          sSecurityAskPinAlways -> R.drawable.ic_done_white_48dp
-          else -> 0
-        }
+        actionIcon = R.drawable.ic_done_white_48dp
       ))
 
     val hasFingerprint = deviceHasBiometricEnabled(requireContext())
