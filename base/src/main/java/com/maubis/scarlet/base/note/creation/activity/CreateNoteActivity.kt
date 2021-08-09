@@ -175,10 +175,6 @@ open class CreateNoteActivity : ViewAdvancedNoteActivity() {
   }
 
   protected fun updateNoteIfNeeded() {
-    if (!formatsInitialised.get()) {
-      return
-    }
-
     val vLastNoteInstance = history.getOrNull(historyIndex) ?: note
     note.content = FormatBuilder().getSmarterContent(formats)
 

@@ -45,7 +45,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.*
-import java.util.concurrent.atomic.AtomicBoolean
 
 const val INTENT_KEY_NOTE_ID = "NOTE_ID"
 
@@ -61,7 +60,6 @@ open class ViewAdvancedNoteActivity : SecuredActivity(), INoteOptionSheetActivit
 
   protected lateinit var note: Note
   protected lateinit var formats: MutableList<Format>
-  protected val formatsInitialised = AtomicBoolean(false)
 
   protected lateinit var views: ActivityAdvancedNoteBinding
   protected lateinit var adapter: FormatAdapter
@@ -134,7 +132,6 @@ open class ViewAdvancedNoteActivity : SecuredActivity(), INoteOptionSheetActivit
       false -> note.getSmartFormats()
     }.toMutableList()
     adapter.addItems(formats)
-    formatsInitialised.set(true)
 
     if (!editModeValue) {
       maybeAddTags()
