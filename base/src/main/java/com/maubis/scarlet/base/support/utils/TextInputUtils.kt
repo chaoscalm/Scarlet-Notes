@@ -38,7 +38,3 @@ fun trim(source: CharSequence?): CharSequence {
   }
   return source.subSequence(0, index + 1)
 }
-
-fun removeMarkdownHeaders(source: String): String {
-  return source.replace(Regex("(^|\n)(\\s*)(#+)(\\s)"), "$1$2$4")
-}

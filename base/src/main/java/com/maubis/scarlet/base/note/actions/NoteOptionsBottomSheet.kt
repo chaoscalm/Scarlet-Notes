@@ -5,7 +5,6 @@ import android.content.Intent
 import android.content.pm.ShortcutInfo
 import android.graphics.drawable.Icon
 import android.view.View
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.maubis.scarlet.base.R
@@ -74,7 +73,6 @@ class NoteOptionsBottomSheet : GridBottomSheetBase() {
       return
     }
 
-    val groupCardLayout = dlg.findViewById<LinearLayout>(R.id.group_card_layout)
     val tagCardLayout = dlg.findViewById<View>(R.id.tag_card_layout)
     val selectCardLayout = dlg.findViewById<View>(R.id.select_notes_layout)
 
