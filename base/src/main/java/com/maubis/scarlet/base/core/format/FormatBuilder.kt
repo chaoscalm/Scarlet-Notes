@@ -26,8 +26,7 @@ class FormatBuilder {
       if (json != null) array.put(json)
     }
 
-    val cache = HashMap<String, Any>()
-    cache[KEY_NOTE] = array
+    val cache = mapOf(KEY_NOTE to array)
     return JSONObject(cache).toString()
   }
 

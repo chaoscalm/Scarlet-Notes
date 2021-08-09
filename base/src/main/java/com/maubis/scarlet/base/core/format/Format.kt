@@ -55,9 +55,7 @@ class Format {
       return null
     }
 
-    val map = HashMap<String, Any>()
-    map["format"] = formatType.name
-    map["text"] = text
+    val map = mapOf("format" to formatType.name, "text" to text)
     return JSONObject(map)
   }
 }

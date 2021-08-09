@@ -3,11 +3,11 @@
 buildscript {
     ext.kotlin_version = '1.5.21'
 
-    ext.appconfig_version_code = 156
-    ext.appconfig_version = '7.5.4'
+    ext.appconfig_version_code = 1
+    ext.appconfig_version = '8.0.0'
     ext.appconfig_min_os_version = 21
     ext.appconfig_target_os_version = 28
-    ext.appconfig_compile_sdk_version = 28
+    ext.appconfig_compile_sdk_version = 29
 
     repositories {
         google()
