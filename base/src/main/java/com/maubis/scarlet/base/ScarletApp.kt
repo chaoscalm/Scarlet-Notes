@@ -2,8 +2,8 @@ package com.maubis.scarlet.base
 
 import android.app.Application
 import android.content.SharedPreferences
-import android.preference.PreferenceManager
 import android.util.Log
+import androidx.preference.PreferenceManager
 import com.evernote.android.job.JobManager
 import com.facebook.soloader.SoLoader
 import com.maubis.scarlet.base.core.note.NoteImage
