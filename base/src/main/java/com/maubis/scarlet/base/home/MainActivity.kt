@@ -87,20 +87,18 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
     outState.putStringArrayList(TAGS_UUIDS, ArrayList(state.tags.map { it.uuid }))
   }
 
-  override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+  override fun onRestoreInstanceState(savedInstanceState: Bundle) {
     super.onRestoreInstanceState(savedInstanceState)
 
-    if (savedInstanceState != null) {
-      isInSearchMode = savedInstanceState.getBoolean(IS_IN_SEARCH_MODE)
-      state.text = savedInstanceState.getString(SEARCH_TEXT, "")
-      state.colors = savedInstanceState.getIntegerArrayList(SEARCH_COLORS) ?: ArrayList()
-      state.mode = HomeNavigationMode.values()[savedInstanceState.getInt(NAVIGATION_MODE)]
-      savedInstanceState.getString(CURRENT_FOLDER_UUID)?.let {
-        state.currentFolder = data.folders.getByUUID(it)
-      }
-      savedInstanceState.getStringArrayList(TAGS_UUIDS)?.forEach {
-        data.tags.getByUUID(it)?.let { state.tags.add(it) }
-      }
+    isInSearchMode = savedInstanceState.getBoolean(IS_IN_SEARCH_MODE)
+    state.text = savedInstanceState.getString(SEARCH_TEXT, "")
+    state.colors = savedInstanceState.getIntegerArrayList(SEARCH_COLORS) ?: ArrayList()
+    state.mode = HomeNavigationMode.values()[savedInstanceState.getInt(NAVIGATION_MODE)]
+    savedInstanceState.getString(CURRENT_FOLDER_UUID)?.let {
+      state.currentFolder = data.folders.getByUUID(it)
+    }
+    savedInstanceState.getStringArrayList(TAGS_UUIDS)?.forEach {
+      data.tags.getByUUID(it)?.let { state.tags.add(it) }
     }
   }
 
