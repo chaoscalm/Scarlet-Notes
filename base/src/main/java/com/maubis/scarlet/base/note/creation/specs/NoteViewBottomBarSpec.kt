@@ -34,9 +34,7 @@ enum class NoteCreateBottomBarType {
 object NoteCreationBottomBarSpec {
 
   @OnCreateInitialState
-  fun onCreateInitialState(
-    context: ComponentContext,
-    state: StateValue<NoteCreateBottomBarType>) {
+  fun onCreateInitialState(state: StateValue<NoteCreateBottomBarType>) {
     state.set(if (sEditorMarkdownDefault) NoteCreateBottomBarType.DEFAULT_MARKDOWNS else NoteCreateBottomBarType.DEFAULT_SEGMENTS)
   }
 

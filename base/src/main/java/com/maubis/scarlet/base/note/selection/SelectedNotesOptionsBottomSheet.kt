@@ -26,8 +26,8 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
   override fun getOptions(componentContext: ComponentContext, dialog: Dialog): List<GridSectionItem> {
     val options = ArrayList<GridSectionItem>()
     options.add(getQuickActions(componentContext))
-    options.add(getSecondaryActions(componentContext, dialog))
-    options.add(getTertiaryActions(componentContext, dialog))
+    options.add(getSecondaryActions(componentContext))
+    options.add(getTertiaryActions(componentContext))
     return options
   }
 
@@ -140,7 +140,7 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
       sectionColor = ContextCompat.getColor(activity, R.color.material_blue_800))
   }
 
-  private fun getSecondaryActions(componentContext: ComponentContext, dialog: Dialog): GridSectionItem {
+  private fun getSecondaryActions(componentContext: ComponentContext): GridSectionItem {
     val activity = componentContext.androidContext as SelectNotesActivity
     val options = ArrayList<GridSectionOptionItem>()
 
@@ -217,7 +217,7 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
       sectionColor = ContextCompat.getColor(activity, R.color.material_red_800))
   }
 
-  private fun getTertiaryActions(componentContext: ComponentContext, dialog: Dialog): GridSectionItem {
+  private fun getTertiaryActions(componentContext: ComponentContext): GridSectionItem {
     val activity = componentContext.androidContext as SelectNotesActivity
     val options = ArrayList<GridSectionOptionItem>()
 

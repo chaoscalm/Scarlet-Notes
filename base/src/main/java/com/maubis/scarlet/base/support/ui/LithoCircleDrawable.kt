@@ -1,10 +1,11 @@
 package com.maubis.scarlet.base.support.ui
 
 import android.graphics.*
+import android.graphics.drawable.Drawable
 import com.facebook.litho.drawable.ComparableDrawable
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 
-class LithoCircleDrawable(color: Int, alpha: Int = 255, val showBorder: Boolean = false) : ComparableDrawable() {
+class LithoCircleDrawable(color: Int, alpha: Int = 255, val showBorder: Boolean = false) : Drawable(), ComparableDrawable {
   private val mPaint: Paint
   private val mBorderPaint: Paint
   private var mRadius = 0
@@ -55,5 +56,4 @@ class LithoCircleDrawable(color: Int, alpha: Int = 255, val showBorder: Boolean 
       && other.mRadius == mRadius
       && other.mPaint.color == mPaint.color
   }
-
 }
