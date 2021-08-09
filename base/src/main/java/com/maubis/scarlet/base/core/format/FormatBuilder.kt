@@ -31,7 +31,7 @@ class FormatBuilder {
   }
 
   fun getSmarterContent(formats: List<Format>): String {
-    val extractedFormats = emptyList<Format>().toMutableList()
+    val extractedFormats = mutableListOf<Format>()
     for (format in formats) {
       if (format.formatType != FormatType.TEXT) {
         extractedFormats.add(format)

@@ -51,7 +51,7 @@ abstract class SelectableNotesActivityBase : SecuredActivity(), INoteSelectorAct
           return notes
         }
 
-        val items = emptyList<RecyclerItem>().toMutableList()
+        val items = mutableListOf<RecyclerItem>()
         var lastFolder = ""
         notes.forEach {
           val noteFolderId = it.note.folder

@@ -261,7 +261,7 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
   }
 
   private fun unifiedSearchSynchronous(): List<RecyclerItem> {
-    val allItems = emptyList<RecyclerItem>().toMutableList()
+    val allItems = mutableListOf<RecyclerItem>()
     if (state.currentFolder != null) {
       val allNotes = unifiedSearchSynchronous(state)
       allItems.addAll(allNotes.map { NoteRecyclerItem(this, it) })

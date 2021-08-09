@@ -40,7 +40,7 @@ open class CreateNoteActivity : ViewAdvancedNoteActivity() {
   private var historyIndex = 0
   private var historySize = 0L
   private var historyModified = false
-  private val history: MutableList<Note> = emptyList<Note>().toMutableList()
+  private val history: MutableList<Note> = mutableListOf<Note>()
 
   override val editModeValue: Boolean get() = true
 

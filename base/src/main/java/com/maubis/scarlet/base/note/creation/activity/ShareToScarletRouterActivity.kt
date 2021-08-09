@@ -61,7 +61,7 @@ class ShareToScarletRouterActivity : AppCompatActivity() {
     }
     note.save(this)
 
-    val images = emptyList<File>().toMutableList()
+    val images = mutableListOf<File>()
     for (uri in sharedImages) {
       try {
         val inputStream = this.contentResolver.openInputStream(uri)
@@ -95,7 +95,7 @@ class ShareToScarletRouterActivity : AppCompatActivity() {
   }
 
   private fun handleSendImage(intent: Intent): List<Uri> {
-    val images = emptyList<Uri>().toMutableList()
+    val images = mutableListOf<Uri>()
     (intent.getParcelableExtra<Parcelable>(Intent.EXTRA_STREAM) as? Uri)?.let {
       images.add(it)
     }
@@ -103,7 +103,7 @@ class ShareToScarletRouterActivity : AppCompatActivity() {
   }
 
   private fun handleSendMultipleImages(intent: Intent): List<Uri> {
-    val images = emptyList<Uri>().toMutableList()
+    val images = mutableListOf<Uri>()
     intent.getParcelableArrayListExtra<Parcelable>(Intent.EXTRA_STREAM)?.let {
       for (parcelable in it) {
         if (parcelable is Uri) {

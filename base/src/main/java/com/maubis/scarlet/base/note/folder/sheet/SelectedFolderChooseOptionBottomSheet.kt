@@ -7,7 +7,7 @@ import com.maubis.scarlet.base.note.selection.SelectNotesActivity
 class SelectedFolderChooseOptionsBottomSheet : FolderChooserBottomSheetBase() {
 
   var onActionListener: (Folder, Boolean) -> Unit = { _, _ -> }
-  var selectedFolders: MutableList<String> = emptyList<String>().toMutableList()
+  var selectedFolders: MutableList<String> = mutableListOf<String>()
   var selectedFolder: String = ""
 
   override fun preComponentRender(componentContext: ComponentContext) {

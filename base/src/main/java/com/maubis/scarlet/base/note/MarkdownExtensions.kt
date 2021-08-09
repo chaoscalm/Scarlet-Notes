@@ -27,7 +27,7 @@ fun String.toInternalFormats(): List<Format> {
  * It's possible to pass specific formats which will be preserved in the formats
  */
 fun String.toInternalFormats(whitelistedSegments: Array<MarkdownSegmentType>): List<Format> {
-  val extractedFormats = emptyList<Format>().toMutableList()
+  val extractedFormats = mutableListOf<Format>()
   val segments = TextSegmenter(this).get()
 
   var lastFormat: Format? = null
