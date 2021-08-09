@@ -1,6 +1,5 @@
 package com.maubis.scarlet.base.home
 
-import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.core.note.sort
 import com.maubis.scarlet.base.database.entities.Folder
@@ -12,11 +11,11 @@ import com.maubis.scarlet.base.note.isNoteLockedButAppUnlocked
 import com.maubis.scarlet.base.settings.SortingOptionsBottomSheet
 
 class SearchState(
-        var text: String = "",
-        var mode: HomeNavigationMode = HomeNavigationMode.DEFAULT,
-        var currentFolder: Folder? = null,
-        var colors: MutableList<Int> = emptyList<Int>().toMutableList(),
-        var tags: MutableList<Tag> = emptyList<Tag>().toMutableList()) {
+    var text: String = "",
+    var mode: HomeNavigationMode = HomeNavigationMode.DEFAULT,
+    var currentFolder: Folder? = null,
+    var colors: MutableList<Int> = mutableListOf<Int>(),
+    var tags: MutableList<Tag> = mutableListOf<Tag>()) {
 
   fun hasFilter(): Boolean {
     return currentFolder != null
@@ -43,15 +42,6 @@ class SearchState(
     tags.clear()
     return this
   }
-
-  fun copy(): SearchState {
-    return SearchState(
-      text,
-      mode,
-      currentFolder,
-      colors.filter { true }.toMutableList(),
-      tags.filter { true }.toMutableList())
-  }
 }
 
 fun unifiedSearchSynchronous(state: SearchState): List<Note> {
@@ -74,7 +64,7 @@ fun filterFolder(notes: List<Note>, folder: Folder): List<Note> {
 }
 
 fun filterOutFolders(notes: List<Note>): List<Note> {
-  val allFoldersUUIDs = ScarletApp.data.folders.getAll().map { it.uuid }
+  val allFoldersUUIDs = data.folders.getAll().map { it.uuid }
   val sorting = SortingOptionsBottomSheet.getSortingState()
   val filteredNotes = notes.filter { !allFoldersUUIDs.contains(it.folder) }
   return sort(filteredNotes, sorting)
@@ -83,7 +73,7 @@ fun filterOutFolders(notes: List<Note>): List<Note> {
 fun unifiedSearchWithoutFolder(state: SearchState): List<Note> {
   return getNotesForMode(state)
     .filter { state.colors.isEmpty() || state.colors.contains(it.color) }
-    .filter { note -> state.tags.isEmpty() || state.tags.filter { note.tags.contains(it.uuid) }.isNotEmpty() }
+    .filter { note -> state.tags.isEmpty() || state.tags.any { note.tags.contains(it.uuid) } }
     .filter {
       when {
         state.text.isBlank() -> true

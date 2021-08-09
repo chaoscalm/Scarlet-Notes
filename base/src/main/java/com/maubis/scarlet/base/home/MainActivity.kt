@@ -118,24 +118,21 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
     tagAndColorPicker = TagsAndColorPickerViewHolder(
       this,
       views.searchToolbar.tagsFlexBox,
-      { tag ->
-        val isTagSelected = state.tags.filter { it.uuid == tag.uuid }.isNotEmpty()
-        when (isTagSelected) {
-          true -> {
-            state.tags.removeAll { it.uuid == tag.uuid }
-            startSearch(views.searchToolbar.textField.text.toString())
-            tagAndColorPicker.notifyChanged()
-          }
-          false -> {
-            openTag(tag)
-            tagAndColorPicker.notifyChanged()
-          }
+      onTagClick = { tag ->
+        if (state.isFilteringByTag(tag)) {
+          state.tags.removeAll { it.uuid == tag.uuid }
+          startSearch(views.searchToolbar.textField.text.toString())
+          tagAndColorPicker.notifyChanged()
+        } else {
+          openTag(tag)
+          tagAndColorPicker.notifyChanged()
         }
       },
-      { color ->
-        when (state.colors.contains(color)) {
-          true -> state.colors.remove(color)
-          false -> state.colors.add(color)
+      onColorClick = { color ->
+        if (state.colors.contains(color)) {
+          state.colors.remove(color)
+        } else {
+          state.colors.add(color)
         }
         tagAndColorPicker.notifyChanged()
         startSearch(views.searchToolbar.textField.text.toString())
