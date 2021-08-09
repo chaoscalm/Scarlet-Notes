@@ -41,41 +41,51 @@ class TagsAndColorPickerViewHolder(
   }
 
   private fun setTags() {
-    val length = tags.size
     tags.toList()
-      .subList(0, length.coerceAtMost(6))
+      .subList(0, tags.size.coerceAtMost(6))
       .forEach { tag ->
-        val tagView = View.inflate(activity, R.layout.layout_flexbox_tag_item, null) as View
-        val text = tagView.findViewById<TextView>(R.id.tag_text)
-        text.text = tag.title
-        text.typeface = appTypeface.title()
-
-        val backgroundDrawable = activity.getDrawable(R.drawable.flexbox_selected_tag_item_bg)!!
-        if (activity.state.tags.any { it.uuid == tag.uuid }) {
-          val accentColor = ContextCompat.getColor(activity, R.color.colorAccent)
-          backgroundDrawable.setTint(accentColor)
-          text.setTextColor(accentColor)
-        } else {
-          val themeColor = appTheme.get(ThemeColorType.TERTIARY_TEXT)
-          backgroundDrawable.setTint(themeColor)
-          text.setTextColor(themeColor)
-        }
-        text.background = backgroundDrawable
-
-        tagView.setOnClickListener { onTagClick(tag) }
+        val tagView = buildViewForTag(tag)
         flexbox.addView(tagView)
       }
   }
 
   private fun setColors() {
-    val length = colors.size
     colors.toList()
-      .subList(0, length.coerceAtMost(6))
+      .subList(0, colors.size.coerceAtMost(6))
       .forEach { color ->
-        val colorView = ColorView(activity, R.layout.layout_color_small)
-        colorView.setColor(color, activity.state.colors.contains(color))
-        colorView.setOnClickListener { onColorClick(color) }
+        val colorView = buildViewForColor(color)
         flexbox.addView(colorView)
       }
+  }
+
+  private fun buildViewForTag(tag: Tag): View {
+    val tagView = View.inflate(activity, R.layout.layout_flexbox_tag_item, null) as View
+    val text = tagView.findViewById<TextView>(R.id.tag_text)
+    text.text = tag.title
+    text.typeface = appTypeface.title()
+    setTagTextColor(tag, text)
+    tagView.setOnClickListener { onTagClick(tag) }
+    return tagView
+  }
+
+  private fun setTagTextColor(tag: Tag, text: TextView) {
+    val backgroundDrawable = activity.getDrawable(R.drawable.flexbox_selected_tag_item_bg)!!
+    if (activity.state.isFilteringByTag(tag)) {
+      val accentColor = ContextCompat.getColor(activity, R.color.colorAccent)
+      backgroundDrawable.setTint(accentColor)
+      text.setTextColor(accentColor)
+    } else {
+      val themeColor = appTheme.get(ThemeColorType.TERTIARY_TEXT)
+      backgroundDrawable.setTint(themeColor)
+      text.setTextColor(themeColor)
+    }
+    text.background = backgroundDrawable
+  }
+
+  private fun buildViewForColor(color: Int): View {
+    val colorView = ColorView(activity, R.layout.layout_color_small)
+    colorView.setColor(color, activity.state.colors.contains(color))
+    colorView.setOnClickListener { onColorClick(color) }
+    return colorView
   }
 }

@@ -26,6 +26,8 @@ class SearchState(
       || mode !== HomeNavigationMode.DEFAULT
   }
 
+  fun isFilteringByTag(tag: Tag) = tags.any { it.uuid == tag.uuid }
+
   fun clear(): SearchState {
     mode = HomeNavigationMode.DEFAULT
     text = ""
