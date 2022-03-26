@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.facebook.litho.ComponentContext
@@ -207,7 +208,7 @@ open class CreateNoteActivity : ViewAdvancedNoteActivity() {
   }
 
   private fun startHandler() {
-    val handler = Handler()
+    val handler = Handler(Looper.getMainLooper())
     handler.postDelayed(object : Runnable {
       override fun run() {
         if (active) {
@@ -251,7 +252,7 @@ open class CreateNoteActivity : ViewAdvancedNoteActivity() {
   }
 
   fun focus(position: Int) {
-    val handler = Handler()
+    val handler = Handler(Looper.getMainLooper())
     handler.postDelayed(Runnable {
       val holder = findTextViewHolderAtPosition(position) ?: return@Runnable
       holder.requestEditTextFocus()
@@ -268,7 +269,7 @@ open class CreateNoteActivity : ViewAdvancedNoteActivity() {
       return
     }
 
-    val handler = Handler()
+    val handler = Handler(Looper.getMainLooper())
     handler.postDelayed(Runnable {
       val holder = findTextViewHolderAtPosition(position) ?: return@Runnable
       holder.requestMarkdownAction(markdownType)

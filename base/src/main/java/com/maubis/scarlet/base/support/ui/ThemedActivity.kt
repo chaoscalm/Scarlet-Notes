@@ -83,10 +83,10 @@ abstract class ThemedActivity : AppCompatActivity(), IThemeChangeListener {
     }
   }
 
-  fun tryOpeningTheKeyboard() {
+  fun tryOpeningTheKeyboard(focusedView: View) {
     try {
       val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-      inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
+      inputMethodManager.showSoftInput(focusedView, InputMethodManager.SHOW_FORCED)
     } catch (exception: Exception) {
       logAndMaybeDisplayError(this, exception)
     }

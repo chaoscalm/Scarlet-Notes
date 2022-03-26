@@ -2,6 +2,7 @@ package com.maubis.scarlet.base.home
 
 import android.content.Context
 import android.os.Handler
+import android.os.Looper
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.LinearLayout
@@ -13,7 +14,7 @@ import com.maubis.scarlet.base.database.entities.NoteState
 
 class NoteDeletionSnackbar(val layout: LinearLayout, val alwaysRunnable: () -> Unit) {
 
-  val handler = Handler()
+  val handler = Handler(Looper.getMainLooper())
   val runnable = {
     layout.visibility = GONE
   }

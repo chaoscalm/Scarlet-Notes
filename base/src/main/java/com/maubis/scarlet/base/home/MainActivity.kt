@@ -23,7 +23,6 @@ import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.database.entities.NoteState
 import com.maubis.scarlet.base.database.entities.Tag
 import com.maubis.scarlet.base.databinding.ActivityMainBinding
-import com.maubis.scarlet.base.home.*
 import com.maubis.scarlet.base.home.recycler.*
 import com.maubis.scarlet.base.note.actions.INoteOptionSheetActivity
 import com.maubis.scarlet.base.note.folder.FolderRecyclerItem
@@ -40,8 +39,13 @@ import com.maubis.scarlet.base.settings.sUIUseGridView
 import com.maubis.scarlet.base.support.database.HouseKeeperJob
 import com.maubis.scarlet.base.support.recycler.RecyclerItem
 import com.maubis.scarlet.base.support.specs.ToolbarColorConfig
-import com.maubis.scarlet.base.support.ui.*
-import kotlinx.coroutines.*
+import com.maubis.scarlet.base.support.ui.SecuredActivity
+import com.maubis.scarlet.base.support.ui.ThemeColorType
+import com.maubis.scarlet.base.support.ui.sThemeIsAutomatic
+import com.maubis.scarlet.base.support.ui.setThemeFromSystem
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
   companion object {
@@ -330,8 +334,8 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
     views.searchToolbar.textField.setText(state.text)
     views.mainToolbar.root.visibility = View.GONE
     views.searchToolbar.root.visibility = View.VISIBLE
-    tryOpeningTheKeyboard()
     views.searchToolbar.textField.requestFocus()
+    tryOpeningTheKeyboard(views.searchToolbar.textField)
     lifecycleScope.launch {
       withContext(Dispatchers.IO) { tagAndColorPicker.reset() }
       tagAndColorPicker.notifyChanged()
