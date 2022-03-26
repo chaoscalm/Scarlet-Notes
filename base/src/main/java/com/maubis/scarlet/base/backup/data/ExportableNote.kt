@@ -1,7 +1,6 @@
 package com.maubis.scarlet.base.backup.data
 
 import android.content.Context
-import com.google.gson.Gson
 import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.core.note.generateUUID
 import com.maubis.scarlet.base.database.entities.Note
@@ -20,7 +19,6 @@ class ExportableNote(
   var color: Int,
   var state: String,
   var tags: String,
-  var meta: Map<String, Any>,
   var folder: String
 ) : Serializable {
   constructor(note: Note) : this(
@@ -31,7 +29,6 @@ class ExportableNote(
     note.color,
     note.state.name,
     note.tags,
-    emptyMap(),
     note.folder
   )
 
@@ -54,7 +51,6 @@ class ExportableNote(
     note.color = color
     note.state = runCatching { NoteState.valueOf(state) }.getOrDefault(NoteState.DEFAULT)
     note.tags = tags
-    note.meta = Gson().toJson(meta)
     note.folder = folder
     return note
   }
@@ -72,7 +68,6 @@ class ExportableNote(
         json["color"] as Int,
         "",
         "",
-        emptyMap(),
         "")
     }
 
@@ -85,7 +80,6 @@ class ExportableNote(
         json["color"] as Int,
         json["state"] as String,
         convertTagsJSONArrayToString(json["tags"] as JSONArray),
-        emptyMap(),
         "")
     }
 
@@ -98,7 +92,6 @@ class ExportableNote(
         json["color"] as Int,
         json["state"] as String,
         convertTagsJSONArrayToString(json["tags"] as JSONArray),
-        emptyMap(),
         "")
     }
 
