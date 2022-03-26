@@ -1,12 +1,11 @@
 package com.maubis.scarlet.base.database.entities
 
 import androidx.room.Entity
-import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.core.note.generateUUID
 
-@Entity(tableName = "tag", indices = [Index("uid")])
+@Entity(tableName = "tag")
 class Tag(var title: String = "", var uuid: String = generateUUID()) {
     @PrimaryKey(autoGenerate = true)
     var uid = 0

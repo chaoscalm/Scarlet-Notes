@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "fb58c8bb4dbc6407e21cdab7725f8de8",
+    "identityHash": "a10398fd3f66c6813ea0aafedc72c0ab",
     "entities": [
       {
         "tableName": "note",
@@ -93,16 +93,7 @@
           ],
           "autoGenerate": true
         },
-        "indices": [
-          {
-            "name": "index_note_uid",
-            "unique": false,
-            "columnNames": [
-              "uid"
-            ],
-            "createSql": "CREATE INDEX IF NOT EXISTS `index_note_uid` ON `${TABLE_NAME}` (`uid`)"
-          }
-        ],
+        "indices": [],
         "foreignKeys": []
       },
       {
@@ -134,16 +125,7 @@
           ],
           "autoGenerate": true
         },
-        "indices": [
-          {
-            "name": "index_tag_uid",
-            "unique": false,
-            "columnNames": [
-              "uid"
-            ],
-            "createSql": "CREATE INDEX IF NOT EXISTS `index_tag_uid` ON `${TABLE_NAME}` (`uid`)"
-          }
-        ],
+        "indices": [],
         "foreignKeys": []
       },
       {
@@ -169,16 +151,7 @@
           ],
           "autoGenerate": false
         },
-        "indices": [
-          {
-            "name": "index_widget_widgetId",
-            "unique": false,
-            "columnNames": [
-              "widgetId"
-            ],
-            "createSql": "CREATE INDEX IF NOT EXISTS `index_widget_widgetId` ON `${TABLE_NAME}` (`widgetId`)"
-          }
-        ],
+        "indices": [],
         "foreignKeys": []
       },
       {
@@ -228,23 +201,14 @@
           ],
           "autoGenerate": true
         },
-        "indices": [
-          {
-            "name": "index_folder_uid",
-            "unique": false,
-            "columnNames": [
-              "uid"
-            ],
-            "createSql": "CREATE INDEX IF NOT EXISTS `index_folder_uid` ON `${TABLE_NAME}` (`uid`)"
-          }
-        ],
+        "indices": [],
         "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'fb58c8bb4dbc6407e21cdab7725f8de8')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a10398fd3f66c6813ea0aafedc72c0ab')"
     ]
   }
 }

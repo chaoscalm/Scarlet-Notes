@@ -2,7 +2,6 @@ package com.maubis.scarlet.base.database.entities
 
 import android.content.Context
 import androidx.room.Entity
-import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.github.bijoysingh.starter.util.TextUtils
 import com.google.gson.Gson
@@ -16,7 +15,7 @@ import com.maubis.scarlet.base.note.mark
 import com.maubis.scarlet.base.settings.sNoteDefaultColor
 import com.maubis.scarlet.base.support.utils.logNonCriticalError
 
-@Entity(tableName = "note", indices = [Index("uid")])
+@Entity(tableName = "note")
 class Note {
     @PrimaryKey(autoGenerate = true)
     var uid: Int = 0

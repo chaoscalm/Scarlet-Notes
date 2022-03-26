@@ -1,13 +1,12 @@
 package com.maubis.scarlet.base.database.entities
 
 import androidx.room.Entity
-import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.core.note.generateUUID
 import com.maubis.scarlet.base.support.utils.dateFormat
 
-@Entity(tableName = "folder", indices = [Index("uid")])
+@Entity(tableName = "folder")
 class Folder() {
     @PrimaryKey(autoGenerate = true)
     var uid = 0
