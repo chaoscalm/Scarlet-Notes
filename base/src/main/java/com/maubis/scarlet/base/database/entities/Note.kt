@@ -3,19 +3,20 @@ package com.maubis.scarlet.base.database.entities
 import android.content.Context
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverter
+import androidx.room.TypeConverters
 import com.github.bijoysingh.starter.util.TextUtils
 import com.google.gson.Gson
 import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.core.format.FormatBuilder
-import com.maubis.scarlet.base.core.note.NoteMeta
 import com.maubis.scarlet.base.core.note.Reminder
 import com.maubis.scarlet.base.core.note.generateUUID
 import com.maubis.scarlet.base.note.mark
 import com.maubis.scarlet.base.settings.sNoteDefaultColor
-import com.maubis.scarlet.base.support.utils.logNonCriticalError
 
 @Entity(tableName = "note")
+@TypeConverters(NoteConverters::class)
 class Note {
     @PrimaryKey(autoGenerate = true)
     var uid: Int = 0
@@ -27,7 +28,7 @@ class Note {
     var locked: Boolean = false
     var pinned: Boolean = false
     var uuid: String = generateUUID()
-    var meta: String = ""
+    var reminder: Reminder? = null
     var excludeFromBackup: Boolean = false
     var tags: String = ""
     var folder: String = ""
@@ -50,25 +51,6 @@ class Note {
 
     fun getFormats(): List<Format> {
         return FormatBuilder().getFormats(this.content)
-    }
-
-    private fun getMeta(): NoteMeta {
-        return try {
-            Gson().fromJson(this.meta, NoteMeta::class.java) ?: NoteMeta()
-        } catch (exception: Exception) {
-            logNonCriticalError(exception)
-            NoteMeta()
-        }
-    }
-
-    fun getReminder(): Reminder? {
-        return getMeta().reminderV2
-    }
-
-    fun setReminder(reminder: Reminder) {
-        val noteMeta = NoteMeta()
-        noteMeta.reminderV2 = reminder
-        meta = Gson().toJson(noteMeta)
     }
 
     fun getTagUUIDs(): MutableSet<String> {
@@ -97,4 +79,20 @@ enum class NoteState {
     TRASH,
     FAVOURITE,
     ARCHIVED,
+}
+
+object NoteConverters {
+    @TypeConverter
+    fun reminderToJson(reminder: Reminder?): String? {
+        return if (reminder == null) null else Gson().toJson(reminder)
+    }
+
+    @TypeConverter
+    fun reminderFromJson(reminderJson: String?): Reminder? {
+        return try {
+            Gson().fromJson(reminderJson, Reminder::class.java)
+        } catch (exception: Exception) {
+            null
+        }
+    }
 }

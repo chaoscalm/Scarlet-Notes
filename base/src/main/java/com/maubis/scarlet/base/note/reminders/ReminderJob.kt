@@ -26,17 +26,17 @@ class ReminderJob : Job() {
     handler.openNotification(NotificationConfig(note, REMINDER_NOTIFICATION_CHANNEL_ID))
 
     try {
-      val reminder = note.getReminder()
+      val reminder = note.reminder
       if (reminder?.interval == ReminderInterval.DAILY) {
-        val reminderV2 = Reminder(
+        val newReminder = Reminder(
           0,
           nextJobTimestamp(reminder.timestamp, System.currentTimeMillis()),
           ReminderInterval.DAILY)
-        reminderV2.uid = scheduleJob(note.uuid, reminderV2)
-        note.setReminder(reminderV2)
+        newReminder.uid = scheduleJob(note.uuid, newReminder)
+        note.reminder = newReminder
         note.save(context)
       } else {
-        note.meta = ""
+        note.reminder = null
         note.save(context)
       }
     } catch (exception: Exception) {

@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "401572d22aa827c4fdb023bbd52a9f28",
+    "identityHash": "81b670563b65b1586b354114d6121c2f",
     "entities": [
       {
         "tableName": "note",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`uid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `content` TEXT NOT NULL, `color` INTEGER NOT NULL, `state` TEXT NOT NULL, `timestamp` INTEGER NOT NULL, `updateTimestamp` INTEGER NOT NULL, `locked` INTEGER NOT NULL, `pinned` INTEGER NOT NULL, `uuid` TEXT NOT NULL, `meta` TEXT NOT NULL, `excludeFromBackup` INTEGER NOT NULL, `tags` TEXT NOT NULL, `folder` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`uid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `content` TEXT NOT NULL, `color` INTEGER NOT NULL, `state` TEXT NOT NULL, `timestamp` INTEGER NOT NULL, `updateTimestamp` INTEGER NOT NULL, `locked` INTEGER NOT NULL, `pinned` INTEGER NOT NULL, `uuid` TEXT NOT NULL, `reminder` TEXT, `excludeFromBackup` INTEGER NOT NULL, `tags` TEXT NOT NULL, `folder` TEXT NOT NULL)",
         "fields": [
           {
             "fieldPath": "uid",
@@ -63,10 +63,10 @@
             "notNull": true
           },
           {
-            "fieldPath": "meta",
-            "columnName": "meta",
+            "fieldPath": "reminder",
+            "columnName": "reminder",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "excludeFromBackup",
@@ -208,7 +208,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '401572d22aa827c4fdb023bbd52a9f28')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '81b670563b65b1586b354114d6121c2f')"
     ]
   }
 }

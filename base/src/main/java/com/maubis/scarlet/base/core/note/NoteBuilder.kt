@@ -78,7 +78,7 @@ class NoteBuilder {
     note.tags = reference.tags
     note.pinned = reference.pinned
     note.locked = reference.locked
-    note.meta = reference.meta
+    note.reminder = reference.reminder
     note.folder = reference.folder
     return note
   }

@@ -44,10 +44,10 @@ class ReminderBottomSheet : ThemedBottomSheetFragment() {
     }
 
     val calendar = Calendar.getInstance()
-    reminder = note.getReminder() ?: Reminder(
-      0,
-      calendar.timeInMillis,
-      ReminderInterval.ONCE)
+    reminder = note.reminder ?: Reminder(
+        0,
+        calendar.timeInMillis,
+        ReminderInterval.ONCE)
 
     val isNewReminder = reminder.uid == 0
     if (isNewReminder) {
@@ -95,7 +95,7 @@ class ReminderBottomSheet : ThemedBottomSheetFragment() {
     removeAlarm.setOnClickListener {
       ReminderJob.cancelJob(reminder.uid)
 
-      note.meta = ""
+      note.reminder = null
       note.save(themedContext())
 
       dismiss()
@@ -113,8 +113,7 @@ class ReminderBottomSheet : ThemedBottomSheetFragment() {
       }
 
       reminder.uid = uid
-
-      note.setReminder(reminder)
+      note.reminder = reminder
       note.save(themedContext())
 
       dismiss()

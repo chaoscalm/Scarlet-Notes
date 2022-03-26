@@ -7,7 +7,6 @@ import com.maubis.scarlet.base.core.note.ReminderInterval
 import com.maubis.scarlet.base.note.reminders.ReminderJob.Companion.nextJobTimestamp
 import com.maubis.scarlet.base.note.reminders.ReminderJob.Companion.scheduleJob
 import java.io.File
-import java.util.*
 import java.util.concurrent.TimeUnit
 
 class HouseKeeper(val context: Context) {
@@ -38,7 +37,7 @@ class HouseKeeper(val context: Context) {
 
   private fun removeOldReminders() {
     data.notes.getAll().forEach {
-      val reminder = it.getReminder()
+      val reminder = it.reminder
       if (reminder === null) {
         return@forEach
       }
@@ -49,14 +48,14 @@ class HouseKeeper(val context: Context) {
       }
 
       if (reminder.interval == ReminderInterval.ONCE) {
-        it.meta = ""
+        it.reminder = null
         it.save(context)
         return@forEach
       }
 
       reminder.timestamp = nextJobTimestamp(reminder.timestamp, System.currentTimeMillis())
       reminder.uid = scheduleJob(it.uuid, reminder)
-      it.setReminder(reminder)
+      it.reminder = reminder
       it.save(context)
     }
   }

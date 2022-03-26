@@ -7,12 +7,6 @@ enum class ReminderInterval {
   DAILY,
 }
 
-class LegacyReminder {
-  var alarmTimestamp: Long = 0
-  var interval: ReminderInterval = ReminderInterval.ONCE
-  var daysOfWeek: IntArray = intArrayOf()
-}
-
 class Reminder(
   var uid: Int = 0,
   var timestamp: Long = 0,
