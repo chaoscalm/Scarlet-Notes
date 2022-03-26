@@ -22,8 +22,8 @@
   <string name="home_option_export_subtitle">Esporta le note nella memoria del dispositivo</string>
   <string name="home_option_import">Importa note</string>
   <string name="home_option_import_subtitle">Importa note dalla memoria del dispositivo</string>
-  <string name="home_option_about_page">Chi siamo</string>
-  <string name="home_option_about_page_subtitle">Scopri di più sull\'app e sugli sviluppatori</string>
+  <string name="home_option_about_page">Informazioni sull\'app</string>
+  <string name="home_option_about_page_subtitle">Scopri di più sull\'app</string>
   <string name="permission_layout_give_permission">Concedi permessi</string>
   <string name="permission_layout_give_permission_details">L\'importazione e l\'esportazione richiedono il permesso di archiviazione. Si prega di concedere il permesso quando richiesto.</string>
   <string name="permission_layout_give_permission_ok">Concedi</string>
@@ -36,7 +36,6 @@
   <string name="import_export_layout_exporting_share">Condividi</string>
   <string name="about_page_contribute">Contribuisci</string>
   <string name="about_page_app_version">Versione dell\'app</string>
-  <string name="about_page_about_app">Informazioni sull\'app</string>
   <string name="search_notes">Cerca note&#8230;</string>
   <string name="lock_note">Proteggi nota</string>
   <string name="unlock_note">Sblocca nota</string>
@@ -169,7 +168,6 @@
   <string name="reminder_frequency_daily">Quotidiano</string>
   <string name="notification_reminder_channel_label">Promemoria e sveglie</string>
   <string name="about_page_description">%s è una semplice app per prendere appunti. Permette di inserire rapidamente testo formattato senza rendere complicata l\'esperienza utente. Rende il multi-tasking un gioco da ragazzi.</string>
-  <string name="about_page_about_us_details">Ciao, siamo una coppia di designer e programmatori che ha creato %s. Ci sforziamo di creare app progettate con cura, senza o con poca pubblicità, che siano di grande utilità per tutti!</string>
   <string name="note_option_number_lines_subtitle">%d linee sulla schermata principale</string>
 
   <!-- Added for 6.6.1 -->
