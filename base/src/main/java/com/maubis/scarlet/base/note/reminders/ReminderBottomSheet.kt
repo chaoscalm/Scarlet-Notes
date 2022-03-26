@@ -13,6 +13,7 @@ import com.maubis.scarlet.base.core.note.Reminder
 import com.maubis.scarlet.base.core.note.ReminderInterval
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.home.sheets.GenericOptionsBottomSheet
+import com.maubis.scarlet.base.note.actions.INoteOptionSheetActivity
 import com.maubis.scarlet.base.support.sheets.LithoChooseOptionsItem
 import com.maubis.scarlet.base.support.ui.ThemeColorType
 import com.maubis.scarlet.base.support.ui.ThemedActivity
@@ -87,20 +88,21 @@ class ReminderBottomSheet : ThemedBottomSheetFragment() {
       openFrequencyDialog()
     }
 
-    val removeAlarm = dlg.findViewById<TextView>(R.id.remove_alarm)
-    val setAlarm = dlg.findViewById<TextView>(R.id.set_alarm)
+    val removeAlarmBtn = dlg.findViewById<TextView>(R.id.remove_alarm)
+    val setAlarmBtn = dlg.findViewById<TextView>(R.id.set_alarm)
+    val activity = themedActivity() as INoteOptionSheetActivity
     if (isNewReminder) {
-      removeAlarm.visibility = GONE
+      removeAlarmBtn.visibility = GONE
     }
-    removeAlarm.setOnClickListener {
+    removeAlarmBtn.setOnClickListener {
       ReminderJob.cancelJob(reminder.uid)
 
       note.reminder = null
       note.save(themedContext())
-
+      activity.updateNote(note)
       dismiss()
     }
-    setAlarm.setOnClickListener {
+    setAlarmBtn.setOnClickListener {
       if (Calendar.getInstance().after(reminder.toCalendar())) {
         dismiss()
         return@setOnClickListener
@@ -115,7 +117,7 @@ class ReminderBottomSheet : ThemedBottomSheetFragment() {
       reminder.uid = uid
       note.reminder = reminder
       note.save(themedContext())
-
+      activity.updateNote(note)
       dismiss()
     }
   }
