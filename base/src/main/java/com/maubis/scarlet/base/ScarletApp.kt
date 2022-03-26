@@ -3,7 +3,6 @@ package com.maubis.scarlet.base
 import android.app.Application
 import android.content.SharedPreferences
 import android.util.Log
-import androidx.preference.PreferenceManager
 import com.evernote.android.job.JobManager
 import com.facebook.soloader.SoLoader
 import com.maubis.scarlet.base.core.note.NoteImage
@@ -20,7 +19,7 @@ class ScarletApp : Application() {
     super.onCreate()
     data = ApplicationData(this)
 
-    appPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+    appPreferences = getSharedPreferences("scarlet_prefs", MODE_PRIVATE)
 
     dateFormat = DateFormatUtils(this)
     SoLoader.init(this, false)
