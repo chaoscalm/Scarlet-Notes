@@ -14,7 +14,7 @@ import com.maubis.scarlet.base.support.sheets.LithoBottomSheet
 import com.maubis.scarlet.base.support.sheets.getLithoBottomSheetTitle
 import com.maubis.scarlet.base.support.ui.ThemeColorType
 
-class AboutUsBottomSheet : LithoBottomSheet() {
+class AboutBottomSheet : LithoBottomSheet() {
 
   override fun getComponent(componentContext: ComponentContext, dialog: Dialog): Component {
     val appName = getString(R.string.app_name)

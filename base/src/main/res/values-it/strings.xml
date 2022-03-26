@@ -23,7 +23,6 @@
   <string name="home_option_import">Importa note</string>
   <string name="home_option_import_subtitle">Importa note dalla memoria del dispositivo</string>
   <string name="home_option_about_page">Informazioni sull\'app</string>
-  <string name="home_option_about_page_subtitle">Scopri di più sull\'app</string>
   <string name="permission_layout_give_permission">Concedi permessi</string>
   <string name="permission_layout_give_permission_details">L\'importazione e l\'esportazione richiedono il permesso di archiviazione. Si prega di concedere il permesso quando richiesto.</string>
   <string name="permission_layout_give_permission_ok">Concedi</string>
@@ -112,7 +111,7 @@
   <string name="home_option_ui_experience">Interfaccia ed esperienza utente</string>
   <string name="home_option_ui_experience_subtitle">Modifica l\'aspetto dell\'app</string>
   <string name="home_option_about">Informazioni sull\'app</string>
-  <string name="home_option_about_subtitle">Scopri di più su di noi e sull\'app</string>
+  <string name="home_option_about_subtitle">Scopri di più sull\'app</string>
   <string name="note_option_default_color">Colore nota predefinita</string>
   <string name="note_option_default_color_subtitle">Scegli il colore predefinito delle note</string>
   <string name="note_option_number_lines">Lunghezza anteprima note</string>

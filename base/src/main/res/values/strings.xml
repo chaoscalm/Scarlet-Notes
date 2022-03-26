@@ -69,7 +69,7 @@
   <string name="home_option_ui_experience">Interface and Experience</string>
   <string name="home_option_ui_experience_subtitle">Choose how the app looks and feels.</string>
   <string name="home_option_about">About</string>
-  <string name="home_option_about_subtitle">Know more about us and the app.</string>
+  <string name="home_option_about_subtitle">Know more about the app.</string>
   <string name="home_option_security">Security</string>
   <string name="home_option_security_subtitle">Locking notes and security options</string>
   <string name="home_option_enable_list_view">Enable List Layout</string>
@@ -88,7 +88,6 @@
   <string name="home_option_auto_export">Export Automatically</string>
   <string name="home_option_auto_export_subtitle">Export notes frequently to external file as backup</string>
   <string name="home_option_about_page">About the app</string>
-  <string name="home_option_about_page_subtitle">Know more about the app</string>
   <string name="home_option_delete_notes_and_more">Delete Notes and More</string>
   <string name="home_option_delete_notes_and_more_details">Delete notes, tags and other data in the app</string>
   <string name="home_option_delete_all_notes">Delete All Notes</string>
