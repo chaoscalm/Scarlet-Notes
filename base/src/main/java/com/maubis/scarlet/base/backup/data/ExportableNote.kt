@@ -15,7 +15,9 @@ class ExportableNote(
   var color: Int,
   var state: String,
   var tags: String,
-  var folder: String
+  var folder: String,
+  var pinned: Boolean,
+  var locked: Boolean
 ) : Serializable {
   constructor(note: Note) : this(
     note.uuid,
@@ -25,7 +27,9 @@ class ExportableNote(
     note.color,
     note.state.name,
     note.tags,
-    note.folder
+    note.folder,
+    note.pinned,
+    note.locked
   )
 
   fun saveIfNeeded(context: Context) {
@@ -48,6 +52,8 @@ class ExportableNote(
     note.state = runCatching { NoteState.valueOf(state) }.getOrDefault(NoteState.DEFAULT)
     note.tags = tags
     note.folder = folder
+    note.pinned = pinned
+    note.locked = locked
     return note
   }
 }
