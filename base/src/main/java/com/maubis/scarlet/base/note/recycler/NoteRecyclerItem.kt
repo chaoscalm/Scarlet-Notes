@@ -48,7 +48,6 @@ class NoteRecyclerItem(context: Context, val note: Note) : RecyclerItem() {
   }
 
   val imageSource = note.getImageFile()
-  val disableBackup = note.disableBackup
 
   override val type = Type.NOTE
 }

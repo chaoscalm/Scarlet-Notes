@@ -179,8 +179,8 @@
   <string name="recent_to_trash_message">La nota è stata spostata nel cestino</string>
   <string name="recent_to_delete_message">La nota è stata cancellata</string>
   <string name="recent_to_trash_undo">Annulla</string>
-  <string name="backup_note_disable">Escludi dal backup</string>
-  <string name="backup_note_enable">Includi nel backup</string>
+  <string name="backup_note_exclude">Escludi dal backup</string>
+  <string name="backup_note_include">Includi nel backup</string>
   <string name="folder_card_title">Notebook vuoto</string>
   <string name="folder_card_title_single_note">1 nota</string>
   <string name="folder_card_title_notes">%d note</string>

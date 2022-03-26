@@ -11,8 +11,10 @@ import com.maubis.scarlet.base.core.format.sectionPreservingSort
 import com.maubis.scarlet.base.database.entities.NoteState
 import com.maubis.scarlet.base.home.sheets.AlertBottomSheet
 import com.maubis.scarlet.base.home.sheets.AlertSheetConfig
-import com.maubis.scarlet.base.note.*
+import com.maubis.scarlet.base.note.addTag
 import com.maubis.scarlet.base.note.folder.sheet.SelectedFolderChooseOptionsBottomSheet
+import com.maubis.scarlet.base.note.mark
+import com.maubis.scarlet.base.note.removeTag
 import com.maubis.scarlet.base.note.tag.SelectedTagChooserBottomSheet
 import com.maubis.scarlet.base.security.openUnlockSheet
 import com.maubis.scarlet.base.support.sheets.GridOptionBottomSheet
@@ -293,32 +295,32 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
       }
     ))
 
-    val allBackupDisabled = !activity.getAllSelectedNotes().any { !it.disableBackup }
+    val allExcludedFromBackup = !activity.getAllSelectedNotes().any { !it.excludeFromBackup }
     options.add(
       GridSectionOptionItem(
-        label = R.string.backup_note_enable,
+        label = R.string.backup_note_include,
         icon = R.drawable.ic_action_backup,
         listener = lockAwareFunctionRunner(activity) {
           activity.runNoteFunction {
-            it.disableBackup = false
+            it.excludeFromBackup = false
             it.save(activity)
           }
           activity.finish()
         },
-        visible = allBackupDisabled
+        visible = allExcludedFromBackup
       ))
     options.add(
       GridSectionOptionItem(
-        label = R.string.backup_note_disable,
+        label = R.string.backup_note_exclude,
         icon = R.drawable.ic_action_backup_no,
         listener = lockAwareFunctionRunner(activity) {
           activity.runNoteFunction {
-            it.disableBackup = true
+            it.excludeFromBackup = true
             it.save(activity)
           }
           activity.finish()
         },
-        visible = !allBackupDisabled
+        visible = !allExcludedFromBackup
       ))
     return GridSectionItem(
       options = options,

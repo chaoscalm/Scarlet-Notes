@@ -7,7 +7,10 @@ import com.github.bijoysingh.starter.util.FileManager
 import com.google.gson.Gson
 import com.maubis.scarlet.base.ScarletApp.Companion.appPreferences
 import com.maubis.scarlet.base.ScarletApp.Companion.data
-import com.maubis.scarlet.base.backup.data.*
+import com.maubis.scarlet.base.backup.data.ExportableFileFormat
+import com.maubis.scarlet.base.backup.data.ExportableFolder
+import com.maubis.scarlet.base.backup.data.ExportableNote
+import com.maubis.scarlet.base.backup.data.ExportableTag
 import com.maubis.scarlet.base.backup.sheet.NOTES_EXPORT_FILENAME
 import com.maubis.scarlet.base.backup.sheet.NOTES_EXPORT_FOLDER
 import com.maubis.scarlet.base.core.format.FormatType
@@ -40,30 +43,31 @@ var sAutoBackupMode: Boolean
   set(value) = appPreferences.edit { putBoolean(STORE_KEY_AUTO_BACKUP_MODE, value) }
 
 class NoteExporter {
-  fun getExportContent(): String {
+  fun getBackupFileContent(): String {
+    val notesToBeExported = data.notes.getAll()
+      .filter { sBackupLockedNotes || !it.locked }
+      .filter { !it.excludeFromBackup }
+
     if (sBackupMarkdown) {
-      return getMarkdownExportContent()
+      return getMarkdownBackupFileContent(notesToBeExported)
     }
 
-    val notes = data.notes
-      .getAll()
-      .filter { sBackupLockedNotes || !it.locked }
-      .map { ExportableNote(it) }
+    val notes = notesToBeExported.map { ExportableNote(it) }
     val tags = data.tags.getAll().map { ExportableTag(it) }
     val folders = data.folders.getAll().map { ExportableFolder(it) }
     val fileContent = ExportableFileFormat(EXPORT_VERSION, notes, tags, folders)
     return Gson().toJson(fileContent)
   }
 
-  private fun getMarkdownExportContent(): String {
-    var totalText = "$EXPORT_NOTE_SEPARATOR\n\n"
-    data.notes.getAll()
+  private fun getMarkdownBackupFileContent(notesToBeExported: List<Note>): String {
+    var fileContent = "$EXPORT_NOTE_SEPARATOR\n\n"
+    notesToBeExported
       .map { it.toExportedMarkdown() }
       .forEach {
-        totalText += it
-        totalText += "\n\n$EXPORT_NOTE_SEPARATOR\n\n"
+        fileContent += it
+        fileContent += "\n\n$EXPORT_NOTE_SEPARATOR\n\n"
       }
-    return totalText
+    return fileContent
   }
 
   /**
@@ -117,7 +121,7 @@ class NoteExporter {
       if (exportFile === null) {
         return@execute
       }
-      saveToFile(exportFile, getExportContent())
+      saveToFile(exportFile, getBackupFileContent())
       appPreferences.edit { putLong(KEY_AUTO_BACKUP_LAST_TIMESTAMP, System.currentTimeMillis()) }
     }
   }

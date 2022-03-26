@@ -90,11 +90,11 @@ open class NoteRecyclerViewHolderBase(context: Context, view: View) : RecyclerVi
     }
   }
 
-  private fun setIndicators(note: NoteRecyclerItem) {
-    pinIndicator.isVisible = note.note.pinned
-    reminderIndicator.isVisible = note.hasReminder
-    backupIndicator.isVisible = note.disableBackup
-    when (note.state) {
+  private fun setIndicators(noteItem: NoteRecyclerItem) {
+    pinIndicator.isVisible = noteItem.note.pinned
+    reminderIndicator.isVisible = noteItem.hasReminder
+    backupIndicator.isVisible = noteItem.note.excludeFromBackup
+    when (noteItem.state) {
       NoteState.FAVOURITE -> {
         stateIndicator.visibility = VISIBLE
         stateIndicator.setImageResource(R.drawable.ic_favorite_white_48dp)
@@ -109,13 +109,13 @@ open class NoteRecyclerViewHolderBase(context: Context, view: View) : RecyclerVi
       }
       NoteState.DEFAULT -> stateIndicator.visibility = GONE
     }
-    unlockIndicator.isVisible = note.note.locked
+    unlockIndicator.isVisible = noteItem.note.locked
 
-    pinIndicator.setColorFilter(note.indicatorColor)
-    stateIndicator.setColorFilter(note.indicatorColor)
-    reminderIndicator.setColorFilter(note.indicatorColor)
-    backupIndicator.setColorFilter(note.indicatorColor)
-    unlockIndicator.setColorFilter(note.indicatorColor)
+    pinIndicator.setColorFilter(noteItem.indicatorColor)
+    stateIndicator.setColorFilter(noteItem.indicatorColor)
+    reminderIndicator.setColorFilter(noteItem.indicatorColor)
+    backupIndicator.setColorFilter(noteItem.indicatorColor)
+    unlockIndicator.setColorFilter(noteItem.indicatorColor)
   }
 
   private fun setMetaText(note: NoteRecyclerItem) {

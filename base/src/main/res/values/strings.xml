@@ -251,8 +251,8 @@
   <string name="recent_to_delete_message">The note was deleted</string>
   <string name="recent_to_trash_undo">Undo</string>
 
-  <string name="backup_note_disable">Disable Backup</string>
-  <string name="backup_note_enable">Enable Backup</string>
+  <string name="backup_note_exclude">Exclude from backups</string>
+  <string name="backup_note_include">Include in backups</string>
 
   <string name="folder_card_title">Empty Notebook</string>
   <string name="folder_card_title_single_note">1 Note</string>

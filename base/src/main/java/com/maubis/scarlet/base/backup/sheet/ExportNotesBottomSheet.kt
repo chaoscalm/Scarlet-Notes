@@ -67,7 +67,7 @@ class ExportNotesBottomSheet : LithoBottomSheet() {
                       .primaryActionRes(R.string.import_export_layout_exporting_done)
                       .onPrimaryClick {
                         activity.lifecycleScope.launch(Dispatchers.IO) {
-                          val notes = NoteExporter().getExportContent()
+                          val notes = NoteExporter().getBackupFileContent()
                           val success = NoteExporter().saveToManualExportFile(notes)
                           withContext(Dispatchers.Main) {
                             Toast.makeText(activity,
@@ -82,7 +82,7 @@ class ExportNotesBottomSheet : LithoBottomSheet() {
                       .secondaryActionRes(R.string.import_export_layout_exporting_share)
                       .onSecondaryClick {
                         activity.lifecycleScope.launch(Dispatchers.IO) {
-                          val notes = NoteExporter().getExportContent()
+                          val notes = NoteExporter().getBackupFileContent()
                           NoteExporter().saveToManualExportFile(notes)
 
                           if (file == null || !file.exists()) {

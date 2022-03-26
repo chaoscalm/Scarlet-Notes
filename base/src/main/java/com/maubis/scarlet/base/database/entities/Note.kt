@@ -28,7 +28,7 @@ class Note {
     var pinned: Boolean = false
     var uuid: String = generateUUID()
     var meta: String = ""
-    var disableBackup: Boolean = false
+    var excludeFromBackup: Boolean = false
     var tags: String = ""
     var folder: String = ""
 
