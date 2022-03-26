@@ -75,26 +75,26 @@ open class NoteRecyclerViewHolderBase(context: Context, view: View) : RecyclerVi
     setActionBar(item, extra)
   }
 
-  private fun setContent(note: NoteRecyclerItem) {
+  private fun setContent(item: NoteRecyclerItem) {
     content.setTypeface(appTypeface.text(), Typeface.NORMAL)
-    content.text = note.content
-    content.maxLines = note.lineCount
-    content.setTextColor(note.contentColor)
+    content.text = item.content
+    content.maxLines = item.lineCount
+    content.setTextColor(item.contentColor)
   }
 
-  private fun setImage(note: NoteRecyclerItem) {
-    val isImageAvailable = !note.imageSource.isBlank()
+  private fun setImage(item: NoteRecyclerItem) {
+    val isImageAvailable = !item.imageSource.isBlank()
     image.isVisible = isImageAvailable
     if (isImageAvailable) {
-      imageStorage.loadThumbnailFileToImageView(note.note.uuid, note.imageSource, image)
+      imageStorage.loadThumbnailFileToImageView(item.note.uuid, item.imageSource, image)
     }
   }
 
-  private fun setIndicators(noteItem: NoteRecyclerItem) {
-    pinIndicator.isVisible = noteItem.note.pinned
-    reminderIndicator.isVisible = noteItem.hasReminder
-    backupIndicator.isVisible = noteItem.note.excludeFromBackup
-    when (noteItem.state) {
+  private fun setIndicators(item: NoteRecyclerItem) {
+    pinIndicator.isVisible = item.note.pinned
+    reminderIndicator.isVisible = item.hasReminder
+    backupIndicator.isVisible = item.note.excludeFromBackup
+    when (item.note.state) {
       NoteState.FAVOURITE -> {
         stateIndicator.visibility = VISIBLE
         stateIndicator.setImageResource(R.drawable.ic_favorite_white_48dp)
@@ -109,27 +109,27 @@ open class NoteRecyclerViewHolderBase(context: Context, view: View) : RecyclerVi
       }
       NoteState.DEFAULT -> stateIndicator.visibility = GONE
     }
-    unlockIndicator.isVisible = noteItem.note.locked
+    unlockIndicator.isVisible = item.note.locked
 
-    pinIndicator.setColorFilter(noteItem.indicatorColor)
-    stateIndicator.setColorFilter(noteItem.indicatorColor)
-    reminderIndicator.setColorFilter(noteItem.indicatorColor)
-    backupIndicator.setColorFilter(noteItem.indicatorColor)
-    unlockIndicator.setColorFilter(noteItem.indicatorColor)
+    pinIndicator.setColorFilter(item.indicatorColor)
+    stateIndicator.setColorFilter(item.indicatorColor)
+    reminderIndicator.setColorFilter(item.indicatorColor)
+    backupIndicator.setColorFilter(item.indicatorColor)
+    unlockIndicator.setColorFilter(item.indicatorColor)
   }
 
-  private fun setMetaText(note: NoteRecyclerItem) {
+  private fun setMetaText(item: NoteRecyclerItem) {
     tags.typeface = appTypeface.text()
     when {
-      !TextUtils.isNullOrEmpty(note.tagsSource) -> {
-        tags.setTextColor(note.tagsColor)
-        val source = note.tags
+      !TextUtils.isNullOrEmpty(item.tagsSource) -> {
+        tags.setTextColor(item.tagsColor)
+        val source = item.tags
         tags.text = trim(source)
         tags.visibility = VISIBLE
       }
-      !TextUtils.isNullOrEmpty(note.timestamp) -> {
-        tags.setTextColor(note.timestampColor)
-        tags.text = note.timestamp
+      !TextUtils.isNullOrEmpty(item.timestamp) -> {
+        tags.setTextColor(item.timestampColor)
+        tags.text = item.timestamp
         tags.visibility = VISIBLE
       }
       else -> {
@@ -138,18 +138,18 @@ open class NoteRecyclerViewHolderBase(context: Context, view: View) : RecyclerVi
     }
   }
 
-  private fun setActionBar(note: NoteRecyclerItem, extra: Bundle?) {
-    delete.setOnClickListener { deleteIconClick(note.note, extra) }
-    share.setOnClickListener { shareIconClick(note.note, extra) }
-    edit.setOnClickListener { editIconClick(note.note, extra) }
-    copy.setOnClickListener { copyIconClick(note.note, extra) }
-    moreOptions.setOnClickListener { moreOptionsIconClick(note.note, extra) }
+  private fun setActionBar(item: NoteRecyclerItem, extra: Bundle?) {
+    delete.setOnClickListener { deleteIconClick(item.note, extra) }
+    share.setOnClickListener { shareIconClick(item.note, extra) }
+    edit.setOnClickListener { editIconClick(item.note, extra) }
+    copy.setOnClickListener { copyIconClick(item.note, extra) }
+    moreOptions.setOnClickListener { moreOptionsIconClick(item.note, extra) }
 
-    delete.setColorFilter(note.actionBarIconColor)
-    share.setColorFilter(note.actionBarIconColor)
-    edit.setColorFilter(note.actionBarIconColor)
-    copy.setColorFilter(note.actionBarIconColor)
-    moreOptions.setColorFilter(note.actionBarIconColor)
+    delete.setColorFilter(item.actionBarIconColor)
+    share.setColorFilter(item.actionBarIconColor)
+    edit.setColorFilter(item.actionBarIconColor)
+    copy.setColorFilter(item.actionBarIconColor)
+    moreOptions.setColorFilter(item.actionBarIconColor)
   }
 
   protected open fun viewClick(note: Note, extra: Bundle?) {}

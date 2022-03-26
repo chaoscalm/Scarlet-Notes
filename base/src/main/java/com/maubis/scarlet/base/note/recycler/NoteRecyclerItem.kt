@@ -22,7 +22,6 @@ class NoteRecyclerItem(context: Context, val note: Note) : RecyclerItem() {
     false -> ContextCompat.getColor(context, R.color.light_primary_text)
   }
 
-  val state = note.state
   val indicatorColor = when (isLightShaded) {
     true -> ContextCompat.getColor(context, R.color.dark_tertiary_text)
     false -> ContextCompat.getColor(context, R.color.light_tertiary_text)
