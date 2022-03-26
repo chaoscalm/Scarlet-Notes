@@ -2,12 +2,8 @@ package com.maubis.scarlet.base.backup.data
 
 import android.content.Context
 import com.maubis.scarlet.base.ScarletApp.Companion.data
-import com.maubis.scarlet.base.core.note.generateUUID
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.database.entities.NoteState
-import com.maubis.scarlet.base.database.entities.Tag
-import org.json.JSONArray
-import org.json.JSONObject
 import java.io.Serializable
 import kotlin.math.max
 
@@ -53,56 +49,5 @@ class ExportableNote(
     note.tags = tags
     note.folder = folder
     return note
-  }
-
-  companion object {
-
-    val KEY_NOTES: String = "notes"
-
-    fun fromJSONObjectV2(json: JSONObject): ExportableNote {
-      return ExportableNote(
-        generateUUID(),
-        json["description"] as String,
-        json["timestamp"] as Long,
-        json["timestamp"] as Long,
-        json["color"] as Int,
-        "",
-        "",
-        "")
-    }
-
-    fun fromJSONObjectV3(json: JSONObject): ExportableNote {
-      return ExportableNote(
-        generateUUID(),
-        json["description"] as String,
-        json["timestamp"] as Long,
-        json["timestamp"] as Long,
-        json["color"] as Int,
-        json["state"] as String,
-        convertTagsJSONArrayToString(json["tags"] as JSONArray),
-        "")
-    }
-
-    fun fromJSONObjectV4(json: JSONObject): ExportableNote {
-      return ExportableNote(
-        json["uuid"] as String,
-        json["description"] as String,
-        json["timestamp"] as Long,
-        json["timestamp"] as Long,
-        json["color"] as Int,
-        json["state"] as String,
-        convertTagsJSONArrayToString(json["tags"] as JSONArray),
-        "")
-    }
-
-    private fun convertTagsJSONArrayToString(tags: JSONArray): String {
-      val noteTags = arrayListOf<Tag>()
-      for (index in 0 until tags.length()) {
-        val tag = ExportableTag.getBestPossibleTagObject(tags.getJSONObject(index))
-        tag.save()
-        noteTags.add(tag)
-      }
-      return noteTags.map { it.uuid }.joinToString(separator = ",")
-    }
   }
 }

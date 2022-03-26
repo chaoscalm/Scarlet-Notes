@@ -3,30 +3,22 @@ package com.maubis.scarlet.base.backup.support
 import android.content.Context
 import android.os.Environment
 import com.github.bijoysingh.starter.async.Parallel
-import com.github.bijoysingh.starter.json.SafeJson
 import com.google.gson.Gson
 import com.maubis.scarlet.base.backup.data.ExportableFileFormat
-import com.maubis.scarlet.base.backup.data.ExportableNote
 import com.maubis.scarlet.base.core.note.NoteBuilder
 import com.maubis.scarlet.base.database.entities.Folder
 import com.maubis.scarlet.base.database.entities.Tag
 import com.maubis.scarlet.base.support.utils.logNonCriticalError
-import org.json.JSONArray
 import java.io.BufferedReader
 import java.io.File
 import java.io.IOException
 import java.io.InputStreamReader
 
-class NoteImporter() {
-
-  fun gen(context: Context, content: String) {
+class NoteImporter {
+  fun importFromBackupContent(context: Context, content: String) {
     try {
-      val json = SafeJson(content)
-      val keyVersion = json.getInt(KEY_NOTE_VERSION, -1)
-      if (keyVersion == -1) {
-        // New form code
-        val fileFormat = Gson().fromJson<ExportableFileFormat>(content, ExportableFileFormat::class.java)
-        if (fileFormat === null) {
+        val fileFormat = Gson().fromJson(content, ExportableFileFormat::class.java)
+        if (fileFormat == null) {
           importNoteFallback(content, context)
           return
         }
@@ -47,19 +39,6 @@ class NoteImporter() {
           }
           folder.saveIfUnique()
         }
-        return
-      }
-
-      val notes = json[ExportableNote.KEY_NOTES] as JSONArray
-      for (index in 0 until notes.length()) {
-        val exportableNote = when (keyVersion) {
-          2 -> ExportableNote.fromJSONObjectV2(notes.getJSONObject(index))
-          3 -> ExportableNote.fromJSONObjectV3(notes.getJSONObject(index))
-          4 -> ExportableNote.fromJSONObjectV4(notes.getJSONObject(index))
-          else -> null
-        }
-        exportableNote?.saveIfNeeded(context)
-      }
     } catch (exception: Exception) {
       importNoteFallback(content, context)
       logNonCriticalError(exception)

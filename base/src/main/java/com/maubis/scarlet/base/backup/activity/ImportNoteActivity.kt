@@ -52,7 +52,7 @@ class ImportNoteActivity : SecuredActivity() {
             if (fileContent.isBlank()) {
               return
             }
-            NoteImporter().gen(activity, fileContent)
+            NoteImporter().importFromBackupContent(activity, fileContent)
           }
         }
       })

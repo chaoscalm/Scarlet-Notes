@@ -90,7 +90,7 @@ class ShareToScarletRouterActivity : AppCompatActivity() {
     if (sharedText === null || sharedText.isBlank()) {
       return false
     }
-    NoteImporter().gen(this, sharedText)
+    NoteImporter().importFromBackupContent(this, sharedText)
     return true
   }
 
