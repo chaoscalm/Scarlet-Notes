@@ -1,10 +1,7 @@
 package com.maubis.scarlet.base.database.entities
 
 import android.content.Context
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import androidx.room.TypeConverter
-import androidx.room.TypeConverters
+import androidx.room.*
 import com.github.bijoysingh.starter.util.TextUtils
 import com.google.gson.Gson
 import com.maubis.scarlet.base.ScarletApp
@@ -15,7 +12,7 @@ import com.maubis.scarlet.base.core.note.generateUUID
 import com.maubis.scarlet.base.note.mark
 import com.maubis.scarlet.base.settings.sNoteDefaultColor
 
-@Entity(tableName = "note")
+@Entity(tableName = "note", indices = [Index("uuid", unique = true)])
 @TypeConverters(NoteConverters::class)
 class Note {
     @PrimaryKey(autoGenerate = true)

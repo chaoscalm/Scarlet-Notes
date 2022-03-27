@@ -34,7 +34,7 @@ class ExportableNote(
 
   fun saveIfNeeded(context: Context) {
     val existingNote = data.notes.getByUUID(uuid)
-    if (existingNote !== null && existingNote.updateTimestamp > this.updateTimestamp) {
+    if (existingNote != null && existingNote.updateTimestamp > this.updateTimestamp) {
       return
     }
 
