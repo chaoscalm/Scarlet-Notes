@@ -49,7 +49,7 @@ class CreateOrEditFolderBottomSheet : ThemedBottomSheetFragment() {
     enterFolder.setTextColor(appTheme.get(ThemeColorType.SECONDARY_TEXT))
     enterFolder.setHintTextColor(appTheme.get(ThemeColorType.HINT_TEXT))
 
-    title.setText(if (folder.isUnsaved()) R.string.folder_sheet_add_note else R.string.folder_sheet_edit_note)
+    title.setText(if (folder.isNotPersisted()) R.string.folder_sheet_add_note else R.string.folder_sheet_edit_note)
     action.setOnClickListener {
       val updated = onActionClick(folder, enterFolder.text.toString())
       sheetOnFolderListener(folder, !updated)
@@ -57,7 +57,7 @@ class CreateOrEditFolderBottomSheet : ThemedBottomSheetFragment() {
     }
 
     val folderDeleteListener = sheetOnFolderListener
-    removeBtn.visibility = if (folder.isUnsaved()) GONE else VISIBLE
+    removeBtn.visibility = if (folder.isNotPersisted()) GONE else VISIBLE
     removeBtn.setOnClickListener {
       openSheet(context as AppCompatActivity, DeleteFolderBottomSheet().apply {
         selectedFolder = folder

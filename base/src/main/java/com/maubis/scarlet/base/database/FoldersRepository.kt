@@ -9,19 +9,19 @@ class FoldersRepository(private val database: FolderDao) {
   private val folders: ConcurrentHashMap<String, Folder> by lazy { loadFoldersFromDB() }
 
   fun save(folder: Folder) {
-    val id = database.insertFolder(folder)
-    folder.uid = if (folder.isUnsaved()) id.toInt() else folder.uid
+    database.insertFolder(folder)
     folders[folder.uuid] = folder
   }
 
   fun delete(folder: Folder) {
-    if (folder.isUnsaved()) {
+    if (!exists(folder.uuid)) {
       return
     }
     database.delete(folder)
     folders.remove(folder.uuid)
-    folder.uid = 0
   }
+
+  fun exists(folderUuid: String): Boolean = folders.containsKey(folderUuid)
 
   fun getAll(): List<Folder> {
     return folders.values.toList()

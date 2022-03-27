@@ -8,33 +8,26 @@ import com.maubis.scarlet.base.support.utils.dateFormat
 
 @Entity(tableName = "folder")
 class Folder() {
-    @PrimaryKey(autoGenerate = true)
-    var uid = 0
+    @PrimaryKey
+    var uuid: String = generateUUID()
     var title: String = ""
     var timestamp: Long = System.currentTimeMillis()
     var updateTimestamp: Long = timestamp
     var color: Int = 0
-    var uuid: String = generateUUID()
 
     constructor(color: Int) : this() {
         this.color = color
     }
 
-    fun isUnsaved(): Boolean {
-        return uid == 0
-    }
-
     fun saveIfUnique() {
         val existing = ScarletApp.data.folders.getByTitle(title)
-        if (existing !== null) {
-            this.uid = existing.uid
+        if (existing != null) {
             this.uuid = existing.uuid
             return
         }
 
         val existingByUUID = ScarletApp.data.folders.getByUUID(uuid)
         if (existingByUUID != null) {
-            this.uid = existingByUUID.uid
             this.title = existingByUUID.title
             return
         }
@@ -53,6 +46,8 @@ class Folder() {
         }
         return dateFormat.readableTime(format, time)
     }
+
+    fun isNotPersisted(): Boolean = !ScarletApp.data.folders.exists(uuid)
 
     fun save() {
         ScarletApp.data.folders.save(this)

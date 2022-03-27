@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "81b670563b65b1586b354114d6121c2f",
+    "identityHash": "5d6fd51af38c6a7b8f5481bb4c4a851a",
     "entities": [
       {
         "tableName": "note",
@@ -156,12 +156,12 @@
       },
       {
         "tableName": "folder",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`uid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT NOT NULL, `timestamp` INTEGER NOT NULL, `updateTimestamp` INTEGER NOT NULL, `color` INTEGER NOT NULL, `uuid` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`uuid` TEXT NOT NULL, `title` TEXT NOT NULL, `timestamp` INTEGER NOT NULL, `updateTimestamp` INTEGER NOT NULL, `color` INTEGER NOT NULL, PRIMARY KEY(`uuid`))",
         "fields": [
           {
-            "fieldPath": "uid",
-            "columnName": "uid",
-            "affinity": "INTEGER",
+            "fieldPath": "uuid",
+            "columnName": "uuid",
+            "affinity": "TEXT",
             "notNull": true
           },
           {
@@ -187,19 +187,13 @@
             "columnName": "color",
             "affinity": "INTEGER",
             "notNull": true
-          },
-          {
-            "fieldPath": "uuid",
-            "columnName": "uuid",
-            "affinity": "TEXT",
-            "notNull": true
           }
         ],
         "primaryKey": {
           "columnNames": [
-            "uid"
+            "uuid"
           ],
-          "autoGenerate": true
+          "autoGenerate": false
         },
         "indices": [],
         "foreignKeys": []
@@ -208,7 +202,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '81b670563b65b1586b354114d6121c2f')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '5d6fd51af38c6a7b8f5481bb4c4a851a')"
     ]
   }
 }

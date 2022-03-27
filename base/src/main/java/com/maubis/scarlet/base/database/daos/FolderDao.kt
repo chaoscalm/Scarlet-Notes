@@ -6,7 +6,7 @@ import com.maubis.scarlet.base.database.entities.Folder
 @Dao
 interface FolderDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertFolder(note: Folder): Long
+    fun insertFolder(note: Folder)
 
     @Delete
     fun delete(note: Folder)
