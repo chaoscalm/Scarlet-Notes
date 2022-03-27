@@ -19,14 +19,6 @@ class ExportableFolder(
           folder.updateTimestamp,
           folder.color)
 
-  // Default failsafe constructor for Gson to use
-  constructor() : this(
-          "invalid",
-          "",
-          System.currentTimeMillis(),
-          System.currentTimeMillis(),
-          -0xff8695)
-
   fun saveIfNotPresent() {
     val existingWithSameTitle = ScarletApp.data.folders.getByTitle(title)
     if (existingWithSameTitle != null) {

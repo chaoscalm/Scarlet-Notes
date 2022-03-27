@@ -9,13 +9,7 @@ class ExportableTag(
   var title: String
 ) : Serializable {
 
-  // Default failsafe constructor for Gson to use
-  constructor() : this("invalid", "")
-
-  constructor(tag: Tag) : this(
-          tag.uuid,
-          tag.title
-  )
+  constructor(tag: Tag) : this(tag.uuid, tag.title)
 
   fun saveIfNotPresent() {
     val existingWithSameTitle = ScarletApp.data.tags.getByTitle(title)
