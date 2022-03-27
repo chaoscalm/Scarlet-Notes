@@ -19,21 +19,6 @@ class Folder() {
         this.color = color
     }
 
-    fun saveIfUnique() {
-        val existing = ScarletApp.data.folders.getByTitle(title)
-        if (existing != null) {
-            this.uuid = existing.uuid
-            return
-        }
-
-        val existingByUUID = ScarletApp.data.folders.getByUUID(uuid)
-        if (existingByUUID != null) {
-            this.title = existingByUUID.title
-            return
-        }
-        save()
-    }
-
     fun getDisplayTime(): String {
         val time = when {
             (this.updateTimestamp != 0L) -> this.updateTimestamp

@@ -38,11 +38,11 @@ class ExportableNote(
       return
     }
 
-    val note = createNote()
+    val note = buildNote()
     note.save(context)
   }
 
-  private fun createNote(): Note {
+  private fun buildNote(): Note {
     val note = Note()
     note.uuid = uuid
     note.content = description

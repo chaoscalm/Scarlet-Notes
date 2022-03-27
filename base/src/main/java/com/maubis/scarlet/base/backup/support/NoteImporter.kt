@@ -6,8 +6,6 @@ import com.github.bijoysingh.starter.async.Parallel
 import com.google.gson.Gson
 import com.maubis.scarlet.base.backup.data.ExportableFileFormat
 import com.maubis.scarlet.base.core.note.NoteBuilder
-import com.maubis.scarlet.base.database.entities.Folder
-import com.maubis.scarlet.base.database.entities.Tag
 import com.maubis.scarlet.base.support.utils.logNonCriticalError
 import java.io.BufferedReader
 import java.io.File
@@ -23,21 +21,13 @@ class NoteImporter {
           return
         }
         fileFormat.tags.forEach {
-            val tag = Tag(it.title, it.uuid)
-            tag.saveIfUnique()
+          it.saveIfNotPresent()
         }
         fileFormat.notes.forEach {
           it.saveIfNeeded(context)
         }
         fileFormat.folders?.forEach {
-          val folder = Folder().apply {
-            uuid = it.uuid
-            title = it.title
-            timestamp = it.timestamp
-            updateTimestamp = it.updateTimestamp
-            color = it.color
-          }
-          folder.saveIfUnique()
+          it.saveIfNotPresent()
         }
     } catch (exception: Exception) {
       importNoteFallback(content, context)
