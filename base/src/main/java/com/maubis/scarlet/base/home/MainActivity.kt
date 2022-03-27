@@ -46,6 +46,7 @@ import com.maubis.scarlet.base.support.ui.setThemeFromSystem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.*
 
 class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
   companion object {
@@ -88,7 +89,7 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
     outState.putIntegerArrayList(SEARCH_COLORS, ArrayList(state.colors))
     outState.putInt(NAVIGATION_MODE, state.mode.ordinal)
     outState.putString(CURRENT_FOLDER_UUID, state.currentFolder?.uuid)
-    outState.putStringArrayList(TAGS_UUIDS, ArrayList(state.tags.map { it.uuid }))
+    outState.putStringArrayList(TAGS_UUIDS, ArrayList(state.tags.map { it.uuid.toString() }))
   }
 
   override fun onRestoreInstanceState(savedInstanceState: Bundle) {
@@ -102,7 +103,7 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
       state.currentFolder = data.folders.getByUUID(it)
     }
     savedInstanceState.getStringArrayList(TAGS_UUIDS)?.forEach {
-      data.tags.getByUUID(it)?.let { state.tags.add(it) }
+      data.tags.getByUUID(UUID.fromString(it))?.let { state.tags.add(it) }
     }
   }
 

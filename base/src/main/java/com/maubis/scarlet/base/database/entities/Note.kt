@@ -11,6 +11,7 @@ import com.maubis.scarlet.base.core.note.Reminder
 import com.maubis.scarlet.base.core.note.generateUUID
 import com.maubis.scarlet.base.note.mark
 import com.maubis.scarlet.base.settings.sNoteDefaultColor
+import java.util.*
 
 @Entity(tableName = "note", indices = [Index("uuid", unique = true)])
 @TypeConverters(NoteConverters::class)
@@ -50,8 +51,11 @@ class Note {
         return FormatBuilder().getFormats(this.content)
     }
 
-    fun getTagUUIDs(): MutableSet<String> {
-        return tags.split(",").filter { it.isNotBlank() }.toMutableSet()
+    fun getTagUUIDs(): MutableSet<UUID> {
+        return tags.split(",")
+            .filter { it.isNotBlank() }
+            .map { UUID.fromString(it) }
+            .toMutableSet()
     }
 
     fun save(context: Context) {

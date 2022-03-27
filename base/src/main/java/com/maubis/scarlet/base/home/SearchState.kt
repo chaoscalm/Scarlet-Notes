@@ -73,7 +73,7 @@ fun filterOutFolders(notes: List<Note>): List<Note> {
 fun unifiedSearchWithoutFolder(state: SearchState): List<Note> {
   return getNotesForMode(state)
     .filter { state.colors.isEmpty() || state.colors.contains(it.color) }
-    .filter { note -> state.tags.isEmpty() || state.tags.any { note.tags.contains(it.uuid) } }
+    .filter { note -> state.tags.isEmpty() || state.tags.any { note.tags.contains(it.uuid.toString()) } }
     .filter {
       when {
         state.text.isBlank() -> true

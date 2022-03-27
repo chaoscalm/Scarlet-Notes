@@ -15,6 +15,7 @@ import com.maubis.scarlet.base.support.sheets.LithoBottomSheet
 import com.maubis.scarlet.base.support.sheets.LithoOptionsItem
 import com.maubis.scarlet.base.support.sheets.OptionItemLayout
 import com.maubis.scarlet.base.support.sheets.getLithoBottomSheetTitle
+import java.util.*
 
 class SelectedTagChooserBottomSheet : LithoBottomSheet() {
 
@@ -60,12 +61,12 @@ class SelectedTagChooserBottomSheet : LithoBottomSheet() {
     val activity = context as SelectNotesActivity
     val options = ArrayList<LithoTagOptionsItem>()
 
-    val tags = HashSet<String>()
+    val tags = HashSet<UUID>()
     tags.addAll(activity.getAllSelectedNotes().firstOrNull()?.getTagUUIDs() ?: emptySet())
 
     activity.getAllSelectedNotes().forEach {
       val uuids = it.getTagUUIDs().toMutableSet()
-      val uuidsToRemove = HashSet<String>()
+      val uuidsToRemove = HashSet<UUID>()
       for (tag in tags) {
         if (!uuids.contains(tag)) {
           uuidsToRemove.add(tag)

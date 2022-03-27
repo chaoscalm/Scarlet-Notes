@@ -2,6 +2,7 @@ package com.maubis.scarlet.base.core.note
 
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.note.getFullText
+import java.util.*
 
 enum class SortingTechnique {
   LAST_MODIFIED,
@@ -51,7 +52,7 @@ fun sort(notes: List<Note>, sortingTechnique: SortingTechnique): List<Note> {
       ComparablePair(note.color, note.updateTimestamp)
     }
     SortingTechnique.NOTE_TAGS -> {
-      val tagCounterMap = HashMap<String, Int>()
+      val tagCounterMap = HashMap<UUID, Int>()
       notes.map { it.getTagUUIDs() }.forEach { tags ->
         tags.forEach { tag ->
           tagCounterMap[tag] = (tagCounterMap[tag] ?: 0) + 1

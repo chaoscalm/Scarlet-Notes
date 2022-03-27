@@ -9,6 +9,7 @@ import com.maubis.scarlet.base.notification.NotificationConfig
 import com.maubis.scarlet.base.notification.NotificationHandler
 import com.maubis.scarlet.base.widget.AllNotesWidgetProvider
 import com.maubis.scarlet.base.widget.WidgetConfigureActivity
+import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 
 class NotesRepository(private val database: NoteDao, private val notificationHandler: NotificationHandler) {
@@ -27,8 +28,8 @@ class NotesRepository(private val database: NoteDao, private val notificationHan
     return notes.values.filter { it.locked == locked }
   }
 
-  fun getNoteCountByTag(uuid: String): Int {
-    return notes.values.count { it.tags.contains(uuid) }
+  fun getNoteCountByTag(tagUuid: UUID): Int {
+    return notes.values.count { it.tags.contains(tagUuid.toString()) }
   }
 
   fun getNoteCountByFolder(uuid: String): Int {
