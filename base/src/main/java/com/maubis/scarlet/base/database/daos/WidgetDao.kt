@@ -14,6 +14,6 @@ interface WidgetDao {
     @Query("SELECT * FROM widget WHERE widgetId = :uid LIMIT 1")
     fun getByID(uid: Int): Widget?
 
-    @Query("SELECT * FROM widget WHERE noteUUID = :uuid")
+    @Query("SELECT * FROM widget WHERE noteUuid = :uuid")
     fun getByNote(uuid: String): List<Widget>
 }

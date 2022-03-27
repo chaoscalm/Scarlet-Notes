@@ -70,7 +70,7 @@ class WidgetConfigureActivity : SelectableNotesActivityBase(), INoteSelectorActi
 
   companion object {
     fun createNoteWidget(context: Context, widget: Widget) {
-      val note = data.notes.getByUUID(widget.noteUUID)
+      val note = data.notes.getByUUID(widget.noteUuid)
       val appWidgetManager = AppWidgetManager.getInstance(context)
       if (note === null || (note.locked && !sWidgetShowLockedNotes)) {
         val views = RemoteViews(context.getPackageName(), R.layout.widget_invalid_note)

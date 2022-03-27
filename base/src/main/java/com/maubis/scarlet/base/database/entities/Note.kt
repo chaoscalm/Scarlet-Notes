@@ -20,6 +20,7 @@ import com.maubis.scarlet.base.settings.sNoteDefaultColor
 class Note {
     @PrimaryKey(autoGenerate = true)
     var uid: Int = 0
+    var uuid: String = generateUUID()
     var content: String = FormatBuilder().getContent(emptyList())
     var color: Int = sNoteDefaultColor
     var state: NoteState = NoteState.DEFAULT
@@ -27,13 +28,12 @@ class Note {
     var updateTimestamp: Long = timestamp
     var locked: Boolean = false
     var pinned: Boolean = false
-    var uuid: String = generateUUID()
     var reminder: Reminder? = null
     var excludeFromBackup: Boolean = false
     var tags: String = ""
     var folder: String = ""
 
-    fun isNew(): Boolean {
+    fun isNotPersisted(): Boolean {
         return this.uid == 0
     }
 

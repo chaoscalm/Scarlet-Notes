@@ -2,16 +2,22 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "791313b10036c7e12ebdbb9a72efab9b",
+    "identityHash": "cc9ad94391f8fdecd899f1f4c4a4803a",
     "entities": [
       {
         "tableName": "note",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`uid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `content` TEXT NOT NULL, `color` INTEGER NOT NULL, `state` TEXT NOT NULL, `timestamp` INTEGER NOT NULL, `updateTimestamp` INTEGER NOT NULL, `locked` INTEGER NOT NULL, `pinned` INTEGER NOT NULL, `uuid` TEXT NOT NULL, `reminder` TEXT, `excludeFromBackup` INTEGER NOT NULL, `tags` TEXT NOT NULL, `folder` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`uid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `uuid` TEXT NOT NULL, `content` TEXT NOT NULL, `color` INTEGER NOT NULL, `state` TEXT NOT NULL, `timestamp` INTEGER NOT NULL, `updateTimestamp` INTEGER NOT NULL, `locked` INTEGER NOT NULL, `pinned` INTEGER NOT NULL, `reminder` TEXT, `excludeFromBackup` INTEGER NOT NULL, `tags` TEXT NOT NULL, `folder` TEXT NOT NULL)",
         "fields": [
           {
             "fieldPath": "uid",
             "columnName": "uid",
             "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "uuid",
+            "columnName": "uuid",
+            "affinity": "TEXT",
             "notNull": true
           },
           {
@@ -54,12 +60,6 @@
             "fieldPath": "pinned",
             "columnName": "pinned",
             "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "uuid",
-            "columnName": "uuid",
-            "affinity": "TEXT",
             "notNull": true
           },
           {
@@ -124,7 +124,7 @@
       },
       {
         "tableName": "widget",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`widgetId` INTEGER NOT NULL, `noteUUID` TEXT NOT NULL, PRIMARY KEY(`widgetId`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`widgetId` INTEGER NOT NULL, `noteUuid` TEXT NOT NULL, PRIMARY KEY(`widgetId`))",
         "fields": [
           {
             "fieldPath": "widgetId",
@@ -133,8 +133,8 @@
             "notNull": true
           },
           {
-            "fieldPath": "noteUUID",
-            "columnName": "noteUUID",
+            "fieldPath": "noteUuid",
+            "columnName": "noteUuid",
             "affinity": "TEXT",
             "notNull": true
           }
@@ -196,7 +196,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '791313b10036c7e12ebdbb9a72efab9b')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'cc9ad94391f8fdecd899f1f4c4a4803a')"
     ]
   }
 }

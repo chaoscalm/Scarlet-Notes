@@ -17,13 +17,13 @@ import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.core.format.FormatBuilder
 import com.maubis.scarlet.base.core.format.FormatType
 import com.maubis.scarlet.base.core.format.sectionPreservingSort
-import com.maubis.scarlet.base.core.note.*
+import com.maubis.scarlet.base.core.note.NoteBuilder
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.database.entities.NoteState
 import com.maubis.scarlet.base.databinding.ActivityAdvancedNoteBinding
-import com.maubis.scarlet.base.note.*
 import com.maubis.scarlet.base.note.actions.INoteOptionSheetActivity
 import com.maubis.scarlet.base.note.actions.NoteOptionsBottomSheet
+import com.maubis.scarlet.base.note.adjustedColor
 import com.maubis.scarlet.base.note.creation.specs.NoteViewBottomBar
 import com.maubis.scarlet.base.note.creation.specs.NoteViewTopBar
 import com.maubis.scarlet.base.note.formats.FormatAdapter
@@ -31,20 +31,25 @@ import com.maubis.scarlet.base.note.formats.IFormatRecyclerViewActivity
 import com.maubis.scarlet.base.note.formats.getFormatControllerItems
 import com.maubis.scarlet.base.note.formats.recycler.KEY_EDITABLE
 import com.maubis.scarlet.base.note.formats.recycler.KEY_NOTE_COLOR
+import com.maubis.scarlet.base.note.getSmartFormats
+import com.maubis.scarlet.base.note.getTagString
+import com.maubis.scarlet.base.note.mark
 import com.maubis.scarlet.base.settings.STORE_KEY_TEXT_SIZE
 import com.maubis.scarlet.base.settings.SettingsOptionsBottomSheet.Companion.KEY_MARKDOWN_ENABLED
 import com.maubis.scarlet.base.settings.sEditorTextSize
 import com.maubis.scarlet.base.settings.sNoteDefaultColor
 import com.maubis.scarlet.base.settings.sUIUseNoteColorAsBackground
 import com.maubis.scarlet.base.support.specs.ToolbarColorConfig
-import com.maubis.scarlet.base.support.ui.*
+import com.maubis.scarlet.base.support.ui.KEY_NIGHT_THEME
+import com.maubis.scarlet.base.support.ui.SecuredActivity
+import com.maubis.scarlet.base.support.ui.Theme
+import com.maubis.scarlet.base.support.ui.ThemeColorType
 import com.maubis.scarlet.base.support.utils.ColorUtil
 import com.maubis.scarlet.base.support.utils.ColorUtil.darkOrDarkerColor
 import com.maubis.scarlet.base.widget.getPendingIntentWithStack
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.util.*
 
 const val INTENT_KEY_NOTE_ID = "NOTE_ID"
 
@@ -258,7 +263,7 @@ open class ViewAdvancedNoteActivity : SecuredActivity(), INoteOptionSheetActivit
   }
 
   protected fun saveNoteIfNeeded() {
-    if (note.getFormats().isEmpty() && note.isNew()) {
+    if (note.getFormats().isEmpty() && note.isNotPersisted()) {
       return
     }
     note.updateTimestamp = System.currentTimeMillis()

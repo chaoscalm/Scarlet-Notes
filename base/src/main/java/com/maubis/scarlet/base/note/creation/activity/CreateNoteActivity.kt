@@ -167,7 +167,7 @@ open class CreateNoteActivity : ViewAdvancedNoteActivity() {
   }
 
   private fun deleteIfEmpty() {
-    if (note.isNew()) {
+    if (note.isNotPersisted()) {
       return
     }
     if (note.getFormats().isEmpty()) {
