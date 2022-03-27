@@ -2,11 +2,12 @@ package com.maubis.scarlet.base.database
 
 import com.maubis.scarlet.base.database.daos.FolderDao
 import com.maubis.scarlet.base.database.entities.Folder
+import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 
 class FoldersRepository(private val database: FolderDao) {
 
-  private val folders: ConcurrentHashMap<String, Folder> by lazy { loadFoldersFromDB() }
+  private val folders: ConcurrentHashMap<UUID, Folder> by lazy { loadFoldersFromDB() }
 
   fun save(folder: Folder) {
     database.insertFolder(folder)
@@ -21,13 +22,13 @@ class FoldersRepository(private val database: FolderDao) {
     folders.remove(folder.uuid)
   }
 
-  fun exists(folderUuid: String): Boolean = folders.containsKey(folderUuid)
+  fun exists(folderUuid: UUID): Boolean = folders.containsKey(folderUuid)
 
   fun getAll(): List<Folder> {
     return folders.values.toList()
   }
 
-  fun getByUUID(uuid: String): Folder? {
+  fun getByUUID(uuid: UUID): Folder? {
     return folders[uuid]
   }
 
@@ -35,8 +36,8 @@ class FoldersRepository(private val database: FolderDao) {
     return folders.values.firstOrNull { it.title == title }
   }
 
-  private fun loadFoldersFromDB(): ConcurrentHashMap<String, Folder> {
-    val foldersMap = ConcurrentHashMap<String, Folder>()
+  private fun loadFoldersFromDB(): ConcurrentHashMap<UUID, Folder> {
+    val foldersMap = ConcurrentHashMap<UUID, Folder>()
     database.getAll().forEach { foldersMap[it.uuid] = it }
     return foldersMap
   }

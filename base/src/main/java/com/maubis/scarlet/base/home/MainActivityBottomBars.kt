@@ -4,7 +4,10 @@ import android.content.pm.ShortcutInfo
 import android.graphics.Color
 import android.graphics.drawable.Icon
 import android.text.Layout
-import com.facebook.litho.*
+import com.facebook.litho.ClickEvent
+import com.facebook.litho.Component
+import com.facebook.litho.ComponentContext
+import com.facebook.litho.Row
 import com.facebook.litho.annotations.LayoutSpec
 import com.facebook.litho.annotations.OnCreateLayout
 import com.facebook.litho.annotations.OnEvent
@@ -75,7 +78,7 @@ object MainActivityBottomBarSpec {
           .onClick {
             val intent = CreateNoteActivity.getNewChecklistNoteIntent(
                 activity,
-                activity.state.currentFolder?.uuid ?: "")
+                activity.state.currentFolder?.uuid)
             activity.startActivity(intent)
           })
       row.child(bottomBarRoundIcon(context, colorConfig)
@@ -97,7 +100,7 @@ object MainActivityBottomBarSpec {
           .onClick {
             val intent = CreateNoteActivity.getNewNoteIntent(
                 activity,
-                activity.state.currentFolder?.uuid ?: "")
+                activity.state.currentFolder?.uuid)
             activity.startActivity(intent)
           })
     }

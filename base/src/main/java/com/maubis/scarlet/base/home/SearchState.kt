@@ -52,19 +52,19 @@ fun unifiedSearchSynchronous(state: SearchState): List<Note> {
       if (currentFolder == null)
         it.folder.isBlank()
       else
-        currentFolder.uuid == it.folder
+        currentFolder.uuid.toString() == it.folder
     }
   return sort(notes, sorting)
 }
 
 fun filterFolder(notes: List<Note>, folder: Folder): List<Note> {
   val sorting = SortingOptionsBottomSheet.getSortingState()
-  val filteredNotes = notes.filter { it.folder == folder.uuid }
+  val filteredNotes = notes.filter { it.folder == folder.uuid.toString() }
   return sort(filteredNotes, sorting)
 }
 
 fun filterOutFolders(notes: List<Note>): List<Note> {
-  val allFoldersUUIDs = data.folders.getAll().map { it.uuid }
+  val allFoldersUUIDs = data.folders.getAll().map { it.uuid.toString() }
   val sorting = SortingOptionsBottomSheet.getSortingState()
   val filteredNotes = notes.filter { !allFoldersUUIDs.contains(it.folder) }
   return sort(filteredNotes, sorting)

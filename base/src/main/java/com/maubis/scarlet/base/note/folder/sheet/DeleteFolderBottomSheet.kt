@@ -74,7 +74,7 @@ class DeleteFolderBottomSheet : LithoOptionBottomSheet() {
   }
 
   private fun executeForFolderContent(folder: Folder, lambda: (Note) -> Unit) {
-    data.notes.getAll().filter { it.folder == folder.uuid }.forEach {
+    data.notes.getAll().filter { it.folder == folder.uuid.toString() }.forEach {
       lambda(it)
     }
   }

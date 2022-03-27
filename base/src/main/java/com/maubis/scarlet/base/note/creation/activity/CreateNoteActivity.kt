@@ -61,15 +61,15 @@ open class CreateNoteActivity : ViewAdvancedNoteActivity() {
     if (intent === null) {
       return
     }
-    val folderUuid = intent.getStringExtra(INTENT_KEY_FOLDER)
-    if (folderUuid === null || folderUuid.isBlank()) {
+    val folderUuid = intent.getSerializableExtra(INTENT_KEY_FOLDER) as UUID?
+    if (folderUuid === null) {
       return
     }
     val folder = data.folders.getByUUID(folderUuid)
     if (folder === null) {
       return
     }
-    note.folder = folder.uuid
+    note.folder = folder.uuid.toString()
   }
 
   private fun setTouchListener() {
@@ -406,19 +406,15 @@ open class CreateNoteActivity : ViewAdvancedNoteActivity() {
     const val HANDLER_UPDATE_TIME = 4000
     const val INTENT_KEY_FOLDER = "key_folder"
 
-    fun getNewNoteIntent(
-      context: Context,
-      folder: String = ""): Intent {
+    fun getNewNoteIntent(context: Context, folderUuid: UUID?): Intent {
       val intent = Intent(context, CreateNoteActivity::class.java)
-      intent.putExtra(INTENT_KEY_FOLDER, folder)
+      intent.putExtra(INTENT_KEY_FOLDER, folderUuid)
       return intent
     }
 
-    fun getNewChecklistNoteIntent(
-      context: Context,
-      folder: String = ""): Intent {
+    fun getNewChecklistNoteIntent(context: Context, folderUuid: UUID?): Intent {
       val intent = Intent(context, CreateListNoteActivity::class.java)
-      intent.putExtra(INTENT_KEY_FOLDER, folder)
+      intent.putExtra(INTENT_KEY_FOLDER, folderUuid)
       return intent
     }
   }

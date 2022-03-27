@@ -3,13 +3,13 @@ package com.maubis.scarlet.base.database.entities
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.maubis.scarlet.base.ScarletApp
-import com.maubis.scarlet.base.core.note.generateUUID
 import com.maubis.scarlet.base.support.utils.dateFormat
+import java.util.*
 
 @Entity(tableName = "folder")
 class Folder() {
     @PrimaryKey
-    var uuid: String = generateUUID()
+    var uuid: UUID = UUID.randomUUID()
     var title: String = ""
     var timestamp: Long = System.currentTimeMillis()
     var updateTimestamp: Long = timestamp

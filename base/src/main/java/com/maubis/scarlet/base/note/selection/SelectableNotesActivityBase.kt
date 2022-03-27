@@ -25,6 +25,7 @@ import com.maubis.scarlet.base.settings.*
 import com.maubis.scarlet.base.support.recycler.RecyclerItem
 import com.maubis.scarlet.base.support.ui.SecuredActivity
 import com.maubis.scarlet.base.support.ui.ThemeColorType
+import java.util.*
 
 abstract class SelectableNotesActivityBase : SecuredActivity(), INoteSelectorActivity {
 
@@ -56,7 +57,7 @@ abstract class SelectableNotesActivityBase : SecuredActivity(), INoteSelectorAct
         notes.forEach {
           val noteFolderId = it.note.folder
           if (lastFolder != noteFolderId) {
-            val folder = data.folders.getByUUID(noteFolderId)
+            val folder = data.folders.getByUUID(UUID.fromString(noteFolderId))
             if (folder !== null) {
               items.add(SelectorFolderRecyclerItem(this@SelectableNotesActivityBase, folder))
               lastFolder = noteFolderId

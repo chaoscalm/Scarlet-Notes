@@ -14,13 +14,13 @@ class FolderChooserBottomSheet : FolderChooserBottomSheetBase() {
 
   override fun onFolderSelected(folder: Folder) {
     note!!.folder = when {
-      note!!.folder == folder.uuid -> ""
-      else -> folder.uuid
+      note!!.folder == folder.uuid.toString() -> ""
+      else -> folder.uuid.toString()
     }
     note!!.save(requireContext())
   }
 
   override fun isFolderSelected(folder: Folder): Boolean {
-    return note!!.folder == folder.uuid
+    return note!!.folder == folder.uuid.toString()
   }
 }

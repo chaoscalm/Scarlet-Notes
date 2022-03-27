@@ -3,6 +3,7 @@ package com.maubis.scarlet.base.backup.data
 import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.database.entities.Folder
 import java.io.Serializable
+import java.util.*
 
 class ExportedFolder(
   val uuid: String,
@@ -13,7 +14,7 @@ class ExportedFolder(
 ) : Serializable {
 
   constructor(folder: Folder) : this(
-          folder.uuid,
+          folder.uuid.toString(),
           folder.title,
           folder.timestamp,
           folder.updateTimestamp,
@@ -24,7 +25,7 @@ class ExportedFolder(
     if (existingWithSameTitle != null) {
       return
     }
-    val existingWithSameUuid = ScarletApp.data.folders.getByUUID(uuid)
+    val existingWithSameUuid = ScarletApp.data.folders.getByUUID(UUID.fromString(uuid))
     if (existingWithSameUuid != null) {
       return
     }
@@ -35,7 +36,7 @@ class ExportedFolder(
 
   private fun buildFolder(): Folder {
     val folder = Folder()
-    folder.uuid = uuid
+    folder.uuid = UUID.fromString(uuid)
     folder.title = title
     folder.timestamp = timestamp
     folder.updateTimestamp = updateTimestamp

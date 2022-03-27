@@ -19,10 +19,10 @@ class SelectedFolderChooseOptionsBottomSheet : FolderChooserBottomSheetBase() {
 
   override fun onFolderSelected(folder: Folder) {
     onActionListener(folder, true)
-    onActionListener(folder, folder.uuid != selectedFolder)
+    onActionListener(folder, folder.uuid.toString() != selectedFolder)
   }
 
   override fun isFolderSelected(folder: Folder): Boolean {
-    return folder.uuid == selectedFolder
+    return folder.uuid.toString() == selectedFolder
   }
 }

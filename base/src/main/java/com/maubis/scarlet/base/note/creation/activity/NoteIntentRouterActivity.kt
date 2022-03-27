@@ -79,9 +79,8 @@ class NoteIntentRouterActivity : AppCompatActivity() {
         .putExtra(INTENT_KEY_NOTE_ID, note.uid)
     }
 
-    fun create(context: Context, baseFolder: String = ""): Intent {
+    fun create(context: Context): Intent {
       return Intent(context, CreateNoteActivity::class.java)
-        .putExtra(CreateNoteActivity.INTENT_KEY_FOLDER, baseFolder)
     }
 
     fun view(note: Note): Intent {

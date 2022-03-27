@@ -32,8 +32,8 @@ class NotesRepository(private val database: NoteDao, private val notificationHan
     return notes.values.count { it.tags.contains(tagUuid.toString()) }
   }
 
-  fun getNoteCountByFolder(uuid: String): Int {
-    return notes.values.count { it.folder == uuid }
+  fun getNoteCountByFolder(folderUuid: UUID): Int {
+    return notes.values.count { it.folder == folderUuid.toString() }
   }
 
   fun getByID(uid: Int): Note? {

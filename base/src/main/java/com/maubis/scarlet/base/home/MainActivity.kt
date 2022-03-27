@@ -88,7 +88,7 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
     outState.putString(SEARCH_TEXT, state.text)
     outState.putIntegerArrayList(SEARCH_COLORS, ArrayList(state.colors))
     outState.putInt(NAVIGATION_MODE, state.mode.ordinal)
-    outState.putString(CURRENT_FOLDER_UUID, state.currentFolder?.uuid)
+    outState.putSerializable(CURRENT_FOLDER_UUID, state.currentFolder?.uuid)
     outState.putStringArrayList(TAGS_UUIDS, ArrayList(state.tags.map { it.uuid.toString() }))
   }
 
@@ -99,8 +99,8 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
     state.text = savedInstanceState.getString(SEARCH_TEXT, "")
     state.colors = savedInstanceState.getIntegerArrayList(SEARCH_COLORS) ?: ArrayList()
     state.mode = HomeNavigationMode.values()[savedInstanceState.getInt(NAVIGATION_MODE)]
-    savedInstanceState.getString(CURRENT_FOLDER_UUID)?.let {
-      state.currentFolder = data.folders.getByUUID(it)
+    savedInstanceState.getSerializable(CURRENT_FOLDER_UUID)?.let {
+      state.currentFolder = data.folders.getByUUID(it as UUID)
     }
     savedInstanceState.getStringArrayList(TAGS_UUIDS)?.forEach {
       data.tags.getByUUID(UUID.fromString(it))?.let { state.tags.add(it) }
