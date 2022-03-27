@@ -4,7 +4,7 @@ import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.database.entities.Folder
 import java.io.Serializable
 
-class ExportableFolder(
+class ExportedFolder(
   val uuid: String,
   val title: String,
   val timestamp: Long,

@@ -4,7 +4,7 @@ import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.database.entities.Tag
 import java.io.Serializable
 
-class ExportableTag(
+class ExportedTag(
   var uuid: String,
   var title: String
 ) : Serializable {

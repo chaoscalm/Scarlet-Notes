@@ -4,7 +4,7 @@ import android.content.Context
 import android.os.Environment
 import com.github.bijoysingh.starter.async.Parallel
 import com.google.gson.Gson
-import com.maubis.scarlet.base.backup.data.ExportableFileFormat
+import com.maubis.scarlet.base.backup.data.ExportFileFormat
 import com.maubis.scarlet.base.core.note.NoteBuilder
 import com.maubis.scarlet.base.support.utils.logNonCriticalError
 import java.io.BufferedReader
@@ -15,7 +15,7 @@ import java.io.InputStreamReader
 class NoteImporter {
   fun importFromBackupContent(context: Context, content: String) {
     try {
-        val fileFormat = Gson().fromJson(content, ExportableFileFormat::class.java)
+        val fileFormat = Gson().fromJson(content, ExportFileFormat::class.java)
         if (fileFormat == null) {
           importNoteFallback(content, context)
           return

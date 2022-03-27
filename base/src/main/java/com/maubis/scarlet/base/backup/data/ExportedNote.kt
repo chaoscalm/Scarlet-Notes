@@ -7,7 +7,7 @@ import com.maubis.scarlet.base.database.entities.NoteState
 import java.io.Serializable
 import kotlin.math.max
 
-class ExportableNote(
+class ExportedNote(
   var uuid: String,
   var description: String,
   var timestamp: Long,

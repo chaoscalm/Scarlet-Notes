@@ -7,10 +7,10 @@ import com.github.bijoysingh.starter.util.FileManager
 import com.google.gson.Gson
 import com.maubis.scarlet.base.ScarletApp.Companion.appPreferences
 import com.maubis.scarlet.base.ScarletApp.Companion.data
-import com.maubis.scarlet.base.backup.data.ExportableFileFormat
-import com.maubis.scarlet.base.backup.data.ExportableFolder
-import com.maubis.scarlet.base.backup.data.ExportableNote
-import com.maubis.scarlet.base.backup.data.ExportableTag
+import com.maubis.scarlet.base.backup.data.ExportFileFormat
+import com.maubis.scarlet.base.backup.data.ExportedFolder
+import com.maubis.scarlet.base.backup.data.ExportedNote
+import com.maubis.scarlet.base.backup.data.ExportedTag
 import com.maubis.scarlet.base.backup.sheet.NOTES_EXPORT_FILENAME
 import com.maubis.scarlet.base.backup.sheet.NOTES_EXPORT_FOLDER
 import com.maubis.scarlet.base.core.format.FormatType
@@ -18,7 +18,6 @@ import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.support.utils.dateFormat
 import java.io.File
 
-const val KEY_NOTE_VERSION = "KEY_NOTE_VERSION"
 const val KEY_AUTO_BACKUP_LAST_TIMESTAMP = "KEY_AUTO_BACKUP_LAST_TIMESTAMP"
 
 const val EXPORT_NOTE_SEPARATOR = ">S>C>A>R>L>E>T>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>N>O>T>E>S>"
@@ -52,10 +51,10 @@ class NoteExporter {
       return getMarkdownBackupFileContent(notesToBeExported)
     }
 
-    val notes = notesToBeExported.map { ExportableNote(it) }
-    val tags = data.tags.getAll().map { ExportableTag(it) }
-    val folders = data.folders.getAll().map { ExportableFolder(it) }
-    val fileContent = ExportableFileFormat(EXPORT_VERSION, notes, tags, folders)
+    val notes = notesToBeExported.map { ExportedNote(it) }
+    val tags = data.tags.getAll().map { ExportedTag(it) }
+    val folders = data.folders.getAll().map { ExportedFolder(it) }
+    val fileContent = ExportFileFormat(EXPORT_VERSION, notes, tags, folders)
     return Gson().toJson(fileContent)
   }
 
