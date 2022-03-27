@@ -6,7 +6,7 @@ import com.maubis.scarlet.base.database.entities.Tag
 @Dao
 interface TagDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertTag(tag: Tag): Long
+    fun insertTag(tag: Tag)
 
     @Delete
     fun delete(tag: Tag)
@@ -14,12 +14,6 @@ interface TagDao {
     @Query("SELECT count(*) FROM tag")
     fun getCount(): Int
 
-    @Query("SELECT * FROM tag ORDER BY uid")
+    @Query("SELECT * FROM tag")
     fun getAll(): List<Tag>
-
-    @Query("SELECT * FROM tag WHERE uid = :uid LIMIT 1")
-    fun getByID(uid: Int): Tag
-
-    @Query("SELECT * FROM tag WHERE uuid = :uuid LIMIT 1")
-    fun getByUUID(uuid: String): Tag
 }

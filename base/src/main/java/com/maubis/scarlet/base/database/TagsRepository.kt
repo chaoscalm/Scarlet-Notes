@@ -9,19 +9,19 @@ class TagsRepository(private val database: TagDao) {
   private val tags: ConcurrentHashMap<String, Tag> by lazy { loadTagsFromDB() }
 
   fun save(tag: Tag) {
-    val id = database.insertTag(tag)
-    tag.uid = if (tag.isUnsaved()) id.toInt() else tag.uid
+    database.insertTag(tag)
     tags[tag.uuid] = tag
   }
 
   fun delete(tag: Tag) {
-    if (tag.isUnsaved()) {
+    if (!exists(tag.uuid)) {
       return
     }
     database.delete(tag)
     tags.remove(tag.uuid)
-    tag.uid = 0
   }
+
+  fun exists(tagUuid: String): Boolean = tags.containsKey(tagUuid)
 
   fun getAll(): List<Tag> {
     return tags.values.toList()

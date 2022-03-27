@@ -43,13 +43,13 @@ class CreateOrEditTagBottomSheet : ThemedBottomSheetFragment() {
     enterTag.setTextColor(appTheme.get(ThemeColorType.SECONDARY_TEXT))
     enterTag.setHintTextColor(appTheme.get(ThemeColorType.HINT_TEXT))
 
-    title.setText(if (tag.isUnsaved()) R.string.tag_sheet_create_title else R.string.tag_sheet_edit_title)
+    title.setText(if (tag.isNotPersisted()) R.string.tag_sheet_create_title else R.string.tag_sheet_edit_title)
     action.setOnClickListener {
       val updated = onActionClick(tag, enterTag.text.toString())
       sheetOnTagListener(tag, !updated)
       dismiss()
     }
-    removeBtn.visibility = if (tag.isUnsaved()) GONE else VISIBLE
+    removeBtn.visibility = if (tag.isNotPersisted()) GONE else VISIBLE
     removeBtn.setOnClickListener {
       tag.delete()
       sheetOnTagListener(tag, true)

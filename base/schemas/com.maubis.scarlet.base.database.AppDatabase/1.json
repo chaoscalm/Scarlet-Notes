@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "5d6fd51af38c6a7b8f5481bb4c4a851a",
+    "identityHash": "791313b10036c7e12ebdbb9a72efab9b",
     "entities": [
       {
         "tableName": "note",
@@ -98,14 +98,8 @@
       },
       {
         "tableName": "tag",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`title` TEXT NOT NULL, `uuid` TEXT NOT NULL, `uid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`uuid` TEXT NOT NULL, `title` TEXT NOT NULL, PRIMARY KEY(`uuid`))",
         "fields": [
-          {
-            "fieldPath": "title",
-            "columnName": "title",
-            "affinity": "TEXT",
-            "notNull": true
-          },
           {
             "fieldPath": "uuid",
             "columnName": "uuid",
@@ -113,17 +107,17 @@
             "notNull": true
           },
           {
-            "fieldPath": "uid",
-            "columnName": "uid",
-            "affinity": "INTEGER",
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
             "notNull": true
           }
         ],
         "primaryKey": {
           "columnNames": [
-            "uid"
+            "uuid"
           ],
-          "autoGenerate": true
+          "autoGenerate": false
         },
         "indices": [],
         "foreignKeys": []
@@ -202,7 +196,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '5d6fd51af38c6a7b8f5481bb4c4a851a')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '791313b10036c7e12ebdbb9a72efab9b')"
     ]
   }
 }

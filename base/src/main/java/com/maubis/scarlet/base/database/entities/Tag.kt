@@ -6,30 +6,23 @@ import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.core.note.generateUUID
 
 @Entity(tableName = "tag")
-class Tag(var title: String = "", var uuid: String = generateUUID()) {
-    @PrimaryKey(autoGenerate = true)
-    var uid = 0
-
-    fun isUnsaved(): Boolean {
-        return uid == 0
-    }
-
+class Tag(@PrimaryKey var uuid: String = generateUUID(), var title: String = "") {
     fun saveIfUnique() {
         val existing = ScarletApp.data.tags.getByTitle(title)
         if (existing !== null) {
-            this.uid = existing.uid
             this.uuid = existing.uuid
             return
         }
 
         val existingByUUID = ScarletApp.data.tags.getByUUID(uuid)
         if (existingByUUID != null) {
-            this.uid = existingByUUID.uid
             this.title = existingByUUID.title
             return
         }
         save()
     }
+
+    fun isNotPersisted(): Boolean = !ScarletApp.data.tags.exists(uuid)
 
     fun save() {
         ScarletApp.data.tags.save(this)
