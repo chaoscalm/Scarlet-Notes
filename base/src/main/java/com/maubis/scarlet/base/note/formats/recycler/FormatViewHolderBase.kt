@@ -70,47 +70,43 @@ abstract class FormatViewHolderBase(context: Context, view: View) : RecyclerView
         linkColor = ContextCompat.getColor(context, R.color.colorAccentYellowDark)
       }
     }
-    val
-      config = FormatViewHolderConfig(
-      editable = !(extra != null
-        && extra.containsKey(KEY_EDITABLE)
-        && !extra.getBoolean(KEY_EDITABLE)),
-      isMarkdownEnabled = (extra == null
-        || extra.getBoolean(SettingsOptionsBottomSheet.KEY_MARKDOWN_ENABLED, true)
-        || data.forcedMarkdown) && (data.formatType != FormatType.CODE),
-      fontSize = {
-        val fontSize = extra?.getInt(STORE_KEY_TEXT_SIZE, TEXT_SIZE_DEFAULT)
-          ?: TEXT_SIZE_DEFAULT
-        when (data.formatType) {
+    val fontSize = extra?.getInt(STORE_KEY_TEXT_SIZE, TEXT_SIZE_DEFAULT) ?: TEXT_SIZE_DEFAULT
+    val config = FormatViewHolderConfig(
+        editable = !(extra != null
+          && extra.containsKey(KEY_EDITABLE)
+          && !extra.getBoolean(KEY_EDITABLE)),
+        isMarkdownEnabled = (extra == null
+          || extra.getBoolean(SettingsOptionsBottomSheet.KEY_MARKDOWN_ENABLED, true)
+          || data.forcedMarkdown) && (data.formatType != FormatType.CODE),
+        fontSize = when (data.formatType) {
           FormatType.HEADING -> fontSize.toFloat() + 4
           FormatType.SUB_HEADING -> fontSize.toFloat() + 2
           else -> fontSize.toFloat()
+        },
+        backgroundColor = when (data.formatType) {
+          FormatType.CODE, FormatType.IMAGE -> appTheme.get(context, R.color.code_light, R.color.code_dark)
+          else -> ContextCompat.getColor(context, R.color.transparent)
+        },
+        secondaryTextColor = secondaryTextColor,
+        tertiaryTextColor = tertiaryTextColor,
+        iconColor = iconColor,
+        hintTextColor = hintTextColor,
+        accentColor = linkColor,
+        noteUUID = extra?.getString(INTENT_KEY_NOTE_ID) ?: "default",
+        typeface = when (data.formatType) {
+          FormatType.HEADING -> appTypeface.subHeading()
+          FormatType.SUB_HEADING -> appTypeface.title()
+          FormatType.HEADING_3 -> appTypeface.title()
+          FormatType.CODE -> appTypeface.code()
+          else -> appTypeface.text()
+        },
+        typefaceStyle = when (data.formatType) {
+          FormatType.HEADING, FormatType.SUB_HEADING, FormatType.HEADING_3 -> Typeface.BOLD
+          else -> Typeface.NORMAL
         }
-      }(),
-      backgroundColor = when (data.formatType) {
-        FormatType.CODE, FormatType.IMAGE -> appTheme.get(context, R.color.code_light, R.color.code_dark)
-        else -> ContextCompat.getColor(context, R.color.transparent)
-      },
-      secondaryTextColor = secondaryTextColor,
-      tertiaryTextColor = tertiaryTextColor,
-      iconColor = iconColor,
-      hintTextColor = hintTextColor,
-      accentColor = linkColor,
-      noteUUID = extra?.getString(INTENT_KEY_NOTE_ID) ?: "default",
-      typeface = when (data.formatType) {
-        FormatType.HEADING -> appTypeface.subHeading()
-        FormatType.SUB_HEADING -> appTypeface.title()
-        FormatType.HEADING_3 -> appTypeface.title()
-        FormatType.CODE -> appTypeface.code()
-        else -> appTypeface.text()
-      },
-      typefaceStyle = when (data.formatType) {
-        FormatType.HEADING, FormatType.SUB_HEADING, FormatType.HEADING_3 -> Typeface.BOLD
-        else -> Typeface.NORMAL
-      })
+    )
 
     populate(data, config)
-
   }
 
   abstract fun populate(data: Format, config: FormatViewHolderConfig)
