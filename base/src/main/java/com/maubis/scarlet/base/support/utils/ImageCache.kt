@@ -2,9 +2,10 @@ package com.maubis.scarlet.base.support.utils
 
 import android.content.Context
 import android.graphics.Bitmap
+import com.maubis.scarlet.base.database.entities.Note
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FileOutputStream
@@ -12,6 +13,7 @@ import java.util.concurrent.atomic.AtomicLong
 
 const val IMAGE_CACHE_SIZE = 1024 * 1024 * 10L
 
+@OptIn(DelicateCoroutinesApi::class)
 class ImageCache(context: Context) {
 
   private val thumbnailFolder = File(context.cacheDir, "thumbnails")
@@ -52,6 +54,14 @@ class ImageCache(context: Context) {
     return compressedBitmap
   }
 
+  fun deleteThumbnails(note: Note) {
+    GlobalScope.launch(Dispatchers.IO) {
+      thumbnailFolder
+          .listFiles { file -> file.name.startsWith(note.uuid.toString()) }
+          ?.forEach { it.delete() }
+    }
+  }
+
   private fun sampleBitmap(bitmap: Bitmap): Bitmap {
     val cropDimension = Math.min(bitmap.width, bitmap.height)
     val destinationBitmap = Bitmap.createBitmap(bitmap, 0, 0, cropDimension, cropDimension)
@@ -64,7 +74,7 @@ class ImageCache(context: Context) {
       return
     }
 
-    GlobalScope.async {
+    GlobalScope.launch(Dispatchers.IO) {
       var index = 0
       val files = thumbnailFolder.listFiles().sortedBy { it.lastModified() }
       while (thumbnailCacheSize.get() > IMAGE_CACHE_SIZE * 0.9 && index < files.size) {

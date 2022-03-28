@@ -100,7 +100,7 @@ class FormatImageViewHolder(context: Context, view: View) : FormatViewHolderBase
   }
 
   fun populateFile(file: File) {
-    imageStorage.loadPersistentFileToImageView(image, file, object : ImageLoadCallback {
+    imageStorage.loadImageToImageView(image, file, object : ImageLoadCallback {
       override fun onSuccess() {
         noImageMessage.visibility = View.GONE
       }

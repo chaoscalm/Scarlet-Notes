@@ -51,13 +51,18 @@ class ImageStore(context: Context, private val thumbnailsCache: ImageCache) {
   }
 
   fun deleteAllFiles(note: Note) {
+    thumbnailsCache.deleteThumbnails(note)
+    deleteImages(note)
+  }
+
+  private fun deleteImages(note: Note) {
     GlobalScope.launch(Dispatchers.IO) {
       val folder = File(rootFolder, note.uuid.toString())
       folder.deleteRecursively()
     }
   }
 
-  fun loadPersistentFileToImageView(image: ImageView, file: File, callback: ImageLoadCallback? = null) {
+  fun loadImageToImageView(image: ImageView, file: File, callback: ImageLoadCallback? = null) {
     GlobalScope.launch {
       if (!file.exists()) {
         withContext(Dispatchers.Main) {
@@ -84,12 +89,12 @@ class ImageStore(context: Context, private val thumbnailsCache: ImageCache) {
     }
   }
 
-  fun loadThumbnailFileToImageView(noteUUID: String, imageUuid: String, image: ImageView) {
+  fun loadThumbnailToImageView(noteUUID: String, imageUuid: String, image: ImageView) {
     GlobalScope.launch {
       val thumbnailFile = thumbnailsCache.thumbnailFile(noteUUID, imageUuid)
-      val persistentFile = getFile(noteUUID, imageUuid)
+      val imageFile = getFile(noteUUID, imageUuid)
 
-      if (!persistentFile.exists()) {
+      if (!imageFile.exists()) {
         withContext(Dispatchers.Main) { image.visibility = View.GONE }
         return@launch
       }
@@ -109,14 +114,14 @@ class ImageStore(context: Context, private val thumbnailsCache: ImageCache) {
         return@launch
       }
 
-      val persistentBitmap = loadBitmap(persistentFile)
-      if (persistentBitmap === null) {
-        deleteIfExist(persistentFile)
+      val bitmap = loadBitmap(imageFile)
+      if (bitmap == null) {
+        deleteIfExist(imageFile)
         withContext(Dispatchers.Main) { image.visibility = View.GONE }
         return@launch
       }
 
-      val compressedBitmap = thumbnailsCache.saveThumbnail(thumbnailFile, persistentBitmap)
+      val compressedBitmap = thumbnailsCache.saveThumbnail(thumbnailFile, bitmap)
       withContext(Dispatchers.Main) {
         image.visibility = View.VISIBLE
         image.setImageBitmap(compressedBitmap)
