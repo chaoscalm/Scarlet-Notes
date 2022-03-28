@@ -21,9 +21,10 @@ class NoteIntentRouterActivity : AppCompatActivity() {
 
     handleOpenNote(data)
     handleCreateNote(data)
+    finish()
   }
 
-  fun handleOpenNote(data: Uri): Boolean {
+  private fun handleOpenNote(data: Uri): Boolean {
     if (data.host != "open_note") {
       return false
     }
@@ -46,7 +47,7 @@ class NoteIntentRouterActivity : AppCompatActivity() {
     return true
   }
 
-  fun handleCreateNote(data: Uri): Boolean {
+  private fun handleCreateNote(data: Uri): Boolean {
     if (data.host != "create_note") {
       return false
     }
