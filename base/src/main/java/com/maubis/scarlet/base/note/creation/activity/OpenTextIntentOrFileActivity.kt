@@ -4,9 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.SpannableString
-import android.text.TextWatcher
 import android.view.View
 import android.widget.TextView
+import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.lifecycleScope
 import com.maubis.markdown.Markdown
 import com.maubis.markdown.spannable.clearMarkdownSpans
@@ -46,18 +46,12 @@ class OpenTextIntentOrFileActivity : SecuredActivity() {
     val spannable = SpannableString(contentText)
     spannable.setFormats(Markdown.getSpanInfo(contentText).spans)
     views.content.setText(spannable, TextView.BufferType.SPANNABLE)
-    views.content.addTextChangedListener(object : TextWatcher {
-      override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-
-      override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {
-        if (text is Editable) {
-          text.clearMarkdownSpans()
-          text.setFormats(Markdown.getSpanInfo(text.toString()).spans)
-        }
+    views.content.doOnTextChanged { text, _, _, _ ->
+      if (text is Editable) {
+        text.clearMarkdownSpans()
+        text.setFormats(Markdown.getSpanInfo(text.toString()).spans)
       }
-
-      override fun afterTextChanged(text: Editable) {}
-    })
+    }
     views.toolbar.fileName.text = filenameText
   }
 
