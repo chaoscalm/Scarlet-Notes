@@ -15,32 +15,16 @@ const val IMAGE_CACHE_SIZE = 1024 * 1024 * 10L
 
 class ImageCache(context: Context) {
 
-  private val persistentFolder = File(context.filesDir, "images")
   private val thumbnailFolder = File(context.cacheDir, "thumbnails")
   private var thumbnailCacheSize = AtomicLong(0L)
 
   init {
     thumbnailFolder.mkdirs()
-    persistentFolder.mkdirs()
 
     GlobalScope.launch(Dispatchers.IO) {
       val files = thumbnailFolder.listFiles()
       files?.forEach { thumbnailCacheSize.addAndGet(it.length()) }
     }
-  }
-
-  fun deleteNote(noteUUID: String) {
-    GlobalScope.launch {
-      val folder = File(persistentFolder, noteUUID)
-      folder.deleteRecursively()
-    }
-  }
-
-  fun persistentFile(noteUUID: String, formatFileName: String): File {
-    val folder = File(persistentFolder, noteUUID)
-    folder.mkdirs()
-
-    return File(folder, formatFileName)
   }
 
   fun thumbnailFile(noteUUID: String, formatFileName: String): File {

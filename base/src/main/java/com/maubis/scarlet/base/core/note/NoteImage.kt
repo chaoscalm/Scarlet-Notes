@@ -6,7 +6,6 @@ import android.widget.ImageView
 import com.github.bijoysingh.starter.util.RandomHelper
 import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.core.format.Format
-import com.maubis.scarlet.base.core.format.FormatBuilder
 import com.maubis.scarlet.base.core.format.FormatType
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.support.utils.logNonCriticalError
@@ -50,11 +49,9 @@ class NoteImage(context: Context) {
   }
 
   fun deleteAllFiles(note: Note) {
-    for (format in FormatBuilder().getFormats(note.content)) {
-      if (format.formatType === FormatType.IMAGE) {
-        val file = getFile(note.uuid.toString(), format)
-        deleteIfExist(file)
-      }
+    GlobalScope.launch(Dispatchers.IO) {
+      val folder = File(rootFolder, note.uuid.toString())
+      folder.deleteRecursively()
     }
   }
 
@@ -88,7 +85,7 @@ class NoteImage(context: Context) {
   fun loadThumbnailFileToImageView(noteUUID: String, imageUuid: String, image: ImageView) {
     GlobalScope.launch {
       val thumbnailFile = ScarletApp.imageCache.thumbnailFile(noteUUID, imageUuid)
-      val persistentFile = ScarletApp.imageCache.persistentFile(noteUUID, imageUuid)
+      val persistentFile = getFile(noteUUID, imageUuid)
 
       if (!persistentFile.exists()) {
         withContext(Dispatchers.Main) { image.visibility = View.GONE }

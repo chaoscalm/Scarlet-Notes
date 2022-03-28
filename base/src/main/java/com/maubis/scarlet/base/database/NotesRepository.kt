@@ -63,8 +63,8 @@ class NotesRepository(private val database: NoteDao, private val notificationHan
   }
 
   fun delete(note: Note, context: Context) {
-    ScarletApp.imageStorage.deleteAllFiles(note)
     if (note.isNotPersisted()) {
+      ScarletApp.imageStorage.deleteAllFiles(note)
       return
     }
     database.delete(note)
@@ -82,7 +82,7 @@ class NotesRepository(private val database: NoteDao, private val notificationHan
     WidgetConfigureActivity.notifyNoteChange(context, note)
     AllNotesWidgetProvider.notifyAllChanged(context)
     notificationHandler.cancelNotification(note.uid)
-    ScarletApp.imageCache.deleteNote(note.uuid.toString())
+    ScarletApp.imageStorage.deleteAllFiles(note)
   }
 
   private fun loadNotesFromDB(): ConcurrentHashMap<UUID, Note> {
