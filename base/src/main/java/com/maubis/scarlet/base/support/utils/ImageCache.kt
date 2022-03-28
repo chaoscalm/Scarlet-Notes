@@ -2,7 +2,6 @@ package com.maubis.scarlet.base.support.utils
 
 import android.content.Context
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
@@ -29,15 +28,6 @@ class ImageCache(context: Context) {
 
   fun thumbnailFile(noteUUID: String, formatFileName: String): File {
     return File(thumbnailFolder, "$noteUUID::$formatFileName")
-  }
-
-  fun loadFromCache(cacheFile: File): Bitmap? {
-    if (cacheFile.exists()) {
-      val options = BitmapFactory.Options()
-      options.inPreferredConfig = Bitmap.Config.ARGB_8888
-      return BitmapFactory.decodeFile(cacheFile.absolutePath, options)
-    }
-    return null
   }
 
   fun saveThumbnail(cacheFile: File, bitmap: Bitmap): Bitmap {

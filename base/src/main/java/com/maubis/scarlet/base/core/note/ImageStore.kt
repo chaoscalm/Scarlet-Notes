@@ -1,13 +1,15 @@
 package com.maubis.scarlet.base.core.note
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.view.View
 import android.widget.ImageView
 import com.github.bijoysingh.starter.util.RandomHelper
-import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.core.format.FormatType
 import com.maubis.scarlet.base.database.entities.Note
+import com.maubis.scarlet.base.support.utils.ImageCache
 import com.maubis.scarlet.base.support.utils.logNonCriticalError
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -21,7 +23,7 @@ interface ImageLoadCallback {
   fun onError()
 }
 
-class NoteImage(context: Context) {
+class ImageStore(context: Context, private val thumbnailsCache: ImageCache) {
 
   private val rootFolder = File(context.filesDir, "images")
 
@@ -65,7 +67,7 @@ class NoteImage(context: Context) {
         return@launch
       }
 
-      val bitmap = ScarletApp.imageCache.loadFromCache(file)
+      val bitmap = loadBitmap(file)
       if (bitmap === null) {
         deleteIfExist(file)
         withContext(Dispatchers.Main) {
@@ -84,7 +86,7 @@ class NoteImage(context: Context) {
 
   fun loadThumbnailFileToImageView(noteUUID: String, imageUuid: String, image: ImageView) {
     GlobalScope.launch {
-      val thumbnailFile = ScarletApp.imageCache.thumbnailFile(noteUUID, imageUuid)
+      val thumbnailFile = thumbnailsCache.thumbnailFile(noteUUID, imageUuid)
       val persistentFile = getFile(noteUUID, imageUuid)
 
       if (!persistentFile.exists()) {
@@ -93,7 +95,7 @@ class NoteImage(context: Context) {
       }
 
       if (thumbnailFile.exists()) {
-        val bitmap = ScarletApp.imageCache.loadFromCache(thumbnailFile)
+        val bitmap = loadBitmap(thumbnailFile)
         if (bitmap === null) {
           deleteIfExist(thumbnailFile)
           withContext(Dispatchers.Main) { image.visibility = View.GONE }
@@ -107,19 +109,28 @@ class NoteImage(context: Context) {
         return@launch
       }
 
-      val persistentBitmap = ScarletApp.imageCache.loadFromCache(persistentFile)
+      val persistentBitmap = loadBitmap(persistentFile)
       if (persistentBitmap === null) {
         deleteIfExist(persistentFile)
         withContext(Dispatchers.Main) { image.visibility = View.GONE }
         return@launch
       }
 
-      val compressedBitmap = ScarletApp.imageCache.saveThumbnail(thumbnailFile, persistentBitmap)
+      val compressedBitmap = thumbnailsCache.saveThumbnail(thumbnailFile, persistentBitmap)
       withContext(Dispatchers.Main) {
         image.visibility = View.VISIBLE
         image.setImageBitmap(compressedBitmap)
       }
     }
+  }
+
+  private fun loadBitmap(imageFile: File): Bitmap? {
+    if (imageFile.exists()) {
+      val options = BitmapFactory.Options()
+      options.inPreferredConfig = Bitmap.Config.ARGB_8888
+      return BitmapFactory.decodeFile(imageFile.absolutePath, options)
+    }
+    return null
   }
 
   companion object {

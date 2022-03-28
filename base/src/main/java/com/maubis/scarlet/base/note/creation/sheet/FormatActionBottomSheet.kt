@@ -8,7 +8,7 @@ import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.imageStorage
 import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.core.format.FormatType
-import com.maubis.scarlet.base.core.note.NoteImage.Companion.deleteIfExist
+import com.maubis.scarlet.base.core.note.ImageStore.Companion.deleteIfExist
 import com.maubis.scarlet.base.note.creation.activity.ViewAdvancedNoteActivity
 import com.maubis.scarlet.base.support.sheets.GridOptionBottomSheet
 import com.maubis.scarlet.base.support.specs.GridSectionItem

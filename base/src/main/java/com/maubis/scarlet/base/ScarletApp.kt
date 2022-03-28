@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 import android.util.Log
 import com.evernote.android.job.JobManager
 import com.facebook.soloader.SoLoader
-import com.maubis.scarlet.base.core.note.NoteImage
+import com.maubis.scarlet.base.core.note.ImageStore
 import com.maubis.scarlet.base.database.ApplicationData
 import com.maubis.scarlet.base.note.reminders.ReminderJobCreator
 import com.maubis.scarlet.base.support.ui.ThemeManager
@@ -30,8 +30,7 @@ class ScarletApp : Application() {
     }
 
     // Setup Image Cache
-    imageStorage = NoteImage(this)
-    imageCache = ImageCache(this)
+    imageStorage = ImageStore(this, ImageCache(this))
 
     // Setup Application Theme
     appTheme = ThemeManager()
@@ -41,9 +40,7 @@ class ScarletApp : Application() {
 
   companion object {
     lateinit var data: ApplicationData
-
-    lateinit var imageStorage: NoteImage
-    lateinit var imageCache: ImageCache
+    lateinit var imageStorage: ImageStore
 
     lateinit var appPreferences: SharedPreferences
 
