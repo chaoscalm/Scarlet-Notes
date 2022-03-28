@@ -24,12 +24,12 @@ class HouseKeeper(val context: Context) {
   }
 
   private fun removeDecoupledFolders() {
-    val folders = data.folders.getAll().map { it.uuid.toString() }
+    val folders = data.folders.getAll().map { it.uuid }
     data.notes.getAll()
-      .filter { it.folder.isNotBlank() }
+      .filter { it.folder != null }
       .forEach {
         if (!folders.contains(it.folder)) {
-          it.folder = ""
+          it.folder = null
           it.save(context)
         }
       }

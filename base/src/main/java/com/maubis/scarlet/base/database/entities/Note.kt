@@ -29,7 +29,7 @@ class Note {
     var reminder: Reminder? = null
     var excludeFromBackup: Boolean = false
     var tags: String = ""
-    var folder: String = ""
+    var folder: UUID? = null
 
     fun isNotPersisted(): Boolean {
         return this.uid == 0

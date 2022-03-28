@@ -33,7 +33,7 @@ class DeleteFolderBottomSheet : LithoOptionBottomSheet() {
       listener = {
         folder.delete()
         executeForFolderContent(folder) {
-          it.folder = ""
+          it.folder = null
           it.save(activity)
         }
 
@@ -47,7 +47,7 @@ class DeleteFolderBottomSheet : LithoOptionBottomSheet() {
       icon = R.drawable.icon_delete_content,
       listener = {
         executeForFolderContent(folder) {
-          it.folder = ""
+          it.folder = null
           it.softDelete(activity)
         }
 
@@ -62,7 +62,7 @@ class DeleteFolderBottomSheet : LithoOptionBottomSheet() {
       listener = {
         folder.delete()
         executeForFolderContent(folder) {
-          it.folder = ""
+          it.folder = null
           it.softDelete(activity)
         }
 
@@ -74,7 +74,7 @@ class DeleteFolderBottomSheet : LithoOptionBottomSheet() {
   }
 
   private fun executeForFolderContent(folder: Folder, lambda: (Note) -> Unit) {
-    data.notes.getAll().filter { it.folder == folder.uuid.toString() }.forEach {
+    data.notes.getAll().filter { it.folder == folder.uuid }.forEach {
       lambda(it)
     }
   }

@@ -175,8 +175,8 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
           this.onActionListener = { folder, selectFolder ->
             activity.runNoteFunction {
               when (selectFolder) {
-                true -> it.folder = folder.uuid.toString()
-                false -> it.folder = ""
+                true -> it.folder = folder.uuid
+                false -> it.folder = null
               }
               it.save(activity)
             }

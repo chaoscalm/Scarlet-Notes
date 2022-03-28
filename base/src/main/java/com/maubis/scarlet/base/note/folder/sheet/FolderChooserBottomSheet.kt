@@ -4,23 +4,19 @@ import com.facebook.litho.ComponentContext
 import com.maubis.scarlet.base.database.entities.Folder
 import com.maubis.scarlet.base.database.entities.Note
 
-class FolderChooserBottomSheet : FolderChooserBottomSheetBase() {
+class FolderChooserBottomSheet(private val note: Note) : FolderChooserBottomSheetBase() {
 
-  var note: Note? = null
-
-  override fun preComponentRender(componentContext: ComponentContext) {
-
-  }
+  override fun preComponentRender(componentContext: ComponentContext) {}
 
   override fun onFolderSelected(folder: Folder) {
-    note!!.folder = when {
-      note!!.folder == folder.uuid.toString() -> ""
-      else -> folder.uuid.toString()
+    note.folder = when (note.folder) {
+      folder.uuid -> null
+      else -> folder.uuid
     }
-    note!!.save(requireContext())
+    note.save(requireContext())
   }
 
   override fun isFolderSelected(folder: Folder): Boolean {
-    return note!!.folder == folder.uuid.toString()
+    return note.folder == folder.uuid
   }
 }

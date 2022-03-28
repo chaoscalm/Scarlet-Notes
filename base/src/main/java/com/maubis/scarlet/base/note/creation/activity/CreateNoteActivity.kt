@@ -69,7 +69,7 @@ open class CreateNoteActivity : ViewAdvancedNoteActivity() {
     if (folder === null) {
       return
     }
-    note.folder = folder.uuid.toString()
+    note.folder = folder.uuid
   }
 
   private fun setTouchListener() {

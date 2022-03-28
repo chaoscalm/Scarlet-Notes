@@ -250,15 +250,12 @@ class NoteOptionsBottomSheet : GridBottomSheetBase() {
             }
     ))
     options.add(OptionsItem(
-            title = if (note.folder.isBlank()) R.string.folder_option_add_to_notebook else R.string.folder_option_change_notebook,
+            title = if (note.folder == null) R.string.folder_option_add_to_notebook else R.string.folder_option_change_notebook,
             subtitle = R.string.folder_option_add_to_notebook,
             icon = R.drawable.ic_folder,
             listener = {
-                openSheet(activity, FolderChooserBottomSheet().apply {
-                    this.note = note
-                    this.dismissListener = {
-                        activity.notifyResetOrDismiss()
-                    }
+                openSheet(activity, FolderChooserBottomSheet(note).apply {
+                    dismissListener = { activity.notifyResetOrDismiss() }
                 })
                 dismiss()
             }

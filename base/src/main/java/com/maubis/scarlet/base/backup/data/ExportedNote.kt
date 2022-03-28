@@ -5,6 +5,7 @@ import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.database.entities.NoteState
 import java.io.Serializable
+import java.util.*
 import kotlin.math.max
 
 class ExportedNote(
@@ -27,7 +28,7 @@ class ExportedNote(
     note.color,
     note.state.name,
     note.tags,
-    note.folder,
+    note.folder?.toString() ?: "",
     note.pinned,
     note.locked
   )
@@ -51,7 +52,7 @@ class ExportedNote(
     note.color = color
     note.state = runCatching { NoteState.valueOf(state) }.getOrDefault(NoteState.DEFAULT)
     note.tags = tags
-    note.folder = folder
+    note.folder = if (folder.isBlank()) null else UUID.fromString(folder)
     note.pinned = pinned
     note.locked = locked
     return note

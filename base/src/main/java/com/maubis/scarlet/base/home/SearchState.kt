@@ -47,24 +47,18 @@ class SearchState(
 fun unifiedSearchSynchronous(state: SearchState): List<Note> {
   val sorting = SortingOptionsBottomSheet.getSortingState()
   val notes = unifiedSearchWithoutFolder(state)
-    .filter {
-      val currentFolder = state.currentFolder
-      if (currentFolder == null)
-        it.folder.isBlank()
-      else
-        currentFolder.uuid.toString() == it.folder
-    }
+    .filter { state.currentFolder?.uuid == it.folder }
   return sort(notes, sorting)
 }
 
 fun filterFolder(notes: List<Note>, folder: Folder): List<Note> {
   val sorting = SortingOptionsBottomSheet.getSortingState()
-  val filteredNotes = notes.filter { it.folder == folder.uuid.toString() }
+  val filteredNotes = notes.filter { it.folder == folder.uuid }
   return sort(filteredNotes, sorting)
 }
 
 fun filterOutFolders(notes: List<Note>): List<Note> {
-  val allFoldersUUIDs = data.folders.getAll().map { it.uuid.toString() }
+  val allFoldersUUIDs = data.folders.getAll().map { it.uuid }
   val sorting = SortingOptionsBottomSheet.getSortingState()
   val filteredNotes = notes.filter { !allFoldersUUIDs.contains(it.folder) }
   return sort(filteredNotes, sorting)
