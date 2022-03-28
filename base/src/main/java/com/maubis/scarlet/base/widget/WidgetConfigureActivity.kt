@@ -20,7 +20,6 @@ import com.maubis.scarlet.base.note.selection.INoteSelectorActivity
 import com.maubis.scarlet.base.note.selection.SelectableNotesActivityBase
 import com.maubis.scarlet.base.settings.sWidgetShowLockedNotes
 import com.maubis.scarlet.base.support.utils.ColorUtil
-import java.util.*
 
 class WidgetConfigureActivity : SelectableNotesActivityBase(), INoteSelectorActivity {
 
@@ -51,7 +50,7 @@ class WidgetConfigureActivity : SelectableNotesActivityBase(), INoteSelectorActi
   }
 
   override fun onNoteClicked(note: Note) {
-    val widget = Widget(appWidgetId, note.uuid.toString())
+    val widget = Widget(appWidgetId, note.uuid)
     ScarletApp.data.widgets.insert(widget)
     createWidget(widget)
   }
@@ -71,7 +70,7 @@ class WidgetConfigureActivity : SelectableNotesActivityBase(), INoteSelectorActi
 
   companion object {
     fun createNoteWidget(context: Context, widget: Widget) {
-      val note = data.notes.getByUUID(UUID.fromString(widget.noteUuid))
+      val note = data.notes.getByUUID(widget.noteUuid)
       val appWidgetManager = AppWidgetManager.getInstance(context)
       if (note === null || (note.locked && !sWidgetShowLockedNotes)) {
         val views = RemoteViews(context.getPackageName(), R.layout.widget_invalid_note)
@@ -100,7 +99,7 @@ class WidgetConfigureActivity : SelectableNotesActivityBase(), INoteSelectorActi
       val application: Application = context.applicationContext as Application
       val ids = AppWidgetManager.getInstance(application).getAppWidgetIds(
         ComponentName(application, NoteWidgetProvider::class.java))
-      val widgets = ScarletApp.data.widgets.getByNote(note.uuid.toString())
+      val widgets = ScarletApp.data.widgets.getByNote(note.uuid)
 
       val widgetIds = ArrayList<Int>()
       for (widget in widgets) {

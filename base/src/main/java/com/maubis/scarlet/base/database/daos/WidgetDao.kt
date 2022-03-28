@@ -2,6 +2,7 @@ package com.maubis.scarlet.base.database.daos
 
 import androidx.room.*
 import com.maubis.scarlet.base.database.entities.Widget
+import java.util.*
 
 @Dao
 interface WidgetDao {
@@ -15,5 +16,5 @@ interface WidgetDao {
     fun getByID(uid: Int): Widget?
 
     @Query("SELECT * FROM widget WHERE noteUuid = :uuid")
-    fun getByNote(uuid: String): List<Widget>
+    fun getByNote(uuid: UUID): List<Widget>
 }
