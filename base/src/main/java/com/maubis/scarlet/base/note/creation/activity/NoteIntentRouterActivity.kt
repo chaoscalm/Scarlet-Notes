@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.settings.sEditorSkipNoteViewer
+import java.util.*
 
 class NoteIntentRouterActivity : AppCompatActivity() {
 
@@ -34,7 +35,7 @@ class NoteIntentRouterActivity : AppCompatActivity() {
       return false
     }
 
-    val note = ScarletApp.data.notes.getByUUID(noteUUID)
+    val note = ScarletApp.data.notes.getByUUID(UUID.fromString(noteUUID))
     if (note === null) {
       return false
     }
@@ -88,7 +89,7 @@ class NoteIntentRouterActivity : AppCompatActivity() {
       val uri = Uri.Builder()
         .scheme("scarlet")
         .authority("open_note")
-        .appendQueryParameter("uuid", note.uuid)
+        .appendQueryParameter("uuid", note.uuid.toString())
         .build()
       return Intent(Intent.ACTION_VIEW, uri)
     }
@@ -97,7 +98,7 @@ class NoteIntentRouterActivity : AppCompatActivity() {
       val uri = Uri.Builder()
         .scheme("scarlet")
         .authority("open_note")
-        .appendQueryParameter("uuid", note.uuid)
+        .appendQueryParameter("uuid", note.uuid.toString())
         .appendQueryParameter("is_edit", "1")
         .build()
       return Intent(Intent.ACTION_VIEW, uri)

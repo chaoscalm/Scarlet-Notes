@@ -11,13 +11,14 @@ import com.maubis.scarlet.base.core.note.ReminderInterval
 import com.maubis.scarlet.base.notification.NotificationConfig
 import com.maubis.scarlet.base.notification.NotificationHandler
 import com.maubis.scarlet.base.notification.REMINDER_NOTIFICATION_CHANNEL_ID
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 class ReminderJob : Job() {
 
   override fun onRunJob(params: Params): Result {
-    val noteUUID = params.extras.getString(EXTRA_KEY_NOTE_UUID, "")
-    val note = data.notes.getByUUID(noteUUID)
+    val note = params.extras.getString(EXTRA_KEY_NOTE_UUID, null)
+        ?.let { uuid -> data.notes.getByUUID(UUID.fromString(uuid)) }
     if (note === null) {
       return Result.SUCCESS
     }
@@ -47,12 +48,12 @@ class ReminderJob : Job() {
   }
 
   companion object {
-    val TAG = "reminder_job"
-    val EXTRA_KEY_NOTE_UUID = "note_uuid"
+    const val TAG = "reminder_job"
+    const val EXTRA_KEY_NOTE_UUID = "note_uuid"
 
-    fun scheduleJob(noteUuid: String, reminder: Reminder): Int {
+    fun scheduleJob(noteUuid: UUID, reminder: Reminder): Int {
       val extras = PersistableBundleCompat()
-      extras.putString(EXTRA_KEY_NOTE_UUID, noteUuid)
+      extras.putString(EXTRA_KEY_NOTE_UUID, noteUuid.toString())
 
       var deltaTime = reminder.timestamp - System.currentTimeMillis()
       if (reminder.interval == ReminderInterval.DAILY && deltaTime > TimeUnit.DAYS.toMillis(1)) {

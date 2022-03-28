@@ -8,7 +8,6 @@ import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.core.format.FormatBuilder
 import com.maubis.scarlet.base.core.note.Reminder
-import com.maubis.scarlet.base.core.note.generateUUID
 import com.maubis.scarlet.base.note.mark
 import com.maubis.scarlet.base.settings.sNoteDefaultColor
 import java.util.*
@@ -18,7 +17,7 @@ import java.util.*
 class Note {
     @PrimaryKey(autoGenerate = true)
     var uid: Int = 0
-    var uuid: String = generateUUID()
+    var uuid: UUID = UUID.randomUUID()
     var content: String = FormatBuilder().getContent(emptyList())
     var color: Int = sNoteDefaultColor
     var state: NoteState = NoteState.DEFAULT
@@ -37,7 +36,7 @@ class Note {
 
     fun isEqual(note: Note): Boolean {
         return TextUtils.areEqualNullIsEmpty(this.content, note.content)
-                && TextUtils.areEqualNullIsEmpty(this.uuid, note.uuid)
+                && this.uuid == note.uuid
                 && TextUtils.areEqualNullIsEmpty(this.tags, note.tags)
                 && this.timestamp == note.timestamp
                 && this.color == note.color

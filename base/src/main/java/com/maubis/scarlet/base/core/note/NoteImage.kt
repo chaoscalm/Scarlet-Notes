@@ -24,10 +24,10 @@ interface ImageLoadCallback {
 
 class NoteImage(context: Context) {
 
-  val rootFolder = File(context.filesDir, "images")
+  private val rootFolder = File(context.filesDir, "images")
 
   fun renameOrCopy(note: Note, imageFile: File): File {
-    val targetFile = getFile(note.uuid, RandomHelper.getRandom() + ".jpg")
+    val targetFile = getFile(note.uuid.toString(), RandomHelper.getRandom() + ".jpg")
     targetFile.mkdirs()
     deleteIfExist(targetFile)
 
@@ -52,7 +52,7 @@ class NoteImage(context: Context) {
   fun deleteAllFiles(note: Note) {
     for (format in FormatBuilder().getFormats(note.content)) {
       if (format.formatType === FormatType.IMAGE) {
-        val file = getFile(note.uuid, format)
+        val file = getFile(note.uuid.toString(), format)
         deleteIfExist(file)
       }
     }

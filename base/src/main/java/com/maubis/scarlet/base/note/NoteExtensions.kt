@@ -23,8 +23,6 @@ import com.maubis.scarlet.base.support.ui.ThemedActivity
 import com.maubis.scarlet.base.support.ui.sThemeDarkenNoteColor
 import com.maubis.scarlet.base.support.utils.ColorUtil
 import com.maubis.scarlet.base.support.utils.dateFormat
-import java.util.*
-import kotlin.collections.ArrayList
 
 /**************************************************************************************
  ************* Content and Display Information Functions Functions ********************
@@ -270,7 +268,7 @@ fun Note.hasImages(): Boolean {
 fun Note.shareImages(context: Context) {
   val imageFormats = getFormats().filter { it.formatType == FormatType.IMAGE }
   val bitmaps = imageFormats
-    .map { ScarletApp.imageStorage.getFile(uuid, it.text) }
+    .map { ScarletApp.imageStorage.getFile(uuid.toString(), it.text) }
     .filter { it.exists() }
     .map { BitmapHelper.loadFromFile(it) }
     .filterNotNull()

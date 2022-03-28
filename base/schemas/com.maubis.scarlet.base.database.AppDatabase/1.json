@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "41e68f95f24062183bc853584cdb842a",
+    "identityHash": "74c5076159295a3f1c988c0344b38068",
     "entities": [
       {
         "tableName": "note",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`uid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `uuid` TEXT NOT NULL, `content` TEXT NOT NULL, `color` INTEGER NOT NULL, `state` TEXT NOT NULL, `timestamp` INTEGER NOT NULL, `updateTimestamp` INTEGER NOT NULL, `locked` INTEGER NOT NULL, `pinned` INTEGER NOT NULL, `reminder` TEXT, `excludeFromBackup` INTEGER NOT NULL, `tags` TEXT NOT NULL, `folder` BLOB)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`uid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `uuid` BLOB NOT NULL, `content` TEXT NOT NULL, `color` INTEGER NOT NULL, `state` TEXT NOT NULL, `timestamp` INTEGER NOT NULL, `updateTimestamp` INTEGER NOT NULL, `locked` INTEGER NOT NULL, `pinned` INTEGER NOT NULL, `reminder` TEXT, `excludeFromBackup` INTEGER NOT NULL, `tags` TEXT NOT NULL, `folder` BLOB)",
         "fields": [
           {
             "fieldPath": "uid",
@@ -17,7 +17,7 @@
           {
             "fieldPath": "uuid",
             "columnName": "uuid",
-            "affinity": "TEXT",
+            "affinity": "BLOB",
             "notNull": true
           },
           {
@@ -206,7 +206,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '41e68f95f24062183bc853584cdb842a')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '74c5076159295a3f1c988c0344b38068')"
     ]
   }
 }

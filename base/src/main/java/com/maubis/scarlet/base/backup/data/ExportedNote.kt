@@ -21,7 +21,7 @@ class ExportedNote(
   var locked: Boolean
 ) : Serializable {
   constructor(note: Note) : this(
-    note.uuid,
+    note.uuid.toString(),
     note.content,
     note.timestamp,
     note.updateTimestamp,
@@ -34,7 +34,7 @@ class ExportedNote(
   )
 
   fun saveIfNeeded(context: Context) {
-    val existingNote = data.notes.getByUUID(uuid)
+    val existingNote = data.notes.getByUUID(UUID.fromString(uuid))
     if (existingNote != null && existingNote.updateTimestamp > this.updateTimestamp) {
       return
     }
@@ -45,7 +45,7 @@ class ExportedNote(
 
   private fun buildNote(): Note {
     val note = Note()
-    note.uuid = uuid
+    note.uuid = UUID.fromString(uuid)
     note.content = description
     note.timestamp = timestamp
     note.updateTimestamp = max(updateTimestamp, timestamp)

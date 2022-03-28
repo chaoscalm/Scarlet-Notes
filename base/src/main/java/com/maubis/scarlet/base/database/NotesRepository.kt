@@ -14,7 +14,7 @@ import java.util.concurrent.ConcurrentHashMap
 
 class NotesRepository(private val database: NoteDao, private val notificationHandler: NotificationHandler) {
 
-  private val notes: ConcurrentHashMap<String, Note> by lazy { loadNotesFromDB() }
+  private val notes: ConcurrentHashMap<UUID, Note> by lazy { loadNotesFromDB() }
 
   fun getAll(): List<Note> {
     return notes.values.toList()
@@ -40,11 +40,11 @@ class NotesRepository(private val database: NoteDao, private val notificationHan
     return notes.values.firstOrNull { it.uid == uid }
   }
 
-  fun getByUUID(uuid: String): Note? {
+  fun getByUUID(uuid: UUID): Note? {
     return notes[uuid]
   }
 
-  fun getAllUUIDs(): List<String> {
+  fun getAllUUIDs(): List<UUID> {
     return notes.keys.toList()
   }
 
@@ -82,11 +82,11 @@ class NotesRepository(private val database: NoteDao, private val notificationHan
     WidgetConfigureActivity.notifyNoteChange(context, note)
     AllNotesWidgetProvider.notifyAllChanged(context)
     notificationHandler.cancelNotification(note.uid)
-    ScarletApp.imageCache.deleteNote(note.uuid)
+    ScarletApp.imageCache.deleteNote(note.uuid.toString())
   }
 
-  private fun loadNotesFromDB(): ConcurrentHashMap<String, Note> {
-    val notesMap = ConcurrentHashMap<String, Note>()
+  private fun loadNotesFromDB(): ConcurrentHashMap<UUID, Note> {
+    val notesMap = ConcurrentHashMap<UUID, Note>()
     database.getAll().forEach { notesMap[it.uuid] = it }
     return notesMap
   }

@@ -10,7 +10,6 @@ import androidx.core.content.ContextCompat
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.core.note.NoteBuilder
-import com.maubis.scarlet.base.core.note.generateUUID
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.database.entities.NoteState
 import com.maubis.scarlet.base.home.sheets.openDeleteNotePermanentlySheet
@@ -32,6 +31,7 @@ import com.maubis.scarlet.base.support.sheets.GridBottomSheetBase
 import com.maubis.scarlet.base.support.sheets.openSheet
 import com.maubis.scarlet.base.support.ui.ThemedActivity
 import com.maubis.scarlet.base.support.utils.OsVersionUtils
+import java.util.*
 
 class NoteOptionsBottomSheet : GridBottomSheetBase() {
 
@@ -389,7 +389,7 @@ class NoteOptionsBottomSheet : GridBottomSheetBase() {
               listener = {
                   val copiedNote = NoteBuilder().copy(note)
                   copiedNote.uid = 0
-                  copiedNote.uuid = generateUUID()
+                  copiedNote.uuid = UUID.randomUUID()
                   copiedNote.save(activity)
                   activity.notifyResetOrDismiss()
                   dismiss()

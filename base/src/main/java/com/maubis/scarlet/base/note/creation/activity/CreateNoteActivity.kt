@@ -287,7 +287,7 @@ open class CreateNoteActivity : ViewAdvancedNoteActivity() {
     val formatToChange = formats[position]
     if (formatToChange.text.isNotBlank()) {
       val noteImage = imageStorage
-      deleteIfExist(noteImage.getFile(note.uuid, formatToChange.text))
+      deleteIfExist(noteImage.getFile(note.uuid.toString(), formatToChange.text))
     }
     formatToChange.text = file.name
     setFormat(formatToChange)

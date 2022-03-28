@@ -75,8 +75,8 @@ class HouseKeeper(val context: Context) {
         availableDirectories.add(file.name)
       }
     }
-    for (id in uuids) {
-      availableDirectories.remove(id)
+    for (uuid in uuids) {
+      availableDirectories.remove(uuid.toString())
     }
     for (uuid in availableDirectories) {
       val noteFolder = File(imagesFolder, uuid)

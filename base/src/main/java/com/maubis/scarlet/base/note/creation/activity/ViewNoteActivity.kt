@@ -124,7 +124,7 @@ open class ViewAdvancedNoteActivity : SecuredActivity(), INoteOptionSheetActivit
     bundle.putBoolean(KEY_NIGHT_THEME, appTheme.isNightTheme())
     bundle.putInt(STORE_KEY_TEXT_SIZE, sEditorTextSize)
     bundle.putInt(KEY_NOTE_COLOR, note.adjustedColor())
-    bundle.putString(INTENT_KEY_NOTE_ID, note.uuid)
+    bundle.putString(INTENT_KEY_NOTE_ID, note.uuid.toString())
     adapter.setExtra(bundle)
   }
 
