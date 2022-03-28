@@ -36,7 +36,6 @@ import com.maubis.scarlet.base.settings.SettingsOptionsBottomSheet.Companion.KEY
 import com.maubis.scarlet.base.settings.SettingsOptionsBottomSheet.Companion.KEY_MARKDOWN_HOME_ENABLED
 import com.maubis.scarlet.base.settings.sNoteItemLineCount
 import com.maubis.scarlet.base.settings.sUIUseGridView
-import com.maubis.scarlet.base.support.database.HouseKeeperJob
 import com.maubis.scarlet.base.support.recycler.RecyclerItem
 import com.maubis.scarlet.base.support.specs.ToolbarColorConfig
 import com.maubis.scarlet.base.support.ui.SecuredActivity
@@ -369,11 +368,6 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
       }
       else -> super.onBackPressed()
     }
-  }
-
-  override fun onDestroy() {
-    super.onDestroy()
-    HouseKeeperJob.schedule()
   }
 
   override fun onStop() {
