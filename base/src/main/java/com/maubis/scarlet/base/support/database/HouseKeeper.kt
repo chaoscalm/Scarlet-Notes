@@ -2,19 +2,16 @@ package com.maubis.scarlet.base.support.database
 
 import android.content.Context
 import com.maubis.scarlet.base.ScarletApp.Companion.data
-import com.maubis.scarlet.base.core.note.ImageStore.Companion.deleteIfExist
 import com.maubis.scarlet.base.core.note.ReminderInterval
 import com.maubis.scarlet.base.note.reminders.ReminderJob.Companion.nextJobTimestamp
 import com.maubis.scarlet.base.note.reminders.ReminderJob.Companion.scheduleJob
-import java.io.File
 import java.util.concurrent.TimeUnit
 
 class HouseKeeper(val context: Context) {
 
   private val houseKeeperTasks: Array<() -> Unit> = arrayOf(
     { removeDecoupledFolders() },
-    { removeOldReminders() },
-    { deleteRedundantImageFiles() }
+    { removeOldReminders() }
   )
 
   fun execute() {
@@ -57,32 +54,6 @@ class HouseKeeper(val context: Context) {
       reminder.uid = scheduleJob(it.uuid, reminder)
       it.reminder = reminder
       it.save(context)
-    }
-  }
-
-  private fun deleteRedundantImageFiles() {
-    val uuids = data.notes.getAllUUIDs()
-
-    val imagesFolder = File(context.filesDir, "images" + File.separator)
-    val uuidFiles = imagesFolder.listFiles()
-    if (uuidFiles === null || uuidFiles.isEmpty()) {
-      return
-    }
-
-    val availableDirectories = HashSet<String>()
-    for (file in uuidFiles) {
-      if (file.isDirectory) {
-        availableDirectories.add(file.name)
-      }
-    }
-    for (uuid in uuids) {
-      availableDirectories.remove(uuid.toString())
-    }
-    for (uuid in availableDirectories) {
-      val noteFolder = File(imagesFolder, uuid)
-      for (file in noteFolder.listFiles()) {
-        deleteIfExist(file)
-      }
     }
   }
 }

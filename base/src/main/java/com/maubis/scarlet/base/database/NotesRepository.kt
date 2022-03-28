@@ -44,10 +44,6 @@ class NotesRepository(private val database: NoteDao, private val notificationHan
     return notes[uuid]
   }
 
-  fun getAllUUIDs(): List<UUID> {
-    return notes.keys.toList()
-  }
-
   fun getLastTimestamp(): Long {
     return notes.values.map { it.updateTimestamp }.maxOrNull() ?: 0
   }
