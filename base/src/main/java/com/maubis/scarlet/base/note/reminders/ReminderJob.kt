@@ -13,6 +13,7 @@ import com.maubis.scarlet.base.notification.NotificationHandler
 import com.maubis.scarlet.base.notification.REMINDER_NOTIFICATION_CHANNEL_ID
 import java.util.*
 import java.util.concurrent.TimeUnit
+import kotlin.time.Duration.Companion.days
 
 class ReminderJob : Job() {
 
@@ -56,18 +57,18 @@ class ReminderJob : Job() {
       extras.putString(EXTRA_KEY_NOTE_UUID, noteUuid.toString())
 
       var deltaTime = reminder.timestamp - System.currentTimeMillis()
-      if (reminder.interval == ReminderInterval.DAILY && deltaTime > TimeUnit.DAYS.toMillis(1)) {
-        deltaTime = deltaTime % TimeUnit.DAYS.toMillis(1)
+      if (reminder.interval == ReminderInterval.DAILY && deltaTime > 1.days.inWholeMilliseconds) {
+        deltaTime %= 1.days.inWholeMilliseconds
       }
 
-      return JobRequest.Builder(ReminderJob.TAG)
+      return JobRequest.Builder(TAG)
         .setExact(deltaTime)
         .setExtras(extras)
         .build()
         .schedule()
     }
 
-    fun nextJobTimestamp(timestamp: Long, currentTimestamp: Long): Long {
+    private fun nextJobTimestamp(timestamp: Long, currentTimestamp: Long): Long {
       return when {
         timestamp > currentTimestamp -> timestamp
         else -> {

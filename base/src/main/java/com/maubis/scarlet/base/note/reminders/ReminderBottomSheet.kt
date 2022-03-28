@@ -23,8 +23,8 @@ import java.util.*
 
 class ReminderBottomSheet : ThemedBottomSheetFragment() {
 
-  var selectedNote: Note? = null
-  var reminder: Reminder = Reminder(
+  private var selectedNote: Note? = null
+  private var reminder: Reminder = Reminder(
     0,
     System.currentTimeMillis(),
     ReminderInterval.ONCE)
@@ -66,7 +66,7 @@ class ReminderBottomSheet : ThemedBottomSheetFragment() {
     makeBackgroundTransparent(dialog, R.id.root_layout)
   }
 
-  fun setListeners(note: Note, isNewReminder: Boolean) {
+  private fun setListeners(note: Note, isNewReminder: Boolean) {
     val dlg = dialog
     if (dlg === null) {
       return
@@ -96,7 +96,6 @@ class ReminderBottomSheet : ThemedBottomSheetFragment() {
     }
     removeAlarmBtn.setOnClickListener {
       ReminderJob.cancelJob(reminder.uid)
-
       note.reminder = null
       note.save(themedContext())
       activity.updateNote(note)
@@ -106,6 +105,10 @@ class ReminderBottomSheet : ThemedBottomSheetFragment() {
       if (Calendar.getInstance().after(reminder.toCalendar())) {
         dismiss()
         return@setOnClickListener
+      }
+
+      if (!isNewReminder) {
+        ReminderJob.cancelJob(reminder.uid)
       }
 
       val uid = ReminderJob.scheduleJob(note.uuid, reminder)
@@ -122,14 +125,14 @@ class ReminderBottomSheet : ThemedBottomSheetFragment() {
     }
   }
 
-  fun getReminderIntervalLabel(interval: ReminderInterval): Int {
+  private fun getReminderIntervalLabel(interval: ReminderInterval): Int {
     return when (interval) {
       ReminderInterval.ONCE -> R.string.reminder_frequency_once
       ReminderInterval.DAILY -> R.string.reminder_frequency_daily
     }
   }
 
-  fun openFrequencyDialog() {
+  private fun openFrequencyDialog() {
     val isSelected = fun(interval: ReminderInterval): Boolean = interval == reminder.interval
     com.maubis.scarlet.base.support.sheets.openSheet(
       themedActivity() as ThemedActivity,
@@ -141,6 +144,7 @@ class ReminderBottomSheet : ThemedBottomSheetFragment() {
             listener = {
               reminder.interval = ReminderInterval.ONCE
               setContent(reminder)
+              dismiss()
             },
             selected = isSelected(ReminderInterval.ONCE)
           ),
@@ -149,6 +153,7 @@ class ReminderBottomSheet : ThemedBottomSheetFragment() {
             listener = {
               reminder.interval = ReminderInterval.DAILY
               setContent(reminder)
+              dismiss()
             },
             selected = isSelected(ReminderInterval.DAILY)
           )
@@ -157,12 +162,12 @@ class ReminderBottomSheet : ThemedBottomSheetFragment() {
     )
   }
 
-  fun openDatePickerDialog() {
+  private fun openDatePickerDialog() {
     val calendar = reminder.toCalendar()
     val dialog = DatePickerDialog(
       themedContext(),
       R.style.DialogTheme,
-      DatePickerDialog.OnDateSetListener { _, year, month, day ->
+      { _, year, month, day ->
         calendar.set(Calendar.YEAR, year)
         calendar.set(Calendar.MONTH, month)
         calendar.set(Calendar.DAY_OF_MONTH, day)
@@ -175,12 +180,12 @@ class ReminderBottomSheet : ThemedBottomSheetFragment() {
     dialog.show()
   }
 
-  fun openTimePickerDialog() {
+  private fun openTimePickerDialog() {
     val calendar = reminder.toCalendar()
     val dialog = TimePickerDialog(
       themedContext(),
       R.style.DialogTheme,
-      TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
+      { _, hourOfDay, minute ->
         calendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
         calendar.set(Calendar.MINUTE, minute)
         calendar.set(Calendar.SECOND, 0)
@@ -193,7 +198,7 @@ class ReminderBottomSheet : ThemedBottomSheetFragment() {
     dialog.show()
   }
 
-  fun setContent(reminder: Reminder) {
+  private fun setContent(reminder: Reminder) {
     val dlg = dialog
     if (dlg === null) {
       return
@@ -209,7 +214,7 @@ class ReminderBottomSheet : ThemedBottomSheetFragment() {
     reminderDate.alpha = if (reminder.interval == ReminderInterval.ONCE) 1.0f else 0.5f
   }
 
-  fun setColors() {
+  private fun setColors() {
     val dlg = dialog
     if (dlg === null) {
       return
