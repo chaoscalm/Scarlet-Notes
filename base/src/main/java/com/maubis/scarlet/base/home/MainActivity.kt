@@ -1,10 +1,9 @@
 package com.maubis.scarlet.base.home
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.View
 import android.widget.GridLayout.VERTICAL
+import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -110,15 +109,6 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
     snackbar = NoteDeletionSnackbar(views.bottomSnackbar) { refreshItems() }
     views.searchToolbar.backButton.setOnClickListener { onBackPressed() }
     views.searchToolbar.closeIcon.setOnClickListener { onBackPressed() }
-    views.searchToolbar.textField.addTextChangedListener(object : TextWatcher {
-      override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
-
-      override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
-        startSearch(charSequence.toString())
-      }
-
-      override fun afterTextChanged(editable: Editable) {}
-    })
     tagAndColorPicker = TagsAndColorPickerViewHolder(
       this,
       views.searchToolbar.tagsFlexBox,
@@ -187,6 +177,22 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
       isTabletView || isStaggeredView -> StaggeredGridLayoutManager(2, VERTICAL)
       else -> LinearLayoutManager(this)
     }
+  }
+
+  override fun onPostCreate(savedInstanceState: Bundle?) {
+    super.onPostCreate(savedInstanceState)
+    // This must be done after onRestoreInstanceState(), otherwise automatic TextView state restoring
+    // will trigger a search which can cause wrong items to appear
+    views.searchToolbar.textField.doOnTextChanged { text, _, _, _ -> startSearch(text.toString()) }
+  }
+
+  override fun onResume() {
+    super.onResume()
+    refreshItems()
+    notifyFolderChange()
+
+    if (isInSearchMode)
+      enterSearchMode()
   }
 
   fun notifyAdapterExtraChanged() {
@@ -311,15 +317,6 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
     state.tags.add(tag)
     refreshItems()
     updateToolbars()
-  }
-
-  override fun onResume() {
-    super.onResume()
-    refreshItems()
-    notifyFolderChange()
-
-    if (isInSearchMode)
-      enterSearchMode()
   }
 
   fun resetAndLoadData() {
