@@ -4,12 +4,12 @@ import android.content.Context
 import android.text.Editable
 import android.text.InputType
 import android.text.TextWatcher
+import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.maubis.markdown.Markdown
 import com.maubis.markdown.spannable.clearMarkdownSpans
@@ -22,7 +22,7 @@ import com.maubis.scarlet.base.note.creation.sheet.FormatActionBottomSheet
 import com.maubis.scarlet.base.settings.sEditorLiveMarkdown
 import com.maubis.scarlet.base.settings.sEditorMoveHandles
 import com.maubis.scarlet.base.support.sheets.openSheet
-import com.maubis.scarlet.base.support.utils.logAndMaybeDisplayError
+import kotlin.math.min
 
 open class FormatTextViewHolder(context: Context, view: View) : FormatViewHolderBase(context, view), TextWatcher {
 
@@ -144,9 +144,9 @@ open class FormatTextViewHolder(context: Context, view: View) : FormatViewHolder
 
     try {
       val additionTokenLength = (if (markdownType.requiresNewLine) 1 else 0) + markdownType.startToken.length
-      edit.setSelection(Math.min(startString.length + additionTokenLength, edit.text.length))
-    } catch (exception: Exception) {
-      logAndMaybeDisplayError(context as AppCompatActivity, exception)
+      edit.setSelection(min(startString.length + additionTokenLength, edit.text.length))
+    } catch (e: Exception) {
+      Log.d("Scarlet", "Error while setting text selection", e)
     }
   }
 

@@ -8,8 +8,6 @@ import com.maubis.scarlet.base.ScarletApp.Companion.appPreferences
 import com.maubis.scarlet.base.home.MainActivity
 import com.maubis.scarlet.base.support.sheets.LithoOptionBottomSheet
 import com.maubis.scarlet.base.support.sheets.LithoOptionsItem
-import com.maubis.scarlet.base.support.utils.logAndMaybeDisplayError
-import com.maubis.scarlet.base.support.utils.sInternalShowTracesInSheet
 
 const val KEY_INTERNAL_ENABLE_FULL_SCREEN = "internal_enable_full_screen"
 var sInternalEnableFullScreen: Boolean
@@ -51,26 +49,6 @@ class InternalSettingsOptionsBottomSheet : LithoOptionBottomSheet() {
         isSelectable = true,
         selected = sInternalShowUUID
       ))
-    options.add(
-      LithoOptionsItem(
-        title = R.string.internal_settings_enable_show_exceptions_title,
-        subtitle = R.string.internal_settings_enable_show_exceptions_description,
-        icon = R.drawable.icon_add_list,
-        listener = {
-          sInternalShowTracesInSheet = !sInternalShowTracesInSheet
-          reset(activity, dialog)
-        },
-        isSelectable = true,
-        selected = sInternalShowTracesInSheet
-      ))
-    options.add(LithoOptionsItem(
-      title = R.string.internal_settings_fake_exceptions_title,
-      subtitle = R.string.internal_settings_fake_exceptions_description,
-      icon = R.drawable.ic_info,
-      listener = {
-        logAndMaybeDisplayError(activity, RuntimeException("Fake Exception for Testing"))
-      }
-    ))
     return options
   }
 }

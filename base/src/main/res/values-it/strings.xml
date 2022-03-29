@@ -235,16 +235,10 @@
   <string name="widget_option_show_trash_notes_details">Consenti alle note nel cestino di essere visualizzate nei widget della schermata principale</string>
   <string name="internal_settings_title">Opzioni sviluppatore</string>
   <string name="internal_settings_description">Modifica le impostazioni interne utilizzate per il debug</string>
-  <string name="internal_settings_enable_show_exceptions_title">Mostra eccezioni</string>
-  <string name="internal_settings_enable_show_exceptions_description">Mostra le eccezioni rilevate, se possibile, per consentirne l\'inoltro allo sviluppatore</string>
   <string name="internal_settings_enable_fullscreen_title">Abilita modalità schermo intero</string>
   <string name="internal_settings_enable_fullscreen_description">Rendi l\'app a schermo intero per consentire screenshot e registrazioni</string>
   <string name="internal_settings_show_uuid_title">Mostra UUID note</string>
   <string name="internal_settings_show_uuid_description">Mostra gli ID univoci delle note nella schermata principale</string>
-  <string name="internal_settings_fake_exceptions_title">Eccezioni fasulle</string>
-  <string name="internal_settings_fake_exceptions_description">Lancia un\'eccezione fasulla per testare le funzionalità relative alle eccezioni</string>
-  <string name="exception_sheet_title">Eccezione rilevata</string>
-  <string name="exception_sheet_share">Condividi</string>
   <string name="delete_sheet_delete_selected_notes_permanently">Vuoi eliminare definitivamente queste note?</string>
   <string name="app_lock_title">Sblocca l\'app</string>
   <string name="app_lock_details_no_fingerprint">Inserisci il PIN di 4 cifre per effettuare lo sblocco</string>

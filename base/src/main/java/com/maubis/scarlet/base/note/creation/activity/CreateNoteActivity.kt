@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.facebook.litho.ComponentContext
@@ -27,7 +28,6 @@ import com.maubis.scarlet.base.settings.ColorPickerBottomSheet
 import com.maubis.scarlet.base.settings.ColorPickerDefaultController
 import com.maubis.scarlet.base.support.recycler.SimpleItemTouchHelper
 import com.maubis.scarlet.base.support.specs.ToolbarColorConfig
-import com.maubis.scarlet.base.support.utils.logAndMaybeDisplayError
 import pl.aprilapps.easyphotopicker.DefaultCallback
 import pl.aprilapps.easyphotopicker.EasyImage
 import java.io.File
@@ -140,7 +140,8 @@ open class CreateNoteActivity : ViewAdvancedNoteActivity() {
       }
 
       override fun onImagePickerError(exception: Exception, source: EasyImage.ImageSource, type: Int) {
-        logAndMaybeDisplayError(this@CreateNoteActivity, exception)
+        // TODO display toast
+        Log.e("Scarlet", "EasyImage picker error", exception)
       }
     })
   }

@@ -3,6 +3,7 @@ package com.maubis.scarlet.base.core.note
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import com.github.bijoysingh.starter.util.RandomHelper
@@ -10,7 +11,6 @@ import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.core.format.FormatType
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.support.utils.ImageCache
-import com.maubis.scarlet.base.support.utils.logNonCriticalError
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -41,7 +41,7 @@ class ImageStore(context: Context, private val thumbnailsCache: ImageCache) {
 
   fun getFile(noteUUID: String, imageFormat: Format): File {
     if (imageFormat.formatType != FormatType.IMAGE) {
-        logNonCriticalError(IllegalStateException("Format should be an Image"))
+      Log.w("Scarlet", "Attempted to retrieve image for a non-image Format")
     }
     return getFile(noteUUID, imageFormat.text)
   }

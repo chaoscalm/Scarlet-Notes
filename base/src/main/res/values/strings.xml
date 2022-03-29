@@ -316,20 +316,11 @@
   <string name="internal_settings_title">Developer Options</string>
   <string name="internal_settings_description">Change internal settings to the application used for debugging</string>
 
-  <string name="internal_settings_enable_show_exceptions_title">Show Exception Sheet</string>
-  <string name="internal_settings_enable_show_exceptions_description">Show caught exceptions on a sheet if possible, to allow forwarding to Developer</string>
-
   <string name="internal_settings_enable_fullscreen_title">Enable Fullscreen</string>
   <string name="internal_settings_enable_fullscreen_description">Make the app in fullscreen to allow screenshots and recordings</string>
 
   <string name="internal_settings_show_uuid_title">Show Note UUIDs</string>
   <string name="internal_settings_show_uuid_description">Show the unique ids of the notes in the home screen view</string>
-
-  <string name="internal_settings_fake_exceptions_title">Fake Exceptions</string>
-  <string name="internal_settings_fake_exceptions_description">Throw a fake exception to test the exception features</string>
-
-  <string name="exception_sheet_title">Exception Thrown</string>
-  <string name="exception_sheet_share">Share</string>
 
   <!-- Start: App Lock Activity -->
   <string name="app_lock_title">Unlock App</string>

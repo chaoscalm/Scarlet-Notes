@@ -1,6 +1,7 @@
 package com.maubis.scarlet.base.note.formats.recycler
 
 import android.content.Context
+import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import android.widget.ImageView
@@ -16,7 +17,6 @@ import com.maubis.scarlet.base.core.note.ImageLoadCallback
 import com.maubis.scarlet.base.home.sheets.openDeleteFormatDialog
 import com.maubis.scarlet.base.note.creation.sheet.FormatActionBottomSheet
 import com.maubis.scarlet.base.support.sheets.openSheet
-import com.maubis.scarlet.base.support.utils.logAndMaybeDisplayError
 import pl.aprilapps.easyphotopicker.EasyImage
 import java.io.File
 
@@ -55,17 +55,17 @@ class FormatImageViewHolder(context: Context, view: View) : FormatViewHolderBase
     actionCamera.setOnClickListener {
       try {
         EasyImage.openCameraForImage(context as AppCompatActivity, data.uid)
-      } catch (exception: Exception) {
+      } catch (e: Exception) {
         Toast.makeText(context, "No camera app installed", Toast.LENGTH_SHORT).show()
-        logAndMaybeDisplayError(context as AppCompatActivity, exception)
+        Log.e("Scarlet", "Error while opening camera", e)
       }
     }
     actionGallery.setOnClickListener {
       try {
         EasyImage.openGallery(context as AppCompatActivity, data.uid)
-      } catch (exception: Exception) {
+      } catch (e: Exception) {
         Toast.makeText(context, "No photo picker app installed", Toast.LENGTH_SHORT).show()
-        logAndMaybeDisplayError(context as AppCompatActivity, exception)
+        Log.e("Scarlet", "Error while opening gallery picker", e)
       }
     }
     actionMove.setColorFilter(config.iconColor)

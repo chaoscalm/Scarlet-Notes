@@ -3,13 +3,13 @@ package com.maubis.scarlet.base.support.ui
 import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.settings.sInternalEnableFullScreen
 import com.maubis.scarlet.base.support.utils.OsVersionUtils
-import com.maubis.scarlet.base.support.utils.logAndMaybeDisplayError
 
 abstract class ThemedActivity : AppCompatActivity(), IThemeChangeListener {
 
@@ -78,8 +78,8 @@ abstract class ThemedActivity : AppCompatActivity(), IThemeChangeListener {
     try {
       val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
       inputMethodManager.hideSoftInputFromWindow(currentFocus!!.windowToken, 0)
-    } catch (exception: Exception) {
-      logAndMaybeDisplayError(this, exception)
+    } catch (e: Exception) {
+      Log.w("Scarlet", "Unable to close the keyboard", e)
     }
   }
 
@@ -87,8 +87,8 @@ abstract class ThemedActivity : AppCompatActivity(), IThemeChangeListener {
     try {
       val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
       inputMethodManager.showSoftInput(focusedView, InputMethodManager.SHOW_FORCED)
-    } catch (exception: Exception) {
-      logAndMaybeDisplayError(this, exception)
+    } catch (e: Exception) {
+      Log.w("Scarlet", "Unable to open the keyboard", e)
     }
   }
 }
