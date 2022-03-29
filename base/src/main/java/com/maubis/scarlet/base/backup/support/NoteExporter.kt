@@ -1,6 +1,5 @@
 package com.maubis.scarlet.base.backup.support
 
-import android.os.AsyncTask
 import android.os.Environment
 import androidx.core.content.edit
 import com.github.bijoysingh.starter.util.FileManager
@@ -16,6 +15,10 @@ import com.maubis.scarlet.base.backup.sheet.NOTES_EXPORT_FOLDER
 import com.maubis.scarlet.base.core.format.FormatType
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.support.utils.dateFormat
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.io.File
 
 const val KEY_AUTO_BACKUP_LAST_TIMESTAMP = "KEY_AUTO_BACKUP_LAST_TIMESTAMP"
@@ -104,21 +107,21 @@ class NoteExporter {
     return markdownBuilder.toString().trim()
   }
 
+  @OptIn(DelicateCoroutinesApi::class)
   fun tryAutoExport() {
-    AsyncTask.execute {
+    GlobalScope.launch(Dispatchers.IO) {
       if (!sAutoBackupMode) {
-        return@execute
+        return@launch
       }
       val lastBackup = appPreferences.getLong(KEY_AUTO_BACKUP_LAST_TIMESTAMP, 0L)
       val lastTimestamp = data.notes.getLastTimestamp()
       if (lastBackup + AUTO_BACKUP_INTERVAL_MS >= lastTimestamp) {
-        return@execute
+        return@launch
       }
 
-      val exportFile = getOrCreateFileForExport(
-        "$AUTO_BACKUP_FILENAME ${dateFormat.getDateForBackup()}")
+      val exportFile = getOrCreateFileForExport("$AUTO_BACKUP_FILENAME ${dateFormat.getDateForBackup()}")
       if (exportFile === null) {
-        return@execute
+        return@launch
       }
       saveToFile(exportFile, getBackupFileContent())
       appPreferences.edit { putLong(KEY_AUTO_BACKUP_LAST_TIMESTAMP, System.currentTimeMillis()) }
@@ -146,11 +149,11 @@ class NoteExporter {
     return saveToFile(file, text)
   }
 
-  fun saveToFile(file: File, text: String): Boolean {
+  private fun saveToFile(file: File, text: String): Boolean {
     return FileManager.writeToFile(file, text)
   }
 
-  fun createFolder(): File? {
+  private fun createFolder(): File? {
     val folder = File(Environment.getExternalStorageDirectory(), NOTES_EXPORT_FOLDER)
     if (!folder.exists() && !folder.mkdirs()) {
       return null

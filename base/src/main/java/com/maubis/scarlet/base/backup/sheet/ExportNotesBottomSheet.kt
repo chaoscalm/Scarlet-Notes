@@ -130,7 +130,7 @@ class ExportNotesBottomSheet : LithoBottomSheet() {
         subtitle = R.string.home_option_auto_export_subtitle,
         icon = R.drawable.ic_time,
         listener = {
-          val manager = PermissionUtils().getStoragePermissionManager(activity)
+          val manager = PermissionUtils.getStoragePermissionManager(activity)
           val hasAllPermissions = manager.hasAllPermissions()
           when {
             sAutoBackupMode -> {

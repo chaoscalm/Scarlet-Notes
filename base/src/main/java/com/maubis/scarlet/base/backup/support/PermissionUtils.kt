@@ -4,7 +4,7 @@ import android.Manifest
 import androidx.appcompat.app.AppCompatActivity
 import com.github.bijoysingh.starter.util.PermissionManager
 
-class PermissionUtils() {
+object PermissionUtils {
   fun getStoragePermissionManager(activity: AppCompatActivity): PermissionManager {
     val manager = PermissionManager(activity)
     manager.setPermissions(

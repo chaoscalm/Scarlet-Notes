@@ -27,7 +27,7 @@ class BackupSettingsOptionsBottomSheet : LithoOptionBottomSheet() {
       subtitle = R.string.home_option_export_subtitle,
       icon = R.drawable.ic_export,
       listener = {
-        val manager = PermissionUtils().getStoragePermissionManager(activity)
+        val manager = PermissionUtils.getStoragePermissionManager(activity)
         val hasAllPermissions = manager.hasAllPermissions()
         when (hasAllPermissions) {
           true -> {
@@ -45,7 +45,7 @@ class BackupSettingsOptionsBottomSheet : LithoOptionBottomSheet() {
       subtitle = R.string.home_option_import_subtitle,
       icon = R.drawable.ic_import,
       listener = {
-        val manager = PermissionUtils().getStoragePermissionManager(activity)
+        val manager = PermissionUtils.getStoragePermissionManager(activity)
         val hasAllPermissions = manager.hasAllPermissions()
         when (hasAllPermissions) {
           true -> {

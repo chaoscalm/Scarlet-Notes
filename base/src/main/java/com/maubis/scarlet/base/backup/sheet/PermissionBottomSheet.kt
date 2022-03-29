@@ -37,7 +37,7 @@ class PermissionBottomSheet : LithoBottomSheet() {
       .child(BottomSheetBar.create(componentContext)
                .primaryActionRes(R.string.permission_layout_give_permission_ok)
                .onPrimaryClick {
-                 val manager = PermissionUtils().getStoragePermissionManager(activity)
+                 val manager = PermissionUtils.getStoragePermissionManager(activity)
                  manager.requestPermissions()
                  dismiss()
                }.secondaryActionRes(R.string.delete_sheet_delete_trash_no)
