@@ -277,6 +277,8 @@
   <string name="biometric_prompt_unlock_app">Sblocca app</string>
   <string name="biometric_prompt_unlock_app_details">Usa l\'impronta digitale o l\'identificatore biometrico configurato per sbloccare l\'app e accedere a tutte le note.</string>
   <string name="pin_to_launcher">Scorciatoia nel launcher</string>
-  <string name="share_images">Condividi foto</string>
+  <string name="share_images">Condividi immagini</string>
+  <string name="share_image">Condividi immagine</string>
+  <string name="image_picker_error">Si è verificato un errore nel recuperare l\'immagine selezionata.</string>
 
 </resources>

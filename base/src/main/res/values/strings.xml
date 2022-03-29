@@ -8,6 +8,7 @@
   <string name="import_to_app">Import</string>
   <string name="search_notes">Search Notes&#8230;</string>
   <string name="share_using">Share using&#8230;</string>
+  <string name="share_image">Share Image</string>
 
   <string name="main_no_notes">No Notes</string>
   <string name="main_no_notes_hint">It seems you have not added any notes. Click to add a note.</string>
@@ -17,7 +18,7 @@
 
   <string name="edit_note">Edit Note</string>
   <string name="open_in_notification">Create Notification</string>
-  <string name="share_images">Share Photos</string>
+  <string name="share_images">Share Images</string>
   <string name="delete_note_permanently">Delete Permanently</string>
   <string name="copy_note">Copy Note</string>
   <string name="send_note">Send Note</string>
@@ -343,5 +344,6 @@
   <string name="folder_delete_option_sheet_remove_folder_and_content_details">Remove Notebook. All notes move to trash or are deleted.</string>
   <string name="folder_delete_option_sheet_remove_folder_content">Remove Notes</string>
   <string name="folder_delete_option_sheet_remove_folder_content_details">Keep Notebook but all notes move to trash or are deleted.</string>
+  <string name="image_picker_error">An error occurred while retrieving the selected image.</string>
 
 </resources>

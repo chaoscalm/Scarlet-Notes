@@ -13,7 +13,7 @@ object SharingUtils {
     intent.putExtra(Intent.EXTRA_STREAM, uri)
     intent.clipData = ClipData.newRawUri("", uri)
     intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-    context.startActivity(Intent.createChooser(intent, "Share Image"))
+    context.startActivity(Intent.createChooser(intent, context.getString(R.string.share_image)))
   }
 
   fun sendMultipleImages(context: Context, uris: List<Uri>) {
@@ -21,7 +21,7 @@ object SharingUtils {
     intent.type = "image/jpeg"
     intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, ArrayList(uris))
     intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-    context.startActivity(Intent.createChooser(intent, "Share Images"))
+    context.startActivity(Intent.createChooser(intent, context.getString(R.string.share_images)))
   }
 
   fun shareText(context: Context, text: String, subject: String? = null) {

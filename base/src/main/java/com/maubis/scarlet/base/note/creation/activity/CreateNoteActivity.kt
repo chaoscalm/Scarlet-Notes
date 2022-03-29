@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import android.widget.Toast
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.facebook.litho.ComponentContext
@@ -140,7 +141,7 @@ open class CreateNoteActivity : ViewAdvancedNoteActivity() {
       }
 
       override fun onImagePickerError(exception: Exception, source: EasyImage.ImageSource, type: Int) {
-        // TODO display toast
+        Toast.makeText(this@CreateNoteActivity, R.string.image_picker_error, Toast.LENGTH_LONG).show()
         Log.e("Scarlet", "EasyImage picker error", exception)
       }
     })
