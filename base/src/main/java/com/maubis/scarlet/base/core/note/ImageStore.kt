@@ -16,6 +16,8 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.File
+import java.io.FileOutputStream
+import java.io.InputStream
 
 interface ImageLoadCallback {
   fun onSuccess()
@@ -27,15 +29,26 @@ class ImageStore(context: Context, private val thumbnailsCache: ImageCache) {
 
   private val rootFolder = File(context.filesDir, "images")
 
-  fun renameOrCopy(note: Note, imageFile: File): File {
+  fun saveImage(note: Note, imageStream: InputStream): File {
+    val destFile = newDestinationFile(note)
+    val bitmap = BitmapFactory.decodeStream(imageStream)
+    bitmap.writeToFile(destFile)
+    return destFile
+  }
+
+  fun storeExistingImage(note: Note, imageFile: File): File {
+    val destFile = newDestinationFile(note)
+    val renamed = imageFile.renameTo(destFile)
+    if (!renamed) {
+      imageFile.copyTo(destFile, true)
+    }
+    return destFile
+  }
+
+  private fun newDestinationFile(note: Note): File {
     val targetFile = getFile(note.uuid.toString(), RandomHelper.getRandom() + ".jpg")
     targetFile.mkdirs()
     deleteIfExist(targetFile)
-
-    val renamed = imageFile.renameTo(targetFile)
-    if (!renamed) {
-      imageFile.copyTo(targetFile, true)
-    }
     return targetFile
   }
 
@@ -136,6 +149,12 @@ class ImageStore(context: Context, private val thumbnailsCache: ImageCache) {
       return BitmapFactory.decodeFile(imageFile.absolutePath, options)
     }
     return null
+  }
+
+  private fun Bitmap.writeToFile(destinationFile: File) {
+    FileOutputStream(destinationFile).use {
+      this.compress(Bitmap.CompressFormat.JPEG, 90, it)
+    }
   }
 
   companion object {

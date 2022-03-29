@@ -1,10 +1,10 @@
 package com.maubis.scarlet.base.note.creation.activity
 
 import android.content.Intent
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.os.Parcelable
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.maubis.scarlet.base.ScarletApp.Companion.imageStorage
 import com.maubis.scarlet.base.backup.support.NoteImporter
@@ -14,7 +14,6 @@ import com.maubis.scarlet.base.core.format.FormatType
 import com.maubis.scarlet.base.core.note.NoteBuilder
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.home.MainActivity
-import com.maubis.scarlet.base.support.BitmapHelper
 import com.maubis.scarlet.base.support.utils.OsVersionUtils
 import java.io.File
 
@@ -64,16 +63,11 @@ class ShareToScarletRouterActivity : AppCompatActivity() {
     val images = mutableListOf<File>()
     for (uri in sharedImages) {
       try {
-        val inputStream = this.contentResolver.openInputStream(uri)
-        val bitmap = BitmapFactory.decodeStream(inputStream)
-        inputStream?.close()
-
-        val temporaryImage = createTempFile()
-        BitmapHelper.saveToFile(temporaryImage, bitmap)
-
-        images.add(imageStorage.renameOrCopy(note, temporaryImage))
-        temporaryImage.delete()
-      } catch (exception: Exception) {
+        contentResolver.openInputStream(uri)?.use {
+          images.add(imageStorage.saveImage(note, it))
+        }
+      } catch (e: Exception) {
+        Log.w("Scarlet", "Unable to save image $uri", e)
       }
     }
     val formats = note.getFormats().toMutableList()

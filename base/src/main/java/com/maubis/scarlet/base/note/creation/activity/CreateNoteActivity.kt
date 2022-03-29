@@ -134,7 +134,7 @@ open class CreateNoteActivity : ViewAdvancedNoteActivity() {
           return
         }
 
-        val targetFile = imageStorage.renameOrCopy(note, imageFiles.first())
+        val targetFile = imageStorage.storeExistingImage(note, imageFiles.first())
         val index = getFormatIndex(type)
         triggerImageLoaded(index, targetFile)
       }

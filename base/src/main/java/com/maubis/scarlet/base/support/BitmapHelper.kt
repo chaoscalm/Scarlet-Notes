@@ -3,10 +3,7 @@ package com.maubis.scarlet.base.support
 import android.content.ClipData
 import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
 import android.net.Uri
-import java.io.File
-import java.io.FileOutputStream
 
 object BitmapHelper {
   fun send(context: Context, uri: Uri) {
@@ -24,12 +21,5 @@ object BitmapHelper {
     intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, ArrayList(uris))
     intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
     context.startActivity(Intent.createChooser(intent, "Share Images"))
-  }
-
-  fun saveToFile(cacheFile: File, bitmap: Bitmap) {
-    val fOut = FileOutputStream(cacheFile)
-    bitmap.compress(Bitmap.CompressFormat.PNG, 90, fOut)
-    fOut.flush()
-    fOut.close()
   }
 }
