@@ -3,7 +3,6 @@ package com.maubis.scarlet.base.note.selection
 import android.app.Dialog
 import androidx.core.content.ContextCompat
 import com.facebook.litho.ComponentContext
-import com.github.bijoysingh.starter.util.IntentUtils
 import com.github.bijoysingh.starter.util.TextUtils
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.core.format.FormatBuilder
@@ -17,6 +16,7 @@ import com.maubis.scarlet.base.note.mark
 import com.maubis.scarlet.base.note.removeTag
 import com.maubis.scarlet.base.note.tag.SelectedTagChooserBottomSheet
 import com.maubis.scarlet.base.security.openUnlockSheet
+import com.maubis.scarlet.base.support.SharingUtils
 import com.maubis.scarlet.base.support.sheets.GridOptionBottomSheet
 import com.maubis.scarlet.base.support.sheets.openSheet
 import com.maubis.scarlet.base.support.specs.GridSectionItem
@@ -106,12 +106,7 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
       label = R.string.send_note,
       icon = R.drawable.ic_share_white_48dp,
       listener = lockAwareFunctionRunner(activity) {
-        activity.runTextFunction {
-          IntentUtils.ShareBuilder(activity)
-            .setChooserText(getString(R.string.share_using))
-            .setText(it)
-            .share()
-        }
+        activity.runTextFunction { SharingUtils.shareText(activity, it) }
       }
     ))
     options.add(GridSectionOptionItem(

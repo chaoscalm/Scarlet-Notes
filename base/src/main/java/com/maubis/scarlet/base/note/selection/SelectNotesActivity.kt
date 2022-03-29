@@ -2,13 +2,13 @@ package com.maubis.scarlet.base.note.selection
 
 import android.os.Bundle
 import androidx.recyclerview.widget.RecyclerView
-import com.github.bijoysingh.starter.util.IntentUtils
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.home.HomeNavigationMode
 import com.maubis.scarlet.base.note.getFullText
+import com.maubis.scarlet.base.support.SharingUtils
 import com.maubis.scarlet.base.support.sheets.openSheet
 import com.maubis.scarlet.base.support.utils.bind
 
@@ -46,12 +46,7 @@ class SelectNotesActivity : SelectableNotesActivityBase() {
   override fun initUI() {
     super.initUI()
     primaryFab.setOnClickListener {
-      runTextFunction { text ->
-        IntentUtils.ShareBuilder(this)
-          .setChooserText(getString(R.string.share_using))
-          .setText(text)
-          .share()
-      }
+      runTextFunction { text -> SharingUtils.shareText(this, text) }
     }
     secondaryFab.setOnClickListener {
       openSheet(this, SelectedNotesOptionsBottomSheet())

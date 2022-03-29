@@ -2,12 +2,10 @@ package com.maubis.scarlet.base.note
 
 import android.content.Context
 import androidx.core.content.FileProvider
-import com.github.bijoysingh.starter.util.IntentUtils
 import com.github.bijoysingh.starter.util.TextUtils
 import com.maubis.markdown.Markdown
 import com.maubis.markdown.MarkdownConfig
 import com.maubis.markdown.spannable.*
-import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.core.format.Format
@@ -283,9 +281,5 @@ fun Note.copy(context: Context) {
 }
 
 fun Note.share(context: Context) {
-  IntentUtils.ShareBuilder(context)
-          .setSubject(getTitleForSharing())
-          .setText(getFullText())
-          .setChooserText(context.getString(R.string.share_using))
-          .share()
+  SharingUtils.shareText(context, getFullText(), subject = getTitleForSharing())
 }

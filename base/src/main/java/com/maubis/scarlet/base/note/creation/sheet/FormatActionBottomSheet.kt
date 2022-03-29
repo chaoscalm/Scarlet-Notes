@@ -2,7 +2,6 @@ package com.maubis.scarlet.base.note.creation.sheet
 
 import android.app.Dialog
 import com.facebook.litho.ComponentContext
-import com.github.bijoysingh.starter.util.IntentUtils
 import com.github.bijoysingh.starter.util.TextUtils
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.imageStorage
@@ -10,6 +9,7 @@ import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.core.format.FormatType
 import com.maubis.scarlet.base.core.note.ImageStore.Companion.deleteIfExist
 import com.maubis.scarlet.base.note.creation.activity.ViewAdvancedNoteActivity
+import com.maubis.scarlet.base.support.SharingUtils
 import com.maubis.scarlet.base.support.sheets.GridOptionBottomSheet
 import com.maubis.scarlet.base.support.specs.GridSectionItem
 import com.maubis.scarlet.base.support.specs.GridSectionOptionItem
@@ -38,10 +38,7 @@ class FormatActionBottomSheet : GridOptionBottomSheet() {
         label = R.string.import_export_layout_exporting_share,
         icon = R.drawable.ic_share_white_48dp,
         listener = {
-          IntentUtils.ShareBuilder(activity)
-            .setChooserText(activity.getString(R.string.share_using))
-            .setText(format.text)
-            .share()
+          SharingUtils.shareText(activity, format.text)
           dismiss()
         },
         visible = !arrayOf(FormatType.IMAGE, FormatType.SEPARATOR).contains(format.formatType)
