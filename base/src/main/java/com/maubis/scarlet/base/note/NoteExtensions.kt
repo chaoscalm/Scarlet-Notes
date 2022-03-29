@@ -19,7 +19,7 @@ import com.maubis.scarlet.base.note.creation.activity.NoteIntentRouterActivity
 import com.maubis.scarlet.base.security.PinLockController.needsLockCheck
 import com.maubis.scarlet.base.security.openUnlockSheet
 import com.maubis.scarlet.base.settings.*
-import com.maubis.scarlet.base.support.BitmapHelper
+import com.maubis.scarlet.base.support.SharingUtils
 import com.maubis.scarlet.base.support.ui.ThemedActivity
 import com.maubis.scarlet.base.support.ui.sThemeDarkenNoteColor
 import com.maubis.scarlet.base.support.utils.ColorUtil
@@ -273,8 +273,8 @@ fun Note.shareImages(context: Context) {
     .filter { it.exists() }
     .map { FileProvider.getUriForFile(context, "fs00.scarletnotes.FileProvider", it) }
   when {
-    imageFileUris.size == 1 -> BitmapHelper.send(context, imageFileUris.first())
-    imageFileUris.size > 1 -> BitmapHelper.send(context, imageFileUris)
+    imageFileUris.size == 1 -> SharingUtils.sendImage(context, imageFileUris.first())
+    imageFileUris.size > 1 -> SharingUtils.sendMultipleImages(context, imageFileUris)
   }
 }
 
