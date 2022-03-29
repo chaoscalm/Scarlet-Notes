@@ -54,10 +54,7 @@ private var sPincodeSheetPasscodeEntered = ""
 object PincodeSheetViewSpec {
 
   @OnCreateLayout
-  fun onCreate(
-          context: ComponentContext,
-          @Prop data: PincodeSheetData,
-          @Prop dismiss: () -> Unit): Component {
+  fun onCreate(context: ComponentContext, @Prop data: PincodeSheetData): Component {
     val editBackground = when {
       appTheme.isNightTheme() -> R.drawable.light_secondary_rounded_bg
       else -> R.drawable.secondary_rounded_bg
@@ -138,6 +135,7 @@ object PincodeSheetViewSpec {
     return component.build()
   }
 
+  @Suppress("UNUSED_PARAMETER")
   @OnEvent(EditorActionEvent::class)
   fun onPinEditorAction(context: ComponentContext,
                         @Prop data: PincodeSheetData,
@@ -147,11 +145,13 @@ object PincodeSheetViewSpec {
     return true
   }
 
+  @Suppress("UNUSED_PARAMETER")
   @OnEvent(TextChangedEvent::class)
   fun onTextChangeListener(context: ComponentContext, @FromEvent text: String) {
     sPincodeSheetPasscodeEntered = text
   }
 
+  @Suppress("UNUSED_PARAMETER")
   @OnEvent(ClickEvent::class)
   fun onActionClick(
           context: ComponentContext,
@@ -162,6 +162,7 @@ object PincodeSheetViewSpec {
     dismiss()
   }
 
+  @Suppress("UNUSED_PARAMETER")
   @OnEvent(ClickEvent::class)
   fun onRemoveClick(
           context: ComponentContext,

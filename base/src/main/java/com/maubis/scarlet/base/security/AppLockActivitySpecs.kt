@@ -63,6 +63,7 @@ object AppLockViewSpec {
       .build()
   }
 
+  @Suppress("UNUSED_PARAMETER")
   @OnEvent(ClickEvent::class)
   fun onUnlockClick(context: ComponentContext, @Prop onClick: () -> Unit) {
     onClick()
@@ -73,10 +74,7 @@ object AppLockViewSpec {
 object AppLockContentViewSpec {
 
   @OnCreateLayout
-  fun onCreate(
-    context: ComponentContext,
-    @Prop fingerprintEnabled: Boolean,
-    @Prop onClick: () -> Unit): Component {
+  fun onCreate(context: ComponentContext, @Prop fingerprintEnabled: Boolean): Component {
     val description = when {
       fingerprintEnabled -> R.string.app_lock_details
       else -> R.string.app_lock_details_no_fingerprint
@@ -123,12 +121,14 @@ object AppLockContentViewSpec {
       .build()
   }
 
+  @Suppress("UNUSED_PARAMETER")
   @OnEvent(EditorActionEvent::class)
   fun onPinEditorAction(context: ComponentContext, @Prop onClick: () -> Unit): Boolean {
     onClick()
     return true
   }
 
+  @Suppress("UNUSED_PARAMETER")
   @OnEvent(TextChangedEvent::class)
   fun onTextChanged(context: ComponentContext, @FromEvent text: String, @Prop onTextChange: (String) -> Unit) {
     onTextChange(text)

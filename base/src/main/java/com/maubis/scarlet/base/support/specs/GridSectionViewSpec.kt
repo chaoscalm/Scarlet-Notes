@@ -70,6 +70,7 @@ object GridOptionSpec {
       .build()
   }
 
+  @Suppress("UNUSED_PARAMETER")
   @OnEvent(ClickEvent::class)
   fun onClick(context: ComponentContext, @Prop option: GridSectionOptionItem) {
     option.listener()

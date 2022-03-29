@@ -52,6 +52,7 @@ object ColorPickerItemSpec {
     return row.build()
   }
 
+  @Suppress("UNUSED_PARAMETER")
   @OnEvent(ClickEvent::class)
   fun onItemClick(context: ComponentContext, @Prop color: Int, @Prop onColorSelected: (Int) -> Unit) {
     onColorSelected(color)

@@ -76,7 +76,7 @@ class ImageCache(context: Context) {
 
     GlobalScope.launch(Dispatchers.IO) {
       var index = 0
-      val files = thumbnailFolder.listFiles().sortedBy { it.lastModified() }
+      val files = thumbnailFolder.listFiles()?.sortedBy { it.lastModified() } ?: emptyList()
       while (thumbnailCacheSize.get() > IMAGE_CACHE_SIZE * 0.9 && index < files.size) {
         thumbnailCacheSize.addAndGet(-files[index].length())
         files[index].delete()

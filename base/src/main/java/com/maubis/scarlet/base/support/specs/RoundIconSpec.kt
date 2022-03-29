@@ -2,16 +2,8 @@ package com.maubis.scarlet.base.support.specs
 
 import android.graphics.Color
 import android.graphics.drawable.Drawable
-import com.facebook.litho.ClickEvent
-import com.facebook.litho.Column
-import com.facebook.litho.Component
-import com.facebook.litho.ComponentContext
-import com.facebook.litho.LongClickEvent
-import com.facebook.litho.annotations.LayoutSpec
-import com.facebook.litho.annotations.OnCreateLayout
-import com.facebook.litho.annotations.OnEvent
-import com.facebook.litho.annotations.Prop
-import com.facebook.litho.annotations.ResType
+import com.facebook.litho.*
+import com.facebook.litho.annotations.*
 import com.facebook.litho.widget.Image
 import com.facebook.yoga.YogaAlign
 import com.facebook.yoga.YogaEdge
@@ -58,11 +50,13 @@ object RoundIconSpec {
       .build()
   }
 
+  @Suppress("UNUSED_PARAMETER")
   @OnEvent(ClickEvent::class)
   fun onClickEvent(context: ComponentContext, @Prop(optional = true) onClick: () -> Unit) {
     onClick()
   }
 
+  @Suppress("UNUSED_PARAMETER")
   @OnEvent(LongClickEvent::class)
   fun onLongClickEvent(context: ComponentContext, @Prop(optional = true) onLongClick: () -> Unit): Boolean {
     onLongClick()

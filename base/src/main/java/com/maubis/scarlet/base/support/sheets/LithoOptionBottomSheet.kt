@@ -106,6 +106,7 @@ object OptionItemLayoutSpec {
     return row.build()
   }
 
+  @Suppress("UNUSED_PARAMETER")
   @OnEvent(ClickEvent::class)
   fun onItemClick(context: ComponentContext, @Prop onClick: () -> Unit) {
     onClick()
@@ -152,6 +153,7 @@ object OptionLabelItemLayoutSpec {
     return row.build()
   }
 
+  @Suppress("UNUSED_PARAMETER")
   @OnEvent(ClickEvent::class)
   fun onItemClick(context: ComponentContext, @Prop onClick: () -> Unit) {
     onClick()

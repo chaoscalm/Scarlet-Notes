@@ -91,6 +91,7 @@ object FolderItemLayoutSpec {
     return row.build()
   }
 
+  @Suppress("UNUSED_PARAMETER")
   @OnEvent(ClickEvent::class)
   fun onItemClick(context: ComponentContext, @Prop option: FolderOptionsItem) {
     option.listener()

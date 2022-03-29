@@ -59,6 +59,7 @@ object ChooseOptionItemLayoutSpec {
     return row.build()
   }
 
+  @Suppress("UNUSED_PARAMETER")
   @OnEvent(ClickEvent::class)
   fun onItemClick(context: ComponentContext, @Prop onClick: () -> Unit) {
     onClick()

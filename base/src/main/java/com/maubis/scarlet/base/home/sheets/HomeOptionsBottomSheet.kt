@@ -116,6 +116,7 @@ object TagItemLayoutSpec {
     return row.build()
   }
 
+  @Suppress("UNUSED_PARAMETER")
   @OnEvent(ClickEvent::class)
   fun onItemClick(context: ComponentContext, @Prop option: LithoTagOptionsItem) {
     option.listener()

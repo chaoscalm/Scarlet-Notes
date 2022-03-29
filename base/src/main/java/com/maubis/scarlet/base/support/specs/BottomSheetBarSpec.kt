@@ -62,16 +62,19 @@ object BottomSheetBarSpec {
     return row.build()
   }
 
+  @Suppress("UNUSED_PARAMETER")
   @OnEvent(ClickEvent::class)
   fun onPrimaryClickEvent(context: ComponentContext, @Prop onPrimaryClick: () -> Unit) {
     onPrimaryClick()
   }
 
+  @Suppress("UNUSED_PARAMETER")
   @OnEvent(ClickEvent::class)
   fun onSecondaryClickEvent(context: ComponentContext, @Prop(optional = true) onSecondaryClick: () -> Unit) {
     onSecondaryClick()
   }
 
+  @Suppress("UNUSED_PARAMETER")
   @OnEvent(ClickEvent::class)
   fun onTertiaryClickEvent(context: ComponentContext, @Prop(optional = true) onTertiaryClick: () -> Unit) {
     onTertiaryClick()
