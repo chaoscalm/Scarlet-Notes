@@ -15,7 +15,6 @@ import com.maubis.scarlet.base.backup.sheet.NOTES_EXPORT_FOLDER
 import com.maubis.scarlet.base.core.format.FormatType
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.support.utils.dateFormat
-import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -107,7 +106,6 @@ class NoteExporter {
     return markdownBuilder.toString().trim()
   }
 
-  @OptIn(DelicateCoroutinesApi::class)
   fun tryAutoExport() {
     GlobalScope.launch(Dispatchers.IO) {
       if (!sAutoBackupMode) {

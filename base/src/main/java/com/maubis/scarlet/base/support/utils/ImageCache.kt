@@ -3,7 +3,6 @@ package com.maubis.scarlet.base.support.utils
 import android.content.Context
 import android.graphics.Bitmap
 import com.maubis.scarlet.base.database.entities.Note
-import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -13,7 +12,6 @@ import java.util.concurrent.atomic.AtomicLong
 
 const val IMAGE_CACHE_SIZE = 1024 * 1024 * 10L
 
-@OptIn(DelicateCoroutinesApi::class)
 class ImageCache(context: Context) {
 
   private val thumbnailFolder = File(context.cacheDir, "thumbnails")
