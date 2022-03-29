@@ -1,7 +1,6 @@
 package com.maubis.scarlet.base.core.note
 
 import com.github.bijoysingh.starter.util.RandomHelper
-import com.github.bijoysingh.starter.util.TextUtils
 import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.core.format.FormatBuilder
 import com.maubis.scarlet.base.core.format.FormatType
@@ -24,7 +23,7 @@ class NoteBuilder {
   fun gen(title: String, description: String): Note {
     val note = Note()
     val formats = ArrayList<Format>()
-    if (!TextUtils.isNullOrEmpty(title)) {
+    if (title.isNotEmpty()) {
       formats.add(Format(FormatType.HEADING, title))
     }
     formats.add(Format(FormatType.TEXT, description))
@@ -38,7 +37,7 @@ class NoteBuilder {
   fun gen(title: String, formatSource: List<Format>): Note {
     val note = Note()
     val formats = ArrayList<Format>()
-    if (!TextUtils.isNullOrEmpty(title)) {
+    if (title.isNotEmpty()) {
       formats.add(Format(FormatType.HEADING, title))
     }
     formats.addAll(formatSource)

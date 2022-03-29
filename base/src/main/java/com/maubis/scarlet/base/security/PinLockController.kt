@@ -1,7 +1,6 @@
 package com.maubis.scarlet.base.security
 
 import android.os.SystemClock
-import com.github.bijoysingh.starter.util.TextUtils
 import com.maubis.scarlet.base.settings.sSecurityAppLockEnabled
 import com.maubis.scarlet.base.settings.sSecurityAskPinAlways
 import com.maubis.scarlet.base.settings.sSecurityCode
@@ -10,7 +9,7 @@ object PinLockController {
   private var sLastLoginTimeMs = 0L
 
   fun isPinCodeEnabled(): Boolean {
-    return !TextUtils.isNullOrEmpty(sSecurityCode)
+    return sSecurityCode.isNotEmpty()
   }
 
   fun needsAppLock(): Boolean {

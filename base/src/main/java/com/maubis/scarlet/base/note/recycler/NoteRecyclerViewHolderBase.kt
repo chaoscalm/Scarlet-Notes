@@ -11,7 +11,6 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.core.view.isVisible
 import com.github.bijoysingh.starter.recyclerview.RecyclerViewHolder
-import com.github.bijoysingh.starter.util.TextUtils
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.ScarletApp.Companion.imageStorage
@@ -121,13 +120,13 @@ open class NoteRecyclerViewHolderBase(context: Context, view: View) : RecyclerVi
   private fun setMetaText(item: NoteRecyclerItem) {
     tags.typeface = appTypeface.text()
     when {
-      !TextUtils.isNullOrEmpty(item.tagsSource) -> {
+      item.tagsSource.isNotEmpty() -> {
         tags.setTextColor(item.tagsColor)
         val source = item.tags
         tags.text = trim(source)
         tags.visibility = VISIBLE
       }
-      !TextUtils.isNullOrEmpty(item.timestamp) -> {
+      item.timestamp.isNotEmpty() -> {
         tags.setTextColor(item.timestampColor)
         tags.text = item.timestamp
         tags.visibility = VISIBLE

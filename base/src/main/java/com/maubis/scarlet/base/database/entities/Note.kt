@@ -2,7 +2,6 @@ package com.maubis.scarlet.base.database.entities
 
 import android.content.Context
 import androidx.room.*
-import com.github.bijoysingh.starter.util.TextUtils
 import com.google.gson.Gson
 import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.core.format.Format
@@ -35,9 +34,9 @@ class Note {
     }
 
     fun isEqual(note: Note): Boolean {
-        return TextUtils.areEqualNullIsEmpty(this.content, note.content)
+        return this.content == note.content
                 && this.uuid == note.uuid
-                && TextUtils.areEqualNullIsEmpty(this.tags, note.tags)
+                && this.tags == note.tags
                 && this.timestamp == note.timestamp
                 && this.color == note.color
                 && this.state == note.state

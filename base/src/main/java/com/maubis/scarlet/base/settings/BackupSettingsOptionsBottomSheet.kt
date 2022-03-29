@@ -1,8 +1,8 @@
 package com.maubis.scarlet.base.settings
 
 import android.app.Dialog
+import android.content.Intent
 import com.facebook.litho.ComponentContext
-import com.github.bijoysingh.starter.util.IntentUtils
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.backup.activity.ImportNoteActivity
 import com.maubis.scarlet.base.backup.sheet.ExportNotesBottomSheet
@@ -49,7 +49,7 @@ class BackupSettingsOptionsBottomSheet : LithoOptionBottomSheet() {
         val hasAllPermissions = manager.hasAllPermissions()
         when (hasAllPermissions) {
           true -> {
-            IntentUtils.startActivity(activity, ImportNoteActivity::class.java)
+            activity.startActivity(Intent(activity, ImportNoteActivity::class.java))
             dismiss()
           }
           false -> {

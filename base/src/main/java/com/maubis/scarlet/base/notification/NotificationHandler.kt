@@ -8,7 +8,6 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
-import com.github.bijoysingh.starter.util.TextUtils
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.database.entities.Note
@@ -99,7 +98,7 @@ class NotificationHandler(private val context: Context) {
 
   fun getRemoteView(config: NotificationConfig): RemoteViews {
     val contentView = RemoteViews(context.packageName, R.layout.notification_note_layout)
-    val hasTitle = !TextUtils.isNullOrEmpty(config.note.getTitleForSharing())
+    val hasTitle = config.note.getTitleForSharing().isNotEmpty()
     contentView.setViewVisibility(R.id.title, if (hasTitle) VISIBLE else GONE)
     contentView.setTextViewText(R.id.title, config.note.getTitleForSharing())
     contentView.setTextViewText(R.id.description, config.note.getTextForSharing())
