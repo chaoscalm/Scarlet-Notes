@@ -129,12 +129,12 @@ open class CreateNoteActivity : ViewAdvancedNoteActivity() {
   override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
     super.onActivityResult(requestCode, resultCode, data)
     EasyImage.handleActivityResult(requestCode, resultCode, data, this, object : DefaultCallback() {
-      override fun onImagePicked(imageFile: File?, source: EasyImage.ImageSource?, type: Int) {
-        if (imageFile == null) {
+      override fun onImagesPicked(imageFiles: MutableList<File>, source: EasyImage.ImageSource?, type: Int) {
+        if (imageFiles.isEmpty()) {
           return
         }
 
-        val targetFile = imageStorage.renameOrCopy(note, imageFile)
+        val targetFile = imageStorage.renameOrCopy(note, imageFiles.first())
         val index = getFormatIndex(type)
         triggerImageLoaded(index, targetFile)
       }

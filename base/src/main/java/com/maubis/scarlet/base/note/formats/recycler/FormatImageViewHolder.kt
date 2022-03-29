@@ -54,7 +54,7 @@ class FormatImageViewHolder(context: Context, view: View) : FormatViewHolderBase
     actionGallery.setColorFilter(iconColor)
     actionCamera.setOnClickListener {
       try {
-        EasyImage.openCamera(context as AppCompatActivity, data.uid)
+        EasyImage.openCameraForImage(context as AppCompatActivity, data.uid)
       } catch (exception: Exception) {
         Toast.makeText(context, "No camera app installed", Toast.LENGTH_SHORT).show()
         logAndMaybeDisplayError(context as AppCompatActivity, exception)

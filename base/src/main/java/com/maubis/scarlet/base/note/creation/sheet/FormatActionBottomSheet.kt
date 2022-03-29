@@ -61,7 +61,7 @@ class FormatActionBottomSheet : GridOptionBottomSheet() {
         label = R.string.format_action_camera,
         icon = R.drawable.ic_image_camera,
         listener = {
-          EasyImage.openCamera(activity, format.uid)
+          EasyImage.openCameraForImage(activity, format.uid)
         },
         visible = format.formatType === FormatType.IMAGE
       ))
