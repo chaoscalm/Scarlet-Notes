@@ -36,7 +36,7 @@
       android:windowSoftInputMode="adjustResize" />
 
     <provider
-      android:name=".backup.support.ScarletFileProvider"
+      android:name="androidx.core.content.FileProvider"
       android:authorities="fs00.scarletnotes.FileProvider"
       android:exported="false"
       android:grantUriPermissions="true">
