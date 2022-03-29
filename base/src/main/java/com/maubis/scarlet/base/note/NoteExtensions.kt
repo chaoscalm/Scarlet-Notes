@@ -1,6 +1,7 @@
 package com.maubis.scarlet.base.note
 
 import android.content.Context
+import androidx.core.content.FileProvider
 import com.github.bijoysingh.starter.util.IntentUtils
 import com.github.bijoysingh.starter.util.TextUtils
 import com.maubis.markdown.Markdown
@@ -267,14 +268,13 @@ fun Note.hasImages(): Boolean {
 
 fun Note.shareImages(context: Context) {
   val imageFormats = getFormats().filter { it.formatType == FormatType.IMAGE }
-  val bitmaps = imageFormats
+  val imageFileUris = imageFormats
     .map { ScarletApp.imageStorage.getFile(uuid.toString(), it.text) }
     .filter { it.exists() }
-    .map { BitmapHelper.loadFromFile(it) }
-    .filterNotNull()
+    .map { FileProvider.getUriForFile(context, "fs00.scarletnotes.FileProvider", it) }
   when {
-    bitmaps.size == 1 -> BitmapHelper.send(context, bitmaps.first())
-    bitmaps.size > 1 -> BitmapHelper.send(context, bitmaps)
+    imageFileUris.size == 1 -> BitmapHelper.send(context, imageFileUris.first())
+    imageFileUris.size > 1 -> BitmapHelper.send(context, imageFileUris)
   }
 }
 
