@@ -194,18 +194,18 @@ class HomeOptionsBottomSheet : LithoBottomSheet() {
       }
     ))
     options.add(LithoLabelOptionsItem(
-      title = R.string.nav_archived,
-      icon = R.drawable.ic_archive_white_48dp,
-      listener = {
-        activity.onModeChange(HomeNavigationMode.ARCHIVED)
-        dismiss()
-      }
-    ))
-    options.add(LithoLabelOptionsItem(
       title = R.string.nav_locked,
       icon = R.drawable.ic_action_lock,
       listener = {
         activity.onModeChange(HomeNavigationMode.LOCKED)
+        dismiss()
+      }
+    ))
+    options.add(LithoLabelOptionsItem(
+      title = R.string.nav_archived,
+      icon = R.drawable.ic_archive_white_48dp,
+      listener = {
+        activity.onModeChange(HomeNavigationMode.ARCHIVED)
         dismiss()
       }
     ))
