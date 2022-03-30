@@ -46,7 +46,6 @@ class SettingsOptionsBottomSheet : LithoOptionBottomSheet() {
       icon = R.drawable.ic_option_security,
       listener = {
         openSheet(activity, SecurityOptionsBottomSheet())
-        dismiss()
       }
     ))
     options.add(LithoOptionsItem(
@@ -75,13 +74,12 @@ class SettingsOptionsBottomSheet : LithoOptionBottomSheet() {
     ))
     if (BuildConfig.DEBUG) {
       options.add(LithoOptionsItem(
-          title = R.string.internal_settings_title,
-          subtitle = R.string.internal_settings_description,
-          icon = R.drawable.icon_code_block,
-          listener = {
-            openSheet(activity, InternalSettingsOptionsBottomSheet())
-            dismiss()
-          }
+        title = R.string.internal_settings_title,
+        subtitle = R.string.internal_settings_description,
+        icon = R.drawable.icon_code_block,
+        listener = {
+          openSheet(activity, InternalSettingsOptionsBottomSheet())
+        }
       ))
     }
     return options

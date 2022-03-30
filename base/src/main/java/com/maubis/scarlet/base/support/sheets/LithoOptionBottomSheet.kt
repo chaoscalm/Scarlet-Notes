@@ -3,6 +3,7 @@ package com.maubis.scarlet.base.support.sheets
 import android.app.Dialog
 import android.graphics.Color
 import android.graphics.Typeface.BOLD
+import android.os.Bundle
 import com.facebook.litho.*
 import com.facebook.litho.annotations.LayoutSpec
 import com.facebook.litho.annotations.OnCreateLayout
@@ -11,6 +12,8 @@ import com.facebook.litho.annotations.Prop
 import com.facebook.litho.widget.Text
 import com.facebook.yoga.YogaAlign
 import com.facebook.yoga.YogaEdge
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
@@ -164,6 +167,15 @@ abstract class LithoOptionBottomSheet : LithoBottomSheet() {
 
   abstract fun title(): Int
   abstract fun getOptions(componentContext: ComponentContext, dialog: Dialog): List<LithoOptionsItem>
+
+  override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+    val dialog = super.onCreateDialog(savedInstanceState)
+    with ((dialog as BottomSheetDialog).behavior) {
+      state = BottomSheetBehavior.STATE_EXPANDED
+      skipCollapsed = true
+    }
+    return dialog
+  }
 
   override fun getComponent(componentContext: ComponentContext, dialog: Dialog): Component {
     val column = Column.create(componentContext)
