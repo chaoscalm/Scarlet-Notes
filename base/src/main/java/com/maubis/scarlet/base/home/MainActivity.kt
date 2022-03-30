@@ -12,7 +12,6 @@ import com.facebook.litho.ComponentContext
 import com.facebook.litho.LithoView
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp
-import com.maubis.scarlet.base.ScarletApp.Companion.appPreferences
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.backup.support.NoteExporter
@@ -31,8 +30,6 @@ import com.maubis.scarlet.base.note.recycler.NoteAppAdapter
 import com.maubis.scarlet.base.note.recycler.NoteRecyclerItem
 import com.maubis.scarlet.base.settings.STORE_KEY_LINE_COUNT
 import com.maubis.scarlet.base.settings.SettingsOptionsBottomSheet
-import com.maubis.scarlet.base.settings.SettingsOptionsBottomSheet.Companion.KEY_MARKDOWN_ENABLED
-import com.maubis.scarlet.base.settings.SettingsOptionsBottomSheet.Companion.KEY_MARKDOWN_HOME_ENABLED
 import com.maubis.scarlet.base.settings.sNoteItemLineCount
 import com.maubis.scarlet.base.settings.sUIUseGridView
 import com.maubis.scarlet.base.support.recycler.RecyclerItem
@@ -157,14 +154,9 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
 
   private fun setupRecyclerView() {
     val isTablet = resources.getBoolean(R.bool.is_tablet)
-
-    val isMarkdownEnabled = appPreferences.getBoolean(KEY_MARKDOWN_ENABLED, true)
-    val isMarkdownHomeEnabled = appPreferences.getBoolean(KEY_MARKDOWN_HOME_ENABLED, true)
     val adapterExtra = Bundle().apply {
-      putBoolean(KEY_MARKDOWN_ENABLED, isMarkdownEnabled && isMarkdownHomeEnabled)
       putInt(STORE_KEY_LINE_COUNT, sNoteItemLineCount)
     }
-
     adapter = NoteAppAdapter(this, sUIUseGridView, isTablet)
     adapter.setExtra(adapterExtra)
     views.recyclerView.layoutManager = getLayoutManager(sUIUseGridView, isTablet)

@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.github.bijoysingh.starter.async.MultiAsyncTask
 import com.github.bijoysingh.starter.recyclerview.RecyclerViewBuilder
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.ScarletApp.Companion.appPreferences
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.core.note.sort
@@ -21,7 +20,10 @@ import com.maubis.scarlet.base.note.folder.SelectorFolderRecyclerItem
 import com.maubis.scarlet.base.note.recycler.NoteAppAdapter
 import com.maubis.scarlet.base.note.recycler.NoteRecyclerItem
 import com.maubis.scarlet.base.note.recycler.getSelectableRecyclerItemControllerList
-import com.maubis.scarlet.base.settings.*
+import com.maubis.scarlet.base.settings.STORE_KEY_LINE_COUNT
+import com.maubis.scarlet.base.settings.SortingOptionsBottomSheet
+import com.maubis.scarlet.base.settings.sNoteItemLineCount
+import com.maubis.scarlet.base.settings.sUIUseGridView
 import com.maubis.scarlet.base.support.recycler.RecyclerItem
 import com.maubis.scarlet.base.support.ui.SecuredActivity
 import com.maubis.scarlet.base.support.ui.ThemeColorType
@@ -90,13 +92,9 @@ abstract class SelectableNotesActivityBase : SecuredActivity(), INoteSelectorAct
 
   open fun getLayoutUI(): Int = R.layout.activity_select_note
 
-  fun setupRecyclerView() {
+  private fun setupRecyclerView() {
     val isTablet = resources.getBoolean(R.bool.is_tablet)
-
-    val isMarkdownEnabled = appPreferences.getBoolean(SettingsOptionsBottomSheet.KEY_MARKDOWN_ENABLED, true)
-    val isMarkdownHomeEnabled = appPreferences.getBoolean(SettingsOptionsBottomSheet.KEY_MARKDOWN_HOME_ENABLED, true)
     val adapterExtra = Bundle()
-    adapterExtra.putBoolean(SettingsOptionsBottomSheet.KEY_MARKDOWN_ENABLED, isMarkdownEnabled && isMarkdownHomeEnabled)
     adapterExtra.putInt(STORE_KEY_LINE_COUNT, sNoteItemLineCount)
 
     adapter = NoteAppAdapter(this, getSelectableRecyclerItemControllerList(sUIUseGridView, isTablet))

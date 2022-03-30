@@ -12,8 +12,6 @@ class Format {
 
   var text: String = ""
 
-  var forcedMarkdown = false
-
   val markdownText: String
     get() {
       return when (formatType) {
@@ -44,10 +42,6 @@ class Format {
   constructor(formatType: FormatType, text: String) {
     this.formatType = formatType
     this.text = text
-
-    if (formatType === FormatType.TAG) {
-      forcedMarkdown = true
-    }
   }
 
   fun toJson(): JSONObject? {

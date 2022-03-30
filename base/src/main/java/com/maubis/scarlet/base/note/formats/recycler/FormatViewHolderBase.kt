@@ -13,7 +13,10 @@ import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.core.format.FormatType
 import com.maubis.scarlet.base.note.creation.activity.INTENT_KEY_NOTE_ID
 import com.maubis.scarlet.base.note.creation.activity.ViewAdvancedNoteActivity
-import com.maubis.scarlet.base.settings.*
+import com.maubis.scarlet.base.settings.STORE_KEY_TEXT_SIZE
+import com.maubis.scarlet.base.settings.TEXT_SIZE_DEFAULT
+import com.maubis.scarlet.base.settings.sNoteDefaultColor
+import com.maubis.scarlet.base.settings.sUIUseNoteColorAsBackground
 import com.maubis.scarlet.base.support.ui.Theme
 import com.maubis.scarlet.base.support.ui.ThemeColorType
 import com.maubis.scarlet.base.support.utils.ColorUtil
@@ -75,9 +78,7 @@ abstract class FormatViewHolderBase(context: Context, view: View) : RecyclerView
         editable = !(extra != null
           && extra.containsKey(KEY_EDITABLE)
           && !extra.getBoolean(KEY_EDITABLE)),
-        isMarkdownEnabled = (extra == null
-          || extra.getBoolean(SettingsOptionsBottomSheet.KEY_MARKDOWN_ENABLED, true)
-          || data.forcedMarkdown) && (data.formatType != FormatType.CODE),
+        isMarkdownEnabled = data.formatType != FormatType.CODE,
         fontSize = when (data.formatType) {
           FormatType.HEADING -> fontSize.toFloat() + 4
           FormatType.SUB_HEADING -> fontSize.toFloat() + 2

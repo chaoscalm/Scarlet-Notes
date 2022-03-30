@@ -88,9 +88,6 @@ class SettingsOptionsBottomSheet : LithoOptionBottomSheet() {
   }
 
   companion object {
-    const val KEY_MARKDOWN_ENABLED = "KEY_MARKDOWN_ENABLED"
-    const val KEY_MARKDOWN_HOME_ENABLED = "KEY_MARKDOWN_HOME_ENABLED"
-
     fun openSheet(activity: MainActivity) {
       val sheet = SettingsOptionsBottomSheet()
 

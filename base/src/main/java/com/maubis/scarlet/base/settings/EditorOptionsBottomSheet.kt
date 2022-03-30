@@ -30,10 +30,6 @@ var sEditorMoveHandles: Boolean
   get() = appPreferences.getBoolean("editor_move_handles", true)
   set(value) = appPreferences.edit { putBoolean("editor_move_handles", value) }
 
-var sEditorMarkdownEnabled: Boolean
-  get() = appPreferences.getBoolean("KEY_MARKDOWN_ENABLED", true)
-  set(value) = appPreferences.edit { putBoolean("KEY_MARKDOWN_ENABLED", value) }
-
 var sNoteDefaultColor: Int
   get() = appPreferences.getInt("KEY_NOTE_DEFAULT_COLOR", (0xFFD32F2F).toInt())
   set(value) = appPreferences.edit { putInt("KEY_NOTE_DEFAULT_COLOR", value) }
@@ -60,17 +56,6 @@ class EditorOptionsBottomSheet : LithoOptionBottomSheet() {
         )
         openSheet(activity, ColorPickerBottomSheet().apply { this.config = config })
         dismiss()
-      }
-    ))
-    items.add(LithoOptionsItem(
-      title = R.string.markdown_sheet_markdown_support,
-      subtitle = R.string.markdown_sheet_markdown_support_subtitle,
-      icon = R.drawable.ic_markdown_logo,
-      selected = sEditorMarkdownEnabled,
-      isSelectable = true,
-      listener = {
-        sEditorMarkdownEnabled = !sEditorMarkdownEnabled
-        reset(componentContext.androidContext, dialog)
       }
     ))
     items.add(LithoOptionsItem(

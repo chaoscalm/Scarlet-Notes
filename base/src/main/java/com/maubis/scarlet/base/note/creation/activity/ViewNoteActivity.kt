@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.facebook.litho.ComponentContext
 import com.facebook.litho.LithoView
 import com.github.bijoysingh.starter.recyclerview.MultiRecyclerViewControllerItem
-import com.maubis.scarlet.base.ScarletApp.Companion.appPreferences
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.core.format.Format
@@ -35,7 +34,6 @@ import com.maubis.scarlet.base.note.getSmartFormats
 import com.maubis.scarlet.base.note.getTagString
 import com.maubis.scarlet.base.note.mark
 import com.maubis.scarlet.base.settings.STORE_KEY_TEXT_SIZE
-import com.maubis.scarlet.base.settings.SettingsOptionsBottomSheet.Companion.KEY_MARKDOWN_ENABLED
 import com.maubis.scarlet.base.settings.sEditorTextSize
 import com.maubis.scarlet.base.settings.sNoteDefaultColor
 import com.maubis.scarlet.base.settings.sUIUseNoteColorAsBackground
@@ -120,7 +118,6 @@ open class ViewAdvancedNoteActivity : SecuredActivity(), INoteOptionSheetActivit
   private fun resetBundle() {
     val bundle = Bundle()
     bundle.putBoolean(KEY_EDITABLE, editModeValue)
-    bundle.putBoolean(KEY_MARKDOWN_ENABLED, appPreferences.getBoolean(KEY_MARKDOWN_ENABLED, true))
     bundle.putBoolean(KEY_NIGHT_THEME, appTheme.isNightTheme())
     bundle.putInt(STORE_KEY_TEXT_SIZE, sEditorTextSize)
     bundle.putInt(KEY_NOTE_COLOR, note.adjustedColor())
