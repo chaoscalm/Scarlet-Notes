@@ -18,7 +18,6 @@ import com.maubis.scarlet.base.security.PinLockController.needsLockCheck
 import com.maubis.scarlet.base.security.openUnlockSheet
 import com.maubis.scarlet.base.settings.sInternalShowUUID
 import com.maubis.scarlet.base.settings.sSecurityAppLockEnabled
-import com.maubis.scarlet.base.settings.sWidgetEnableFormatting
 import com.maubis.scarlet.base.settings.sWidgetShowLockedNotes
 import com.maubis.scarlet.base.support.SharingUtils
 import com.maubis.scarlet.base.support.ui.ThemedActivity
@@ -166,10 +165,7 @@ fun Note.getTextForWidget(): CharSequence {
   }
 
   val text = getFullTextForDirectMarkdownRender()
-  return when (sWidgetEnableFormatting) {
-    true -> Markdown.render(text, true)
-    false -> text
-  }
+  return Markdown.render(text, true)
 }
 
 fun Note.getDisplayTime(): String {

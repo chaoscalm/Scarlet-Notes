@@ -289,9 +289,6 @@
   <string name="home_option_widget_options_title">Widget Settings</string>
   <string name="home_option_widget_options_description">Change the settings for the home screen widgets</string>
 
-  <string name="widget_option_enable_formatting">Enable Formatting</string>
-  <string name="widget_option_enable_formatting_details">Notes are rendered with formatting in home screen widgets</string>
-
   <string name="widget_option_show_locked_notes">Show Locked Notes</string>
   <string name="widget_option_show_locked_notes_details">Allow locked notes to be shown in home screen widgets</string>
 

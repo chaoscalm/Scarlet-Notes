@@ -17,11 +17,6 @@ import com.maubis.scarlet.base.support.sheets.openSheet
 import com.maubis.scarlet.base.widget.AllNotesWidgetProvider
 import com.maubis.scarlet.base.widget.NoteWidgetProvider
 
-const val STORE_KEY_WIDGET_ENABLE_FORMATTING = "widget_enable_formatting"
-var sWidgetEnableFormatting: Boolean
-  get() = appPreferences.getBoolean(STORE_KEY_WIDGET_ENABLE_FORMATTING, true)
-  set(value) = appPreferences.edit { putBoolean(STORE_KEY_WIDGET_ENABLE_FORMATTING, value) }
-
 const val STORE_KEY_WIDGET_SHOW_LOCKED_NOTES = "widget_show_locked_notes"
 var sWidgetShowLockedNotes: Boolean
   get() = appPreferences.getBoolean(STORE_KEY_WIDGET_SHOW_LOCKED_NOTES, false)
@@ -48,19 +43,6 @@ class WidgetOptionsBottomSheet : LithoOptionBottomSheet() {
   override fun getOptions(componentContext: ComponentContext, dialog: Dialog): List<LithoOptionsItem> {
     val activity = context as MainActivity
     val options = ArrayList<LithoOptionsItem>()
-    options.add(
-      LithoOptionsItem(
-        title = R.string.widget_option_enable_formatting,
-        subtitle = R.string.widget_option_enable_formatting_details,
-        icon = R.drawable.ic_markdown_logo,
-        listener = {
-          sWidgetEnableFormatting = !sWidgetEnableFormatting
-          notifyWidgetConfigChanged(activity)
-          reset(activity, dialog)
-        },
-        isSelectable = true,
-        selected = sWidgetEnableFormatting
-      ))
     options.add(
       LithoOptionsItem(
         title = R.string.widget_option_show_locked_notes,

@@ -221,8 +221,6 @@
   <string name="markdown_help_sheet_title">Esempi di formattazione Markdown</string>
   <string name="home_option_widget_options_title">Impostazioni dei widget</string>
   <string name="home_option_widget_options_description">Modifica le impostazioni per i widget della schermata principale</string>
-  <string name="widget_option_enable_formatting">Abilita formattazione</string>
-  <string name="widget_option_enable_formatting_details">Le note vengono visualizzate con formattazione nei widget della schermata principale</string>
   <string name="widget_option_show_locked_notes">Mostra note protette</string>
   <string name="widget_option_show_locked_notes_details">Consenti alle note protette di essere visualizzate nei widget della schermata principale</string>
   <string name="widget_option_show_archived_notes">Mostra note archiviate</string>
