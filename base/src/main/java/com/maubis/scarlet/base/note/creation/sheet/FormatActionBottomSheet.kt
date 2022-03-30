@@ -7,7 +7,6 @@ import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.imageStorage
 import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.core.format.FormatType
-import com.maubis.scarlet.base.core.note.ImageStore.Companion.deleteIfExist
 import com.maubis.scarlet.base.note.creation.activity.ViewAdvancedNoteActivity
 import com.maubis.scarlet.base.support.SharingUtils
 import com.maubis.scarlet.base.support.sheets.GridOptionBottomSheet
@@ -76,8 +75,8 @@ class FormatActionBottomSheet : GridOptionBottomSheet() {
       icon = R.drawable.ic_delete_white_48dp,
       listener = {
         activity.deleteFormat(format)
-        if (format.formatType === FormatType.IMAGE && !format.text.isBlank()) {
-          deleteIfExist(imageStorage.getFile(noteUUID, format))
+        if (format.formatType === FormatType.IMAGE && format.text.isNotBlank()) {
+          imageStorage.deleteImageIfExists(noteUUID, format)
         }
         dismiss()
       }

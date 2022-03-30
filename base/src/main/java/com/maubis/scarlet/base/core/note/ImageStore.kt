@@ -46,21 +46,25 @@ class ImageStore(context: Context, private val thumbnailsCache: ImageCache) {
   }
 
   private fun newDestinationFile(note: Note): File {
-    val targetFile = getFile(note.uuid.toString(), RandomHelper.getRandom() + ".jpg")
+    val targetFile = getImageFile(note.uuid.toString(), RandomHelper.getRandom() + ".jpg")
     targetFile.mkdirs()
-    deleteIfExist(targetFile)
+    targetFile.deleteIfExists()
     return targetFile
   }
 
-  fun getFile(noteUUID: String, imageFormat: Format): File {
+  fun deleteImageIfExists(noteUUID: String, imageFormat: Format) {
+    getImage(noteUUID, imageFormat).deleteIfExists()
+  }
+
+  fun getImage(noteUUID: String, imageFormat: Format): File {
     if (imageFormat.formatType != FormatType.IMAGE) {
       Log.w("Scarlet", "Attempted to retrieve image for a non-image Format")
     }
-    return getFile(noteUUID, imageFormat.text)
+    return getImageFile(noteUUID, imageFormat.text)
   }
 
-  fun getFile(noteUUID: String, formatFileName: String): File {
-    return File(rootFolder, noteUUID + File.separator + formatFileName)
+  private fun getImageFile(noteUUID: String, imageName: String): File {
+    return File(rootFolder, noteUUID + File.separator + imageName)
   }
 
   fun deleteAllFiles(note: Note) {
@@ -87,7 +91,7 @@ class ImageStore(context: Context, private val thumbnailsCache: ImageCache) {
 
       val bitmap = loadBitmap(file)
       if (bitmap === null) {
-        deleteIfExist(file)
+        file.deleteIfExists()
         withContext(Dispatchers.Main) {
           image.visibility = View.GONE
           callback?.onError()
@@ -105,7 +109,7 @@ class ImageStore(context: Context, private val thumbnailsCache: ImageCache) {
   fun loadThumbnailToImageView(noteUUID: String, imageUuid: String, image: ImageView) {
     GlobalScope.launch {
       val thumbnailFile = thumbnailsCache.thumbnailFile(noteUUID, imageUuid)
-      val imageFile = getFile(noteUUID, imageUuid)
+      val imageFile = getImageFile(noteUUID, imageUuid)
 
       if (!imageFile.exists()) {
         withContext(Dispatchers.Main) { image.visibility = View.GONE }
@@ -115,7 +119,7 @@ class ImageStore(context: Context, private val thumbnailsCache: ImageCache) {
       if (thumbnailFile.exists()) {
         val bitmap = loadBitmap(thumbnailFile)
         if (bitmap === null) {
-          deleteIfExist(thumbnailFile)
+          thumbnailFile.deleteIfExists()
           withContext(Dispatchers.Main) { image.visibility = View.GONE }
           return@launch
         }
@@ -129,7 +133,7 @@ class ImageStore(context: Context, private val thumbnailsCache: ImageCache) {
 
       val bitmap = loadBitmap(imageFile)
       if (bitmap == null) {
-        deleteIfExist(imageFile)
+        imageFile.deleteIfExists()
         withContext(Dispatchers.Main) { image.visibility = View.GONE }
         return@launch
       }
@@ -157,12 +161,8 @@ class ImageStore(context: Context, private val thumbnailsCache: ImageCache) {
     }
   }
 
-  companion object {
-    fun deleteIfExist(file: File): Boolean {
-      return when {
-        file.exists() -> file.delete()
-        else -> false
-      }
-    }
+  private fun File.deleteIfExists() {
+    if (exists())
+       delete()
   }
 }

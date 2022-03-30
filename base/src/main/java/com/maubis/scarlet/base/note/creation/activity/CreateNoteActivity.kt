@@ -18,7 +18,6 @@ import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.core.format.FormatBuilder
 import com.maubis.scarlet.base.core.format.FormatType
 import com.maubis.scarlet.base.core.format.MarkdownType
-import com.maubis.scarlet.base.core.note.ImageStore.Companion.deleteIfExist
 import com.maubis.scarlet.base.core.note.NoteBuilder
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.note.creation.specs.NoteCreationBottomBar
@@ -288,8 +287,7 @@ open class CreateNoteActivity : ViewAdvancedNoteActivity() {
 
     val formatToChange = formats[position]
     if (formatToChange.text.isNotBlank()) {
-      val noteImage = imageStorage
-      deleteIfExist(noteImage.getFile(note.uuid.toString(), formatToChange.text))
+      imageStorage.deleteImageIfExists(note.uuid.toString(), formatToChange)
     }
     formatToChange.text = file.name
     setFormat(formatToChange)

@@ -267,7 +267,7 @@ fun Note.hasImages(): Boolean {
 fun Note.shareImages(context: Context) {
   val imageFormats = getFormats().filter { it.formatType == FormatType.IMAGE }
   val imageFileUris = imageFormats
-    .map { ScarletApp.imageStorage.getFile(uuid.toString(), it.text) }
+    .map { ScarletApp.imageStorage.getImage(uuid.toString(), it) }
     .filter { it.exists() }
     .map { FileProvider.getUriForFile(context, "fs00.scarletnotes.FileProvider", it) }
   when {

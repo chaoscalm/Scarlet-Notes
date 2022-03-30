@@ -85,7 +85,7 @@ class FormatImageViewHolder(context: Context, view: View) : FormatViewHolderBase
     when {
       fileName.isBlank() -> image.visibility = View.GONE
       else -> {
-        val file = imageStorage.getFile(config.noteUUID, data)
+        val file = imageStorage.getImage(config.noteUUID, data)
         when (file.exists()) {
           true -> populateFile(file)
           false -> {
