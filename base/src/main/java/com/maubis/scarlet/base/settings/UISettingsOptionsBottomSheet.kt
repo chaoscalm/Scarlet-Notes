@@ -22,10 +22,6 @@ var sUIUseNoteColorAsBackground: Boolean
   get() = appPreferences.getBoolean("KEY_NOTE_VIEWER_BG_COLOR", false)
   set(value) = appPreferences.edit { putBoolean("KEY_NOTE_VIEWER_BG_COLOR", value) }
 
-var sUIMarkdownEnabledOnHome: Boolean
-  get() = appPreferences.getBoolean("KEY_MARKDOWN_HOME_ENABLED", true)
-  set(value) = appPreferences.edit { putBoolean("KEY_MARKDOWN_HOME_ENABLED", value) }
-
 class UISettingsOptionsBottomSheet : LithoOptionBottomSheet() {
   override fun title(): Int = R.string.home_option_ui_experience
 
@@ -116,18 +112,6 @@ class UISettingsOptionsBottomSheet : LithoOptionBottomSheet() {
           reset(activity, dialog)
         },
         actionIcon = 0
-      ))
-    options.add(
-      LithoOptionsItem(
-        title = R.string.markdown_sheet_home_markdown_support,
-        subtitle = R.string.markdown_sheet_home_markdown_support_subtitle,
-        icon = R.drawable.ic_markdown_logo,
-        listener = {
-          sUIMarkdownEnabledOnHome = !sUIMarkdownEnabledOnHome
-          reset(activity, dialog)
-        },
-        isSelectable = true,
-        selected = sUIMarkdownEnabledOnHome
       ))
     return options
   }

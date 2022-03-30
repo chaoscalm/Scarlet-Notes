@@ -90,8 +90,6 @@
 
   <!-- Added in Release v3.7.9 -->
   <string name="import_to_app">Importa</string>
-  <string name="markdown_sheet_home_markdown_support">Markdown nell\'elenco delle note</string>
-  <string name="markdown_sheet_home_markdown_support_subtitle">Abilita la formattazione Markdown nell\'elenco delle note</string>
 
   <!-- Added in release v3.8.4 -->
   <string name="change_tags">Cambia tag</string>
