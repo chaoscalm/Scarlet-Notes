@@ -22,7 +22,7 @@ import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.database.entities.NoteState
 import com.maubis.scarlet.base.database.entities.Tag
 import com.maubis.scarlet.base.databinding.ActivityMainBinding
-import com.maubis.scarlet.base.home.recycler.*
+import com.maubis.scarlet.base.home.recycler.EmptyRecyclerItem
 import com.maubis.scarlet.base.note.actions.INoteOptionSheetActivity
 import com.maubis.scarlet.base.note.folder.FolderRecyclerItem
 import com.maubis.scarlet.base.note.folder.sheet.CreateOrEditFolderBottomSheet
@@ -246,9 +246,6 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
 
   private fun handleNewItems(notes: List<RecyclerItem>) {
     adapter.clearItems()
-    if (!isInSearchMode) {
-      addInformationItem()
-    }
     if (notes.isEmpty()) {
       adapter.addItem(EmptyRecyclerItem())
       return
@@ -256,18 +253,6 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
     notes.forEach {
       adapter.addItem(it)
     }
-  }
-
-  private fun addInformationItem() {
-    val informationItem = when {
-      shouldShowThemeInformationItem() -> getThemeInformationItem(this)
-      shouldShowBackupInformationItem() -> getBackupInformationItem(this)
-      else -> null
-    }
-    if (informationItem === null) {
-      return
-    }
-    adapter.addItem(informationItem, 0)
   }
 
   private fun unifiedSearchSynchronous(): List<RecyclerItem> {

@@ -6,12 +6,10 @@ import com.github.bijoysingh.starter.recyclerview.MultiRecyclerViewControllerIte
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.backup.recycler.FileImportViewHolder
 import com.maubis.scarlet.base.home.recycler.EmptyRecyclerHolder
-import com.maubis.scarlet.base.home.recycler.InformationRecyclerHolder
 import com.maubis.scarlet.base.note.folder.FolderRecyclerHolder
 import com.maubis.scarlet.base.note.folder.SelectorFolderRecyclerHolder
 import com.maubis.scarlet.base.note.selection.SelectableNoteRecyclerViewHolder
 import com.maubis.scarlet.base.support.recycler.RecyclerItem
-import java.util.*
 
 class NoteAppAdapter : MultiRecyclerViewAdapter<RecyclerItem> {
 
@@ -42,12 +40,6 @@ fun getRecyclerItemControllerList(
       .viewType(RecyclerItem.Type.EMPTY.ordinal)
       .layoutFile(R.layout.item_no_notes)
       .holderClass(EmptyRecyclerHolder::class.java)
-      .build())
-  list.add(
-    MultiRecyclerViewControllerItem.Builder<RecyclerItem>()
-      .viewType(RecyclerItem.Type.INFORMATION.ordinal)
-      .layoutFile(R.layout.item_information)
-      .holderClass(InformationRecyclerHolder::class.java)
       .build())
   list.add(
     MultiRecyclerViewControllerItem.Builder<RecyclerItem>()
