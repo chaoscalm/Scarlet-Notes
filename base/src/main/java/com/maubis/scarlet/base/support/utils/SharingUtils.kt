@@ -1,4 +1,4 @@
-package com.maubis.scarlet.base.support
+package com.maubis.scarlet.base.support.utils
 
 import android.content.ClipData
 import android.content.Context

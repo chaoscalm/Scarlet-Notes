@@ -1,13 +1,11 @@
-package com.maubis.scarlet.base.backup.recycler
+package com.maubis.scarlet.base.backup.ui
 
-import com.maubis.scarlet.base.backup.sheet.NOTES_EXPORT_FILENAME
-import com.maubis.scarlet.base.backup.support.AUTO_BACKUP_FILENAME
+import com.maubis.scarlet.base.backup.AUTO_BACKUP_FILENAME
 import com.maubis.scarlet.base.support.recycler.RecyclerItem
 import java.io.File
 
 class FileRecyclerItem(
   val name: String,
-  val date: Long,
   val path: String,
   val file: File) : RecyclerItem(), Comparable<FileRecyclerItem> {
   var selected = false

@@ -1,10 +1,9 @@
-package com.maubis.scarlet.base.support
+package com.maubis.scarlet.base.support.utils
 
 import android.app.PendingIntent
 import android.content.Context
 import android.content.pm.ShortcutInfo
 import android.content.pm.ShortcutManager
-import com.maubis.scarlet.base.support.utils.OsVersionUtils
 
 fun addShortcut(context: Context, shortcut: ShortcutInfo) {
   if (!OsVersionUtils.canAddLauncherShortcuts()) {

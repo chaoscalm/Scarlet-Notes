@@ -16,11 +16,11 @@ import com.maubis.scarlet.base.note.mark
 import com.maubis.scarlet.base.note.removeTag
 import com.maubis.scarlet.base.note.tag.SelectedTagChooserBottomSheet
 import com.maubis.scarlet.base.security.openUnlockSheet
-import com.maubis.scarlet.base.support.SharingUtils
 import com.maubis.scarlet.base.support.sheets.GridOptionBottomSheet
 import com.maubis.scarlet.base.support.sheets.openSheet
 import com.maubis.scarlet.base.support.specs.GridSectionItem
 import com.maubis.scarlet.base.support.specs.GridSectionOptionItem
+import com.maubis.scarlet.base.support.utils.SharingUtils
 
 class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
   override fun title(): Int = R.string.choose_action

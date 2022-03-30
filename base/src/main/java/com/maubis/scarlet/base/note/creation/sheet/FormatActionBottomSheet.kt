@@ -8,10 +8,10 @@ import com.maubis.scarlet.base.ScarletApp.Companion.imageStorage
 import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.core.format.FormatType
 import com.maubis.scarlet.base.note.creation.activity.ViewAdvancedNoteActivity
-import com.maubis.scarlet.base.support.SharingUtils
 import com.maubis.scarlet.base.support.sheets.GridOptionBottomSheet
 import com.maubis.scarlet.base.support.specs.GridSectionItem
 import com.maubis.scarlet.base.support.specs.GridSectionOptionItem
+import com.maubis.scarlet.base.support.utils.SharingUtils
 import pl.aprilapps.easyphotopicker.EasyImage
 
 class FormatActionBottomSheet : GridOptionBottomSheet() {

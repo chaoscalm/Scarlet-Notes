@@ -14,8 +14,8 @@ import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.data
-import com.maubis.scarlet.base.backup.support.NoteExporter
-import com.maubis.scarlet.base.backup.support.PermissionUtils
+import com.maubis.scarlet.base.backup.NoteExporter
+import com.maubis.scarlet.base.backup.PermissionUtils
 import com.maubis.scarlet.base.database.entities.Folder
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.database.entities.NoteState

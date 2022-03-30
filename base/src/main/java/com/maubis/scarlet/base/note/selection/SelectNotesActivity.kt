@@ -8,8 +8,8 @@ import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.home.HomeNavigationMode
 import com.maubis.scarlet.base.note.getFullText
-import com.maubis.scarlet.base.support.SharingUtils
 import com.maubis.scarlet.base.support.sheets.openSheet
+import com.maubis.scarlet.base.support.utils.SharingUtils
 import com.maubis.scarlet.base.support.utils.bind
 
 const val KEY_SELECT_EXTRA_MODE = "KEY_SELECT_EXTRA_MODE"

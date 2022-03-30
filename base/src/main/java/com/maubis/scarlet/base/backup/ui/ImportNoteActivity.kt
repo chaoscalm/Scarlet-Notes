@@ -1,4 +1,4 @@
-package com.maubis.scarlet.base.backup.activity
+package com.maubis.scarlet.base.backup.ui
 
 import android.os.Bundle
 import android.view.View
@@ -10,8 +10,7 @@ import com.github.bijoysingh.starter.async.MultiAsyncTask
 import com.github.bijoysingh.starter.recyclerview.RecyclerViewBuilder
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
-import com.maubis.scarlet.base.backup.recycler.FileRecyclerItem
-import com.maubis.scarlet.base.backup.support.NoteImporter
+import com.maubis.scarlet.base.backup.NoteImporter
 import com.maubis.scarlet.base.note.recycler.NoteAppAdapter
 import com.maubis.scarlet.base.support.recycler.RecyclerItem
 import com.maubis.scarlet.base.support.ui.SecuredActivity
@@ -66,7 +65,7 @@ class ImportNoteActivity : SecuredActivity() {
     MultiAsyncTask.execute(object : MultiAsyncTask.Task<List<RecyclerItem>> {
       override fun run(): List<RecyclerItem> {
         return NoteImporter().getImportableFiles()
-          .map { FileRecyclerItem(it.name, it.lastModified(), it.absolutePath, it) }
+          .map { FileRecyclerItem(it.name, it.absolutePath, it) }
           .sorted()
       }
 

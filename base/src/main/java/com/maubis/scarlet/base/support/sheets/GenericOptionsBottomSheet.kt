@@ -1,9 +1,7 @@
-package com.maubis.scarlet.base.home.sheets
+package com.maubis.scarlet.base.support.sheets
 
 import android.app.Dialog
 import com.facebook.litho.ComponentContext
-import com.maubis.scarlet.base.support.sheets.LithoChooseOptionBottomSheet
-import com.maubis.scarlet.base.support.sheets.LithoChooseOptionsItem
 
 class GenericOptionsBottomSheet : LithoChooseOptionBottomSheet() {
   var title: Int = 0

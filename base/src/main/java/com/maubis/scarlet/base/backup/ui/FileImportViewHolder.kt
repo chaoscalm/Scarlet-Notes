@@ -1,4 +1,4 @@
-package com.maubis.scarlet.base.backup.recycler
+package com.maubis.scarlet.base.backup.ui
 
 import android.content.Context
 import android.graphics.Color
@@ -11,7 +11,6 @@ import com.github.bijoysingh.starter.util.LocaleManager
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
-import com.maubis.scarlet.base.backup.activity.ImportNoteActivity
 import com.maubis.scarlet.base.support.recycler.RecyclerItem
 import com.maubis.scarlet.base.support.ui.ThemeColorType
 import com.maubis.scarlet.base.support.utils.dateFormat

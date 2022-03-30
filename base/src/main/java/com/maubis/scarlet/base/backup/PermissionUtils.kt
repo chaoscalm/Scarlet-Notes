@@ -1,4 +1,4 @@
-package com.maubis.scarlet.base.backup.support
+package com.maubis.scarlet.base.backup
 
 import android.Manifest
 import androidx.appcompat.app.AppCompatActivity

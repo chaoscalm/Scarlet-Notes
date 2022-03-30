@@ -4,10 +4,10 @@ import android.app.Dialog
 import android.content.Intent
 import com.facebook.litho.ComponentContext
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.backup.activity.ImportNoteActivity
-import com.maubis.scarlet.base.backup.sheet.ExportNotesBottomSheet
-import com.maubis.scarlet.base.backup.sheet.PermissionBottomSheet
-import com.maubis.scarlet.base.backup.support.PermissionUtils
+import com.maubis.scarlet.base.backup.PermissionUtils
+import com.maubis.scarlet.base.backup.ui.ExportNotesBottomSheet
+import com.maubis.scarlet.base.backup.ui.ImportNoteActivity
+import com.maubis.scarlet.base.backup.ui.PermissionBottomSheet
 import com.maubis.scarlet.base.home.MainActivity
 import com.maubis.scarlet.base.security.PinLockController.isPinCodeEnabled
 import com.maubis.scarlet.base.security.openUnlockSheet

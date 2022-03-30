@@ -19,10 +19,10 @@ import com.maubis.scarlet.base.security.openUnlockSheet
 import com.maubis.scarlet.base.settings.sInternalShowUUID
 import com.maubis.scarlet.base.settings.sSecurityAppLockEnabled
 import com.maubis.scarlet.base.settings.sWidgetShowLockedNotes
-import com.maubis.scarlet.base.support.SharingUtils
 import com.maubis.scarlet.base.support.ui.ThemedActivity
 import com.maubis.scarlet.base.support.ui.sThemeDarkenNoteColor
 import com.maubis.scarlet.base.support.utils.ColorUtil
+import com.maubis.scarlet.base.support.utils.SharingUtils
 import com.maubis.scarlet.base.support.utils.dateFormat
 
 /**************************************************************************************

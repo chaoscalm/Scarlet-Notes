@@ -26,11 +26,11 @@ import com.maubis.scarlet.base.notification.NotificationHandler
 import com.maubis.scarlet.base.security.openUnlockSheet
 import com.maubis.scarlet.base.settings.ColorPickerBottomSheet
 import com.maubis.scarlet.base.settings.ColorPickerDefaultController
-import com.maubis.scarlet.base.support.addShortcut
 import com.maubis.scarlet.base.support.sheets.GridBottomSheetBase
 import com.maubis.scarlet.base.support.sheets.openSheet
 import com.maubis.scarlet.base.support.ui.ThemedActivity
 import com.maubis.scarlet.base.support.utils.OsVersionUtils
+import com.maubis.scarlet.base.support.utils.addShortcut
 import java.util.*
 
 class NoteOptionsBottomSheet : GridBottomSheetBase() {

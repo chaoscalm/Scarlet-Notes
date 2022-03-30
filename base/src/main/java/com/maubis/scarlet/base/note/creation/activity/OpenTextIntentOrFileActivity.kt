@@ -13,7 +13,7 @@ import com.maubis.markdown.spannable.clearMarkdownSpans
 import com.maubis.markdown.spannable.setFormats
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
-import com.maubis.scarlet.base.backup.support.NoteImporter
+import com.maubis.scarlet.base.backup.NoteImporter
 import com.maubis.scarlet.base.core.note.NoteBuilder
 import com.maubis.scarlet.base.databinding.ActivityExternalIntentBinding
 import com.maubis.scarlet.base.support.ui.SecuredActivity
