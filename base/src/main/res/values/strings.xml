@@ -194,7 +194,7 @@
   <!-- End Select Notes -->
 
   <string name="format_action_copy">Copy</string>
-  <string name="format_action_title">Block Text Actions</string>
+  <string name="format_action_title">Text Block Actions</string>
   <string name="format_action_gallery">Gallery</string>
   <string name="format_action_camera">Camera</string>
 
