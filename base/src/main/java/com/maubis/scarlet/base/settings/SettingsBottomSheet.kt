@@ -9,7 +9,7 @@ import com.maubis.scarlet.base.support.sheets.LithoOptionBottomSheet
 import com.maubis.scarlet.base.support.sheets.LithoOptionsItem
 import com.maubis.scarlet.base.support.sheets.openSheet
 
-class SettingsOptionsBottomSheet : LithoOptionBottomSheet() {
+class SettingsBottomSheet : LithoOptionBottomSheet() {
   override fun title(): Int = R.string.home_option_sheet_title
 
   override fun getOptions(componentContext: ComponentContext, dialog: Dialog): List<LithoOptionsItem> {
@@ -21,7 +21,7 @@ class SettingsOptionsBottomSheet : LithoOptionBottomSheet() {
       subtitle = R.string.home_option_ui_experience_subtitle,
       icon = R.drawable.ic_action_grid,
       listener = {
-        openSheet(activity, UISettingsOptionsBottomSheet())
+        openSheet(activity, UIOptionsBottomSheet())
       }
     ))
     options.add(LithoOptionsItem(
@@ -37,7 +37,7 @@ class SettingsOptionsBottomSheet : LithoOptionBottomSheet() {
       subtitle = R.string.home_option_backup_options_subtitle,
       icon = R.drawable.ic_export,
       listener = {
-        openSheet(activity, BackupSettingsOptionsBottomSheet())
+        openSheet(activity, BackupDataOptionsBottomSheet())
       }
     ))
     options.add(LithoOptionsItem(
@@ -64,21 +64,13 @@ class SettingsOptionsBottomSheet : LithoOptionBottomSheet() {
         openSheet(activity, AboutBottomSheet())
       }
     ))
-    options.add(LithoOptionsItem(
-      title = R.string.home_option_delete_notes_and_more,
-      subtitle = R.string.home_option_delete_notes_and_more_details,
-      icon = R.drawable.ic_delete_permanently,
-      listener = {
-        openSheet(activity, DeleteAndMoreOptionsBottomSheet())
-      }
-    ))
     if (BuildConfig.DEBUG) {
       options.add(LithoOptionsItem(
         title = R.string.internal_settings_title,
         subtitle = R.string.internal_settings_description,
         icon = R.drawable.icon_code_block,
         listener = {
-          openSheet(activity, InternalSettingsOptionsBottomSheet())
+          openSheet(activity, DeveloperOptionsBottomSheet())
         }
       ))
     }
@@ -87,7 +79,7 @@ class SettingsOptionsBottomSheet : LithoOptionBottomSheet() {
 
   companion object {
     fun openSheet(activity: MainActivity) {
-      val sheet = SettingsOptionsBottomSheet()
+      val sheet = SettingsBottomSheet()
 
       sheet.show(activity.supportFragmentManager, sheet.tag)
     }

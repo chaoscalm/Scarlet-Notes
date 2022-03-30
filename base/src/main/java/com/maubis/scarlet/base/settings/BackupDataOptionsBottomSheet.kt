@@ -16,7 +16,7 @@ import com.maubis.scarlet.base.support.sheets.LithoOptionsItem
 import com.maubis.scarlet.base.support.sheets.openSheet
 import com.maubis.scarlet.base.support.ui.ThemedActivity
 
-class BackupSettingsOptionsBottomSheet : LithoOptionBottomSheet() {
+class BackupDataOptionsBottomSheet : LithoOptionBottomSheet() {
   override fun title(): Int = R.string.home_option_backup_options
 
   override fun getOptions(componentContext: ComponentContext, dialog: Dialog): List<LithoOptionsItem> {
@@ -28,15 +28,11 @@ class BackupSettingsOptionsBottomSheet : LithoOptionBottomSheet() {
       icon = R.drawable.ic_export,
       listener = {
         val manager = PermissionUtils.getStoragePermissionManager(activity)
-        val hasAllPermissions = manager.hasAllPermissions()
-        when (hasAllPermissions) {
-          true -> {
-            openExportSheet(activity)
-            dismiss()
-          }
-          false -> {
-            openSheet(activity, PermissionBottomSheet())
-          }
+        if (manager.hasAllPermissions()) {
+          openExportSheet(activity)
+          dismiss()
+        } else {
+          openSheet(activity, PermissionBottomSheet())
         }
       }
     ))
@@ -46,16 +42,21 @@ class BackupSettingsOptionsBottomSheet : LithoOptionBottomSheet() {
       icon = R.drawable.ic_import,
       listener = {
         val manager = PermissionUtils.getStoragePermissionManager(activity)
-        val hasAllPermissions = manager.hasAllPermissions()
-        when (hasAllPermissions) {
-          true -> {
-            activity.startActivity(Intent(activity, ImportNoteActivity::class.java))
-            dismiss()
-          }
-          false -> {
-            openSheet(activity, PermissionBottomSheet())
-          }
+        if (manager.hasAllPermissions()) {
+          activity.startActivity(Intent(activity, ImportNoteActivity::class.java))
+          dismiss()
+        } else {
+          openSheet(activity, PermissionBottomSheet())
         }
+      }
+    ))
+    options.add(LithoOptionsItem(
+      title = R.string.home_option_delete_notes_and_more,
+      subtitle = R.string.home_option_delete_notes_and_more_details,
+      icon = R.drawable.ic_delete_permanently,
+      listener = {
+        openSheet(activity, DeleteAndMoreOptionsBottomSheet())
+        dismiss()
       }
     ))
     return options

@@ -19,7 +19,7 @@ var sInternalShowUUID: Boolean
   get() = appPreferences.getBoolean(KEY_INTERNAL_SHOW_UUID, false)
   set(value) = appPreferences.edit { putBoolean(KEY_INTERNAL_SHOW_UUID, value) }
 
-class InternalSettingsOptionsBottomSheet : LithoOptionBottomSheet() {
+class DeveloperOptionsBottomSheet : LithoOptionBottomSheet() {
   override fun title(): Int = R.string.internal_settings_title
 
   override fun getOptions(componentContext: ComponentContext, dialog: Dialog): List<LithoOptionsItem> {

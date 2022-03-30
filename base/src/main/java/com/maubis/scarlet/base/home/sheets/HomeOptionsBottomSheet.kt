@@ -18,7 +18,7 @@ import com.maubis.scarlet.base.database.entities.Tag
 import com.maubis.scarlet.base.home.HomeNavigationMode
 import com.maubis.scarlet.base.home.MainActivity
 import com.maubis.scarlet.base.note.tag.CreateOrEditTagBottomSheet
-import com.maubis.scarlet.base.settings.SettingsOptionsBottomSheet
+import com.maubis.scarlet.base.settings.SettingsBottomSheet
 import com.maubis.scarlet.base.support.sheets.*
 import com.maubis.scarlet.base.support.specs.RoundIcon
 import com.maubis.scarlet.base.support.ui.ThemeColorType
@@ -221,7 +221,7 @@ class HomeOptionsBottomSheet : LithoBottomSheet() {
       title = R.string.nav_settings,
       icon = R.drawable.ic_action_settings,
       listener = {
-        SettingsOptionsBottomSheet.openSheet(activity)
+        SettingsBottomSheet.openSheet(activity)
         dismiss()
       }
     ))

@@ -29,7 +29,7 @@ import com.maubis.scarlet.base.note.mark
 import com.maubis.scarlet.base.note.recycler.NoteAppAdapter
 import com.maubis.scarlet.base.note.recycler.NoteRecyclerItem
 import com.maubis.scarlet.base.settings.STORE_KEY_LINE_COUNT
-import com.maubis.scarlet.base.settings.SettingsOptionsBottomSheet
+import com.maubis.scarlet.base.settings.SettingsBottomSheet
 import com.maubis.scarlet.base.settings.sNoteItemLineCount
 import com.maubis.scarlet.base.settings.sUIUseGridView
 import com.maubis.scarlet.base.support.recycler.RecyclerItem
@@ -136,7 +136,7 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
     }
 
     views.mainToolbar.settingsIcon.setOnClickListener {
-      SettingsOptionsBottomSheet.openSheet(this)
+      SettingsBottomSheet.openSheet(this)
     }
 
     val titleColor = appTheme.get(ThemeColorType.SECONDARY_TEXT)

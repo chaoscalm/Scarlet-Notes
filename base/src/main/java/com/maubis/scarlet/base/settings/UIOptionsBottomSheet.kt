@@ -22,7 +22,7 @@ var sUIUseNoteColorAsBackground: Boolean
   get() = appPreferences.getBoolean("KEY_NOTE_VIEWER_BG_COLOR", false)
   set(value) = appPreferences.edit { putBoolean("KEY_NOTE_VIEWER_BG_COLOR", value) }
 
-class UISettingsOptionsBottomSheet : LithoOptionBottomSheet() {
+class UIOptionsBottomSheet : LithoOptionBottomSheet() {
   override fun title(): Int = R.string.home_option_ui_experience
 
   override fun getOptions(componentContext: ComponentContext, dialog: Dialog): List<LithoOptionsItem> {

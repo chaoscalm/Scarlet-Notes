@@ -111,8 +111,8 @@
   <string name="note_option_default_color">Colore nota predefinita</string>
   <string name="note_option_default_color_subtitle">Scegli il colore predefinito delle note</string>
   <string name="note_option_number_lines">Lunghezza anteprima note</string>
-  <string name="home_option_backup_options">Backup e importazione</string>
-  <string name="home_option_backup_options_subtitle">Backup, importazione ed esportazione delle note</string>
+  <string name="home_option_backup_options">Backup e dati</string>
+  <string name="home_option_backup_options_subtitle">Importa, esporta o elimina le tue note</string>
 
   <!-- Added in release v4.0.0 -->
   <!-- No PinCode Sheet -->
