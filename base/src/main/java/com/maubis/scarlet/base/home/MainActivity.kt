@@ -369,7 +369,7 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
 
   override fun onStop() {
     super.onStop()
-    if (!isChangingConfigurations && PermissionUtils.getStoragePermissionManager(this).hasAllPermissions()) {
+    if (isFinishing && PermissionUtils.getStoragePermissionManager(this).hasAllPermissions()) {
       NoteExporter().tryAutoExport()
     }
   }
