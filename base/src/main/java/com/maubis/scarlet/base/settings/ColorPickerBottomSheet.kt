@@ -91,7 +91,7 @@ class ColorPickerBottomSheet : LithoBottomSheet() {
             .onColorSelected { selectedColor ->
               config.selectedColor = selectedColor
               config.onColorSelected(selectedColor)
-              reset(componentContext.androidContext, dialog)
+              refresh(componentContext.androidContext, dialog)
             }
             .flexGrow(1f))
       }

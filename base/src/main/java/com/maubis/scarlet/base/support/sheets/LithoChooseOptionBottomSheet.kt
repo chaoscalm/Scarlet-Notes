@@ -81,7 +81,7 @@ abstract class LithoChooseOptionBottomSheet : LithoBottomSheet() {
                      .option(it)
                      .onClick {
                        it.listener()
-                       reset(componentContext.androidContext, dialog)
+                       refresh(componentContext.androidContext, dialog)
                      })
     }
     return column.build()

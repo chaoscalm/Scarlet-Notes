@@ -66,7 +66,7 @@ class EditorOptionsBottomSheet : LithoOptionBottomSheet() {
       isSelectable = true,
       listener = {
         sEditorLiveMarkdown = !sEditorLiveMarkdown
-        reset(componentContext.androidContext, dialog)
+        refresh(componentContext.androidContext, dialog)
       }
     ))
     items.add(LithoOptionsItem(
@@ -77,7 +77,7 @@ class EditorOptionsBottomSheet : LithoOptionBottomSheet() {
       isSelectable = true,
       listener = {
         sEditorMarkdownDefault = !sEditorMarkdownDefault
-        reset(componentContext.androidContext, dialog)
+        refresh(componentContext.androidContext, dialog)
       }
     ))
 
@@ -89,7 +89,7 @@ class EditorOptionsBottomSheet : LithoOptionBottomSheet() {
       isSelectable = true,
       listener = {
         sEditorSkipNoteViewer = !sEditorSkipNoteViewer
-        reset(componentContext.androidContext, dialog)
+        refresh(componentContext.androidContext, dialog)
       }
     ))
     items.add(LithoOptionsItem(
@@ -100,7 +100,7 @@ class EditorOptionsBottomSheet : LithoOptionBottomSheet() {
       isSelectable = true,
       listener = {
         sEditorMoveChecked = !sEditorMoveChecked
-        reset(componentContext.androidContext, dialog)
+        refresh(componentContext.androidContext, dialog)
       }
     ))
     items.add(LithoOptionsItem(
@@ -111,7 +111,7 @@ class EditorOptionsBottomSheet : LithoOptionBottomSheet() {
       isSelectable = true,
       listener = {
         sEditorMoveHandles = !sEditorMoveHandles
-        reset(componentContext.androidContext, dialog)
+        refresh(componentContext.androidContext, dialog)
       }
     ))
     return items

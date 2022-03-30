@@ -63,7 +63,7 @@ class SecurityOptionsBottomSheet : LithoOptionBottomSheet() {
               activity = activity,
               onVerifySuccess = {
                 sSecurityAppLockEnabled = !sSecurityAppLockEnabled
-                reset(componentContext.androidContext, dialog)
+                refresh(componentContext.androidContext, dialog)
               }
             )
             else -> openCreatePasswordDialog(dialog)
@@ -85,7 +85,7 @@ class SecurityOptionsBottomSheet : LithoOptionBottomSheet() {
               activity = activity,
               onVerifySuccess = {
                 sSecurityAskPinAlways = !sSecurityAskPinAlways
-                reset(componentContext.androidContext, dialog)
+                refresh(componentContext.androidContext, dialog)
               }
             )
             else -> openCreatePasswordDialog(dialog)
@@ -108,12 +108,12 @@ class SecurityOptionsBottomSheet : LithoOptionBottomSheet() {
               activity = activity,
               onVerifySuccess = {
                 sSecurityBiometricEnabled = false
-                reset(componentContext.androidContext, dialog)
+                refresh(componentContext.androidContext, dialog)
               }
             )
             else -> {
               sSecurityBiometricEnabled = false
-              reset(componentContext.androidContext, dialog)
+              refresh(componentContext.androidContext, dialog)
             }
           }
         },
@@ -132,12 +132,12 @@ class SecurityOptionsBottomSheet : LithoOptionBottomSheet() {
               activity = activity,
               onVerifySuccess = {
                 sSecurityBiometricEnabled = true
-                reset(componentContext.androidContext, dialog)
+                refresh(componentContext.androidContext, dialog)
               }
             )
             else -> {
               sSecurityBiometricEnabled = true
-              reset(componentContext.androidContext, dialog)
+              refresh(componentContext.androidContext, dialog)
             }
           }
         },
@@ -150,7 +150,7 @@ class SecurityOptionsBottomSheet : LithoOptionBottomSheet() {
     val activity = context as ThemedActivity
     openCreateSheet(
       activity = activity,
-      onCreateSuccess = { reset(dialog.context, dialog) })
+      onCreateSuccess = { refresh(dialog.context, dialog) })
   }
 
   fun openResetPasswordDialog(dialog: Dialog) {

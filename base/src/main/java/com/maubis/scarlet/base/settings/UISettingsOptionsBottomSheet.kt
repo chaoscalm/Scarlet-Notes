@@ -53,7 +53,7 @@ class UISettingsOptionsBottomSheet : LithoOptionBottomSheet() {
         listener = {
           sUIUseGridView = false
           activity.notifyAdapterExtraChanged()
-          reset(activity, dialog)
+          refresh(activity, dialog)
         },
         visible = !isTablet && sUIUseGridView
       ))
@@ -65,7 +65,7 @@ class UISettingsOptionsBottomSheet : LithoOptionBottomSheet() {
         listener = {
           sUIUseGridView = true
           activity.notifyAdapterExtraChanged()
-          reset(activity, dialog)
+          refresh(activity, dialog)
         },
         visible = !isTablet && !sUIUseGridView
       ))
@@ -75,7 +75,7 @@ class UISettingsOptionsBottomSheet : LithoOptionBottomSheet() {
       icon = R.drawable.ic_sort,
       listener = {
         SortingOptionsBottomSheet.openSheet(activity, { activity.refreshItems() })
-        reset(activity, dialog)
+        refresh(activity, dialog)
       }
     ))
     options.add(
@@ -86,7 +86,7 @@ class UISettingsOptionsBottomSheet : LithoOptionBottomSheet() {
         icon = R.drawable.ic_title_white_48dp,
         listener = {
             openSheet(activity, FontSizeBottomSheet())
-            reset(activity, dialog)
+            refresh(activity, dialog)
         },
         actionIcon = 0
       ))
@@ -109,7 +109,7 @@ class UISettingsOptionsBottomSheet : LithoOptionBottomSheet() {
         icon = R.drawable.ic_action_color,
         listener = {
           sUIUseNoteColorAsBackground = !sUIUseNoteColorAsBackground
-          reset(activity, dialog)
+          refresh(activity, dialog)
         },
         actionIcon = 0
       ))

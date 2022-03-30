@@ -52,7 +52,7 @@ class FontSizeBottomSheet : LithoBottomSheet() {
                .maxValue(TEXT_SIZE_MAX)
                .onValueChange { value ->
                  sEditorTextSize = value
-                 reset(activity, dialog)
+                 refresh(activity, dialog)
                }
                .paddingDip(YogaEdge.VERTICAL, 16f))
       .child(BottomSheetBar.create(componentContext)

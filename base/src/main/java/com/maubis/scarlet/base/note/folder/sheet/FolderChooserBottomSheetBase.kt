@@ -130,7 +130,7 @@ abstract class FolderChooserBottomSheetBase : LithoBottomSheet() {
       listener = {
         CreateOrEditFolderBottomSheet.openSheet(activity, Folder(sNoteDefaultColor)) { folder, _ ->
           onFolderSelected(folder)
-          reset(activity, dialog)
+          refresh(activity, dialog)
         }
       })
     foldersComponent.child(OptionItemLayout.create(componentContext)
@@ -152,7 +152,7 @@ abstract class FolderChooserBottomSheetBase : LithoBottomSheet() {
           folder = folder,
           listener = {
             onFolderSelected(folder)
-            reset(activity, dialog)
+            refresh(activity, requireDialog())
           },
           isSelected = isFolderSelected(folder)
         ))

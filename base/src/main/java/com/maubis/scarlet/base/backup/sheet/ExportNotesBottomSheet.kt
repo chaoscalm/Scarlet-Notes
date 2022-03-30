@@ -58,7 +58,7 @@ class ExportNotesBottomSheet : LithoBottomSheet() {
                           .option(it)
                           .onClick {
                             it.listener()
-                            reset(componentContext.androidContext, dialog)
+                            refresh(componentContext.androidContext, dialog)
                           })
       }
     }

@@ -50,7 +50,7 @@ class TagChooserBottomSheet : LithoBottomSheet() {
       title = R.string.tag_sheet_new_tag_button,
       subtitle = 0,
       icon = R.drawable.icon_add_note,
-      listener = { CreateOrEditTagBottomSheet.openSheet(activity, Tag()) { _, _ -> reset(activity, dialog) } })
+      listener = { CreateOrEditTagBottomSheet.openSheet(activity, Tag()) { _, _ -> refresh(activity, dialog) } })
     tagsComponent.child(OptionItemLayout.create(componentContext)
                           .option(addTag)
                           .backgroundRes(R.drawable.accent_rounded_bg)
@@ -72,7 +72,7 @@ class TagChooserBottomSheet : LithoBottomSheet() {
           listener = {
             note!!.toggleTag(tag)
             note!!.save(activity)
-            reset(activity, dialog)
+            refresh(activity, requireDialog())
           },
           isSelected = tags.contains(tag.uuid)
         ))

@@ -51,40 +51,27 @@ fun getLithoBottomSheetButton(context: ComponentContext): Text.Builder {
 abstract class LithoBottomSheet : BottomSheetDialogFragment() {
 
   override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-    val ctxt = context ?: activity
-    if (ctxt === null) {
+    val ctx = context ?: activity
+    if (ctx === null) {
       return super.onCreateDialog(savedInstanceState)
     }
 
-    val isTablet = ctxt.resources.getBoolean(R.bool.is_tablet)
+    val isTablet = ctx.resources.getBoolean(R.bool.is_tablet)
     val dialog = when {
-      isTablet -> BottomSheetTabletDialog(ctxt, theme)
+      isTablet -> BottomSheetTabletDialog(ctx, theme)
       else -> super.onCreateDialog(savedInstanceState)
     }
+    refresh(ctx, dialog)
     retainInstance = true
     return dialog
   }
 
-  override fun setupDialog(dialog: Dialog, style: Int) {
-    val localContext = context
-    if (localContext === null) {
-      dismiss()
-      return
-    }
-
-    reset(localContext, dialog)
-  }
-
-  fun reset(localContext: Context, dialog: Dialog?) {
-    if (dialog === null) {
-      return
-    }
-
-    val componentContext = ComponentContext(localContext)
+  fun refresh(context: Context, dialog: Dialog) {
+    val componentContext = ComponentContext(context)
     getFullComponent(componentContext, dialog, getComponent(componentContext, dialog))
   }
 
-  fun getFullComponent(componentContext: ComponentContext, dialog: Dialog, childComponent: Component) {
+  private fun getFullComponent(componentContext: ComponentContext, dialog: Dialog, childComponent: Component) {
     val topHandle = when (appTheme.isNightTheme()) {
       true -> R.drawable.bottom_sheet_top_handle_dark
       false -> R.drawable.bottom_sheet_top_handle_light

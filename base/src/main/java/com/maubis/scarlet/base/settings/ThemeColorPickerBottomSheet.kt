@@ -101,7 +101,7 @@ class ThemeColorPickerBottomSheet : LithoBottomSheet() {
               setThemeFromSystem(context)
               onThemeChange(appTheme.get())
             }
-            reset(context, dialog)
+            refresh(context, dialog)
           })
     }
 

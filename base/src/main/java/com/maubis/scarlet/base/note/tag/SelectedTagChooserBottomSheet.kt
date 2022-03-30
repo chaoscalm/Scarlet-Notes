@@ -44,7 +44,7 @@ class SelectedTagChooserBottomSheet : LithoBottomSheet() {
       listener = {
           CreateOrEditTagBottomSheet.openSheet(activity, Tag()) { tag, _ ->
             onActionListener(tag, true)
-            reset(activity, dialog)
+            refresh(activity, dialog)
           }
       })
     tagsComponent.child(OptionItemLayout.create(componentContext)
@@ -81,7 +81,7 @@ class SelectedTagChooserBottomSheet : LithoBottomSheet() {
           listener = {
             onActionListener(tag, !tags.contains(tag.uuid))
             activity.refreshSelectedNotes()
-            reset(activity, dialog)
+            refresh(activity, requireDialog())
           },
           isSelected = tags.contains(tag.uuid)
         ))

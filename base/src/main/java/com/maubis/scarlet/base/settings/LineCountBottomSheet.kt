@@ -41,7 +41,7 @@ class LineCountBottomSheet : LithoBottomSheet() {
                .maxValue(LINE_COUNT_MAX)
                .onValueChange { value ->
                  sNoteItemLineCount = value
-                 reset(activity, dialog)
+                 refresh(activity, dialog)
                  activity.notifyAdapterExtraChanged()
                }
                .paddingDip(YogaEdge.VERTICAL, 16f))

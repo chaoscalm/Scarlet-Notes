@@ -26,7 +26,7 @@ class SortingOptionsBottomSheet : LithoChooseOptionBottomSheet() {
           listener = {
             setSortingState(technique)
             listener()
-            reset(componentContext.androidContext, dialog)
+            refresh(componentContext.androidContext, dialog)
           },
           selected = sorting == technique
         ))

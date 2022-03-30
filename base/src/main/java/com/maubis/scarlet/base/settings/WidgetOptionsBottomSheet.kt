@@ -51,7 +51,7 @@ class WidgetOptionsBottomSheet : LithoOptionBottomSheet() {
         listener = {
           sWidgetShowLockedNotes = !sWidgetShowLockedNotes
           notifyWidgetConfigChanged(activity)
-          reset(activity, dialog)
+          refresh(activity, dialog)
         },
         isSelectable = true,
         selected = sWidgetShowLockedNotes
@@ -64,7 +64,7 @@ class WidgetOptionsBottomSheet : LithoOptionBottomSheet() {
         listener = {
           sWidgetShowArchivedNotes = !sWidgetShowArchivedNotes
           notifyWidgetConfigChanged(activity)
-          reset(activity, dialog)
+          refresh(activity, dialog)
         },
         isSelectable = true,
         selected = sWidgetShowArchivedNotes
@@ -77,7 +77,7 @@ class WidgetOptionsBottomSheet : LithoOptionBottomSheet() {
         listener = {
           sWidgetShowToolbar = !sWidgetShowToolbar
           notifyAllNotesConfigChanged(activity)
-          reset(activity, dialog)
+          refresh(activity, dialog)
         },
         isSelectable = true,
         selected = sWidgetShowToolbar

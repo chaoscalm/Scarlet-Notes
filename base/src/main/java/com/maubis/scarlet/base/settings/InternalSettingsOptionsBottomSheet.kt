@@ -32,7 +32,7 @@ class InternalSettingsOptionsBottomSheet : LithoOptionBottomSheet() {
         icon = R.drawable.ic_action_grid,
         listener = {
           sInternalEnableFullScreen = !sInternalEnableFullScreen
-          reset(activity, dialog)
+          refresh(activity, dialog)
         },
         isSelectable = true,
         selected = sInternalEnableFullScreen
@@ -44,7 +44,7 @@ class InternalSettingsOptionsBottomSheet : LithoOptionBottomSheet() {
         icon = R.drawable.ic_code_white_48dp,
         listener = {
           sInternalShowUUID = !sInternalShowUUID
-          reset(activity, dialog)
+          refresh(activity, dialog)
         },
         isSelectable = true,
         selected = sInternalShowUUID
