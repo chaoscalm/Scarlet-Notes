@@ -227,8 +227,6 @@
   <string name="widget_option_show_locked_notes_details">Consenti alle note protette di essere visualizzate nei widget della schermata principale</string>
   <string name="widget_option_show_archived_notes">Mostra note archiviate</string>
   <string name="widget_option_show_archived_notes_details">Consenti alle note archiviate di essere visualizzate nei widget della schermata principale</string>
-  <string name="widget_option_show_trash_notes">Mostra note nel cestino</string>
-  <string name="widget_option_show_trash_notes_details">Consenti alle note nel cestino di essere visualizzate nei widget della schermata principale</string>
   <string name="internal_settings_title">Opzioni sviluppatore</string>
   <string name="internal_settings_description">Modifica le impostazioni interne utilizzate per il debug</string>
   <string name="internal_settings_enable_fullscreen_title">Abilita modalità schermo intero</string>

@@ -32,11 +32,6 @@ var sWidgetShowArchivedNotes: Boolean
   get() = appPreferences.getBoolean(STORE_KEY_WIDGET_SHOW_ARCHIVED_NOTES, true)
   set(value) = appPreferences.edit { putBoolean(STORE_KEY_WIDGET_SHOW_ARCHIVED_NOTES, value) }
 
-const val STORE_KEY_WIDGET_SHOW_TRASH_NOTES = "widget_show_trash_notes"
-var sWidgetShowDeletedNotes: Boolean
-  get() = appPreferences.getBoolean(STORE_KEY_WIDGET_SHOW_TRASH_NOTES, false)
-  set(value) = appPreferences.edit { putBoolean(STORE_KEY_WIDGET_SHOW_TRASH_NOTES, value) }
-
 const val STORE_KEY_WIDGET_BACKGROUND_COLOR = "widget_background_color_v1"
 var sWidgetBackgroundColor: Int
   get() = appPreferences.getInt(STORE_KEY_WIDGET_BACKGROUND_COLOR, 0x65000000)
@@ -91,19 +86,6 @@ class WidgetOptionsBottomSheet : LithoOptionBottomSheet() {
         },
         isSelectable = true,
         selected = sWidgetShowArchivedNotes
-      ))
-    options.add(
-      LithoOptionsItem(
-        title = R.string.widget_option_show_trash_notes,
-        subtitle = R.string.widget_option_show_trash_notes_details,
-        icon = R.drawable.icon_delete,
-        listener = {
-          sWidgetShowDeletedNotes = !sWidgetShowDeletedNotes
-          notifyWidgetConfigChanged(activity)
-          reset(activity, dialog)
-        },
-        isSelectable = true,
-        selected = sWidgetShowDeletedNotes
       ))
     options.add(
       LithoOptionsItem(

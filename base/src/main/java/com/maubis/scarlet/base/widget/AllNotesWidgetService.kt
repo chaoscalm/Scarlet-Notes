@@ -16,7 +16,6 @@ import com.maubis.scarlet.base.note.creation.activity.INTENT_KEY_NOTE_ID
 import com.maubis.scarlet.base.note.getTextForWidget
 import com.maubis.scarlet.base.settings.SortingOptionsBottomSheet
 import com.maubis.scarlet.base.settings.sWidgetShowArchivedNotes
-import com.maubis.scarlet.base.settings.sWidgetShowDeletedNotes
 import com.maubis.scarlet.base.settings.sWidgetShowLockedNotes
 import com.maubis.scarlet.base.support.utils.ColorUtil
 
@@ -24,9 +23,6 @@ fun getWidgetNotes(): List<Note> {
   val states = mutableListOf(NoteState.DEFAULT, NoteState.FAVOURITE)
   if (sWidgetShowArchivedNotes) {
     states.add(NoteState.ARCHIVED)
-  }
-  if (sWidgetShowDeletedNotes) {
-    states.add(NoteState.TRASH)
   }
 
   val sorting = SortingOptionsBottomSheet.getSortingState()
