@@ -11,11 +11,11 @@ import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.settings.sInternalEnableFullScreen
 import com.maubis.scarlet.base.support.utils.OsVersionUtils
 
-abstract class ThemedActivity : AppCompatActivity(), IThemeChangeListener {
+abstract class ThemedActivity : AppCompatActivity(), ThemeChangeListener {
 
   abstract fun notifyThemeChange()
 
-  override fun onChange(theme: Theme) {
+  override fun onThemeChange(theme: Theme) {
     notifyThemeChange()
   }
 
@@ -54,11 +54,11 @@ abstract class ThemedActivity : AppCompatActivity(), IThemeChangeListener {
         View.SYSTEM_UI_FLAG_FULLSCREEN
   }
 
-  fun setStatusBarColor(color: Int) {
+  private fun setStatusBarColor(color: Int) {
     window.statusBarColor = color
   }
 
-  fun setStatusBarTextColor() {
+  private fun setStatusBarTextColor() {
     if (OsVersionUtils.canSetStatusBarTheme()) {
       val view = window.decorView
       var flags = view.systemUiVisibility

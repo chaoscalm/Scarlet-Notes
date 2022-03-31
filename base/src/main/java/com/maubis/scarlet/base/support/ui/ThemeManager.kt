@@ -42,37 +42,37 @@ fun setThemeFromSystem(context: Context) {
 // Old Theme Key, remove in future once theme is properly handled
 const val KEY_NIGHT_THEME: String = "KEY_NIGHT_THEME"
 
-class ThemeManager : IThemeManager {
-  lateinit var theme: Theme
+class ThemeManager {
+  private lateinit var theme: Theme
+  private var listeners = HashSet<WeakReference<ThemeChangeListener>>()
+  private var map = HashMap<ThemeColorType, Int>()
 
-  var listeners = HashSet<WeakReference<IThemeChangeListener>>()
-  var map = HashMap<ThemeColorType, Int>()
-  override fun setup(context: Context) {
+  fun setup(context: Context) {
     theme = getThemeFromStore()
     notifyChange(context)
   }
 
-  override fun get(): Theme {
+  fun get(): Theme {
     return theme
   }
 
-  override fun register(listener: IThemeChangeListener) {
+  fun register(listener: ThemeChangeListener) {
     listeners.add(WeakReference(listener))
   }
 
-  override fun isNightTheme() = theme.isNightTheme
+  fun isNightTheme() = theme.isNightTheme
 
-  override fun get(type: ThemeColorType): Int = map[type] ?: Color.WHITE
+  fun get(type: ThemeColorType): Int = map[type] ?: Color.WHITE
 
-  override fun get(context: Context, lightColor: Int, darkColor: Int): Int {
+  fun get(context: Context, lightColor: Int, darkColor: Int): Int {
     return ContextCompat.getColor(context, if (isNightTheme()) darkColor else lightColor)
   }
 
-  override fun get(context: Context, theme: Theme, type: ThemeColorType): Int {
+  fun get(context: Context, theme: Theme, type: ThemeColorType): Int {
     return load(context, theme, type)
   }
 
-  override fun notifyChange(context: Context) {
+  fun notifyChange(context: Context) {
     theme = getThemeFromStore()
     for (colorType in ThemeColorType.values()) {
       map[colorType] = load(context, colorType)
@@ -88,7 +88,7 @@ class ThemeManager : IThemeManager {
     for (reference in listeners) {
       val listener = reference.get()
       if (listener !== null) {
-        listener.onChange(theme)
+        listener.onThemeChange(theme)
       }
     }
   }
@@ -129,15 +129,6 @@ class ThemeManager : IThemeManager {
   }
 
   companion object {
-    fun getThemeByBackgroundColor(context: Context, color: Int): Theme {
-      for (theme in Theme.values()) {
-        if (color == ContextCompat.getColor(context, theme.background)) {
-          return theme
-        }
-      }
-      return Theme.DARK
-    }
-
     fun getThemeFromStore(): Theme {
       return try {
         Theme.valueOf(sThemeLabel)
