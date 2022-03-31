@@ -36,9 +36,9 @@
 
   <array name="bright_colors">
     <item>@color/black</item>
-    <item>@color/material_grey_850</item>
     <item>@color/material_blue_grey_800</item>
     <item>@color/material_blue_grey_700</item>
+    <item>@color/material_brown_700</item>
     <item>@color/material_purple_700</item>
     <item>@color/material_deep_purple_700</item>
     <item>@color/material_indigo_700</item>
@@ -55,10 +55,10 @@
     <item>@color/material_yellow_900</item>
     <item>@color/material_orange_700</item>
     <item>@color/material_deep_orange_700</item>
-    <item>@color/material_pink_700</item>
     <item>@color/material_red_700</item>
     <item>@color/material_red_900</item>
-    <item>@color/material_brown_700</item>
+    <item>@color/material_pink_700</item>
+    <item>@color/white</item>
   </array>
 
   <array name="bright_colors_accent">
