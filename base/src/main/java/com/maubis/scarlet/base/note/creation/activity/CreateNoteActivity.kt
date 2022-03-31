@@ -21,7 +21,6 @@ import com.maubis.scarlet.base.core.format.MarkdownType
 import com.maubis.scarlet.base.core.note.NoteBuilder
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.note.creation.specs.NoteCreationBottomBar
-import com.maubis.scarlet.base.note.creation.specs.NoteCreationTopBar
 import com.maubis.scarlet.base.note.formats.recycler.FormatImageViewHolder
 import com.maubis.scarlet.base.note.formats.recycler.FormatTextViewHolder
 import com.maubis.scarlet.base.settings.ColorPickerBottomSheet
@@ -104,15 +103,6 @@ open class CreateNoteActivity : ViewAdvancedNoteActivity() {
   override fun notifyToolbarColor() {
     super.notifyToolbarColor()
     setBottomToolbar()
-  }
-
-  override fun setTopToolbar() {
-    views.lithoTopToolbar.removeAllViews()
-    val componentContext = ComponentContext(this)
-    views.lithoTopToolbar.addView(
-      LithoView.create(
-        componentContext,
-        NoteCreationTopBar.create(componentContext).build()))
   }
 
   override fun setBottomToolbar() {

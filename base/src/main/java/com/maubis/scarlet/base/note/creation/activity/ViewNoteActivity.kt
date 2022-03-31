@@ -24,7 +24,6 @@ import com.maubis.scarlet.base.note.actions.INoteOptionSheetActivity
 import com.maubis.scarlet.base.note.actions.NoteOptionsBottomSheet
 import com.maubis.scarlet.base.note.adjustedColor
 import com.maubis.scarlet.base.note.creation.specs.NoteViewBottomBar
-import com.maubis.scarlet.base.note.creation.specs.NoteViewTopBar
 import com.maubis.scarlet.base.note.formats.FormatAdapter
 import com.maubis.scarlet.base.note.formats.IFormatRecyclerViewActivity
 import com.maubis.scarlet.base.note.formats.getFormatControllerItems
@@ -223,7 +222,6 @@ open class ViewAdvancedNoteActivity : SecuredActivity(), INoteOptionSheetActivit
     adapter.notifyDataSetChanged()
 
     setBottomToolbar()
-    setTopToolbar()
   }
 
   protected open fun setBottomToolbar() {
@@ -235,15 +233,6 @@ open class ViewAdvancedNoteActivity : SecuredActivity(), INoteOptionSheetActivit
         NoteViewBottomBar.create(componentContext)
           .colorConfig(ToolbarColorConfig(colorConfig.toolbarBackgroundColor, colorConfig.toolbarIconColor))
           .build()))
-  }
-
-  protected open fun setTopToolbar() {
-    views.lithoTopToolbar.removeAllViews()
-    val componentContext = ComponentContext(this)
-    views.lithoTopToolbar.addView(
-      LithoView.create(
-        componentContext,
-        NoteViewTopBar.create(componentContext).build()))
   }
 
   protected open fun setNoteColor(color: Int) {
