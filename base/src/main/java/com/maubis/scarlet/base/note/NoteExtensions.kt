@@ -226,7 +226,7 @@ fun Note.removeTag(tag: Tag) {
 
 fun Note.adjustedColor(): Int {
   return when (sThemeDarkenNoteColor) {
-    true -> ColorUtil.darkOrDarkerColor(color)
+    true -> ColorUtil.darkerColor(color)
     false -> color
   }
 }

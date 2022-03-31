@@ -114,7 +114,7 @@ object MainActivityFolderBottomBarSpec {
   fun onCreate(context: ComponentContext, @Prop folder: Folder): Component {
     val colorConfig = ToolbarColorConfig(
       toolbarBackgroundColor = folder.color,
-      toolbarIconColor = when (ColorUtil.isLightColored(folder.color)) {
+      toolbarIconColor = when (ColorUtil.isLightColor(folder.color)) {
         true -> context.getColor(R.color.dark_tertiary_text)
         false -> context.getColor(R.color.light_secondary_text)
       }

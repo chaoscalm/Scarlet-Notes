@@ -107,7 +107,7 @@ abstract class SelectableNotesActivityBase : SecuredActivity(), INoteSelectorAct
   }
 
   override fun notifyThemeChange() {
-    setSystemTheme()
+    updateStatusBarTheme()
 
     val containerLayout = findViewById<View>(R.id.container_layout)
     containerLayout.setBackgroundColor(getThemeColor())

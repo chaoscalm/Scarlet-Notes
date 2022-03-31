@@ -9,6 +9,7 @@ import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.settings.sInternalEnableFullScreen
+import com.maubis.scarlet.base.support.utils.ColorUtil
 import com.maubis.scarlet.base.support.utils.OsVersionUtils
 
 abstract class ThemedActivity : AppCompatActivity(), ThemeChangeListener {
@@ -24,9 +25,9 @@ abstract class ThemedActivity : AppCompatActivity(), ThemeChangeListener {
     appTheme.register(this)
   }
 
-  fun setSystemTheme(color: Int = getStatusBarColor()) {
-    setStatusBarColor(color)
-    setStatusBarTextColor()
+  fun updateStatusBarTheme(backgroundColor: Int = getStatusBarColor()) {
+    setStatusBarColor(backgroundColor)
+    setStatusBarTextColor(backgroundColor)
   }
 
   override fun onResume() {
@@ -58,15 +59,14 @@ abstract class ThemedActivity : AppCompatActivity(), ThemeChangeListener {
     window.statusBarColor = color
   }
 
-  private fun setStatusBarTextColor() {
+  private fun setStatusBarTextColor(backgroundColor: Int) {
     if (OsVersionUtils.canSetStatusBarTheme()) {
       val view = window.decorView
-      var flags = view.systemUiVisibility
-      flags = when (appTheme.isNightTheme()) {
-        true -> flags and View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR.inv()
-        false -> flags or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-      }
-      view.systemUiVisibility = flags
+      val visibilityFlags = if (ColorUtil.isLightColor(backgroundColor))
+        view.systemUiVisibility or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+      else
+        view.systemUiVisibility and View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR.inv()
+      view.systemUiVisibility = visibilityFlags
     }
   }
 

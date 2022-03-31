@@ -5,14 +5,14 @@ import androidx.core.graphics.ColorUtils
 
 object ColorUtil {
 
-  fun isLightColored(color: Int): Boolean {
+  fun isLightColor(color: Int): Boolean {
     if (Color.alpha(color) < 100) {
       return true
     }
     return ColorUtils.calculateLuminance(color) > 0.4
   }
 
-  fun darkOrDarkerColor(color: Int): Int {
+  fun darkerColor(color: Int): Int {
     val hsl = floatArrayOf(0.0f, 0.0f, 0.0f)
     ColorUtils.RGBToHSL(Color.red(color), Color.green(color), Color.blue(color), hsl)
 

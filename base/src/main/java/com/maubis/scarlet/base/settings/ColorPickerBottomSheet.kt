@@ -43,7 +43,7 @@ object ColorPickerItemSpec {
                  })
                .bgColor(color)
                .showBorder(true)
-               .iconColorRes(if (ColorUtil.isLightColored(color)) R.color.dark_tertiary_text else R.color.light_secondary_text)
+               .iconColorRes(if (ColorUtil.isLightColor(color)) R.color.dark_tertiary_text else R.color.light_secondary_text)
                .iconSizeRes(R.dimen.toolbar_round_icon_size)
                .iconPaddingRes(R.dimen.toolbar_round_icon_padding)
                .onClick { }

@@ -57,6 +57,6 @@ class AppLockActivity : ThemedActivity() {
   }
 
   override fun notifyThemeChange() {
-    setSystemTheme()
+    updateStatusBarTheme()
   }
 }

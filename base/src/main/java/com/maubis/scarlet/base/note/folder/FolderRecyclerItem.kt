@@ -16,7 +16,7 @@ class FolderRecyclerItem(
         val selected: Boolean = false,
         contents: Int = -1) : RecyclerItem() {
 
-  val isLightShaded = ColorUtil.isLightColored(folder.color)
+  val isLightShaded = ColorUtil.isLightColor(folder.color)
   val title = folder.title
   val titleColor = when (isLightShaded) {
     true -> ContextCompat.getColor(context, R.color.dark_secondary_text)

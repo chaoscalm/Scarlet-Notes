@@ -79,7 +79,7 @@ class ThemeManager {
     }
 
     if (map[ThemeColorType.TOOLBAR_BACKGROUND] == map[ThemeColorType.BACKGROUND]) {
-      map[ThemeColorType.TOOLBAR_BACKGROUND] = ColorUtil.darkOrDarkerColor(
+      map[ThemeColorType.TOOLBAR_BACKGROUND] = ColorUtil.darkerColor(
         map[ThemeColorType.TOOLBAR_BACKGROUND]
           ?: 0)
     }
@@ -140,7 +140,7 @@ class ThemeManager {
   }
 }
 
-// NOTE: These names cannot be changed
+// NOTE: Theme names should not be changed since are used to store theme preference
 enum class Theme(
   val isNightTheme: Boolean,
   val background: Int,
@@ -167,9 +167,9 @@ enum class Theme(
     toolbarBackground = R.color.material_grey_50,
     toolbarIcon = R.color.dark_secondary_text,
     statusBarColorFallback = R.color.material_grey_500),
-  OFF_WHITE(
+  BEIGE(
     isNightTheme = false,
-    background = R.color.bg_off_white,
+    background = R.color.app_theme_beige,
     primaryText = R.color.dark_primary_text,
     secondaryText = R.color.dark_secondary_text,
     tertiaryText = R.color.dark_tertiary_text,
@@ -177,22 +177,9 @@ enum class Theme(
     disabledText = R.color.material_grey_600,
     accentText = R.color.colorAccent,
     sectionHeader = R.color.material_blue_grey_700,
-    toolbarBackground = R.color.bg_off_white_dark,
+    toolbarBackground = R.color.app_theme_beige_dark,
     toolbarIcon = R.color.dark_secondary_text,
-    statusBarColorFallback = R.color.bg_off_white_darkest),
-  PEACH(
-    isNightTheme = false,
-    background = R.color.bg_peach,
-    primaryText = R.color.dark_primary_text,
-    secondaryText = R.color.dark_secondary_text,
-    tertiaryText = R.color.dark_tertiary_text,
-    hintText = R.color.dark_hint_text,
-    disabledText = R.color.material_grey_600,
-    accentText = R.color.colorAccent,
-    sectionHeader = R.color.material_blue_grey_700,
-    toolbarBackground = R.color.bg_peach_dark,
-    toolbarIcon = R.color.dark_secondary_text,
-    statusBarColorFallback = R.color.bg_peach_darkest),
+    statusBarColorFallback = R.color.app_theme_beige_dark),
   ROSE(
     isNightTheme = false,
     background = R.color.app_theme_rose,
@@ -206,66 +193,30 @@ enum class Theme(
     toolbarBackground = R.color.app_theme_rose_dark,
     toolbarIcon = R.color.dark_secondary_text,
     statusBarColorFallback = R.color.app_theme_rose_dark),
-  TEAL(
-    isNightTheme = true,
-    background = R.color.app_theme_oceanic,
-    primaryText = R.color.light_primary_text,
-    secondaryText = R.color.light_primary_text,
-    tertiaryText = R.color.light_secondary_text,
-    hintText = R.color.light_hint_text,
+  SKY(
+    isNightTheme = false,
+    background = R.color.material_blue_100,
+    primaryText = R.color.dark_primary_text,
+    secondaryText = R.color.dark_secondary_text,
+    tertiaryText = R.color.dark_tertiary_text,
+    hintText = R.color.dark_hint_text,
     disabledText = R.color.material_grey_200,
     accentText = R.color.material_pink_accent_100,
-    sectionHeader = R.color.material_blue_grey_200,
-    toolbarBackground = R.color.app_theme_oceanic,
-    toolbarIcon = R.color.white),
-  VIOLET(
-    isNightTheme = true,
-    background = R.color.app_theme_violet,
-    primaryText = R.color.light_primary_text,
-    secondaryText = R.color.light_primary_text,
-    tertiaryText = R.color.light_secondary_text,
-    hintText = R.color.light_hint_text,
-    disabledText = R.color.material_grey_200,
-    accentText = R.color.material_pink_accent_100,
-    sectionHeader = R.color.material_blue_grey_200,
-    toolbarBackground = R.color.app_theme_violet,
-    toolbarIcon = R.color.white),
-  HONEYSUCKLE(
-    isNightTheme = true,
-    background = R.color.app_theme_honeysuckle,
-    primaryText = R.color.light_primary_text,
-    secondaryText = R.color.light_primary_text,
-    tertiaryText = R.color.light_secondary_text,
-    hintText = R.color.light_hint_text,
-    disabledText = R.color.material_grey_200,
-    accentText = R.color.material_yellow_accent_100,
-    sectionHeader = R.color.material_blue_grey_200,
-    toolbarBackground = R.color.app_theme_honeysuckle,
-    toolbarIcon = R.color.white),
-  BROWN(
-    isNightTheme = true,
-    background = R.color.material_brown_800,
-    primaryText = R.color.light_primary_text,
-    secondaryText = R.color.light_primary_text,
-    tertiaryText = R.color.light_secondary_text,
-    hintText = R.color.light_hint_text,
-    disabledText = R.color.material_grey_200,
-    accentText = R.color.material_pink_accent_100,
-    sectionHeader = R.color.material_blue_grey_200,
-    toolbarBackground = R.color.material_brown_900,
-    toolbarIcon = R.color.white),
-  BLUE_GRAY(
-    isNightTheme = true,
-    background = R.color.material_blue_grey_900,
-    primaryText = R.color.light_primary_text,
-    secondaryText = R.color.light_primary_text,
-    tertiaryText = R.color.light_secondary_text,
-    hintText = R.color.light_hint_text,
-    disabledText = R.color.material_grey_200,
-    accentText = R.color.material_pink_accent_100,
-    sectionHeader = R.color.material_blue_grey_200,
-    toolbarBackground = R.color.material_blue_grey_900,
-    toolbarIcon = R.color.white),
+    sectionHeader = R.color.material_blue_grey_600,
+    toolbarBackground = R.color.material_blue_200,
+    toolbarIcon = R.color.dark_secondary_text),
+  PURPLE(
+    isNightTheme = false,
+    background = R.color.material_purple_100,
+    primaryText = R.color.dark_primary_text,
+    secondaryText = R.color.dark_secondary_text,
+    tertiaryText = R.color.dark_tertiary_text,
+    hintText = R.color.dark_hint_text,
+    disabledText = R.color.material_grey_600,
+    accentText = R.color.colorAccent,
+    sectionHeader = R.color.material_blue_grey_600,
+    toolbarBackground = R.color.material_purple_200,
+    toolbarIcon = R.color.dark_secondary_text),
   DARK(
     isNightTheme = true,
     background = R.color.material_grey_850,

@@ -352,7 +352,7 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
   }
 
   override fun notifyThemeChange() {
-    setSystemTheme()
+    updateStatusBarTheme()
     views.containerLayoutMain.setBackgroundColor(getThemeColor())
     setBottomToolbar()
   }

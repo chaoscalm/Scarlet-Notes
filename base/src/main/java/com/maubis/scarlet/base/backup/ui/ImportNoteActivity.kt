@@ -57,7 +57,7 @@ class ImportNoteActivity : SecuredActivity() {
       })
     }
     notifyThemeChange()
-    setSystemTheme()
+    updateStatusBarTheme()
   }
 
   override fun onResume() {

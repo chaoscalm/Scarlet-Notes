@@ -48,7 +48,7 @@ abstract class FormatViewHolderBase(context: Context, view: View) : RecyclerView
     val tertiaryTextColor: Int
     val iconColor: Int
     val hintTextColor: Int
-    val isLightBackground = ColorUtil.isLightColored(noteColor)
+    val isLightBackground = ColorUtil.isLightColor(noteColor)
     val linkColor: Int
     when {
       !sUIUseNoteColorAsBackground -> {

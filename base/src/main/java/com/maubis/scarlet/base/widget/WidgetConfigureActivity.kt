@@ -84,7 +84,7 @@ class WidgetConfigureActivity : SelectableNotesActivityBase(), INoteSelectorActi
       views.setTextViewText(R.id.description, note.getTextForWidget())
       views.setInt(R.id.container_layout, "setBackgroundColor", note.color)
 
-      val isLightShaded = ColorUtil.isLightColored(note.color)
+      val isLightShaded = ColorUtil.isLightColor(note.color)
       val colorResource = if (isLightShaded) R.color.dark_tertiary_text else R.color.light_secondary_text
       val textColor = ContextCompat.getColor(context, colorResource)
       views.setInt(R.id.description, "setTextColor", textColor)

@@ -42,8 +42,7 @@ import com.maubis.scarlet.base.support.ui.KEY_NIGHT_THEME
 import com.maubis.scarlet.base.support.ui.SecuredActivity
 import com.maubis.scarlet.base.support.ui.Theme
 import com.maubis.scarlet.base.support.ui.ThemeColorType
-import com.maubis.scarlet.base.support.utils.ColorUtil
-import com.maubis.scarlet.base.support.utils.ColorUtil.darkOrDarkerColor
+import com.maubis.scarlet.base.support.utils.ColorUtil.darkerColor
 import com.maubis.scarlet.base.widget.getPendingIntentWithStack
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -204,27 +203,21 @@ open class ViewAdvancedNoteActivity : SecuredActivity(), INoteOptionSheetActivit
   protected open fun notifyToolbarColor() {
     val noteColor = note.adjustedColor()
     when {
-      !sUIUseNoteColorAsBackground -> {
-        colorConfig.backgroundColor = appTheme.get(ThemeColorType.BACKGROUND)
-        colorConfig.toolbarIconColor = appTheme.get(ThemeColorType.TOOLBAR_ICON)
-        colorConfig.statusBarColor = colorConfig.backgroundColor
-        colorConfig.toolbarBackgroundColor = appTheme.get(ThemeColorType.TOOLBAR_BACKGROUND)
-      }
-      ColorUtil.isLightColored(noteColor) -> {
+      sUIUseNoteColorAsBackground -> {
         colorConfig.backgroundColor = noteColor
         colorConfig.toolbarIconColor = appTheme.get(this, Theme.DARK, ThemeColorType.TOOLBAR_ICON)
-        colorConfig.statusBarColor = darkOrDarkerColor(noteColor)
-        colorConfig.toolbarBackgroundColor = colorConfig.statusBarColor
+        colorConfig.statusBarColor = noteColor
+        colorConfig.toolbarBackgroundColor = darkerColor(noteColor)
       }
       else -> {
-        colorConfig.backgroundColor = noteColor
-        colorConfig.toolbarIconColor = appTheme.get(this, Theme.DARK, ThemeColorType.TOOLBAR_ICON)
-        colorConfig.statusBarColor = darkOrDarkerColor(noteColor)
-        colorConfig.toolbarBackgroundColor = colorConfig.statusBarColor
+        colorConfig.backgroundColor = appTheme.get(ThemeColorType.BACKGROUND)
+        colorConfig.toolbarIconColor = appTheme.get(ThemeColorType.TOOLBAR_ICON)
+        colorConfig.statusBarColor = appTheme.get(ThemeColorType.STATUS_BAR)
+        colorConfig.toolbarBackgroundColor = appTheme.get(ThemeColorType.TOOLBAR_BACKGROUND)
       }
     }
 
-    setSystemTheme(colorConfig.statusBarColor)
+    updateStatusBarTheme(colorConfig.statusBarColor)
     views.root.setBackgroundColor(colorConfig.backgroundColor)
     views.formatsRecyclerView.setBackgroundColor(colorConfig.backgroundColor)
 

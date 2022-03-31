@@ -14,7 +14,7 @@ class NoteRecyclerItem(context: Context, val note: Note) : RecyclerItem() {
 
   val lineCount = sNoteItemLineCount
   val backgroundColor = note.adjustedColor()
-  val isLightShaded = ColorUtil.isLightColored(backgroundColor)
+  val isLightShaded = ColorUtil.isLightColor(backgroundColor)
 
   val content = note.getLockedAwareTextForHomeList()
   val contentColor = when (isLightShaded) {
