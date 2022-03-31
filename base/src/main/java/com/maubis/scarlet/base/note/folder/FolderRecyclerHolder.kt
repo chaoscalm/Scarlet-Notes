@@ -15,17 +15,9 @@ import com.maubis.scarlet.base.support.utils.ColorUtil.darkerColor
 
 class FolderRecyclerHolder(context: Context, view: View) : RecyclerViewHolder<RecyclerItem>(context, view) {
 
-  protected val view: CardView
-  protected val label: UITextView
-  protected val title: TextView
-  protected val timestamp: TextView
-
-  init {
-    this.view = view as CardView
-    title = view.findViewById(R.id.title)
-    timestamp = view.findViewById(R.id.timestamp)
-    label = view.findViewById(R.id.ui_information_title)
-  }
+  private val view: CardView = view as CardView
+  private val label: UITextView = view.findViewById(R.id.ui_information_title)
+  private val title: TextView = view.findViewById(R.id.title)
 
   override fun populate(itemData: RecyclerItem, extra: Bundle?) {
     val item = itemData as FolderRecyclerItem
@@ -37,10 +29,6 @@ class FolderRecyclerHolder(context: Context, view: View) : RecyclerViewHolder<Re
     label.setImageTint(item.labelColor)
     label.setTextColor(item.labelColor)
     label.label.typeface = appTypeface.text()
-
-    timestamp.text = item.timestamp
-    timestamp.setTextColor(item.timestampColor)
-    timestamp.typeface = appTypeface.text()
 
     val folderColor = if (appTheme.shouldDarkenCustomColors()) {
       darkerColor(item.folder.color)
@@ -60,13 +48,11 @@ class FolderRecyclerHolder(context: Context, view: View) : RecyclerViewHolder<Re
       true -> {
         view.alpha = 0.5f
         label.visibility = View.GONE
-        timestamp.visibility = View.GONE
         title.minLines = 1
       }
       false -> {
         view.alpha = 1.0f
         label.visibility = View.VISIBLE
-        timestamp.visibility = View.VISIBLE
         title.minLines = 1
       }
     }
