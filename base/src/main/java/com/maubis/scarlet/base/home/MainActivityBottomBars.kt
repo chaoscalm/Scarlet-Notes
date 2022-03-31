@@ -1,7 +1,6 @@
 package com.maubis.scarlet.base.home
 
 import android.content.pm.ShortcutInfo
-import android.graphics.Color
 import android.graphics.drawable.Icon
 import android.text.Layout
 import com.facebook.litho.ClickEvent
@@ -48,7 +47,6 @@ object MainActivityBottomBarSpec {
       .alignItems(YogaAlign.CENTER)
       .paddingDip(YogaEdge.HORIZONTAL, 4f)
     row.child(bottomBarRoundIcon(context, colorConfig)
-                .bgColor(Color.TRANSPARENT)
                 .iconRes(R.drawable.ic_apps_white_48dp)
                 .onClick {
                   openSheet(activity, HomeOptionsBottomSheet())
@@ -125,7 +123,6 @@ object MainActivityFolderBottomBarSpec {
       .alignItems(YogaAlign.CENTER)
       .paddingDip(YogaEdge.HORIZONTAL, 4f)
     row.child(bottomBarRoundIcon(context, colorConfig)
-                .bgColor(Color.TRANSPARENT)
                 .iconRes(R.drawable.ic_arrow_back_white_48dp)
                 .onClick { activity.onFolderChange(null) })
     row.child(

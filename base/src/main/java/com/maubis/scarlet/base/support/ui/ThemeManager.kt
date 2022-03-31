@@ -42,7 +42,7 @@ fun setThemeFromSystem(context: Context) {
 class ThemeManager {
   private lateinit var theme: Theme
   private var listeners = HashSet<WeakReference<ThemeChangeListener>>()
-  private var map = HashMap<ThemeColorType, Int>()
+  private var colors = HashMap<ThemeColorType, Int>()
 
   fun setup(context: Context) {
     theme = getThemeFromStore()
@@ -61,7 +61,7 @@ class ThemeManager {
 
   fun shouldDarkenCustomColors() = isNightTheme() && sThemeDarkenCustomColors
 
-  fun get(type: ThemeColorType): Int = map[type] ?: Color.WHITE
+  fun get(type: ThemeColorType): Int = colors[type] ?: Color.WHITE
 
   fun get(context: Context, lightColor: Int, darkColor: Int): Int {
     return ContextCompat.getColor(context, if (isNightTheme()) darkColor else lightColor)
@@ -74,13 +74,13 @@ class ThemeManager {
   fun notifyChange(context: Context) {
     theme = getThemeFromStore()
     for (colorType in ThemeColorType.values()) {
-      map[colorType] = load(context, colorType)
+      colors[colorType] = load(context, colorType)
     }
 
-    if (map[ThemeColorType.TOOLBAR_BACKGROUND] == map[ThemeColorType.BACKGROUND]) {
-      map[ThemeColorType.TOOLBAR_BACKGROUND] = ColorUtil.darkerColor(
-        map[ThemeColorType.TOOLBAR_BACKGROUND]
-          ?: 0)
+    if (colors[ThemeColorType.TOOLBAR_BACKGROUND] == colors[ThemeColorType.BACKGROUND]) {
+      colors[ThemeColorType.TOOLBAR_BACKGROUND] = ColorUtil.darkerColor(
+        colors[ThemeColorType.TOOLBAR_BACKGROUND] ?: 0
+      )
     }
 
     setMarkdownConfig(context)

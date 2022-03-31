@@ -1,6 +1,5 @@
 package com.maubis.scarlet.base.note.creation.specs
 
-import android.graphics.Color
 import com.facebook.litho.*
 import com.facebook.litho.annotations.*
 import com.facebook.litho.widget.EmptyComponent
@@ -72,7 +71,6 @@ object NoteEditorBottomBarSpec {
     row.child(content)
 
     val extraRoundIcon = bottomBarRoundIcon(context, colorConfig)
-      .bgColor(Color.TRANSPARENT)
       .onClick { }
       .isClickDisabled(true)
     val icon = when (state) {
@@ -98,7 +96,6 @@ object NoteEditorBottomBarSpec {
       NoteEditorBottomBarType.COMMON_MARKDOWNS, NoteEditorBottomBarType.COMMON_BLOCKS, NoteEditorBottomBarType.OPTIONS ->
         bottomBarRoundIcon(context, colorConfig)
           .iconRes(R.drawable.ic_more_options)
-          .bgColor(Color.TRANSPARENT)
           .onClick { }
           .isClickDisabled(true)
           .clickHandler(NoteEditorBottomBar.onStateChangeClick(context, NoteEditorBottomBarType.OPTIONS))
@@ -144,7 +141,6 @@ object NoteEditorOptionsBottomBarSpec {
     return Row.create(context)
       .alignItems(YogaAlign.CENTER)
       .child(bottomBarRoundIcon(context, colorConfig)
-               .bgColor(Color.TRANSPARENT)
                .iconRes(R.drawable.icon_markdown_help)
                .onClick { openSheet(activity, MarkdownHelpBottomSheet()) })
       .child(EmptySpec.create(context).heightDip(1f).flexGrow(1f))
@@ -311,7 +307,6 @@ object NoteViewBottomBarSpec {
       .widthPercent(100f)
       .alignItems(YogaAlign.CENTER)
     row.child(bottomBarRoundIcon(context, colorConfig)
-                .bgColor(Color.TRANSPARENT)
                 .iconRes(R.drawable.ic_apps_white_48dp)
                 .onClick { activity.openMoreOptions() })
     row.child(EmptySpec.create(context).heightDip(1f).flexGrow(1f))
@@ -329,7 +324,6 @@ object NoteViewBottomBarSpec {
 
     row.child(EmptySpec.create(context).heightDip(1f).flexGrow(1f))
     row.child(bottomBarRoundIcon(context, colorConfig)
-                .bgColor(Color.TRANSPARENT)
                 .iconRes(R.drawable.ic_edit_white_48dp)
                 .onClick { activity.openEditor() })
     return bottomBarCard(context, row.build(), colorConfig).build()
