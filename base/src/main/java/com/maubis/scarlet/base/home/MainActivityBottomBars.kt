@@ -126,7 +126,7 @@ object MainActivityFolderBottomBarSpec {
       .paddingDip(YogaEdge.HORIZONTAL, 4f)
     row.child(bottomBarRoundIcon(context, colorConfig)
                 .bgColor(Color.TRANSPARENT)
-                .iconRes(R.drawable.ic_close_white_48dp)
+                .iconRes(R.drawable.ic_arrow_back_white_48dp)
                 .onClick { activity.onFolderChange(null) })
     row.child(
       Text.create(context)
@@ -138,7 +138,7 @@ object MainActivityFolderBottomBarSpec {
         .textColor(colorConfig.toolbarIconColor)
         .clickHandler(MainActivityFolderBottomBar.onClickEvent(context)))
     row.child(bottomBarRoundIcon(context, colorConfig)
-                .iconRes(R.drawable.ic_more_options)
+                .iconRes(R.drawable.ic_edit_white_48dp)
                 .isClickDisabled(true)
                 .clickHandler(MainActivityFolderBottomBar.onClickEvent(context))
                 .onClick {})
