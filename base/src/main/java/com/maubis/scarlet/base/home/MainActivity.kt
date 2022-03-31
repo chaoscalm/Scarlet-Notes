@@ -289,7 +289,7 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
     }
   }
 
-  fun openTag(tag: Tag) {
+  private fun openTag(tag: Tag) {
     state.mode = if (state.mode == HomeNavigationMode.LOCKED) HomeNavigationMode.DEFAULT else state.mode
     state.tags.add(tag)
     refreshItems()

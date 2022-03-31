@@ -2,7 +2,6 @@ package com.maubis.scarlet.base.note.tag
 
 import android.app.Dialog
 import android.content.DialogInterface
-import androidx.appcompat.app.AppCompatActivity
 import com.facebook.litho.Column
 import com.facebook.litho.Component
 import com.facebook.litho.ComponentContext
@@ -11,8 +10,6 @@ import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.database.entities.Tag
-import com.maubis.scarlet.base.home.sheets.LithoTagOptionsItem
-import com.maubis.scarlet.base.home.sheets.TagItemLayout
 import com.maubis.scarlet.base.note.toggleTag
 import com.maubis.scarlet.base.support.sheets.LithoBottomSheet
 import com.maubis.scarlet.base.support.sheets.LithoOptionsItem
@@ -34,8 +31,8 @@ class TagChooserBottomSheet(private val note: Note, private val dismissListener:
         getLithoBottomSheetTitle(componentContext)
           .textRes(R.string.tag_sheet_choose_tag)
           .marginDip(YogaEdge.BOTTOM, 12f))
-    getTagOptions().forEach {
-      tagsComponent.child(TagItemLayout.create(componentContext).option(it))
+    getTagItems().forEach {
+      tagsComponent.child(TagItemLayout.create(componentContext).tagItem(it))
     }
 
     val addTag = LithoOptionsItem(
@@ -53,23 +50,29 @@ class TagChooserBottomSheet(private val note: Note, private val dismissListener:
     return component.build()
   }
 
-  private fun getTagOptions(): List<LithoTagOptionsItem> {
-    val activity = context as AppCompatActivity
-    val options = ArrayList<LithoTagOptionsItem>()
+  private fun getTagItems(): List<TagItem> {
+    val activity = context as ThemedActivity
+    val items = ArrayList<TagItem>()
     val noteTags = note.getTagUUIDs()
     for (tag in data.tags.getAll()) {
-      options.add(
-        LithoTagOptionsItem(
+      items.add(
+        TagItem(
           tag = tag,
           listener = {
             note.toggleTag(tag)
             note.save(activity)
             refresh(activity, requireDialog())
           },
-          isSelected = noteTags.contains(tag.uuid)
+          isSelected = noteTags.contains(tag.uuid),
+          isEditable = true,
+          editListener = {
+            CreateOrEditTagBottomSheet.openSheet(activity, tag) { _, _ ->
+              refresh(activity, requireDialog())
+            }
+          }
         ))
     }
-    return options
+    return items
   }
 
   override fun onDismiss(dialog: DialogInterface) {

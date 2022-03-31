@@ -8,8 +8,6 @@ import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.database.entities.Tag
-import com.maubis.scarlet.base.home.sheets.LithoTagOptionsItem
-import com.maubis.scarlet.base.home.sheets.TagItemLayout
 import com.maubis.scarlet.base.note.selection.SelectNotesActivity
 import com.maubis.scarlet.base.support.sheets.LithoBottomSheet
 import com.maubis.scarlet.base.support.sheets.LithoOptionsItem
@@ -33,8 +31,8 @@ class SelectedTagChooserBottomSheet : LithoBottomSheet() {
         getLithoBottomSheetTitle(componentContext)
           .textRes(R.string.tag_sheet_choose_tag)
           .marginDip(YogaEdge.BOTTOM, 12f))
-    getTagOptions().forEach {
-      tagsComponent.child(TagItemLayout.create(componentContext).option(it))
+    getTagItems().forEach {
+      tagsComponent.child(TagItemLayout.create(componentContext).tagItem(it))
     }
 
     val addTag = LithoOptionsItem(
@@ -57,9 +55,9 @@ class SelectedTagChooserBottomSheet : LithoBottomSheet() {
     return component.build()
   }
 
-  private fun getTagOptions(): List<LithoTagOptionsItem> {
+  private fun getTagItems(): List<TagItem> {
     val activity = context as SelectNotesActivity
-    val options = ArrayList<LithoTagOptionsItem>()
+    val items = ArrayList<TagItem>()
 
     val tags = HashSet<UUID>()
     tags.addAll(activity.getAllSelectedNotes().firstOrNull()?.getTagUUIDs() ?: emptySet())
@@ -75,8 +73,8 @@ class SelectedTagChooserBottomSheet : LithoBottomSheet() {
       tags.removeAll(uuidsToRemove)
     }
     for (tag in data.tags.getAll()) {
-      options.add(
-        LithoTagOptionsItem(
+      items.add(
+        TagItem(
           tag = tag,
           listener = {
             onActionListener(tag, !tags.contains(tag.uuid))
@@ -86,7 +84,7 @@ class SelectedTagChooserBottomSheet : LithoBottomSheet() {
           isSelected = tags.contains(tag.uuid)
         ))
     }
-    options.sortByDescending { if (it.isSelected) 1 else 0 }
-    return options
+    items.sortByDescending { if (it.isSelected) 1 else 0 }
+    return items
   }
 }
