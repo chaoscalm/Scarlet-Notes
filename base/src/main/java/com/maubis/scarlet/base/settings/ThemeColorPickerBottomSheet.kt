@@ -21,7 +21,7 @@ import com.maubis.scarlet.base.support.specs.EmptySpec
 import com.maubis.scarlet.base.support.specs.RoundIcon
 import com.maubis.scarlet.base.support.ui.Theme
 import com.maubis.scarlet.base.support.ui.ThemeManager.Companion.getThemeFromStore
-import com.maubis.scarlet.base.support.ui.sThemeDarkenNoteColor
+import com.maubis.scarlet.base.support.ui.sThemeDarkenCustomColors
 import com.maubis.scarlet.base.support.ui.sThemeIsAutomatic
 import com.maubis.scarlet.base.support.ui.setThemeFromSystem
 import com.maubis.scarlet.base.support.utils.OsVersionUtils
@@ -115,12 +115,12 @@ class ThemeColorPickerBottomSheet : LithoBottomSheet() {
               icon = R.drawable.night_mode_white_48dp,
               listener = {},
               isSelectable = true,
-              selected = sThemeDarkenNoteColor,
+              selected = sThemeDarkenCustomColors,
               actionIcon = 0
             ))
           .onClick {
             val activity = componentContext.androidContext as AppCompatActivity
-            sThemeDarkenNoteColor = !sThemeDarkenNoteColor
+            sThemeDarkenCustomColors = !sThemeDarkenCustomColors
             activity.recreate()
           })
     }

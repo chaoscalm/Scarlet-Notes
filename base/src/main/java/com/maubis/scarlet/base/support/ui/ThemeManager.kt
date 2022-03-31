@@ -22,7 +22,7 @@ var sThemeIsAutomatic: Boolean
   get() = appPreferences.getBoolean("automatic_theme", false)
   set(value) = appPreferences.edit { putBoolean("automatic_theme", value) }
 
-var sThemeDarkenNoteColor: Boolean
+var sThemeDarkenCustomColors: Boolean
   get() = appPreferences.getBoolean("darken_note_color", false)
   set(value) = appPreferences.edit { putBoolean("darken_note_color", value) }
 
@@ -61,6 +61,8 @@ class ThemeManager {
   }
 
   fun isNightTheme() = theme.isNightTheme
+
+  fun shouldDarkenCustomColors() = isNightTheme() && sThemeDarkenCustomColors
 
   fun get(type: ThemeColorType): Int = map[type] ?: Color.WHITE
 

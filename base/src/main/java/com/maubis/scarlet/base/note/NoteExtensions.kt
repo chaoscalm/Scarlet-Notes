@@ -7,6 +7,7 @@ import com.maubis.markdown.Markdown
 import com.maubis.markdown.MarkdownConfig
 import com.maubis.markdown.spannable.*
 import com.maubis.scarlet.base.ScarletApp
+import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.core.format.FormatType
@@ -20,7 +21,6 @@ import com.maubis.scarlet.base.settings.sInternalShowUUID
 import com.maubis.scarlet.base.settings.sSecurityAppLockEnabled
 import com.maubis.scarlet.base.settings.sWidgetShowLockedNotes
 import com.maubis.scarlet.base.support.ui.ThemedActivity
-import com.maubis.scarlet.base.support.ui.sThemeDarkenNoteColor
 import com.maubis.scarlet.base.support.utils.ColorUtil
 import com.maubis.scarlet.base.support.utils.SharingUtils
 import com.maubis.scarlet.base.support.utils.dateFormat
@@ -225,10 +225,7 @@ fun Note.removeTag(tag: Tag) {
 }
 
 fun Note.adjustedColor(): Int {
-  return when (sThemeDarkenNoteColor) {
-    true -> ColorUtil.darkerColor(color)
-    false -> color
-  }
+  return if (appTheme.shouldDarkenCustomColors()) ColorUtil.darkerColor(color) else color
 }
 
 /**************************************************************************************

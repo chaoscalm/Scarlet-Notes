@@ -8,9 +8,9 @@ import androidx.cardview.widget.CardView
 import com.github.bijoysingh.starter.recyclerview.RecyclerViewHolder
 import com.github.bijoysingh.uibasics.views.UITextView
 import com.maubis.scarlet.base.R
+import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.support.recycler.RecyclerItem
-import com.maubis.scarlet.base.support.ui.sThemeDarkenNoteColor
 import com.maubis.scarlet.base.support.utils.ColorUtil.darkerColor
 
 class FolderRecyclerHolder(context: Context, view: View) : RecyclerViewHolder<RecyclerItem>(context, view) {
@@ -42,9 +42,10 @@ class FolderRecyclerHolder(context: Context, view: View) : RecyclerViewHolder<Re
     timestamp.setTextColor(item.timestampColor)
     timestamp.typeface = appTypeface.text()
 
-    val folderColor = when (sThemeDarkenNoteColor) {
-      true -> darkerColor(item.folder.color)
-      false -> item.folder.color
+    val folderColor = if (appTheme.shouldDarkenCustomColors()) {
+      darkerColor(item.folder.color)
+    } else {
+      item.folder.color
     }
     view.setCardBackgroundColor(folderColor)
     view.setOnClickListener {
