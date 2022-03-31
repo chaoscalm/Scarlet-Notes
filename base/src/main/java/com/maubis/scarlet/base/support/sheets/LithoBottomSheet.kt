@@ -44,7 +44,7 @@ fun getLithoBottomSheetButton(context: ComponentContext): Text.Builder {
     .textSizeRes(R.dimen.font_size_large)
     .paddingDip(YogaEdge.VERTICAL, 12f)
     .paddingDip(YogaEdge.HORIZONTAL, 24f)
-    .textColorRes(R.color.light_secondary_text)
+    .textColorRes(com.github.bijoysingh.uibasics.R.color.light_secondary_text)
     .backgroundRes(R.drawable.accent_rounded_bg)
 }
 

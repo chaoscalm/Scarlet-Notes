@@ -431,7 +431,7 @@ class NoteOptionsBottomSheet : GridBottomSheetBase() {
   override fun getBackgroundCardViewIds(): Array<Int> = emptyArray()
 
   override fun getOptionsTitleColor(selected: Boolean): Int {
-    return ContextCompat.getColor(themedContext(), R.color.light_primary_text)
+    return ContextCompat.getColor(themedContext(), com.github.bijoysingh.uibasics.R.color.light_primary_text)
   }
 
   companion object {

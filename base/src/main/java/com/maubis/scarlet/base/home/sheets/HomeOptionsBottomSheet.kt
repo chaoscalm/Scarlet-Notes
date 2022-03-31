@@ -38,8 +38,8 @@ object TagItemLayoutSpec {
   fun onCreate(context: ComponentContext, @Prop option: LithoTagOptionsItem): Component {
     val titleColor = appTheme.get(ThemeColorType.SECONDARY_TEXT)
     val selectedColor = when (appTheme.isNightTheme()) {
-      true -> context.getColor(R.color.material_blue_400)
-      false -> context.getColor(R.color.material_blue_700)
+      true -> context.getColor(com.github.bijoysingh.uibasics.R.color.material_blue_400)
+      false -> context.getColor(com.github.bijoysingh.uibasics.R.color.material_blue_700)
     }
 
     val icon: Int
@@ -152,7 +152,7 @@ class HomeOptionsBottomSheet : LithoBottomSheet() {
       .paddingDip(YogaEdge.TOP, 8f)
       .paddingDip(YogaEdge.BOTTOM, 20f)
       .paddingDip(YogaEdge.HORIZONTAL, 20f)
-      .backgroundRes(R.color.dark_hint_text)
+      .backgroundRes(com.github.bijoysingh.uibasics.R.color.dark_hint_text)
       .child(
         getLithoBottomSheetTitle(componentContext)
           .textRes(R.string.tag_sheet_choose_tag)

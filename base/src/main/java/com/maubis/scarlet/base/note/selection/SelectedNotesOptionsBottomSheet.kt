@@ -134,7 +134,7 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
 
     return GridSectionItem(
       options = options,
-      sectionColor = ContextCompat.getColor(activity, R.color.material_blue_800))
+      sectionColor = ContextCompat.getColor(activity, com.github.bijoysingh.uibasics.R.color.material_blue_800))
   }
 
   private fun getSecondaryActions(componentContext: ComponentContext): GridSectionItem {
@@ -211,7 +211,7 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
 
     return GridSectionItem(
       options = options,
-      sectionColor = ContextCompat.getColor(activity, R.color.material_red_800))
+      sectionColor = ContextCompat.getColor(activity, com.github.bijoysingh.uibasics.R.color.material_red_800))
   }
 
   private fun getTertiaryActions(componentContext: ComponentContext): GridSectionItem {
@@ -319,7 +319,7 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
       ))
     return GridSectionItem(
       options = options,
-      sectionColor = ContextCompat.getColor(activity, R.color.material_teal_800))
+      sectionColor = ContextCompat.getColor(activity, com.github.bijoysingh.uibasics.R.color.material_teal_800))
   }
 
   private fun lockAwareFunctionRunner(

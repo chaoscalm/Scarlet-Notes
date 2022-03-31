@@ -115,8 +115,8 @@ object MainActivityFolderBottomBarSpec {
     val colorConfig = ToolbarColorConfig(
       toolbarBackgroundColor = folder.color,
       toolbarIconColor = when (ColorUtil.isLightColor(folder.color)) {
-        true -> context.getColor(R.color.dark_tertiary_text)
-        false -> context.getColor(R.color.light_secondary_text)
+        true -> context.getColor(com.github.bijoysingh.uibasics.R.color.dark_tertiary_text)
+        false -> context.getColor(com.github.bijoysingh.uibasics.R.color.light_secondary_text)
       }
     )
     val activity = context.androidContext as MainActivity

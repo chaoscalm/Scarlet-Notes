@@ -125,7 +125,7 @@ object PincodeSheetViewSpec {
             Text.create(context)
               .backgroundRes(R.drawable.accent_rounded_bg)
               .textSizeRes(R.dimen.font_size_large)
-              .textColorRes(R.color.white)
+              .textColorRes(android.R.color.white)
               .textRes(data.actionTitle)
               .textAlignment(Layout.Alignment.ALIGN_CENTER)
               .paddingDip(YogaEdge.VERTICAL, 12f)

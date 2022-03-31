@@ -19,14 +19,14 @@ class FolderRecyclerItem(
   val isLightShaded = ColorUtil.isLightColor(folder.color)
   val title = folder.title
   val titleColor = when (isLightShaded) {
-    true -> ContextCompat.getColor(context, R.color.dark_secondary_text)
-    false -> ContextCompat.getColor(context, R.color.light_primary_text)
+    true -> ContextCompat.getColor(context, com.github.bijoysingh.uibasics.R.color.dark_secondary_text)
+    false -> ContextCompat.getColor(context, com.github.bijoysingh.uibasics.R.color.light_primary_text)
   }
 
   val timestamp = folder.getDisplayTime()
   val timestampColor = when (isLightShaded) {
-    true -> ContextCompat.getColor(context, R.color.dark_hint_text)
-    false -> ContextCompat.getColor(context, R.color.light_hint_text)
+    true -> ContextCompat.getColor(context, com.github.bijoysingh.uibasics.R.color.dark_hint_text)
+    false -> ContextCompat.getColor(context, com.github.bijoysingh.uibasics.R.color.light_hint_text)
   }
 
   val usage = if (contents == -1) data.notes.getNoteCountByFolder(folder.uuid) else contents
@@ -36,8 +36,8 @@ class FolderRecyclerItem(
     else -> context.getString(R.string.folder_card_title_notes, usage)
   }
   val labelColor = when (isLightShaded) {
-    true -> ContextCompat.getColor(context, R.color.dark_tertiary_text)
-    false -> ContextCompat.getColor(context, R.color.light_secondary_text)
+    true -> ContextCompat.getColor(context, com.github.bijoysingh.uibasics.R.color.dark_tertiary_text)
+    false -> ContextCompat.getColor(context, com.github.bijoysingh.uibasics.R.color.light_secondary_text)
   }
 
   override val type = RecyclerItem.Type.FOLDER

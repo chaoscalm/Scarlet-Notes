@@ -37,8 +37,8 @@ object FolderItemLayoutSpec {
   fun onCreate(context: ComponentContext, @Prop option: FolderOptionsItem): Component {
     val titleColor = appTheme.get(ThemeColorType.SECONDARY_TEXT)
     val selectedColor = when (appTheme.isNightTheme()) {
-      true -> context.getColor(R.color.material_blue_400)
-      false -> context.getColor(R.color.material_blue_700)
+      true -> context.getColor(com.github.bijoysingh.uibasics.R.color.material_blue_400)
+      false -> context.getColor(com.github.bijoysingh.uibasics.R.color.material_blue_700)
     }
 
     val icon: Int

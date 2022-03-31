@@ -31,7 +31,7 @@ fun Drawable.color(tint: Int): Drawable {
 fun separatorSpec(context: ComponentContext): Component.Builder<*> {
   return SolidColor.create(context)
     .alignSelf(YogaAlign.CENTER)
-    .colorRes(R.color.material_grey_200)
+    .colorRes(com.github.bijoysingh.uibasics.R.color.material_grey_200)
     .heightDip(1f)
     .widthDip(164f)
     .marginDip(YogaEdge.HORIZONTAL, 32f)

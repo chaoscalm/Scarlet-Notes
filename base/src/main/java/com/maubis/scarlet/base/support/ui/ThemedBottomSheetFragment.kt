@@ -56,20 +56,20 @@ abstract class ThemedBottomSheetFragment : SimpleBottomSheetFragment() {
 
   open fun getOptionsTitleColor(selected: Boolean): Int {
     val colorResource = when {
-      appTheme.isNightTheme() && selected -> R.color.material_blue_300
-      appTheme.isNightTheme() -> R.color.light_secondary_text
-      selected -> R.color.material_blue_700
-      else -> R.color.dark_secondary_text
+      appTheme.isNightTheme() && selected -> com.github.bijoysingh.uibasics.R.color.material_blue_300
+      appTheme.isNightTheme() -> com.github.bijoysingh.uibasics.R.color.light_secondary_text
+      selected -> com.github.bijoysingh.uibasics.R.color.material_blue_700
+      else -> com.github.bijoysingh.uibasics.R.color.dark_secondary_text
     }
     return ContextCompat.getColor(themedContext(), colorResource)
   }
 
   open fun getOptionsSubtitleColor(selected: Boolean): Int {
     val colorResource = when {
-      appTheme.isNightTheme() && selected -> R.color.material_blue_200
-      appTheme.isNightTheme() -> R.color.light_tertiary_text
-      selected -> R.color.material_blue_500
-      else -> R.color.dark_tertiary_text
+      appTheme.isNightTheme() && selected -> com.github.bijoysingh.uibasics.R.color.material_blue_200
+      appTheme.isNightTheme() -> com.github.bijoysingh.uibasics.R.color.light_tertiary_text
+      selected -> com.github.bijoysingh.uibasics.R.color.material_blue_500
+      else -> com.github.bijoysingh.uibasics.R.color.dark_tertiary_text
     }
     return ContextCompat.getColor(themedContext(), colorResource)
   }

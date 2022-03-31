@@ -49,8 +49,11 @@ class FileImportViewHolder(context: Context, root: View)
       (context as ImportNoteActivity).select(item)
     }
     root.setBackgroundColor(
-      if (item.selected) appTheme.get(
-        context, R.color.material_grey_100, R.color.dark_hint_text) else Color.TRANSPARENT)
+      if (item.selected)
+        appTheme.get(context, com.github.bijoysingh.uibasics.R.color.material_grey_100, com.github.bijoysingh.uibasics.R.color.dark_hint_text)
+      else
+        Color.TRANSPARENT
+    )
   }
 
   private fun getPath(item: FileRecyclerItem): String {
