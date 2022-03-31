@@ -157,7 +157,6 @@ abstract class FolderChooserBottomSheetBase : LithoBottomSheet() {
           isSelected = isFolderSelected(folder)
         ))
     }
-    options.sortByDescending { if (it.isSelected) 1 else 0 }
     return options
   }
 

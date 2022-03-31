@@ -86,10 +86,7 @@ class NoteOptionsBottomSheet : GridBottomSheetBase() {
     val tagSubtitle = tagCardLayout.findViewById<TextView>(R.id.tags_subtitle)
     tagSubtitle.typeface = appTypeface.title()
     tagCardLayout.setOnClickListener {
-      openSheet(activity, TagChooserBottomSheet().apply {
-        this.note = note
-        dismissListener = { activity.notifyTagsChanged(note) }
-      })
+      openSheet(activity, TagChooserBottomSheet(note, dismissListener = { activity.notifyTagsChanged(note) }))
       dismiss()
     }
 

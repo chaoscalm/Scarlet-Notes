@@ -20,17 +20,9 @@ import com.maubis.scarlet.base.support.sheets.OptionItemLayout
 import com.maubis.scarlet.base.support.sheets.getLithoBottomSheetTitle
 import com.maubis.scarlet.base.support.ui.ThemedActivity
 
-class TagChooserBottomSheet : LithoBottomSheet() {
-
-  var note: Note? = null
-  var dismissListener: () -> Unit = {}
+class TagChooserBottomSheet(private val note: Note, private val dismissListener: () -> Unit) : LithoBottomSheet() {
 
   override fun getComponent(componentContext: ComponentContext, dialog: Dialog): Component {
-    if (note === null) {
-      dismiss()
-      return Column.create(componentContext).widthPercent(100f).build()
-    }
-
     val activity = context as ThemedActivity
     val component = Column.create(componentContext)
       .widthPercent(100f)
@@ -64,20 +56,19 @@ class TagChooserBottomSheet : LithoBottomSheet() {
   private fun getTagOptions(): List<LithoTagOptionsItem> {
     val activity = context as AppCompatActivity
     val options = ArrayList<LithoTagOptionsItem>()
-    val tags = note!!.getTagUUIDs()
+    val noteTags = note.getTagUUIDs()
     for (tag in data.tags.getAll()) {
       options.add(
         LithoTagOptionsItem(
           tag = tag,
           listener = {
-            note!!.toggleTag(tag)
-            note!!.save(activity)
+            note.toggleTag(tag)
+            note.save(activity)
             refresh(activity, requireDialog())
           },
-          isSelected = tags.contains(tag.uuid)
+          isSelected = noteTags.contains(tag.uuid)
         ))
     }
-    options.sortByDescending { if (it.isSelected) 1 else 0 }
     return options
   }
 
