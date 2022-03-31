@@ -4,14 +4,7 @@ import com.github.bijoysingh.starter.recyclerview.MultiRecyclerViewControllerIte
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.core.format.FormatType
-import com.maubis.scarlet.base.note.formats.recycler.FormatBulletViewHolder
-import com.maubis.scarlet.base.note.formats.recycler.FormatImageViewHolder
-import com.maubis.scarlet.base.note.formats.recycler.FormatListViewHolder
-import com.maubis.scarlet.base.note.formats.recycler.FormatQuoteViewHolder
-import com.maubis.scarlet.base.note.formats.recycler.FormatSeparatorViewHolder
-import com.maubis.scarlet.base.note.formats.recycler.FormatTextViewHolder
-import com.maubis.scarlet.base.note.formats.recycler.NullFormatHolder
-import java.util.*
+import com.maubis.scarlet.base.note.formats.recycler.*
 
 fun getFormatControllerItems(): List<MultiRecyclerViewControllerItem<Format>> {
   val list = ArrayList<MultiRecyclerViewControllerItem<Format>>()
@@ -31,19 +24,19 @@ fun getFormatControllerItems(): List<MultiRecyclerViewControllerItem<Format>> {
     MultiRecyclerViewControllerItem.Builder<Format>()
       .viewType(FormatType.HEADING.ordinal)
       .layoutFile(R.layout.item_format_heading)
-      .holderClass(FormatTextViewHolder::class.java)
+      .holderClass(FormatHeadingViewHolder::class.java)
       .build())
   list.add(
     MultiRecyclerViewControllerItem.Builder<Format>()
       .viewType(FormatType.SUB_HEADING.ordinal)
       .layoutFile(R.layout.item_format_heading)
-      .holderClass(FormatTextViewHolder::class.java)
+      .holderClass(FormatHeadingViewHolder::class.java)
       .build())
   list.add(
     MultiRecyclerViewControllerItem.Builder<Format>()
       .viewType(FormatType.HEADING_3.ordinal)
       .layoutFile(R.layout.item_format_heading)
-      .holderClass(FormatTextViewHolder::class.java)
+      .holderClass(FormatHeadingViewHolder::class.java)
       .build())
   list.add(
     MultiRecyclerViewControllerItem.Builder<Format>()

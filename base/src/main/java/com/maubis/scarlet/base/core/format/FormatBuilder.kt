@@ -6,7 +6,6 @@ import com.maubis.scarlet.base.support.utils.logNonCriticalError
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
-import java.util.*
 
 class FormatBuilder {
   val KEY_NOTE = "note"
@@ -68,12 +67,11 @@ class FormatBuilder {
   }
 
   fun getNextFormatType(type: FormatType): FormatType {
-    when (type) {
-      FormatType.NUMBERED_LIST -> return FormatType.NUMBERED_LIST
-      FormatType.HEADING -> return FormatType.SUB_HEADING
-      FormatType.CHECKLIST_CHECKED, FormatType.CHECKLIST_UNCHECKED -> return FormatType.CHECKLIST_UNCHECKED
-      FormatType.IMAGE, FormatType.SUB_HEADING, FormatType.CODE, FormatType.QUOTE, FormatType.TEXT -> return FormatType.TEXT
-      else -> return FormatType.TEXT
+    return when (type) {
+      FormatType.HEADING, FormatType.SUB_HEADING, FormatType.HEADING_3 -> FormatType.TEXT
+      FormatType.CHECKLIST_CHECKED, FormatType.CHECKLIST_UNCHECKED -> FormatType.CHECKLIST_UNCHECKED
+      FormatType.NUMBERED_LIST -> FormatType.NUMBERED_LIST
+      else -> FormatType.TEXT
     }
   }
 }
