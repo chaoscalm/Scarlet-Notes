@@ -38,7 +38,6 @@ import com.maubis.scarlet.base.settings.sEditorTextSize
 import com.maubis.scarlet.base.settings.sNoteDefaultColor
 import com.maubis.scarlet.base.settings.sUIUseNoteColorAsBackground
 import com.maubis.scarlet.base.support.specs.ToolbarColorConfig
-import com.maubis.scarlet.base.support.ui.KEY_NIGHT_THEME
 import com.maubis.scarlet.base.support.ui.SecuredActivity
 import com.maubis.scarlet.base.support.ui.Theme
 import com.maubis.scarlet.base.support.ui.ThemeColorType
@@ -117,7 +116,6 @@ open class ViewAdvancedNoteActivity : SecuredActivity(), INoteOptionSheetActivit
   private fun resetBundle() {
     val bundle = Bundle()
     bundle.putBoolean(KEY_EDITABLE, editModeValue)
-    bundle.putBoolean(KEY_NIGHT_THEME, appTheme.isNightTheme())
     bundle.putInt(STORE_KEY_TEXT_SIZE, sEditorTextSize)
     bundle.putInt(KEY_NOTE_COLOR, note.adjustedColor())
     bundle.putString(INTENT_KEY_NOTE_ID, note.uuid.toString())

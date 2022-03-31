@@ -39,9 +39,6 @@ fun setThemeFromSystem(context: Context) {
   sThemeLabel = systemBasedTheme
 }
 
-// Old Theme Key, remove in future once theme is properly handled
-const val KEY_NIGHT_THEME: String = "KEY_NIGHT_THEME"
-
 class ThemeManager {
   private lateinit var theme: Theme
   private var listeners = HashSet<WeakReference<ThemeChangeListener>>()
