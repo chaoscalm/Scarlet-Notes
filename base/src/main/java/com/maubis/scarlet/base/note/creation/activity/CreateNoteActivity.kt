@@ -17,10 +17,10 @@ import com.maubis.scarlet.base.ScarletApp.Companion.imageStorage
 import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.core.format.FormatBuilder
 import com.maubis.scarlet.base.core.format.FormatType
-import com.maubis.scarlet.base.core.format.MarkdownType
+import com.maubis.scarlet.base.core.format.MarkdownFormatting
 import com.maubis.scarlet.base.core.note.NoteBuilder
 import com.maubis.scarlet.base.database.entities.Note
-import com.maubis.scarlet.base.note.creation.specs.NoteCreationBottomBar
+import com.maubis.scarlet.base.note.creation.specs.NoteEditorBottomBar
 import com.maubis.scarlet.base.note.formats.recycler.FormatImageViewHolder
 import com.maubis.scarlet.base.note.formats.recycler.FormatTextViewHolder
 import com.maubis.scarlet.base.settings.ColorPickerBottomSheet
@@ -111,7 +111,7 @@ open class CreateNoteActivity : ViewAdvancedNoteActivity() {
     views.lithoBottomToolbar.addView(
       LithoView.create(
         componentContext,
-        NoteCreationBottomBar.create(componentContext)
+        NoteEditorBottomBar.create(componentContext)
           .colorConfig(ToolbarColorConfig(colorConfig.toolbarBackgroundColor, colorConfig.toolbarIconColor))
           .build()))
   }
@@ -250,7 +250,7 @@ open class CreateNoteActivity : ViewAdvancedNoteActivity() {
     }, 100)
   }
 
-  fun triggerMarkdown(markdownType: MarkdownType) {
+  fun triggerMarkdown(formatting: MarkdownFormatting) {
     if (focusedFormat == null) {
       return
     }
@@ -263,7 +263,7 @@ open class CreateNoteActivity : ViewAdvancedNoteActivity() {
     val handler = Handler(Looper.getMainLooper())
     handler.postDelayed(Runnable {
       val holder = findTextViewHolderAtPosition(position) ?: return@Runnable
-      holder.requestMarkdownAction(markdownType)
+      holder.insertMarkdownFormatting(formatting)
     }, 100)
   }
 

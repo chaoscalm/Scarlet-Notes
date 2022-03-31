@@ -17,7 +17,7 @@ import com.maubis.markdown.spannable.setFormats
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.core.format.FormatType
-import com.maubis.scarlet.base.core.format.MarkdownType
+import com.maubis.scarlet.base.core.format.MarkdownFormatting
 import com.maubis.scarlet.base.note.creation.sheet.FormatActionBottomSheet
 import com.maubis.scarlet.base.settings.sEditorLiveMarkdown
 import com.maubis.scarlet.base.settings.sEditorMoveHandles
@@ -123,7 +123,7 @@ open class FormatTextViewHolder(context: Context, view: View) : FormatViewHolder
     edit.requestFocus()
   }
 
-  fun requestMarkdownAction(markdownType: MarkdownType) {
+  fun insertMarkdownFormatting(formatting: MarkdownFormatting) {
     val cursorStartPosition = edit.selectionStart
     val cursorEndPosition = edit.selectionEnd
     val content = edit.text
@@ -134,16 +134,16 @@ open class FormatTextViewHolder(context: Context, view: View) : FormatViewHolder
 
     val stringBuilder = StringBuilder()
     stringBuilder.append(startString)
-    stringBuilder.append(if (startString.isEmpty() || !markdownType.requiresNewLine) "" else "\n")
-    stringBuilder.append(markdownType.startToken)
+    stringBuilder.append(if (startString.isEmpty() || !formatting.requiresNewLine) "" else "\n")
+    stringBuilder.append(formatting.startToken)
     stringBuilder.append(middleString)
-    stringBuilder.append(markdownType.endToken)
+    stringBuilder.append(formatting.endToken)
     stringBuilder.append(endString)
 
     edit.setText(stringBuilder.toString())
 
     try {
-      val additionTokenLength = (if (markdownType.requiresNewLine) 1 else 0) + markdownType.startToken.length
+      val additionTokenLength = (if (formatting.requiresNewLine) 1 else 0) + formatting.startToken.length
       edit.setSelection(min(startString.length + additionTokenLength, edit.text.length))
     } catch (e: Exception) {
       Log.d("Scarlet", "Error while setting text selection", e)
