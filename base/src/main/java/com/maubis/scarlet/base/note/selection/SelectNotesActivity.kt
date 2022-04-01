@@ -2,13 +2,12 @@ package com.maubis.scarlet.base.note.selection
 
 import android.os.Bundle
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.common.sheets.openSheet
 import com.maubis.scarlet.base.common.utils.SharingUtils
-import com.maubis.scarlet.base.common.utils.bind
 import com.maubis.scarlet.base.database.entities.Note
+import com.maubis.scarlet.base.databinding.ActivitySelectNotesBinding
 import com.maubis.scarlet.base.home.HomeNavigationMode
 import com.maubis.scarlet.base.note.getFullText
 
@@ -17,15 +16,15 @@ const val KEY_SELECT_EXTRA_NOTE_ID = "KEY_SELECT_EXTRA_NOTE_ID"
 
 class SelectNotesActivity : SelectableNotesActivityBase() {
 
-  val selectedNotes = HashMap<Int, Note>()
-  val orderingNoteIds = ArrayList<Int>()
+  private val selectedNotes = HashMap<Int, Note>()
+  private val orderingNoteIds = ArrayList<Int>()
 
-  val primaryFab: FloatingActionButton by bind(R.id.primary_fab_action)
-  val secondaryFab: FloatingActionButton by bind(R.id.secondary_fab_action)
+  private lateinit var views: ActivitySelectNotesBinding
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_select_notes)
+    views = ActivitySelectNotesBinding.inflate(layoutInflater)
+    setContentView(views.root)
 
     val intent = intent
     val extras = intent.extras
@@ -45,10 +44,10 @@ class SelectNotesActivity : SelectableNotesActivityBase() {
 
   override fun initUI() {
     super.initUI()
-    primaryFab.setOnClickListener {
+    views.primaryFabAction.setOnClickListener {
       runTextFunction { text -> SharingUtils.shareText(this, text) }
     }
-    secondaryFab.setOnClickListener {
+    views.secondaryFabAction.setOnClickListener {
       openSheet(this, SelectedNotesOptionsBottomSheet())
     }
     recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -56,12 +55,12 @@ class SelectNotesActivity : SelectableNotesActivityBase() {
         super.onScrollStateChanged(recyclerView, newState)
         when (newState) {
           RecyclerView.SCROLL_STATE_DRAGGING -> {
-            primaryFab.hide()
-            secondaryFab.hide()
+            views.primaryFabAction.hide()
+            views.secondaryFabAction.hide()
           }
           RecyclerView.SCROLL_STATE_IDLE -> {
-            primaryFab.show()
-            secondaryFab.show()
+            views.primaryFabAction.show()
+            views.secondaryFabAction.show()
           }
         }
       }
@@ -108,10 +107,6 @@ class SelectNotesActivity : SelectableNotesActivityBase() {
     }
   }
 
-  override fun notifyThemeChange() {
-    super.notifyThemeChange()
-  }
-
   override fun isNoteSelected(note: Note): Boolean = orderingNoteIds.contains(note.uid)
 
   override fun getNotes(): List<Note> = data.notes.getAll()
@@ -128,7 +123,7 @@ class SelectNotesActivity : SelectableNotesActivityBase() {
     return notes
   }
 
-  fun getText(): String {
+  private fun getText(): String {
     val builder = StringBuilder()
     for (note in getOrderedSelectedNotes()) {
       builder.append(note.getFullText())
