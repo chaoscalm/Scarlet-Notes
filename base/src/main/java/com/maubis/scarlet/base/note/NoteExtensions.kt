@@ -248,7 +248,7 @@ fun Note.shareImages(context: Context) {
   }
 }
 
-fun Note.copy(context: Context) {
+fun Note.copyToClipboard(context: Context) {
   TextUtils.copyToClipboard(context, getFullText())
 }
 

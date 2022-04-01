@@ -6,7 +6,7 @@ import android.view.View
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.home.MainActivity
 import com.maubis.scarlet.base.note.actions.NoteOptionsBottomSheet
-import com.maubis.scarlet.base.note.copy
+import com.maubis.scarlet.base.note.copyToClipboard
 import com.maubis.scarlet.base.note.creation.activity.NoteIntentRouterActivity
 import com.maubis.scarlet.base.note.edit
 import com.maubis.scarlet.base.note.share
@@ -38,7 +38,7 @@ class NoteRecyclerHolder(context: Context, view: View) : NoteRecyclerViewHolderB
   }
 
   override fun copyIconClick(note: Note, extra: Bundle?) {
-    actionOrUnlockNote(note, Runnable { note.copy(context) })
+    actionOrUnlockNote(note, Runnable { note.copyToClipboard(context) })
   }
 
   override fun moreOptionsIconClick(note: Note, extra: Bundle?) {

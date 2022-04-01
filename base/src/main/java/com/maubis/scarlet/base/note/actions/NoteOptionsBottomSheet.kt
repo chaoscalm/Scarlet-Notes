@@ -188,7 +188,7 @@ class NoteOptionsBottomSheet : GridBottomSheetBase() {
               icon = R.drawable.ic_content_copy_white_48dp,
               invalid = activity.lockedContentIsHidden() && note.locked,
               listener = {
-                  note.copy(activity)
+                  note.copyToClipboard(activity)
                   dismiss()
               }
       ))
