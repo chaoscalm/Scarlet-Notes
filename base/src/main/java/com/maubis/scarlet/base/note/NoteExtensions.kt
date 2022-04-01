@@ -120,7 +120,7 @@ fun Note.getImageFile(): String {
 }
 
 fun Note.getFullText(): String {
-  val fullText = getFormats().map { it -> it.markdownText }.joinToString(separator = "\n").trim()
+  val fullText = getFormats().joinToString(separator = "\n") { it.markdownText }.trim()
   if (sInternalShowUUID) {
     return "`$uuid`\n$fullText"
   }
@@ -132,7 +132,7 @@ fun Note.isNoteLockedButAppUnlocked(): Boolean {
 }
 
 fun Note.getLockedAwareTextForHomeList(): CharSequence {
-  val lockedText = "******************\n***********\n****************"
+  val lockedText = "*********************************************"
   return when {
     isNoteLockedButAppUnlocked() || !this.locked -> getMarkdownForListView()
     else -> markdownFormatForList("# ${getTitleForSharing()}\n\n```\n$lockedText\n```")
@@ -141,7 +141,7 @@ fun Note.getLockedAwareTextForHomeList(): CharSequence {
 
 fun Note.getTextForWidget(): CharSequence {
   if (locked && !sWidgetShowLockedNotes) {
-    return "******************\n***********\n****************"
+    return "*********************************************"
   }
 
   val text = getFullTextForDirectMarkdownRender()
