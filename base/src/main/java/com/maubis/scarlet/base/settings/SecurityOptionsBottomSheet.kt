@@ -6,7 +6,7 @@ import com.facebook.litho.ComponentContext
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appPreferences
 import com.maubis.scarlet.base.security.PinLockController.isPinCodeEnabled
-import com.maubis.scarlet.base.security.openCreateSheet
+import com.maubis.scarlet.base.security.openPincodeSetupSheet
 import com.maubis.scarlet.base.security.openVerifySheet
 import com.maubis.scarlet.base.support.sheets.LithoOptionBottomSheet
 import com.maubis.scarlet.base.support.sheets.LithoOptionsItem
@@ -148,7 +148,7 @@ class SecurityOptionsBottomSheet : LithoOptionBottomSheet() {
 
   fun openCreatePasswordDialog(dialog: Dialog) {
     val activity = context as ThemedActivity
-    openCreateSheet(
+    openPincodeSetupSheet(
       activity = activity,
       onCreateSuccess = { refresh(dialog.context, dialog) })
   }

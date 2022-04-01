@@ -45,19 +45,13 @@ class NoPincodeBottomSheet : LithoBottomSheet() {
       .child(BottomSheetBar.create(componentContext)
                .primaryActionRes(R.string.no_pincode_sheet_set_up)
                .onPrimaryClick {
-                 openCreateSheet(
+                 openPincodeSetupSheet(
                    activity = activity,
-                   onCreateSuccess = {})
+                   onCreateSuccess = onSuccess)
                  dismiss()
                }
-               .secondaryActionRes(R.string.no_pincode_sheet_dont_ask)
+               .secondaryActionRes(R.string.no_pincode_sheet_not_now)
                .onSecondaryClick {
-                 onSuccess()
-                 dismiss()
-               }
-               .tertiaryActionRes(R.string.no_pincode_sheet_not_now)
-               .onTertiaryClick {
-                 onSuccess()
                  dismiss()
                }
                .paddingDip(YogaEdge.VERTICAL, 8f))

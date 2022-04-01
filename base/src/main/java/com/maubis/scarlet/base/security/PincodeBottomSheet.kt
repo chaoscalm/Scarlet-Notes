@@ -204,7 +204,7 @@ class PincodeBottomSheet : LithoBottomSheet() {
   }
 }
 
-fun openCreateSheet(
+fun openPincodeSetupSheet(
   activity: ThemedActivity,
   onCreateSuccess: () -> Unit) {
 

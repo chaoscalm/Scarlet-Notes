@@ -119,7 +119,6 @@
   <string name="no_pincode_sheet_title">Nessun PIN impostato</string>
   <string name="no_pincode_sheet_details">Non hai impostato il PIN. Vuoi impostarlo ora?</string>
   <string name="no_pincode_sheet_not_now">Più tardi</string>
-  <string name="no_pincode_sheet_dont_ask">Non chiedere mai</string>
   <string name="no_pincode_sheet_set_up">Imposta</string>
 
   <!-- Added for 4.1.0 -->
