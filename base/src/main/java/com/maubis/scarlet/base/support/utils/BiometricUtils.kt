@@ -3,6 +3,7 @@ package com.maubis.scarlet.base.support.utils
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import androidx.biometric.BiometricManager
+import androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_WEAK
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -11,7 +12,7 @@ import com.maubis.scarlet.base.settings.sSecurityBiometricEnabled
 
 fun deviceHasBiometricEnabled(context: Context): Boolean {
   val biometricManager = BiometricManager.from(context)
-  return biometricManager.canAuthenticate() == BiometricManager.BIOMETRIC_SUCCESS
+  return biometricManager.canAuthenticate(BIOMETRIC_WEAK) == BiometricManager.BIOMETRIC_SUCCESS
 }
 
 fun isBiometricEnabled(context: Context) = sSecurityBiometricEnabled && deviceHasBiometricEnabled(context)
@@ -49,7 +50,7 @@ fun showBiometricPrompt(
   val promptInfo = BiometricPrompt.PromptInfo.Builder()
     .setTitle(activity.getString(title))
     .setDescription(activity.getString(subtitle))
-    .setDeviceCredentialAllowed(false)
+    .setAllowedAuthenticators(BIOMETRIC_WEAK)
     .setNegativeButtonText(activity.getString(R.string.delete_sheet_delete_trash_no))
     .build()
   prompt.authenticate(promptInfo)

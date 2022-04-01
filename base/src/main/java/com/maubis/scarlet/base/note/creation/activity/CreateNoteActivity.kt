@@ -115,6 +115,7 @@ open class CreateNoteActivity : ViewAdvancedNoteActivity() {
           .build()))
   }
 
+  @Suppress("DEPRECATION")
   override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
     super.onActivityResult(requestCode, resultCode, data)
     EasyImage.handleActivityResult(requestCode, resultCode, data, this, object : DefaultCallback() {
