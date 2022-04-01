@@ -16,5 +16,14 @@ enum class FormatType {
   CODE,
   QUOTE,
   SEPARATOR,
-  EMPTY
+  EMPTY;
+
+  fun getNextFormatType(): FormatType {
+    return when (this) {
+      HEADING, SUB_HEADING, HEADING_3 -> TEXT
+      CHECKLIST_CHECKED, CHECKLIST_UNCHECKED -> CHECKLIST_UNCHECKED
+      NUMBERED_LIST -> NUMBERED_LIST
+      else -> TEXT
+    }
+  }
 }

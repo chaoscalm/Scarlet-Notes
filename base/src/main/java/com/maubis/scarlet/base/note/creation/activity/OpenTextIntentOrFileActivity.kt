@@ -59,7 +59,7 @@ class OpenTextIntentOrFileActivity : SecuredActivity() {
     views.toolbar.backButton.setOnClickListener { onBackPressed() }
     views.toolbar.importButton.setOnClickListener {
       lifecycleScope.launch {
-        val note = NoteBuilder().gen(title = "", contentText)
+        val note = NoteBuilder.gen(title = "", contentText)
         withContext(Dispatchers.IO) { note.save(this@OpenTextIntentOrFileActivity) }
         startActivity(ViewAdvancedNoteActivity.getIntent(this@OpenTextIntentOrFileActivity, note))
         finish()

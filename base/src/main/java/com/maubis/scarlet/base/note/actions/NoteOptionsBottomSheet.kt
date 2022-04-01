@@ -9,7 +9,6 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
-import com.maubis.scarlet.base.core.note.NoteBuilder
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.database.entities.NoteState
 import com.maubis.scarlet.base.home.sheets.openDeleteNotePermanentlySheet
@@ -384,7 +383,7 @@ class NoteOptionsBottomSheet : GridBottomSheetBase() {
               icon = R.drawable.ic_duplicate,
               invalid = activity.lockedContentIsHidden() && note.locked,
               listener = {
-                  val copiedNote = NoteBuilder().copy(note)
+                  val copiedNote = note.shallowCopy()
                   copiedNote.uid = 0
                   copiedNote.uuid = UUID.randomUUID()
                   copiedNote.save(activity)

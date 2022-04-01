@@ -9,7 +9,6 @@ import com.maubis.markdown.spannable.*
 import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.data
-import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.core.format.FormatType
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.database.entities.NoteState
@@ -112,25 +111,6 @@ fun Note.getTextForSharing(): String {
     return "`$uuid`\n\n$text"
   }
   return text
-}
-
-fun Note.getSmartFormats(): List<Format> {
-  val formats = getFormats()
-  var maxIndex = formats.size
-  val smartFormats = ArrayList<Format>()
-  formats.forEach {
-    if (it.formatType == FormatType.TEXT) {
-      val moreFormats = it.text.convertToFormats()
-      moreFormats.forEach { format ->
-        format.uid = maxIndex
-        smartFormats.add(format)
-        maxIndex += 1
-      }
-    } else {
-      smartFormats.add(it)
-    }
-  }
-  return smartFormats
 }
 
 fun Note.getImageFile(): String {

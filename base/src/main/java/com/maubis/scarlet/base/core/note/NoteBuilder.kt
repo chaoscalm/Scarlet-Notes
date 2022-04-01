@@ -2,11 +2,11 @@ package com.maubis.scarlet.base.core.note
 
 import com.github.bijoysingh.starter.util.RandomHelper
 import com.maubis.scarlet.base.core.format.Format
-import com.maubis.scarlet.base.core.format.FormatBuilder
 import com.maubis.scarlet.base.core.format.FormatType
+import com.maubis.scarlet.base.core.format.Formats
 import com.maubis.scarlet.base.database.entities.Note
 
-class NoteBuilder {
+object NoteBuilder {
 
   /**
    * Generate blank note with color
@@ -27,7 +27,7 @@ class NoteBuilder {
       formats.add(Format(FormatType.HEADING, title))
     }
     formats.add(Format(FormatType.TEXT, description))
-    note.content = FormatBuilder().getContent(formats)
+    note.content = Formats.getNoteContent(formats)
     return note
   }
 
@@ -41,7 +41,7 @@ class NoteBuilder {
       formats.add(Format(FormatType.HEADING, title))
     }
     formats.addAll(formatSource)
-    note.content = FormatBuilder().getContent(formats)
+    note.content = Formats.getNoteContent(formats)
     return note
   }
 
@@ -60,22 +60,5 @@ class NoteBuilder {
       }
     }
     return formats
-  }
-
-  fun copy(reference: Note): Note {
-    val note = Note()
-    note.uid = reference.uid
-    note.uuid = reference.uuid
-    note.state = reference.state
-    note.content = reference.content
-    note.timestamp = reference.timestamp
-    note.updateTimestamp = reference.updateTimestamp
-    note.color = reference.color
-    note.tags = reference.tags
-    note.pinned = reference.pinned
-    note.locked = reference.locked
-    note.reminder = reference.reminder
-    note.folder = reference.folder
-    return note
   }
 }

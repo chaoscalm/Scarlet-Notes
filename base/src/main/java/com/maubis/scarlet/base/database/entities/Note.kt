@@ -5,7 +5,7 @@ import androidx.room.*
 import com.google.gson.Gson
 import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.core.format.Format
-import com.maubis.scarlet.base.core.format.FormatBuilder
+import com.maubis.scarlet.base.core.format.Formats
 import com.maubis.scarlet.base.core.note.Reminder
 import com.maubis.scarlet.base.note.mark
 import com.maubis.scarlet.base.settings.sNoteDefaultColor
@@ -17,7 +17,7 @@ class Note {
     @PrimaryKey(autoGenerate = true)
     var uid: Int = 0
     var uuid: UUID = UUID.randomUUID()
-    var content: String = FormatBuilder().getContent(emptyList())
+    var content: String = Formats.getNoteContent(emptyList())
     var color: Int = sNoteDefaultColor
     var state: NoteState = NoteState.DEFAULT
     var timestamp: Long = System.currentTimeMillis()
@@ -46,7 +46,7 @@ class Note {
     }
 
     fun getFormats(): List<Format> {
-        return FormatBuilder().getFormats(this.content)
+        return Formats.getFormatsFromNoteContent(this.content)
     }
 
     fun getTagUUIDs(): MutableSet<UUID> {
@@ -70,6 +70,23 @@ class Note {
             return
         }
         mark(context, NoteState.TRASH)
+    }
+
+    fun shallowCopy(): Note {
+        val note = Note()
+        note.uid = uid
+        note.uuid = uuid
+        note.state = state
+        note.content = content
+        note.timestamp = timestamp
+        note.updateTimestamp = updateTimestamp
+        note.color = color
+        note.tags = tags
+        note.pinned = pinned
+        note.locked = locked
+        note.reminder = reminder
+        note.folder = folder
+        return note
     }
 }
 

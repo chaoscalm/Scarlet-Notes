@@ -15,10 +15,9 @@ import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.ScarletApp.Companion.imageStorage
 import com.maubis.scarlet.base.core.format.Format
-import com.maubis.scarlet.base.core.format.FormatBuilder
 import com.maubis.scarlet.base.core.format.FormatType
+import com.maubis.scarlet.base.core.format.Formats
 import com.maubis.scarlet.base.core.format.MarkdownFormatting
-import com.maubis.scarlet.base.core.note.NoteBuilder
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.note.creation.specs.NoteEditorBottomBar
 import com.maubis.scarlet.base.note.formats.recycler.FormatImageViewHolder
@@ -52,7 +51,7 @@ open class CreateNoteActivity : ViewAdvancedNoteActivity() {
 
   override fun onCreationFinished() {
     super.onCreationFinished()
-    history.add(NoteBuilder().copy(note))
+    history.add(note.shallowCopy())
     setFolderFromIntent()
   }
 
@@ -168,12 +167,12 @@ open class CreateNoteActivity : ViewAdvancedNoteActivity() {
 
   protected fun updateNoteIfNeeded() {
     val vLastNoteInstance = history.getOrNull(historyIndex) ?: note
-    note.content = FormatBuilder().getSmarterContent(formats)
+    note.content = Formats.getEnhancedNoteContent(formats)
 
     // Ignore update if nothing changed. It allows for one undo per few seconds
     when {
       !historyModified && note.isEqual(vLastNoteInstance) -> return
-      !historyModified -> addNoteToHistory(NoteBuilder().copy(note))
+      !historyModified -> addNoteToHistory(note.shallowCopy())
       else -> historyModified = false
     }
     note.updateTimestamp = System.currentTimeMillis()
@@ -287,14 +286,14 @@ open class CreateNoteActivity : ViewAdvancedNoteActivity() {
     when (undo) {
       true -> {
         historyIndex = if (historyIndex == 0) 0 else (historyIndex - 1)
-        note = NoteBuilder().copy(history.get(historyIndex))
+        note = history[historyIndex].shallowCopy()
         displayNote()
         historyModified = true
       }
       false -> {
         val maxHistoryIndex = history.size - 1
         historyIndex = if (historyIndex == maxHistoryIndex) maxHistoryIndex else (historyIndex + 1)
-        note = NoteBuilder().copy(history.get(historyIndex))
+        note = history[historyIndex].shallowCopy()
         displayNote()
         historyModified = true
       }
@@ -386,9 +385,9 @@ open class CreateNoteActivity : ViewAdvancedNoteActivity() {
         || format.formatType === FormatType.CHECKLIST_CHECKED)
     val newPosition = position + 1
     when {
-      isCheckList -> addEmptyItemAtFocused(FormatBuilder().getNextFormatType(FormatType.CHECKLIST_UNCHECKED))
+      isCheckList -> addEmptyItemAtFocused(FormatType.CHECKLIST_UNCHECKED.getNextFormatType())
       newPosition < formats.size -> focus(position + 1)
-      else -> addEmptyItemAtFocused(FormatBuilder().getNextFormatType(format.formatType))
+      else -> addEmptyItemAtFocused(format.formatType.getNextFormatType())
     }
   }
 

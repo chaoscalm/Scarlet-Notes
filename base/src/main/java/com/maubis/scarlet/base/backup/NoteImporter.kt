@@ -43,7 +43,7 @@ class NoteImporter {
       }
       .filter { it.isNotBlank() }
       .forEach {
-        NoteBuilder().gen("", it).save(context)
+        NoteBuilder.gen("", it).save(context)
       }
   }
 

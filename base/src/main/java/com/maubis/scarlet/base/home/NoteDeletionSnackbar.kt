@@ -8,7 +8,6 @@ import android.view.View.VISIBLE
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.core.note.NoteBuilder
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.database.entities.NoteState
 
@@ -37,7 +36,7 @@ class NoteDeletionSnackbar(val layout: LinearLayout, val alwaysRunnable: () -> U
   }
 
   fun undoMoveNoteToTrash(context: Context, note: Note) {
-    val backupOfNote = NoteBuilder().copy(note)
+    val backupOfNote = note.shallowCopy()
     title.setText(R.string.recent_to_trash_message)
     action.setText(R.string.recent_to_trash_undo)
     action.setOnClickListener {
@@ -49,7 +48,7 @@ class NoteDeletionSnackbar(val layout: LinearLayout, val alwaysRunnable: () -> U
   }
 
   fun undoDeleteNote(context: Context, note: Note) {
-    val backupOfNote = NoteBuilder().copy(note)
+    val backupOfNote = note.shallowCopy()
     title.setText(R.string.recent_to_delete_message)
     action.setText(R.string.recent_to_trash_undo)
     action.setOnClickListener {

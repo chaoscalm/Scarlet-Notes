@@ -13,8 +13,8 @@ import com.github.bijoysingh.starter.recyclerview.MultiRecyclerViewControllerIte
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.core.format.Format
-import com.maubis.scarlet.base.core.format.FormatBuilder
 import com.maubis.scarlet.base.core.format.FormatType
+import com.maubis.scarlet.base.core.format.Formats
 import com.maubis.scarlet.base.core.format.sectionPreservingSort
 import com.maubis.scarlet.base.core.note.NoteBuilder
 import com.maubis.scarlet.base.database.entities.Note
@@ -29,7 +29,6 @@ import com.maubis.scarlet.base.note.formats.IFormatRecyclerViewActivity
 import com.maubis.scarlet.base.note.formats.getFormatControllerItems
 import com.maubis.scarlet.base.note.formats.recycler.KEY_EDITABLE
 import com.maubis.scarlet.base.note.formats.recycler.KEY_NOTE_COLOR
-import com.maubis.scarlet.base.note.getSmartFormats
 import com.maubis.scarlet.base.note.getTagString
 import com.maubis.scarlet.base.note.mark
 import com.maubis.scarlet.base.settings.STORE_KEY_TEXT_SIZE
@@ -81,9 +80,9 @@ open class ViewAdvancedNoteActivity : SecuredActivity(), INoteOptionSheetActivit
       noteId = savedInstanceState.getInt(INTENT_KEY_NOTE_ID, 0)
     }
     note = if (noteId != 0) {
-      data.notes.getByID(noteId) ?: NoteBuilder().emptyNote(sNoteDefaultColor)
+      data.notes.getByID(noteId) ?: NoteBuilder.emptyNote(sNoteDefaultColor)
     } else {
-      NoteBuilder().emptyNote(sNoteDefaultColor)
+      NoteBuilder.emptyNote(sNoteDefaultColor)
     }
     resetBundle()
     displayNote()
@@ -127,7 +126,7 @@ open class ViewAdvancedNoteActivity : SecuredActivity(), INoteOptionSheetActivit
 
     formats = when (editModeValue) {
       true -> note.getFormats()
-      false -> note.getSmartFormats()
+      false -> Formats.getEnhancedFormatsForNoteView(note.getFormats())
     }.toMutableList()
     adapter.addItems(formats)
 
@@ -184,7 +183,7 @@ open class ViewAdvancedNoteActivity : SecuredActivity(), INoteOptionSheetActivit
 
     trueFormats[truePosition] = format
 
-    note.content = FormatBuilder().getSmarterContent(sectionPreservingSort(trueFormats))
+    note.content = Formats.getEnhancedNoteContent(sectionPreservingSort(trueFormats))
     displayNote()
     saveNoteIfNeeded()
   }

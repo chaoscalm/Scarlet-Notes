@@ -9,8 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.maubis.scarlet.base.ScarletApp.Companion.imageStorage
 import com.maubis.scarlet.base.backup.NoteImporter
 import com.maubis.scarlet.base.core.format.Format
-import com.maubis.scarlet.base.core.format.FormatBuilder
 import com.maubis.scarlet.base.core.format.FormatType
+import com.maubis.scarlet.base.core.format.Formats
 import com.maubis.scarlet.base.core.note.NoteBuilder
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.home.MainActivity
@@ -55,8 +55,8 @@ class ShareToScarletRouterActivity : AppCompatActivity() {
     }
 
     val note = when (isCallerKeep()) {
-      true -> NoteBuilder().gen(sharedSubject, NoteBuilder().genFromKeep(sharedText))
-      false -> NoteBuilder().gen(sharedSubject, sharedText)
+      true -> NoteBuilder.gen(sharedSubject, NoteBuilder.genFromKeep(sharedText))
+      false -> NoteBuilder.gen(sharedSubject, sharedText)
     }
     note.save(this)
 
@@ -74,7 +74,7 @@ class ShareToScarletRouterActivity : AppCompatActivity() {
     for (image in images.reversed()) {
       formats.add(0, Format(FormatType.IMAGE, image.name))
     }
-    note.content = FormatBuilder().getSmarterContent(formats)
+    note.content = Formats.getEnhancedNoteContent(formats)
     note.save(this)
     return note
   }

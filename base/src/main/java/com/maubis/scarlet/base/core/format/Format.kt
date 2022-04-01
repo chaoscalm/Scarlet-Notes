@@ -4,7 +4,7 @@ import com.maubis.scarlet.base.settings.sEditorMoveChecked
 import org.json.JSONObject
 import java.util.*
 
-class Format {
+class Format() {
 
   var formatType: FormatType = FormatType.TEXT
 
@@ -29,9 +29,7 @@ class Format {
       }
     }
 
-  constructor() {}
-
-  constructor(formatType: FormatType) {
+  constructor(formatType: FormatType) : this() {
     this.formatType = formatType
 
     if (formatType == FormatType.SEPARATOR) {
@@ -39,7 +37,7 @@ class Format {
     }
   }
 
-  constructor(formatType: FormatType, text: String) {
+  constructor(formatType: FormatType, text: String) : this() {
     this.formatType = formatType
     this.text = text
   }
@@ -51,6 +49,15 @@ class Format {
 
     val map = mapOf("format" to formatType.name, "text" to text)
     return JSONObject(map)
+  }
+
+  companion object {
+    fun fromJson(json: JSONObject): Format {
+      return Format().apply {
+        formatType = FormatType.valueOf(json.getString("format"))
+        text = json.getString("text")
+      }
+    }
   }
 }
 

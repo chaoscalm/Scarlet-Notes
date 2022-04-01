@@ -5,7 +5,7 @@ import androidx.core.content.ContextCompat
 import com.facebook.litho.ComponentContext
 import com.github.bijoysingh.starter.util.TextUtils
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.core.format.FormatBuilder
+import com.maubis.scarlet.base.core.format.Formats
 import com.maubis.scarlet.base.core.format.sectionPreservingSort
 import com.maubis.scarlet.base.database.entities.NoteState
 import com.maubis.scarlet.base.home.sheets.AlertBottomSheet
@@ -266,7 +266,7 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
           formats.addAll(noteToAdd.getFormats())
           noteToAdd.delete(activity)
         }
-        note.content = FormatBuilder().getContent(sectionPreservingSort(formats))
+        note.content = Formats.getNoteContent(sectionPreservingSort(formats))
         note.save(activity)
         activity.finish()
       }
