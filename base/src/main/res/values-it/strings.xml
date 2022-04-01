@@ -63,16 +63,6 @@
   <string name="favourite_note">Aggiungi ai preferiti</string>
   <string name="restore_note">Ripristina nota</string>
   <string name="trash_note">Sposta nel cestino</string>
-  <string name="tap_for_action_edit">Tocca per modificare la nota</string>
-  <string name="tap_for_action_copy">Tocca per copiare il contenuto della nota negli appunti</string>
-  <string name="tap_for_action_share">Tocca per condividere il contenuto della nota con altre app</string>
-  <string name="tap_for_action_delete">Tocca per eliminare la nota</string>
-  <string name="tap_for_action_trash">Tocca per spostare la nota nel cestino</string>
-  <string name="tap_for_action_not_trash">Tocca per rimuovere la nota dal cestino</string>
-  <string name="tap_for_action_favourite">Tocca per contrassegnare la nota come preferita</string>
-  <string name="tap_for_action_not_favourite">Tocca per contrassegnare la nota come non preferita</string>
-  <string name="tap_for_action_archive">Tocca per archiviare la nota</string>
-  <string name="tap_for_action_not_archive">Tocca per annullare l\'archiviazione della nota</string>
   <string name="nav_home">Home</string>
   <string name="nav_favourites">Preferiti</string>
   <string name="nav_archived">Archivio</string>
