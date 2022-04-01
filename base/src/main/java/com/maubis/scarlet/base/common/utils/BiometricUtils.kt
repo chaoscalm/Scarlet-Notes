@@ -1,6 +1,7 @@
 package com.maubis.scarlet.base.common.utils
 
 import android.content.Context
+import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_WEAK
@@ -18,12 +19,12 @@ fun deviceHasBiometricEnabled(context: Context): Boolean {
 fun isBiometricEnabled(context: Context) = sSecurityBiometricEnabled && deviceHasBiometricEnabled(context)
 
 fun showBiometricPrompt(
+  @StringRes title: Int,
+  @StringRes subtitle: Int,
   activity: AppCompatActivity,
   fragment: Fragment? = null,
   onSuccess: () -> Unit = {},
-  onFailure: () -> Unit = {},
-  title: Int = R.string.biometric_prompt_unlock_app,
-  subtitle: Int = R.string.biometric_prompt_unlock_app_details) {
+  onFailure: () -> Unit = {}) {
   val executor = ContextCompat.getMainExecutor(activity)
 
   val callback = object : BiometricPrompt.AuthenticationCallback() {

@@ -48,10 +48,15 @@ class AppLockActivity : ThemedActivity() {
     passCodeEntered = ""
 
     if (isBiometricEnabled(this)) {
-      showBiometricPrompt(this, onSuccess = {
-        PinLockController.notifyPinVerified()
-        finish()
-      }, title = R.string.biometric_prompt_unlock_app, subtitle = R.string.biometric_prompt_unlock_app_details)
+      showBiometricPrompt(
+        title = R.string.biometric_prompt_unlock_app,
+        subtitle = R.string.biometric_prompt_unlock_app_details,
+        activity = this,
+        onSuccess = {
+          PinLockController.notifyPinVerified()
+          finish()
+        }
+      )
     }
 
   }

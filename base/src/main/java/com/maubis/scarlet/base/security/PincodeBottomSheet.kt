@@ -196,10 +196,16 @@ class PincodeBottomSheet : LithoBottomSheet() {
     }
 
     if (data.isFingerprintEnabled) {
-      showBiometricPrompt(compatActivity, this, {
-        data.onSuccess()
-        dismiss()
-      })
+      showBiometricPrompt(
+        title = R.string.biometric_prompt_unlock_note,
+        subtitle = R.string.biometric_prompt_unlock_note_details,
+        activity = compatActivity,
+        fragment = this,
+        onSuccess = {
+          data.onSuccess()
+          dismiss()
+        }
+      )
     }
   }
 }
