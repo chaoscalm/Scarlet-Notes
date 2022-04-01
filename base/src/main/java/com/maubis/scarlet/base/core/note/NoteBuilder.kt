@@ -7,16 +7,6 @@ import com.maubis.scarlet.base.core.format.Formats
 import com.maubis.scarlet.base.database.entities.Note
 
 object NoteBuilder {
-
-  /**
-   * Generate blank note with color
-   */
-  fun emptyNote(color: Int): Note {
-    val note = Note()
-    note.color = color
-    return note
-  }
-
   /**
    * Generate blank note from basic title and description
    */
@@ -47,10 +37,10 @@ object NoteBuilder {
 
   fun genFromKeep(content: String): List<Format> {
     val randomDelimiter = "-+-" + RandomHelper.getRandom() + "-+-"
-    var delimitered = content.replace("(^|\n)\\s*\\[\\s\\]\\s*".toRegex(), randomDelimiter + "[ ]")
-    delimitered = delimitered.replace("(^|\n)\\s*\\[x\\]\\s*".toRegex(), randomDelimiter + "[x]")
+    var delimited = content.replace("(^|\n)\\s*\\[\\s\\]\\s*".toRegex(), randomDelimiter + "[ ]")
+    delimited = delimited.replace("(^|\n)\\s*\\[x\\]\\s*".toRegex(), randomDelimiter + "[x]")
 
-    val items = delimitered.split(randomDelimiter)
+    val items = delimited.split(randomDelimiter)
     val formats = ArrayList<Format>()
     for (item in items) {
       when {

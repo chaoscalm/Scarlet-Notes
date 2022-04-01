@@ -13,7 +13,7 @@ import java.util.*
 
 @Entity(tableName = "note", indices = [Index("uuid", unique = true)])
 @TypeConverters(NoteConverters::class)
-class Note {
+class Note() {
     @PrimaryKey(autoGenerate = true)
     var uid: Int = 0
     var uuid: UUID = UUID.randomUUID()
@@ -28,6 +28,10 @@ class Note {
     var excludeFromBackup: Boolean = false
     var tags: String = ""
     var folder: UUID? = null
+
+    constructor(color: Int) : this() {
+        this.color = color
+    }
 
     fun isNotPersisted(): Boolean {
         return this.uid == 0

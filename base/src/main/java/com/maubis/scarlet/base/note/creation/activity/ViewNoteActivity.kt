@@ -16,7 +16,6 @@ import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.core.format.FormatType
 import com.maubis.scarlet.base.core.format.Formats
 import com.maubis.scarlet.base.core.format.sectionPreservingSort
-import com.maubis.scarlet.base.core.note.NoteBuilder
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.database.entities.NoteState
 import com.maubis.scarlet.base.databinding.ActivityAdvancedNoteBinding
@@ -80,9 +79,9 @@ open class ViewAdvancedNoteActivity : SecuredActivity(), INoteOptionSheetActivit
       noteId = savedInstanceState.getInt(INTENT_KEY_NOTE_ID, 0)
     }
     note = if (noteId != 0) {
-      data.notes.getByID(noteId) ?: NoteBuilder.emptyNote(sNoteDefaultColor)
+      data.notes.getByID(noteId) ?: Note(sNoteDefaultColor)
     } else {
-      NoteBuilder.emptyNote(sNoteDefaultColor)
+      Note(sNoteDefaultColor)
     }
     resetBundle()
     displayNote()
