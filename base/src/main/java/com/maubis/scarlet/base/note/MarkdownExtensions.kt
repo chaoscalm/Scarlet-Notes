@@ -5,8 +5,8 @@ import com.maubis.markdown.segmenter.TextSegmenter
 import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.core.format.FormatType
 
-fun String.toInternalFormats(): List<Format> {
-  return toInternalFormats(
+fun String.convertToFormats(): List<Format> {
+  return convertToFormats(
     arrayOf(
       MarkdownSegmentType.HEADING_1,
       MarkdownSegmentType.HEADING_2,
@@ -26,7 +26,7 @@ fun String.toInternalFormats(): List<Format> {
  * Converts a string to the internal format types using the Markdown Segmentation Library.
  * It's possible to pass specific formats which will be preserved in the formats
  */
-fun String.toInternalFormats(whitelistedSegments: Array<MarkdownSegmentType>): List<Format> {
+fun String.convertToFormats(whitelistedSegments: Array<MarkdownSegmentType>): List<Format> {
   val extractedFormats = mutableListOf<Format>()
   val segments = TextSegmenter(this).get()
 

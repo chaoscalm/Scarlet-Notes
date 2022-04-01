@@ -120,7 +120,7 @@ fun Note.getSmartFormats(): List<Format> {
   val smartFormats = ArrayList<Format>()
   formats.forEach {
     if (it.formatType == FormatType.TEXT) {
-      val moreFormats = it.text.toInternalFormats()
+      val moreFormats = it.text.convertToFormats()
       moreFormats.forEach { format ->
         format.uid = maxIndex
         smartFormats.add(format)

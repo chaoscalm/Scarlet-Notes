@@ -1,7 +1,7 @@
 package com.maubis.scarlet.base.core.format
 
 import com.maubis.markdown.segmenter.MarkdownSegmentType
-import com.maubis.scarlet.base.note.toInternalFormats
+import com.maubis.scarlet.base.note.convertToFormats
 import com.maubis.scarlet.base.support.utils.logNonCriticalError
 import org.json.JSONArray
 import org.json.JSONException
@@ -37,8 +37,13 @@ class FormatBuilder {
         continue
       }
 
-      val moreFormats = format.text.toInternalFormats(
+      val moreFormats = format.text.convertToFormats(
         arrayOf(
+          MarkdownSegmentType.HEADING_1,
+          MarkdownSegmentType.HEADING_2,
+          MarkdownSegmentType.HEADING_3,
+          MarkdownSegmentType.CODE,
+          MarkdownSegmentType.SEPARATOR,
           MarkdownSegmentType.CHECKLIST_CHECKED,
           MarkdownSegmentType.CHECKLIST_UNCHECKED))
       extractedFormats.addAll(moreFormats)
