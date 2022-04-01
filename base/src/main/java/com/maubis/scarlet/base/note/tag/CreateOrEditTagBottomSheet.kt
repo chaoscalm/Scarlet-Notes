@@ -7,6 +7,7 @@ import android.widget.EditText
 import android.widget.TextView
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
+import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.database.entities.Tag
 import com.maubis.scarlet.base.support.ui.ThemeColorType
 import com.maubis.scarlet.base.support.ui.ThemedActivity
@@ -35,20 +36,23 @@ class CreateOrEditTagBottomSheet : ThemedBottomSheetFragment() {
     }
 
     val title = dialog.findViewById<TextView>(R.id.options_title)
-    val action = dialog.findViewById<TextView>(R.id.action_button)
-    val enterTag = dialog.findViewById<EditText>(R.id.enter_tag)
-    val removeBtn = dialog.findViewById<TextView>(R.id.action_remove_button)
-
     title.setTextColor(appTheme.get(ThemeColorType.SECONDARY_TEXT))
+    title.setText(if (tag.isNotPersisted()) R.string.tag_sheet_create_title else R.string.tag_sheet_edit_title)
+    title.typeface = appTypeface.title()
+
+    val enterTag = dialog.findViewById<EditText>(R.id.enter_tag)
     enterTag.setTextColor(appTheme.get(ThemeColorType.SECONDARY_TEXT))
     enterTag.setHintTextColor(appTheme.get(ThemeColorType.HINT_TEXT))
+    enterTag.typeface = appTypeface.text()
 
-    title.setText(if (tag.isNotPersisted()) R.string.tag_sheet_create_title else R.string.tag_sheet_edit_title)
+    val action = dialog.findViewById<TextView>(R.id.action_button)
     action.setOnClickListener {
       val updated = onActionClick(tag, enterTag.text.toString())
       sheetOnTagListener(tag, !updated)
       dismiss()
     }
+
+    val removeBtn = dialog.findViewById<TextView>(R.id.action_remove_button)
     removeBtn.visibility = if (tag.isNotPersisted()) GONE else VISIBLE
     removeBtn.setOnClickListener {
       tag.delete()

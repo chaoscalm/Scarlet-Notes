@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.flexbox.FlexboxLayout
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
+import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.database.entities.Folder
 import com.maubis.scarlet.base.settings.ColorView
 import com.maubis.scarlet.base.support.sheets.openSheet
@@ -40,16 +41,16 @@ class CreateOrEditFolderBottomSheet : ThemedBottomSheetFragment() {
     }
 
     val title = dialog.findViewById<TextView>(R.id.options_title)
-    val action = dialog.findViewById<TextView>(R.id.action_button)
-    val enterFolder = dialog.findViewById<EditText>(R.id.enter_folder)
-    val removeBtn = dialog.findViewById<TextView>(R.id.action_remove_button)
-    val colorFlexbox = dialog.findViewById<FlexboxLayout>(R.id.color_flexbox)
-
     title.setTextColor(appTheme.get(ThemeColorType.SECONDARY_TEXT))
+    title.typeface = appTypeface.title()
+    title.setText(if (folder.isNotPersisted()) R.string.folder_sheet_add_note else R.string.folder_sheet_edit_note)
+
+    val enterFolder = dialog.findViewById<EditText>(R.id.enter_folder)
     enterFolder.setTextColor(appTheme.get(ThemeColorType.SECONDARY_TEXT))
     enterFolder.setHintTextColor(appTheme.get(ThemeColorType.HINT_TEXT))
+    enterFolder.typeface = appTypeface.text()
 
-    title.setText(if (folder.isNotPersisted()) R.string.folder_sheet_add_note else R.string.folder_sheet_edit_note)
+    val action = dialog.findViewById<TextView>(R.id.action_button)
     action.setOnClickListener {
       val updated = onActionClick(folder, enterFolder.text.toString())
       sheetOnFolderListener(folder, !updated)
@@ -57,6 +58,7 @@ class CreateOrEditFolderBottomSheet : ThemedBottomSheetFragment() {
     }
 
     val folderDeleteListener = sheetOnFolderListener
+    val removeBtn = dialog.findViewById<TextView>(R.id.action_remove_button)
     removeBtn.visibility = if (folder.isNotPersisted()) GONE else VISIBLE
     removeBtn.setOnClickListener {
       openSheet(context as AppCompatActivity, DeleteFolderBottomSheet().apply {
@@ -74,6 +76,7 @@ class CreateOrEditFolderBottomSheet : ThemedBottomSheetFragment() {
         return@getEditorActionListener true
       }))
 
+    val colorFlexbox = dialog.findViewById<FlexboxLayout>(R.id.color_flexbox)
     setColorsList(dialog.context, folder, colorFlexbox)
     makeBackgroundTransparent(dialog, R.id.root_layout)
   }
