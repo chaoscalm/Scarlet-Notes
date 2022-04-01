@@ -4,12 +4,9 @@ import com.maubis.scarlet.base.settings.sEditorMoveChecked
 import org.json.JSONObject
 import java.util.*
 
-class Format() {
-
-  var formatType: FormatType = FormatType.TEXT
+class Format(var formatType: FormatType) {
 
   var uid: Int = 0
-
   var text: String = ""
 
   val markdownText: String
@@ -29,15 +26,7 @@ class Format() {
       }
     }
 
-  constructor(formatType: FormatType) : this() {
-    this.formatType = formatType
-
-    if (formatType == FormatType.SEPARATOR) {
-      text = "n/a"
-    }
-  }
-
-  constructor(formatType: FormatType, text: String) : this() {
+  constructor(formatType: FormatType, text: String) : this(formatType) {
     this.formatType = formatType
     this.text = text
   }
@@ -53,8 +42,7 @@ class Format() {
 
   companion object {
     fun fromJson(json: JSONObject): Format {
-      return Format().apply {
-        formatType = FormatType.valueOf(json.getString("format"))
+      return Format(FormatType.valueOf(json.getString("format"))).apply {
         text = json.getString("text")
       }
     }
