@@ -4,7 +4,7 @@ import android.content.Context
 import com.google.gson.Gson
 import com.maubis.scarlet.base.backup.data.ExportFileFormat
 import com.maubis.scarlet.base.common.utils.logNonCriticalError
-import com.maubis.scarlet.base.note.NoteBuilder
+import com.maubis.scarlet.base.database.entities.Note
 
 object NoteImporter {
   fun importFromBackupContent(context: Context, content: String) {
@@ -37,7 +37,7 @@ object NoteImporter {
       }
       .filter { it.isNotBlank() }
       .forEach {
-        NoteBuilder.gen("", it).save(context)
+        Note.create("", it).save(context)
       }
   }
 }

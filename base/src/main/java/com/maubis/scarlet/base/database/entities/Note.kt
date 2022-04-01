@@ -5,6 +5,7 @@ import androidx.room.*
 import com.google.gson.Gson
 import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.editor.formats.Format
+import com.maubis.scarlet.base.editor.formats.FormatType
 import com.maubis.scarlet.base.editor.formats.Formats
 import com.maubis.scarlet.base.note.mark
 import com.maubis.scarlet.base.reminders.Reminder
@@ -91,6 +92,19 @@ class Note() {
         note.reminder = reminder
         note.folder = folder
         return note
+    }
+
+    companion object {
+        fun create(title: String, description: String): Note {
+            val note = Note()
+            val formats = ArrayList<Format>()
+            if (title.isNotEmpty()) {
+                formats.add(Format(FormatType.HEADING, title))
+            }
+            formats.add(Format(FormatType.TEXT, description))
+            note.content = Formats.getNoteContent(formats)
+            return note
+        }
     }
 }
 

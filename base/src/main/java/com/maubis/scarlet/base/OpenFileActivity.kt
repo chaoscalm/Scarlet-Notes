@@ -14,9 +14,9 @@ import com.maubis.markdown.spannable.setFormats
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.common.ui.SecuredActivity
 import com.maubis.scarlet.base.common.ui.ThemeColorType
+import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.databinding.ActivityExternalIntentBinding
 import com.maubis.scarlet.base.editor.ViewAdvancedNoteActivity
-import com.maubis.scarlet.base.note.NoteBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -57,7 +57,7 @@ class OpenFileActivity : SecuredActivity() {
     views.toolbar.backButton.setOnClickListener { onBackPressed() }
     views.toolbar.importButton.setOnClickListener {
       lifecycleScope.launch {
-        val note = NoteBuilder.gen(title = "", contentText)
+        val note = Note.create(title = "", description = contentText)
         withContext(Dispatchers.IO) { note.save(this@OpenFileActivity) }
         startActivity(ViewAdvancedNoteActivity.getIntent(this@OpenFileActivity, note))
         finish()

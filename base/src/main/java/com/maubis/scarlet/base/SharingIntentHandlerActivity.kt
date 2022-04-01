@@ -7,16 +7,12 @@ import android.os.Parcelable
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.maubis.scarlet.base.ScarletApp.Companion.imageStorage
-import com.maubis.scarlet.base.common.utils.OsVersionUtils
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.editor.ViewAdvancedNoteActivity
 import com.maubis.scarlet.base.editor.formats.Format
 import com.maubis.scarlet.base.editor.formats.FormatType
 import com.maubis.scarlet.base.editor.formats.Formats
-import com.maubis.scarlet.base.note.NoteBuilder
 import java.io.File
-
-const val KEEP_PACKAGE = "com.google.android.keep"
 
 class SharingIntentHandlerActivity : AppCompatActivity() {
 
@@ -36,22 +32,17 @@ class SharingIntentHandlerActivity : AppCompatActivity() {
   private fun handleSendText(intent: Intent): Note? {
     val sharedText = intent.getStringExtra(Intent.EXTRA_TEXT) ?: ""
     val sharedSubject = intent.getStringExtra(Intent.EXTRA_SUBJECT)
-      ?: intent.getStringExtra(Intent.EXTRA_TITLE) ?: ""
-    val sharedImages = when {
-      intent.action == Intent.ACTION_SEND -> handleSendImage(intent)
-      intent.action == Intent.ACTION_SEND_MULTIPLE -> handleSendMultipleImages(intent)
+          ?: intent.getStringExtra(Intent.EXTRA_TITLE) ?: ""
+    val sharedImages = when (intent.action) {
+      Intent.ACTION_SEND -> handleSendImage(intent)
+      Intent.ACTION_SEND_MULTIPLE -> handleSendMultipleImages(intent)
       else -> emptyList()
     }
     if (sharedText.isBlank() && sharedSubject.isBlank() && sharedImages.isEmpty()) {
       return null
     }
 
-    val note = when (isCallerKeep()) {
-      true -> NoteBuilder.gen(sharedSubject, NoteBuilder.genFromKeep(sharedText))
-      false -> NoteBuilder.gen(sharedSubject, sharedText)
-    }
-    note.save(this)
-
+    val note = Note.create(sharedSubject, sharedText)
     val images = mutableListOf<File>()
     for (uri in sharedImages) {
       try {
@@ -89,19 +80,5 @@ class SharingIntentHandlerActivity : AppCompatActivity() {
       }
     }
     return images
-  }
-
-  private fun isCallerKeep(): Boolean {
-    return try {
-      when {
-        OsVersionUtils.canExtractReferrer() && (referrer?.toString()
-          ?: "").contains(KEEP_PACKAGE) -> true
-        callingPackage?.contains(KEEP_PACKAGE) ?: false -> true
-        (intent?.`package` ?: "").contains(KEEP_PACKAGE) -> true
-        else -> false
-      }
-    } catch (exception: Exception) {
-      false
-    }
   }
 }
