@@ -2,7 +2,6 @@
 <resources>
 
   <color name="separator">#0F000000</color>
-  <color name="add_note_action_bar">#EFEFEF</color>
 
   <color name="colorPrimary">#07575B</color>
   <color name="colorPrimaryDark">#003B46</color>
@@ -12,21 +11,7 @@
   <color name="colorAccentYellowDark">#FFFFCD</color>
   <color name="colorAccentYellowLight">#505000</color>
 
-  <color name="color_1">#021C1E</color>
-  <color name="color_2">#004445</color>
-  <color name="color_3">#2C7873</color>
-  <color name="color_4">#6FB98F</color>
-
-  <color name="timestamp_text">#76000000</color>
-
-  <color name="home_title">@color/material_blue_grey_700</color>
-  <color name="home_text">@color/material_blue_grey_500</color>
-  <color name="home_timestamp">@color/dark_hint_text</color>
-
   <color name="fabColor">@color/colorAccent</color>
-
-  <color name="login_button_active">@color/material_blue_800</color>
-  <color name="login_button_disabled">@color/material_grey_600</color>
 
   <color name="code_light">#22000000</color>
   <color name="code_dark">#22FFFFFF</color>

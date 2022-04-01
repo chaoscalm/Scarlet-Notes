@@ -2,7 +2,6 @@
   <string name="app_name" translatable="false">Scarlet Notes</string>
 
   <string name="timestamp" translatable="false">dd month yyyy, hh:mm aa</string>
-  <string name="title">Title</string>
   <string name="description">Content</string>
   <string name="save">Save</string>
   <string name="import_to_app">Import</string>
@@ -34,7 +33,6 @@
   <string name="unlock_note">Unlock</string>
   <string name="reminder">Reminder</string>
   <string name="pin_to_launcher">Launcher Shortcut</string>
-  <string name="select">Select</string>
   <string name="duplicate">Duplicate</string>
   <string name="pin_note">Pin</string>
   <string name="unpin_note">Unpin</string>
@@ -123,14 +121,10 @@
   <string name="note_option_number_lines">Note Line Limit</string>
   <string name="note_option_number_lines_subtitle">%d lines on home screen</string>
 
-  <string name="markdown_sheet_examples_list" translatable="false"># Heading \n## Subheading \n\n```\nblock of code\n```\n\n> quote\n\n- **bold**\n- *italics*\n- _underline_\n- ~~strike~~\n- `code`\n</string>
-
   <string name="permission_layout_give_permission">Give Permissions</string>
   <string name="permission_layout_give_permission_details">Import and export require storage permissions. Please give the permission when requested.</string>
   <string name="permission_layout_give_permission_ok">Allow</string>
 
-  <string name="import_export_import_file_title">Import Backup from File</string>
-  <string name="import_export_import_file">Import File</string>
   <string name="import_export_layout_exported">Exported to file</string>
   <string name="import_export_layout_export_failed">Export failed</string>
   <string name="import_export_layout_exporting">Exporting to file&#8230;</string>
@@ -139,7 +133,6 @@
   <string name="import_export_locked">Export locked notes</string>
   <string name="import_export_locked_details">Also backup the notes which are locked</string>
 
-  <string name="about_page_contribute">Contribute</string>
   <string name="about_page_app_version">App Version</string>
 
   <string name="reminder_sheet_reminder_date">Reminder Date</string>
@@ -207,14 +200,6 @@
   <string name="delete_sheet_delete_trash_yes">Delete</string>
   <string name="delete_sheet_delete_trash_no">Cancel</string>
   <!-- End Delete Notes -->
-
-  <!-- Start Information -->
-  <string name="information_card_title">Information</string>
-  <!-- End Information -->
-
-  <!-- Start Welcome Page -->
-  <string name="welcome_page_app_name" translatable="false">Scarlet</string>
-  <!-- End Welcome Page -->
 
   <!-- Start Theme Color -->
   <string name="home_option_theme_color">App Theme</string>
