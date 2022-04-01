@@ -16,28 +16,28 @@
   <string name="shortcut_add_note">Add Note</string>
   <string name="shortcut_add_list">Add Checklist</string>
 
-  <string name="edit_note">Edit Note</string>
+  <string name="edit_note">Edit</string>
   <string name="open_in_notification">Create Notification</string>
   <string name="share_images">Share Images</string>
   <string name="delete_note_permanently">Delete Permanently</string>
-  <string name="copy_note">Copy Note</string>
-  <string name="send_note">Send Note</string>
-  <string name="unarchive_note">Unarchive Note</string>
-  <string name="archive_note">Archive Note</string>
+  <string name="copy_note">Copy</string>
+  <string name="send_note">Send</string>
+  <string name="unarchive_note">Unarchive</string>
+  <string name="archive_note">Archive</string>
   <string name="not_favourite_note">Mark Not Favourite</string>
   <string name="favourite_note">Mark Favourite</string>
-  <string name="restore_note">Restore Note</string>
+  <string name="restore_note">Restore</string>
   <string name="trash_note">Move to Trash</string>
   <string name="choose_note_color">Change Color</string>
-  <string name="lock_note">Lock Note</string>
+  <string name="lock_note">Lock</string>
   <string name="change_tags">Change Tags</string>
-  <string name="unlock_note">Unlock Note</string>
+  <string name="unlock_note">Unlock</string>
   <string name="reminder">Reminder</string>
   <string name="pin_to_launcher">Launcher Shortcut</string>
   <string name="select">Select</string>
   <string name="duplicate">Duplicate</string>
-  <string name="pin_note">Pin Note</string>
-  <string name="unpin_note">Unpin Note</string>
+  <string name="pin_note">Pin</string>
+  <string name="unpin_note">Unpin</string>
   <string name="merge_notes">Merge Notes</string>
   <string name="choose_action">Choose Action&#8230;</string>
 
@@ -238,15 +238,14 @@
   <string name="backup_note_exclude">Exclude from backups</string>
   <string name="backup_note_include">Include in backups</string>
 
-  <string name="folder_card_title">Empty Notebook</string>
-  <string name="folder_card_title_single_note">1 Note</string>
-  <string name="folder_card_title_notes">%d Notes</string>
+  <string name="folder_card_title">No notes</string>
+  <string name="folder_card_title_single_note">1 note</string>
+  <string name="folder_card_title_notes">%d notes</string>
   <string name="folder_sheet_add_note">Create New Notebook</string>
   <string name="folder_sheet_edit_note">Edit Notebook</string>
-  <string name="folder_sheet_add_note_detail">Add Notebook</string>
+  <string name="folder_sheet_add_note_detail">Notebook name</string>
 
-  <string name="folder_option_add_to_notebook">Add to Notebook</string>
-  <string name="folder_option_change_notebook">Modify Notebook</string>
+  <string name="folder_option_change_notebook">Move to…</string>
 
   <string name="recent_notes">Recent Notes</string>
 

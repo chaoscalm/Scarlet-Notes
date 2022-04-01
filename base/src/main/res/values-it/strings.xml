@@ -6,9 +6,9 @@
   <string name="share_using">Condividi con&#8230;</string>
   <string name="main_no_notes">Nessuna nota</string>
   <string name="main_no_notes_hint">Sembra che non hai aggiunto alcuna nota. Fai clic per aggiungere una nota.</string>
-  <string name="edit_note">Modifica nota</string>
-  <string name="copy_note">Copia nota</string>
-  <string name="send_note">Invia nota</string>
+  <string name="edit_note">Modifica</string>
+  <string name="copy_note">Copia</string>
+  <string name="send_note">Invia</string>
   <string name="choose_action">Scegli un\'azione&#8230;</string>
   <string name="format_hint_text">Aggiungi contenuto&#8230;</string>
   <string name="format_hint_heading">Aggiungi intestazione&#8230;</string>
@@ -34,8 +34,8 @@
   <string name="about_page_contribute">Contribuisci</string>
   <string name="about_page_app_version">Versione dell\'app</string>
   <string name="search_notes">Cerca note&#8230;</string>
-  <string name="lock_note">Proteggi nota</string>
-  <string name="unlock_note">Sblocca nota</string>
+  <string name="lock_note">Proteggi</string>
+  <string name="unlock_note">Sblocca</string>
   <string name="home_option_security">Sicurezza</string>
   <string name="home_option_security_subtitle">Blocco delle note e opzioni di sicurezza</string>
   <string name="security_option_title">Opzioni di sicurezza</string>
@@ -54,14 +54,12 @@
   <string name="home_option_enable_grid_view_subtitle">Mostra le note in una griglia sfalsata</string>
 
   <string name="choose_note_color">Cambia colore</string>
-  <string name="tap_for_action_color">Tocca per cambiare il colore di sfondo della nota</string>
-
   <string name="delete_note_permanently">Elimina definitivamente</string>
-  <string name="unarchive_note">Rimuovi nota dall\'archivio</string>
-  <string name="archive_note">Archivia nota</string>
+  <string name="unarchive_note">Rimuovi dall\'archivio</string>
+  <string name="archive_note">Archivia</string>
   <string name="not_favourite_note">Rimuovi dai preferiti</string>
   <string name="favourite_note">Aggiungi ai preferiti</string>
-  <string name="restore_note">Ripristina nota</string>
+  <string name="restore_note">Ripristina</string>
   <string name="trash_note">Sposta nel cestino</string>
   <string name="nav_home">Home</string>
   <string name="nav_favourites">Preferiti</string>
@@ -91,7 +89,7 @@
   <string name="sort_sheet_last_modified">Più recentemente modificato</string>
   <string name="reminder">Promemoria</string>
   <string name="pin_note">Fissa in alto</string>
-  <string name="unpin_note">Sblocca nota</string>
+  <string name="unpin_note">Rilascia</string>
 
   <!-- Added in release v3.9.0 -->
   <string name="home_option_ui_experience">Interfaccia ed esperienza utente</string>
@@ -166,14 +164,13 @@
   <string name="recent_to_trash_undo">Annulla</string>
   <string name="backup_note_exclude">Escludi dal backup</string>
   <string name="backup_note_include">Includi nel backup</string>
-  <string name="folder_card_title">Notebook vuoto</string>
+  <string name="folder_card_title">Nessuna nota</string>
   <string name="folder_card_title_single_note">1 nota</string>
   <string name="folder_card_title_notes">%d note</string>
   <string name="folder_sheet_add_note">Crea nuovo blocco note</string>
   <string name="folder_sheet_edit_note">Modifica blocco note</string>
-  <string name="folder_sheet_add_note_detail">Aggiungi blocco note</string>
-  <string name="folder_option_add_to_notebook">Aggiungi al blocco note</string>
-  <string name="folder_option_change_notebook">Modifica blocco note</string>
+  <string name="folder_sheet_add_note_detail">Nome del blocco note</string>
+  <string name="folder_option_change_notebook">Sposta in…</string>
   <string name="recent_notes">Note recenti</string>
   <string name="information_card_title">Informazione</string>
   <string name="home_option_delete_notes_and_more">Elimina note e altro</string>

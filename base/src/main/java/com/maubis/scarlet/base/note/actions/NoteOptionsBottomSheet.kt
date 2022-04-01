@@ -230,7 +230,7 @@ class NoteOptionsBottomSheet : GridBottomSheetBase() {
       dismiss()
     })
     options.add(OptionsItem(
-        title = if (note.folder == null) R.string.folder_option_add_to_notebook else R.string.folder_option_change_notebook,
+        title = R.string.folder_option_change_notebook,
         icon = R.drawable.ic_folder
     ) {
       openSheet(activity, FolderChooserBottomSheet(note).apply {
