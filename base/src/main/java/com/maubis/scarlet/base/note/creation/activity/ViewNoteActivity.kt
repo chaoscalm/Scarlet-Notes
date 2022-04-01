@@ -301,7 +301,7 @@ open class ViewAdvancedNoteActivity : SecuredActivity(), INoteOptionSheetActivit
   }
 
   override fun moveItemToTrashOrDelete(note: Note) {
-    note.softDelete(this)
+    note.moveToTrashOrDelete(this)
     finish()
   }
 

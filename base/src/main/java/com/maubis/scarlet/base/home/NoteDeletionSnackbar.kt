@@ -13,29 +13,23 @@ import com.maubis.scarlet.base.database.entities.NoteState
 
 class NoteDeletionSnackbar(val layout: LinearLayout, val alwaysRunnable: () -> Unit) {
 
-  val handler = Handler(Looper.getMainLooper())
-  val runnable = {
+  private val handler = Handler(Looper.getMainLooper())
+  private val runnable = {
     layout.visibility = GONE
   }
 
   val title: TextView = layout.findViewById(R.id.bottom_snackbar_title)
   val action: TextView = layout.findViewById(R.id.bottom_snackbar_action)
 
-  fun triggerSnackbar() {
-    handler.removeCallbacks(runnable)
-    layout.visibility = VISIBLE
-    handler.postDelayed(runnable, 5 * 1000)
-  }
-
-  fun softUndo(context: Context, note: Note) {
-    if (note.state === NoteState.TRASH) {
-      undoMoveNoteToTrash(context, note)
+  fun softUndo(context: Context, noteBeforeDeletion: Note) {
+    if (noteBeforeDeletion.state != NoteState.TRASH) {
+      displayMoveToTrashSnackbar(context, noteBeforeDeletion)
       return
     }
-    undoDeleteNote(context, note)
+    displayPermanentDeletionSnackbar(context, noteBeforeDeletion)
   }
 
-  fun undoMoveNoteToTrash(context: Context, note: Note) {
+  private fun displayMoveToTrashSnackbar(context: Context, note: Note) {
     val backupOfNote = note.shallowCopy()
     title.setText(R.string.recent_to_trash_message)
     action.setText(R.string.recent_to_trash_undo)
@@ -47,7 +41,7 @@ class NoteDeletionSnackbar(val layout: LinearLayout, val alwaysRunnable: () -> U
     triggerSnackbar()
   }
 
-  fun undoDeleteNote(context: Context, note: Note) {
+  private fun displayPermanentDeletionSnackbar(context: Context, note: Note) {
     val backupOfNote = note.shallowCopy()
     title.setText(R.string.recent_to_delete_message)
     action.setText(R.string.recent_to_trash_undo)
@@ -57,5 +51,11 @@ class NoteDeletionSnackbar(val layout: LinearLayout, val alwaysRunnable: () -> U
       layout.visibility = GONE
     }
     triggerSnackbar()
+  }
+
+  private fun triggerSnackbar() {
+    handler.removeCallbacks(runnable)
+    layout.visibility = VISIBLE
+    handler.postDelayed(runnable, 5 * 1000)
   }
 }

@@ -385,7 +385,7 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
 
   override fun moveItemToTrashOrDelete(note: Note) {
     snackbar.softUndo(this, note)
-    note.softDelete(this)
+    note.moveToTrashOrDelete(this)
     refreshItems()
   }
 

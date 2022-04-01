@@ -68,7 +68,7 @@ class Note() {
         ScarletApp.data.notes.delete(this, context)
     }
 
-    fun softDelete(context: Context) {
+    fun moveToTrashOrDelete(context: Context) {
         if (state === NoteState.TRASH) {
             delete(context)
             return

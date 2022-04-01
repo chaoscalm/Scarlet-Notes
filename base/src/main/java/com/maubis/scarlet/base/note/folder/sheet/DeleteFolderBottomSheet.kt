@@ -48,7 +48,7 @@ class DeleteFolderBottomSheet : LithoOptionBottomSheet() {
       listener = {
         executeForFolderContent(folder) {
           it.folder = null
-          it.softDelete(activity)
+          it.moveToTrashOrDelete(activity)
         }
 
         sheetOnFolderListener(folder, false)
@@ -63,7 +63,7 @@ class DeleteFolderBottomSheet : LithoOptionBottomSheet() {
         folder.delete()
         executeForFolderContent(folder) {
           it.folder = null
-          it.softDelete(activity)
+          it.moveToTrashOrDelete(activity)
         }
 
         sheetOnFolderListener(folder, true)

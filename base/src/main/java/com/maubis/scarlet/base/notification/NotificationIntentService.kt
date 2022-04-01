@@ -41,7 +41,7 @@ class NotificationIntentService : IntentService("NotificationIntentService") {
       NoteAction.COPY -> note.copyToClipboard(context)
       NoteAction.SHARE -> note.share(context)
       NoteAction.DELETE -> {
-        note.softDelete(context)
+        note.moveToTrashOrDelete(context)
         NotificationHandler(context).cancelNotification(note.uid)
       }
     }
