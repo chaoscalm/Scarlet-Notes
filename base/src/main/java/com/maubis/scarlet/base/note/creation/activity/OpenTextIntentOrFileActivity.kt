@@ -13,7 +13,6 @@ import com.maubis.markdown.spannable.clearMarkdownSpans
 import com.maubis.markdown.spannable.setFormats
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
-import com.maubis.scarlet.base.backup.NoteImporter
 import com.maubis.scarlet.base.core.note.NoteBuilder
 import com.maubis.scarlet.base.databinding.ActivityExternalIntentBinding
 import com.maubis.scarlet.base.support.ui.SecuredActivity
@@ -21,7 +20,6 @@ import com.maubis.scarlet.base.support.ui.ThemeColorType
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.io.InputStreamReader
 
 class OpenTextIntentOrFileActivity : SecuredActivity() {
 
@@ -75,10 +73,10 @@ class OpenTextIntentOrFileActivity : SecuredActivity() {
     }
 
     try {
-      val inputStream = contentResolver.openInputStream(data)
-      contentText = NoteImporter().readFileInputStream(InputStreamReader(inputStream))
+      contentResolver.openInputStream(data)?.use { stream ->
+        contentText = stream.bufferedReader().use { it.readText() }
+      }
       filenameText = lastPathSegment
-      inputStream?.close()
       return true
     } catch (exception: Exception) {
       return false

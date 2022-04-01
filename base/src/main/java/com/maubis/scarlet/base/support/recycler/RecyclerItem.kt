@@ -7,7 +7,6 @@ abstract class RecyclerItem {
   enum class Type {
     NOTE,
     EMPTY,
-    FILE,
     FOLDER
   }
 }

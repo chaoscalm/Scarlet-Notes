@@ -74,7 +74,6 @@
           android:scheme="scarlet" />
       </intent-filter>
     </activity>
-    <activity android:name=".backup.ui.ImportNoteActivity" />
     <activity android:name=".note.creation.activity.ShareToScarletRouterActivity">
       <intent-filter>
         <action android:name="android.intent.action.SEND_MULTIPLE" />

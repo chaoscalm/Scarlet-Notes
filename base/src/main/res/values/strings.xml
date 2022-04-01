@@ -139,10 +139,6 @@
   <string name="import_export_locked">Export locked notes</string>
   <string name="import_export_locked_details">Also backup the notes which are locked</string>
 
-  <string name="file_size_kb" translatable="false">%s KB</string>
-  <string name="file_size_mb" translatable="false">%s MB</string>
-  <string name="file_size_gb" translatable="false">%s GB</string>
-
   <string name="about_page_contribute">Contribute</string>
   <string name="about_page_app_version">App Version</string>
 
@@ -321,5 +317,7 @@
   <string name="folder_delete_option_sheet_remove_folder_content">Remove Notes</string>
   <string name="folder_delete_option_sheet_remove_folder_content_details">Keep Notebook but all notes move to trash or are deleted.</string>
   <string name="image_picker_error">An error occurred while retrieving the selected image.</string>
+  <string name="file_picker_missing">The Android file chooser appears to be missing on this device. You should reinstall it ;)</string>
+  <string name="import_completed">Import completed</string>
 
 </resources>

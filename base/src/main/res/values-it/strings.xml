@@ -258,5 +258,7 @@
   <string name="share_images">Condividi immagini</string>
   <string name="share_image">Condividi immagine</string>
   <string name="image_picker_error">Si è verificato un errore nel recuperare l\'immagine selezionata.</string>
+  <string name="file_picker_missing">Sembra che il selettore file di Android non sia installato sul dispositivo. Dovresti reinstallarlo ;)</string>
+  <string name="import_completed">Importazione completata</string>
 
 </resources>

@@ -4,7 +4,6 @@ import android.content.Context
 import com.github.bijoysingh.starter.recyclerview.MultiRecyclerViewAdapter
 import com.github.bijoysingh.starter.recyclerview.MultiRecyclerViewControllerItem
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.backup.ui.FileImportViewHolder
 import com.maubis.scarlet.base.home.recycler.EmptyRecyclerHolder
 import com.maubis.scarlet.base.note.folder.FolderRecyclerHolder
 import com.maubis.scarlet.base.note.folder.SelectorFolderRecyclerHolder
@@ -40,12 +39,6 @@ fun getRecyclerItemControllerList(
       .viewType(RecyclerItem.Type.EMPTY.ordinal)
       .layoutFile(R.layout.item_no_notes)
       .holderClass(EmptyRecyclerHolder::class.java)
-      .build())
-  list.add(
-    MultiRecyclerViewControllerItem.Builder<RecyclerItem>()
-      .viewType(RecyclerItem.Type.FILE.ordinal)
-      .layoutFile(R.layout.item_import_file)
-      .holderClass(FileImportViewHolder::class.java)
       .build())
   list.add(
     MultiRecyclerViewControllerItem.Builder<RecyclerItem>()
