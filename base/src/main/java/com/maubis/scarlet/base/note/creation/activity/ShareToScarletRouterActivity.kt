@@ -7,30 +7,21 @@ import android.os.Parcelable
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.maubis.scarlet.base.ScarletApp.Companion.imageStorage
-import com.maubis.scarlet.base.backup.NoteImporter
 import com.maubis.scarlet.base.core.format.Format
 import com.maubis.scarlet.base.core.format.FormatType
 import com.maubis.scarlet.base.core.format.Formats
 import com.maubis.scarlet.base.core.note.NoteBuilder
 import com.maubis.scarlet.base.database.entities.Note
-import com.maubis.scarlet.base.home.MainActivity
 import com.maubis.scarlet.base.support.utils.OsVersionUtils
 import java.io.File
 
 const val KEEP_PACKAGE = "com.google.android.keep"
-const val INTENT_KEY_DIRECT_NOTES_TRANSFER = "direct_notes_transfer"
 
 class ShareToScarletRouterActivity : AppCompatActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     try {
-      val hasDirectIntent = handleDirectSendText(intent)
-      if (hasDirectIntent) {
-        startActivity(Intent(this, MainActivity::class.java))
-        return
-      }
-
       val note = handleSendText(intent)
       if (note === null) {
         return
@@ -77,15 +68,6 @@ class ShareToScarletRouterActivity : AppCompatActivity() {
     note.content = Formats.getEnhancedNoteContent(formats)
     note.save(this)
     return note
-  }
-
-  private fun handleDirectSendText(intent: Intent): Boolean {
-    val sharedText = intent.getStringExtra(INTENT_KEY_DIRECT_NOTES_TRANSFER)
-    if (sharedText === null || sharedText.isBlank()) {
-      return false
-    }
-    NoteImporter().importFromBackupContent(this, sharedText)
-    return true
   }
 
   private fun handleSendImage(intent: Intent): List<Uri> {
