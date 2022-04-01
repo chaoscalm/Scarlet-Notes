@@ -16,13 +16,19 @@ import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.backup.NoteExporter
 import com.maubis.scarlet.base.backup.PermissionUtils
+import com.maubis.scarlet.base.common.recycler.RecyclerItem
+import com.maubis.scarlet.base.common.specs.ToolbarColorConfig
+import com.maubis.scarlet.base.common.ui.SecuredActivity
+import com.maubis.scarlet.base.common.ui.ThemeColorType
+import com.maubis.scarlet.base.common.ui.sThemeIsAutomatic
+import com.maubis.scarlet.base.common.ui.setThemeFromSystem
 import com.maubis.scarlet.base.database.entities.Folder
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.database.entities.NoteState
 import com.maubis.scarlet.base.database.entities.Tag
 import com.maubis.scarlet.base.databinding.ActivityMainBinding
-import com.maubis.scarlet.base.home.recycler.EmptyRecyclerItem
-import com.maubis.scarlet.base.note.actions.INoteOptionSheetActivity
+import com.maubis.scarlet.base.home.recycler.NoNotesRecyclerItem
+import com.maubis.scarlet.base.note.actions.INoteActionsSheetActivity
 import com.maubis.scarlet.base.note.folder.FolderRecyclerItem
 import com.maubis.scarlet.base.note.folder.sheet.CreateOrEditFolderBottomSheet
 import com.maubis.scarlet.base.note.mark
@@ -32,18 +38,12 @@ import com.maubis.scarlet.base.settings.STORE_KEY_LINE_COUNT
 import com.maubis.scarlet.base.settings.SettingsBottomSheet
 import com.maubis.scarlet.base.settings.sNoteItemLineCount
 import com.maubis.scarlet.base.settings.sUIUseGridView
-import com.maubis.scarlet.base.support.recycler.RecyclerItem
-import com.maubis.scarlet.base.support.specs.ToolbarColorConfig
-import com.maubis.scarlet.base.support.ui.SecuredActivity
-import com.maubis.scarlet.base.support.ui.ThemeColorType
-import com.maubis.scarlet.base.support.ui.sThemeIsAutomatic
-import com.maubis.scarlet.base.support.ui.setThemeFromSystem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.*
 
-class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
+class MainActivity : SecuredActivity(), INoteActionsSheetActivity {
   companion object {
     private const val IS_IN_SEARCH_MODE: String = "IS_IN_SEARCH_MODE"
     private const val NAVIGATION_MODE: String = "NAVIGATION_MODE"
@@ -239,7 +239,7 @@ class MainActivity : SecuredActivity(), INoteOptionSheetActivity {
   private fun handleNewItems(notes: List<RecyclerItem>) {
     adapter.clearItems()
     if (notes.isEmpty()) {
-      adapter.addItem(EmptyRecyclerItem())
+      adapter.addItem(NoNotesRecyclerItem())
       return
     }
     notes.forEach {

@@ -8,11 +8,11 @@ import com.facebook.litho.ComponentContext
 import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appPreferences
+import com.maubis.scarlet.base.common.sheets.LithoBottomSheet
+import com.maubis.scarlet.base.common.sheets.getLithoBottomSheetTitle
+import com.maubis.scarlet.base.common.specs.BottomSheetBar
+import com.maubis.scarlet.base.common.specs.CounterChooser
 import com.maubis.scarlet.base.home.MainActivity
-import com.maubis.scarlet.base.support.sheets.LithoBottomSheet
-import com.maubis.scarlet.base.support.sheets.getLithoBottomSheetTitle
-import com.maubis.scarlet.base.support.specs.BottomSheetBar
-import com.maubis.scarlet.base.support.specs.CounterChooser
 
 const val STORE_KEY_LINE_COUNT = "KEY_LINE_COUNT"
 const val LINE_COUNT_DEFAULT = 7

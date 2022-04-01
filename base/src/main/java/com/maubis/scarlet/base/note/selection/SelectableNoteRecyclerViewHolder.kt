@@ -3,10 +3,10 @@ package com.maubis.scarlet.base.note.selection
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import com.maubis.scarlet.base.common.recycler.RecyclerItem
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.note.recycler.NoteRecyclerItem
 import com.maubis.scarlet.base.note.recycler.NoteRecyclerViewHolderBase
-import com.maubis.scarlet.base.support.recycler.RecyclerItem
 
 class SelectableNoteRecyclerViewHolder(context: Context, view: View) : NoteRecyclerViewHolderBase(context, view) {
 

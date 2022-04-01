@@ -13,9 +13,12 @@ import com.github.bijoysingh.starter.recyclerview.RecyclerViewBuilder
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.data
-import com.maubis.scarlet.base.core.note.sort
+import com.maubis.scarlet.base.common.recycler.RecyclerItem
+import com.maubis.scarlet.base.common.ui.SecuredActivity
+import com.maubis.scarlet.base.common.ui.ThemeColorType
+import com.maubis.scarlet.base.common.utils.sort
 import com.maubis.scarlet.base.database.entities.Note
-import com.maubis.scarlet.base.home.recycler.EmptyRecyclerItem
+import com.maubis.scarlet.base.home.recycler.NoNotesRecyclerItem
 import com.maubis.scarlet.base.note.folder.SelectorFolderRecyclerItem
 import com.maubis.scarlet.base.note.recycler.NoteAppAdapter
 import com.maubis.scarlet.base.note.recycler.NoteRecyclerItem
@@ -24,9 +27,6 @@ import com.maubis.scarlet.base.settings.STORE_KEY_LINE_COUNT
 import com.maubis.scarlet.base.settings.SortingOptionsBottomSheet
 import com.maubis.scarlet.base.settings.sNoteItemLineCount
 import com.maubis.scarlet.base.settings.sUIUseGridView
-import com.maubis.scarlet.base.support.recycler.RecyclerItem
-import com.maubis.scarlet.base.support.ui.SecuredActivity
-import com.maubis.scarlet.base.support.ui.ThemeColorType
 import java.util.*
 
 abstract class SelectableNotesActivityBase : SecuredActivity(), INoteSelectorActivity {
@@ -74,7 +74,7 @@ abstract class SelectableNotesActivityBase : SecuredActivity(), INoteSelectorAct
         adapter.clearItems()
 
         if (notes.isEmpty()) {
-          adapter.addItem(EmptyRecyclerItem())
+          adapter.addItem(NoNotesRecyclerItem())
         }
 
         notes.forEach {

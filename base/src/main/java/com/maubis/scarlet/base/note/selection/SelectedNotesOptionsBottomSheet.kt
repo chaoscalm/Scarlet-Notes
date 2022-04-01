@@ -5,9 +5,14 @@ import androidx.core.content.ContextCompat
 import com.facebook.litho.ComponentContext
 import com.github.bijoysingh.starter.util.TextUtils
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.core.format.Formats
-import com.maubis.scarlet.base.core.format.sectionPreservingSort
+import com.maubis.scarlet.base.common.sheets.GridOptionBottomSheet
+import com.maubis.scarlet.base.common.sheets.openSheet
+import com.maubis.scarlet.base.common.specs.GridSectionItem
+import com.maubis.scarlet.base.common.specs.GridSectionOptionItem
+import com.maubis.scarlet.base.common.utils.SharingUtils
 import com.maubis.scarlet.base.database.entities.NoteState
+import com.maubis.scarlet.base.editor.formats.Formats
+import com.maubis.scarlet.base.editor.formats.sectionPreservingSort
 import com.maubis.scarlet.base.home.sheets.AlertBottomSheet
 import com.maubis.scarlet.base.home.sheets.AlertSheetConfig
 import com.maubis.scarlet.base.note.addTag
@@ -16,11 +21,6 @@ import com.maubis.scarlet.base.note.mark
 import com.maubis.scarlet.base.note.removeTag
 import com.maubis.scarlet.base.note.tag.SelectedTagChooserBottomSheet
 import com.maubis.scarlet.base.security.openUnlockSheet
-import com.maubis.scarlet.base.support.sheets.GridOptionBottomSheet
-import com.maubis.scarlet.base.support.sheets.openSheet
-import com.maubis.scarlet.base.support.specs.GridSectionItem
-import com.maubis.scarlet.base.support.specs.GridSectionOptionItem
-import com.maubis.scarlet.base.support.utils.SharingUtils
 
 class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
   override fun title(): Int = R.string.choose_action

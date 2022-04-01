@@ -3,34 +3,34 @@ package com.maubis.scarlet.base.note.recycler
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import com.maubis.scarlet.base.ScarletIntentHandlerActivity
+import com.maubis.scarlet.base.common.ui.ThemedActivity
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.home.MainActivity
-import com.maubis.scarlet.base.note.actions.NoteOptionsBottomSheet
+import com.maubis.scarlet.base.note.actions.NoteActionsBottomSheet
 import com.maubis.scarlet.base.note.copyToClipboard
-import com.maubis.scarlet.base.note.creation.activity.NoteIntentRouterActivity
 import com.maubis.scarlet.base.note.edit
 import com.maubis.scarlet.base.note.share
 import com.maubis.scarlet.base.security.openUnlockSheet
-import com.maubis.scarlet.base.support.ui.ThemedActivity
 
 class NoteRecyclerHolder(context: Context, view: View) : NoteRecyclerViewHolderBase(context, view) {
 
   private val activity = context as MainActivity
 
   override fun viewClick(note: Note, extra: Bundle?) {
-    actionOrUnlockNote(note, Runnable { openNote(note) })
+    actionOrUnlockNote(note) { openNote(note) }
   }
 
   override fun viewLongClick(note: Note, extra: Bundle?) {
-    NoteOptionsBottomSheet.openSheet(activity, note)
+    NoteActionsBottomSheet.openSheet(activity, note)
   }
 
   override fun deleteIconClick(note: Note, extra: Bundle?) {
-    actionOrUnlockNote(note, Runnable { activity.moveItemToTrashOrDelete(note) })
+    actionOrUnlockNote(note) { activity.moveItemToTrashOrDelete(note) }
   }
 
   override fun shareIconClick(note: Note, extra: Bundle?) {
-    actionOrUnlockNote(note, Runnable { note.share(context) })
+    actionOrUnlockNote(note) { note.share(context) }
   }
 
   override fun editIconClick(note: Note, extra: Bundle?) {
@@ -38,11 +38,11 @@ class NoteRecyclerHolder(context: Context, view: View) : NoteRecyclerViewHolderB
   }
 
   override fun copyIconClick(note: Note, extra: Bundle?) {
-    actionOrUnlockNote(note, Runnable { note.copyToClipboard(context) })
+    actionOrUnlockNote(note) { note.copyToClipboard(context) }
   }
 
   override fun moreOptionsIconClick(note: Note, extra: Bundle?) {
-    NoteOptionsBottomSheet.openSheet(activity, note)
+    NoteActionsBottomSheet.openSheet(activity, note)
   }
 
   private fun actionOrUnlockNote(data: Note, runnable: Runnable) {
@@ -59,6 +59,6 @@ class NoteRecyclerHolder(context: Context, view: View) : NoteRecyclerViewHolderB
   }
 
   private fun openNote(data: Note) {
-    context.startActivity(NoteIntentRouterActivity.view(context, data))
+    context.startActivity(ScarletIntentHandlerActivity.view(context, data))
   }
 }

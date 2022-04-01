@@ -9,20 +9,20 @@ import com.maubis.markdown.spannable.*
 import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.data
-import com.maubis.scarlet.base.core.format.FormatType
+import com.maubis.scarlet.base.ScarletIntentHandlerActivity
+import com.maubis.scarlet.base.common.ui.ThemedActivity
+import com.maubis.scarlet.base.common.utils.ColorUtil
+import com.maubis.scarlet.base.common.utils.SharingUtils
+import com.maubis.scarlet.base.common.utils.dateFormat
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.database.entities.NoteState
 import com.maubis.scarlet.base.database.entities.Tag
-import com.maubis.scarlet.base.note.creation.activity.NoteIntentRouterActivity
+import com.maubis.scarlet.base.editor.formats.FormatType
 import com.maubis.scarlet.base.security.PinLockController.needsLockCheck
 import com.maubis.scarlet.base.security.openUnlockSheet
 import com.maubis.scarlet.base.settings.sInternalShowUUID
 import com.maubis.scarlet.base.settings.sSecurityAppLockEnabled
 import com.maubis.scarlet.base.settings.sWidgetShowLockedNotes
-import com.maubis.scarlet.base.support.ui.ThemedActivity
-import com.maubis.scarlet.base.support.utils.ColorUtil
-import com.maubis.scarlet.base.support.utils.SharingUtils
-import com.maubis.scarlet.base.support.utils.dateFormat
 
 /**************************************************************************************
  ************* Content and Display Information Functions Functions ********************
@@ -223,12 +223,12 @@ fun Note.edit(context: Context) {
     if (context is ThemedActivity) {
       openUnlockSheet(
         activity = context,
-        onUnlockSuccess = { context.startActivity(NoteIntentRouterActivity.edit(context, this)) },
+        onUnlockSuccess = { context.startActivity(ScarletIntentHandlerActivity.edit(context, this)) },
         onUnlockFailure = { edit(context) })
     }
     return
   }
-  context.startActivity(NoteIntentRouterActivity.edit(context, this))
+  context.startActivity(ScarletIntentHandlerActivity.edit(context, this))
 }
 
 fun Note.hasImages(): Boolean {

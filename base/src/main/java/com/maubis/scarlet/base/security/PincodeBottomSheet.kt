@@ -16,19 +16,19 @@ import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
+import com.maubis.scarlet.base.common.sheets.LithoBottomSheet
+import com.maubis.scarlet.base.common.sheets.getLithoBottomSheetTitle
+import com.maubis.scarlet.base.common.sheets.openSheet
+import com.maubis.scarlet.base.common.specs.EmptySpec
+import com.maubis.scarlet.base.common.ui.ThemeColorType
+import com.maubis.scarlet.base.common.ui.ThemedActivity
+import com.maubis.scarlet.base.common.utils.isBiometricEnabled
+import com.maubis.scarlet.base.common.utils.showBiometricPrompt
 import com.maubis.scarlet.base.home.MainActivity
 import com.maubis.scarlet.base.security.PinLockController.isPinCodeEnabled
 import com.maubis.scarlet.base.security.PinLockController.needsLockCheck
 import com.maubis.scarlet.base.settings.sSecurityAppLockEnabled
 import com.maubis.scarlet.base.settings.sSecurityCode
-import com.maubis.scarlet.base.support.sheets.LithoBottomSheet
-import com.maubis.scarlet.base.support.sheets.getLithoBottomSheetTitle
-import com.maubis.scarlet.base.support.sheets.openSheet
-import com.maubis.scarlet.base.support.specs.EmptySpec
-import com.maubis.scarlet.base.support.ui.ThemeColorType
-import com.maubis.scarlet.base.support.ui.ThemedActivity
-import com.maubis.scarlet.base.support.utils.isBiometricEnabled
-import com.maubis.scarlet.base.support.utils.showBiometricPrompt
 
 data class PincodeSheetData(
   val title: Int,

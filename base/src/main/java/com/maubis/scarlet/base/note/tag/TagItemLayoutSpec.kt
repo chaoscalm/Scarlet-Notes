@@ -14,10 +14,10 @@ import com.facebook.yoga.YogaAlign
 import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp
+import com.maubis.scarlet.base.common.sheets.OptionItemLayout
+import com.maubis.scarlet.base.common.specs.RoundIcon
+import com.maubis.scarlet.base.common.ui.ThemeColorType
 import com.maubis.scarlet.base.database.entities.Tag
-import com.maubis.scarlet.base.support.sheets.OptionItemLayout
-import com.maubis.scarlet.base.support.specs.RoundIcon
-import com.maubis.scarlet.base.support.ui.ThemeColorType
 
 class TagItem(
     val tag: Tag,

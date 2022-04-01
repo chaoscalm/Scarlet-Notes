@@ -4,11 +4,11 @@ import android.content.Context
 import com.github.bijoysingh.starter.recyclerview.MultiRecyclerViewAdapter
 import com.github.bijoysingh.starter.recyclerview.MultiRecyclerViewControllerItem
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.home.recycler.EmptyRecyclerHolder
+import com.maubis.scarlet.base.common.recycler.RecyclerItem
+import com.maubis.scarlet.base.home.recycler.NoNotesNoticeRecyclerHolder
 import com.maubis.scarlet.base.note.folder.FolderRecyclerHolder
 import com.maubis.scarlet.base.note.folder.SelectorFolderRecyclerHolder
 import com.maubis.scarlet.base.note.selection.SelectableNoteRecyclerViewHolder
-import com.maubis.scarlet.base.support.recycler.RecyclerItem
 
 class NoteAppAdapter : MultiRecyclerViewAdapter<RecyclerItem> {
 
@@ -36,9 +36,9 @@ fun getRecyclerItemControllerList(
       .build())
   list.add(
     MultiRecyclerViewControllerItem.Builder<RecyclerItem>()
-      .viewType(RecyclerItem.Type.EMPTY.ordinal)
+      .viewType(RecyclerItem.Type.EMPTY_NOTICE.ordinal)
       .layoutFile(R.layout.item_no_notes)
-      .holderClass(EmptyRecyclerHolder::class.java)
+      .holderClass(NoNotesNoticeRecyclerHolder::class.java)
       .build())
   list.add(
     MultiRecyclerViewControllerItem.Builder<RecyclerItem>()
@@ -67,9 +67,9 @@ fun getSelectableRecyclerItemControllerList(
       .build())
   list.add(
     MultiRecyclerViewControllerItem.Builder<RecyclerItem>()
-      .viewType(RecyclerItem.Type.EMPTY.ordinal)
+      .viewType(RecyclerItem.Type.EMPTY_NOTICE.ordinal)
       .layoutFile(R.layout.item_no_notes)
-      .holderClass(EmptyRecyclerHolder::class.java)
+      .holderClass(NoNotesNoticeRecyclerHolder::class.java)
       .spanSize(2)
       .build())
   return list

@@ -10,17 +10,17 @@ import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
+import com.maubis.scarlet.base.ScarletIntentHandlerActivity
+import com.maubis.scarlet.base.common.ui.ThemeColorType
+import com.maubis.scarlet.base.common.utils.OsVersionUtils
 import com.maubis.scarlet.base.database.entities.Note
+import com.maubis.scarlet.base.editor.EditNoteActivity
+import com.maubis.scarlet.base.editor.INTENT_KEY_NOTE_ID
+import com.maubis.scarlet.base.editor.ViewAdvancedNoteActivity
 import com.maubis.scarlet.base.home.MainActivity
-import com.maubis.scarlet.base.note.creation.activity.CreateNoteActivity
-import com.maubis.scarlet.base.note.creation.activity.INTENT_KEY_NOTE_ID
-import com.maubis.scarlet.base.note.creation.activity.NoteIntentRouterActivity
-import com.maubis.scarlet.base.note.creation.activity.ViewAdvancedNoteActivity
 import com.maubis.scarlet.base.note.getDisplayTime
 import com.maubis.scarlet.base.note.getTextForSharing
 import com.maubis.scarlet.base.note.getTitleForSharing
-import com.maubis.scarlet.base.support.ui.ThemeColorType
-import com.maubis.scarlet.base.support.utils.OsVersionUtils
 
 const val REQUEST_CODE_BASE = 3200;
 const val REQUEST_CODE_MULTIPLIER = 250;
@@ -56,7 +56,7 @@ class NotificationHandler(private val context: Context) {
   }
 
   fun openNotification(config: NotificationConfig) {
-    val pendingIntent = getPendingActivityIntent(config, NoteIntentRouterActivity.view(context.applicationContext, config.note), 1)
+    val pendingIntent = getPendingActivityIntent(config, ScarletIntentHandlerActivity.view(context.applicationContext, config.note), 1)
     val contentView = getRemoteView(config)
     val notificationBuilder = NotificationCompat.Builder(context, config.channel)
       .setSmallIcon(R.drawable.ic_format_quote_white_48dp)
@@ -146,7 +146,7 @@ class NotificationHandler(private val context: Context) {
   }
 
   private fun getNoteEditIntent(config: NotificationConfig): Intent {
-    val intent = Intent(context, CreateNoteActivity::class.java)
+    val intent = Intent(context, EditNoteActivity::class.java)
     intent.putExtra(INTENT_KEY_NOTE_ID, config.note.uid)
     return intent
   }

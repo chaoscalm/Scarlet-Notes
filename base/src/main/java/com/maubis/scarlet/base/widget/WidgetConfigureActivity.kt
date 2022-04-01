@@ -12,14 +12,14 @@ import androidx.core.content.ContextCompat
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.ScarletApp.Companion.data
+import com.maubis.scarlet.base.common.utils.ColorUtil
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.database.entities.Widget
-import com.maubis.scarlet.base.note.creation.activity.ViewAdvancedNoteActivity
+import com.maubis.scarlet.base.editor.ViewAdvancedNoteActivity
 import com.maubis.scarlet.base.note.getTextForWidget
 import com.maubis.scarlet.base.note.selection.INoteSelectorActivity
 import com.maubis.scarlet.base.note.selection.SelectableNotesActivityBase
 import com.maubis.scarlet.base.settings.sWidgetShowLockedNotes
-import com.maubis.scarlet.base.support.utils.ColorUtil
 
 class WidgetConfigureActivity : SelectableNotesActivityBase(), INoteSelectorActivity {
 

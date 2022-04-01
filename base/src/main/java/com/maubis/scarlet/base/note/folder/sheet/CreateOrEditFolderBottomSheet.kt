@@ -11,13 +11,13 @@ import com.google.android.flexbox.FlexboxLayout
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
+import com.maubis.scarlet.base.common.sheets.openSheet
+import com.maubis.scarlet.base.common.ui.ColorView
+import com.maubis.scarlet.base.common.ui.ThemeColorType
+import com.maubis.scarlet.base.common.ui.ThemedActivity
+import com.maubis.scarlet.base.common.ui.ThemedBottomSheetFragment
+import com.maubis.scarlet.base.common.utils.getEditorActionListener
 import com.maubis.scarlet.base.database.entities.Folder
-import com.maubis.scarlet.base.settings.ColorView
-import com.maubis.scarlet.base.support.sheets.openSheet
-import com.maubis.scarlet.base.support.ui.ThemeColorType
-import com.maubis.scarlet.base.support.ui.ThemedActivity
-import com.maubis.scarlet.base.support.ui.ThemedBottomSheetFragment
-import com.maubis.scarlet.base.support.utils.getEditorActionListener
 
 class CreateOrEditFolderBottomSheet : ThemedBottomSheetFragment() {
 

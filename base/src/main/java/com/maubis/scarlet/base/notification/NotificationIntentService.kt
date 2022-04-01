@@ -3,10 +3,10 @@ package com.maubis.scarlet.base.notification
 import android.app.IntentService
 import android.content.Intent
 import com.maubis.scarlet.base.ScarletApp.Companion.data
+import com.maubis.scarlet.base.common.utils.logNonCriticalError
+import com.maubis.scarlet.base.editor.INTENT_KEY_NOTE_ID
 import com.maubis.scarlet.base.note.copyToClipboard
-import com.maubis.scarlet.base.note.creation.activity.INTENT_KEY_NOTE_ID
 import com.maubis.scarlet.base.note.share
-import com.maubis.scarlet.base.support.utils.logNonCriticalError
 
 const val INTENT_KEY_ACTION = "ACTION"
 

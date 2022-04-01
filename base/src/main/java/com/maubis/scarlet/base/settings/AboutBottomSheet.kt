@@ -10,9 +10,9 @@ import com.maubis.scarlet.base.BuildConfig
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
-import com.maubis.scarlet.base.support.sheets.LithoBottomSheet
-import com.maubis.scarlet.base.support.sheets.getLithoBottomSheetTitle
-import com.maubis.scarlet.base.support.ui.ThemeColorType
+import com.maubis.scarlet.base.common.sheets.LithoBottomSheet
+import com.maubis.scarlet.base.common.sheets.getLithoBottomSheetTitle
+import com.maubis.scarlet.base.common.ui.ThemeColorType
 
 class AboutBottomSheet : LithoBottomSheet() {
 

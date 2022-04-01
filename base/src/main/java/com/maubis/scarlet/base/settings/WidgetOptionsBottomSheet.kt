@@ -10,10 +10,8 @@ import androidx.core.content.edit
 import com.facebook.litho.ComponentContext
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appPreferences
+import com.maubis.scarlet.base.common.sheets.*
 import com.maubis.scarlet.base.home.MainActivity
-import com.maubis.scarlet.base.support.sheets.LithoOptionBottomSheet
-import com.maubis.scarlet.base.support.sheets.LithoOptionsItem
-import com.maubis.scarlet.base.support.sheets.openSheet
 import com.maubis.scarlet.base.widget.AllNotesWidgetProvider
 import com.maubis.scarlet.base.widget.NoteWidgetProvider
 

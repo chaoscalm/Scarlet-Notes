@@ -10,8 +10,8 @@ import com.github.bijoysingh.uibasics.views.UITextView
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
-import com.maubis.scarlet.base.support.recycler.RecyclerItem
-import com.maubis.scarlet.base.support.utils.ColorUtil.darkerColor
+import com.maubis.scarlet.base.common.recycler.RecyclerItem
+import com.maubis.scarlet.base.common.utils.ColorUtil.darkerColor
 
 class FolderRecyclerHolder(context: Context, view: View) : RecyclerViewHolder<RecyclerItem>(context, view) {
 

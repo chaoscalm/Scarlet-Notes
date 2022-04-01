@@ -3,8 +3,8 @@ package com.maubis.scarlet.base.backup
 import android.content.Context
 import com.google.gson.Gson
 import com.maubis.scarlet.base.backup.data.ExportFileFormat
-import com.maubis.scarlet.base.core.note.NoteBuilder
-import com.maubis.scarlet.base.support.utils.logNonCriticalError
+import com.maubis.scarlet.base.common.utils.logNonCriticalError
+import com.maubis.scarlet.base.note.NoteBuilder
 
 object NoteImporter {
   fun importFromBackupContent(context: Context, content: String) {

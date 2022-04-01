@@ -8,9 +8,9 @@ import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.ScarletApp.Companion.data
+import com.maubis.scarlet.base.common.ui.ColorView
+import com.maubis.scarlet.base.common.ui.ThemeColorType
 import com.maubis.scarlet.base.database.entities.Tag
-import com.maubis.scarlet.base.settings.ColorView
-import com.maubis.scarlet.base.support.ui.ThemeColorType
 
 class TagsAndColorPickerViewHolder(
         val activity: MainActivity,

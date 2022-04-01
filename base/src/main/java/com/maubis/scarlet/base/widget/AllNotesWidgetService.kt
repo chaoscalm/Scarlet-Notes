@@ -9,15 +9,15 @@ import android.widget.RemoteViewsService
 import androidx.core.content.ContextCompat
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp
-import com.maubis.scarlet.base.core.note.sort
+import com.maubis.scarlet.base.common.utils.ColorUtil
+import com.maubis.scarlet.base.common.utils.sort
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.database.entities.NoteState
-import com.maubis.scarlet.base.note.creation.activity.INTENT_KEY_NOTE_ID
+import com.maubis.scarlet.base.editor.INTENT_KEY_NOTE_ID
 import com.maubis.scarlet.base.note.getTextForWidget
 import com.maubis.scarlet.base.settings.SortingOptionsBottomSheet
 import com.maubis.scarlet.base.settings.sWidgetShowArchivedNotes
 import com.maubis.scarlet.base.settings.sWidgetShowLockedNotes
-import com.maubis.scarlet.base.support.utils.ColorUtil
 
 fun getWidgetNotes(): List<Note> {
   val states = mutableListOf(NoteState.DEFAULT, NoteState.FAVOURITE)

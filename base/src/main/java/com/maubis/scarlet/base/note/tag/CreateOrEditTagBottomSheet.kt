@@ -8,11 +8,11 @@ import android.widget.TextView
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
+import com.maubis.scarlet.base.common.ui.ThemeColorType
+import com.maubis.scarlet.base.common.ui.ThemedActivity
+import com.maubis.scarlet.base.common.ui.ThemedBottomSheetFragment
+import com.maubis.scarlet.base.common.utils.getEditorActionListener
 import com.maubis.scarlet.base.database.entities.Tag
-import com.maubis.scarlet.base.support.ui.ThemeColorType
-import com.maubis.scarlet.base.support.ui.ThemedActivity
-import com.maubis.scarlet.base.support.ui.ThemedBottomSheetFragment
-import com.maubis.scarlet.base.support.utils.getEditorActionListener
 
 class CreateOrEditTagBottomSheet : ThemedBottomSheetFragment() {
 

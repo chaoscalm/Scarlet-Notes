@@ -5,13 +5,13 @@ import androidx.core.content.edit
 import com.facebook.litho.ComponentContext
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appPreferences
+import com.maubis.scarlet.base.common.sheets.LithoOptionBottomSheet
+import com.maubis.scarlet.base.common.sheets.LithoOptionsItem
+import com.maubis.scarlet.base.common.ui.ThemedActivity
+import com.maubis.scarlet.base.common.utils.deviceHasBiometricEnabled
 import com.maubis.scarlet.base.security.PinLockController.isPinCodeEnabled
 import com.maubis.scarlet.base.security.openPincodeSetupSheet
 import com.maubis.scarlet.base.security.openVerifySheet
-import com.maubis.scarlet.base.support.sheets.LithoOptionBottomSheet
-import com.maubis.scarlet.base.support.sheets.LithoOptionsItem
-import com.maubis.scarlet.base.support.ui.ThemedActivity
-import com.maubis.scarlet.base.support.utils.deviceHasBiometricEnabled
 
 const val KEY_SECURITY_CODE = "KEY_SECURITY_CODE"
 const val KEY_FINGERPRINT_ENABLED = "KEY_FINGERPRINT_ENABLED"

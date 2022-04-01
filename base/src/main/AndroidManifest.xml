@@ -19,7 +19,8 @@
 
     <activity
         android:name=".home.MainActivity"
-        android:windowSoftInputMode="stateHidden">
+        android:windowSoftInputMode="stateHidden"
+        android:exported="true">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
 
@@ -48,18 +49,18 @@
     <service android:name=".notification.NotificationIntentService" />
 
     <activity
-      android:name=".note.creation.activity.ViewAdvancedNoteActivity"
+      android:name=".editor.ViewAdvancedNoteActivity"
       android:configChanges="uiMode"
       android:windowSoftInputMode="stateAlwaysHidden" />
     <activity
-      android:name=".note.creation.activity.CreateNoteActivity"
+      android:name=".editor.EditNoteActivity"
       android:configChanges="uiMode"
       android:windowSoftInputMode="stateVisible" />
     <activity
-      android:name=".note.creation.activity.CreateListNoteActivity"
+      android:name=".editor.CreateListNoteActivity"
       android:configChanges="uiMode"
       android:windowSoftInputMode="stateHidden" />
-    <activity android:name=".note.creation.activity.NoteIntentRouterActivity">
+    <activity android:name=".ScarletIntentHandlerActivity">
       <intent-filter android:label="Open Note in App">
         <action android:name="android.intent.action.VIEW" />
 
@@ -74,7 +75,7 @@
           android:scheme="scarlet" />
       </intent-filter>
     </activity>
-    <activity android:name=".note.creation.activity.ShareToScarletRouterActivity">
+    <activity android:name=".SharingIntentHandlerActivity">
       <intent-filter>
         <action android:name="android.intent.action.SEND_MULTIPLE" />
         <category android:name="android.intent.category.DEFAULT" />
@@ -88,7 +89,7 @@
         <data android:mimeType="image/jpeg" />
       </intent-filter>
     </activity>
-    <activity android:name=".note.creation.activity.OpenTextIntentOrFileActivity">
+    <activity android:name=".OpenFileActivity">
       <intent-filter>
         <action android:name="android.intent.action.VIEW" />
 

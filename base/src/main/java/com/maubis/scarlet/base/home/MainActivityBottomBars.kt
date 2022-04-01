@@ -16,21 +16,21 @@ import com.facebook.yoga.YogaAlign
 import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
+import com.maubis.scarlet.base.ScarletIntentHandlerActivity
+import com.maubis.scarlet.base.common.sheets.openSheet
+import com.maubis.scarlet.base.common.specs.EmptySpec
+import com.maubis.scarlet.base.common.specs.ToolbarColorConfig
+import com.maubis.scarlet.base.common.specs.bottomBarCard
+import com.maubis.scarlet.base.common.specs.bottomBarRoundIcon
+import com.maubis.scarlet.base.common.utils.ColorUtil
+import com.maubis.scarlet.base.common.utils.OsVersionUtils
+import com.maubis.scarlet.base.common.utils.addShortcut
 import com.maubis.scarlet.base.database.entities.Folder
+import com.maubis.scarlet.base.editor.EditNoteActivity
 import com.maubis.scarlet.base.home.sheets.HomeOptionsBottomSheet
 import com.maubis.scarlet.base.home.sheets.openDeleteTrashSheet
-import com.maubis.scarlet.base.note.creation.activity.CreateNoteActivity
-import com.maubis.scarlet.base.note.creation.activity.NoteIntentRouterActivity
 import com.maubis.scarlet.base.note.folder.sheet.CreateOrEditFolderBottomSheet
 import com.maubis.scarlet.base.settings.sNoteDefaultColor
-import com.maubis.scarlet.base.support.sheets.openSheet
-import com.maubis.scarlet.base.support.specs.EmptySpec
-import com.maubis.scarlet.base.support.specs.ToolbarColorConfig
-import com.maubis.scarlet.base.support.specs.bottomBarCard
-import com.maubis.scarlet.base.support.specs.bottomBarRoundIcon
-import com.maubis.scarlet.base.support.utils.ColorUtil
-import com.maubis.scarlet.base.support.utils.OsVersionUtils
-import com.maubis.scarlet.base.support.utils.addShortcut
 
 @LayoutSpec
 object MainActivityBottomBarSpec {
@@ -74,7 +74,7 @@ object MainActivityBottomBarSpec {
       row.child(bottomBarRoundIcon(context, colorConfig)
           .iconRes(R.drawable.icon_add_list)
           .onClick {
-            val intent = CreateNoteActivity.getNewChecklistNoteIntent(
+            val intent = EditNoteActivity.getNewChecklistNoteIntent(
                 activity,
                 activity.state.currentFolder?.uuid)
             activity.startActivity(intent)
@@ -91,12 +91,12 @@ object MainActivityBottomBarSpec {
                 .setShortLabel(activity.getString(R.string.shortcut_add_note))
                 .setLongLabel(activity.getString(R.string.shortcut_add_note))
                 .setIcon(Icon.createWithResource(activity, R.mipmap.create_launcher))
-                .setIntent(NoteIntentRouterActivity.create())
+                .setIntent(ScarletIntentHandlerActivity.create())
                 .build()
             addShortcut(activity, shortcut)
           }
           .onClick {
-            val intent = CreateNoteActivity.getNewNoteIntent(
+            val intent = EditNoteActivity.getNewNoteIntent(
                 activity,
                 activity.state.currentFolder?.uuid)
             activity.startActivity(intent)

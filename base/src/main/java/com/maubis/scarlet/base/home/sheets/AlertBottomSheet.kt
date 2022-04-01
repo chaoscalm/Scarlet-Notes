@@ -9,17 +9,17 @@ import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.data
-import com.maubis.scarlet.base.core.format.Format
+import com.maubis.scarlet.base.common.sheets.LithoBottomSheet
+import com.maubis.scarlet.base.common.sheets.getLithoBottomSheetTitle
+import com.maubis.scarlet.base.common.sheets.openSheet
+import com.maubis.scarlet.base.common.specs.BottomSheetBar
+import com.maubis.scarlet.base.common.ui.ThemeColorType
+import com.maubis.scarlet.base.common.ui.ThemedActivity
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.database.entities.NoteState
+import com.maubis.scarlet.base.editor.ViewAdvancedNoteActivity
+import com.maubis.scarlet.base.editor.formats.Format
 import com.maubis.scarlet.base.home.MainActivity
-import com.maubis.scarlet.base.note.creation.activity.ViewAdvancedNoteActivity
-import com.maubis.scarlet.base.support.sheets.LithoBottomSheet
-import com.maubis.scarlet.base.support.sheets.getLithoBottomSheetTitle
-import com.maubis.scarlet.base.support.sheets.openSheet
-import com.maubis.scarlet.base.support.specs.BottomSheetBar
-import com.maubis.scarlet.base.support.ui.ThemeColorType
-import com.maubis.scarlet.base.support.ui.ThemedActivity
 
 data class AlertSheetConfig(
   val title: Int = R.string.delete_sheet_are_you_sure,

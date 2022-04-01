@@ -14,8 +14,8 @@ import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
-import com.maubis.scarlet.base.support.specs.EmptySpec
-import com.maubis.scarlet.base.support.ui.ThemeColorType
+import com.maubis.scarlet.base.common.specs.EmptySpec
+import com.maubis.scarlet.base.common.ui.ThemeColorType
 
 @LayoutSpec
 object AppLockViewSpec {

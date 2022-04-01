@@ -8,9 +8,9 @@ import android.content.Intent
 import android.widget.RemoteViews
 import androidx.core.app.TaskStackBuilder
 import com.maubis.scarlet.base.R
+import com.maubis.scarlet.base.editor.CreateListNoteActivity
+import com.maubis.scarlet.base.editor.EditNoteActivity
 import com.maubis.scarlet.base.home.MainActivity
-import com.maubis.scarlet.base.note.creation.activity.CreateListNoteActivity
-import com.maubis.scarlet.base.note.creation.activity.CreateNoteActivity
 
 class CreateNoteWidgetProvider : AppWidgetProvider() {
 
@@ -20,7 +20,7 @@ class CreateNoteWidgetProvider : AppWidgetProvider() {
       val appWidgetId = appWidgetIds[i]
 
       val views = RemoteViews(context.packageName, R.layout.add_note_widget_layout)
-      views.setOnClickPendingIntent(R.id.add_note, getPendingIntent(context, CreateNoteActivity::class.java, 23100))
+      views.setOnClickPendingIntent(R.id.add_note, getPendingIntent(context, EditNoteActivity::class.java, 23100))
 
       val pendingIntentList = getPendingIntent(context, CreateListNoteActivity::class.java, 23101)
       views.setOnClickPendingIntent(R.id.add_list, pendingIntentList)

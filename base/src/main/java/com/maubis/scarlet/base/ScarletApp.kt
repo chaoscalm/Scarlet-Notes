@@ -5,14 +5,14 @@ import android.content.SharedPreferences
 import android.util.Log
 import com.evernote.android.job.JobManager
 import com.facebook.soloader.SoLoader
-import com.maubis.scarlet.base.core.note.ImageStore
+import com.maubis.scarlet.base.common.ui.ThemeManager
+import com.maubis.scarlet.base.common.ui.TypefaceController
+import com.maubis.scarlet.base.common.utils.DateFormatUtils
+import com.maubis.scarlet.base.common.utils.ImageCache
+import com.maubis.scarlet.base.common.utils.ImageStore
+import com.maubis.scarlet.base.common.utils.dateFormat
 import com.maubis.scarlet.base.database.ApplicationData
-import com.maubis.scarlet.base.note.reminders.ReminderJobCreator
-import com.maubis.scarlet.base.support.ui.ThemeManager
-import com.maubis.scarlet.base.support.ui.TypefaceController
-import com.maubis.scarlet.base.support.utils.DateFormatUtils
-import com.maubis.scarlet.base.support.utils.ImageCache
-import com.maubis.scarlet.base.support.utils.dateFormat
+import com.maubis.scarlet.base.reminders.ReminderJobCreator
 
 class ScarletApp : Application() {
   override fun onCreate() {

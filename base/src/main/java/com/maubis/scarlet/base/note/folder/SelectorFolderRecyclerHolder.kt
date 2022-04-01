@@ -8,9 +8,9 @@ import android.widget.TextView
 import com.github.bijoysingh.starter.recyclerview.RecyclerViewHolder
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
-import com.maubis.scarlet.base.home.recycler.setFullSpan
-import com.maubis.scarlet.base.support.recycler.RecyclerItem
-import com.maubis.scarlet.base.support.ui.CircleDrawable
+import com.maubis.scarlet.base.common.recycler.RecyclerItem
+import com.maubis.scarlet.base.common.recycler.setFullSpan
+import com.maubis.scarlet.base.common.ui.CircleDrawable
 
 class SelectorFolderRecyclerHolder(context: Context, view: View) : RecyclerViewHolder<RecyclerItem>(context, view) {
 

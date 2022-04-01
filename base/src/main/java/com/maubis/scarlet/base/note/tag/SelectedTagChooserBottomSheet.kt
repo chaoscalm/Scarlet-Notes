@@ -7,12 +7,12 @@ import com.facebook.litho.ComponentContext
 import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.data
+import com.maubis.scarlet.base.common.sheets.LithoBottomSheet
+import com.maubis.scarlet.base.common.sheets.LithoOptionsItem
+import com.maubis.scarlet.base.common.sheets.OptionItemLayout
+import com.maubis.scarlet.base.common.sheets.getLithoBottomSheetTitle
 import com.maubis.scarlet.base.database.entities.Tag
 import com.maubis.scarlet.base.note.selection.SelectNotesActivity
-import com.maubis.scarlet.base.support.sheets.LithoBottomSheet
-import com.maubis.scarlet.base.support.sheets.LithoOptionsItem
-import com.maubis.scarlet.base.support.sheets.OptionItemLayout
-import com.maubis.scarlet.base.support.sheets.getLithoBottomSheetTitle
 import java.util.*
 
 class SelectedTagChooserBottomSheet : LithoBottomSheet() {

@@ -8,14 +8,14 @@ import com.facebook.litho.ComponentContext
 import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.data
+import com.maubis.scarlet.base.common.sheets.LithoBottomSheet
+import com.maubis.scarlet.base.common.sheets.LithoOptionsItem
+import com.maubis.scarlet.base.common.sheets.OptionItemLayout
+import com.maubis.scarlet.base.common.sheets.getLithoBottomSheetTitle
+import com.maubis.scarlet.base.common.ui.ThemedActivity
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.database.entities.Tag
 import com.maubis.scarlet.base.note.toggleTag
-import com.maubis.scarlet.base.support.sheets.LithoBottomSheet
-import com.maubis.scarlet.base.support.sheets.LithoOptionsItem
-import com.maubis.scarlet.base.support.sheets.OptionItemLayout
-import com.maubis.scarlet.base.support.sheets.getLithoBottomSheetTitle
-import com.maubis.scarlet.base.support.ui.ThemedActivity
 
 class TagChooserBottomSheet(private val note: Note, private val dismissListener: () -> Unit) : LithoBottomSheet() {
 

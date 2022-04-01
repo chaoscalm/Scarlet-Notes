@@ -6,13 +6,13 @@ import com.facebook.litho.ComponentContext
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appPreferences
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
+import com.maubis.scarlet.base.common.sheets.LithoOptionBottomSheet
+import com.maubis.scarlet.base.common.sheets.LithoOptionsItem
+import com.maubis.scarlet.base.common.sheets.openSheet
+import com.maubis.scarlet.base.common.ui.sThemeLabel
 import com.maubis.scarlet.base.home.MainActivity
 import com.maubis.scarlet.base.settings.SortingOptionsBottomSheet.Companion.getSortingState
 import com.maubis.scarlet.base.settings.SortingOptionsBottomSheet.Companion.getSortingTechniqueLabel
-import com.maubis.scarlet.base.support.sheets.LithoOptionBottomSheet
-import com.maubis.scarlet.base.support.sheets.LithoOptionsItem
-import com.maubis.scarlet.base.support.sheets.openSheet
-import com.maubis.scarlet.base.support.ui.sThemeLabel
 
 var sUIUseGridView: Boolean
   get() = appPreferences.getBoolean("KEY_LIST_VIEW", true)

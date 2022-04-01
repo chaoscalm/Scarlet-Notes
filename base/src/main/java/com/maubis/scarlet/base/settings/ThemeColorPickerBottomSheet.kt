@@ -12,19 +12,19 @@ import com.facebook.yoga.YogaAlign
 import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
-import com.maubis.scarlet.base.support.sheets.LithoBottomSheet
-import com.maubis.scarlet.base.support.sheets.LithoOptionsItem
-import com.maubis.scarlet.base.support.sheets.OptionItemLayout
-import com.maubis.scarlet.base.support.sheets.getLithoBottomSheetTitle
-import com.maubis.scarlet.base.support.specs.BottomSheetBar
-import com.maubis.scarlet.base.support.specs.EmptySpec
-import com.maubis.scarlet.base.support.specs.RoundIcon
-import com.maubis.scarlet.base.support.ui.Theme
-import com.maubis.scarlet.base.support.ui.ThemeManager.Companion.getThemeFromStore
-import com.maubis.scarlet.base.support.ui.sThemeDarkenCustomColors
-import com.maubis.scarlet.base.support.ui.sThemeIsAutomatic
-import com.maubis.scarlet.base.support.ui.setThemeFromSystem
-import com.maubis.scarlet.base.support.utils.OsVersionUtils
+import com.maubis.scarlet.base.common.sheets.LithoBottomSheet
+import com.maubis.scarlet.base.common.sheets.LithoOptionsItem
+import com.maubis.scarlet.base.common.sheets.OptionItemLayout
+import com.maubis.scarlet.base.common.sheets.getLithoBottomSheetTitle
+import com.maubis.scarlet.base.common.specs.BottomSheetBar
+import com.maubis.scarlet.base.common.specs.EmptySpec
+import com.maubis.scarlet.base.common.specs.RoundIcon
+import com.maubis.scarlet.base.common.ui.Theme
+import com.maubis.scarlet.base.common.ui.ThemeManager.Companion.getThemeFromStore
+import com.maubis.scarlet.base.common.ui.sThemeDarkenCustomColors
+import com.maubis.scarlet.base.common.ui.sThemeIsAutomatic
+import com.maubis.scarlet.base.common.ui.setThemeFromSystem
+import com.maubis.scarlet.base.common.utils.OsVersionUtils
 
 @LayoutSpec
 object ThemeColorPickerItemSpec {

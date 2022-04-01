@@ -5,10 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.facebook.litho.ComponentContext
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.data
+import com.maubis.scarlet.base.common.sheets.LithoOptionBottomSheet
+import com.maubis.scarlet.base.common.sheets.LithoOptionsItem
 import com.maubis.scarlet.base.database.entities.Folder
 import com.maubis.scarlet.base.database.entities.Note
-import com.maubis.scarlet.base.support.sheets.LithoOptionBottomSheet
-import com.maubis.scarlet.base.support.sheets.LithoOptionsItem
 
 class DeleteFolderBottomSheet : LithoOptionBottomSheet() {
 

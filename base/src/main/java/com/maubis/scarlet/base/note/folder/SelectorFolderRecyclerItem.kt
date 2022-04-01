@@ -3,10 +3,10 @@ package com.maubis.scarlet.base.note.folder
 import android.content.Context
 import androidx.core.content.ContextCompat
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
+import com.maubis.scarlet.base.common.recycler.RecyclerItem
+import com.maubis.scarlet.base.common.ui.ThemeColorType
+import com.maubis.scarlet.base.common.utils.ColorUtil
 import com.maubis.scarlet.base.database.entities.Folder
-import com.maubis.scarlet.base.support.recycler.RecyclerItem
-import com.maubis.scarlet.base.support.ui.ThemeColorType
-import com.maubis.scarlet.base.support.utils.ColorUtil
 
 class SelectorFolderRecyclerItem(context: Context, val folder: Folder) : RecyclerItem() {
 

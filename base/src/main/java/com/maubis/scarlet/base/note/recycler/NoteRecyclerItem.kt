@@ -3,11 +3,11 @@ package com.maubis.scarlet.base.note.recycler
 import android.content.Context
 import androidx.core.content.ContextCompat
 import com.maubis.markdown.Markdown
+import com.maubis.scarlet.base.common.recycler.RecyclerItem
+import com.maubis.scarlet.base.common.utils.ColorUtil
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.note.*
 import com.maubis.scarlet.base.settings.sNoteItemLineCount
-import com.maubis.scarlet.base.support.recycler.RecyclerItem
-import com.maubis.scarlet.base.support.utils.ColorUtil
 
 class NoteRecyclerItem(context: Context, val note: Note) : RecyclerItem() {
 

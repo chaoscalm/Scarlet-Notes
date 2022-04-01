@@ -1,7 +1,7 @@
 package com.maubis.scarlet.base.home
 
 import com.maubis.scarlet.base.ScarletApp.Companion.data
-import com.maubis.scarlet.base.core.note.sort
+import com.maubis.scarlet.base.common.utils.sort
 import com.maubis.scarlet.base.database.entities.Folder
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.database.entities.NoteState

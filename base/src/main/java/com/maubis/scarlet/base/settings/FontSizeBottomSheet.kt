@@ -11,12 +11,12 @@ import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appPreferences
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
+import com.maubis.scarlet.base.common.sheets.LithoBottomSheet
+import com.maubis.scarlet.base.common.sheets.getLithoBottomSheetTitle
+import com.maubis.scarlet.base.common.specs.BottomSheetBar
+import com.maubis.scarlet.base.common.specs.CounterChooser
+import com.maubis.scarlet.base.common.ui.ThemeColorType
 import com.maubis.scarlet.base.home.MainActivity
-import com.maubis.scarlet.base.support.sheets.LithoBottomSheet
-import com.maubis.scarlet.base.support.sheets.getLithoBottomSheetTitle
-import com.maubis.scarlet.base.support.specs.BottomSheetBar
-import com.maubis.scarlet.base.support.specs.CounterChooser
-import com.maubis.scarlet.base.support.ui.ThemeColorType
 
 const val STORE_KEY_TEXT_SIZE = "KEY_TEXT_SIZE"
 const val TEXT_SIZE_DEFAULT = 16
