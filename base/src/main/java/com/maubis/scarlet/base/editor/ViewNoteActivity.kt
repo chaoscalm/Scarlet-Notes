@@ -150,7 +150,7 @@ open class ViewAdvancedNoteActivity : SecuredActivity(), INoteActionsSheetActivi
     adapter = FormatAdapter(this)
     views.formatsRecyclerView.adapter = adapter
     views.formatsRecyclerView.layoutManager = LinearLayoutManager(this)
-    views.formatsRecyclerView.setHasFixedSize(false)
+    views.formatsRecyclerView.setHasFixedSize(true)
   }
 
   open fun setFormat(format: Format) {

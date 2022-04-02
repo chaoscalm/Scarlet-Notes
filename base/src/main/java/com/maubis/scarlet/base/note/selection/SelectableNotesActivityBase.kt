@@ -101,7 +101,7 @@ abstract class SelectableNotesActivityBase : SecuredActivity(), INoteSelectorAct
     recyclerView = findViewById(R.id.recycler_view)
     recyclerView.adapter = adapter
     recyclerView.layoutManager = getLayoutManager(sUIUseGridView, isTablet)
-    recyclerView.setHasFixedSize(false)
+    recyclerView.setHasFixedSize(true)
   }
 
   override fun notifyThemeChange() {

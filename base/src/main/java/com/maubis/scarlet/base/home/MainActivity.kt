@@ -161,7 +161,7 @@ class MainActivity : SecuredActivity(), INoteActionsSheetActivity {
     adapter.setExtra(adapterExtra)
     views.recyclerView.layoutManager = getLayoutManager(sUIUseGridView, isTablet)
     views.recyclerView.adapter = adapter
-    views.recyclerView.setHasFixedSize(false)
+    views.recyclerView.setHasFixedSize(true)
   }
 
   private fun getLayoutManager(isStaggeredView: Boolean, isTabletView: Boolean): RecyclerView.LayoutManager {
