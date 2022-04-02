@@ -2,7 +2,6 @@ package com.maubis.scarlet.base.backup
 
 import android.os.Environment
 import androidx.core.content.edit
-import com.github.bijoysingh.starter.util.FileManager
 import com.google.gson.Gson
 import com.maubis.scarlet.base.ScarletApp.Companion.appPreferences
 import com.maubis.scarlet.base.ScarletApp.Companion.data
@@ -10,8 +9,9 @@ import com.maubis.scarlet.base.backup.data.ExportFileFormat
 import com.maubis.scarlet.base.backup.data.ExportedFolder
 import com.maubis.scarlet.base.backup.data.ExportedNote
 import com.maubis.scarlet.base.backup.data.ExportedTag
-import com.maubis.scarlet.base.backup.ui.NOTES_EXPORT_FILENAME
-import com.maubis.scarlet.base.backup.ui.NOTES_EXPORT_FOLDER
+import com.maubis.scarlet.base.backup.ui.sAutoBackupMode
+import com.maubis.scarlet.base.backup.ui.sBackupLockedNotes
+import com.maubis.scarlet.base.backup.ui.sBackupMarkdown
 import com.maubis.scarlet.base.common.utils.dateFormat
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.editor.formats.FormatType
@@ -25,26 +25,44 @@ const val KEY_AUTO_BACKUP_LAST_TIMESTAMP = "KEY_AUTO_BACKUP_LAST_TIMESTAMP"
 const val EXPORT_NOTE_SEPARATOR = ">S>C>A>R>L>E>T>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>N>O>T>E>S>"
 const val EXPORT_VERSION = 6
 
+const val NOTES_BACKUP_FOLDER = "ScarletNotes"
+const val NOTES_BACKUP_FILENAME = "manual_backup"
 const val AUTO_BACKUP_FILENAME = "auto_backup"
 const val AUTO_BACKUP_INTERVAL_MS = 1000 * 60 * 60 * 6 // 6 hours update
 
-const val STORE_KEY_BACKUP_MARKDOWN = "KEY_BACKUP_MARKDOWN"
-var sBackupMarkdown: Boolean
-  get() = appPreferences.getBoolean(STORE_KEY_BACKUP_MARKDOWN, false)
-  set(value) = appPreferences.edit { putBoolean(STORE_KEY_BACKUP_MARKDOWN, value) }
+object NoteExporter {
+  fun tryAutoExport() {
+    GlobalScope.launch(Dispatchers.IO) {
+      if (!sAutoBackupMode) {
+        return@launch
+      }
+      val lastBackup = appPreferences.getLong(KEY_AUTO_BACKUP_LAST_TIMESTAMP, 0L)
+      val lastTimestamp = data.notes.getLastTimestamp()
+      if (lastBackup + AUTO_BACKUP_INTERVAL_MS >= lastTimestamp) {
+        return@launch
+      }
 
-const val STORE_KEY_BACKUP_LOCKED = "KEY_BACKUP_LOCKED"
-var sBackupLockedNotes: Boolean
-  get() = appPreferences.getBoolean(STORE_KEY_BACKUP_LOCKED, true)
-  set(value) = appPreferences.edit { putBoolean(STORE_KEY_BACKUP_LOCKED, value) }
+      val exportFile = getOrCreateFileForExport("$AUTO_BACKUP_FILENAME ${dateFormat.getDateForBackup()}")
+      if (exportFile === null) {
+        return@launch
+      }
+      exportFile.writeText(getBackupFileContent())
+      appPreferences.edit { putLong(KEY_AUTO_BACKUP_LAST_TIMESTAMP, System.currentTimeMillis()) }
+    }
+  }
 
-const val STORE_KEY_AUTO_BACKUP_MODE = "KEY_AUTO_BACKUP_MODE"
-var sAutoBackupMode: Boolean
-  get() = appPreferences.getBoolean(STORE_KEY_AUTO_BACKUP_MODE, false)
-  set(value) = appPreferences.edit { putBoolean(STORE_KEY_AUTO_BACKUP_MODE, value) }
+  fun getManualBackupFile(): File? {
+    return getOrCreateFileForExport("$NOTES_BACKUP_FILENAME ${dateFormat.getTimestampForBackup()}")
+  }
 
-class NoteExporter {
-  fun getBackupFileContent(): String {
+  fun exportNotesToManualBackupFile(): File? {
+    val backupContent = getBackupFileContent()
+    val file = getManualBackupFile()
+    file?.writeText(backupContent)
+    return file
+  }
+
+  private fun getBackupFileContent(): String {
     val notesToBeExported = data.notes.getAll()
       .filter { sBackupLockedNotes || !it.locked }
       .filter { !it.excludeFromBackup }
@@ -106,53 +124,16 @@ class NoteExporter {
     return markdownBuilder.toString().trim()
   }
 
-  fun tryAutoExport() {
-    GlobalScope.launch(Dispatchers.IO) {
-      if (!sAutoBackupMode) {
-        return@launch
-      }
-      val lastBackup = appPreferences.getLong(KEY_AUTO_BACKUP_LAST_TIMESTAMP, 0L)
-      val lastTimestamp = data.notes.getLastTimestamp()
-      if (lastBackup + AUTO_BACKUP_INTERVAL_MS >= lastTimestamp) {
-        return@launch
-      }
-
-      val exportFile = getOrCreateFileForExport("$AUTO_BACKUP_FILENAME ${dateFormat.getDateForBackup()}")
-      if (exportFile === null) {
-        return@launch
-      }
-      saveToFile(exportFile, getBackupFileContent())
-      appPreferences.edit { putLong(KEY_AUTO_BACKUP_LAST_TIMESTAMP, System.currentTimeMillis()) }
-    }
-  }
-
-  fun getOrCreateManualExportFile(): File? {
-    return getOrCreateFileForExport(
-      "$NOTES_EXPORT_FILENAME ${dateFormat.getTimestampForBackup()}")
-  }
-
   private fun getOrCreateFileForExport(filename: String): File? {
-    val folder = createFolder()
+    val folder = createBackupFolder()
     if (folder === null) {
       return null
     }
-    return File(folder, filename + ".txt")
+    return File(folder, "$filename.txt")
   }
 
-  fun saveToManualExportFile(text: String): Boolean {
-    val file = getOrCreateManualExportFile()
-    if (file === null) {
-      return false
-    }
-    return saveToFile(file, text)
-  }
-
-  private fun saveToFile(file: File, text: String): Boolean {
-    return FileManager.writeToFile(file, text)
-  }
-
-  private fun createFolder(): File? {
-    val folder = File(Environment.getExternalStorageDirectory(), NOTES_EXPORT_FOLDER)
+  private fun createBackupFolder(): File? {
+    val folder = File(Environment.getExternalStorageDirectory(), NOTES_BACKUP_FOLDER)
     if (!folder.exists() && !folder.mkdirs()) {
       return null
     }

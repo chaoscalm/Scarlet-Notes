@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.Typeface
 import android.widget.Toast
 import androidx.core.content.FileProvider
+import androidx.core.content.edit
 import androidx.lifecycle.lifecycleScope
 import com.facebook.litho.Column
 import com.facebook.litho.Component
@@ -12,27 +13,38 @@ import com.facebook.litho.ComponentContext
 import com.facebook.litho.widget.Text
 import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.R
+import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
-import com.maubis.scarlet.base.backup.*
+import com.maubis.scarlet.base.backup.NoteExporter
+import com.maubis.scarlet.base.backup.PermissionUtils
 import com.maubis.scarlet.base.common.sheets.*
 import com.maubis.scarlet.base.common.specs.BottomSheetBar
 import com.maubis.scarlet.base.common.specs.separatorSpec
 import com.maubis.scarlet.base.common.ui.ThemeColorType
-import com.maubis.scarlet.base.common.ui.ThemedActivity
 import com.maubis.scarlet.base.home.MainActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-val NOTES_EXPORT_FOLDER = "ScarletNotes"
-val NOTES_EXPORT_FILENAME = "manual_backup"
+const val STORE_KEY_BACKUP_MARKDOWN = "KEY_BACKUP_MARKDOWN"
+var sBackupMarkdown: Boolean
+  get() = ScarletApp.appPreferences.getBoolean(STORE_KEY_BACKUP_MARKDOWN, false)
+  set(value) = ScarletApp.appPreferences.edit { putBoolean(STORE_KEY_BACKUP_MARKDOWN, value) }
+
+const val STORE_KEY_BACKUP_LOCKED = "KEY_BACKUP_LOCKED"
+var sBackupLockedNotes: Boolean
+  get() = ScarletApp.appPreferences.getBoolean(STORE_KEY_BACKUP_LOCKED, true)
+  set(value) = ScarletApp.appPreferences.edit { putBoolean(STORE_KEY_BACKUP_LOCKED, value) }
+
+const val STORE_KEY_AUTO_BACKUP_MODE = "KEY_AUTO_BACKUP_MODE"
+var sAutoBackupMode: Boolean
+  get() = ScarletApp.appPreferences.getBoolean(STORE_KEY_AUTO_BACKUP_MODE, false)
+  set(value) = ScarletApp.appPreferences.edit { putBoolean(STORE_KEY_AUTO_BACKUP_MODE, value) }
 
 class ExportNotesBottomSheet : LithoBottomSheet() {
 
   override fun getComponent(componentContext: ComponentContext, dialog: Dialog): Component {
-    val activity = componentContext.androidContext as ThemedActivity
-
-    val file = NoteExporter().getOrCreateManualExportFile()
+    val file = NoteExporter.getManualBackupFile()
     val filenameRender = "${file?.parentFile?.name}/${file?.name}"
 
     val component = Column.create(componentContext)
@@ -66,37 +78,11 @@ class ExportNotesBottomSheet : LithoBottomSheet() {
     component.child(BottomSheetBar.create(componentContext)
                       .primaryActionRes(R.string.import_export_layout_exporting_done)
                       .onPrimaryClick {
-                        activity.lifecycleScope.launch(Dispatchers.IO) {
-                          val notes = NoteExporter().getBackupFileContent()
-                          val success = NoteExporter().saveToManualExportFile(notes)
-                          withContext(Dispatchers.Main) {
-                            Toast.makeText(activity,
-                                if (success) R.string.import_export_layout_exported
-                                else R.string.import_export_layout_export_failed,
-                                Toast.LENGTH_SHORT
-                            ).show()
-                            dismiss()
-                          }
-                        }
+                        lifecycleScope.launch(Dispatchers.IO) { performManualBackup() }
                       }
                       .secondaryActionRes(R.string.import_export_layout_exporting_share)
                       .onSecondaryClick {
-                        activity.lifecycleScope.launch(Dispatchers.IO) {
-                          val notes = NoteExporter().getBackupFileContent()
-                          NoteExporter().saveToManualExportFile(notes)
-
-                          if (file == null || !file.exists()) {
-                            return@launch
-                          }
-
-                          val uri = FileProvider.getUriForFile(activity, "fs00.scarletnotes.FileProvider", file)
-                          val intent = Intent(Intent.ACTION_SEND)
-                          intent.type = "text/plain"
-                          intent.putExtra(Intent.EXTRA_STREAM, uri)
-                          startActivity(Intent.createChooser(intent, getString(R.string.share_using)))
-
-                          withContext(Dispatchers.Main) { dismiss() }
-                        }
+                        lifecycleScope.launch(Dispatchers.IO) { performBackupAndShareContent() }
                       }
                       .paddingDip(YogaEdge.HORIZONTAL, 20f)
                       .paddingDip(YogaEdge.VERTICAL, 8f))
@@ -146,6 +132,34 @@ class ExportNotesBottomSheet : LithoBottomSheet() {
         selected = sAutoBackupMode
       ))
     return options
+  }
+
+  private suspend fun performManualBackup() {
+    val destinationFile = NoteExporter.exportNotesToManualBackupFile()
+    withContext(Dispatchers.Main) {
+      Toast.makeText(context,
+          if (destinationFile != null && destinationFile.exists()) R.string.import_export_layout_exported
+          else R.string.import_export_layout_export_failed,
+          Toast.LENGTH_SHORT
+      ).show()
+      dismiss()
+    }
+  }
+
+  private suspend fun performBackupAndShareContent() {
+    val destinationFile = NoteExporter.exportNotesToManualBackupFile()
+    if (destinationFile == null || !destinationFile.exists()) {
+      return
+    }
+
+    val uri = FileProvider.getUriForFile(requireContext(), "fs00.scarletnotes.FileProvider", destinationFile)
+    withContext(Dispatchers.Main) {
+      val intent = Intent(Intent.ACTION_SEND)
+      intent.type = "text/plain"
+      intent.putExtra(Intent.EXTRA_STREAM, uri)
+      startActivity(Intent.createChooser(intent, getString(R.string.share_using)))
+      dismiss()
+    }
   }
 
 }
