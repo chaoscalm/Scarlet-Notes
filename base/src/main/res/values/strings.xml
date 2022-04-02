@@ -207,10 +207,7 @@
   <string name="theme_page_title">Select App Theme</string>
   <!-- End Theme Color-->
 
-  <string name="click_to_add_tags">Click to add or change tags</string>
-
-  <string name="select_notes">Select Notes</string>
-  <string name="select_notes_details">Select and perform actions on multiple notes at once</string>
+  <string name="select_action">Select</string>
 
   <string name="recent_to_trash_message">The note was moved to trash</string>
   <string name="recent_to_delete_message">The note was deleted</string>
