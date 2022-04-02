@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.common.sheets.openSheet
-import com.maubis.scarlet.base.common.utils.SharingUtils
+import com.maubis.scarlet.base.common.utils.shareText
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.databinding.ActivitySelectNotesBinding
 import com.maubis.scarlet.base.home.HomeNavigationMode
@@ -45,7 +45,7 @@ class SelectNotesActivity : SelectableNotesActivityBase() {
   override fun initUI() {
     super.initUI()
     views.primaryFabAction.setOnClickListener {
-      runTextFunction { text -> SharingUtils.shareText(this, text) }
+      runTextFunction { text -> shareText(this, text) }
     }
     views.secondaryFabAction.setOnClickListener {
       openSheet(this, SelectedNotesOptionsBottomSheet())

@@ -2,7 +2,6 @@ package com.maubis.scarlet.base.note
 
 import android.content.Context
 import androidx.core.content.FileProvider
-import com.github.bijoysingh.starter.util.TextUtils
 import com.maubis.markdown.Markdown
 import com.maubis.markdown.MarkdownConfig
 import com.maubis.markdown.spannable.*
@@ -11,9 +10,7 @@ import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.ScarletIntentHandlerActivity
 import com.maubis.scarlet.base.common.ui.ThemedActivity
-import com.maubis.scarlet.base.common.utils.ColorUtil
-import com.maubis.scarlet.base.common.utils.SharingUtils
-import com.maubis.scarlet.base.common.utils.dateFormat
+import com.maubis.scarlet.base.common.utils.*
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.database.entities.NoteState
 import com.maubis.scarlet.base.database.entities.Tag
@@ -243,15 +240,15 @@ fun Note.shareImages(context: Context) {
     .filter { it.exists() }
     .map { FileProvider.getUriForFile(context, "fs00.scarletnotes.FileProvider", it) }
   when {
-    imageFileUris.size == 1 -> SharingUtils.sendImage(context, imageFileUris.first())
-    imageFileUris.size > 1 -> SharingUtils.sendMultipleImages(context, imageFileUris)
+    imageFileUris.size == 1 -> shareImage(context, imageFileUris.first())
+    imageFileUris.size > 1 -> shareMultipleImages(context, imageFileUris)
   }
 }
 
 fun Note.copyToClipboard(context: Context) {
-  TextUtils.copyToClipboard(context, getFullText())
+  copyTextToClipboard(context, getFullText())
 }
 
 fun Note.share(context: Context) {
-  SharingUtils.shareText(context, getFullText(), subject = getTitleForSharing())
+  shareText(context, getFullText(), subject = getTitleForSharing())
 }

@@ -3,13 +3,13 @@ package com.maubis.scarlet.base.note.selection
 import android.app.Dialog
 import androidx.core.content.ContextCompat
 import com.facebook.litho.ComponentContext
-import com.github.bijoysingh.starter.util.TextUtils
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.common.sheets.GridOptionBottomSheet
 import com.maubis.scarlet.base.common.sheets.openSheet
 import com.maubis.scarlet.base.common.specs.GridSectionItem
 import com.maubis.scarlet.base.common.specs.GridSectionOptionItem
-import com.maubis.scarlet.base.common.utils.SharingUtils
+import com.maubis.scarlet.base.common.utils.copyTextToClipboard
+import com.maubis.scarlet.base.common.utils.shareText
 import com.maubis.scarlet.base.database.entities.NoteState
 import com.maubis.scarlet.base.editor.formats.Formats
 import com.maubis.scarlet.base.editor.formats.sectionPreservingSort
@@ -106,7 +106,7 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
       label = R.string.send_note,
       icon = R.drawable.ic_share_white_48dp,
       listener = lockAwareFunctionRunner(activity) {
-        activity.runTextFunction { SharingUtils.shareText(activity, it) }
+        activity.runTextFunction { shareText(activity, it) }
       }
     ))
     options.add(GridSectionOptionItem(
@@ -114,7 +114,7 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
       icon = R.drawable.ic_content_copy_white_48dp,
       listener = lockAwareFunctionRunner(activity) {
         activity.runTextFunction {
-          TextUtils.copyToClipboard(activity, it)
+          copyTextToClipboard(activity, it)
         }
         activity.finish()
       }

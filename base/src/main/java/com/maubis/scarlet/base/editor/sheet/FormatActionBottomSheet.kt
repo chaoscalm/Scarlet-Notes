@@ -2,13 +2,13 @@ package com.maubis.scarlet.base.editor.sheet
 
 import android.app.Dialog
 import com.facebook.litho.ComponentContext
-import com.github.bijoysingh.starter.util.TextUtils
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.imageStorage
 import com.maubis.scarlet.base.common.sheets.GridOptionBottomSheet
 import com.maubis.scarlet.base.common.specs.GridSectionItem
 import com.maubis.scarlet.base.common.specs.GridSectionOptionItem
-import com.maubis.scarlet.base.common.utils.SharingUtils
+import com.maubis.scarlet.base.common.utils.copyTextToClipboard
+import com.maubis.scarlet.base.common.utils.shareText
 import com.maubis.scarlet.base.editor.ViewAdvancedNoteActivity
 import com.maubis.scarlet.base.editor.formats.Format
 import com.maubis.scarlet.base.editor.formats.FormatType
@@ -37,7 +37,7 @@ class FormatActionBottomSheet : GridOptionBottomSheet() {
         label = R.string.import_export_layout_exporting_share,
         icon = R.drawable.ic_share_white_48dp,
         listener = {
-          SharingUtils.shareText(activity, format.text)
+          shareText(activity, format.text)
           dismiss()
         },
         visible = !arrayOf(FormatType.IMAGE, FormatType.SEPARATOR).contains(format.formatType)
@@ -47,7 +47,7 @@ class FormatActionBottomSheet : GridOptionBottomSheet() {
         label = R.string.format_action_copy,
         icon = R.drawable.ic_content_copy_white_48dp,
         listener = {
-          TextUtils.copyToClipboard(context, format.text)
+          copyTextToClipboard(requireContext(), format.text)
           dismiss()
         },
         visible = !arrayOf(FormatType.IMAGE, FormatType.SEPARATOR).contains(format.formatType)

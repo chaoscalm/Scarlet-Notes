@@ -304,5 +304,6 @@
   <string name="image_picker_error">An error occurred while retrieving the selected image.</string>
   <string name="file_picker_missing">The Android file chooser appears to be missing on this device. You should reinstall it ;)</string>
   <string name="import_completed">Import completed</string>
+  <string name="notice_text_copied">Text copied</string>
 
 </resources>
