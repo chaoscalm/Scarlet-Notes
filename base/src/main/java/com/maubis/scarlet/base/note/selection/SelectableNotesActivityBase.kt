@@ -5,10 +5,10 @@ import android.view.View
 import android.widget.GridLayout
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.github.bijoysingh.starter.async.MultiAsyncTask
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.data
@@ -26,6 +26,9 @@ import com.maubis.scarlet.base.settings.STORE_KEY_LINE_COUNT
 import com.maubis.scarlet.base.settings.SortingOptionsBottomSheet
 import com.maubis.scarlet.base.settings.sNoteItemLineCount
 import com.maubis.scarlet.base.settings.sUIUseGridView
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.*
 
 abstract class SelectableNotesActivityBase : SecuredActivity(), INoteSelectorActivity {
@@ -41,53 +44,44 @@ abstract class SelectableNotesActivityBase : SecuredActivity(), INoteSelectorAct
   open fun initUI() {
     notifyThemeChange()
     setupRecyclerView()
-
-    MultiAsyncTask.execute(object : MultiAsyncTask.Task<List<RecyclerItem>> {
-      override fun run(): List<RecyclerItem> {
-        val sorting = SortingOptionsBottomSheet.getSortingState()
-        val notes = sort(getNotes(), sorting)
-          .sortedBy { it.folder }
-          .map { NoteRecyclerItem(this@SelectableNotesActivityBase, it) }
-
-        if (notes.isEmpty()) {
-          return notes
-        }
-
-        val items = mutableListOf<RecyclerItem>()
-        var lastFolder: UUID? = null
-        notes.forEach {
-          val noteFolderId = it.note.folder
-          if (noteFolderId != null && lastFolder != noteFolderId) {
-            val folder = data.folders.getByUUID(noteFolderId)
-            if (folder !== null) {
-              items.add(SelectorFolderRecyclerItem(this@SelectableNotesActivityBase, folder))
-              lastFolder = noteFolderId
-            }
-          }
-          items.add(it)
-        }
-        return items
-      }
-
-      override fun handle(notes: List<RecyclerItem>) {
-        adapter.clearItems()
-
-        if (notes.isEmpty()) {
-          adapter.addItem(NoNotesRecyclerItem())
-        }
-
-        notes.forEach {
-          adapter.addItem(it)
-        }
-      }
-    })
-
+    loadNotes()
     findViewById<View>(R.id.back_button).setOnClickListener {
       onBackPressed()
     }
   }
 
-  abstract fun getNotes(): List<Note>;
+  private fun loadNotes() {
+    lifecycleScope.launch(Dispatchers.IO) {
+      val sorting = SortingOptionsBottomSheet.getSortingState()
+      val notes = sort(getNotes(), sorting)
+        .sortedBy { it.folder }
+        .map { NoteRecyclerItem(this@SelectableNotesActivityBase, it) }
+
+      val items = mutableListOf<RecyclerItem>()
+      var lastFolder: UUID? = null
+      notes.forEach {
+        val noteFolderId = it.note.folder
+        if (noteFolderId != null && lastFolder != noteFolderId) {
+          val folder = data.folders.getByUUID(noteFolderId)
+          if (folder !== null) {
+            items.add(SelectorFolderRecyclerItem(this@SelectableNotesActivityBase, folder))
+            lastFolder = noteFolderId
+          }
+        }
+        items.add(it)
+      }
+
+      withContext(Dispatchers.Main) {
+        adapter.clearItems()
+        if (items.isEmpty()) {
+          adapter.addItem(NoNotesRecyclerItem())
+        }
+        items.forEach { adapter.addItem(it) }
+      }
+    }
+  }
+
+  abstract fun getNotes(): List<Note>
 
   open fun getLayoutUI(): Int = R.layout.activity_select_note
 
