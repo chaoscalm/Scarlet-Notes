@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.github.bijoysingh.starter.async.MultiAsyncTask
-import com.github.bijoysingh.starter.recyclerview.RecyclerViewBuilder
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.data
@@ -99,11 +98,10 @@ abstract class SelectableNotesActivityBase : SecuredActivity(), INoteSelectorAct
 
     adapter = NoteAppAdapter(this, getSelectableRecyclerItemControllerList(sUIUseGridView, isTablet))
     adapter.setExtra(adapterExtra)
-    recyclerView = RecyclerViewBuilder(this)
-      .setView(this, R.id.recycler_view)
-      .setAdapter(adapter)
-      .setLayoutManager(getLayoutManager(sUIUseGridView, isTablet))
-      .build()
+    recyclerView = findViewById(R.id.recycler_view)
+    recyclerView.adapter = adapter
+    recyclerView.layoutManager = getLayoutManager(sUIUseGridView, isTablet)
+    recyclerView.setHasFixedSize(false)
   }
 
   override fun notifyThemeChange() {
