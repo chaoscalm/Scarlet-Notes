@@ -2,30 +2,20 @@ package com.maubis.scarlet.base.common.utils
 
 import android.content.Context
 import android.text.format.DateFormat
-import com.github.bijoysingh.starter.util.DateFormatter
+import java.text.SimpleDateFormat
 import java.util.*
 
-lateinit var dateFormat: DateFormatUtils
-
-class DateFormatUtils(context: Context) {
-  private val is24HourFormat = DateFormat.is24HourFormat(context)
-
-  fun readableFullTime(timestamp: Long): String = readableTime(
-    DateFormatter.Formats.HH_MM_A_DD_MMM_YYYY.format,
-    timestamp)
-
-  fun readableTime(format: String, timestamp: Long): String {
-    val hourFormatSafe = when {
-      is24HourFormat -> format
-        .replace("a", "")
-        .replace("h", "H")
-      else -> format
-    }
-    return DateFormatter.getDate(
-      DateFormat.getBestDateTimePattern(Locale.getDefault(), hourFormatSafe),
-      timestamp)
+fun readableTime(timestamp: Long, format: String, context: Context): String {
+  val adjustedFormat = when {
+    DateFormat.is24HourFormat(context) -> format
+      .replace("a", "")
+      .replace("h", "H")
+    else -> format
   }
+  return formatTimestamp(timestamp, DateFormat.getBestDateTimePattern(Locale.getDefault(), adjustedFormat))
+}
 
-  fun getDateForBackup(): String = DateFormatter.getDate("dd_MMM_yyyy", Calendar.getInstance())
-  fun getTimestampForBackup(): String = DateFormatter.getDate("dd_MMM_yyyy HH_mm", Calendar.getInstance())
+fun formatTimestamp(timestamp: Long, format: String): String {
+  val timeFormatter = SimpleDateFormat(format, Locale.getDefault())
+  return timeFormatter.format(Date(timestamp))
 }

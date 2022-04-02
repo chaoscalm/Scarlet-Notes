@@ -5,7 +5,6 @@ import android.app.Dialog
 import android.app.TimePickerDialog
 import android.view.View.GONE
 import android.widget.TextView
-import com.github.bijoysingh.starter.util.DateFormatter
 import com.github.bijoysingh.uibasics.views.UIActionView
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
@@ -14,7 +13,7 @@ import com.maubis.scarlet.base.common.sheets.LithoChooseOptionsItem
 import com.maubis.scarlet.base.common.ui.ThemeColorType
 import com.maubis.scarlet.base.common.ui.ThemedActivity
 import com.maubis.scarlet.base.common.ui.ThemedBottomSheetFragment
-import com.maubis.scarlet.base.common.utils.dateFormat
+import com.maubis.scarlet.base.common.utils.readableTime
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.note.actions.INoteActionsSheetActivity
 import java.util.*
@@ -207,8 +206,8 @@ class ReminderBottomSheet : ThemedBottomSheetFragment() {
     val reminderRepeat = dlg.findViewById<UIActionView>(R.id.reminder_repeat)
 
     reminderRepeat.setSubtitle(getReminderIntervalLabel(reminder.interval))
-    reminderTime.setSubtitle(dateFormat.readableTime(DateFormatter.Formats.HH_MM_A.format, reminder.timestamp))
-    reminderDate.setSubtitle(dateFormat.readableTime(DateFormatter.Formats.DD_MMM_YYYY.format, reminder.timestamp))
+    reminderTime.setSubtitle(readableTime(reminder.timestamp, "hh:mm a", requireContext()))
+    reminderDate.setSubtitle(readableTime(reminder.timestamp, "dd MMM yyyy", requireContext()))
     reminderDate.alpha = if (reminder.interval == ReminderInterval.ONCE) 1.0f else 0.5f
   }
 

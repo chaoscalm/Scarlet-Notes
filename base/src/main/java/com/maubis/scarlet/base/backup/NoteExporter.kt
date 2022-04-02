@@ -12,7 +12,7 @@ import com.maubis.scarlet.base.backup.data.ExportedTag
 import com.maubis.scarlet.base.backup.ui.sAutoBackupMode
 import com.maubis.scarlet.base.backup.ui.sBackupLockedNotes
 import com.maubis.scarlet.base.backup.ui.sBackupMarkdown
-import com.maubis.scarlet.base.common.utils.dateFormat
+import com.maubis.scarlet.base.common.utils.formatTimestamp
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.editor.formats.FormatType
 import kotlinx.coroutines.Dispatchers
@@ -42,7 +42,7 @@ object NoteExporter {
         return@launch
       }
 
-      val exportFile = getOrCreateFileForExport("$AUTO_BACKUP_FILENAME ${dateFormat.getDateForBackup()}")
+      val exportFile = getOrCreateFileForExport("$AUTO_BACKUP_FILENAME ${getFormattedDate()}")
       if (exportFile === null) {
         return@launch
       }
@@ -52,7 +52,7 @@ object NoteExporter {
   }
 
   fun getManualBackupFile(): File? {
-    return getOrCreateFileForExport("$NOTES_BACKUP_FILENAME ${dateFormat.getTimestampForBackup()}")
+    return getOrCreateFileForExport("$NOTES_BACKUP_FILENAME ${getFormattedDateWithTime()}")
   }
 
   fun exportNotesToManualBackupFile(): File? {
@@ -123,6 +123,9 @@ object NoteExporter {
     }
     return markdownBuilder.toString().trim()
   }
+
+  private fun getFormattedDate(): String = formatTimestamp(System.currentTimeMillis(), "dd_MMM_yyyy")
+  private fun getFormattedDateWithTime(): String = formatTimestamp(System.currentTimeMillis(), "dd_MMM_yyyy HH_mm")
 
   private fun getOrCreateFileForExport(filename: String): File? {
     val folder = createBackupFolder()

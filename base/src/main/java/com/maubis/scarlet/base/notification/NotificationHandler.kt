@@ -102,7 +102,7 @@ class NotificationHandler(private val context: Context) {
     contentView.setViewVisibility(R.id.title, if (hasTitle) VISIBLE else GONE)
     contentView.setTextViewText(R.id.title, config.note.getTitleForSharing())
     contentView.setTextViewText(R.id.description, config.note.getTextForSharing())
-    contentView.setTextViewText(R.id.timestamp, config.note.getDisplayTime())
+    contentView.setTextViewText(R.id.timestamp, config.note.getDisplayTime(context))
 
     val titleColor = appTheme.get(ThemeColorType.SECONDARY_TEXT)
     val descColor = appTheme.get(ThemeColorType.TERTIARY_TEXT)

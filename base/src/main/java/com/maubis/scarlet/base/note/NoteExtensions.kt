@@ -145,7 +145,7 @@ fun Note.getTextForWidget(): CharSequence {
   return Markdown.render(text, true)
 }
 
-fun Note.getDisplayTime(): String {
+fun Note.getDisplayTime(context: Context): String {
   val time = when {
     (this.updateTimestamp != 0L) -> this.updateTimestamp
     else -> this.timestamp
@@ -155,7 +155,7 @@ fun Note.getDisplayTime(): String {
     System.currentTimeMillis() - time < 1000 * 60 * 60 * 2 -> "hh:mm aa"
     else -> "dd MMMM"
   }
-  return dateFormat.readableTime(format, time)
+  return readableTime(time, format, context)
 }
 
 fun Note.getTagString(): String {

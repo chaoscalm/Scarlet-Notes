@@ -39,7 +39,7 @@ class NoteRecyclerItem(context: Context, val note: Note) : RecyclerItem() {
     false -> ContextCompat.getColor(context, com.github.bijoysingh.uibasics.R.color.light_secondary_text)
   }
 
-  val timestamp = note.getDisplayTime()
+  val timestamp = note.getDisplayTime(context)
   val timestampColor = when (isLightShaded) {
     true -> ContextCompat.getColor(context, com.github.bijoysingh.uibasics.R.color.dark_hint_text)
     false -> ContextCompat.getColor(context, com.github.bijoysingh.uibasics.R.color.light_hint_text)

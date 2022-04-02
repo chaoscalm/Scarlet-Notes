@@ -7,10 +7,8 @@ import com.evernote.android.job.JobManager
 import com.facebook.soloader.SoLoader
 import com.maubis.scarlet.base.common.ui.ThemeManager
 import com.maubis.scarlet.base.common.ui.TypefaceController
-import com.maubis.scarlet.base.common.utils.DateFormatUtils
 import com.maubis.scarlet.base.common.utils.ImageCache
 import com.maubis.scarlet.base.common.utils.ImageStore
-import com.maubis.scarlet.base.common.utils.dateFormat
 import com.maubis.scarlet.base.database.ApplicationData
 import com.maubis.scarlet.base.reminders.ReminderJobCreator
 
@@ -21,7 +19,6 @@ class ScarletApp : Application() {
 
     appPreferences = getSharedPreferences("scarlet_prefs", MODE_PRIVATE)
 
-    dateFormat = DateFormatUtils(this)
     SoLoader.init(this, false)
     try {
       JobManager.create(this).addJobCreator(ReminderJobCreator())
