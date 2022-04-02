@@ -82,9 +82,9 @@ class NoteActionsBottomSheet : GridBottomSheetBase() {
     val actions = ArrayList<NoteActionItem>()
     actions.add(
       NoteActionItem(
-          title = R.string.restore_note,
-          icon = R.drawable.ic_restore,
-          visible = note.state == NoteState.TRASH
+        title = R.string.restore_note,
+        icon = R.drawable.ic_restore,
+        visible = note.state == NoteState.TRASH
       ) {
         activity.markItem(note, NoteState.DEFAULT)
         dismiss()
@@ -100,8 +100,8 @@ class NoteActionsBottomSheet : GridBottomSheetBase() {
       })
     actions.add(
       NoteActionItem(
-          title = R.string.select_action,
-          icon = R.drawable.ic_action_select,
+        title = R.string.select_action,
+        icon = R.drawable.ic_action_select,
       ) {
         val intent = Intent(context, SelectNotesActivity::class.java)
         intent.putExtra(KEY_SELECT_EXTRA_MODE, activity.getSelectMode(note))
@@ -111,56 +111,56 @@ class NoteActionsBottomSheet : GridBottomSheetBase() {
       })
     actions.add(
       NoteActionItem(
-          title = R.string.copy_note,
-          icon = R.drawable.ic_content_copy_white_48dp,
-          invalid = activity.lockedContentIsHidden() && note.locked
+        title = R.string.copy_note,
+        icon = R.drawable.ic_content_copy_white_48dp,
+        invalid = activity.lockedContentIsHidden() && note.locked
       ) {
         note.copyToClipboard(activity)
         dismiss()
       })
     actions.add(
       NoteActionItem(
-          title = R.string.send_note,
-          icon = R.drawable.ic_share_white_48dp,
-          invalid = activity.lockedContentIsHidden() && note.locked
+        title = R.string.send_note,
+        icon = R.drawable.ic_share_white_48dp,
+        invalid = activity.lockedContentIsHidden() && note.locked
       ) {
         note.share(activity)
         dismiss()
       })
     actions.add(
       NoteActionItem(
-          title = R.string.unarchive_note,
-          icon = R.drawable.ic_archive_white_48dp,
-          visible = note.state == NoteState.ARCHIVED
+        title = R.string.unarchive_note,
+        icon = R.drawable.ic_archive_white_48dp,
+        visible = note.state == NoteState.ARCHIVED
       ) {
         activity.markItem(note, NoteState.DEFAULT)
         dismiss()
       })
     actions.add(
       NoteActionItem(
-          title = R.string.archive_note,
-          icon = R.drawable.ic_archive_white_48dp,
-          visible = note.state != NoteState.ARCHIVED
+        title = R.string.archive_note,
+        icon = R.drawable.ic_archive_white_48dp,
+        visible = note.state != NoteState.ARCHIVED
       ) {
         activity.markItem(note, NoteState.ARCHIVED)
         dismiss()
       })
     actions.add(
       NoteActionItem(
-          title = R.string.delete_note_permanently,
-          icon = R.drawable.ic_delete_permanently,
-          visible = note.state == NoteState.TRASH,
-          invalid = activity.lockedContentIsHidden() && note.locked
+        title = R.string.delete_note_permanently,
+        icon = R.drawable.ic_delete_permanently,
+        visible = note.state == NoteState.TRASH,
+        invalid = activity.lockedContentIsHidden() && note.locked
       ) {
         activity.moveItemToTrashOrDelete(note)
         dismiss()
       })
     actions.add(
       NoteActionItem(
-          title = R.string.trash_note,
-          icon = R.drawable.ic_delete_white_48dp,
-          visible = note.state != NoteState.TRASH,
-          invalid = activity.lockedContentIsHidden() && note.locked
+        title = R.string.trash_note,
+        icon = R.drawable.ic_delete_white_48dp,
+        visible = note.state != NoteState.TRASH,
+        invalid = activity.lockedContentIsHidden() && note.locked
       ) {
         activity.moveItemToTrashOrDelete(note)
         dismiss()
@@ -192,8 +192,8 @@ class NoteActionsBottomSheet : GridBottomSheetBase() {
         val config = ColorPickerDefaultController(
           title = R.string.choose_note_color,
           colors = listOf(
-              activity.resources.getIntArray(R.array.bright_colors),
-              activity.resources.getIntArray(R.array.bright_colors_accent)),
+            activity.resources.getIntArray(R.array.bright_colors),
+            activity.resources.getIntArray(R.array.bright_colors_accent)),
           selectedColor = note.color,
           onColorSelected = { color ->
             note.color = color
@@ -213,20 +213,20 @@ class NoteActionsBottomSheet : GridBottomSheetBase() {
       }
     ))
     actions.add(
-        NoteActionItem(
-            title = R.string.not_favourite_note,
-            icon = R.drawable.ic_favorite_white_48dp,
-            visible = note.state == NoteState.FAVOURITE
-        ) {
-          activity.markItem(note, NoteState.DEFAULT)
-          dismiss()
-        })
+      NoteActionItem(
+        title = R.string.not_favourite_note,
+        icon = R.drawable.ic_favorite_white_48dp,
+        visible = note.state == NoteState.FAVOURITE
+      ) {
+        activity.markItem(note, NoteState.DEFAULT)
+        dismiss()
+      })
     actions.add(
       NoteActionItem(
-          title = R.string.favourite_note,
-          icon = R.drawable.ic_favorite_border_white_48dp,
-          visible = note.state != NoteState.FAVOURITE,
-          listener = {
+        title = R.string.favourite_note,
+        icon = R.drawable.ic_favorite_border_white_48dp,
+        visible = note.state != NoteState.FAVOURITE,
+        listener = {
           activity.markItem(note, NoteState.FAVOURITE)
           dismiss()
         }
@@ -280,19 +280,19 @@ class NoteActionsBottomSheet : GridBottomSheetBase() {
     val actions = ArrayList<NoteActionItem>()
     actions.add(
       NoteActionItem(
-          title = R.string.share_images,
-          icon = R.drawable.icon_share_image,
-          visible = note.hasImages(),
-          invalid = activity.lockedContentIsHidden() && note.locked
+        title = R.string.share_images,
+        icon = R.drawable.icon_share_image,
+        visible = note.hasImages(),
+        invalid = activity.lockedContentIsHidden() && note.locked
       ) {
         note.shareImages(activity)
         dismiss()
       })
     actions.add(
       NoteActionItem(
-          title = R.string.open_in_notification,
-          icon = R.drawable.ic_action_notification,
-          invalid = activity.lockedContentIsHidden() && note.locked
+        title = R.string.open_in_notification,
+        icon = R.drawable.ic_action_notification,
+        invalid = activity.lockedContentIsHidden() && note.locked
       ) {
         val handler = NotificationHandler(themedContext())
         handler.openNotification(NotificationConfig(note = note))
@@ -300,40 +300,40 @@ class NoteActionsBottomSheet : GridBottomSheetBase() {
       })
     actions.add(
       NoteActionItem(
-          title = R.string.reminder,
-          icon = R.drawable.ic_action_reminder_icon,
-          invalid = activity.lockedContentIsHidden() && note.locked
+        title = R.string.reminder,
+        icon = R.drawable.ic_action_reminder_icon,
+        invalid = activity.lockedContentIsHidden() && note.locked
       ) {
         ReminderBottomSheet.openSheet(activity, note)
         dismiss()
       })
     actions.add(
       NoteActionItem(
-          title = R.string.pin_to_launcher,
-          icon = R.drawable.icon_shortcut,
-          visible = OsVersionUtils.canAddLauncherShortcuts(),
-          invalid = activity.lockedContentIsHidden() && note.locked
+        title = R.string.pin_to_launcher,
+        icon = R.drawable.icon_shortcut,
+        visible = OsVersionUtils.canAddLauncherShortcuts(),
+        invalid = activity.lockedContentIsHidden() && note.locked
       ) {
-          if (OsVersionUtils.canAddLauncherShortcuts()) {
-              var title = note.getTitleForSharing()
-              if (title.isBlank()) {
-                  title = note.getFullText().split("\n").firstOrNull() ?: "Note"
-              }
-
-              val shortcut = ShortcutInfo.Builder(activity, "scarlet_notes___${note.uuid}")
-                      .setShortLabel(title)
-                      .setLongLabel(title)
-                      .setIcon(Icon.createWithResource(activity, R.mipmap.open_note_launcher))
-                      .setIntent(ScarletIntentHandlerActivity.view(note))
-                      .build()
-              addShortcut(activity, shortcut)
+        if (OsVersionUtils.canAddLauncherShortcuts()) {
+          var title = note.getTitleForSharing()
+          if (title.isBlank()) {
+            title = note.getFullText().split("\n").firstOrNull() ?: "Note"
           }
+
+          val shortcut = ShortcutInfo.Builder(activity, "scarlet_notes___${note.uuid}")
+            .setShortLabel(title)
+            .setLongLabel(title)
+            .setIcon(Icon.createWithResource(activity, R.mipmap.open_note_launcher))
+            .setIntent(ScarletIntentHandlerActivity.view(note))
+            .build()
+          addShortcut(activity, shortcut)
+        }
       })
     actions.add(
       NoteActionItem(
-          title = R.string.duplicate,
-          icon = R.drawable.ic_duplicate,
-          invalid = activity.lockedContentIsHidden() && note.locked
+        title = R.string.duplicate,
+        icon = R.drawable.ic_duplicate,
+        invalid = activity.lockedContentIsHidden() && note.locked
       ) {
         val copiedNote = note.shallowCopy()
         copiedNote.uid = 0
@@ -344,10 +344,10 @@ class NoteActionsBottomSheet : GridBottomSheetBase() {
       })
     actions.add(
       NoteActionItem(
-          title = R.string.backup_note_include,
-          icon = R.drawable.ic_action_backup,
-          visible = note.excludeFromBackup,
-          invalid = activity.lockedContentIsHidden() && note.locked
+        title = R.string.backup_note_include,
+        icon = R.drawable.ic_action_backup,
+        visible = note.excludeFromBackup,
+        invalid = activity.lockedContentIsHidden() && note.locked
       ) {
         note.excludeFromBackup = false
         note.save(activity)
@@ -356,10 +356,10 @@ class NoteActionsBottomSheet : GridBottomSheetBase() {
       })
     actions.add(
       NoteActionItem(
-          title = R.string.backup_note_exclude,
-          icon = R.drawable.ic_action_backup_no,
-          visible = !note.excludeFromBackup,
-          invalid = activity.lockedContentIsHidden() && note.locked
+        title = R.string.backup_note_exclude,
+        icon = R.drawable.ic_action_backup_no,
+        visible = !note.excludeFromBackup,
+        invalid = activity.lockedContentIsHidden() && note.locked
       ) {
         note.excludeFromBackup = true
         note.save(activity)
@@ -368,10 +368,10 @@ class NoteActionsBottomSheet : GridBottomSheetBase() {
       })
     actions.add(
       NoteActionItem(
-          title = R.string.delete_note_permanently,
-          icon = R.drawable.ic_delete_permanently,
-          visible = note.state != NoteState.TRASH,
-          invalid = activity.lockedContentIsHidden() && note.locked
+        title = R.string.delete_note_permanently,
+        icon = R.drawable.ic_delete_permanently,
+        visible = note.state != NoteState.TRASH,
+        invalid = activity.lockedContentIsHidden() && note.locked
       ) {
         openDeleteNotePermanentlySheet(activity, note) { activity.notifyResetOrDismiss() }
         dismiss()
