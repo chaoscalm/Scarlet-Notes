@@ -41,7 +41,7 @@ class FolderRecyclerHolder(context: Context, view: View) : RecyclerViewHolder<Re
     }
     view.setOnLongClickListener {
       item.longClick()
-      return@setOnLongClickListener false
+      true
     }
 
     when (item.selected) {
