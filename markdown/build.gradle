@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    compileSdk rootProject.ext.appconfig_compile_sdk_version
+    compileSdk rootProject.ext.compile_sdk_version
 
     defaultConfig {
-        minSdk rootProject.ext.appconfig_min_os_version
-        targetSdk rootProject.ext.appconfig_target_os_version
+        minSdk rootProject.ext.min_sdk_version
+        targetSdk rootProject.ext.target_sdk_version
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

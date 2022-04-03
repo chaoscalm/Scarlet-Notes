@@ -5,14 +5,14 @@ plugins {
 }
 
 android {
-    compileSdk rootProject.ext.appconfig_compile_sdk_version
+    compileSdk rootProject.ext.compile_sdk_version
 
     defaultConfig {
         applicationId "fs00.scarletnotes"
-        minSdk rootProject.ext.appconfig_min_os_version
-        targetSdk rootProject.ext.appconfig_target_os_version
-        versionCode rootProject.ext.appconfig_version_code
-        versionName rootProject.ext.appconfig_version
+        minSdk rootProject.ext.min_sdk_version
+        targetSdk rootProject.ext.target_sdk_version
+        versionCode 1
+        versionName '8.0.0'
 
         resConfigs "en", "it"
 
