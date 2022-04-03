@@ -2,7 +2,7 @@ package com.maubis.scarlet.base.note.folder.sheet
 
 import com.facebook.litho.ComponentContext
 import com.maubis.scarlet.base.database.entities.Folder
-import com.maubis.scarlet.base.note.selection.SelectNotesActivity
+import com.maubis.scarlet.base.note.selection.NotesSelectionActivity
 import java.util.*
 
 class SelectedFolderChooseOptionsBottomSheet : FolderChooserBottomSheetBase() {
@@ -12,7 +12,7 @@ class SelectedFolderChooseOptionsBottomSheet : FolderChooserBottomSheetBase() {
   var selectedFolder: UUID? = null
 
   override fun preComponentRender(componentContext: ComponentContext) {
-    val activity = requireContext() as SelectNotesActivity
+    val activity = requireContext() as NotesSelectionActivity
     selectedFolders.clear()
     selectedFolders.addAll(activity.getAllSelectedNotes().map { it.folder }.distinct())
     selectedFolder = selectedFolders.firstOrNull()

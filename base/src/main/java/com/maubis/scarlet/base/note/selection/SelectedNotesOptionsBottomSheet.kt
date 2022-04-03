@@ -34,7 +34,7 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
   }
 
   private fun getQuickActions(componentContext: ComponentContext): GridSectionItem {
-    val activity = componentContext.androidContext as SelectNotesActivity
+    val activity = componentContext.androidContext as NotesSelectionActivity
     val options = ArrayList<GridSectionOptionItem>()
 
     val allItemsInTrash = !activity.getAllSelectedNotes().any { it.state != NoteState.TRASH }
@@ -43,7 +43,7 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
         label = R.string.restore_note,
         icon = R.drawable.ic_restore,
         listener = lockAwareFunctionRunner(activity) {
-          activity.runNoteFunction {
+          activity.forEachNote {
             it.mark(activity, NoteState.DEFAULT)
           }
           activity.finish()
@@ -57,7 +57,7 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
         label = R.string.not_favourite_note,
         icon = R.drawable.ic_favorite_white_48dp,
         listener = lockAwareFunctionRunner(activity) {
-          activity.runNoteFunction {
+          activity.forEachNote {
             it.mark(activity, NoteState.DEFAULT)
           }
           activity.finish()
@@ -69,7 +69,7 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
         label = R.string.favourite_note,
         icon = R.drawable.ic_favorite_border_white_48dp,
         listener = lockAwareFunctionRunner(activity) {
-          activity.runNoteFunction {
+          activity.forEachNote {
             it.mark(activity, NoteState.FAVOURITE)
           }
           activity.finish()
@@ -83,7 +83,7 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
         label = R.string.unarchive_note,
         icon = R.drawable.ic_archive_white_48dp,
         listener = lockAwareFunctionRunner(activity) {
-          activity.runNoteFunction {
+          activity.forEachNote {
             it.mark(activity, NoteState.DEFAULT)
           }
           activity.finish()
@@ -95,7 +95,7 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
         label = R.string.archive_note,
         icon = R.drawable.ic_archive_white_48dp,
         listener = lockAwareFunctionRunner(activity) {
-          activity.runNoteFunction {
+          activity.forEachNote {
             it.mark(activity, NoteState.ARCHIVED)
           }
           activity.finish()
@@ -124,7 +124,7 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
         label = R.string.trash_note,
         icon = R.drawable.ic_delete_white_48dp,
         listener = lockAwareFunctionRunner(activity) {
-          activity.runNoteFunction {
+          activity.forEachNote {
             it.mark(activity, NoteState.TRASH)
           }
           activity.finish()
@@ -138,7 +138,7 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
   }
 
   private fun getSecondaryActions(componentContext: ComponentContext): GridSectionItem {
-    val activity = componentContext.androidContext as SelectNotesActivity
+    val activity = componentContext.androidContext as NotesSelectionActivity
     val options = ArrayList<GridSectionOptionItem>()
 
     options.add(GridSectionOptionItem(
@@ -147,7 +147,7 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
       listener = lockAwareFunctionRunner(activity) {
         openSheet(activity, SelectedTagChooserBottomSheet().apply {
           onActionListener = { tag, selectTag ->
-            activity.runNoteFunction {
+            activity.forEachNote {
               when (selectTag) {
                 true -> it.addTag(tag)
                 false -> it.removeTag(tag)
@@ -168,7 +168,7 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
         openSheet(activity, SelectedFolderChooseOptionsBottomSheet().apply {
           this.dismissListener = {}
           this.onActionListener = { folder, selectFolder ->
-            activity.runNoteFunction {
+            activity.forEachNote {
               when (selectFolder) {
                 true -> it.folder = folder.uuid
                 false -> it.folder = null
@@ -187,7 +187,7 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
         label = R.string.lock_note,
         icon = R.drawable.ic_action_lock,
         listener = lockAwareFunctionRunner(activity) {
-          activity.runNoteFunction {
+          activity.forEachNote {
             it.locked = true
             it.save(activity)
           }
@@ -200,7 +200,7 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
         label = R.string.unlock_note,
         icon = R.drawable.ic_action_unlock,
         listener = lockAwareFunctionRunner(activity) {
-          activity.runNoteFunction {
+          activity.forEachNote {
             it.locked = false
             it.save(activity)
           }
@@ -215,7 +215,7 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
   }
 
   private fun getTertiaryActions(componentContext: ComponentContext): GridSectionItem {
-    val activity = componentContext.androidContext as SelectNotesActivity
+    val activity = componentContext.androidContext as NotesSelectionActivity
     val options = ArrayList<GridSectionOptionItem>()
 
     val allItemsPinned = !activity.getAllSelectedNotes().any { !it.pinned }
@@ -224,7 +224,7 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
         label = R.string.pin_note,
         icon = R.drawable.ic_pin,
         listener = lockAwareFunctionRunner(activity) {
-          activity.runNoteFunction {
+          activity.forEachNote {
             it.pinned = true
             it.save(activity)
           }
@@ -237,7 +237,7 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
         label = R.string.unpin_note,
         icon = R.drawable.ic_pin,
         listener = lockAwareFunctionRunner(activity) {
-          activity.runNoteFunction {
+          activity.forEachNote {
             it.pinned = false
             it.save(activity)
           }
@@ -280,7 +280,7 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
           config = AlertSheetConfig(
             description = R.string.delete_sheet_delete_selected_notes_permanently,
             onPositiveClick = {
-              activity.runNoteFunction {
+              activity.forEachNote {
                 it.delete(activity)
               }
               activity.finish()
@@ -296,7 +296,7 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
         label = R.string.backup_note_include,
         icon = R.drawable.ic_action_backup,
         listener = lockAwareFunctionRunner(activity) {
-          activity.runNoteFunction {
+          activity.forEachNote {
             it.excludeFromBackup = false
             it.save(activity)
           }
@@ -309,7 +309,7 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
         label = R.string.backup_note_exclude,
         icon = R.drawable.ic_action_backup_no,
         listener = lockAwareFunctionRunner(activity) {
-          activity.runNoteFunction {
+          activity.forEachNote {
             it.excludeFromBackup = true
             it.save(activity)
           }
@@ -323,8 +323,8 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
   }
 
   private fun lockAwareFunctionRunner(
-          activity: SelectNotesActivity,
-          listener: () -> Unit): () -> Unit = {
+    activity: NotesSelectionActivity,
+    listener: () -> Unit): () -> Unit = {
     val hasLockedNote = activity.getAllSelectedNotes().any { it.locked }
     when {
       hasLockedNote -> openUnlockSheet(

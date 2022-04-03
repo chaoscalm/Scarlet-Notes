@@ -12,7 +12,7 @@ import com.maubis.scarlet.base.common.sheets.LithoOptionsItem
 import com.maubis.scarlet.base.common.sheets.OptionItemLayout
 import com.maubis.scarlet.base.common.sheets.getLithoBottomSheetTitle
 import com.maubis.scarlet.base.database.entities.Tag
-import com.maubis.scarlet.base.note.selection.SelectNotesActivity
+import com.maubis.scarlet.base.note.selection.NotesSelectionActivity
 import java.util.*
 
 class SelectedTagChooserBottomSheet : LithoBottomSheet() {
@@ -20,7 +20,7 @@ class SelectedTagChooserBottomSheet : LithoBottomSheet() {
   var onActionListener: (Tag, Boolean) -> Unit = { _, _ -> }
 
   override fun getComponent(componentContext: ComponentContext, dialog: Dialog): Component {
-    val activity = context as SelectNotesActivity
+    val activity = context as NotesSelectionActivity
     val component = Column.create(componentContext)
       .widthPercent(100f)
     val tagsComponent = Column.create(componentContext)
@@ -56,7 +56,7 @@ class SelectedTagChooserBottomSheet : LithoBottomSheet() {
   }
 
   private fun getTagItems(): List<TagItem> {
-    val activity = context as SelectNotesActivity
+    val activity = context as NotesSelectionActivity
     val items = ArrayList<TagItem>()
 
     val tags = HashSet<UUID>()

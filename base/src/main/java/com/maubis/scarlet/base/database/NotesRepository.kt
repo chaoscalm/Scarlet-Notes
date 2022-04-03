@@ -20,7 +20,7 @@ class NotesRepository(private val database: NoteDao, private val notificationHan
     return notes.values.toList()
   }
 
-  fun getByNoteState(states: Array<NoteState>): List<Note> {
+  fun getByNoteState(vararg states: NoteState): List<Note> {
     return notes.values.filter { states.contains(it.state) }
   }
 

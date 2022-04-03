@@ -12,8 +12,6 @@ interface INoteActionsSheetActivity {
 
   fun notifyTagsChanged(note: Note)
 
-  fun getSelectMode(note: Note): String
-
   fun notifyResetOrDismiss()
 
   fun lockedContentIsHidden(): Boolean

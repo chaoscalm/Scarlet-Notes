@@ -306,10 +306,6 @@ open class ViewAdvancedNoteActivity : SecuredActivity(), INoteActionsSheetActivi
     displayNote()
   }
 
-  override fun getSelectMode(note: Note): String {
-    return NoteState.DEFAULT.name
-  }
-
   override fun notifyResetOrDismiss() {
     finish()
   }

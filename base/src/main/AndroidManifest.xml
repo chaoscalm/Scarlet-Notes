@@ -130,7 +130,7 @@
       </intent-filter>
     </activity>
     <activity
-      android:name=".note.selection.SelectNotesActivity"
+      android:name=".note.selection.NotesSelectionActivity"
       android:configChanges="uiMode" />
 
     <service

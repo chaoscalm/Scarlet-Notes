@@ -393,10 +393,6 @@ class MainActivity : SecuredActivity(), INoteActionsSheetActivity {
     refreshItems()
   }
 
-  override fun getSelectMode(note: Note): String {
-    return state.mode.name
-  }
-
   override fun notifyResetOrDismiss() {
     refreshItems()
   }

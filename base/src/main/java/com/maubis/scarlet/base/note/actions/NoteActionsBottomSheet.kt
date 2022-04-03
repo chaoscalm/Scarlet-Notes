@@ -27,9 +27,9 @@ import com.maubis.scarlet.base.database.entities.NoteState
 import com.maubis.scarlet.base.home.sheets.openDeleteNotePermanentlySheet
 import com.maubis.scarlet.base.note.*
 import com.maubis.scarlet.base.note.folder.sheet.FolderChooserBottomSheet
-import com.maubis.scarlet.base.note.selection.KEY_SELECT_EXTRA_MODE
-import com.maubis.scarlet.base.note.selection.KEY_SELECT_EXTRA_NOTE_ID
-import com.maubis.scarlet.base.note.selection.SelectNotesActivity
+import com.maubis.scarlet.base.note.selection.KEY_EXTRA_SELECTED_NOTE_ID
+import com.maubis.scarlet.base.note.selection.KEY_EXTRA_SELECTED_NOTE_STATE
+import com.maubis.scarlet.base.note.selection.NotesSelectionActivity
 import com.maubis.scarlet.base.note.tag.TagChooserBottomSheet
 import com.maubis.scarlet.base.notification.NotificationConfig
 import com.maubis.scarlet.base.notification.NotificationHandler
@@ -103,9 +103,9 @@ class NoteActionsBottomSheet : GridBottomSheetBase() {
         title = R.string.select_action,
         icon = R.drawable.ic_action_select,
       ) {
-        val intent = Intent(context, SelectNotesActivity::class.java)
-        intent.putExtra(KEY_SELECT_EXTRA_MODE, activity.getSelectMode(note))
-        intent.putExtra(KEY_SELECT_EXTRA_NOTE_ID, note.uid)
+        val intent = Intent(context, NotesSelectionActivity::class.java)
+        intent.putExtra(KEY_EXTRA_SELECTED_NOTE_STATE, note.state.name)
+        intent.putExtra(KEY_EXTRA_SELECTED_NOTE_ID, note.uid)
         activity.startActivity(intent)
         dismiss()
       })

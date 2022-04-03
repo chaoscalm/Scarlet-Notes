@@ -26,7 +26,7 @@ fun getWidgetNotes(): List<Note> {
   }
 
   val sorting = SortingOptionsBottomSheet.getSortingState()
-  return sort(ScarletApp.data.notes.getByNoteState(states.toTypedArray())
+  return sort(ScarletApp.data.notes.getByNoteState(*states.toTypedArray())
           .filter { note -> (!note.locked || sWidgetShowLockedNotes) }, sorting)
 }
 

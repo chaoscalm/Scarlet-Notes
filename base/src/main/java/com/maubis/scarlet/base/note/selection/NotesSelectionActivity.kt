@@ -7,14 +7,14 @@ import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.common.sheets.openSheet
 import com.maubis.scarlet.base.common.utils.shareText
 import com.maubis.scarlet.base.database.entities.Note
+import com.maubis.scarlet.base.database.entities.NoteState
 import com.maubis.scarlet.base.databinding.ActivitySelectNotesBinding
-import com.maubis.scarlet.base.home.HomeNavigationMode
 import com.maubis.scarlet.base.note.getFullText
 
-const val KEY_SELECT_EXTRA_MODE = "KEY_SELECT_EXTRA_MODE"
-const val KEY_SELECT_EXTRA_NOTE_ID = "KEY_SELECT_EXTRA_NOTE_ID"
+const val KEY_EXTRA_SELECTED_NOTE_STATE = "EXTRA_SELECTED_NOTE_STATE"
+const val KEY_EXTRA_SELECTED_NOTE_ID = "EXTRA_SELECTED_NOTE_ID"
 
-class SelectNotesActivity : SelectableNotesActivityBase() {
+class NotesSelectionActivity : SelectableNotesActivityBase() {
 
   private val selectedNotes = HashMap<Int, Note>()
   private val orderingNoteIds = ArrayList<Int>()
@@ -25,21 +25,19 @@ class SelectNotesActivity : SelectableNotesActivityBase() {
     super.onCreate(savedInstanceState)
     views = ActivitySelectNotesBinding.inflate(layoutInflater)
     setContentView(views.root)
+    fetchSelectedNote()
+    initUI()
+  }
 
-    val intent = intent
-    val extras = intent.extras
-    if (extras != null) {
-      val noteId = getIntent().getIntExtra(KEY_SELECT_EXTRA_NOTE_ID, 0)
-      if (noteId != 0) {
-        val note = data.notes.getByID(noteId)
-        if (note !== null) {
-          orderingNoteIds.add(noteId)
-          selectedNotes.put(noteId, note)
-        }
+  private fun fetchSelectedNote() {
+    val noteId = intent.getIntExtra(KEY_EXTRA_SELECTED_NOTE_ID, 0)
+    if (noteId != 0) {
+      val note = data.notes.getByID(noteId)
+      if (note != null) {
+        orderingNoteIds.add(noteId)
+        selectedNotes[noteId] = note
       }
     }
-
-    initUI()
   }
 
   override fun initUI() {
@@ -67,7 +65,7 @@ class SelectNotesActivity : SelectableNotesActivityBase() {
     })
   }
 
-  fun runNoteFunction(noteFunction: (Note) -> Unit) {
+  fun forEachNote(noteFunction: (Note) -> Unit) {
     for (note in selectedNotes.values) {
       noteFunction(note)
     }
@@ -97,7 +95,7 @@ class SelectNotesActivity : SelectableNotesActivityBase() {
       selectedNotes.remove(note.uid)
       orderingNoteIds.remove(note.uid)
     } else {
-      selectedNotes.put(note.uid, note)
+      selectedNotes[note.uid] = note
       orderingNoteIds.add(note.uid)
     }
     adapter.notifyDataSetChanged()
@@ -106,10 +104,6 @@ class SelectNotesActivity : SelectableNotesActivityBase() {
       onBackPressed()
     }
   }
-
-  override fun isNoteSelected(note: Note): Boolean = orderingNoteIds.contains(note.uid)
-
-  override fun getNotes(): List<Note> = data.notes.getAll()
 
   fun getOrderedSelectedNotes(): List<Note> {
     val notes = ArrayList<Note>()
@@ -123,6 +117,13 @@ class SelectNotesActivity : SelectableNotesActivityBase() {
     return notes
   }
 
+  override fun isNoteSelected(note: Note): Boolean = orderingNoteIds.contains(note.uid)
+
+  override fun getNotes(): List<Note> {
+    val state = NoteState.valueOf(intent.getStringExtra(KEY_EXTRA_SELECTED_NOTE_STATE) ?: NoteState.DEFAULT.name)
+    return data.notes.getByNoteState(*noteStatesToBeIncluded(state))
+  }
+
   private fun getText(): String {
     val builder = StringBuilder()
     for (note in getOrderedSelectedNotes()) {
@@ -132,12 +133,14 @@ class SelectNotesActivity : SelectableNotesActivityBase() {
     return builder.toString()
   }
 
-  fun getMode(navigationMode: String): Array<String> {
-    return when (navigationMode) {
-      HomeNavigationMode.FAVOURITE.name -> arrayOf(HomeNavigationMode.FAVOURITE.name)
-      HomeNavigationMode.ARCHIVED.name -> arrayOf(HomeNavigationMode.ARCHIVED.name)
-      HomeNavigationMode.TRASH.name -> arrayOf(HomeNavigationMode.TRASH.name)
-      else -> arrayOf(HomeNavigationMode.DEFAULT.name, HomeNavigationMode.FAVOURITE.name)
+  private fun noteStatesToBeIncluded(noteState: NoteState): Array<NoteState> {
+    return when (noteState) {
+      NoteState.ARCHIVED -> arrayOf(NoteState.ARCHIVED)
+      NoteState.TRASH -> arrayOf(NoteState.TRASH)
+      // Favourite and "default" notes are displayed together in the home screen by default,
+      // so if the user starts a selection on a favourite note we can't tell if they were
+      // viewing only favourite notes
+      else -> arrayOf(NoteState.DEFAULT, NoteState.FAVOURITE)
     }
   }
 }
