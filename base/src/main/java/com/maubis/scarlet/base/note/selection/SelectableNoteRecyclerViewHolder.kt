@@ -14,7 +14,6 @@ class SelectableNoteRecyclerViewHolder(context: Context, view: View) : NoteRecyc
 
   override fun populate(itemData: RecyclerItem, extra: Bundle?) {
     super.populate(itemData, extra)
-    bottomLayout.visibility = View.GONE
 
     val note = (itemData as NoteRecyclerItem).note
     itemView.alpha = if (noteSelector.isNoteSelected(note)) 1.0f else 0.5f
