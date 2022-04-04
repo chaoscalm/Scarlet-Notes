@@ -1,50 +1,40 @@
 package com.maubis.scarlet.base.common.ui
 
-import android.app.Activity
 import android.app.Dialog
-import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
+import androidx.annotation.LayoutRes
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
-import com.github.bijoysingh.starter.fragments.SimpleBottomSheetFragment
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.home.MainActivity
 
-abstract class ThemedBottomSheetFragment : SimpleBottomSheetFragment() {
-
-  var appContext: Context? = null
+abstract class ThemedBottomSheetFragment : BottomSheetDialogFragment() {
 
   override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-    val isTablet = maybeContext()?.resources?.getBoolean(R.bool.is_tablet) ?: false
+    retainInstance = true
+    val isTablet = context?.resources?.getBoolean(R.bool.is_tablet) ?: false
     val dialog = when {
-      isTablet -> BottomSheetTabletDialog(themedContext(), theme)
+      isTablet -> BottomSheetTabletDialog(requireContext(), theme)
       else -> super.onCreateDialog(savedInstanceState)
     }
-    retainInstance = true
+    dialog.setContentView(View.inflate(context, getLayout(), null))
+    resetBackground(dialog)
+    setupView(dialog)
     return dialog
   }
 
-  override fun setupView(dialog: Dialog?) {
-    if (dialog == null) {
-      return
-    }
-    appContext = dialog.context.applicationContext
-    resetBackground(dialog)
-  }
+  abstract fun setupView(dialog: Dialog)
 
-  fun themedActivity(): Activity = activity ?: context as AppCompatActivity
+  @LayoutRes
+  abstract fun getLayout(): Int
 
-  fun themedContext(): Context = maybeContext()!!
+  private fun getBackgroundView(): Int = R.id.container_layout
 
-  fun maybeContext(): Context? = context ?: activity ?: appContext
-
-  abstract fun getBackgroundView(): Int
-
-  fun resetBackground(dialog: Dialog) {
+  private fun resetBackground(dialog: Dialog) {
     val backgroundColor = appTheme.get(ThemeColorType.BACKGROUND)
     val containerLayout = dialog.findViewById<View>(getBackgroundView())
     containerLayout.setBackgroundColor(backgroundColor)
@@ -61,17 +51,7 @@ abstract class ThemedBottomSheetFragment : SimpleBottomSheetFragment() {
       selected -> com.github.bijoysingh.uibasics.R.color.material_blue_700
       else -> com.github.bijoysingh.uibasics.R.color.dark_secondary_text
     }
-    return ContextCompat.getColor(themedContext(), colorResource)
-  }
-
-  open fun getOptionsSubtitleColor(selected: Boolean): Int {
-    val colorResource = when {
-      appTheme.isNightTheme() && selected -> com.github.bijoysingh.uibasics.R.color.material_blue_200
-      appTheme.isNightTheme() -> com.github.bijoysingh.uibasics.R.color.light_tertiary_text
-      selected -> com.github.bijoysingh.uibasics.R.color.material_blue_500
-      else -> com.github.bijoysingh.uibasics.R.color.dark_tertiary_text
-    }
-    return ContextCompat.getColor(themedContext(), colorResource)
+    return ContextCompat.getColor(requireContext(), colorResource)
   }
 
   open fun getBackgroundCardViewIds(): Array<Int> = emptyArray()

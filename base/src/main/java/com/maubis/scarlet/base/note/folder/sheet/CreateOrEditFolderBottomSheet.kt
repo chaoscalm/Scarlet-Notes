@@ -24,16 +24,7 @@ class CreateOrEditFolderBottomSheet : ThemedBottomSheetFragment() {
   var selectedFolder: Folder? = null
   var sheetOnFolderListener: (folder: Folder, deleted: Boolean) -> Unit = { _, _ -> }
 
-  override fun getBackgroundView(): Int {
-    return R.id.container_layout
-  }
-
-  override fun setupView(dialog: Dialog?) {
-    super.setupView(dialog)
-    if (dialog == null) {
-      return
-    }
-
+  override fun setupView(dialog: Dialog) {
     val folder = selectedFolder
     if (folder == null) {
       dismiss()

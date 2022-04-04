@@ -16,10 +16,10 @@ import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.ScarletIntentHandlerActivity
 import com.maubis.scarlet.base.common.sheets.ColorPickerBottomSheet
 import com.maubis.scarlet.base.common.sheets.ColorPickerDefaultController
-import com.maubis.scarlet.base.common.sheets.GridBottomSheetBase
 import com.maubis.scarlet.base.common.sheets.openSheet
 import com.maubis.scarlet.base.common.ui.ThemeColorType
 import com.maubis.scarlet.base.common.ui.ThemedActivity
+import com.maubis.scarlet.base.common.ui.ThemedBottomSheetFragment
 import com.maubis.scarlet.base.common.utils.OsVersionUtils
 import com.maubis.scarlet.base.common.utils.addShortcut
 import com.maubis.scarlet.base.database.entities.Note
@@ -37,34 +37,26 @@ import com.maubis.scarlet.base.reminders.ReminderBottomSheet
 import com.maubis.scarlet.base.security.openUnlockSheet
 import java.util.*
 
-class NoteActionsBottomSheet : GridBottomSheetBase() {
+class NoteActionsBottomSheet(private val note: Note) : ThemedBottomSheetFragment() {
 
-  var noteFn: () -> Note? = { null }
-
-  override fun setupViewWithDialog(dialog: Dialog) {
-    val note = noteFn()
-    if (note === null) {
-      dismiss()
-      return
-    }
-
+  override fun setupView(dialog: Dialog) {
     setActionTitle(dialog, R.string.choose_action)
-    setupGrid(dialog, note)
+    setupGrid(dialog)
     makeBackgroundTransparent(dialog, R.id.root_layout)
   }
 
-  private fun setupGrid(dialog: Dialog, note: Note) {
+  private fun setupGrid(dialog: Dialog) {
     val gridLayoutIds = arrayOf(
       R.id.quick_actions_properties,
       R.id.note_properties,
       R.id.grid_layout)
 
     val gridOptionFunctions = arrayOf(
-      { noteForAction: Note -> getQuickActions(noteForAction) },
-      { noteForAction: Note -> getNotePropertyActions(noteForAction) },
-      { noteForAction: Note -> getExtraActions(noteForAction) })
+      this::getQuickActions,
+      this::getNotePropertyActions,
+      this::getExtraActions)
     gridOptionFunctions.forEachIndexed { index, function ->
-      val items = function(note)
+      val items = function()
       val optionsGrid: GridLayout = dialog.findViewById(gridLayoutIds[index])
       if (items.isEmpty())
         optionsGrid.isVisible = false
@@ -73,7 +65,7 @@ class NoteActionsBottomSheet : GridBottomSheetBase() {
     }
   }
 
-  private fun getQuickActions(note: Note): List<NoteActionItem> {
+  private fun getQuickActions(): List<NoteActionItem> {
     val activity = context as ThemedActivity
     if (activity !is INoteActionsSheetActivity) {
       return emptyList()
@@ -168,7 +160,7 @@ class NoteActionsBottomSheet : GridBottomSheetBase() {
     return actions
   }
 
-  private fun getNotePropertyActions(note: Note): List<NoteActionItem> {
+  private fun getNotePropertyActions(): List<NoteActionItem> {
     val activity = context as ThemedActivity
     if (activity !is INoteActionsSheetActivity || note.state == NoteState.TRASH) {
       return emptyList()
@@ -271,7 +263,7 @@ class NoteActionsBottomSheet : GridBottomSheetBase() {
     return actions
   }
 
-  private fun getExtraActions(note: Note): List<NoteActionItem> {
+  private fun getExtraActions(): List<NoteActionItem> {
     val activity = context as ThemedActivity
     if (activity !is INoteActionsSheetActivity || note.state == NoteState.TRASH) {
       return emptyList()
@@ -294,7 +286,7 @@ class NoteActionsBottomSheet : GridBottomSheetBase() {
         icon = R.drawable.ic_action_notification,
         invalid = activity.lockedContentIsHidden() && note.locked
       ) {
-        val handler = NotificationHandler(themedContext())
+        val handler = NotificationHandler(requireContext())
         handler.openNotification(NotificationConfig(note = note))
         dismiss()
       })
@@ -381,10 +373,8 @@ class NoteActionsBottomSheet : GridBottomSheetBase() {
 
   override fun getLayout(): Int = R.layout.bottom_sheet_note_options
 
-  override fun getBackgroundCardViewIds(): Array<Int> = emptyArray()
-
   override fun getOptionsTitleColor(selected: Boolean): Int {
-    return ContextCompat.getColor(themedContext(), com.github.bijoysingh.uibasics.R.color.light_primary_text)
+    return ContextCompat.getColor(requireContext(), com.github.bijoysingh.uibasics.R.color.light_primary_text)
   }
 
   private fun setActionTitle(dialog: Dialog, title: Int) {
@@ -419,8 +409,7 @@ class NoteActionsBottomSheet : GridBottomSheetBase() {
 
   companion object {
     fun openSheet(activity: ThemedActivity, note: Note) {
-      val sheet = NoteActionsBottomSheet()
-      sheet.noteFn = { note }
+      val sheet = NoteActionsBottomSheet(note)
       sheet.show(activity.supportFragmentManager, sheet.tag)
     }
   }
