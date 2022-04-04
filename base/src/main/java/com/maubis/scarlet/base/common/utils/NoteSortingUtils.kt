@@ -26,7 +26,6 @@ class ComparablePair<T : Comparable<T>, U : Comparable<U>>(private val first: T,
 }
 
 fun sort(notes: List<Note>, sortingTechnique: SortingTechnique): List<Note> {
-  // Notes returned from DB are always sorted newest first. Reduce computational load
   return when (sortingTechnique) {
     SortingTechnique.LAST_MODIFIED -> notes.sortedByDescending { note ->
       if (note.pinned) Long.MAX_VALUE
@@ -41,10 +40,7 @@ fun sort(notes: List<Note>, sortingTechnique: SortingTechnique): List<Note> {
       else note.timestamp
     }
     SortingTechnique.ALPHABETICAL -> notes.sortedBy { note ->
-      val content = note.getFullText().trim().filter {
-        (it in 'a'..'z') || (it in 'A'..'Z')
-      }
-
+      val content = note.getFullText().substringBefore('\n').filter { it.isLetterOrDigit() }
       val sortValue = when {
         (note.pinned || content.isBlank()) -> 0
         else -> content[0].uppercaseChar().code
