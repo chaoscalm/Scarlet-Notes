@@ -28,6 +28,10 @@ class FoldersRepository(private val database: FolderDao) {
     return folders.values.toList()
   }
 
+  fun getAllUUIDs(): List<UUID> {
+    return folders.keys.toList()
+  }
+
   fun getByUUID(uuid: UUID): Folder? {
     return folders[uuid]
   }

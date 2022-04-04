@@ -9,12 +9,12 @@ import com.maubis.scarlet.base.common.utils.ColorUtil
 import com.maubis.scarlet.base.database.entities.Folder
 
 class FolderRecyclerItem(
-        context: Context,
-        val folder: Folder,
-        val click: () -> Unit = {},
-        val longClick: () -> Unit = {},
-        val selected: Boolean = false,
-        contents: Int = -1) : RecyclerItem() {
+  context: Context,
+  val folder: Folder,
+  val click: () -> Unit = {},
+  val longClick: () -> Unit = {},
+  val selected: Boolean = false,
+  notesCount: Int? = null) : RecyclerItem() {
 
   val isLightShaded = ColorUtil.isLightColor(folder.color)
   val title = folder.title
@@ -23,7 +23,7 @@ class FolderRecyclerItem(
     false -> ContextCompat.getColor(context, com.github.bijoysingh.uibasics.R.color.light_primary_text)
   }
 
-  val usage = if (contents == -1) data.notes.getNoteCountByFolder(folder.uuid) else contents
+  val usage = notesCount ?: data.notes.getNoteCountByFolder(folder.uuid)
   val label = when (usage) {
     0 -> context.getString(R.string.folder_card_title)
     1 -> context.getString(R.string.folder_card_title_single_note)
@@ -34,5 +34,5 @@ class FolderRecyclerItem(
     false -> ContextCompat.getColor(context, com.github.bijoysingh.uibasics.R.color.light_secondary_text)
   }
 
-  override val type = RecyclerItem.Type.FOLDER
+  override val type = Type.FOLDER
 }

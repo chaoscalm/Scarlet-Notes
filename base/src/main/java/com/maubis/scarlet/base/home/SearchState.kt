@@ -22,7 +22,7 @@ class SearchState(
       || tags.isNotEmpty()
       || colors.isNotEmpty()
       || text.isNotBlank()
-      || mode !== HomeNavigationMode.DEFAULT
+      || mode != HomeNavigationMode.DEFAULT
   }
 
   fun isFilteringByTag(tag: Tag) = tags.any { it.uuid == tag.uuid }
@@ -44,27 +44,18 @@ class SearchState(
   }
 }
 
-fun unifiedSearchSynchronous(state: SearchState): List<Note> {
-  val sorting = SortingOptionsBottomSheet.getSortingState()
-  val notes = unifiedSearchWithoutFolder(state)
+fun findMatchingNotes(state: SearchState): List<Note> {
+  val notes = findMatchingNotesIgnoringFolder(state)
     .filter { state.currentFolder?.uuid == it.folder }
-  return sort(notes, sorting)
+  return sort(notes, SortingOptionsBottomSheet.getSortingState())
 }
 
-fun filterFolder(notes: List<Note>, folder: Folder): List<Note> {
-  val sorting = SortingOptionsBottomSheet.getSortingState()
-  val filteredNotes = notes.filter { it.folder == folder.uuid }
-  return sort(filteredNotes, sorting)
+fun excludeNotesInFolders(notes: List<Note>): List<Note> {
+  val notesWithoutFolder = notes.filter { it.folder !in data.folders.getAllUUIDs() }
+  return sort(notesWithoutFolder, SortingOptionsBottomSheet.getSortingState())
 }
 
-fun filterOutFolders(notes: List<Note>): List<Note> {
-  val allFoldersUUIDs = data.folders.getAll().map { it.uuid }
-  val sorting = SortingOptionsBottomSheet.getSortingState()
-  val filteredNotes = notes.filter { !allFoldersUUIDs.contains(it.folder) }
-  return sort(filteredNotes, sorting)
-}
-
-fun unifiedSearchWithoutFolder(state: SearchState): List<Note> {
+fun findMatchingNotesIgnoringFolder(state: SearchState): List<Note> {
   return getNotesForMode(state)
     .filter { state.colors.isEmpty() || state.colors.contains(it.color) }
     .filter { note -> state.tags.isEmpty() || state.tags.any { note.tags.contains(it.uuid.toString()) } }
@@ -77,7 +68,7 @@ fun unifiedSearchWithoutFolder(state: SearchState): List<Note> {
     }
 }
 
-fun filterDirectlyValidFolders(state: SearchState): List<Folder> {
+fun findMatchingFolders(state: SearchState): List<Folder> {
   if (state.currentFolder != null) {
     return emptyList()
   }
@@ -87,7 +78,7 @@ fun filterDirectlyValidFolders(state: SearchState): List<Folder> {
     .filter { it.title.contains(state.text, true) }
 }
 
-fun getNotesForMode(state: SearchState): List<Note> {
+private fun getNotesForMode(state: SearchState): List<Note> {
   return when (state.mode) {
     HomeNavigationMode.FAVOURITE -> data.notes.getByNoteState(NoteState.FAVOURITE)
     HomeNavigationMode.ARCHIVED -> data.notes.getByNoteState(NoteState.ARCHIVED)

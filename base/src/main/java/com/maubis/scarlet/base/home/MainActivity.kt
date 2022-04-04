@@ -247,44 +247,40 @@ class MainActivity : SecuredActivity(), INoteActionsSheetActivity {
     }
   }
 
-  private fun unifiedSearchSynchronous(): List<RecyclerItem> {
-    val allItems = mutableListOf<RecyclerItem>()
+  private fun computeItemsToBeShown(): List<RecyclerItem> {
     if (state.currentFolder != null) {
-      val allNotes = unifiedSearchSynchronous(state)
-      allItems.addAll(allNotes.map { NoteRecyclerItem(this, it) })
-      return allItems
+      return findMatchingNotes(state)
+        .map { NoteRecyclerItem(this, it) }
     }
 
-    val allNotes = unifiedSearchWithoutFolder(state)
-    val directAcceptableFolders = filterDirectlyValidFolders(state)
+    val allNotes = findMatchingNotesIgnoringFolder(state)
+    val matchingFolders = findMatchingFolders(state)
+    val allItems = mutableListOf<RecyclerItem>()
     allItems.addAll(
         data.folders.getAll()
-            .map {
-                val isDirectFolder = directAcceptableFolders.contains(it)
-                val notesCount = filterFolder(allNotes, it).size
-                if (state.hasFilter() && notesCount == 0 && !isDirectFolder) {
-                  return@map null
-                }
-
-                FolderRecyclerItem(
-                  context = this,
-                  folder = it,
-                  click = { onFolderChange(it) },
-                  longClick = {
-                    CreateOrEditFolderBottomSheet.openSheet(this, it, { _, _ -> refreshItems() })
-                  },
-                  selected = state.currentFolder?.uuid == it.uuid,
-                  contents = notesCount)
-            }
-            .filterNotNull()
+          .filter { folder ->
+            val notesInFolder = allNotes.count { it.folder == folder.uuid }
+            !state.hasFilter() || notesInFolder != 0 || matchingFolders.contains(folder)
+          }
+          .map { folder ->
+              FolderRecyclerItem(
+                context = this,
+                folder = folder,
+                click = { onFolderChange(folder) },
+                longClick = {
+                  CreateOrEditFolderBottomSheet.openSheet(this, folder) { _, _ -> refreshItems() }
+                },
+                selected = state.currentFolder?.uuid == folder.uuid,
+                notesCount = allNotes.count { it.folder == folder.uuid })
+          }
     )
-    allItems.addAll(filterOutFolders(allNotes).map { NoteRecyclerItem(this, it) })
+    allItems.addAll(excludeNotesInFolders(allNotes).map { NoteRecyclerItem(this, it) })
     return allItems
   }
 
   fun refreshItems() {
     lifecycleScope.launch {
-      val items = withContext(Dispatchers.IO) { unifiedSearchSynchronous() }
+      val items = withContext(Dispatchers.IO) { computeItemsToBeShown() }
       handleNewItems(items)
     }
   }
