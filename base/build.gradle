@@ -33,6 +33,20 @@ android {
         viewBinding true
     }
 
+    signingConfigs {
+        release {
+            def signingConfigFile = new File('signing.properties')
+            if (signingConfigFile.exists()) {
+                def props = new Properties()
+                props.load(new FileInputStream(signingConfigFile))
+                storeFile file(props['storeFile'])
+                storePassword props['storePassword']
+                keyAlias props['keyAlias']
+                keyPassword props['keyPassword']
+            }
+        }
+    }
+    
     buildTypes {
         debug {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -42,8 +56,10 @@ android {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
+
     sourceSets {
         androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
     }
