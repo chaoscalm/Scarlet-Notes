@@ -6,6 +6,8 @@ import android.graphics.Rect
 import android.text.Layout
 import android.text.style.LeadingMarginSpan
 import com.maubis.markdown.MarkdownConfig
+import kotlin.math.max
+import kotlin.math.min
 
 class QuoteSegmentSpan : LeadingMarginSpan, ICustomSpan {
 
@@ -37,7 +39,7 @@ class QuoteSegmentSpan : LeadingMarginSpan, ICustomSpan {
     val startPosition = x + dir * MarkdownConfig.spanConfig.quoteWidth
     val endPosition = startPosition + dir * MarkdownConfig.spanConfig.quoteWidth
 
-    rect.set(Math.min(startPosition, endPosition), top, Math.max(startPosition, endPosition), bottom)
+    rect.set(min(startPosition, endPosition), top, max(startPosition, endPosition), bottom)
     canvas.drawRect(rect, paint)
   }
 }

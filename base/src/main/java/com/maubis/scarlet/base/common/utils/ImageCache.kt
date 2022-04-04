@@ -9,6 +9,7 @@ import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FileOutputStream
 import java.util.concurrent.atomic.AtomicLong
+import kotlin.math.min
 
 const val IMAGE_CACHE_SIZE = 1024 * 1024 * 10L
 
@@ -61,7 +62,7 @@ class ImageCache(context: Context) {
   }
 
   private fun sampleBitmap(bitmap: Bitmap): Bitmap {
-    val cropDimension = Math.min(bitmap.width, bitmap.height)
+    val cropDimension = min(bitmap.width, bitmap.height)
     val destinationBitmap = Bitmap.createBitmap(bitmap, 0, 0, cropDimension, cropDimension)
     return Bitmap.createScaledBitmap(destinationBitmap, 256, 256, false)
   }

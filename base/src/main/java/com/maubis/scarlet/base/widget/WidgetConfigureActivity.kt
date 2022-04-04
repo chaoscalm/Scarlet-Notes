@@ -73,13 +73,13 @@ class WidgetConfigureActivity : SelectableNotesActivityBase(), INoteSelectorActi
       val note = data.notes.getByUUID(widget.noteUuid)
       val appWidgetManager = AppWidgetManager.getInstance(context)
       if (note === null || (note.locked && !sWidgetShowLockedNotes)) {
-        val views = RemoteViews(context.getPackageName(), R.layout.widget_invalid_note)
+        val views = RemoteViews(context.packageName, R.layout.widget_invalid_note)
         appWidgetManager.updateAppWidget(widget.widgetId, views)
         return
       }
 
       val pendingIntent = ViewAdvancedNoteActivity.getIntentWithStack(context, note)
-      val views = RemoteViews(context.getPackageName(), R.layout.widget_layout)
+      val views = RemoteViews(context.packageName, R.layout.widget_layout)
 
       views.setTextViewText(R.id.description, note.getTextForWidget())
       views.setInt(R.id.container_layout, "setBackgroundColor", note.color)
@@ -119,7 +119,7 @@ class WidgetConfigureActivity : SelectableNotesActivityBase(), INoteSelectorActi
       val intentIds = IntArray(widgetIds.size, { index -> widgetIds[index] })
 
       val intent = Intent(application, NoteWidgetProvider::class.java)
-      intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE)
+      intent.action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
       intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, intentIds)
       return intent
     }
@@ -133,7 +133,7 @@ class WidgetConfigureActivity : SelectableNotesActivityBase(), INoteSelectorActi
       if (intent === null) {
         return
       }
-      context.sendBroadcast(intent);
+      context.sendBroadcast(intent)
     }
   }
 }

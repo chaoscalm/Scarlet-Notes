@@ -80,7 +80,7 @@ class ReminderJob : Job() {
     }
 
     fun cancelJob(uid: Int) {
-      JobManager.instance().cancel(uid);
+      JobManager.instance().cancel(uid)
     }
   }
 }

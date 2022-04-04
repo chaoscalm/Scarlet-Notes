@@ -13,6 +13,8 @@ import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.common.ui.ThemeColorType
+import kotlin.math.max
+import kotlin.math.min
 
 @LayoutSpec
 object CounterChooserSpec {
@@ -28,7 +30,7 @@ object CounterChooserSpec {
       .child(EmptySpec.create(context).flexGrow(1f))
       .child(bottomBarRoundIcon(context, ToolbarColorConfig())
                .iconRes(R.drawable.icon_less_counter)
-               .onClick { onValueChange(Math.max(value - 1, minValue)) })
+               .onClick { onValueChange(max(value - 1, minValue)) })
       .child(
         Text.create(context)
           .text(value.toString())
@@ -38,7 +40,7 @@ object CounterChooserSpec {
           .textColor(appTheme.get(ThemeColorType.TERTIARY_TEXT)))
       .child(bottomBarRoundIcon(context, ToolbarColorConfig())
                .iconRes(R.drawable.icon_more_counter)
-               .onClick { onValueChange(Math.min(value + 1, maxValue)) })
+               .onClick { onValueChange(min(value + 1, maxValue)) })
       .child(EmptySpec.create(context).flexGrow(1f))
     return row.build()
   }

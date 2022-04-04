@@ -18,8 +18,8 @@ enum class SortingTechnique(@StringRes val label: Int) {
 class ComparablePair<T : Comparable<T>, U : Comparable<U>>(private val first: T, private val second: U) : Comparable<ComparablePair<T, U>> {
   override fun compareTo(other: ComparablePair<T, U>): Int {
     val firstComparison = first.compareTo(other.first)
-    return when {
-      firstComparison == 0 -> second.compareTo(other.second)
+    return when (firstComparison) {
+      0 -> second.compareTo(other.second)
       else -> firstComparison
     }
   }

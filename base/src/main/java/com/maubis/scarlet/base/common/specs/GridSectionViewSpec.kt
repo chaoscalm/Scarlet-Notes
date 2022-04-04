@@ -131,7 +131,7 @@ object GridSectionViewSpec {
         break
       }
 
-      for (delta in 0..(numberOfColumns - 1)) {
+      for (delta in 0 until numberOfColumns) {
         row.child(getComponentAtIndex(index))
         index += 1
       }

@@ -3,6 +3,7 @@ package com.maubis.scarlet.base.common.ui
 import android.graphics.*
 import android.graphics.drawable.Drawable
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
+import kotlin.math.min
 
 class CircleDrawable(color: Int, showBorder: Boolean = true) : Drawable() {
   private val paint: Paint
@@ -42,6 +43,6 @@ class CircleDrawable(color: Int, showBorder: Boolean = true) : Drawable() {
 
   override fun onBoundsChange(bounds: Rect) {
     super.onBoundsChange(bounds)
-    radius = Math.min(bounds.width(), bounds.height()) / 2
+    radius = min(bounds.width(), bounds.height()) / 2
   }
 }

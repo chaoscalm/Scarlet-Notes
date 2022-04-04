@@ -14,13 +14,8 @@ import com.maubis.scarlet.base.common.ui.CircleDrawable
 
 class SelectorFolderRecyclerHolder(context: Context, view: View) : RecyclerViewHolder<RecyclerItem>(context, view) {
 
-  protected val title: TextView
-  protected val icon: ImageView
-
-  init {
-    title = view.findViewById(R.id.folder_title)
-    icon = view.findViewById(R.id.folder_icon)
-  }
+  private val title: TextView = view.findViewById(R.id.folder_title)
+  private val icon: ImageView = view.findViewById(R.id.folder_icon)
 
   override fun populate(itemData: RecyclerItem, extra: Bundle?) {
     setFullSpan()

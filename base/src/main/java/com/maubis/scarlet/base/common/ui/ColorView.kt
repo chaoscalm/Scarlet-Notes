@@ -13,8 +13,8 @@ import com.maubis.scarlet.base.R
 
 class ColorView : LinearLayout {
 
-  lateinit internal var root: View
-  lateinit internal var icon: ImageView
+  internal lateinit var root: View
+  internal lateinit var icon: ImageView
 
   constructor(context: Context) : super(context) {
     init(context)

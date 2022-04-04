@@ -22,16 +22,16 @@ import java.io.File
 
 class FormatImageViewHolder(context: Context, view: View) : FormatViewHolderBase(context, view) {
 
-  protected val text: TextView = root.findViewById(R.id.text)
-  protected val image: ImageView = root.findViewById(R.id.image)
+  private val text: TextView = root.findViewById(R.id.text)
+  private val image: ImageView = root.findViewById(R.id.image)
 
-  protected val actionCamera: ImageView = root.findViewById(R.id.action_camera)
-  protected val actionGallery: ImageView = root.findViewById(R.id.action_gallery)
-  protected val actionMove: ImageView = root.findViewById(R.id.action_move_icon)
-  protected val imageToolbar: View = root.findViewById(R.id.image_toolbar)
-  protected val noImageMessage: UITextView = root.findViewById(R.id.no_image_message)
+  private val actionCamera: ImageView = root.findViewById(R.id.action_camera)
+  private val actionGallery: ImageView = root.findViewById(R.id.action_gallery)
+  private val actionMove: ImageView = root.findViewById(R.id.action_move_icon)
+  private val imageToolbar: View = root.findViewById(R.id.image_toolbar)
+  private val noImageMessage: UITextView = root.findViewById(R.id.no_image_message)
 
-  protected var format: Format? = null
+  private var format: Format? = null
 
   override fun populate(data: Format, config: FormatViewHolderConfig) {
     format = data

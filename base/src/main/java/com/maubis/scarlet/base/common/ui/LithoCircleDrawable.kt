@@ -4,6 +4,7 @@ import android.graphics.*
 import android.graphics.drawable.Drawable
 import com.facebook.litho.drawable.ComparableDrawable
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
+import kotlin.math.min
 
 class LithoCircleDrawable(color: Int, alpha: Int = 255, val showBorder: Boolean = false) : Drawable(), ComparableDrawable {
   private val mPaint: Paint
@@ -48,7 +49,7 @@ class LithoCircleDrawable(color: Int, alpha: Int = 255, val showBorder: Boolean 
 
   override fun onBoundsChange(bounds: Rect) {
     super.onBoundsChange(bounds)
-    mRadius = Math.min(bounds.width(), bounds.height()) / 2
+    mRadius = min(bounds.width(), bounds.height()) / 2
   }
 
   override fun isEquivalentTo(other: ComparableDrawable?): Boolean {

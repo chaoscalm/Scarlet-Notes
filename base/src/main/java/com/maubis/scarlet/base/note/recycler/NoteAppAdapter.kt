@@ -14,10 +14,9 @@ class NoteAppAdapter : MultiRecyclerViewAdapter<RecyclerItem> {
 
   @JvmOverloads
   constructor(context: Context, staggered: Boolean = false, isTablet: Boolean = false) : super(
-    context, getRecyclerItemControllerList(staggered, isTablet)) {
-  }
+    context, getRecyclerItemControllerList(staggered, isTablet))
 
-  constructor(context: Context, list: List<MultiRecyclerViewControllerItem<RecyclerItem>>) : super(context, list) {}
+  constructor(context: Context, list: List<MultiRecyclerViewControllerItem<RecyclerItem>>) : super(context, list)
 
   override fun getItemViewType(position: Int): Int {
     return items[position].type.ordinal

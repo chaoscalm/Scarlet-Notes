@@ -22,10 +22,10 @@ import com.maubis.scarlet.base.note.getDisplayTime
 import com.maubis.scarlet.base.note.getTextForSharing
 import com.maubis.scarlet.base.note.getTitleForSharing
 
-const val REQUEST_CODE_BASE = 3200;
-const val REQUEST_CODE_MULTIPLIER = 250;
-const val NOTE_NOTIFICATION_CHANNEL_ID = "NOTE_NOTIFICATION_CHANNEL";
-const val REMINDER_NOTIFICATION_CHANNEL_ID = "REMINDER_NOTIFICATION_CHANNEL";
+const val REQUEST_CODE_BASE = 3200
+const val REQUEST_CODE_MULTIPLIER = 250
+const val NOTE_NOTIFICATION_CHANNEL_ID = "NOTE_NOTIFICATION_CHANNEL"
+const val REMINDER_NOTIFICATION_CHANNEL_ID = "REMINDER_NOTIFICATION_CHANNEL"
 
 class NotificationConfig(
     val note: Note,

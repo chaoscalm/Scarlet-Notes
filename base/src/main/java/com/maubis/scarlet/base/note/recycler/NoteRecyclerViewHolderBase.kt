@@ -22,40 +22,21 @@ import com.maubis.scarlet.base.note.isNoteLockedButAppUnlocked
 
 open class NoteRecyclerViewHolderBase(context: Context, view: View) : RecyclerViewHolder<RecyclerItem>(context, view) {
 
-  protected val view: CardView
-  protected val tags: TextView
-  protected val image: ImageView
-  protected val content: TextView
-  protected val edit: ImageView
-  protected val share: ImageView
-  protected val delete: ImageView
-  protected val copy: ImageView
-  protected val moreOptions: ImageView
-  protected val bottomLayout: View
+  protected val view: CardView = view as CardView
+  protected val tags: TextView = view.findViewById(R.id.tags)
+  protected val image: ImageView = view.findViewById(R.id.image)
+  protected val content: TextView = view.findViewById(R.id.description)
+  protected val edit: ImageView = view.findViewById(R.id.edit_button)
+  protected val share: ImageView = view.findViewById(R.id.share_button)
+  protected val delete: ImageView = view.findViewById(R.id.delete_button)
+  protected val copy: ImageView = view.findViewById(R.id.copy_button)
+  protected val moreOptions: ImageView = view.findViewById(R.id.options_button)
 
-  protected val pinIndicator: ImageView
-  protected val unlockIndicator: ImageView
-  protected val reminderIndicator: ImageView
-  protected val stateIndicator: ImageView
-  protected val backupIndicator: ImageView
-
-  init {
-    this.view = view as CardView
-    tags = view.findViewById(R.id.tags)
-    image = view.findViewById(R.id.image)
-    content = view.findViewById(R.id.description)
-    share = view.findViewById(R.id.share_button)
-    delete = view.findViewById(R.id.delete_button)
-    copy = view.findViewById(R.id.copy_button)
-    moreOptions = view.findViewById(R.id.options_button)
-    pinIndicator = view.findViewById(R.id.pin_icon)
-    unlockIndicator = view.findViewById(R.id.unlock_icon)
-    reminderIndicator = view.findViewById(R.id.reminder_icon)
-    edit = view.findViewById(R.id.edit_button)
-    bottomLayout = view.findViewById(R.id.bottom_toolbar_layout)
-    stateIndicator = view.findViewById(R.id.state_icon)
-    backupIndicator = view.findViewById(R.id.backup_icon)
-  }
+  private val pinIndicator: ImageView = view.findViewById(R.id.pin_icon)
+  private val unlockIndicator: ImageView = view.findViewById(R.id.unlock_icon)
+  private val reminderIndicator: ImageView = view.findViewById(R.id.reminder_icon)
+  private val stateIndicator: ImageView = view.findViewById(R.id.state_icon)
+  private val backupIndicator: ImageView = view.findViewById(R.id.backup_icon)
 
   override fun populate(itemData: RecyclerItem, extra: Bundle?) {
     val item = itemData as NoteRecyclerItem
@@ -82,7 +63,7 @@ open class NoteRecyclerViewHolderBase(context: Context, view: View) : RecyclerVi
   }
 
   private fun setImage(item: NoteRecyclerItem) {
-    val isImageAvailable = !item.imageSource.isBlank()
+    val isImageAvailable = item.imageSource.isNotBlank()
     image.isVisible = isImageAvailable
     if (isImageAvailable) {
       imageStorage.loadThumbnailToImageView(item.note.uuid.toString(), item.imageSource, image)

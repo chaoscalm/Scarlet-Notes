@@ -66,7 +66,7 @@ class AllNotesRemoteViewsFactory(val context: Context) : RemoteViewsService.Remo
 
     val note = notes[position]
 
-    val views = RemoteViews(context.getPackageName(), R.layout.item_widget_note)
+    val views = RemoteViews(context.packageName, R.layout.item_widget_note)
 
     views.setTextViewText(R.id.description, note.getTextForWidget())
     views.setInt(R.id.container_layout, "setBackgroundColor", note.color)
