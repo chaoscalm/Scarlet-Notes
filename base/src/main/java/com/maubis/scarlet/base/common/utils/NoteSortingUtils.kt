@@ -1,22 +1,21 @@
 package com.maubis.scarlet.base.common.utils
 
+import androidx.annotation.StringRes
+import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.note.getFullText
-import java.util.*
 
-enum class SortingTechnique {
-  LAST_MODIFIED,
-  NEWEST_FIRST,
-  OLDEST_FIRST,
-  ALPHABETICAL,
-  NOTE_COLOR,
-  NOTE_TAGS,
+enum class SortingTechnique(@StringRes val label: Int) {
+  LAST_MODIFIED(R.string.sort_sheet_last_modified),
+  NEWEST_FIRST(R.string.sort_sheet_newest_first),
+  OLDEST_FIRST(R.string.sort_sheet_oldest_first),
+  ALPHABETICAL(R.string.sort_sheet_alphabetical)
 }
 
 /**
  * Helper class which allow comparison of a pair of objects
  */
-class ComparablePair<T : Comparable<T>, U : Comparable<U>>(val first: T, val second: U) : Comparable<ComparablePair<T, U>> {
+class ComparablePair<T : Comparable<T>, U : Comparable<U>>(private val first: T, private val second: U) : Comparable<ComparablePair<T, U>> {
   override fun compareTo(other: ComparablePair<T, U>): Int {
     val firstComparison = first.compareTo(other.first)
     return when {
@@ -33,13 +32,17 @@ fun sort(notes: List<Note>, sortingTechnique: SortingTechnique): List<Note> {
       if (note.pinned) Long.MAX_VALUE
       else note.updateTimestamp
     }
+    SortingTechnique.NEWEST_FIRST -> notes.sortedByDescending { note ->
+      if (note.pinned) Long.MAX_VALUE
+      else note.timestamp
+    }
     SortingTechnique.OLDEST_FIRST -> notes.sortedBy { note ->
       if (note.pinned) Long.MIN_VALUE
       else note.timestamp
     }
     SortingTechnique.ALPHABETICAL -> notes.sortedBy { note ->
       val content = note.getFullText().trim().filter {
-        ((it in 'a'..'z') || (it in 'A'..'Z'))
+        (it in 'a'..'z') || (it in 'A'..'Z')
       }
 
       val sortValue = when {
@@ -47,27 +50,6 @@ fun sort(notes: List<Note>, sortingTechnique: SortingTechnique): List<Note> {
         else -> content[0].uppercaseChar().code
       }
       ComparablePair(sortValue, note.updateTimestamp)
-    }
-    SortingTechnique.NOTE_COLOR -> notes.sortedBy { note ->
-      ComparablePair(note.color, note.updateTimestamp)
-    }
-    SortingTechnique.NOTE_TAGS -> {
-      val tagCounterMap = HashMap<UUID, Int>()
-      notes.map { it.getTagUUIDs() }.forEach { tags ->
-        tags.forEach { tag ->
-          tagCounterMap[tag] = (tagCounterMap[tag] ?: 0) + 1
-        }
-      }
-      notes.sortedByDescending {
-        val noteTagScore = it.getTagUUIDs().sumOf { tag ->
-          tagCounterMap[tag] ?: 0
-        }
-        ComparablePair(ComparablePair(noteTagScore, it.tags), it.updateTimestamp)
-      }
-    }
-    SortingTechnique.NEWEST_FIRST -> notes.sortedByDescending { note ->
-      if (note.pinned) Long.MAX_VALUE
-      else note.timestamp
     }
   }
 }

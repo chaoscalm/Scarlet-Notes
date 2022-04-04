@@ -8,7 +8,7 @@ import com.maubis.scarlet.base.database.entities.NoteState
 import com.maubis.scarlet.base.database.entities.Tag
 import com.maubis.scarlet.base.note.getFullText
 import com.maubis.scarlet.base.note.isNoteLockedButAppUnlocked
-import com.maubis.scarlet.base.settings.SortingOptionsBottomSheet
+import com.maubis.scarlet.base.settings.notesSortingTechniquePref
 
 class SearchState(
     var text: String = "",
@@ -47,12 +47,12 @@ class SearchState(
 fun findMatchingNotes(state: SearchState): List<Note> {
   val notes = findMatchingNotesIgnoringFolder(state)
     .filter { state.currentFolder?.uuid == it.folder }
-  return sort(notes, SortingOptionsBottomSheet.getSortingState())
+  return sort(notes, notesSortingTechniquePref)
 }
 
 fun excludeNotesInFolders(notes: List<Note>): List<Note> {
   val notesWithoutFolder = notes.filter { it.folder !in data.folders.getAllUUIDs() }
-  return sort(notesWithoutFolder, SortingOptionsBottomSheet.getSortingState())
+  return sort(notesWithoutFolder, notesSortingTechniquePref)
 }
 
 fun findMatchingNotesIgnoringFolder(state: SearchState): List<Note> {

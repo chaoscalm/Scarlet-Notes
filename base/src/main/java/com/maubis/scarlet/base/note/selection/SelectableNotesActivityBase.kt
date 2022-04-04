@@ -23,7 +23,7 @@ import com.maubis.scarlet.base.note.recycler.NoteAppAdapter
 import com.maubis.scarlet.base.note.recycler.NoteRecyclerItem
 import com.maubis.scarlet.base.note.recycler.getSelectableRecyclerItemControllerList
 import com.maubis.scarlet.base.settings.STORE_KEY_LINE_COUNT
-import com.maubis.scarlet.base.settings.SortingOptionsBottomSheet
+import com.maubis.scarlet.base.settings.notesSortingTechniquePref
 import com.maubis.scarlet.base.settings.sNoteItemLineCount
 import com.maubis.scarlet.base.settings.sUIUseGridView
 import kotlinx.coroutines.Dispatchers
@@ -52,8 +52,7 @@ abstract class SelectableNotesActivityBase : SecuredActivity(), INoteSelectorAct
 
   private fun loadNotes() {
     lifecycleScope.launch(Dispatchers.IO) {
-      val sorting = SortingOptionsBottomSheet.getSortingState()
-      val notes = sort(getNotes(), sorting)
+      val notes = sort(getNotes(), notesSortingTechniquePref)
         .sortedBy { it.folder }
         .map { NoteRecyclerItem(this@SelectableNotesActivityBase, it) }
 

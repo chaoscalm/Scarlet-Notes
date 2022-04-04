@@ -10,57 +10,33 @@ import com.maubis.scarlet.base.common.sheets.LithoChooseOptionsItem
 import com.maubis.scarlet.base.common.utils.SortingTechnique
 import com.maubis.scarlet.base.home.MainActivity
 
-class SortingOptionsBottomSheet : LithoChooseOptionBottomSheet() {
-  var listener: () -> Unit = {}
+var notesSortingTechniquePref: SortingTechnique
+  get() = SortingTechnique.valueOf(appPreferences.getString("notes_sorting_technique", SortingTechnique.LAST_MODIFIED.name)!!)
+  set(value) = appPreferences.edit { putString("notes_sorting_technique", value.name) }
 
+class SortingOptionsBottomSheet(private val listener: () -> Unit) : LithoChooseOptionBottomSheet() {
   override fun title(): Int = R.string.sort_sheet_title
 
   override fun getOptions(componentContext: ComponentContext, dialog: Dialog): List<LithoChooseOptionsItem> {
-    val sorting = getSortingState()
     val options = ArrayList<LithoChooseOptionsItem>()
-
     SortingTechnique.values().forEach { technique ->
       options.add(
         LithoChooseOptionsItem(
-          title = getSortingTechniqueLabel(technique),
+          title = technique.label,
           listener = {
-            setSortingState(technique)
+            notesSortingTechniquePref = technique
             listener()
             refresh(componentContext.androidContext, dialog)
           },
-          selected = sorting == technique
+          selected = notesSortingTechniquePref == technique
         ))
     }
     return options
   }
 
   companion object {
-
-    const val KEY_SORTING_TECHNIQUE = "KEY_SORTING_TECHNIQUE"
-
-    fun getSortingState(): SortingTechnique {
-      return SortingTechnique.values()[appPreferences.getInt(KEY_SORTING_TECHNIQUE, SortingTechnique.LAST_MODIFIED.ordinal)]
-    }
-
-    fun getSortingTechniqueLabel(technique: SortingTechnique): Int {
-      return when (technique) {
-        SortingTechnique.LAST_MODIFIED -> R.string.sort_sheet_last_modified
-        SortingTechnique.NEWEST_FIRST -> R.string.sort_sheet_newest_first
-        SortingTechnique.OLDEST_FIRST -> R.string.sort_sheet_oldest_first
-        SortingTechnique.ALPHABETICAL -> R.string.sort_sheet_alphabetical
-        SortingTechnique.NOTE_COLOR -> R.string.sort_sheet_note_color
-        SortingTechnique.NOTE_TAGS -> R.string.sort_sheet_note_tags
-      }
-    }
-
-    fun setSortingState(sortingTechnique: SortingTechnique) {
-      appPreferences.edit { putInt(KEY_SORTING_TECHNIQUE, sortingTechnique.ordinal) }
-    }
-
     fun openSheet(activity: MainActivity, listener: () -> Unit) {
-      val sheet = SortingOptionsBottomSheet()
-
-      sheet.listener = listener
+      val sheet = SortingOptionsBottomSheet(listener)
       sheet.show(activity.supportFragmentManager, sheet.tag)
     }
   }

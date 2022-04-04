@@ -11,8 +11,6 @@ import com.maubis.scarlet.base.common.sheets.LithoOptionsItem
 import com.maubis.scarlet.base.common.sheets.openSheet
 import com.maubis.scarlet.base.common.ui.sThemeLabel
 import com.maubis.scarlet.base.home.MainActivity
-import com.maubis.scarlet.base.settings.SortingOptionsBottomSheet.Companion.getSortingState
-import com.maubis.scarlet.base.settings.SortingOptionsBottomSheet.Companion.getSortingTechniqueLabel
 
 var sUIUseGridView: Boolean
   get() = appPreferences.getBoolean("KEY_LIST_VIEW", true)
@@ -71,7 +69,7 @@ class UIOptionsBottomSheet : LithoOptionBottomSheet() {
       ))
     options.add(LithoOptionsItem(
       title = R.string.home_option_order_notes,
-      subtitle = getSortingTechniqueLabel(getSortingState()),
+      subtitle = notesSortingTechniquePref.label,
       icon = R.drawable.ic_sort,
       listener = {
         SortingOptionsBottomSheet.openSheet(activity, { activity.refreshItems() })

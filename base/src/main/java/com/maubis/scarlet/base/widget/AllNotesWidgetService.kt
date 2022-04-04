@@ -15,7 +15,7 @@ import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.database.entities.NoteState
 import com.maubis.scarlet.base.editor.INTENT_KEY_NOTE_ID
 import com.maubis.scarlet.base.note.getTextForWidget
-import com.maubis.scarlet.base.settings.SortingOptionsBottomSheet
+import com.maubis.scarlet.base.settings.notesSortingTechniquePref
 import com.maubis.scarlet.base.settings.sWidgetShowArchivedNotes
 import com.maubis.scarlet.base.settings.sWidgetShowLockedNotes
 
@@ -25,9 +25,9 @@ fun getWidgetNotes(): List<Note> {
     states.add(NoteState.ARCHIVED)
   }
 
-  val sorting = SortingOptionsBottomSheet.getSortingState()
-  return sort(ScarletApp.data.notes.getByNoteState(*states.toTypedArray())
-          .filter { note -> (!note.locked || sWidgetShowLockedNotes) }, sorting)
+  val availableNotesForWidget = ScarletApp.data.notes.getByNoteState(*states.toTypedArray())
+    .filter { note -> (!note.locked || sWidgetShowLockedNotes) }
+  return sort(availableNotesForWidget, notesSortingTechniquePref)
 }
 
 class AllNotesWidgetService : RemoteViewsService() {
