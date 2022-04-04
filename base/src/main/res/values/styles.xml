@@ -5,10 +5,6 @@
     <item name="colorPrimaryDark">@color/material_grey_500</item>
     <item name="colorAccent">@color/colorAccent</item>
 
-    <item name="android:textViewStyle">@style/RobotoTextViewStyle</item>
-    <item name="android:buttonStyle">@style/RobotoButtonStyle</item>
-    <item name="android:editTextStyle">@style/RobotoEditTextStyle</item>
-
     <item name="android:dialogTheme">@style/DialogTheme</item>
     <item name="android:alertDialogTheme">@style/DialogTheme</item>
     <item name="android:datePickerDialogTheme">@style/DialogTheme</item>
@@ -27,15 +23,6 @@
     <item name="android:colorAccent">@color/colorAccent</item>
     <item name="android:colorPrimary">@color/material_grey_800</item>
     <item name="android:colorPrimaryDark">@color/material_grey_900</item>
-  </style>
-
-  <style name="RobotoEditTextStyle" parent="android:Widget.EditText">
-  </style>
-
-  <style name="RobotoTextViewStyle" parent="android:Widget.TextView">
-  </style>
-
-  <style name="RobotoButtonStyle" parent="android:Widget.Holo.Button">
   </style>
 
   <style name="NoteItemActionIcon" parent="BorderlessBackgroundView">
