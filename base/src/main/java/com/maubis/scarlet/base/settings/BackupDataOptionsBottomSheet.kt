@@ -3,8 +3,10 @@ package com.maubis.scarlet.base.settings
 import android.app.Dialog
 import android.content.ActivityNotFoundException
 import android.net.Uri
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts.OpenDocument
+import androidx.annotation.StringRes
 import androidx.lifecycle.lifecycleScope
 import com.facebook.litho.ComponentContext
 import com.maubis.scarlet.base.R
@@ -75,17 +77,32 @@ class BackupDataOptionsBottomSheet : LithoOptionBottomSheet() {
 
     lifecycleScope.launch(Dispatchers.IO) {
       requireContext().contentResolver.openInputStream(fileUri)?.use { stream ->
-        stream.bufferedReader().use { performBackupImport(it.readText()) }
+        val fileContent = stream.bufferedReader().use { it.readText() }
+        tryPerformBackupImport(fileContent)
+        withContext(Dispatchers.Main) { dismiss() }
       }
     }
   }
 
-  private suspend fun performBackupImport(fileContent: String) {
-    NoteImporter.importFromBackupContent(requireContext(), fileContent)
+  private suspend fun tryPerformBackupImport(fileContent: String) {
+    if (fileContent.isEmpty()) {
+      showImportOutcome(R.string.notice_import_failed_empty_file)
+      return
+    }
+
+    try {
+      NoteImporter.importFromBackupContent(requireContext(), fileContent)
+      showImportOutcome(R.string.notice_import_successful)
+    } catch (e: Exception) {
+      Log.e("Scarlet", "Backup import error", e)
+      showImportOutcome(R.string.notice_import_completed_with_error)
+    }
+  }
+
+  private suspend fun showImportOutcome(@StringRes messageTextRes: Int) {
     withContext(Dispatchers.Main) {
+      Toast.makeText(requireContext(), messageTextRes, Toast.LENGTH_SHORT).show()
       (activity as MainActivity).resetAndLoadData()
-      Toast.makeText(requireContext(), R.string.import_completed, Toast.LENGTH_SHORT).show()
-      dismiss()
     }
   }
 

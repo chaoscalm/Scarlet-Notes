@@ -298,7 +298,9 @@
   <string name="folder_delete_option_sheet_remove_folder_content_details">Keep Notebook but all notes move to trash or are deleted.</string>
   <string name="image_picker_error">An error occurred while retrieving the selected image.</string>
   <string name="file_picker_missing">The Android file chooser appears to be missing on this device. You should reinstall it ;)</string>
-  <string name="import_completed">Import completed</string>
+  <string name="notice_import_successful">Import successful</string>
+  <string name="notice_import_failed_empty_file">Import failed: backup file is empty.</string>
+  <string name="notice_import_completed_with_error">Import completed with errors: data may have been partially imported.</string>
   <string name="notice_text_copied">Text copied</string>
 
 </resources>

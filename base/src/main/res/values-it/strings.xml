@@ -249,7 +249,9 @@
   <string name="share_image">Condividi immagine</string>
   <string name="image_picker_error">Si è verificato un errore nel recuperare l\'immagine selezionata.</string>
   <string name="file_picker_missing">Sembra che il selettore file di Android non sia installato sul dispositivo. Dovresti reinstallarlo ;)</string>
-  <string name="import_completed">Importazione completata</string>
+  <string name="notice_import_successful">Importazione riuscita</string>
+  <string name="notice_import_failed_empty_file">Importazione fallita: il file di backup è vuoto.</string>
+  <string name="notice_import_completed_with_error">Importazione completata con errori: i dati potrebbero essere stati importati parzialmente.</string>
   <string name="notice_text_copied">Testo copiato</string>
 
 </resources>
