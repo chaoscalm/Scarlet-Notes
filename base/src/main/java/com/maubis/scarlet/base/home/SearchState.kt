@@ -7,7 +7,7 @@ import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.database.entities.NoteState
 import com.maubis.scarlet.base.database.entities.Tag
 import com.maubis.scarlet.base.note.getFullText
-import com.maubis.scarlet.base.note.isNoteLockedButAppUnlocked
+import com.maubis.scarlet.base.note.isLockedButAppUnlocked
 import com.maubis.scarlet.base.settings.notesSortingTechniquePref
 
 class SearchState(
@@ -62,7 +62,7 @@ fun findMatchingNotesIgnoringFolder(state: SearchState): List<Note> {
     .filter {
       when {
         state.text.isBlank() -> true
-        it.locked && !it.isNoteLockedButAppUnlocked() -> false
+        it.locked && !it.isLockedButAppUnlocked() -> false
         else -> it.getFullText().contains(state.text, true)
       }
     }

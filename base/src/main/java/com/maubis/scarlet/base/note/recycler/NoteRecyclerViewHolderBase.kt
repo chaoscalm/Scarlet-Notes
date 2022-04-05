@@ -18,7 +18,7 @@ import com.maubis.scarlet.base.common.recycler.RecyclerItem
 import com.maubis.scarlet.base.common.utils.trim
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.database.entities.NoteState
-import com.maubis.scarlet.base.note.isNoteLockedButAppUnlocked
+import com.maubis.scarlet.base.note.isLockedButAppUnlocked
 
 open class NoteRecyclerViewHolderBase(context: Context, view: View) : RecyclerViewHolder<RecyclerItem>(context, view) {
 
@@ -45,7 +45,7 @@ open class NoteRecyclerViewHolderBase(context: Context, view: View) : RecyclerVi
     setIndicators(item)
     setMetaText(item)
 
-    view.alpha = if (item.note.isNoteLockedButAppUnlocked()) 0.7f else 1.0f
+    view.alpha = if (item.note.isLockedButAppUnlocked()) 0.7f else 1.0f
     view.setOnClickListener { viewClick(item.note, extra) }
     view.setOnLongClickListener {
       viewLongClick(item.note, extra)

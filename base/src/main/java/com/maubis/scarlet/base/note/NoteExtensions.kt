@@ -3,8 +3,6 @@ package com.maubis.scarlet.base.note
 import android.content.Context
 import androidx.core.content.FileProvider
 import com.maubis.markdown.Markdown
-import com.maubis.markdown.MarkdownConfig
-import com.maubis.markdown.spannable.*
 import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.data
@@ -31,43 +29,6 @@ fun Note.getFullTextForDirectMarkdownRender(): String {
   text = text.replace("\n[ ] ", "\n\u2610 ")
   text = text.replace("\n- ", "\n\u2022 ")
   return text
-}
-
-fun Note.getMarkdownForListView(): CharSequence {
-  val text = getFullTextForDirectMarkdownRender()
-  return markdownFormatForList(text)
-}
-
-internal fun markdownFormatForList(text: String): CharSequence {
-  return Markdown.renderWithCustomFormatting(text, true) { spannable, spanInfo ->
-    val s = spanInfo.start
-    val e = spanInfo.end
-    when (spanInfo.markdownType) {
-      MarkdownType.HEADING_1 -> {
-        spannable.relativeSize(1.2f, s, e)
-          .font(MarkdownConfig.spanConfig.headingTypeface, s, e)
-          .bold(s, e)
-        true
-      }
-      MarkdownType.HEADING_2 -> {
-        spannable.relativeSize(1.1f, s, e)
-          .font(MarkdownConfig.spanConfig.headingTypeface, s, e)
-          .bold(s, e)
-        true
-      }
-      MarkdownType.HEADING_3 -> {
-        spannable.relativeSize(1.0f, s, e)
-          .font(MarkdownConfig.spanConfig.headingTypeface, s, e)
-          .bold(s, e)
-        true
-      }
-      MarkdownType.CHECKLIST_CHECKED -> {
-        spannable.strike(s, e)
-        true
-      }
-      else -> false
-    }
-  }
 }
 
 fun Note.getTitleForSharing(): String {
@@ -124,16 +85,8 @@ fun Note.getFullText(): String {
   return fullText
 }
 
-fun Note.isNoteLockedButAppUnlocked(): Boolean {
+fun Note.isLockedButAppUnlocked(): Boolean {
   return this.locked && !needsLockCheck() && sSecurityAppLockEnabled
-}
-
-fun Note.getLockedAwareTextForHomeList(): CharSequence {
-  val lockedText = "*********************************************"
-  return when {
-    isNoteLockedButAppUnlocked() || !this.locked -> getMarkdownForListView()
-    else -> markdownFormatForList("# ${getTitleForSharing()}\n\n```\n$lockedText\n```")
-  }
 }
 
 fun Note.getTextForWidget(): CharSequence {
