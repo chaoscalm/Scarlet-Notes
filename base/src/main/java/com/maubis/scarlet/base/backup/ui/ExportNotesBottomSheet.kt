@@ -43,6 +43,8 @@ var sAutoBackupMode: Boolean
 
 class ExportNotesBottomSheet : LithoBottomSheet() {
 
+  override fun isAlwaysExpanded(): Boolean = true
+
   override fun getComponent(componentContext: ComponentContext, dialog: Dialog): Component {
     val file = NoteExporter.getManualBackupFile()
     val filenameRender = "${file?.parentFile?.name}/${file?.name}"

@@ -16,6 +16,8 @@ import com.facebook.litho.widget.Text
 import com.facebook.litho.widget.VerticalScroll
 import com.facebook.yoga.YogaAlign
 import com.facebook.yoga.YogaEdge
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
@@ -51,20 +53,24 @@ fun getLithoBottomSheetButton(context: ComponentContext): Text.Builder {
 abstract class LithoBottomSheet : BottomSheetDialogFragment() {
 
   override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-    val ctx = context ?: activity
-    if (ctx === null) {
-      return super.onCreateDialog(savedInstanceState)
-    }
-
+    retainInstance = true
+    val ctx = requireContext()
     val isTablet = ctx.resources.getBoolean(R.bool.is_tablet)
     val dialog = when {
       isTablet -> BottomSheetTabletDialog(ctx, theme)
       else -> super.onCreateDialog(savedInstanceState)
     }
     refresh(ctx, dialog)
-    retainInstance = true
+    if (isAlwaysExpanded()) {
+      with((dialog as BottomSheetDialog).behavior) {
+        state = BottomSheetBehavior.STATE_EXPANDED
+        skipCollapsed = true
+      }
+    }
     return dialog
   }
+
+  open fun isAlwaysExpanded(): Boolean = false
 
   fun refresh(context: Context, dialog: Dialog) {
     val componentContext = ComponentContext(context)

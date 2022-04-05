@@ -31,6 +31,8 @@ class CreateOrEditFolderBottomSheet : ThemedBottomSheetFragment() {
       return
     }
 
+    setAlwaysExpanded(dialog)
+
     val title = dialog.findViewById<TextView>(R.id.options_title)
     title.setTextColor(appTheme.get(ThemeColorType.SECONDARY_TEXT))
     title.typeface = appTypeface.title()

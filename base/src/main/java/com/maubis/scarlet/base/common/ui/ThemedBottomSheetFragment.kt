@@ -7,6 +7,8 @@ import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
@@ -33,6 +35,13 @@ abstract class ThemedBottomSheetFragment : BottomSheetDialogFragment() {
   abstract fun getLayout(): Int
 
   private fun getBackgroundView(): Int = R.id.container_layout
+
+  protected fun setAlwaysExpanded(dialog: Dialog) {
+    with((dialog as BottomSheetDialog).behavior) {
+      state = BottomSheetBehavior.STATE_EXPANDED
+      skipCollapsed = true
+    }
+  }
 
   private fun resetBackground(dialog: Dialog) {
     val backgroundColor = appTheme.get(ThemeColorType.BACKGROUND)
