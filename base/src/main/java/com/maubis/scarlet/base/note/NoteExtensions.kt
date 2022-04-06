@@ -10,7 +10,6 @@ import com.maubis.scarlet.base.ScarletIntentHandlerActivity
 import com.maubis.scarlet.base.common.ui.ThemedActivity
 import com.maubis.scarlet.base.common.utils.*
 import com.maubis.scarlet.base.database.entities.Note
-import com.maubis.scarlet.base.database.entities.NoteState
 import com.maubis.scarlet.base.database.entities.Tag
 import com.maubis.scarlet.base.editor.formats.FormatType
 import com.maubis.scarlet.base.security.PinLockController.needsLockCheck
@@ -161,12 +160,6 @@ fun Note.adjustedColor(): Int {
 /**************************************************************************************
  ******************************* Note Action Functions ********************************
  **************************************************************************************/
-
-fun Note.mark(context: Context, noteState: NoteState) {
-  this.state = noteState
-  this.updateTimestamp = System.currentTimeMillis()
-  save(context)
-}
 
 fun Note.edit(context: Context) {
   if (this.locked) {

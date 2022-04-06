@@ -227,9 +227,9 @@
   <string name="folder_delete_option_sheet_remove_folder">Rimuovi il blocco note</string>
   <string name="folder_delete_option_sheet_remove_folder_details">Rimuovi solo il blocco note. Le note al suo interno verranno spostate al di fuori di esso.</string>
   <string name="folder_delete_option_sheet_remove_folder_and_content">Rimuovi blocco note e contenuto</string>
-  <string name="folder_delete_option_sheet_remove_folder_and_content_details">Rimuovi il blocco note. Tutte le note al suo interno verranno eliminate.</string>
+  <string name="folder_delete_option_sheet_remove_folder_and_content_details">Rimuovi il blocco note. Tutte le note al suo interno verranno spostate nel cestino.</string>
   <string name="folder_delete_option_sheet_remove_folder_content">Rimuovi note</string>
-  <string name="folder_delete_option_sheet_remove_folder_content_details">Mantieni il blocco note, ma elimina tutte le note al suo interno.</string>
+  <string name="folder_delete_option_sheet_remove_folder_content_details">Mantieni il blocco note, ma sposta nel cestino tutte le note al suo interno.</string>
   <string name="theme_use_system_theme">Usa tema di sistema</string>
   <string name="theme_use_system_theme_details">Usa il tema chiaro o scuro impostato dal sistema</string>
   <string name="theme_dark_notes">Note scure</string>

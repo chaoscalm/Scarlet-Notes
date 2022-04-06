@@ -30,7 +30,6 @@ import com.maubis.scarlet.base.home.recycler.NoNotesRecyclerItem
 import com.maubis.scarlet.base.note.actions.INoteActionsSheetActivity
 import com.maubis.scarlet.base.note.folder.FolderRecyclerItem
 import com.maubis.scarlet.base.note.folder.sheet.CreateOrEditFolderBottomSheet
-import com.maubis.scarlet.base.note.mark
 import com.maubis.scarlet.base.note.recycler.NoteAppAdapter
 import com.maubis.scarlet.base.note.recycler.NoteRecyclerItem
 import com.maubis.scarlet.base.settings.STORE_KEY_LINE_COUNT
@@ -359,7 +358,7 @@ class MainActivity : SecuredActivity(), INoteActionsSheetActivity {
   }
 
   override fun markItem(note: Note, state: NoteState) {
-    note.mark(this, state)
+    note.updateState(state, this)
     refreshList()
   }
 

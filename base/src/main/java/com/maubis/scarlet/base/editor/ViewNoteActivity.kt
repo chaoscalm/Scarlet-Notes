@@ -31,7 +31,6 @@ import com.maubis.scarlet.base.note.actions.INoteActionsSheetActivity
 import com.maubis.scarlet.base.note.actions.NoteActionsBottomSheet
 import com.maubis.scarlet.base.note.adjustedColor
 import com.maubis.scarlet.base.note.getTagString
-import com.maubis.scarlet.base.note.mark
 import com.maubis.scarlet.base.settings.STORE_KEY_TEXT_SIZE
 import com.maubis.scarlet.base.settings.sEditorTextSize
 import com.maubis.scarlet.base.settings.sNoteDefaultColor
@@ -294,7 +293,7 @@ open class ViewAdvancedNoteActivity : SecuredActivity(), INoteActionsSheetActivi
   }
 
   override fun markItem(note: Note, state: NoteState) {
-    note.mark(this, state)
+    note.updateState(state, this)
   }
 
   override fun moveItemToTrashOrDelete(note: Note) {

@@ -291,11 +291,11 @@
 
   <string name="folder_delete_option_sheet_title">Remove Options</string>
   <string name="folder_delete_option_sheet_remove_folder">Remove Notebook</string>
-  <string name="folder_delete_option_sheet_remove_folder_details">Only Remove Notebook. Notes move outside folder.</string>
+  <string name="folder_delete_option_sheet_remove_folder_details">Only remove the notebook. Notes will be moved outside it.</string>
   <string name="folder_delete_option_sheet_remove_folder_and_content">Remove Notebook and Notes</string>
-  <string name="folder_delete_option_sheet_remove_folder_and_content_details">Remove Notebook. All notes move to trash or are deleted.</string>
+  <string name="folder_delete_option_sheet_remove_folder_and_content_details">Remove the notebook. All notes will be moved to trash.</string>
   <string name="folder_delete_option_sheet_remove_folder_content">Remove Notes</string>
-  <string name="folder_delete_option_sheet_remove_folder_content_details">Keep Notebook but all notes move to trash or are deleted.</string>
+  <string name="folder_delete_option_sheet_remove_folder_content_details">Keep the notebook but all notes will be moved to trash.</string>
   <string name="image_picker_error">An error occurred while retrieving the selected image.</string>
   <string name="file_picker_missing">The Android file chooser appears to be missing on this device. You should reinstall it ;)</string>
   <string name="notice_import_successful">Import successful</string>

@@ -7,7 +7,6 @@ import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.editor.formats.Format
 import com.maubis.scarlet.base.editor.formats.FormatType
 import com.maubis.scarlet.base.editor.formats.Formats
-import com.maubis.scarlet.base.note.mark
 import com.maubis.scarlet.base.reminders.Reminder
 import com.maubis.scarlet.base.settings.sNoteDefaultColor
 import java.util.*
@@ -74,7 +73,13 @@ class Note() {
             delete(context)
             return
         }
-        mark(context, NoteState.TRASH)
+        updateState(NoteState.TRASH, context)
+    }
+
+    fun updateState(state: NoteState, context: Context) {
+        this.state = state
+        this.updateTimestamp = System.currentTimeMillis()
+        save(context)
     }
 
     fun shallowCopy(): Note {

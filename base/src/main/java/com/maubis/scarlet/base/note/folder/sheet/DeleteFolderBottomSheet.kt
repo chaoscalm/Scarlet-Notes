@@ -9,6 +9,7 @@ import com.maubis.scarlet.base.common.sheets.LithoOptionBottomSheet
 import com.maubis.scarlet.base.common.sheets.LithoOptionsItem
 import com.maubis.scarlet.base.database.entities.Folder
 import com.maubis.scarlet.base.database.entities.Note
+import com.maubis.scarlet.base.database.entities.NoteState
 
 class DeleteFolderBottomSheet : LithoOptionBottomSheet() {
 
@@ -31,11 +32,11 @@ class DeleteFolderBottomSheet : LithoOptionBottomSheet() {
       subtitle = R.string.folder_delete_option_sheet_remove_folder_details,
       icon = R.drawable.icon_delete,
       listener = {
-        folder.delete()
         forEachNoteInFolder(folder) {
           it.folder = null
           it.save(activity)
         }
+        folder.delete()
         onDeletionListener(folder)
         dismiss()
       }
@@ -47,7 +48,7 @@ class DeleteFolderBottomSheet : LithoOptionBottomSheet() {
       listener = {
         forEachNoteInFolder(folder) {
           it.folder = null
-          it.moveToTrashOrDelete(activity)
+          it.updateState(NoteState.TRASH, activity)
         }
         onDeletionListener(folder)
         dismiss()
@@ -58,11 +59,11 @@ class DeleteFolderBottomSheet : LithoOptionBottomSheet() {
       subtitle = R.string.folder_delete_option_sheet_remove_folder_and_content_details,
       icon = R.drawable.ic_delete_permanently,
       listener = {
-        folder.delete()
         forEachNoteInFolder(folder) {
           it.folder = null
-          it.moveToTrashOrDelete(activity)
+          it.updateState(NoteState.TRASH, activity)
         }
+        folder.delete()
         onDeletionListener(folder)
         dismiss()
       }

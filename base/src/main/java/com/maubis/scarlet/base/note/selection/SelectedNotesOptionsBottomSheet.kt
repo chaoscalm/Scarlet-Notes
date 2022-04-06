@@ -17,7 +17,6 @@ import com.maubis.scarlet.base.home.sheets.AlertBottomSheet
 import com.maubis.scarlet.base.home.sheets.AlertSheetConfig
 import com.maubis.scarlet.base.note.addTag
 import com.maubis.scarlet.base.note.folder.sheet.SelectedFolderChooseOptionsBottomSheet
-import com.maubis.scarlet.base.note.mark
 import com.maubis.scarlet.base.note.removeTag
 import com.maubis.scarlet.base.note.tag.SelectedTagChooserBottomSheet
 import com.maubis.scarlet.base.security.openUnlockSheet
@@ -44,7 +43,7 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
         icon = R.drawable.ic_restore,
         listener = lockAwareFunctionRunner(activity) {
           activity.forEachNote {
-            it.mark(activity, NoteState.DEFAULT)
+            it.updateState(NoteState.DEFAULT, activity)
           }
           activity.finish()
         },
@@ -58,7 +57,7 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
         icon = R.drawable.ic_favorite_white_48dp,
         listener = lockAwareFunctionRunner(activity) {
           activity.forEachNote {
-            it.mark(activity, NoteState.DEFAULT)
+            it.updateState(NoteState.DEFAULT, activity)
           }
           activity.finish()
         },
@@ -70,7 +69,7 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
         icon = R.drawable.ic_favorite_border_white_48dp,
         listener = lockAwareFunctionRunner(activity) {
           activity.forEachNote {
-            it.mark(activity, NoteState.FAVOURITE)
+            it.updateState(NoteState.FAVOURITE, activity)
           }
           activity.finish()
         },
@@ -84,7 +83,7 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
         icon = R.drawable.ic_archive_white_48dp,
         listener = lockAwareFunctionRunner(activity) {
           activity.forEachNote {
-            it.mark(activity, NoteState.DEFAULT)
+            it.updateState(NoteState.DEFAULT, activity)
           }
           activity.finish()
         },
@@ -96,7 +95,7 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
         icon = R.drawable.ic_archive_white_48dp,
         listener = lockAwareFunctionRunner(activity) {
           activity.forEachNote {
-            it.mark(activity, NoteState.ARCHIVED)
+            it.updateState(NoteState.ARCHIVED, activity)
           }
           activity.finish()
         },
@@ -125,7 +124,7 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
         icon = R.drawable.ic_delete_white_48dp,
         listener = lockAwareFunctionRunner(activity) {
           activity.forEachNote {
-            it.mark(activity, NoteState.TRASH)
+            it.updateState(NoteState.TRASH, activity)
           }
           activity.finish()
         },
