@@ -15,7 +15,6 @@ import com.maubis.scarlet.base.common.sheets.getLithoBottomSheetTitle
 import com.maubis.scarlet.base.common.ui.ThemedActivity
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.database.entities.Tag
-import com.maubis.scarlet.base.note.toggleTag
 
 class TagChooserBottomSheet(private val note: Note, private val dismissListener: () -> Unit) : LithoBottomSheet() {
 
@@ -53,7 +52,6 @@ class TagChooserBottomSheet(private val note: Note, private val dismissListener:
   private fun getTagItems(): List<TagItem> {
     val activity = context as ThemedActivity
     val items = ArrayList<TagItem>()
-    val noteTags = note.getTagUUIDs()
     for (tag in data.tags.getAll()) {
       items.add(
         TagItem(
@@ -63,7 +61,7 @@ class TagChooserBottomSheet(private val note: Note, private val dismissListener:
             note.save(activity)
             refresh(activity, requireDialog())
           },
-          isSelected = noteTags.contains(tag.uuid),
+          isSelected = note.tags.contains(tag.uuid),
           isEditable = true,
           editListener = {
             CreateOrEditTagBottomSheet.openSheet(activity, tag) { _, _ ->

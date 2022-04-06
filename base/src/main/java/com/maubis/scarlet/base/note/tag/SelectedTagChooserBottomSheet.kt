@@ -60,17 +60,16 @@ class SelectedTagChooserBottomSheet : LithoBottomSheet() {
     val items = ArrayList<TagItem>()
 
     val tags = HashSet<UUID>()
-    tags.addAll(activity.getAllSelectedNotes().firstOrNull()?.getTagUUIDs() ?: emptySet())
+    tags.addAll(activity.getAllSelectedNotes().firstOrNull()?.tags ?: emptySet())
 
     activity.getAllSelectedNotes().forEach {
-      val uuids = it.getTagUUIDs().toMutableSet()
-      val uuidsToRemove = HashSet<UUID>()
+      val tagsToRemove = HashSet<UUID>()
       for (tag in tags) {
-        if (!uuids.contains(tag)) {
-          uuidsToRemove.add(tag)
+        if (!it.tags.contains(tag)) {
+          tagsToRemove.add(tag)
         }
       }
-      tags.removeAll(uuidsToRemove)
+      tags.removeAll(tagsToRemove)
     }
     for (tag in data.tags.getAll()) {
       items.add(

@@ -58,7 +58,7 @@ fun excludeNotesInFolders(notes: List<Note>): List<Note> {
 fun findMatchingNotesIgnoringFolder(state: SearchState): List<Note> {
   return getNotesForMode(state)
     .filter { state.colors.isEmpty() || state.colors.contains(it.color) }
-    .filter { note -> state.tags.isEmpty() || state.tags.any { note.tags.contains(it.uuid.toString()) } }
+    .filter { note -> state.tags.isEmpty() || state.tags.any { note.tags.contains(it.uuid) } }
     .filter {
       when {
         state.text.isBlank() -> true

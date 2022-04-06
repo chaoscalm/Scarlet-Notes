@@ -10,7 +10,6 @@ import com.maubis.scarlet.base.ScarletIntentHandlerActivity
 import com.maubis.scarlet.base.common.ui.ThemedActivity
 import com.maubis.scarlet.base.common.utils.*
 import com.maubis.scarlet.base.database.entities.Note
-import com.maubis.scarlet.base.database.entities.Tag
 import com.maubis.scarlet.base.editor.formats.FormatType
 import com.maubis.scarlet.base.security.PinLockController.needsLockCheck
 import com.maubis.scarlet.base.security.openUnlockSheet
@@ -111,46 +110,8 @@ fun Note.getDisplayTime(context: Context): String {
 }
 
 fun Note.getTagString(): String {
-  val tags = getTags()
-  return tags.map { "` ${it.title} `" }.joinToString(separator = " ")
-}
-
-fun Note.getTags(): Set<Tag> {
-  val tags = HashSet<Tag>()
-  for (tagID in getTagUUIDs()) {
-    val tag = data.tags.getByUUID(tagID)
-    if (tag != null) {
-      tags.add(tag)
-    }
-  }
-  return tags
-}
-
-fun Note.toggleTag(tag: Tag) {
-  val tags = getTagUUIDs()
-  when (tags.contains(tag.uuid)) {
-    true -> tags.remove(tag.uuid)
-    false -> tags.add(tag.uuid)
-  }
-  this.tags = tags.joinToString(separator = ",")
-}
-
-fun Note.addTag(tag: Tag) {
-  val tags = getTagUUIDs()
-  when (tags.contains(tag.uuid)) {
-    true -> return
-    false -> tags.add(tag.uuid)
-  }
-  this.tags = tags.joinToString(separator = ",")
-}
-
-fun Note.removeTag(tag: Tag) {
-  val tags = getTagUUIDs()
-  when (tags.contains(tag.uuid)) {
-    true -> tags.remove(tag.uuid)
-    false -> return
-  }
-  this.tags = tags.joinToString(separator = ",")
+  val tags = tags.mapNotNull { uuid -> data.tags.getByUUID(uuid) }
+  return tags.joinToString(separator = " ") { "` ${it.title} `" }
 }
 
 fun Note.adjustedColor(): Int {

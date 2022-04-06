@@ -26,7 +26,7 @@ class Note() {
     var pinned: Boolean = false
     var reminder: Reminder? = null
     var excludeFromBackup: Boolean = false
-    var tags: String = ""
+    var tags: MutableSet<UUID> = mutableSetOf<UUID>()
     var folder: UUID? = null
 
     constructor(color: Int) : this() {
@@ -53,11 +53,12 @@ class Note() {
         return Formats.getFormatsFromNoteContent(this.content)
     }
 
-    fun getTagUUIDs(): MutableSet<UUID> {
-        return tags.split(",")
-            .filter { it.isNotBlank() }
-            .map { UUID.fromString(it) }
-            .toMutableSet()
+    fun toggleTag(tag: Tag) {
+        if (tags.contains(tag.uuid)) {
+            tags.remove(tag.uuid)
+        } else {
+            tags.add(tag.uuid)
+        }
     }
 
     fun save(context: Context) {
@@ -133,5 +134,16 @@ object NoteConverters {
         } catch (exception: Exception) {
             null
         }
+    }
+
+    @TypeConverter
+    fun uuidSetToString(uuidSet: MutableSet<UUID>): String = uuidSet.joinToString(separator = ",")
+
+    @TypeConverter
+    fun uuidSetFromString(setAsString: String): MutableSet<UUID> {
+        return setAsString.split(",")
+          .filter { it.isNotBlank() }
+          .map { UUID.fromString(it.trim()) }
+          .toMutableSet()
     }
 }

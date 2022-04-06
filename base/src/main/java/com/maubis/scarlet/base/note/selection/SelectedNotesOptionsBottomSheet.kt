@@ -15,9 +15,7 @@ import com.maubis.scarlet.base.editor.formats.Formats
 import com.maubis.scarlet.base.editor.formats.sectionPreservingSort
 import com.maubis.scarlet.base.home.sheets.AlertBottomSheet
 import com.maubis.scarlet.base.home.sheets.AlertSheetConfig
-import com.maubis.scarlet.base.note.addTag
 import com.maubis.scarlet.base.note.folder.sheet.SelectedFolderChooseOptionsBottomSheet
-import com.maubis.scarlet.base.note.removeTag
 import com.maubis.scarlet.base.note.tag.SelectedTagChooserBottomSheet
 import com.maubis.scarlet.base.security.openUnlockSheet
 
@@ -148,8 +146,8 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
           onActionListener = { tag, selectTag ->
             activity.forEachNote {
               when (selectTag) {
-                true -> it.addTag(tag)
-                false -> it.removeTag(tag)
+                true -> it.tags.add(tag.uuid)
+                false -> it.tags.remove(tag.uuid)
               }
               it.save(activity)
             }
