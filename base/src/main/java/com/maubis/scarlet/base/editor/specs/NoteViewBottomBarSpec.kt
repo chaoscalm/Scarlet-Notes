@@ -35,7 +35,7 @@ object NoteViewBottomBarSpec {
     if (note.state != NoteState.TRASH) {
       row.child(bottomBarRoundIcon(context, colorConfig)
           .iconRes(R.drawable.icon_delete)
-          .onClick { activity.moveItemToTrashOrDelete(note) })
+          .onClick { activity.moveNoteToTrashOrDelete(note) })
     }
     row.child(bottomBarRoundIcon(context, colorConfig)
                 .iconRes(R.drawable.ic_content_copy_white_48dp)
@@ -49,7 +49,7 @@ object NoteViewBottomBarSpec {
       row.child(bottomBarRoundIcon(context, colorConfig)
           .iconRes(R.drawable.ic_delete_permanently)
           .onClick {
-            openDeleteNotePermanentlySheet(activity, note) { activity.moveItemToTrashOrDelete(note) }
+            openDeleteNotePermanentlySheet(activity, note) { activity.moveNoteToTrashOrDelete(note) }
           })
     } else {
       row.child(bottomBarRoundIcon(context, colorConfig)

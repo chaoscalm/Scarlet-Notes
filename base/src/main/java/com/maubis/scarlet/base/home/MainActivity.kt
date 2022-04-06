@@ -357,12 +357,12 @@ class MainActivity : SecuredActivity(), INoteActionsActivity {
     refreshList()
   }
 
-  override fun markItem(note: Note, state: NoteState) {
+  override fun updateNoteState(note: Note, state: NoteState) {
     note.updateState(state, this)
     refreshList()
   }
 
-  override fun moveItemToTrashOrDelete(note: Note) {
+  override fun moveNoteToTrashOrDelete(note: Note) {
     snackbar.softUndo(this, note)
     note.moveToTrashOrDelete(this)
     refreshList()

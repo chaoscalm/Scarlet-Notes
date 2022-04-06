@@ -26,7 +26,7 @@ class NoteRecyclerHolder(context: Context, view: View) : NoteRecyclerViewHolderB
   }
 
   override fun deleteIconClick(note: Note, extra: Bundle?) {
-    actionOrUnlockNote(note) { activity.moveItemToTrashOrDelete(note) }
+    actionOrUnlockNote(note) { activity.moveNoteToTrashOrDelete(note) }
   }
 
   override fun shareIconClick(note: Note, extra: Bundle?) {

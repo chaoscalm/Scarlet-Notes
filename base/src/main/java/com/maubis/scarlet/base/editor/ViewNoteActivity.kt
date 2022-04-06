@@ -292,11 +292,11 @@ open class ViewAdvancedNoteActivity : SecuredActivity(), INoteActionsActivity, I
     notifyNoteChange()
   }
 
-  override fun markItem(note: Note, state: NoteState) {
+  override fun updateNoteState(note: Note, state: NoteState) {
     note.updateState(state, this)
   }
 
-  override fun moveItemToTrashOrDelete(note: Note) {
+  override fun moveNoteToTrashOrDelete(note: Note) {
     note.moveToTrashOrDelete(this)
     finish()
   }

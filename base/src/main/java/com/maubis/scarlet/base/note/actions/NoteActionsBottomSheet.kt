@@ -84,7 +84,7 @@ class NoteActionsBottomSheet : ThemedBottomSheetFragment() {
         icon = R.drawable.ic_restore,
         visible = note.state == NoteState.TRASH
       ) {
-        activity.markItem(note, NoteState.DEFAULT)
+        activity.updateNoteState(note, NoteState.DEFAULT)
         dismiss()
       })
     actions.add(
@@ -131,7 +131,7 @@ class NoteActionsBottomSheet : ThemedBottomSheetFragment() {
         icon = R.drawable.ic_archive_white_48dp,
         visible = note.state == NoteState.ARCHIVED
       ) {
-        activity.markItem(note, NoteState.DEFAULT)
+        activity.updateNoteState(note, NoteState.DEFAULT)
         dismiss()
       })
     actions.add(
@@ -140,7 +140,7 @@ class NoteActionsBottomSheet : ThemedBottomSheetFragment() {
         icon = R.drawable.ic_archive_white_48dp,
         visible = note.state != NoteState.ARCHIVED
       ) {
-        activity.markItem(note, NoteState.ARCHIVED)
+        activity.updateNoteState(note, NoteState.ARCHIVED)
         dismiss()
       })
     actions.add(
@@ -150,7 +150,7 @@ class NoteActionsBottomSheet : ThemedBottomSheetFragment() {
         visible = note.state == NoteState.TRASH,
         invalid = activity.lockedContentIsHidden() && note.locked
       ) {
-        activity.moveItemToTrashOrDelete(note)
+        activity.moveNoteToTrashOrDelete(note)
         dismiss()
       })
     actions.add(
@@ -160,7 +160,7 @@ class NoteActionsBottomSheet : ThemedBottomSheetFragment() {
         visible = note.state != NoteState.TRASH,
         invalid = activity.lockedContentIsHidden() && note.locked
       ) {
-        activity.moveItemToTrashOrDelete(note)
+        activity.moveNoteToTrashOrDelete(note)
         dismiss()
       })
     return actions
@@ -214,7 +214,7 @@ class NoteActionsBottomSheet : ThemedBottomSheetFragment() {
         icon = R.drawable.ic_favorite_white_48dp,
         visible = note.state == NoteState.FAVOURITE
       ) {
-        activity.markItem(note, NoteState.DEFAULT)
+        activity.updateNoteState(note, NoteState.DEFAULT)
         dismiss()
       })
     actions.add(
@@ -223,7 +223,7 @@ class NoteActionsBottomSheet : ThemedBottomSheetFragment() {
         icon = R.drawable.ic_favorite_border_white_48dp,
         visible = note.state != NoteState.FAVOURITE,
         listener = {
-          activity.markItem(note, NoteState.FAVOURITE)
+          activity.updateNoteState(note, NoteState.FAVOURITE)
           dismiss()
         }
       ))

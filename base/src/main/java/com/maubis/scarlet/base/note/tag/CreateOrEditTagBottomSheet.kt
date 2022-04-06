@@ -17,7 +17,7 @@ import com.maubis.scarlet.base.database.entities.Tag
 class CreateOrEditTagBottomSheet : ThemedBottomSheetFragment() {
 
   var selectedTag: Tag? = null
-  var sheetOnTagListener: (tag: Tag, deleted: Boolean) -> Unit = { _, _ -> }
+  var sheetOnTagListener: (Tag) -> Unit = { _ -> }
 
   override fun setupDialogViews(dialog: Dialog) {
     val tag = selectedTag
@@ -38,8 +38,8 @@ class CreateOrEditTagBottomSheet : ThemedBottomSheetFragment() {
 
     val action = dialog.findViewById<TextView>(R.id.action_button)
     action.setOnClickListener {
-      val updated = onActionClick(tag, enterTag.text.toString())
-      sheetOnTagListener(tag, !updated)
+      onActionClick(tag, enterTag.text.toString())
+      sheetOnTagListener(tag)
       dismiss()
     }
 
@@ -47,28 +47,26 @@ class CreateOrEditTagBottomSheet : ThemedBottomSheetFragment() {
     removeBtn.visibility = if (tag.isNotPersisted()) GONE else VISIBLE
     removeBtn.setOnClickListener {
       tag.delete()
-      sheetOnTagListener(tag, true)
+      sheetOnTagListener(tag)
       dismiss()
     }
     enterTag.setText(tag.title)
     enterTag.setOnEditorActionListener(getEditorActionListener(
       runnable = {
-        val updated = onActionClick(tag, enterTag.text.toString())
-        sheetOnTagListener(tag, !updated)
+        onActionClick(tag, enterTag.text.toString())
+        sheetOnTagListener(tag)
         dismiss()
         return@getEditorActionListener true
       }))
     makeBackgroundTransparent(dialog, R.id.root_layout)
   }
 
-  private fun onActionClick(tag: Tag, title: String): Boolean {
-    tag.title = title
-    if (tag.title.isBlank()) {
-      tag.delete()
-      return false
+  private fun onActionClick(tag: Tag, title: String) {
+    if (title.isBlank()) {
+      return
     }
+    tag.title = title
     tag.save()
-    return true
   }
 
   override fun getLayout(): Int = R.layout.bottom_sheet_create_or_edit_tag
@@ -76,9 +74,8 @@ class CreateOrEditTagBottomSheet : ThemedBottomSheetFragment() {
   override fun getBackgroundCardViewIds(): Array<Int> = arrayOf(R.id.content_card)
 
   companion object {
-    fun openSheet(activity: ThemedActivity, tag: Tag, listener: (tag: Tag, deleted: Boolean) -> Unit) {
+    fun openSheet(activity: ThemedActivity, tag: Tag, listener: (Tag) -> Unit) {
       val sheet = CreateOrEditTagBottomSheet()
-
       sheet.selectedTag = tag
       sheet.sheetOnTagListener = listener
       sheet.show(activity.supportFragmentManager, sheet.tag)

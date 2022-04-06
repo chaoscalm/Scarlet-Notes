@@ -6,9 +6,9 @@ import com.maubis.scarlet.base.database.entities.NoteState
 interface INoteActionsActivity {
   fun updateNote(note: Note)
 
-  fun markItem(note: Note, state: NoteState)
+  fun updateNoteState(note: Note, state: NoteState)
 
-  fun moveItemToTrashOrDelete(note: Note)
+  fun moveNoteToTrashOrDelete(note: Note)
 
   fun notifyTagsChanged()
 
