@@ -6,7 +6,7 @@ import java.io.Serializable
 import java.util.*
 
 class ExportedFolder(
-  val uuid: String,
+  var uuid: String,
   val title: String,
   val timestamp: Long,
   val updateTimestamp: Long,

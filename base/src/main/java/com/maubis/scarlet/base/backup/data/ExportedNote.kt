@@ -34,6 +34,8 @@ class ExportedNote(
     note.locked
   )
 
+  fun tagUuids(): List<String> = tags.split(",").filter { it.isNotBlank() }
+
   fun saveIfNeeded(context: Context) {
     val existingNote = data.notes.getByUUID(UUID.fromString(uuid))
     if (existingNote != null && existingNote.updateTimestamp > this.updateTimestamp) {
