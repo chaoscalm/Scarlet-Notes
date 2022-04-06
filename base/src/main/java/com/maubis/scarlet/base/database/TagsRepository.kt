@@ -32,10 +32,6 @@ class TagsRepository(private val database: TagDao) {
     return tags[uuid]
   }
 
-  fun getByTitle(title: String): Tag? {
-    return tags.values.firstOrNull { it.title == title }
-  }
-
   fun search(string: String): List<Tag> {
     return tags.values
             .filter { string.isBlank() || it.title.contains(string, true) }
