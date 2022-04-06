@@ -25,7 +25,6 @@ import com.maubis.scarlet.base.common.ui.setThemeFromSystem
 import com.maubis.scarlet.base.database.entities.Folder
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.database.entities.NoteState
-import com.maubis.scarlet.base.database.entities.Tag
 import com.maubis.scarlet.base.databinding.ActivityMainBinding
 import com.maubis.scarlet.base.home.recycler.NoNotesRecyclerItem
 import com.maubis.scarlet.base.note.actions.INoteActionsSheetActivity
@@ -103,7 +102,7 @@ class MainActivity : SecuredActivity(), INoteActionsSheetActivity {
   }
 
   private fun setListeners() {
-    snackbar = NoteDeletionSnackbar(views.bottomSnackbar) { refreshItems() }
+    snackbar = NoteDeletionSnackbar(views.bottomSnackbar) { refreshList() }
     views.searchToolbar.backButton.setOnClickListener { onBackPressed() }
     views.searchToolbar.closeIcon.setOnClickListener { onBackPressed() }
     tagAndColorPicker = TagsAndColorPickerViewHolder(
@@ -115,7 +114,8 @@ class MainActivity : SecuredActivity(), INoteActionsSheetActivity {
           startSearch(views.searchToolbar.textField.text.toString())
           tagAndColorPicker.notifyChanged()
         } else {
-          openTag(tag)
+          state.tags.add(tag)
+          startSearch(views.searchToolbar.textField.text.toString())
           tagAndColorPicker.notifyChanged()
         }
       },
@@ -180,11 +180,30 @@ class MainActivity : SecuredActivity(), INoteActionsSheetActivity {
 
   override fun onResume() {
     super.onResume()
-    refreshItems()
-    notifyFolderChange()
+    refreshList()
 
     if (isInSearchMode)
       enterSearchMode()
+  }
+
+  override fun onStop() {
+    super.onStop()
+    if (isFinishing && PermissionUtils.getStoragePermissionManager(this).hasAllPermissions()) {
+      NoteExporter.tryAutoExport()
+    }
+  }
+
+  override fun onBackPressed() {
+    when {
+      isInSearchMode && views.searchToolbar.textField.text.toString().isBlank() -> quitSearchMode()
+      isInSearchMode -> views.searchToolbar.textField.setText("")
+      state.currentFolder != null -> onFolderChange(null)
+      state.hasFilter() -> {
+        state.clear()
+        onModeChange(HomeNavigationMode.DEFAULT)
+      }
+      else -> super.onBackPressed()
+    }
   }
 
   fun notifyAdapterExtraChanged() {
@@ -192,59 +211,32 @@ class MainActivity : SecuredActivity(), INoteActionsSheetActivity {
     resetAndLoadData()
   }
 
+  fun resetAndLoadData() {
+    state.clear()
+    loadData()
+  }
+
+  fun loadData() = onModeChange(state.mode)
+
   fun onModeChange(mode: HomeNavigationMode) {
     state.mode = mode
     state.currentFolder = null
-    notifyFolderChange()
-    refreshItems()
-    updateToolbars()
-  }
-
-  private fun updateToolbars() {
-    views.mainToolbar.title.text = getString(state.mode.toolbarTitleResourceId)
-    updateMainToolbarLeftIcon()
-    setBottomToolbar()
-  }
-
-  private fun updateMainToolbarLeftIcon() {
-    views.mainToolbar.leftIcon.setImageDrawable(getDrawable(state.mode.toolbarIconResourceId))
-    if (state.mode != HomeNavigationMode.DEFAULT) {
-      val iconColor = appTheme.get(ThemeColorType.SECONDARY_TEXT)
-      views.mainToolbar.leftIcon.setColorFilter(iconColor)
-    }
-    else
-      views.mainToolbar.leftIcon.clearColorFilter()
+    refreshList()
+    updateMainToolbar()
   }
 
   fun onFolderChange(folder: Folder?) {
     state.currentFolder = folder
-    refreshItems()
-    notifyFolderChange()
+    refreshList()
   }
 
-  fun notifyFolderChange() {
-    val componentContext = ComponentContext(this)
-    views.folderToolbar.removeAllViews()
-    setBottomToolbar()
-
-    val currentFolder = state.currentFolder
-    if (currentFolder != null) {
-      views.folderToolbar.addView(LithoView.create(componentContext,
-          MainActivityFolderBottomBar.create(componentContext)
-              .folder(currentFolder)
-              .build()))
+  fun refreshList() {
+    lifecycleScope.launch {
+      val items = withContext(Dispatchers.IO) { computeItemsToBeShown() }
+      displayItems(items)
     }
-  }
-
-  private fun handleNewItems(notes: List<RecyclerItem>) {
-    adapter.clearItems()
-    if (notes.isEmpty()) {
-      adapter.addItem(NoNotesRecyclerItem())
-      return
-    }
-    notes.forEach {
-      adapter.addItem(it)
-    }
+    updateBottomToolbar()
+    updateFolderToolbar()
   }
 
   private fun computeItemsToBeShown(): List<RecyclerItem> {
@@ -257,47 +249,37 @@ class MainActivity : SecuredActivity(), INoteActionsSheetActivity {
     val matchingFolders = findMatchingFolders(state)
     val allItems = mutableListOf<RecyclerItem>()
     allItems.addAll(
-        data.folders.getAll()
-          .filter { folder ->
-            val notesInFolder = allNotes.count { it.folder == folder.uuid }
-            !state.hasFilter() || notesInFolder != 0 || matchingFolders.contains(folder)
-          }
-          .map { folder ->
-              FolderRecyclerItem(
-                context = this,
-                folder = folder,
-                click = { onFolderChange(folder) },
-                longClick = {
-                  CreateOrEditFolderBottomSheet.openSheet(this, folder) { refreshItems() }
-                },
-                selected = state.currentFolder?.uuid == folder.uuid,
-                notesCount = allNotes.count { it.folder == folder.uuid })
-          }
+      data.folders.getAll()
+        .filter { folder ->
+          val notesInFolder = allNotes.count { it.folder == folder.uuid }
+          !state.hasFilter() || notesInFolder != 0 || matchingFolders.contains(folder)
+        }
+        .map { folder ->
+          FolderRecyclerItem(
+            context = this,
+            folder = folder,
+            click = { onFolderChange(folder) },
+            longClick = {
+              CreateOrEditFolderBottomSheet.openSheet(this, folder) { refreshList() }
+            },
+            selected = state.currentFolder?.uuid == folder.uuid,
+            notesCount = allNotes.count { it.folder == folder.uuid })
+        }
     )
     allItems.addAll(excludeNotesInFolders(allNotes).map { NoteRecyclerItem(this, it) })
     return allItems
   }
 
-  fun refreshItems() {
-    lifecycleScope.launch {
-      val items = withContext(Dispatchers.IO) { computeItemsToBeShown() }
-      handleNewItems(items)
+  private fun displayItems(notes: List<RecyclerItem>) {
+    adapter.clearItems()
+    if (notes.isEmpty()) {
+      adapter.addItem(NoNotesRecyclerItem())
+      return
+    }
+    notes.forEach {
+      adapter.addItem(it)
     }
   }
-
-  private fun openTag(tag: Tag) {
-    state.mode = if (state.mode == HomeNavigationMode.LOCKED) HomeNavigationMode.DEFAULT else state.mode
-    state.tags.add(tag)
-    refreshItems()
-    updateToolbars()
-  }
-
-  fun resetAndLoadData() {
-    state.clear()
-    loadData()
-  }
-
-  fun loadData() = onModeChange(state.mode)
 
   private fun enterSearchMode() {
     isInSearchMode = true
@@ -319,41 +301,31 @@ class MainActivity : SecuredActivity(), INoteActionsSheetActivity {
     views.mainToolbar.root.visibility = View.VISIBLE
     views.searchToolbar.root.visibility = View.GONE
     state.clearSearchBar()
-    refreshItems()
+    refreshList()
   }
 
   private fun startSearch(keyword: String) {
     state.text = keyword
-    refreshItems()
-  }
-
-  override fun onBackPressed() {
-    when {
-      isInSearchMode && views.searchToolbar.textField.text.toString().isBlank() -> quitSearchMode()
-      isInSearchMode -> views.searchToolbar.textField.setText("")
-      state.currentFolder != null -> onFolderChange(null)
-      state.hasFilter() -> {
-        state.clear()
-        onModeChange(HomeNavigationMode.DEFAULT)
-      }
-      else -> super.onBackPressed()
-    }
-  }
-
-  override fun onStop() {
-    super.onStop()
-    if (isFinishing && PermissionUtils.getStoragePermissionManager(this).hasAllPermissions()) {
-      NoteExporter.tryAutoExport()
-    }
+    refreshList()
   }
 
   override fun notifyThemeChange() {
     updateStatusBarTheme()
     views.containerLayoutMain.setBackgroundColor(getThemeColor())
-    setBottomToolbar()
+    updateBottomToolbar()
   }
 
-  private fun setBottomToolbar() {
+  private fun updateMainToolbar() {
+    views.mainToolbar.title.text = getString(state.mode.toolbarTitleResourceId)
+    views.mainToolbar.leftIcon.setImageDrawable(getDrawable(state.mode.toolbarIconResourceId))
+    if (state.mode != HomeNavigationMode.DEFAULT) {
+      val iconColor = appTheme.get(ThemeColorType.SECONDARY_TEXT)
+      views.mainToolbar.leftIcon.setColorFilter(iconColor)
+    } else
+      views.mainToolbar.leftIcon.clearColorFilter()
+  }
+
+  private fun updateBottomToolbar() {
     val componentContext = ComponentContext(this)
     views.lithoBottomToolbar.removeAllViews()
     views.lithoBottomToolbar.addView(
@@ -366,31 +338,43 @@ class MainActivity : SecuredActivity(), INoteActionsSheetActivity {
           .build()))
   }
 
+  private fun updateFolderToolbar() {
+    val componentContext = ComponentContext(this)
+    views.folderToolbar.removeAllViews()
+    val currentFolder = state.currentFolder
+    if (currentFolder != null) {
+      views.folderToolbar.addView(LithoView.create(componentContext,
+        MainActivityFolderBottomBar.create(componentContext)
+          .folder(currentFolder)
+          .build()))
+    }
+  }
+
   /**
    * Start : INoteOptionSheetActivity Functions
    */
   override fun updateNote(note: Note) {
     note.save(this)
-    refreshItems()
+    refreshList()
   }
 
   override fun markItem(note: Note, state: NoteState) {
     note.mark(this, state)
-    refreshItems()
+    refreshList()
   }
 
   override fun moveItemToTrashOrDelete(note: Note) {
     snackbar.softUndo(this, note)
     note.moveToTrashOrDelete(this)
-    refreshItems()
+    refreshList()
   }
 
   override fun notifyTagsChanged(note: Note) {
-    refreshItems()
+    refreshList()
   }
 
   override fun notifyResetOrDismiss() {
-    refreshItems()
+    refreshList()
   }
 
   override fun lockedContentIsHidden() = true

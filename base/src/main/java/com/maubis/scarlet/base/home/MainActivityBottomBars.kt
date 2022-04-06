@@ -66,7 +66,7 @@ object MainActivityBottomBarSpec {
           .iconRes(R.drawable.icon_add_notebook)
           .onClick {
             CreateOrEditFolderBottomSheet.openSheet(activity, Folder(sNoteDefaultColor)) {
-              activity.refreshItems()
+              activity.refreshList()
             }
           })
       }
@@ -145,7 +145,7 @@ object MainActivityFolderBottomBarSpec {
   fun onClickEvent(context: ComponentContext, @Prop folder: Folder) {
     val activity = context.androidContext as MainActivity
     if (activity.state.currentFolder != null) {
-      CreateOrEditFolderBottomSheet.openSheet(activity, folder) { activity.notifyFolderChange() }
+      CreateOrEditFolderBottomSheet.openSheet(activity, folder) { activity.refreshList() }
     }
   }
 }
