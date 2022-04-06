@@ -12,7 +12,6 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
-import com.maubis.scarlet.base.home.MainActivity
 
 abstract class ThemedBottomSheetFragment : BottomSheetDialogFragment() {
 
@@ -25,11 +24,11 @@ abstract class ThemedBottomSheetFragment : BottomSheetDialogFragment() {
     }
     dialog.setContentView(View.inflate(context, getLayout(), null))
     resetBackground(dialog)
-    setupView(dialog)
+    setupDialogViews(dialog)
     return dialog
   }
 
-  abstract fun setupView(dialog: Dialog)
+  abstract fun setupDialogViews(dialog: Dialog)
 
   @LayoutRes
   abstract fun getLayout(): Int
@@ -73,12 +72,6 @@ abstract class ThemedBottomSheetFragment : BottomSheetDialogFragment() {
     val parentView = rootView.parent
     if (parentView is View) {
       parentView.setBackgroundResource(R.drawable.note_option_bs_gradient)
-    }
-  }
-
-  companion object {
-    fun openSheet(activity: MainActivity, sheet: ThemedBottomSheetFragment) {
-      sheet.show(activity.supportFragmentManager, sheet.tag)
     }
   }
 }

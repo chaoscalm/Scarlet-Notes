@@ -19,7 +19,7 @@ class CreateOrEditTagBottomSheet : ThemedBottomSheetFragment() {
   var selectedTag: Tag? = null
   var sheetOnTagListener: (tag: Tag, deleted: Boolean) -> Unit = { _, _ -> }
 
-  override fun setupView(dialog: Dialog) {
+  override fun setupDialogViews(dialog: Dialog) {
     val tag = selectedTag
     if (tag == null) {
       dismiss()

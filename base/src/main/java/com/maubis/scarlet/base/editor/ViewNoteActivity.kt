@@ -27,7 +27,7 @@ import com.maubis.scarlet.base.editor.formats.Formats
 import com.maubis.scarlet.base.editor.formats.recycler.*
 import com.maubis.scarlet.base.editor.formats.sectionPreservingSort
 import com.maubis.scarlet.base.editor.specs.NoteViewBottomBar
-import com.maubis.scarlet.base.note.actions.INoteActionsSheetActivity
+import com.maubis.scarlet.base.note.actions.INoteActionsActivity
 import com.maubis.scarlet.base.note.actions.NoteActionsBottomSheet
 import com.maubis.scarlet.base.note.adjustedColor
 import com.maubis.scarlet.base.note.getTagString
@@ -48,7 +48,7 @@ data class NoteViewColorConfig(
   var toolbarIconColor: Int = Color.BLACK,
   var statusBarColor: Int = Color.BLACK)
 
-open class ViewAdvancedNoteActivity : SecuredActivity(), INoteActionsSheetActivity, IFormatRecyclerViewActivity {
+open class ViewAdvancedNoteActivity : SecuredActivity(), INoteActionsActivity, IFormatRecyclerViewActivity {
 
   var focusedFormat: Format? = null
 
@@ -301,7 +301,7 @@ open class ViewAdvancedNoteActivity : SecuredActivity(), INoteActionsSheetActivi
     finish()
   }
 
-  override fun notifyTagsChanged(note: Note) {
+  override fun notifyTagsChanged() {
     displayNote()
   }
 

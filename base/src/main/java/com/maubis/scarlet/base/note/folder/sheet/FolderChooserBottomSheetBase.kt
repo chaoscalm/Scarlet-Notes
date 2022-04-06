@@ -1,7 +1,6 @@
 package com.maubis.scarlet.base.note.folder.sheet
 
 import android.app.Dialog
-import android.content.DialogInterface
 import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import com.facebook.litho.*
@@ -100,9 +99,7 @@ object FolderItemLayoutSpec {
 
 abstract class FolderChooserBottomSheetBase : LithoBottomSheet() {
 
-  var dismissListener: () -> Unit = {}
-
-  protected abstract fun preComponentRender(componentContext: ComponentContext)
+  protected open fun preComponentRender(componentContext: ComponentContext) {}
   protected abstract fun onFolderSelected(folder: Folder)
   protected abstract fun isFolderSelected(folder: Folder): Boolean
 
@@ -158,10 +155,5 @@ abstract class FolderChooserBottomSheetBase : LithoBottomSheet() {
         ))
     }
     return options
-  }
-
-  override fun onDismiss(dialog: DialogInterface) {
-    super.onDismiss(dialog)
-    dismissListener()
   }
 }

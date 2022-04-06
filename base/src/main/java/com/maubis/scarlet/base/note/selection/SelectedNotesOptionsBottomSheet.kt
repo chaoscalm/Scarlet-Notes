@@ -15,7 +15,7 @@ import com.maubis.scarlet.base.editor.formats.Formats
 import com.maubis.scarlet.base.editor.formats.sectionPreservingSort
 import com.maubis.scarlet.base.home.sheets.AlertBottomSheet
 import com.maubis.scarlet.base.home.sheets.AlertSheetConfig
-import com.maubis.scarlet.base.note.folder.sheet.SelectedFolderChooseOptionsBottomSheet
+import com.maubis.scarlet.base.note.folder.sheet.MultipleNotesFolderChooserBottomSheet
 import com.maubis.scarlet.base.note.tag.SelectedTagChooserBottomSheet
 import com.maubis.scarlet.base.security.openUnlockSheet
 
@@ -162,8 +162,7 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
       label = R.string.folder_option_change_notebook,
       icon = R.drawable.ic_folder,
       listener = lockAwareFunctionRunner(activity) {
-        openSheet(activity, SelectedFolderChooseOptionsBottomSheet().apply {
-          this.dismissListener = {}
+        openSheet(activity, MultipleNotesFolderChooserBottomSheet().apply {
           this.onActionListener = { folder, selectFolder ->
             activity.forEachNote {
               when (selectFolder) {

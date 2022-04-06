@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.content.Intent
 import android.content.pm.ShortcutInfo
 import android.graphics.drawable.Icon
+import android.os.Bundle
 import android.view.View
 import android.widget.GridLayout
 import android.widget.TextView
@@ -13,6 +14,7 @@ import com.github.bijoysingh.uibasics.views.UILabelView
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
+import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.ScarletIntentHandlerActivity
 import com.maubis.scarlet.base.common.sheets.ColorPickerBottomSheet
 import com.maubis.scarlet.base.common.sheets.ColorPickerDefaultController
@@ -37,9 +39,13 @@ import com.maubis.scarlet.base.reminders.ReminderBottomSheet
 import com.maubis.scarlet.base.security.openUnlockSheet
 import java.util.*
 
-class NoteActionsBottomSheet(private val note: Note) : ThemedBottomSheetFragment() {
+class NoteActionsBottomSheet : ThemedBottomSheetFragment() {
+  private val note: Note by lazy {
+    val noteId = requireArguments().getInt(KEY_NOTE_ID)
+    data.notes.getByID(noteId) ?: throw IllegalArgumentException("Invalid note ID")
+  }
 
-  override fun setupView(dialog: Dialog) {
+  override fun setupDialogViews(dialog: Dialog) {
     setActionTitle(dialog, R.string.choose_action)
     setupGrid(dialog)
     makeBackgroundTransparent(dialog, R.id.root_layout)
@@ -67,7 +73,7 @@ class NoteActionsBottomSheet(private val note: Note) : ThemedBottomSheetFragment
 
   private fun getQuickActions(): List<NoteActionItem> {
     val activity = context as ThemedActivity
-    if (activity !is INoteActionsSheetActivity) {
+    if (activity !is INoteActionsActivity) {
       return emptyList()
     }
 
@@ -162,7 +168,7 @@ class NoteActionsBottomSheet(private val note: Note) : ThemedBottomSheetFragment
 
   private fun getNotePropertyActions(): List<NoteActionItem> {
     val activity = context as ThemedActivity
-    if (activity !is INoteActionsSheetActivity || note.state == NoteState.TRASH) {
+    if (activity !is INoteActionsActivity || note.state == NoteState.TRASH) {
       return emptyList()
     }
 
@@ -171,9 +177,7 @@ class NoteActionsBottomSheet(private val note: Note) : ThemedBottomSheetFragment
       title = R.string.folder_option_change_notebook,
       icon = R.drawable.ic_folder,
       listener = {
-        openSheet(activity, FolderChooserBottomSheet(note).apply {
-          dismissListener = { activity.notifyResetOrDismiss() }
-        })
+        FolderChooserBottomSheet.openSheet(activity, note)
         dismiss()
       }
     ))
@@ -200,7 +204,7 @@ class NoteActionsBottomSheet(private val note: Note) : ThemedBottomSheetFragment
       title = R.string.change_tags,
       icon = R.drawable.ic_action_tags,
       listener = {
-        openSheet(activity, TagChooserBottomSheet(note, dismissListener = { activity.notifyTagsChanged(note) }))
+        TagChooserBottomSheet.openSheet(activity, note)
         dismiss()
       }
     ))
@@ -265,7 +269,7 @@ class NoteActionsBottomSheet(private val note: Note) : ThemedBottomSheetFragment
 
   private fun getExtraActions(): List<NoteActionItem> {
     val activity = context as ThemedActivity
-    if (activity !is INoteActionsSheetActivity || note.state == NoteState.TRASH) {
+    if (activity !is INoteActionsActivity || note.state == NoteState.TRASH) {
       return emptyList()
     }
 
@@ -408,8 +412,11 @@ class NoteActionsBottomSheet(private val note: Note) : ThemedBottomSheetFragment
   }
 
   companion object {
+    private const val KEY_NOTE_ID = "note_id"
+
     fun openSheet(activity: ThemedActivity, note: Note) {
-      val sheet = NoteActionsBottomSheet(note)
+      val sheet = NoteActionsBottomSheet()
+      sheet.arguments = Bundle().apply { putInt(KEY_NOTE_ID, note.uid) }
       sheet.show(activity.supportFragmentManager, sheet.tag)
     }
   }

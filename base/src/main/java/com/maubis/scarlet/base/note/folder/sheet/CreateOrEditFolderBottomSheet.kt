@@ -24,7 +24,7 @@ class CreateOrEditFolderBottomSheet : ThemedBottomSheetFragment() {
 
   private var selectedColor: Int = 0
 
-  override fun setupView(dialog: Dialog) {
+  override fun setupDialogViews(dialog: Dialog) {
     setAlwaysExpanded(dialog)
 
     setupTitle(dialog)

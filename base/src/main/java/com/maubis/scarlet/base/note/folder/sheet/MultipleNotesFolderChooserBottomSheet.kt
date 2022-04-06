@@ -5,7 +5,7 @@ import com.maubis.scarlet.base.database.entities.Folder
 import com.maubis.scarlet.base.note.selection.NotesSelectionActivity
 import java.util.*
 
-class SelectedFolderChooseOptionsBottomSheet : FolderChooserBottomSheetBase() {
+class MultipleNotesFolderChooserBottomSheet : FolderChooserBottomSheetBase() {
 
   var onActionListener: (Folder, Boolean) -> Unit = { _, _ -> }
   var selectedFolders: MutableList<UUID?> = mutableListOf<UUID?>()

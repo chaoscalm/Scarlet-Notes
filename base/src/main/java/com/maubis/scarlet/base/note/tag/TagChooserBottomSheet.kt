@@ -2,6 +2,7 @@ package com.maubis.scarlet.base.note.tag
 
 import android.app.Dialog
 import android.content.DialogInterface
+import android.os.Bundle
 import com.facebook.litho.Column
 import com.facebook.litho.Component
 import com.facebook.litho.ComponentContext
@@ -15,8 +16,13 @@ import com.maubis.scarlet.base.common.sheets.getLithoBottomSheetTitle
 import com.maubis.scarlet.base.common.ui.ThemedActivity
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.database.entities.Tag
+import com.maubis.scarlet.base.note.actions.INoteActionsActivity
 
-class TagChooserBottomSheet(private val note: Note, private val dismissListener: () -> Unit) : LithoBottomSheet() {
+class TagChooserBottomSheet : LithoBottomSheet() {
+  private val note: Note by lazy {
+    val noteId = requireArguments().getInt(KEY_NOTE_ID)
+    data.notes.getByID(noteId) ?: throw IllegalArgumentException("Invalid note ID")
+  }
 
   override fun getComponent(componentContext: ComponentContext, dialog: Dialog): Component {
     val activity = context as ThemedActivity
@@ -75,6 +81,16 @@ class TagChooserBottomSheet(private val note: Note, private val dismissListener:
 
   override fun onDismiss(dialog: DialogInterface) {
     super.onDismiss(dialog)
-    dismissListener()
+    (activity as INoteActionsActivity).notifyTagsChanged()
+  }
+
+  companion object {
+    private const val KEY_NOTE_ID = "note_id"
+
+    fun openSheet(activity: ThemedActivity, note: Note) {
+      val sheet = TagChooserBottomSheet()
+      sheet.arguments = Bundle().apply { putInt(KEY_NOTE_ID, note.uid) }
+      sheet.show(activity.supportFragmentManager, sheet.tag)
+    }
   }
 }

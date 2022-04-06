@@ -3,11 +3,13 @@ package com.maubis.scarlet.base.reminders
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.app.TimePickerDialog
+import android.os.Bundle
 import android.view.View.GONE
 import android.widget.TextView
 import com.github.bijoysingh.uibasics.views.UIActionView
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
+import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.common.sheets.GenericOptionsBottomSheet
 import com.maubis.scarlet.base.common.sheets.LithoChooseOptionsItem
 import com.maubis.scarlet.base.common.ui.ThemeColorType
@@ -15,22 +17,23 @@ import com.maubis.scarlet.base.common.ui.ThemedActivity
 import com.maubis.scarlet.base.common.ui.ThemedBottomSheetFragment
 import com.maubis.scarlet.base.common.utils.readableTime
 import com.maubis.scarlet.base.database.entities.Note
-import com.maubis.scarlet.base.note.actions.INoteActionsSheetActivity
+import com.maubis.scarlet.base.note.actions.INoteActionsActivity
 import java.util.*
 
-class ReminderBottomSheet(private val note: Note) : ThemedBottomSheetFragment() {
+class ReminderBottomSheet : ThemedBottomSheetFragment() {
+  private val note: Note by lazy {
+    val noteId = requireArguments().getInt(KEY_NOTE_ID)
+    data.notes.getByID(noteId) ?: throw IllegalArgumentException("Invalid note ID")
+  }
+
   private var reminder: Reminder = Reminder(
     0,
     System.currentTimeMillis(),
     ReminderInterval.ONCE)
 
-  override fun setupView(dialog: Dialog) {
+  override fun setupDialogViews(dialog: Dialog) {
     val calendar = Calendar.getInstance()
-    reminder = note.reminder ?: Reminder(
-        0,
-        calendar.timeInMillis,
-        ReminderInterval.ONCE)
-
+    reminder = note.reminder ?: Reminder(0, calendar.timeInMillis, ReminderInterval.ONCE)
     val isNewReminder = reminder.uid == 0
     if (isNewReminder) {
       calendar.set(Calendar.HOUR_OF_DAY, 8)
@@ -45,6 +48,7 @@ class ReminderBottomSheet(private val note: Note) : ThemedBottomSheetFragment() 
     setContent(dialog, reminder)
     setListeners(dialog, isNewReminder)
     makeBackgroundTransparent(dialog, R.id.root_layout)
+    setAlwaysExpanded(dialog)
   }
 
   private fun setListeners(dialog: Dialog, isNewReminder: Boolean) {
@@ -66,7 +70,7 @@ class ReminderBottomSheet(private val note: Note) : ThemedBottomSheetFragment() 
 
     val removeAlarmBtn = dialog.findViewById<TextView>(R.id.remove_alarm)
     val setAlarmBtn = dialog.findViewById<TextView>(R.id.set_alarm)
-    val activity = requireActivity() as INoteActionsSheetActivity
+    val activity = requireActivity() as INoteActionsActivity
     if (isNewReminder) {
       removeAlarmBtn.visibility = GONE
     }
@@ -215,8 +219,11 @@ class ReminderBottomSheet(private val note: Note) : ThemedBottomSheetFragment() 
   override fun getBackgroundCardViewIds(): Array<Int> = arrayOf(R.id.card_layout)
 
   companion object {
+    private const val KEY_NOTE_ID = "note_id"
+
     fun openSheet(activity: ThemedActivity, note: Note) {
-      val sheet = ReminderBottomSheet(note)
+      val sheet = ReminderBottomSheet()
+      sheet.arguments = Bundle().apply { putInt(KEY_NOTE_ID, note.uid) }
       sheet.show(activity.supportFragmentManager, sheet.tag)
     }
   }

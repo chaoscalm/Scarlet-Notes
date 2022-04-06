@@ -72,7 +72,7 @@ class UIOptionsBottomSheet : LithoOptionBottomSheet() {
       subtitle = notesSortingTechniquePref.label,
       icon = R.drawable.ic_sort,
       listener = {
-        SortingOptionsBottomSheet.openSheet(activity, { activity.refreshList() })
+        SortingOptionsBottomSheet.openSheet(activity)
         refresh(activity, dialog)
       }
     ))

@@ -27,7 +27,7 @@ import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.database.entities.NoteState
 import com.maubis.scarlet.base.databinding.ActivityMainBinding
 import com.maubis.scarlet.base.home.recycler.NoNotesRecyclerItem
-import com.maubis.scarlet.base.note.actions.INoteActionsSheetActivity
+import com.maubis.scarlet.base.note.actions.INoteActionsActivity
 import com.maubis.scarlet.base.note.folder.FolderRecyclerItem
 import com.maubis.scarlet.base.note.folder.sheet.CreateOrEditFolderBottomSheet
 import com.maubis.scarlet.base.note.recycler.NoteAppAdapter
@@ -41,7 +41,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.*
 
-class MainActivity : SecuredActivity(), INoteActionsSheetActivity {
+class MainActivity : SecuredActivity(), INoteActionsActivity {
   companion object {
     private const val IS_IN_SEARCH_MODE: String = "IS_IN_SEARCH_MODE"
     private const val NAVIGATION_MODE: String = "NAVIGATION_MODE"
@@ -368,7 +368,7 @@ class MainActivity : SecuredActivity(), INoteActionsSheetActivity {
     refreshList()
   }
 
-  override fun notifyTagsChanged(note: Note) {
+  override fun notifyTagsChanged() {
     refreshList()
   }
 

@@ -14,7 +14,7 @@ var notesSortingTechniquePref: SortingTechnique
   get() = SortingTechnique.valueOf(appPreferences.getString("notes_sorting_technique", SortingTechnique.LAST_MODIFIED.name)!!)
   set(value) = appPreferences.edit { putString("notes_sorting_technique", value.name) }
 
-class SortingOptionsBottomSheet(private val listener: () -> Unit) : LithoChooseOptionBottomSheet() {
+class SortingOptionsBottomSheet : LithoChooseOptionBottomSheet() {
   override fun title(): Int = R.string.sort_sheet_title
 
   override fun getOptions(componentContext: ComponentContext, dialog: Dialog): List<LithoChooseOptionsItem> {
@@ -25,7 +25,7 @@ class SortingOptionsBottomSheet(private val listener: () -> Unit) : LithoChooseO
           title = technique.label,
           listener = {
             notesSortingTechniquePref = technique
-            listener()
+            (activity as? MainActivity)?.refreshList()
             refresh(componentContext.androidContext, dialog)
           },
           selected = notesSortingTechniquePref == technique
@@ -35,8 +35,8 @@ class SortingOptionsBottomSheet(private val listener: () -> Unit) : LithoChooseO
   }
 
   companion object {
-    fun openSheet(activity: MainActivity, listener: () -> Unit) {
-      val sheet = SortingOptionsBottomSheet(listener)
+    fun openSheet(activity: MainActivity) {
+      val sheet = SortingOptionsBottomSheet()
       sheet.show(activity.supportFragmentManager, sheet.tag)
     }
   }
