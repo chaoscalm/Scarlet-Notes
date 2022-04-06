@@ -128,7 +128,7 @@ abstract class FolderChooserBottomSheetBase : LithoBottomSheet() {
       subtitle = 0,
       icon = R.drawable.icon_add_notebook,
       listener = {
-        CreateOrEditFolderBottomSheet.openSheet(activity, Folder(sNoteDefaultColor)) { folder, _ ->
+        CreateOrEditFolderBottomSheet.openSheet(activity, Folder(sNoteDefaultColor)) { folder ->
           onFolderSelected(folder)
           refresh(activity, dialog)
         }

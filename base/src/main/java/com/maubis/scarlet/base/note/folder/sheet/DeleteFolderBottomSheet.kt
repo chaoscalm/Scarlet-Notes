@@ -13,7 +13,7 @@ import com.maubis.scarlet.base.database.entities.Note
 class DeleteFolderBottomSheet : LithoOptionBottomSheet() {
 
   var selectedFolder: Folder? = null
-  var sheetOnFolderListener: (folder: Folder, deleted: Boolean) -> Unit = { _, _ -> }
+  var onDeletionListener: (Folder) -> Unit = { _ -> }
 
   override fun title(): Int = R.string.folder_delete_option_sheet_title
 
@@ -32,12 +32,11 @@ class DeleteFolderBottomSheet : LithoOptionBottomSheet() {
       icon = R.drawable.icon_delete,
       listener = {
         folder.delete()
-        executeForFolderContent(folder) {
+        forEachNoteInFolder(folder) {
           it.folder = null
           it.save(activity)
         }
-
-        sheetOnFolderListener(folder, true)
+        onDeletionListener(folder)
         dismiss()
       }
     ))
@@ -46,12 +45,11 @@ class DeleteFolderBottomSheet : LithoOptionBottomSheet() {
       subtitle = R.string.folder_delete_option_sheet_remove_folder_content_details,
       icon = R.drawable.icon_delete_content,
       listener = {
-        executeForFolderContent(folder) {
+        forEachNoteInFolder(folder) {
           it.folder = null
           it.moveToTrashOrDelete(activity)
         }
-
-        sheetOnFolderListener(folder, false)
+        onDeletionListener(folder)
         dismiss()
       }
     ))
@@ -61,19 +59,18 @@ class DeleteFolderBottomSheet : LithoOptionBottomSheet() {
       icon = R.drawable.ic_delete_permanently,
       listener = {
         folder.delete()
-        executeForFolderContent(folder) {
+        forEachNoteInFolder(folder) {
           it.folder = null
           it.moveToTrashOrDelete(activity)
         }
-
-        sheetOnFolderListener(folder, true)
+        onDeletionListener(folder)
         dismiss()
       }
     ))
     return options
   }
 
-  private fun executeForFolderContent(folder: Folder, lambda: (Note) -> Unit) {
+  private fun forEachNoteInFolder(folder: Folder, lambda: (Note) -> Unit) {
     data.notes.getAll().filter { it.folder == folder.uuid }.forEach {
       lambda(it)
     }

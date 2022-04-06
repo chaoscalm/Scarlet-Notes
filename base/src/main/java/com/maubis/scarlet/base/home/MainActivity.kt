@@ -268,7 +268,7 @@ class MainActivity : SecuredActivity(), INoteActionsSheetActivity {
                 folder = folder,
                 click = { onFolderChange(folder) },
                 longClick = {
-                  CreateOrEditFolderBottomSheet.openSheet(this, folder) { _, _ -> refreshItems() }
+                  CreateOrEditFolderBottomSheet.openSheet(this, folder) { refreshItems() }
                 },
                 selected = state.currentFolder?.uuid == folder.uuid,
                 notesCount = allNotes.count { it.folder == folder.uuid })

@@ -1,7 +1,6 @@
 package com.maubis.scarlet.base.note.folder.sheet
 
 import android.app.Dialog
-import android.content.Context
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.EditText
@@ -20,80 +19,88 @@ import com.maubis.scarlet.base.common.utils.getEditorActionListener
 import com.maubis.scarlet.base.database.entities.Folder
 
 class CreateOrEditFolderBottomSheet : ThemedBottomSheetFragment() {
+  private lateinit var folder: Folder
+  private var onFolderSaveListener: (Folder) -> Unit = { _ -> }
 
-  var selectedFolder: Folder? = null
-  var sheetOnFolderListener: (folder: Folder, deleted: Boolean) -> Unit = { _, _ -> }
+  private var selectedColor: Int = 0
 
   override fun setupView(dialog: Dialog) {
-    val folder = selectedFolder
-    if (folder == null) {
-      dismiss()
-      return
-    }
-
     setAlwaysExpanded(dialog)
 
+    setupTitle(dialog)
+    val folderNameTextField = setupNameTextField(dialog)
+    setupSaveButton(dialog, folderNameTextField)
+    setupDeleteButton(dialog)
+
+    selectedColor = folder.color
+    setColorsList(dialog)
+    makeBackgroundTransparent(dialog, R.id.root_layout)
+  }
+
+  private fun setupTitle(dialog: Dialog) {
     val title = dialog.findViewById<TextView>(R.id.options_title)
     title.setTextColor(appTheme.get(ThemeColorType.SECONDARY_TEXT))
     title.typeface = appTypeface.title()
     title.setText(if (folder.isNotPersisted()) R.string.folder_sheet_add_note else R.string.folder_sheet_edit_note)
+  }
 
-    val enterFolder = dialog.findViewById<EditText>(R.id.enter_folder)
-    enterFolder.setTextColor(appTheme.get(ThemeColorType.SECONDARY_TEXT))
-    enterFolder.setHintTextColor(appTheme.get(ThemeColorType.HINT_TEXT))
-    enterFolder.typeface = appTypeface.text()
-
-    val action = dialog.findViewById<TextView>(R.id.action_button)
-    action.setOnClickListener {
-      val updated = onActionClick(folder, enterFolder.text.toString())
-      sheetOnFolderListener(folder, !updated)
-      dismiss()
-    }
-
-    val folderDeleteListener = sheetOnFolderListener
-    val removeBtn = dialog.findViewById<TextView>(R.id.action_remove_button)
-    removeBtn.visibility = if (folder.isNotPersisted()) GONE else VISIBLE
-    removeBtn.setOnClickListener {
-      openSheet(context as AppCompatActivity, DeleteFolderBottomSheet().apply {
-        selectedFolder = folder
-        sheetOnFolderListener = folderDeleteListener
-      })
-      dismiss()
-    }
-    enterFolder.setText(folder.title)
-    enterFolder.setOnEditorActionListener(getEditorActionListener(
+  private fun setupNameTextField(dialog: Dialog): EditText {
+    val folderNameTextField = dialog.findViewById<EditText>(R.id.enter_folder)
+    folderNameTextField.setTextColor(appTheme.get(ThemeColorType.SECONDARY_TEXT))
+    folderNameTextField.setHintTextColor(appTheme.get(ThemeColorType.HINT_TEXT))
+    folderNameTextField.typeface = appTypeface.text()
+    folderNameTextField.setText(folder.title)
+    folderNameTextField.setOnEditorActionListener(getEditorActionListener(
       runnable = {
-        val updated = onActionClick(folder, enterFolder.text.toString())
-        sheetOnFolderListener(folder, !updated)
+        saveFolder(folderNameTextField.text.toString())
+        onFolderSaveListener(folder)
         dismiss()
         return@getEditorActionListener true
       }))
-
-    val colorFlexbox = dialog.findViewById<FlexboxLayout>(R.id.color_flexbox)
-    setColorsList(dialog.context, folder, colorFlexbox)
-    makeBackgroundTransparent(dialog, R.id.root_layout)
+    return folderNameTextField
   }
 
-  private fun onActionClick(folder: Folder, title: String): Boolean {
-    folder.title = title
-    if (folder.title.isBlank()) {
-      folder.delete()
-      return false
+  private fun setupSaveButton(dialog: Dialog, folderNameTextField: EditText) {
+    val saveButton = dialog.findViewById<TextView>(R.id.action_button)
+    saveButton.setOnClickListener {
+      saveFolder(folderNameTextField.text.toString())
+      onFolderSaveListener(folder)
+      dismiss()
     }
+  }
+
+  private fun setupDeleteButton(dialog: Dialog) {
+    val deleteButton = dialog.findViewById<TextView>(R.id.action_remove_button)
+    deleteButton.visibility = if (folder.isNotPersisted()) GONE else VISIBLE
+    deleteButton.setOnClickListener {
+      openSheet(context as AppCompatActivity, DeleteFolderBottomSheet().apply {
+        selectedFolder = folder
+        onDeletionListener = onFolderSaveListener
+      })
+      dismiss()
+    }
+  }
+
+  private fun saveFolder(title: String) {
+    if (title.isBlank())
+      return
+
+    folder.title = title
+    folder.color = selectedColor
     folder.updateTimestamp = System.currentTimeMillis()
     folder.save()
-    return true
   }
 
-  private fun setColorsList(context: Context, folder: Folder, colorSelectorLayout: FlexboxLayout) {
+  private fun setColorsList(dialog: Dialog) {
+    val colorSelectorLayout = dialog.findViewById<FlexboxLayout>(R.id.color_flexbox)
     colorSelectorLayout.removeAllViews()
-    val colors = context.resources.getIntArray(R.array.bright_colors)
+    val colors = requireContext().resources.getIntArray(R.array.bright_colors)
     for (color in colors) {
-      val item = ColorView(context)
-      item.setColor(color, folder.color == color)
+      val item = ColorView(requireContext())
+      item.setColor(color, selectedColor == color)
       item.setOnClickListener {
-        folder.color = color
-        setColorsList(context, folder, colorSelectorLayout)
+        selectedColor = color
+        setColorsList(dialog)
       }
       colorSelectorLayout.addView(item)
     }
@@ -104,11 +111,10 @@ class CreateOrEditFolderBottomSheet : ThemedBottomSheetFragment() {
   override fun getBackgroundCardViewIds(): Array<Int> = arrayOf(R.id.content_card, R.id.core_color_card)
 
   companion object {
-    fun openSheet(activity: ThemedActivity, folder: Folder, listener: (folder: Folder, deleted: Boolean) -> Unit) {
+    fun openSheet(activity: ThemedActivity, folder: Folder, listener: (Folder) -> Unit) {
       val sheet = CreateOrEditFolderBottomSheet()
-
-      sheet.selectedFolder = folder
-      sheet.sheetOnFolderListener = listener
+      sheet.folder = folder
+      sheet.onFolderSaveListener = listener
       sheet.show(activity.supportFragmentManager, sheet.tag)
     }
   }

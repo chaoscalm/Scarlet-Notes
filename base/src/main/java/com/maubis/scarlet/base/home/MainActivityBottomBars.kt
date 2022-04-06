@@ -63,13 +63,12 @@ object MainActivityBottomBarSpec {
     else {
       if (!isInsideFolder) {
         row.child(bottomBarRoundIcon(context, colorConfig)
-                .iconRes(R.drawable.icon_add_notebook)
-                .onClick {
-                  CreateOrEditFolderBottomSheet.openSheet(
-                          activity,
-                          Folder(sNoteDefaultColor),
-                          { _, _ -> activity.refreshItems() })
-                })
+          .iconRes(R.drawable.icon_add_notebook)
+          .onClick {
+            CreateOrEditFolderBottomSheet.openSheet(activity, Folder(sNoteDefaultColor)) {
+              activity.refreshItems()
+            }
+          })
       }
       row.child(bottomBarRoundIcon(context, colorConfig)
           .iconRes(R.drawable.icon_add_list)
@@ -146,7 +145,7 @@ object MainActivityFolderBottomBarSpec {
   fun onClickEvent(context: ComponentContext, @Prop folder: Folder) {
     val activity = context.androidContext as MainActivity
     if (activity.state.currentFolder != null) {
-      CreateOrEditFolderBottomSheet.openSheet(activity, folder) { _, _ -> activity.notifyFolderChange() }
+      CreateOrEditFolderBottomSheet.openSheet(activity, folder) { activity.notifyFolderChange() }
     }
   }
 }
