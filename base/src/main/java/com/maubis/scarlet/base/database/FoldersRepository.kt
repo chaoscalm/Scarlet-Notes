@@ -36,10 +36,6 @@ class FoldersRepository(private val database: FolderDao) {
     return folders[uuid]
   }
 
-  fun getByTitle(title: String): Folder? {
-    return folders.values.firstOrNull { it.title == title }
-  }
-
   private fun loadFoldersFromDB(): ConcurrentHashMap<UUID, Folder> {
     val foldersMap = ConcurrentHashMap<UUID, Folder>()
     database.getAll().forEach { foldersMap[it.uuid] = it }

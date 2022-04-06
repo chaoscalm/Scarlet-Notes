@@ -20,13 +20,9 @@ class ExportedFolder(
           folder.updateTimestamp,
           folder.color)
 
-  fun saveIfNotPresent() {
-    val existingWithSameTitle = ScarletApp.data.folders.getByTitle(title)
-    if (existingWithSameTitle != null) {
-      return
-    }
-    val existingWithSameUuid = ScarletApp.data.folders.getByUUID(UUID.fromString(uuid))
-    if (existingWithSameUuid != null) {
+  fun saveIfNeeded() {
+    val existingFolder = ScarletApp.data.folders.getByUUID(UUID.fromString(uuid))
+    if (existingFolder != null && existingFolder.updateTimestamp > this.updateTimestamp) {
       return
     }
 
