@@ -69,7 +69,7 @@ class Note() {
     }
 
     fun moveToTrashOrDelete(context: Context) {
-        if (state === NoteState.TRASH) {
+        if (state == NoteState.TRASH) {
             delete(context)
             return
         }
