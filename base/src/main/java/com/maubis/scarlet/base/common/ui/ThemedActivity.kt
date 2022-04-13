@@ -77,7 +77,7 @@ abstract class ThemedActivity : AppCompatActivity(), ThemeChangeListener {
   fun tryClosingTheKeyboard() {
     try {
       val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-      inputMethodManager.hideSoftInputFromWindow(currentFocus!!.windowToken, 0)
+      inputMethodManager.hideSoftInputFromWindow(window.decorView.windowToken, 0)
     } catch (e: Exception) {
       Log.w("Scarlet", "Unable to close the keyboard", e)
     }

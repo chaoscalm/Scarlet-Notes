@@ -36,6 +36,7 @@ class AppLockActivity : ThemedActivity() {
       .onClick {
         if (passCodeEntered.length == 4 && sSecurityCode == passCodeEntered) {
           PinLockController.notifyPinVerified()
+          tryClosingTheKeyboard()
           finish()
         }
       }
