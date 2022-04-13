@@ -5,14 +5,18 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.EditText
 import android.widget.TextView
+import androidx.lifecycle.lifecycleScope
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
+import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.common.ui.ThemeColorType
 import com.maubis.scarlet.base.common.ui.ThemedActivity
 import com.maubis.scarlet.base.common.ui.ThemedBottomSheetFragment
 import com.maubis.scarlet.base.common.utils.getEditorActionListener
 import com.maubis.scarlet.base.database.entities.Tag
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class CreateOrEditTagBottomSheet : ThemedBottomSheetFragment() {
 
@@ -47,6 +51,7 @@ class CreateOrEditTagBottomSheet : ThemedBottomSheetFragment() {
     removeBtn.visibility = if (tag.isNotPersisted()) GONE else VISIBLE
     removeBtn.setOnClickListener {
       tag.delete()
+      removeDeletedTagFromAllNotes(tag)
       sheetOnTagListener(tag)
       dismiss()
     }
@@ -67,6 +72,18 @@ class CreateOrEditTagBottomSheet : ThemedBottomSheetFragment() {
     }
     tag.title = title
     tag.save()
+  }
+
+  private fun removeDeletedTagFromAllNotes(tag: Tag) {
+    val appContext = requireContext().applicationContext
+    requireActivity().lifecycleScope.launch(Dispatchers.IO) {
+      data.notes.getAll().forEach { note ->
+        if (note.tags.contains(tag.uuid)) {
+          note.tags.remove(tag.uuid)
+          note.save(appContext)
+        }
+      }
+    }
   }
 
   override fun getLayout(): Int = R.layout.bottom_sheet_create_or_edit_tag
