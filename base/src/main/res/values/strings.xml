@@ -230,9 +230,6 @@
   <string name="home_option_editor_options_title">Editor Options</string>
   <string name="home_option_editor_options_description">Change the settings and usage for the note editor</string>
 
-  <string name="editor_option_enable_markdown_mode_default">Markdown Options as Default</string>
-  <string name="editor_option_enable_markdown_mode_default_details">Show the markdown quick buttons on the toolbar as default</string>
-
   <string name="editor_option_skip_view_note">Skip Note Viewer</string>
   <string name="editor_option_skip_view_note_details">Skip the note viewer and jump to the note editor directly</string>
 

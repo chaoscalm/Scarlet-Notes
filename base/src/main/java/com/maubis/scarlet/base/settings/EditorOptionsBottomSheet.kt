@@ -16,10 +16,6 @@ var sEditorMoveChecked: Boolean
   get() = appPreferences.getBoolean("editor_move_checked_items", false)
   set(value) = appPreferences.edit { putBoolean("editor_move_checked_items", value) }
 
-var sEditorMarkdownDefault: Boolean
-  get() = appPreferences.getBoolean("editor_markdown_default", false)
-  set(value) = appPreferences.edit { putBoolean("editor_markdown_default", value) }
-
 var sEditorSkipNoteViewer: Boolean
   get() = appPreferences.getBoolean("skip_note_viewer", false)
   set(value) = appPreferences.edit { putBoolean("skip_note_viewer", value) }
@@ -64,17 +60,6 @@ class EditorOptionsBottomSheet : LithoOptionBottomSheet() {
       isSelectable = true,
       listener = {
         sEditorLiveMarkdown = !sEditorLiveMarkdown
-        refresh(componentContext.androidContext, dialog)
-      }
-    ))
-    items.add(LithoOptionsItem(
-      title = R.string.editor_option_enable_markdown_mode_default,
-      subtitle = R.string.editor_option_enable_markdown_mode_default_details,
-      icon = R.drawable.ic_formats_logo,
-      selected = sEditorMarkdownDefault,
-      isSelectable = true,
-      listener = {
-        sEditorMarkdownDefault = !sEditorMarkdownDefault
         refresh(componentContext.androidContext, dialog)
       }
     ))

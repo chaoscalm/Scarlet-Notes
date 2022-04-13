@@ -189,8 +189,6 @@
   <string name="import_export_locked_details">Effettua anche il backup delle note che sono protette</string>
   <string name="home_option_editor_options_title">Opzioni dell\'editor</string>
   <string name="home_option_editor_options_description">Modifica le impostazioni dell\'editor delle note</string>
-  <string name="editor_option_enable_markdown_mode_default">Mostra opzioni Markdown come predefinite</string>
-  <string name="editor_option_enable_markdown_mode_default_details">Mostra i pulsanti rapidi per la formattazione Markdown sulla barra degli strumenti come impostazione predefinita</string>
   <string name="editor_option_enable_live_markdown">Formattazione Markdown in tempo reale</string>
   <string name="editor_option_enable_live_markdown_description">La formattazione Markdown verrà applicata mentre scrivi. Può influire sulle prestazioni su note di grandi dimensioni.</string>
   <string name="editor_option_move_checked_items">Riordina elementi selezionati</string>

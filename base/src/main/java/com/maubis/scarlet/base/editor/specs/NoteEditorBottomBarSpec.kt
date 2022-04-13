@@ -16,13 +16,11 @@ import com.maubis.scarlet.base.editor.EditNoteActivity
 import com.maubis.scarlet.base.editor.MarkdownFormatting
 import com.maubis.scarlet.base.editor.formats.FormatType
 import com.maubis.scarlet.base.editor.sheet.MarkdownHelpBottomSheet
-import com.maubis.scarlet.base.settings.sEditorMarkdownDefault
 
 enum class NoteEditorBottomBarType {
-  COMMON_BLOCKS,
-  COMMON_MARKDOWNS,
+  COMMON_FORMATTING,
+  ALL_FORMATTING,
   ALL_BLOCKS,
-  ALL_MARKDOWNS,
   OPTIONS,
 }
 
@@ -31,7 +29,7 @@ object NoteEditorBottomBarSpec {
 
   @OnCreateInitialState
   fun onCreateInitialState(state: StateValue<NoteEditorBottomBarType>) {
-    state.set(if (sEditorMarkdownDefault) NoteEditorBottomBarType.COMMON_MARKDOWNS else NoteEditorBottomBarType.COMMON_BLOCKS)
+    state.set(NoteEditorBottomBarType.COMMON_FORMATTING)
   }
 
   @OnCreateLayout
@@ -45,21 +43,23 @@ object NoteEditorBottomBarSpec {
         .alignItems(YogaAlign.CENTER)
 
     val content = when (state) {
-      NoteEditorBottomBarType.COMMON_BLOCKS ->
-        NoteEditorBlocksBottomBar.create(context)
-            .colorConfig(colorConfig)
-            .flexGrow(1f)
-            .toggleButtonClick(NoteEditorBottomBar.onStateChangeClick(context, NoteEditorBottomBarType.ALL_BLOCKS))
-      NoteEditorBottomBarType.COMMON_MARKDOWNS -> NoteEditorMarkdownsBottomBar.create(context)
+      NoteEditorBottomBarType.COMMON_FORMATTING ->
+        NoteEditorCommonFormattingBottomBar.create(context)
           .colorConfig(colorConfig)
           .flexGrow(1f)
-          .toggleButtonClick(NoteEditorBottomBar.onStateChangeClick(context, NoteEditorBottomBarType.ALL_MARKDOWNS))
-      NoteEditorBottomBarType.ALL_BLOCKS -> HorizontalScroll.create(context)
+          .toggleButtonClick(NoteEditorBottomBar.onStateChangeClick(context, NoteEditorBottomBarType.ALL_FORMATTING))
+      NoteEditorBottomBarType.ALL_BLOCKS ->
+        HorizontalScroll.create(context)
           .flexGrow(1f)
-          .contentProps(NoteEditorAllBlocksBottomBar.create(context).colorConfig(colorConfig))
-      NoteEditorBottomBarType.ALL_MARKDOWNS -> HorizontalScroll.create(context)
+          .contentProps(
+            NoteEditorAllBlocksBottomBar.create(context)
+              .colorConfig(colorConfig)
+              .blockSelectedEventHandler(NoteEditorBottomBar.onBlockSelected(context))
+          )
+      NoteEditorBottomBarType.ALL_FORMATTING ->
+        HorizontalScroll.create(context)
           .flexGrow(1f)
-          .contentProps(NoteEditorAllMarkdownsBottomBar.create(context).colorConfig(colorConfig))
+          .contentProps(NoteEditorAllFormattingBottomBar.create(context).colorConfig(colorConfig))
       NoteEditorBottomBarType.OPTIONS ->
         NoteEditorOptionsBottomBar.create(context)
             .colorConfig(colorConfig)
@@ -71,26 +71,23 @@ object NoteEditorBottomBarSpec {
         .onClick { }
         .isClickDisabled(true)
     val icon = when (state) {
-      NoteEditorBottomBarType.COMMON_BLOCKS -> extraRoundIcon
-          .iconRes(R.drawable.ic_markdown_logo)
-          .clickHandler(NoteEditorBottomBar.onStateChangeClick(context, NoteEditorBottomBarType.COMMON_MARKDOWNS))
-      NoteEditorBottomBarType.COMMON_MARKDOWNS -> extraRoundIcon
+      NoteEditorBottomBarType.COMMON_FORMATTING -> extraRoundIcon
           .iconRes(R.drawable.ic_add_white_24dp)
-          .clickHandler(NoteEditorBottomBar.onStateChangeClick(context, NoteEditorBottomBarType.COMMON_BLOCKS))
+          .clickHandler(NoteEditorBottomBar.onStateChangeClick(context, NoteEditorBottomBarType.ALL_BLOCKS))
       NoteEditorBottomBarType.ALL_BLOCKS -> extraRoundIcon
           .marginDip(YogaEdge.HORIZONTAL, 4f)
           .iconRes(R.drawable.ic_close_white_48dp)
-          .clickHandler(NoteEditorBottomBar.onStateChangeClick(context, NoteEditorBottomBarType.COMMON_BLOCKS))
-      NoteEditorBottomBarType.ALL_MARKDOWNS -> extraRoundIcon
+          .clickHandler(NoteEditorBottomBar.onStateChangeClick(context, NoteEditorBottomBarType.COMMON_FORMATTING))
+      NoteEditorBottomBarType.ALL_FORMATTING -> extraRoundIcon
           .marginDip(YogaEdge.HORIZONTAL, 4f)
           .iconRes(R.drawable.ic_close_white_48dp)
-          .clickHandler(NoteEditorBottomBar.onStateChangeClick(context, NoteEditorBottomBarType.COMMON_MARKDOWNS))
+          .clickHandler(NoteEditorBottomBar.onStateChangeClick(context, NoteEditorBottomBarType.COMMON_FORMATTING))
       NoteEditorBottomBarType.OPTIONS -> EmptyComponent.create(context)
     }
     row.child(icon)
 
     val moreIcon = when (state) {
-      NoteEditorBottomBarType.COMMON_MARKDOWNS, NoteEditorBottomBarType.COMMON_BLOCKS, NoteEditorBottomBarType.OPTIONS ->
+      NoteEditorBottomBarType.COMMON_FORMATTING, NoteEditorBottomBarType.OPTIONS ->
         bottomBarRoundIcon(context, colorConfig)
             .iconRes(R.drawable.ic_more_options)
             .onClick { }
@@ -108,18 +105,16 @@ object NoteEditorBottomBarSpec {
       @State state: NoteEditorBottomBarType,
       @Param nextState: NoteEditorBottomBarType) {
     if (state == NoteEditorBottomBarType.OPTIONS && nextState == NoteEditorBottomBarType.OPTIONS) {
-      NoteEditorBottomBar.onStateChange(context, NoteEditorBottomBarType.COMMON_BLOCKS)
-      return
-    }
-    if (state == NoteEditorBottomBarType.ALL_MARKDOWNS && nextState == NoteEditorBottomBarType.COMMON_BLOCKS) {
-      NoteEditorBottomBar.onStateChange(context, NoteEditorBottomBarType.ALL_BLOCKS)
-      return
-    }
-    if (state == NoteEditorBottomBarType.ALL_BLOCKS && nextState == NoteEditorBottomBarType.COMMON_MARKDOWNS) {
-      NoteEditorBottomBar.onStateChange(context, NoteEditorBottomBarType.ALL_MARKDOWNS)
+      NoteEditorBottomBar.onStateChange(context, NoteEditorBottomBarType.COMMON_FORMATTING)
       return
     }
     NoteEditorBottomBar.onStateChange(context, nextState)
+  }
+
+  @OnEvent(BlockSelectedEvent::class)
+  fun onBlockSelected(context: ComponentContext, @FromEvent formatType: FormatType) {
+    (context.androidContext as EditNoteActivity).addEmptyItemAtFocused(formatType)
+    NoteEditorBottomBar.onStateChange(context, NoteEditorBottomBarType.COMMON_FORMATTING)
   }
 
   @OnUpdateState
@@ -161,38 +156,7 @@ object NoteEditorOptionsBottomBarSpec {
 }
 
 @LayoutSpec
-object NoteEditorBlocksBottomBarSpec {
-  @OnCreateLayout
-  fun onCreate(
-      context: ComponentContext,
-      @Prop colorConfig: ToolbarColorConfig,
-      @Prop toggleButtonClick: EventHandler<ClickEvent>): Component {
-    val activity = context.androidContext as EditNoteActivity
-    return Row.create(context)
-        .alignItems(YogaAlign.CENTER)
-        .child(bottomBarRoundIcon(context, colorConfig)
-            .iconRes(R.drawable.ic_title_white_48dp)
-            .onClick { activity.addEmptyItemAtFocused(FormatType.HEADING) })
-        .child(bottomBarRoundIcon(context, colorConfig)
-            .iconRes(R.drawable.ic_subject_white_48dp)
-            .onClick { activity.addEmptyItemAtFocused(FormatType.TEXT) })
-        .child(bottomBarRoundIcon(context, colorConfig)
-            .iconRes(R.drawable.ic_check_box_white_24dp)
-            .onClick { activity.addEmptyItemAtFocused(FormatType.CHECKLIST_UNCHECKED) })
-        .child(bottomBarRoundIcon(context, colorConfig)
-            .iconRes(R.drawable.ic_format_quote_white_48dp)
-            .onClick { activity.addEmptyItemAtFocused(FormatType.QUOTE) })
-        .child(bottomBarRoundIcon(context, colorConfig)
-            .iconRes(R.drawable.ic_more_horiz_white_48dp)
-            .onClick { }
-            .isClickDisabled(true)
-            .clickHandler(toggleButtonClick))
-        .build()
-  }
-}
-
-@LayoutSpec
-object NoteEditorMarkdownsBottomBarSpec {
+object NoteEditorCommonFormattingBottomBarSpec {
   @OnCreateLayout
   fun onCreate(
       context: ComponentContext,
@@ -223,72 +187,78 @@ object NoteEditorMarkdownsBottomBarSpec {
 }
 
 @LayoutSpec
+object NoteEditorAllFormattingBottomBarSpec {
+  @OnCreateLayout
+  fun onCreate(
+    context: ComponentContext,
+    @Prop colorConfig: ToolbarColorConfig): Component {
+    val activity = context.androidContext as EditNoteActivity
+    return Row.create(context)
+      .alignSelf(YogaAlign.CENTER)
+      .alignItems(YogaAlign.CENTER)
+      .child(bottomBarRoundIcon(context, colorConfig)
+        .iconRes(R.drawable.ic_markdown_bold)
+        .onClick { activity.triggerMarkdown(MarkdownFormatting.BOLD) })
+      .child(bottomBarRoundIcon(context, colorConfig)
+        .iconRes(R.drawable.ic_markdown_italics)
+        .onClick { activity.triggerMarkdown(MarkdownFormatting.ITALICS) })
+      .child(bottomBarRoundIcon(context, colorConfig)
+        .iconRes(R.drawable.ic_markdown_underline)
+        .onClick { activity.triggerMarkdown(MarkdownFormatting.UNDERLINE) })
+      .child(bottomBarRoundIcon(context, colorConfig)
+        .iconRes(R.drawable.ic_format_list_bulleted_white_48dp)
+        .onClick { activity.triggerMarkdown(MarkdownFormatting.UNORDERED) })
+      .child(bottomBarRoundIcon(context, colorConfig)
+        .iconRes(R.drawable.ic_code_white_48dp)
+        .onClick { activity.triggerMarkdown(MarkdownFormatting.CODE) })
+      .child(bottomBarRoundIcon(context, colorConfig)
+        .iconRes(R.drawable.ic_markdown_strikethrough)
+        .onClick { activity.triggerMarkdown(MarkdownFormatting.STRIKE_THROUGH) })
+      .build()
+  }
+}
+
+@Event
+class BlockSelectedEvent {
+  lateinit var formatType: FormatType
+}
+
+@LayoutSpec(events = [BlockSelectedEvent::class])
 object NoteEditorAllBlocksBottomBarSpec {
   @OnCreateLayout
   fun onCreate(
       context: ComponentContext,
       @Prop colorConfig: ToolbarColorConfig): Component {
-    val activity = context.androidContext as EditNoteActivity
+    val handler = NoteEditorAllBlocksBottomBar.getBlockSelectedEventHandler(context) ?:
+      throw IllegalArgumentException("The BlockSelectedEvent requires an event handler")
     return Row.create(context)
         .alignSelf(YogaAlign.CENTER)
         .alignItems(YogaAlign.CENTER)
         .child(bottomBarRoundIcon(context, colorConfig)
             .iconRes(R.drawable.ic_title_white_48dp)
-            .onClick { activity.addEmptyItemAtFocused(FormatType.HEADING) })
+            .onClick { NoteEditorAllBlocksBottomBar.dispatchBlockSelectedEvent(handler, FormatType.HEADING) })
         .child(bottomBarRoundIcon(context, colorConfig)
             .iconRes(R.drawable.ic_title_white_48dp)
             .iconPaddingRes(R.dimen.toolbar_round_icon_padding_subsize)
-            .onClick { activity.addEmptyItemAtFocused(FormatType.SUB_HEADING) })
+            .onClick { NoteEditorAllBlocksBottomBar.dispatchBlockSelectedEvent(handler, FormatType.SUB_HEADING) })
         .child(bottomBarRoundIcon(context, colorConfig)
             .iconRes(R.drawable.ic_subject_white_48dp)
-            .onClick { activity.addEmptyItemAtFocused(FormatType.TEXT) })
+            .onClick { NoteEditorAllBlocksBottomBar.dispatchBlockSelectedEvent(handler, FormatType.TEXT) })
         .child(bottomBarRoundIcon(context, colorConfig)
             .iconRes(R.drawable.ic_check_box_white_24dp)
-            .onClick { activity.addEmptyItemAtFocused(FormatType.CHECKLIST_UNCHECKED) })
+            .onClick { NoteEditorAllBlocksBottomBar.dispatchBlockSelectedEvent(handler, FormatType.CHECKLIST_UNCHECKED) })
         .child(bottomBarRoundIcon(context, colorConfig)
             .iconRes(R.drawable.ic_format_quote_white_48dp)
-            .onClick { activity.addEmptyItemAtFocused(FormatType.QUOTE) })
+            .onClick { NoteEditorAllBlocksBottomBar.dispatchBlockSelectedEvent(handler, FormatType.QUOTE) })
         .child(bottomBarRoundIcon(context, colorConfig)
             .iconRes(R.drawable.icon_code_block)
-            .onClick { activity.addEmptyItemAtFocused(FormatType.CODE) })
+            .onClick { NoteEditorAllBlocksBottomBar.dispatchBlockSelectedEvent(handler, FormatType.CODE) })
         .child(bottomBarRoundIcon(context, colorConfig)
             .iconRes(R.drawable.ic_image_gallery)
-            .onClick { activity.addEmptyItemAtFocused(FormatType.IMAGE) })
+            .onClick { NoteEditorAllBlocksBottomBar.dispatchBlockSelectedEvent(handler, FormatType.IMAGE) })
         .child(bottomBarRoundIcon(context, colorConfig)
             .iconRes(R.drawable.ic_format_separator)
-            .onClick { activity.addEmptyItemAtFocused(FormatType.SEPARATOR) })
-        .build()
-  }
-}
-
-@LayoutSpec
-object NoteEditorAllMarkdownsBottomBarSpec {
-  @OnCreateLayout
-  fun onCreate(
-      context: ComponentContext,
-      @Prop colorConfig: ToolbarColorConfig): Component {
-    val activity = context.androidContext as EditNoteActivity
-    return Row.create(context)
-        .alignSelf(YogaAlign.CENTER)
-        .alignItems(YogaAlign.CENTER)
-        .child(bottomBarRoundIcon(context, colorConfig)
-            .iconRes(R.drawable.ic_markdown_bold)
-            .onClick { activity.triggerMarkdown(MarkdownFormatting.BOLD) })
-        .child(bottomBarRoundIcon(context, colorConfig)
-            .iconRes(R.drawable.ic_markdown_italics)
-            .onClick { activity.triggerMarkdown(MarkdownFormatting.ITALICS) })
-        .child(bottomBarRoundIcon(context, colorConfig)
-            .iconRes(R.drawable.ic_markdown_underline)
-            .onClick { activity.triggerMarkdown(MarkdownFormatting.UNDERLINE) })
-        .child(bottomBarRoundIcon(context, colorConfig)
-            .iconRes(R.drawable.ic_format_list_bulleted_white_48dp)
-            .onClick { activity.triggerMarkdown(MarkdownFormatting.UNORDERED) })
-        .child(bottomBarRoundIcon(context, colorConfig)
-            .iconRes(R.drawable.ic_code_white_48dp)
-            .onClick { activity.triggerMarkdown(MarkdownFormatting.CODE) })
-        .child(bottomBarRoundIcon(context, colorConfig)
-            .iconRes(R.drawable.ic_markdown_strikethrough)
-            .onClick { activity.triggerMarkdown(MarkdownFormatting.STRIKE_THROUGH) })
+            .onClick { NoteEditorAllBlocksBottomBar.dispatchBlockSelectedEvent(handler, FormatType.SEPARATOR) })
         .build()
   }
 }
