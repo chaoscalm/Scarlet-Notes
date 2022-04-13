@@ -44,6 +44,12 @@ class AppLockActivity : ThemedActivity() {
     setContentView(LithoView.create(componentContext, component))
   }
 
+  override fun onBackPressed() {
+    super.onBackPressed()
+    if (isFinishing)
+      finishAffinity()
+  }
+
   override fun onResume() {
     super.onResume()
     passCodeEntered = ""
