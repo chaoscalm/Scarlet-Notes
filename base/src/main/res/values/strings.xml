@@ -6,6 +6,7 @@
   <string name="save">Save</string>
   <string name="import_to_app">Import</string>
   <string name="search_notes">Search Notes&#8230;</string>
+  <string name="action_done">Done</string>
   <string name="action_share">Share</string>
   <string name="share_using">Share using&#8230;</string>
   <string name="share_image">Share Image</string>
@@ -122,14 +123,13 @@
   <string name="note_option_number_lines">Note Preview Line Limit</string>
   <string name="note_option_number_lines_subtitle">%d lines on home screen</string>
 
-  <string name="permission_layout_give_permission">Give Permissions</string>
-  <string name="permission_layout_give_permission_details">Import and export require storage permissions. Please give the permission when requested.</string>
-  <string name="permission_layout_give_permission_ok">Allow</string>
+  <string name="storage_permission_dialog_title">Give Permissions</string>
+  <string name="storage_permission_dialog_details">Automatic export requires access to the internal storage. Please give the permission when requested.</string>
+  <string name="storage_permission_dialog_action_allow">Allow</string>
 
   <string name="import_export_layout_exported">Exported to file</string>
   <string name="import_export_layout_export_failed">Export failed</string>
   <string name="import_export_layout_exporting">Export to file&#8230;</string>
-  <string name="import_export_layout_exporting_done">Done</string>
   <string name="import_export_layout_export_action">Export</string>
   <string name="import_export_locked">Export locked notes</string>
   <string name="import_export_locked_details">Also backup the notes which are locked</string>
@@ -303,5 +303,7 @@
   <string name="notice_import_failed_empty_file">Import failed: backup file is empty.</string>
   <string name="notice_import_completed_with_error">Import completed with errors: data may have been partially imported.</string>
   <string name="notice_text_copied">Text copied</string>
+  <string name="notice_permission_granted">Permission granted</string>
+  <string name="notice_permission_denied">Permission denied</string>
 
 </resources>

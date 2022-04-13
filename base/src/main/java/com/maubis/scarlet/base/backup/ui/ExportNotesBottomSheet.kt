@@ -108,16 +108,11 @@ class ExportNotesBottomSheet : LithoBottomSheet() {
         subtitle = R.string.home_option_auto_export_subtitle,
         icon = R.drawable.ic_time,
         listener = {
-          val manager = PermissionUtils.getStoragePermissionManager(activity)
-          val hasAllPermissions = manager.hasAllPermissions()
+          val hasRequiredPermissions = PermissionUtils.hasExternalStorageAccess(requireContext())
           when {
-            sAutoBackupMode -> {
-              sAutoBackupMode = false
-            }
-            hasAllPermissions -> {
-              sAutoBackupMode = true
-            }
-            else -> openSheet(activity, PermissionBottomSheet())
+            sAutoBackupMode -> sAutoBackupMode = false
+            hasRequiredPermissions -> sAutoBackupMode = true
+            else -> openSheet(activity, StoragePermissionBottomSheet())
           }
         },
         isSelectable = true,
@@ -147,5 +142,4 @@ class ExportNotesBottomSheet : LithoBottomSheet() {
       ?: throw IllegalStateException("Could not open backup file in write mode")
     descriptor.use { NoteExporter.exportNotesToFile(it.fileDescriptor) }
   }
-
 }

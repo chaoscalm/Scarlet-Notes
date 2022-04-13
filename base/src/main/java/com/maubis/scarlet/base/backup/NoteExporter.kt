@@ -27,8 +27,8 @@ const val KEY_AUTO_BACKUP_LAST_TIMESTAMP = "KEY_AUTO_BACKUP_LAST_TIMESTAMP"
 const val EXPORT_NOTE_SEPARATOR = ">S>C>A>R>L>E>T>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>N>O>T>E>S>"
 const val EXPORT_VERSION = 6
 
-const val NOTES_BACKUP_FOLDER = "ScarletNotes"
 const val MANUAL_BACKUP_FILENAME = "manual_backup"
+const val AUTO_BACKUP_FOLDER = "ScarletNotes"
 const val AUTO_BACKUP_FILENAME = "auto_backup"
 const val AUTO_BACKUP_INTERVAL_MS = 1000 * 60 * 60 * 6 // 6 hours update
 
@@ -44,7 +44,7 @@ object NoteExporter {
         return@launch
       }
 
-      val exportFile = getOrCreateFileForExport("$AUTO_BACKUP_FILENAME ${getFormattedDate()}")
+      val exportFile = getFileForAutomaticExport()
       if (exportFile === null) {
         return@launch
       }
@@ -127,16 +127,16 @@ object NoteExporter {
   private fun getFormattedDate(): String = formatTimestamp(System.currentTimeMillis(), "dd_MMM_yyyy")
   private fun getFormattedDateWithTime(): String = formatTimestamp(System.currentTimeMillis(), "dd_MMM_yyyy HH_mm")
 
-  private fun getOrCreateFileForExport(filename: String): File? {
+  private fun getFileForAutomaticExport(): File? {
     val folder = createBackupFolder()
     if (folder === null) {
       return null
     }
-    return File(folder, "$filename.txt")
+    return File(folder, "$AUTO_BACKUP_FILENAME ${getFormattedDate()}.txt")
   }
 
   private fun createBackupFolder(): File? {
-    val folder = File(Environment.getExternalStorageDirectory(), NOTES_BACKUP_FOLDER)
+    val folder = File(Environment.getExternalStorageDirectory(), AUTO_BACKUP_FOLDER)
     if (!folder.exists() && !folder.mkdirs()) {
       return null
     }

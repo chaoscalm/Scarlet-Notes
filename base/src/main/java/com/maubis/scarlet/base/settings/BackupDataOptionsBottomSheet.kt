@@ -11,9 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import com.facebook.litho.ComponentContext
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.backup.NoteImporter
-import com.maubis.scarlet.base.backup.PermissionUtils
 import com.maubis.scarlet.base.backup.ui.ExportNotesBottomSheet
-import com.maubis.scarlet.base.backup.ui.PermissionBottomSheet
 import com.maubis.scarlet.base.common.sheets.LithoOptionBottomSheet
 import com.maubis.scarlet.base.common.sheets.LithoOptionsItem
 import com.maubis.scarlet.base.common.sheets.openSheet
@@ -38,13 +36,8 @@ class BackupDataOptionsBottomSheet : LithoOptionBottomSheet() {
       subtitle = R.string.home_option_export_subtitle,
       icon = R.drawable.ic_export,
       listener = {
-        val manager = PermissionUtils.getStoragePermissionManager(activity)
-        if (manager.hasAllPermissions()) {
-          openExportSheet(activity)
-          dismiss()
-        } else {
-          openSheet(activity, PermissionBottomSheet())
-        }
+        openExportSheet(activity)
+        dismiss()
       }
     ))
     options.add(LithoOptionsItem(

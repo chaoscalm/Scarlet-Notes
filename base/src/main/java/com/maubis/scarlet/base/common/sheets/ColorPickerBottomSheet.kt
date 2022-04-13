@@ -107,7 +107,7 @@ class ColorPickerBottomSheet : LithoBottomSheet() {
       }
     }
     column.child(BottomSheetBar.create(componentContext)
-                   .primaryActionRes(R.string.import_export_layout_exporting_done)
+                   .primaryActionRes(R.string.action_done)
                    .onPrimaryClick {
                      dismiss()
                    }.paddingDip(YogaEdge.VERTICAL, 8f))

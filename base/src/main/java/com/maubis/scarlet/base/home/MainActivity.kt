@@ -187,7 +187,7 @@ class MainActivity : SecuredActivity(), INoteActionsActivity {
 
   override fun onStop() {
     super.onStop()
-    if (isFinishing && PermissionUtils.getStoragePermissionManager(this).hasAllPermissions()) {
+    if (isFinishing && PermissionUtils.hasExternalStorageAccess(this)) {
       NoteExporter.tryAutoExport()
     }
   }

@@ -20,14 +20,14 @@
   <string name="home_option_import">Importa dati</string>
   <string name="home_option_import_subtitle">Importa tutti i dati da un backup esistente</string>
   <string name="home_option_about_page">Informazioni sull\'app</string>
-  <string name="permission_layout_give_permission">Concedi permessi</string>
-  <string name="permission_layout_give_permission_details">L\'importazione e l\'esportazione richiedono il permesso di archiviazione. Si prega di concedere il permesso quando richiesto.</string>
-  <string name="permission_layout_give_permission_ok">Concedi</string>
+  <string name="storage_permission_dialog_title">Concedi permessi</string>
+  <string name="storage_permission_dialog_details">L\'esportazione automatica richiede l\'accesso allo spazio di archiviazione interno. Concedi l\'autorizzazione quando viene richiesta.</string>
+  <string name="storage_permission_dialog_action_allow">Concedi</string>
   <string name="import_export_layout_exported">Esportato nel file</string>
   <string name="import_export_layout_export_failed">Esportazione fallita</string>
   <string name="import_export_layout_exporting">Esporta su file…</string>
   <string name="import_export_layout_export_action">Esporta</string>
-  <string name="import_export_layout_exporting_done">Ok</string>
+  <string name="action_done">Ok</string>
   <string name="action_share">Condividi</string>
   <string name="about_page_app_version">Versione dell\'app</string>
   <string name="search_notes">Cerca note&#8230;</string>
@@ -254,5 +254,7 @@
   <string name="notice_import_failed_empty_file">Importazione fallita: il file di backup è vuoto.</string>
   <string name="notice_import_completed_with_error">Importazione completata con errori: i dati potrebbero essere stati importati parzialmente.</string>
   <string name="notice_text_copied">Testo copiato</string>
+  <string name="notice_permission_granted">Permesso concesso</string>
+  <string name="notice_permission_denied">Permesso negato</string>
 
 </resources>
