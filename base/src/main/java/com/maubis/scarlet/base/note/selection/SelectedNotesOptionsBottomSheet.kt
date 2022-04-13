@@ -17,7 +17,7 @@ import com.maubis.scarlet.base.home.sheets.AlertBottomSheet
 import com.maubis.scarlet.base.home.sheets.AlertSheetConfig
 import com.maubis.scarlet.base.note.folder.sheet.MultipleNotesFolderChooserBottomSheet
 import com.maubis.scarlet.base.note.tag.SelectedTagChooserBottomSheet
-import com.maubis.scarlet.base.security.openUnlockSheet
+import com.maubis.scarlet.base.security.PincodeBottomSheet
 
 class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
   override fun title(): Int = R.string.choose_action
@@ -323,13 +323,14 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
     listener: () -> Unit): () -> Unit = {
     val hasLockedNote = activity.getAllSelectedNotes().any { it.locked }
     when {
-      hasLockedNote -> openUnlockSheet(
-        activity = activity,
-        onUnlockSuccess = {
-          listener()
-          dismiss()
-        },
-        onUnlockFailure = {})
+      hasLockedNote -> {
+        PincodeBottomSheet.openForUnlock(activity,
+          onUnlockSuccess = {
+            listener()
+            dismiss()
+          },
+          onUnlockFailure = {})
+      }
       else -> {
         listener()
         dismiss()

@@ -11,7 +11,7 @@ import com.maubis.scarlet.base.note.actions.NoteActionsBottomSheet
 import com.maubis.scarlet.base.note.copyToClipboard
 import com.maubis.scarlet.base.note.edit
 import com.maubis.scarlet.base.note.share
-import com.maubis.scarlet.base.security.openUnlockSheet
+import com.maubis.scarlet.base.security.PincodeBottomSheet
 
 class NoteRecyclerHolder(context: Context, view: View) : NoteRecyclerViewHolderBase(context, view) {
 
@@ -47,8 +47,7 @@ class NoteRecyclerHolder(context: Context, view: View) : NoteRecyclerViewHolderB
 
   private fun actionOrUnlockNote(data: Note, runnable: Runnable) {
     if (context is ThemedActivity && data.locked) {
-      openUnlockSheet(
-        activity = context as ThemedActivity,
+      PincodeBottomSheet.openForUnlock(context as ThemedActivity,
         onUnlockSuccess = { runnable.run() },
         onUnlockFailure = { actionOrUnlockNote(data, runnable) })
       return

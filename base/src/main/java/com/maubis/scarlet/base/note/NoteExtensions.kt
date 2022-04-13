@@ -12,7 +12,7 @@ import com.maubis.scarlet.base.common.utils.*
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.editor.formats.FormatType
 import com.maubis.scarlet.base.security.PinLockController.needsLockCheck
-import com.maubis.scarlet.base.security.openUnlockSheet
+import com.maubis.scarlet.base.security.PincodeBottomSheet
 import com.maubis.scarlet.base.settings.sInternalShowUUID
 import com.maubis.scarlet.base.settings.sSecurityAppLockEnabled
 import com.maubis.scarlet.base.settings.sWidgetShowLockedNotes
@@ -125,8 +125,7 @@ fun Note.adjustedColor(): Int {
 fun Note.edit(context: Context) {
   if (this.locked) {
     if (context is ThemedActivity) {
-      openUnlockSheet(
-        activity = context,
+      PincodeBottomSheet.openForUnlock(context,
         onUnlockSuccess = { context.startActivity(ScarletIntentHandlerActivity.edit(context, this)) },
         onUnlockFailure = { edit(context) })
     }

@@ -10,8 +10,7 @@ import com.maubis.scarlet.base.common.sheets.LithoOptionsItem
 import com.maubis.scarlet.base.common.ui.ThemedActivity
 import com.maubis.scarlet.base.common.utils.deviceHasBiometricEnabled
 import com.maubis.scarlet.base.security.PinLockController.isPinCodeEnabled
-import com.maubis.scarlet.base.security.openPincodeSetupSheet
-import com.maubis.scarlet.base.security.openVerifySheet
+import com.maubis.scarlet.base.security.PincodeBottomSheet
 
 const val KEY_SECURITY_CODE = "KEY_SECURITY_CODE"
 const val KEY_FINGERPRINT_ENABLED = "KEY_FINGERPRINT_ENABLED"
@@ -59,13 +58,14 @@ class SecurityOptionsBottomSheet : LithoOptionBottomSheet() {
         icon = R.drawable.ic_apps_white_48dp,
         listener = {
           when {
-            isPinCodeEnabled() -> openVerifySheet(
-              activity = activity,
-              onVerifySuccess = {
-                sSecurityAppLockEnabled = !sSecurityAppLockEnabled
-                refresh(componentContext.androidContext, dialog)
-              }
-            )
+            isPinCodeEnabled() -> {
+              PincodeBottomSheet.openForVerification(activity,
+                onVerifySuccess = {
+                  sSecurityAppLockEnabled = !sSecurityAppLockEnabled
+                  refresh(componentContext.androidContext, dialog)
+                }
+              )
+            }
             else -> openCreatePasswordDialog(dialog)
           }
         },
@@ -81,13 +81,14 @@ class SecurityOptionsBottomSheet : LithoOptionBottomSheet() {
         icon = R.drawable.ic_action_grid,
         listener = {
           when {
-            isPinCodeEnabled() -> openVerifySheet(
-              activity = activity,
-              onVerifySuccess = {
-                sSecurityAskPinAlways = !sSecurityAskPinAlways
-                refresh(componentContext.androidContext, dialog)
-              }
-            )
+            isPinCodeEnabled() -> {
+              PincodeBottomSheet.openForVerification(activity,
+                onVerifySuccess = {
+                  sSecurityAskPinAlways = !sSecurityAskPinAlways
+                  refresh(componentContext.androidContext, dialog)
+                }
+              )
+            }
             else -> openCreatePasswordDialog(dialog)
           }
         },
@@ -104,13 +105,14 @@ class SecurityOptionsBottomSheet : LithoOptionBottomSheet() {
         icon = R.drawable.ic_option_fingerprint,
         listener = {
           when {
-            isPinCodeEnabled() -> openVerifySheet(
-              activity = activity,
-              onVerifySuccess = {
-                sSecurityBiometricEnabled = false
-                refresh(componentContext.androidContext, dialog)
-              }
-            )
+            isPinCodeEnabled() -> {
+              PincodeBottomSheet.openForVerification(activity,
+                onVerifySuccess = {
+                  sSecurityBiometricEnabled = false
+                  refresh(componentContext.androidContext, dialog)
+                }
+              )
+            }
             else -> {
               sSecurityBiometricEnabled = false
               refresh(componentContext.androidContext, dialog)
@@ -128,13 +130,14 @@ class SecurityOptionsBottomSheet : LithoOptionBottomSheet() {
         icon = R.drawable.ic_option_fingerprint,
         listener = {
           when {
-            isPinCodeEnabled() -> openVerifySheet(
-              activity = activity,
-              onVerifySuccess = {
-                sSecurityBiometricEnabled = true
-                refresh(componentContext.androidContext, dialog)
-              }
-            )
+            isPinCodeEnabled() -> {
+              PincodeBottomSheet.openForVerification(activity,
+                onVerifySuccess = {
+                  sSecurityBiometricEnabled = true
+                  refresh(componentContext.androidContext, dialog)
+                }
+              )
+            }
             else -> {
               sSecurityBiometricEnabled = true
               refresh(componentContext.androidContext, dialog)
@@ -146,17 +149,15 @@ class SecurityOptionsBottomSheet : LithoOptionBottomSheet() {
     return options
   }
 
-  fun openCreatePasswordDialog(dialog: Dialog) {
+  private fun openCreatePasswordDialog(dialog: Dialog) {
     val activity = context as ThemedActivity
-    openPincodeSetupSheet(
-      activity = activity,
+    PincodeBottomSheet.openForPincodeSetup(activity,
       onCreateSuccess = { refresh(dialog.context, dialog) })
   }
 
-  fun openResetPasswordDialog(dialog: Dialog) {
+  private fun openResetPasswordDialog(dialog: Dialog) {
     val activity = context as ThemedActivity
-    openVerifySheet(
-      activity,
+    PincodeBottomSheet.openForVerification(activity,
       onVerifySuccess = {
         openCreatePasswordDialog(dialog)
       },

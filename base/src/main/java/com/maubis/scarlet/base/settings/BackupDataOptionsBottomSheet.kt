@@ -18,7 +18,7 @@ import com.maubis.scarlet.base.common.sheets.openSheet
 import com.maubis.scarlet.base.common.ui.ThemedActivity
 import com.maubis.scarlet.base.home.MainActivity
 import com.maubis.scarlet.base.security.PinLockController.isPinCodeEnabled
-import com.maubis.scarlet.base.security.openUnlockSheet
+import com.maubis.scarlet.base.security.PincodeBottomSheet
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -105,8 +105,7 @@ class BackupDataOptionsBottomSheet : LithoOptionBottomSheet() {
       return
     }
 
-    openUnlockSheet(
-      activity = activity as ThemedActivity,
+    PincodeBottomSheet.openForUnlock(activity as ThemedActivity,
       onUnlockSuccess = { openSheet(activity, ExportNotesBottomSheet()) },
       onUnlockFailure = { openExportSheet(activity) })
   }

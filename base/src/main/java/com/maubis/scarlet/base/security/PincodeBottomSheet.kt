@@ -174,10 +174,7 @@ object PincodeSheetViewSpec {
 }
 
 class PincodeBottomSheet : LithoBottomSheet() {
-  var data = PincodeSheetData(
-    title = R.string.no_pincode_sheet_title,
-    actionTitle = R.string.no_pincode_sheet_details,
-    onSuccess = {})
+  private lateinit var data: PincodeSheetData
 
   override fun getComponent(componentContext: ComponentContext, dialog: Dialog): Component {
     sPincodeSheetPasscodeEntered = ""
@@ -202,74 +199,67 @@ class PincodeBottomSheet : LithoBottomSheet() {
       )
     }
   }
-}
 
-fun openPincodeSetupSheet(
-  activity: ThemedActivity,
-  onCreateSuccess: () -> Unit) {
+  companion object {
+    fun openForPincodeSetup(activity: ThemedActivity, onCreateSuccess: () -> Unit) {
+      openSheet(activity, PincodeBottomSheet().apply {
+        data = PincodeSheetData(
+          title = R.string.security_sheet_enter_new_pin_title,
+          actionTitle = R.string.security_sheet_button_set,
+          isFingerprintEnabled = false,
+          isRemoveButtonEnabled = isPinCodeEnabled(),
+          onRemoveButtonClick = {
+            sSecurityCode = ""
+            sSecurityAppLockEnabled = false
+            onCreateSuccess()
 
-  openSheet(activity, PincodeBottomSheet().apply {
-    data = PincodeSheetData(
-      title = R.string.security_sheet_enter_new_pin_title,
-      actionTitle = R.string.security_sheet_button_set,
-      isFingerprintEnabled = false,
-      isRemoveButtonEnabled = isPinCodeEnabled(),
-      onRemoveButtonClick = {
-        sSecurityCode = ""
-        sSecurityAppLockEnabled = false
-        onCreateSuccess()
+            if (activity is MainActivity) {
+              activity.loadData()
+            }
+          },
+          onActionClicked = { password: String ->
+            if (password.length == 4 && password.toIntOrNull() !== null) {
+              sSecurityCode = password
+              onCreateSuccess()
+            }
+          },
+          onSuccess = {}
+        )
+      })
+    }
 
-        if (activity is MainActivity) {
-          activity.loadData()
-        }
-      },
-      onActionClicked = { password: String ->
-        if (password.length == 4 && password.toIntOrNull() !== null) {
-          sSecurityCode = password
-          onCreateSuccess()
-        }
-      },
-      onSuccess = {}
-    )
-  })
-}
+    fun openForVerification(activity: ThemedActivity, onVerifySuccess: () -> Unit, onVerifyFailure: () -> Unit = {}) {
+      openSheet(activity, PincodeBottomSheet().apply {
+        data = PincodeSheetData(
+          title = R.string.security_sheet_enter_current_pin_title,
+          actionTitle = R.string.security_sheet_button_verify,
+          onSuccess = onVerifySuccess,
+          onFailure = onVerifyFailure,
+          isFingerprintEnabled = isBiometricEnabled(activity)
+        )
+      })
+    }
 
-fun openVerifySheet(
-  activity: ThemedActivity,
-  onVerifySuccess: () -> Unit,
-  onVerifyFailure: () -> Unit = {}) {
-  openSheet(activity, PincodeBottomSheet().apply {
-    data = PincodeSheetData(
-      title = R.string.security_sheet_enter_current_pin_title,
-      actionTitle = R.string.security_sheet_button_verify,
-      onSuccess = onVerifySuccess,
-      onFailure = onVerifyFailure,
-      isFingerprintEnabled = isBiometricEnabled(activity)
-    )
-  })
-}
+    fun openForUnlock(activity: ThemedActivity, onUnlockSuccess: () -> Unit, onUnlockFailure: () -> Unit) {
+      if (!isPinCodeEnabled()) {
+        openSheet(activity, NoPincodeBottomSheet().apply {
+          this.onSuccess = onUnlockSuccess
+        })
+        return
+      }
 
-fun openUnlockSheet(
-  activity: ThemedActivity,
-  onUnlockSuccess: () -> Unit,
-  onUnlockFailure: () -> Unit) {
-  if (!isPinCodeEnabled()) {
-    openSheet(activity, NoPincodeBottomSheet().apply {
-      this.onSuccess = onUnlockSuccess
-    })
-    return
+      if (!needsLockCheck()) {
+        return onUnlockSuccess()
+      }
+      openSheet(activity, PincodeBottomSheet().apply {
+        data = PincodeSheetData(
+          title = R.string.security_sheet_enter_pin_to_unlock_title,
+          actionTitle = R.string.security_sheet_button_unlock,
+          onSuccess = onUnlockSuccess,
+          onFailure = onUnlockFailure,
+          isFingerprintEnabled = isBiometricEnabled(activity)
+        )
+      })
+    }
   }
-
-  if (!needsLockCheck()) {
-    return onUnlockSuccess()
-  }
-  openSheet(activity, PincodeBottomSheet().apply {
-    data = PincodeSheetData(
-      title = R.string.security_sheet_enter_pin_to_unlock_title,
-      actionTitle = R.string.security_sheet_button_unlock,
-      onSuccess = onUnlockSuccess,
-      onFailure = onUnlockFailure,
-      isFingerprintEnabled = isBiometricEnabled(activity)
-    )
-  })
 }

@@ -36,7 +36,7 @@ import com.maubis.scarlet.base.note.tag.TagChooserBottomSheet
 import com.maubis.scarlet.base.notification.NotificationConfig
 import com.maubis.scarlet.base.notification.NotificationHandler
 import com.maubis.scarlet.base.reminders.ReminderBottomSheet
-import com.maubis.scarlet.base.security.openUnlockSheet
+import com.maubis.scarlet.base.security.PincodeBottomSheet
 import java.util.*
 
 class NoteActionsBottomSheet : ThemedBottomSheetFragment() {
@@ -254,8 +254,7 @@ class NoteActionsBottomSheet : ThemedBottomSheetFragment() {
         icon = R.drawable.ic_action_unlock,
         visible = note.locked,
         listener = {
-          openUnlockSheet(
-            activity = activity,
+          PincodeBottomSheet.openForUnlock(activity,
             onUnlockSuccess = {
               note.locked = false
               activity.updateNote(note)
