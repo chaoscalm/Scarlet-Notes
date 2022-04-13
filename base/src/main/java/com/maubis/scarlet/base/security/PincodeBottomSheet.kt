@@ -223,7 +223,6 @@ fun openPincodeSetupSheet(
       onRemoveButtonClick = {
         sSecurityCode = ""
         sSecurityAppLockEnabled = false
-        sNoPinSetupNoticeShown = false
         onCreateSuccess()
 
         if (activity is MainActivity) {
@@ -261,10 +260,6 @@ fun openUnlockSheet(
   onUnlockSuccess: () -> Unit,
   onUnlockFailure: () -> Unit) {
   if (!isPinCodeEnabled()) {
-    if (sNoPinSetupNoticeShown) {
-      onUnlockSuccess()
-      return
-    }
     openSheet(activity, NoPincodeBottomSheet().apply {
       this.onSuccess = onUnlockSuccess
     })

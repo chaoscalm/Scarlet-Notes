@@ -186,7 +186,7 @@
 
   <!-- Start No Pincode -->
   <string name="no_pincode_sheet_title">No PIN set</string>
-  <string name="no_pincode_sheet_details">You have not set up the PIN. Would you like to set it up now?</string>
+  <string name="no_pincode_sheet_details">You haven\'t set up the PIN to access locked notes. Would you like to set it up now?</string>
   <string name="no_pincode_sheet_not_now">Later</string>
   <string name="no_pincode_sheet_set_up">Set Up</string>
   <!-- End No Pincode -->
