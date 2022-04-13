@@ -7,7 +7,6 @@ import android.text.InputType
 import android.text.Layout
 import android.view.View
 import android.view.inputmethod.EditorInfo
-import androidx.appcompat.app.AppCompatActivity
 import com.facebook.litho.*
 import com.facebook.litho.annotations.*
 import com.facebook.litho.widget.*
@@ -190,16 +189,11 @@ class PincodeBottomSheet : LithoBottomSheet() {
 
   override fun onResume() {
     super.onResume()
-    val compatActivity = activity
-    if (compatActivity === null || compatActivity !is AppCompatActivity) {
-      return
-    }
-
     if (data.isFingerprintEnabled) {
       showBiometricPrompt(
         title = R.string.biometric_prompt_unlock_note,
         subtitle = R.string.biometric_prompt_unlock_note_details,
-        activity = compatActivity,
+        activity = requireActivity(),
         fragment = this,
         onSuccess = {
           data.onSuccess()
@@ -219,7 +213,7 @@ fun openPincodeSetupSheet(
       title = R.string.security_sheet_enter_new_pin_title,
       actionTitle = R.string.security_sheet_button_set,
       isFingerprintEnabled = false,
-      isRemoveButtonEnabled = true,
+      isRemoveButtonEnabled = isPinCodeEnabled(),
       onRemoveButtonClick = {
         sSecurityCode = ""
         sSecurityAppLockEnabled = false
