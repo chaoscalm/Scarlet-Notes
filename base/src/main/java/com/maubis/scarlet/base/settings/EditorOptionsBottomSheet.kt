@@ -13,7 +13,7 @@ var sEditorLiveMarkdown: Boolean
   set(value) = appPreferences.edit { putBoolean("editor_live_markdown", value) }
 
 var sEditorMoveChecked: Boolean
-  get() = appPreferences.getBoolean("editor_move_checked_items", true)
+  get() = appPreferences.getBoolean("editor_move_checked_items", false)
   set(value) = appPreferences.edit { putBoolean("editor_move_checked_items", value) }
 
 var sEditorMarkdownDefault: Boolean
