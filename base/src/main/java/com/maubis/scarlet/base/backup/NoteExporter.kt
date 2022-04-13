@@ -19,6 +19,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.io.File
+import java.io.FileDescriptor
+import java.io.FileOutputStream
 
 const val KEY_AUTO_BACKUP_LAST_TIMESTAMP = "KEY_AUTO_BACKUP_LAST_TIMESTAMP"
 
@@ -26,7 +28,7 @@ const val EXPORT_NOTE_SEPARATOR = ">S>C>A>R>L>E>T>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 const val EXPORT_VERSION = 6
 
 const val NOTES_BACKUP_FOLDER = "ScarletNotes"
-const val NOTES_BACKUP_FILENAME = "manual_backup"
+const val MANUAL_BACKUP_FILENAME = "manual_backup"
 const val AUTO_BACKUP_FILENAME = "auto_backup"
 const val AUTO_BACKUP_INTERVAL_MS = 1000 * 60 * 60 * 6 // 6 hours update
 
@@ -51,15 +53,13 @@ object NoteExporter {
     }
   }
 
-  fun getManualBackupFile(): File? {
-    return getOrCreateFileForExport("$NOTES_BACKUP_FILENAME ${getFormattedDateWithTime()}")
+  fun getDefaultManualBackupFileName(): String {
+    return "$MANUAL_BACKUP_FILENAME ${getFormattedDateWithTime()}.txt"
   }
 
-  fun exportNotesToManualBackupFile(): File? {
+  fun exportNotesToFile(file: FileDescriptor) {
     val backupContent = getBackupFileContent()
-    val file = getManualBackupFile()
-    file?.writeText(backupContent)
-    return file
+    FileOutputStream(file).use { it.write(backupContent.toByteArray()) }
   }
 
   private fun getBackupFileContent(): String {

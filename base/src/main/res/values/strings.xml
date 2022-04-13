@@ -6,6 +6,7 @@
   <string name="save">Save</string>
   <string name="import_to_app">Import</string>
   <string name="search_notes">Search Notes&#8230;</string>
+  <string name="action_share">Share</string>
   <string name="share_using">Share using&#8230;</string>
   <string name="share_image">Share Image</string>
 
@@ -66,11 +67,11 @@
   <string name="home_option_order_notes">Order Notes</string>
   <string name="home_option_backup_options">Backup and Data</string>
   <string name="home_option_backup_options_subtitle">Import, export or delete your notes</string>
-  <string name="home_option_export">Export Notes</string>
-  <string name="home_option_export_subtitle">Export notes to device storage to share</string>
-  <string name="home_option_import">Import Notes</string>
-  <string name="home_option_import_subtitle">Import notes from the device storage</string>
-  <string name="home_option_export_markdown">Export As Markdown</string>
+  <string name="home_option_export">Export data</string>
+  <string name="home_option_export_subtitle">Create a backup of your data</string>
+  <string name="home_option_import">Import data</string>
+  <string name="home_option_import_subtitle">Import all data from an existing backup</string>
+  <string name="home_option_export_markdown">Export as Markdown</string>
   <string name="home_option_export_markdown_subtitle">Export notes in markdown format. (You cannot import these back to the app)</string>
   <string name="home_option_auto_export">Export Automatically</string>
   <string name="home_option_auto_export_subtitle">Export notes frequently to external file as backup</string>
@@ -127,9 +128,9 @@
 
   <string name="import_export_layout_exported">Exported to file</string>
   <string name="import_export_layout_export_failed">Export failed</string>
-  <string name="import_export_layout_exporting">Exporting to file&#8230;</string>
+  <string name="import_export_layout_exporting">Export to file&#8230;</string>
   <string name="import_export_layout_exporting_done">Done</string>
-  <string name="import_export_layout_exporting_share">Share</string>
+  <string name="import_export_layout_export_action">Export</string>
   <string name="import_export_locked">Export locked notes</string>
   <string name="import_export_locked_details">Also backup the notes which are locked</string>
 

@@ -34,7 +34,7 @@ class FormatActionBottomSheet : GridOptionBottomSheet() {
     val format: Format = this.format!!
     options.add(
       GridSectionOptionItem(
-        label = R.string.import_export_layout_exporting_share,
+        label = R.string.action_share,
         icon = R.drawable.ic_share_white_48dp,
         listener = {
           shareText(activity, format.text)
