@@ -114,7 +114,7 @@ open class FormatTextViewHolder(context: Context, view: View) : FormatViewHolder
 
   override fun afterTextChanged(text: Editable) {
     text.clearMarkdownSpans()
-    if (sEditorLiveMarkdown) {
+    if (sEditorLiveMarkdown && format.type != FormatType.CODE) {
       text.setFormats(Markdown.getSpanInfo(format.text).spans)
     }
   }
