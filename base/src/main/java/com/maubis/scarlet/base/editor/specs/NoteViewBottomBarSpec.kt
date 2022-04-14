@@ -7,6 +7,7 @@ import com.facebook.litho.annotations.LayoutSpec
 import com.facebook.litho.annotations.OnCreateLayout
 import com.facebook.litho.annotations.Prop
 import com.facebook.yoga.YogaAlign
+import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.common.specs.EmptySpec
 import com.maubis.scarlet.base.common.specs.ToolbarColorConfig
@@ -26,6 +27,7 @@ object NoteViewBottomBarSpec {
     val note = activity.note()
     val row = Row.create(context)
       .widthPercent(100f)
+      .paddingDip(YogaEdge.HORIZONTAL, 4f)
       .alignItems(YogaAlign.CENTER)
     row.child(bottomBarRoundIcon(context, colorConfig)
                 .iconRes(R.drawable.ic_apps_white_48dp)
