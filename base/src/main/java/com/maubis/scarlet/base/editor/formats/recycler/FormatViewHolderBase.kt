@@ -78,13 +78,13 @@ abstract class FormatViewHolderBase(context: Context, view: View) : RecyclerView
         editable = !(extra != null
           && extra.containsKey(KEY_EDITABLE)
           && !extra.getBoolean(KEY_EDITABLE)),
-        isMarkdownEnabled = data.formatType != FormatType.CODE,
-        fontSize = when (data.formatType) {
+        isMarkdownEnabled = data.type != FormatType.CODE,
+        fontSize = when (data.type) {
           FormatType.HEADING -> fontSize.toFloat() + 4
           FormatType.SUB_HEADING -> fontSize.toFloat() + 2
           else -> fontSize.toFloat()
         },
-        backgroundColor = when (data.formatType) {
+        backgroundColor = when (data.type) {
           FormatType.CODE, FormatType.IMAGE -> appTheme.get(context, R.color.code_light, R.color.code_dark)
           else -> ContextCompat.getColor(context, android.R.color.transparent)
         },
@@ -94,14 +94,14 @@ abstract class FormatViewHolderBase(context: Context, view: View) : RecyclerView
         hintTextColor = hintTextColor,
         accentColor = linkColor,
         noteUUID = extra?.getString(INTENT_KEY_NOTE_ID) ?: "default",
-        typeface = when (data.formatType) {
+        typeface = when (data.type) {
           FormatType.HEADING -> appTypeface.subHeading()
           FormatType.SUB_HEADING -> appTypeface.title()
           FormatType.HEADING_3 -> appTypeface.title()
           FormatType.CODE -> appTypeface.code()
           else -> appTypeface.text()
         },
-        typefaceStyle = when (data.formatType) {
+        typefaceStyle = when (data.type) {
           FormatType.HEADING, FormatType.SUB_HEADING, FormatType.HEADING_3 -> Typeface.BOLD
           else -> Typeface.NORMAL
         }

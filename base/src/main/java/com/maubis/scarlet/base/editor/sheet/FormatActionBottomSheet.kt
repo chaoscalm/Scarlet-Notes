@@ -40,7 +40,7 @@ class FormatActionBottomSheet : GridOptionBottomSheet() {
           shareText(activity, format.text)
           dismiss()
         },
-        visible = !arrayOf(FormatType.IMAGE, FormatType.SEPARATOR).contains(format.formatType)
+        visible = !arrayOf(FormatType.IMAGE, FormatType.SEPARATOR).contains(format.type)
       ))
     options.add(
       GridSectionOptionItem(
@@ -50,7 +50,7 @@ class FormatActionBottomSheet : GridOptionBottomSheet() {
           copyTextToClipboard(requireContext(), format.text)
           dismiss()
         },
-        visible = !arrayOf(FormatType.IMAGE, FormatType.SEPARATOR).contains(format.formatType)
+        visible = !arrayOf(FormatType.IMAGE, FormatType.SEPARATOR).contains(format.type)
       ))
     options.add(
       GridSectionOptionItem(
@@ -59,7 +59,7 @@ class FormatActionBottomSheet : GridOptionBottomSheet() {
         listener = {
           EasyImage.openCameraForImage(activity, format.uid)
         },
-        visible = format.formatType === FormatType.IMAGE
+        visible = format.type === FormatType.IMAGE
       ))
     options.add(
       GridSectionOptionItem(
@@ -68,14 +68,14 @@ class FormatActionBottomSheet : GridOptionBottomSheet() {
         listener = {
           EasyImage.openGallery(activity, format.uid)
         },
-        visible = format.formatType === FormatType.IMAGE
+        visible = format.type === FormatType.IMAGE
       ))
     options.add(GridSectionOptionItem(
       label = R.string.delete_sheet_delete_trash_yes,
       icon = R.drawable.ic_delete_white_48dp,
       listener = {
         activity.deleteFormat(format)
-        if (format.formatType === FormatType.IMAGE && format.text.isNotBlank()) {
+        if (format.type === FormatType.IMAGE && format.text.isNotBlank()) {
           imageStorage.deleteImageIfExists(noteUUID, format)
         }
         dismiss()

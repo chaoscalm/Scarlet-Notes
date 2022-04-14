@@ -56,7 +56,7 @@ class ImageStore(context: Context, private val thumbnailsCache: ImageCache) {
   }
 
   fun getImage(noteUUID: String, imageFormat: Format): File {
-    if (imageFormat.formatType != FormatType.IMAGE) {
+    if (imageFormat.type != FormatType.IMAGE) {
       Log.w("Scarlet", "Attempted to retrieve image for a non-image Format")
     }
     return getImageFile(noteUUID, imageFormat.text)

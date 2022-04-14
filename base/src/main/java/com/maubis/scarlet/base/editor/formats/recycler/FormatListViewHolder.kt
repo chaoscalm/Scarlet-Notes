@@ -33,7 +33,7 @@ class FormatListViewHolder(context: Context, view: View) : FormatTextViewHolder(
     super.populate(data, config)
     icon.setColorFilter(config.iconColor)
 
-    when (data.formatType) {
+    when (data.type) {
       FormatType.CHECKLIST_CHECKED -> {
         icon.setImageResource(R.drawable.ic_check_box_white_24dp)
         text.paintFlags = text.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
@@ -57,11 +57,11 @@ class FormatListViewHolder(context: Context, view: View) : FormatTextViewHolder(
 
     itemView.setOnClickListener {
       if (!config.editable) {
-        activity.setFormatChecked(data, data.formatType != FormatType.CHECKLIST_CHECKED)
+        activity.setFormatChecked(data, data.type != FormatType.CHECKLIST_CHECKED)
       }
     }
     icon.setOnClickListener {
-      activity.setFormatChecked(data, data.formatType != FormatType.CHECKLIST_CHECKED)
+      activity.setFormatChecked(data, data.type != FormatType.CHECKLIST_CHECKED)
     }
   }
 }

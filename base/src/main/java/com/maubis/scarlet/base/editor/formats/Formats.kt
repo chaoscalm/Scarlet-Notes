@@ -43,7 +43,7 @@ object Formats {
     var maxIndex = formats.size
     val enhancedFormats = mutableListOf<Format>()
     formats.forEach {
-      if (it.formatType == FormatType.TEXT) {
+      if (it.type == FormatType.TEXT) {
         val moreFormats = it.text.convertToFormats()
         moreFormats.forEach { format ->
           format.uid = maxIndex
@@ -66,7 +66,7 @@ object Formats {
   private fun enhanceTextFormats(formats: List<Format>): List<Format> {
     val newFormats = mutableListOf<Format>()
     for (format in formats) {
-      if (format.formatType != FormatType.TEXT) {
+      if (format.type != FormatType.TEXT) {
         newFormats.add(format)
         continue
       }

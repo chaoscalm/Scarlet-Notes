@@ -96,7 +96,7 @@ object NoteExporter {
     val markdownBuilder = StringBuilder()
     getFormats().forEach { format ->
       val text = format.text
-      val formatMarkdown = when (format.formatType) {
+      val formatMarkdown = when (format.type) {
         FormatType.NUMBERED_LIST -> "- $text"
         FormatType.HEADING -> "# $text"
         FormatType.HEADING_3 -> "### $text"

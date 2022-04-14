@@ -37,7 +37,7 @@ fun Note.getTitleForSharing(): String {
   val format = formats.first()
   val headingFormats = listOf(FormatType.HEADING, FormatType.SUB_HEADING, FormatType.HEADING_3)
   return when {
-    headingFormats.contains(format.formatType) -> format.text
+    headingFormats.contains(format.type) -> format.text
     else -> ""
   }
 }
@@ -49,7 +49,7 @@ fun Note.getTextForSharing(): String {
   }
 
   val format = formats.first()
-  if (format.formatType == FormatType.HEADING || format.formatType == FormatType.SUB_HEADING) {
+  if (format.type == FormatType.HEADING || format.type == FormatType.SUB_HEADING) {
     formats.removeAt(0)
   }
 
@@ -57,7 +57,7 @@ fun Note.getTextForSharing(): String {
   formats.forEach {
     stringBuilder.append(it.markdownText)
     stringBuilder.append("\n")
-    if (it.formatType == FormatType.QUOTE) {
+    if (it.type == FormatType.QUOTE) {
       stringBuilder.append("\n")
     }
   }
@@ -71,7 +71,7 @@ fun Note.getTextForSharing(): String {
 
 fun Note.getImageFile(): String {
   val formats = getFormats()
-  val format = formats.find { it.formatType === FormatType.IMAGE }
+  val format = formats.find { it.type === FormatType.IMAGE }
   return format?.text ?: ""
 }
 
@@ -135,12 +135,12 @@ fun Note.edit(context: Context) {
 }
 
 fun Note.hasImages(): Boolean {
-  val imageFormats = getFormats().filter { it.formatType == FormatType.IMAGE }
+  val imageFormats = getFormats().filter { it.type == FormatType.IMAGE }
   return imageFormats.isNotEmpty()
 }
 
 fun Note.shareImages(context: Context) {
-  val imageFormats = getFormats().filter { it.formatType == FormatType.IMAGE }
+  val imageFormats = getFormats().filter { it.type == FormatType.IMAGE }
   val imageFileUris = imageFormats
     .map { ScarletApp.imageStorage.getImage(uuid.toString(), it) }
     .filter { it.exists() }

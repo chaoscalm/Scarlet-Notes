@@ -86,8 +86,8 @@ open class EditNoteActivity : ViewNoteActivity() {
         addDefaultItem()
       }
       !formats[0].text.startsWith("# ") &&
-        formats[0].formatType !== FormatType.HEADING
-        && formats[0].formatType !== FormatType.IMAGE -> {
+        formats[0].type !== FormatType.HEADING
+        && formats[0].type !== FormatType.IMAGE -> {
         addEmptyItem(0, FormatType.HEADING)
       }
     }
@@ -381,13 +381,13 @@ open class EditNoteActivity : ViewNoteActivity() {
     }
 
     val isCheckList =
-      (format.formatType === FormatType.CHECKLIST_UNCHECKED
-        || format.formatType === FormatType.CHECKLIST_CHECKED)
+      (format.type === FormatType.CHECKLIST_UNCHECKED
+        || format.type === FormatType.CHECKLIST_CHECKED)
     val newPosition = position + 1
     when {
       isCheckList -> addEmptyItemAtFocused(FormatType.CHECKLIST_UNCHECKED.getNextFormatType())
       newPosition < formats.size -> focus(position + 1)
-      else -> addEmptyItemAtFocused(format.formatType.getNextFormatType())
+      else -> addEmptyItemAtFocused(format.type.getNextFormatType())
     }
   }
 

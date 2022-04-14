@@ -18,7 +18,7 @@ class FormatBulletViewHolder(context: Context, view: View) : FormatTextViewHolde
     super.populate(data, config)
     icon.setColorFilter(config.iconColor)
 
-    when (data.formatType) {
+    when (data.type) {
       FormatType.BULLET_1 -> {
         icon.setImageResource(R.drawable.icon_bullet_1)
         firstMargin.isVisible = false

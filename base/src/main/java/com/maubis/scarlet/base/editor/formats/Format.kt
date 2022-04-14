@@ -4,13 +4,13 @@ import com.maubis.scarlet.base.settings.sEditorMoveChecked
 import org.json.JSONObject
 import java.util.*
 
-class Format(var formatType: FormatType) {
+class Format(var type: FormatType) {
 
   var uid: Int = 0
   var text: String = ""
 
   init {
-    if (formatType == FormatType.SEPARATOR) {
+    if (type == FormatType.SEPARATOR) {
       // Needed to make sure the Format doesn't get lost, since Formats containing no text
       // are discarded when the note is saved
       text = "---"
@@ -19,7 +19,7 @@ class Format(var formatType: FormatType) {
 
   val markdownText: String
     get() {
-      return when (formatType) {
+      return when (type) {
         FormatType.NUMBERED_LIST -> "- $text"
         FormatType.HEADING -> "# $text"
         FormatType.CHECKLIST_CHECKED -> "[x] $text"
@@ -34,8 +34,8 @@ class Format(var formatType: FormatType) {
       }
     }
 
-  constructor(formatType: FormatType, text: String) : this(formatType) {
-    this.formatType = formatType
+  constructor(type: FormatType, text: String) : this(type) {
+    this.type = type
     this.text = text
   }
 
@@ -44,15 +44,15 @@ class Format(var formatType: FormatType) {
       return null
     }
 
-    val map = mapOf("format" to formatType.name, "text" to text)
+    val map = mapOf("format" to type.name, "text" to text)
     return JSONObject(map)
   }
 
   companion object {
     fun fromJson(json: JSONObject): Format {
-      return Format(FormatType.valueOf(json.getString("format"))).apply {
-        text = json.getString("text")
-      }
+      return Format(
+        type = FormatType.valueOf(json.getString("format")),
+        text = json.getString("text"))
     }
   }
 }
@@ -68,8 +68,8 @@ fun sectionPreservingSort(formats: List<Format>): List<Format> {
     val currentItem = mutableFormats[index]
     val nextItem = mutableFormats[index + 1]
 
-    if (currentItem.formatType == FormatType.CHECKLIST_CHECKED
-      && nextItem.formatType == FormatType.CHECKLIST_UNCHECKED) {
+    if (currentItem.type == FormatType.CHECKLIST_CHECKED
+      && nextItem.type == FormatType.CHECKLIST_UNCHECKED) {
       Collections.swap(mutableFormats, index, index + 1)
       continue
     }
@@ -79,8 +79,8 @@ fun sectionPreservingSort(formats: List<Format>): List<Format> {
     val currentItem = mutableFormats[index]
     val nextItem = mutableFormats[index - 1]
 
-    if (currentItem.formatType == FormatType.CHECKLIST_UNCHECKED
-      && nextItem.formatType == FormatType.CHECKLIST_CHECKED) {
+    if (currentItem.type == FormatType.CHECKLIST_UNCHECKED
+      && nextItem.type == FormatType.CHECKLIST_CHECKED) {
       Collections.swap(mutableFormats, index, index - 1)
       continue
     }

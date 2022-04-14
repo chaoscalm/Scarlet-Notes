@@ -168,7 +168,7 @@ open class ViewNoteActivity : SecuredActivity(), INoteActionsActivity, IFormatRe
       return
     }
 
-    format.formatType = if (checked) FormatType.CHECKLIST_CHECKED else FormatType.CHECKLIST_UNCHECKED
+    format.type = if (checked) FormatType.CHECKLIST_CHECKED else FormatType.CHECKLIST_UNCHECKED
     formats[position] = format
     adapter.updateItem(format, position)
 

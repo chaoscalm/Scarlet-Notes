@@ -9,7 +9,7 @@ class FormatAdapter(val formatActivity: IFormatRecyclerViewActivity)
   : MultiRecyclerViewAdapter<Format>(formatActivity.context(), formatActivity.controllerItems()), ItemTouchHelperAdapter {
 
   override fun getItemViewType(position: Int): Int {
-    return items[position].formatType.ordinal
+    return items[position].type.ordinal
   }
 
   override fun onItemDismiss(position: Int) {

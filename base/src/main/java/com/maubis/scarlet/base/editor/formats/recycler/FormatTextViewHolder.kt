@@ -46,7 +46,7 @@ open class FormatTextViewHolder(context: Context, view: View) : FormatViewHolder
   override fun populate(data: Format, config: FormatViewHolderConfig) {
     format = data
 
-    val fontSize = when (data.formatType) {
+    val fontSize = when (data.type) {
       FormatType.HEADING -> config.fontSize * 1.75f
       FormatType.SUB_HEADING -> config.fontSize * 1.5f
       FormatType.HEADING_3 -> config.fontSize * 1.25f
@@ -151,7 +151,7 @@ open class FormatTextViewHolder(context: Context, view: View) : FormatViewHolder
   }
 
   private fun Format.getHint(): String {
-    return when (formatType) {
+    return when (type) {
       FormatType.TEXT, FormatType.TAG -> context.getString(R.string.format_hint_text)
       FormatType.HEADING,
       FormatType.SUB_HEADING,
