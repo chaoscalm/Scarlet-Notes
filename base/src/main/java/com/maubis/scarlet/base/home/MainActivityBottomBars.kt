@@ -40,7 +40,7 @@ object MainActivityBottomBarSpec {
     val row = Row.create(context)
       .widthPercent(100f)
       .alignItems(YogaAlign.CENTER)
-      .paddingDip(YogaEdge.HORIZONTAL, 4f)
+      .paddingDip(YogaEdge.HORIZONTAL, 6f)
     row.child(bottomBarRoundIcon(context, colorConfig)
                 .iconRes(R.drawable.ic_apps_white_48dp)
                 .onClick {
@@ -101,7 +101,7 @@ object MainActivityFolderBottomBarSpec {
     val row = Row.create(context)
       .widthPercent(100f)
       .alignItems(YogaAlign.CENTER)
-      .paddingDip(YogaEdge.HORIZONTAL, 4f)
+      .paddingDip(YogaEdge.HORIZONTAL, 6f)
     row.child(bottomBarRoundIcon(context, colorConfig)
                 .iconRes(R.drawable.ic_arrow_back_white_48dp)
                 .onClick { activity.onFolderChange(null) })

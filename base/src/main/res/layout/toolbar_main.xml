@@ -5,9 +5,8 @@
   android:layout_height="wrap_content"
   android:gravity="center_vertical"
   android:orientation="horizontal"
-  android:paddingStart="@dimen/spacing_normal"
+  android:paddingHorizontal="@dimen/spacing_small"
   android:paddingTop="@dimen/main_toolbar_top_padding"
-  android:paddingEnd="@dimen/spacing_normal"
   android:paddingBottom="@dimen/main_toolbar_bottom_padding">
 
   <ImageView
