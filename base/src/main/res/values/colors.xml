@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-  <color name="separator">#0F000000</color>
-
-  <color name="colorPrimary">#07575B</color>
-  <color name="colorPrimaryDark">#003B46</color>
-
   <color name="colorAccent">#F52549</color>
   <color name="colorAccentDark">@color/material_pink_accent_200</color>
   <color name="colorAccentYellowDark">#FFFFCD</color>
