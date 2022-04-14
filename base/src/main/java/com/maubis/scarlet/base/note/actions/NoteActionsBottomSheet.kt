@@ -2,8 +2,6 @@ package com.maubis.scarlet.base.note.actions
 
 import android.app.Dialog
 import android.content.Intent
-import android.content.pm.ShortcutInfo
-import android.graphics.drawable.Icon
 import android.os.Bundle
 import android.view.View
 import android.widget.GridLayout
@@ -15,7 +13,6 @@ import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.ScarletApp.Companion.data
-import com.maubis.scarlet.base.ShortcutIntentHandlerActivity
 import com.maubis.scarlet.base.common.sheets.ColorPickerBottomSheet
 import com.maubis.scarlet.base.common.sheets.ColorPickerDefaultController
 import com.maubis.scarlet.base.common.sheets.openSheet
@@ -23,7 +20,7 @@ import com.maubis.scarlet.base.common.ui.ThemeColorType
 import com.maubis.scarlet.base.common.ui.ThemedActivity
 import com.maubis.scarlet.base.common.ui.ThemedBottomSheetFragment
 import com.maubis.scarlet.base.common.utils.OsVersionUtils
-import com.maubis.scarlet.base.common.utils.addShortcut
+import com.maubis.scarlet.base.common.utils.ShortcutHandler
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.database.entities.NoteState
 import com.maubis.scarlet.base.home.sheets.openDeleteNotePermanentlySheet
@@ -309,20 +306,8 @@ class NoteActionsBottomSheet : ThemedBottomSheetFragment() {
         visible = OsVersionUtils.canAddLauncherShortcuts(),
         invalid = activity.lockedContentIsHidden() && note.locked
       ) {
-        if (OsVersionUtils.canAddLauncherShortcuts()) {
-          var title = note.getTitleForSharing()
-          if (title.isBlank()) {
-            title = note.getFullText().split("\n").firstOrNull() ?: "Note"
-          }
-
-          val shortcut = ShortcutInfo.Builder(activity, "scarlet_notes___${note.uuid}")
-            .setShortLabel(title)
-            .setLongLabel(title)
-            .setIcon(Icon.createWithResource(activity, R.mipmap.open_note_launcher))
-            .setIntent(ShortcutIntentHandlerActivity.viewShortcutIntent(note))
-            .build()
-          addShortcut(activity, shortcut)
-        }
+        if (OsVersionUtils.canAddLauncherShortcuts())
+          ShortcutHandler.addLauncherShortcut(activity, note)
       })
     actions.add(
       NoteActionItem(

@@ -121,7 +121,7 @@
   <string name="select_a_note_title">Seleziona una nota</string>
   <string name="select_notes_title">Seleziona note</string>
   <string name="nav_settings">Impostazioni</string>
-  <string name="widget_no_valid_note">Nota cancellata o protetta</string>
+  <string name="widget_no_valid_note">Nota eliminata o protetta</string>
   <string name="note_option_font_size">Dimensione carattere</string>
   <string name="note_option_font_size_example">Regola le dimensioni del carattere del testo delle note. Puoi vedere come apparirà in questa anteprima.</string>
   <string name="note_option_font_size_subtitle">Dimensione del testo nel visualizzatore note: %d</string>
@@ -154,7 +154,7 @@
   <string name="theme_page_title">Seleziona il tema dell\'app</string>
   <string name="select_action">Seleziona</string>
   <string name="recent_to_trash_message">La nota è stata spostata nel cestino</string>
-  <string name="recent_to_delete_message">La nota è stata cancellata</string>
+  <string name="recent_to_delete_message">La nota è stata eliminata</string>
   <string name="recent_to_trash_undo">Annulla</string>
   <string name="backup_note_exclude">Escludi dal backup</string>
   <string name="backup_note_include">Includi nel backup</string>
@@ -254,5 +254,6 @@
   <string name="notice_text_copied">Testo copiato</string>
   <string name="notice_permission_granted">Permesso concesso</string>
   <string name="notice_permission_denied">Permesso negato</string>
+  <string name="notice_unsupported_pinned_shortcuts">Il tuo attuale launcher predefinito non supporta l\'aggiunta di scorciatoie personalizzate</string>
 
 </resources>

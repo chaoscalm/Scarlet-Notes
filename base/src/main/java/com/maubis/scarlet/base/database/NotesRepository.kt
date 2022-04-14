@@ -1,7 +1,10 @@
 package com.maubis.scarlet.base.database
 
 import android.content.Context
+import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp
+import com.maubis.scarlet.base.common.utils.OsVersionUtils
+import com.maubis.scarlet.base.common.utils.ShortcutHandler
 import com.maubis.scarlet.base.database.daos.NoteDao
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.database.entities.NoteState
@@ -74,6 +77,8 @@ class NotesRepository(private val database: NoteDao, private val notificationHan
     WidgetConfigureActivity.notifyNoteChange(context, note)
     AllNotesWidgetProvider.notifyAllChanged(context)
     notificationHandler.cancelNotification(note.uid)
+    if (OsVersionUtils.canAddLauncherShortcuts())
+      ShortcutHandler.disableLauncherShortcuts(context, note, R.string.recent_to_delete_message)
     ScarletApp.imageStorage.deleteAllFiles(note)
   }
 

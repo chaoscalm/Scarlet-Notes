@@ -302,5 +302,6 @@
   <string name="notice_text_copied">Text copied</string>
   <string name="notice_permission_granted">Permission granted</string>
   <string name="notice_permission_denied">Permission denied</string>
+  <string name="notice_unsupported_pinned_shortcuts">Your current default launcher does not support adding custom shortcuts</string>
 
 </resources>

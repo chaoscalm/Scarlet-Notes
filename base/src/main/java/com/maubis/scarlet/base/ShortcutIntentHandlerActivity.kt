@@ -33,7 +33,7 @@ class ShortcutIntentHandlerActivity : AppCompatActivity() {
   }
 
   companion object {
-    fun viewShortcutIntent(note: Note): Intent {
+    fun makeOpenNoteShortcutIntent(note: Note): Intent {
       val uri = Uri.Builder()
         .scheme("scarlet")
         .authority("open_note")
