@@ -12,11 +12,10 @@ import com.maubis.scarlet.base.settings.sEditorMoveHandles
 
 class FormatSeparatorViewHolder(context: Context, view: View) : FormatViewHolderBase(context, view) {
 
-  val separator: View = root.findViewById(R.id.separator)
-  val actionMove: ImageView = root.findViewById(R.id.action_move_icon)
+  private val separator: View = root.findViewById(R.id.separator)
+  private val actionMove: ImageView = root.findViewById(R.id.action_move_icon)
 
   override fun populate(data: Format, config: FormatViewHolderConfig) {
-
     separator.setBackgroundColor(config.hintTextColor)
 
     actionMove.setColorFilter(config.iconColor)

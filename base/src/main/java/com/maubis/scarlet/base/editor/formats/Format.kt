@@ -9,6 +9,14 @@ class Format(var formatType: FormatType) {
   var uid: Int = 0
   var text: String = ""
 
+  init {
+    if (formatType == FormatType.SEPARATOR) {
+      // Needed to make sure the Format doesn't get lost, since Formats containing no text
+      // are discarded when the note is saved
+      text = "---"
+    }
+  }
+
   val markdownText: String
     get() {
       return when (formatType) {
