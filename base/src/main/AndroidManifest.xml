@@ -70,9 +70,6 @@
         <data
           android:host="open_note"
           android:scheme="scarlet" />
-        <data
-          android:host="create_note"
-          android:scheme="scarlet" />
       </intent-filter>
     </activity>
     <activity android:name=".SharingIntentHandlerActivity">

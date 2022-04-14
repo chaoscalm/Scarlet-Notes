@@ -1,7 +1,5 @@
 package com.maubis.scarlet.base.home
 
-import android.content.pm.ShortcutInfo
-import android.graphics.drawable.Icon
 import android.text.Layout
 import com.facebook.litho.ClickEvent
 import com.facebook.litho.Component
@@ -16,15 +14,12 @@ import com.facebook.yoga.YogaAlign
 import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
-import com.maubis.scarlet.base.ScarletIntentHandlerActivity
 import com.maubis.scarlet.base.common.sheets.openSheet
 import com.maubis.scarlet.base.common.specs.EmptySpec
 import com.maubis.scarlet.base.common.specs.ToolbarColorConfig
 import com.maubis.scarlet.base.common.specs.bottomBarCard
 import com.maubis.scarlet.base.common.specs.bottomBarRoundIcon
 import com.maubis.scarlet.base.common.utils.ColorUtil
-import com.maubis.scarlet.base.common.utils.OsVersionUtils
-import com.maubis.scarlet.base.common.utils.addShortcut
 import com.maubis.scarlet.base.database.entities.Folder
 import com.maubis.scarlet.base.editor.EditNoteActivity
 import com.maubis.scarlet.base.home.sheets.HomeOptionsBottomSheet
@@ -80,20 +75,6 @@ object MainActivityBottomBarSpec {
           })
       row.child(bottomBarRoundIcon(context, colorConfig)
           .iconRes(R.drawable.icon_add_note)
-          .isLongClickEnabled(true)
-          .onLongClick {
-            if (!OsVersionUtils.canAddLauncherShortcuts()) {
-              return@onLongClick
-            }
-
-            val shortcut = ShortcutInfo.Builder(activity, "scarlet_notes___create_note")
-                .setShortLabel(activity.getString(R.string.shortcut_add_note))
-                .setLongLabel(activity.getString(R.string.shortcut_add_note))
-                .setIcon(Icon.createWithResource(activity, R.mipmap.create_launcher))
-                .setIntent(ScarletIntentHandlerActivity.create())
-                .build()
-            addShortcut(activity, shortcut)
-          }
           .onClick {
             val intent = EditNoteActivity.getNewNoteIntent(
                 activity,

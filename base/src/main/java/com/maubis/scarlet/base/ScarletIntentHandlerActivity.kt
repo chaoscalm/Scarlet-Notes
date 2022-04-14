@@ -23,7 +23,6 @@ class ScarletIntentHandlerActivity : AppCompatActivity() {
     }
 
     handleOpenNote(data)
-    handleCreateNote(data)
     finish()
   }
 
@@ -47,15 +46,6 @@ class ScarletIntentHandlerActivity : AppCompatActivity() {
       false -> view(this, note)
     }
     startActivity(intent)
-    return true
-  }
-
-  private fun handleCreateNote(data: Uri): Boolean {
-    if (data.host != "create_note") {
-      return false
-    }
-
-    startActivity(create(this))
     return true
   }
 
@@ -83,10 +73,6 @@ class ScarletIntentHandlerActivity : AppCompatActivity() {
         .putExtra(INTENT_KEY_NOTE_ID, note.uid)
     }
 
-    fun create(context: Context): Intent {
-      return Intent(context, EditNoteActivity::class.java)
-    }
-
     fun view(note: Note): Intent {
       val uri = Uri.Builder()
         .scheme("scarlet")
@@ -102,14 +88,6 @@ class ScarletIntentHandlerActivity : AppCompatActivity() {
         .authority("open_note")
         .appendQueryParameter("uuid", note.uuid.toString())
         .appendQueryParameter("is_edit", "1")
-        .build()
-      return Intent(Intent.ACTION_VIEW, uri)
-    }
-
-    fun create(): Intent {
-      val uri = Uri.Builder()
-        .scheme("scarlet")
-        .authority("create_note")
         .build()
       return Intent(Intent.ACTION_VIEW, uri)
     }
