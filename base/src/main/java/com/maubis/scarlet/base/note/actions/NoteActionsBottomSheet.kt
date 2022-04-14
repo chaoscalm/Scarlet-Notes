@@ -319,7 +319,7 @@ class NoteActionsBottomSheet : ThemedBottomSheetFragment() {
             .setShortLabel(title)
             .setLongLabel(title)
             .setIcon(Icon.createWithResource(activity, R.mipmap.open_note_launcher))
-            .setIntent(ScarletIntentHandlerActivity.view(note))
+            .setIntent(ScarletIntentHandlerActivity.viewShortcutIntent(note))
             .build()
           addShortcut(activity, shortcut)
         }

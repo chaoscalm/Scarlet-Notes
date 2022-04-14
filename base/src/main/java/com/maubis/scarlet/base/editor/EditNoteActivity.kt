@@ -392,19 +392,24 @@ open class EditNoteActivity : ViewAdvancedNoteActivity() {
   }
 
   companion object {
-    const val HANDLER_UPDATE_TIME = 4000
-    const val INTENT_KEY_FOLDER = "key_folder"
+    private const val HANDLER_UPDATE_TIME = 4000
+    private const val INTENT_KEY_FOLDER = "key_folder"
 
-    fun getNewNoteIntent(context: Context, folderUuid: UUID?): Intent {
+    fun makeNewNoteIntent(context: Context, folderUuid: UUID?): Intent {
       val intent = Intent(context, EditNoteActivity::class.java)
       intent.putExtra(INTENT_KEY_FOLDER, folderUuid)
       return intent
     }
 
-    fun getNewChecklistNoteIntent(context: Context, folderUuid: UUID?): Intent {
+    fun makeNewChecklistNoteIntent(context: Context, folderUuid: UUID?): Intent {
       val intent = Intent(context, CreateListNoteActivity::class.java)
       intent.putExtra(INTENT_KEY_FOLDER, folderUuid)
       return intent
+    }
+
+    fun makeEditNoteIntent(context: Context, note: Note): Intent {
+      return Intent(context, EditNoteActivity::class.java)
+        .putExtra(INTENT_KEY_NOTE_ID, note.uid)
     }
   }
 }

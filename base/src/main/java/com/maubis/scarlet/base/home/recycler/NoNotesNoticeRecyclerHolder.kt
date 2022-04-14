@@ -14,7 +14,7 @@ class NoNotesNoticeRecyclerHolder(context: Context, itemView: View) : RecyclerVi
   override fun populate(data: RecyclerItem, extra: Bundle) {
     setFullSpan()
     itemView.setOnClickListener {
-      val newNoteIntent = EditNoteActivity.getNewNoteIntent(
+      val newNoteIntent = EditNoteActivity.makeNewNoteIntent(
         context,
         folderUuid = (context as MainActivity).state.currentFolder?.uuid
       )

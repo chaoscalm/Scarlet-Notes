@@ -59,7 +59,7 @@ class OpenFileActivity : SecuredActivity() {
       lifecycleScope.launch {
         val note = Note.create(title = "", description = contentText)
         withContext(Dispatchers.IO) { note.save(this@OpenFileActivity) }
-        startActivity(ViewAdvancedNoteActivity.getIntent(this@OpenFileActivity, note))
+        startActivity(ViewAdvancedNoteActivity.makeIntent(this@OpenFileActivity, note))
         finish()
       }
     }

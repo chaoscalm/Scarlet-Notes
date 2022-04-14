@@ -12,7 +12,6 @@ import com.facebook.litho.LithoView
 import com.github.bijoysingh.starter.recyclerview.MultiRecyclerViewControllerItem
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.data
-import com.maubis.scarlet.base.ScarletIntentHandlerActivity
 import com.maubis.scarlet.base.common.specs.ToolbarColorConfig
 import com.maubis.scarlet.base.common.ui.SecuredActivity
 import com.maubis.scarlet.base.common.ui.Theme
@@ -31,10 +30,7 @@ import com.maubis.scarlet.base.note.actions.INoteActionsActivity
 import com.maubis.scarlet.base.note.actions.NoteActionsBottomSheet
 import com.maubis.scarlet.base.note.adjustedColor
 import com.maubis.scarlet.base.note.getTagString
-import com.maubis.scarlet.base.settings.STORE_KEY_TEXT_SIZE
-import com.maubis.scarlet.base.settings.sEditorTextSize
-import com.maubis.scarlet.base.settings.sNoteDefaultColor
-import com.maubis.scarlet.base.settings.sUIUseNoteColorAsBackground
+import com.maubis.scarlet.base.settings.*
 import com.maubis.scarlet.base.widget.getPendingIntentWithStack
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -188,7 +184,7 @@ open class ViewAdvancedNoteActivity : SecuredActivity(), INoteActionsActivity, I
   }
 
   fun openEditor() {
-    startActivity(ScarletIntentHandlerActivity.edit(this, note))
+    startActivity(EditNoteActivity.makeEditNoteIntent(this, note))
   }
 
   protected open fun notifyToolbarColor() {
@@ -270,16 +266,25 @@ open class ViewAdvancedNoteActivity : SecuredActivity(), INoteActionsActivity, I
   fun note() = note
 
   companion object {
-    fun getIntent(context: Context, note: Note): Intent {
+    fun makeIntent(context: Context, note: Note): Intent {
       val intent = Intent(context, ViewAdvancedNoteActivity::class.java)
       intent.putExtra(INTENT_KEY_NOTE_ID, note.uid)
       return intent
     }
 
-    fun getIntentWithStack(context: Context, note: Note): PendingIntent {
+    fun makePendingIntentWithStack(context: Context, note: Note): PendingIntent {
       val intent = Intent(context, ViewAdvancedNoteActivity::class.java)
       intent.putExtra(INTENT_KEY_NOTE_ID, note.uid)
       return getPendingIntentWithStack(context, 5000 + note.uid, intent)
+    }
+
+    fun makePreferenceAwareIntent(context: Context, note: Note): Intent {
+      if (sEditorSkipNoteViewer) {
+        return EditNoteActivity.makeEditNoteIntent(context, note)
+      }
+
+      return Intent(context, ViewAdvancedNoteActivity::class.java)
+        .putExtra(INTENT_KEY_NOTE_ID, note.uid)
     }
   }
 

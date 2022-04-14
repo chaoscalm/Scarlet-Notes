@@ -6,10 +6,10 @@ import com.maubis.markdown.Markdown
 import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.data
-import com.maubis.scarlet.base.ScarletIntentHandlerActivity
 import com.maubis.scarlet.base.common.ui.ThemedActivity
 import com.maubis.scarlet.base.common.utils.*
 import com.maubis.scarlet.base.database.entities.Note
+import com.maubis.scarlet.base.editor.EditNoteActivity
 import com.maubis.scarlet.base.editor.formats.FormatType
 import com.maubis.scarlet.base.security.PinLockController.needsLockCheck
 import com.maubis.scarlet.base.security.PincodeBottomSheet
@@ -126,12 +126,12 @@ fun Note.edit(context: Context) {
   if (this.locked) {
     if (context is ThemedActivity) {
       PincodeBottomSheet.openForUnlock(context,
-        onUnlockSuccess = { context.startActivity(ScarletIntentHandlerActivity.edit(context, this)) },
+        onUnlockSuccess = { context.startActivity(EditNoteActivity.makeEditNoteIntent(context, this)) },
         onUnlockFailure = { edit(context) })
     }
     return
   }
-  context.startActivity(ScarletIntentHandlerActivity.edit(context, this))
+  context.startActivity(EditNoteActivity.makeEditNoteIntent(context, this))
 }
 
 fun Note.hasImages(): Boolean {

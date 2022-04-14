@@ -10,7 +10,6 @@ import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
-import com.maubis.scarlet.base.ScarletIntentHandlerActivity
 import com.maubis.scarlet.base.common.ui.ThemeColorType
 import com.maubis.scarlet.base.common.utils.OsVersionUtils
 import com.maubis.scarlet.base.database.entities.Note
@@ -56,7 +55,7 @@ class NotificationHandler(private val context: Context) {
   }
 
   fun openNotification(config: NotificationConfig) {
-    val pendingIntent = getPendingActivityIntent(config, ScarletIntentHandlerActivity.view(context.applicationContext, config.note), 1)
+    val pendingIntent = getPendingActivityIntent(config, ViewAdvancedNoteActivity.makePreferenceAwareIntent(context.applicationContext, config.note), 1)
     val contentView = getRemoteView(config)
     val notificationBuilder = NotificationCompat.Builder(context, config.channel)
       .setSmallIcon(R.drawable.ic_format_quote_white_48dp)

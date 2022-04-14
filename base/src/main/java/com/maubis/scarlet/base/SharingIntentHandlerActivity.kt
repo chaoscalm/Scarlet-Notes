@@ -23,7 +23,7 @@ class SharingIntentHandlerActivity : AppCompatActivity() {
       if (note === null) {
         return
       }
-      startActivity(ViewAdvancedNoteActivity.getIntent(this, note))
+      startActivity(ViewAdvancedNoteActivity.makeIntent(this, note))
     } finally {
       finish()
     }

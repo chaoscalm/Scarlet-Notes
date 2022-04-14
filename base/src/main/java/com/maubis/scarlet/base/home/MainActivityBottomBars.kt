@@ -68,7 +68,7 @@ object MainActivityBottomBarSpec {
       row.child(bottomBarRoundIcon(context, colorConfig)
           .iconRes(R.drawable.icon_add_list)
           .onClick {
-            val intent = EditNoteActivity.getNewChecklistNoteIntent(
+            val intent = EditNoteActivity.makeNewChecklistNoteIntent(
                 activity,
                 activity.state.currentFolder?.uuid)
             activity.startActivity(intent)
@@ -76,7 +76,7 @@ object MainActivityBottomBarSpec {
       row.child(bottomBarRoundIcon(context, colorConfig)
           .iconRes(R.drawable.icon_add_note)
           .onClick {
-            val intent = EditNoteActivity.getNewNoteIntent(
+            val intent = EditNoteActivity.makeNewNoteIntent(
                 activity,
                 activity.state.currentFolder?.uuid)
             activity.startActivity(intent)
