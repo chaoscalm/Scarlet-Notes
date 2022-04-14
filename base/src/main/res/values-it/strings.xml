@@ -138,7 +138,7 @@
   <string name="image_not_on_current_device">Immagine non presente su questo dispositivo</string>
   <string name="image_cannot_be_loaded">L\'immagine non può essere caricata</string>
   <string name="home_option_auto_export">Esporta automaticamente</string>
-  <string name="home_option_auto_export_subtitle">Esporta frequentemente le note in un file esterno come backup</string>
+  <string name="home_option_auto_export_subtitle">Crea regolarmente un backup di tutti i dati nella memoria interna del dispositivo</string>
   <string name="format_hint_image">Clicca per aggiungere o cambiare immagine</string>
 
   <!-- Added for 4.7.0 -->
@@ -166,7 +166,7 @@
   <string name="folder_sheet_add_note_detail">Nome del blocco note</string>
   <string name="folder_option_change_notebook">Sposta in…</string>
   <string name="recent_notes">Note recenti</string>
-  <string name="home_option_delete_notes_and_more">Elimina note e altro</string>
+  <string name="home_option_delete_notes_and_more">Elimina dati</string>
   <string name="home_option_delete_notes_and_more_details">Elimina note, tag e altri dati nell\'app</string>
   <string name="home_option_delete_all_notes">Elimina tutte le note</string>
   <string name="home_option_delete_all_notes_details">Elimina tutte le note nell\'app</string>

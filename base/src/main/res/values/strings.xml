@@ -73,11 +73,11 @@
   <string name="home_option_import">Import data</string>
   <string name="home_option_import_subtitle">Import all data from an existing backup</string>
   <string name="home_option_export_markdown">Export as Markdown</string>
-  <string name="home_option_export_markdown_subtitle">Export notes in markdown format. (You cannot import these back to the app)</string>
+  <string name="home_option_export_markdown_subtitle">Export notes in Markdown format (you cannot import them back to the app)</string>
   <string name="home_option_auto_export">Export Automatically</string>
-  <string name="home_option_auto_export_subtitle">Export notes frequently to external file as backup</string>
+  <string name="home_option_auto_export_subtitle">Periodically make a backup of all data to the device internal storage</string>
   <string name="home_option_about_page">About the app</string>
-  <string name="home_option_delete_notes_and_more">Delete Notes and More</string>
+  <string name="home_option_delete_notes_and_more">Delete data</string>
   <string name="home_option_delete_notes_and_more_details">Delete notes, tags and other data in the app</string>
   <string name="home_option_delete_all_notes">Delete All Notes</string>
   <string name="home_option_delete_all_notes_details">Delete all the notes in the app</string>
