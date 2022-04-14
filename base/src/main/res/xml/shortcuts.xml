@@ -10,7 +10,7 @@
     <intent
       android:action="android.intent.action.VIEW"
       android:targetPackage="fs00.scarletnotes"
-      android:targetClass="com.maubis.scarlet.base.note.creation.activity.CreateNoteActivity" />
+      android:targetClass="com.maubis.scarlet.base.editor.EditNoteActivity" />
     <categories android:name="android.shortcut.conversation" />
   </shortcut>
 
@@ -24,7 +24,7 @@
     <intent
       android:action="android.intent.action.VIEW"
       android:targetPackage="fs00.scarletnotes"
-      android:targetClass="com.maubis.scarlet.base.note.creation.activity.CreateListNoteActivity" />
+      android:targetClass="com.maubis.scarlet.base.editor.CreateListNoteActivity" />
     <categories android:name="android.shortcut.conversation" />
   </shortcut>
 </shortcuts>

@@ -117,7 +117,7 @@
 
   <!-- Added for 4.3.7 -->
   <string name="shortcut_add_note">Aggiungi nota</string>
-  <string name="shortcut_add_list">Aggiungi nota con elenco</string>
+  <string name="shortcut_add_list">Aggiungi lista</string>
   <string name="select_a_note_title">Seleziona una nota</string>
   <string name="select_notes_title">Seleziona note</string>
   <string name="nav_settings">Impostazioni</string>
