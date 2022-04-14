@@ -147,7 +147,7 @@ class NoteActionsBottomSheet : ThemedBottomSheetFragment() {
         visible = note.state == NoteState.TRASH,
         invalid = activity.lockedContentIsHidden() && note.locked
       ) {
-        activity.moveNoteToTrashOrDelete(note)
+        openDeleteNotePermanentlySheet(activity, note) { activity.notifyResetOrDismiss() }
         dismiss()
       })
     actions.add(

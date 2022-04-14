@@ -49,7 +49,7 @@ object NoteViewBottomBarSpec {
       row.child(bottomBarRoundIcon(context, colorConfig)
           .iconRes(R.drawable.ic_delete_permanently)
           .onClick {
-            openDeleteNotePermanentlySheet(activity, note) { activity.moveNoteToTrashOrDelete(note) }
+            openDeleteNotePermanentlySheet(activity, note) { activity.notifyResetOrDismiss() }
           })
     } else {
       row.child(bottomBarRoundIcon(context, colorConfig)
