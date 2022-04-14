@@ -14,7 +14,7 @@ import android.widget.RemoteViews
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.editor.CreateListNoteActivity
 import com.maubis.scarlet.base.editor.EditNoteActivity
-import com.maubis.scarlet.base.editor.ViewAdvancedNoteActivity
+import com.maubis.scarlet.base.editor.ViewNoteActivity
 import com.maubis.scarlet.base.home.MainActivity
 import com.maubis.scarlet.base.settings.sWidgetBackgroundColor
 import com.maubis.scarlet.base.settings.sWidgetShowToolbar
@@ -38,7 +38,7 @@ class AllNotesWidgetProvider : AppWidgetProvider() {
       views.setInt(R.id.widget_background, "setBackgroundColor", sWidgetBackgroundColor)
       views.setViewVisibility(R.id.toolbar, if (sWidgetShowToolbar) VISIBLE else GONE)
 
-      val noteIntent = Intent(context, ViewAdvancedNoteActivity::class.java)
+      val noteIntent = Intent(context, ViewNoteActivity::class.java)
       noteIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetIds[i])
       val notePendingIntent = getPendingIntentWithStack(context, 0, noteIntent)
       views.setPendingIntentTemplate(R.id.list, notePendingIntent)

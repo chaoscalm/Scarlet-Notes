@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.View
 import com.maubis.scarlet.base.common.ui.ThemedActivity
 import com.maubis.scarlet.base.database.entities.Note
-import com.maubis.scarlet.base.editor.ViewAdvancedNoteActivity
+import com.maubis.scarlet.base.editor.ViewNoteActivity
 import com.maubis.scarlet.base.home.MainActivity
 import com.maubis.scarlet.base.note.actions.NoteActionsBottomSheet
 import com.maubis.scarlet.base.note.copyToClipboard
@@ -58,6 +58,6 @@ class NoteRecyclerHolder(context: Context, view: View) : NoteRecyclerViewHolderB
   }
 
   private fun openNote(data: Note) {
-    context.startActivity(ViewAdvancedNoteActivity.makePreferenceAwareIntent(context, data))
+    context.startActivity(ViewNoteActivity.makePreferenceAwareIntent(context, data))
   }
 }

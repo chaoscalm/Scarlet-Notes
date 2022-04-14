@@ -8,7 +8,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.maubis.scarlet.base.ScarletApp.Companion.imageStorage
 import com.maubis.scarlet.base.database.entities.Note
-import com.maubis.scarlet.base.editor.ViewAdvancedNoteActivity
+import com.maubis.scarlet.base.editor.ViewNoteActivity
 import com.maubis.scarlet.base.editor.formats.Format
 import com.maubis.scarlet.base.editor.formats.FormatType
 import com.maubis.scarlet.base.editor.formats.Formats
@@ -23,7 +23,7 @@ class SharingIntentHandlerActivity : AppCompatActivity() {
       if (note === null) {
         return
       }
-      startActivity(ViewAdvancedNoteActivity.makeIntent(this, note))
+      startActivity(ViewNoteActivity.makeIntent(this, note))
     } finally {
       finish()
     }

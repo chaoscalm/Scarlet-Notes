@@ -5,10 +5,10 @@ import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.maubis.scarlet.base.database.entities.Note
-import com.maubis.scarlet.base.editor.ViewAdvancedNoteActivity
+import com.maubis.scarlet.base.editor.ViewNoteActivity
 import java.util.*
 
-class ScarletIntentHandlerActivity : AppCompatActivity() {
+class ShortcutIntentHandlerActivity : AppCompatActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -29,7 +29,7 @@ class ScarletIntentHandlerActivity : AppCompatActivity() {
 
     val noteUUID = data.getQueryParameter("uuid") ?: return
     val note = ScarletApp.data.notes.getByUUID(UUID.fromString(noteUUID)) ?: return
-    startActivity(ViewAdvancedNoteActivity.makePreferenceAwareIntent(this, note))
+    startActivity(ViewNoteActivity.makePreferenceAwareIntent(this, note))
   }
 
   companion object {

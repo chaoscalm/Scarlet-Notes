@@ -30,7 +30,7 @@ import pl.aprilapps.easyphotopicker.EasyImage
 import java.io.File
 import java.util.*
 
-open class EditNoteActivity : ViewAdvancedNoteActivity() {
+open class EditNoteActivity : ViewNoteActivity() {
 
   private var active = false
   private var maxUid = 0

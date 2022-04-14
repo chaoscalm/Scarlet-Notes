@@ -15,7 +15,7 @@ import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.common.utils.ColorUtil
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.database.entities.Widget
-import com.maubis.scarlet.base.editor.ViewAdvancedNoteActivity
+import com.maubis.scarlet.base.editor.ViewNoteActivity
 import com.maubis.scarlet.base.note.getTextForWidget
 import com.maubis.scarlet.base.note.selection.INoteSelectorActivity
 import com.maubis.scarlet.base.note.selection.SelectableNotesActivityBase
@@ -78,7 +78,7 @@ class WidgetConfigureActivity : SelectableNotesActivityBase(), INoteSelectorActi
         return
       }
 
-      val pendingIntent = ViewAdvancedNoteActivity.makePendingIntentWithStack(context, note)
+      val pendingIntent = ViewNoteActivity.makePendingIntentWithStack(context, note)
       val views = RemoteViews(context.packageName, R.layout.widget_layout)
 
       views.setTextViewText(R.id.description, note.getTextForWidget())

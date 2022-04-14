@@ -13,7 +13,7 @@ import com.maubis.scarlet.base.common.specs.ToolbarColorConfig
 import com.maubis.scarlet.base.common.specs.bottomBarCard
 import com.maubis.scarlet.base.common.specs.bottomBarRoundIcon
 import com.maubis.scarlet.base.database.entities.NoteState
-import com.maubis.scarlet.base.editor.ViewAdvancedNoteActivity
+import com.maubis.scarlet.base.editor.ViewNoteActivity
 import com.maubis.scarlet.base.home.sheets.openDeleteNotePermanentlySheet
 import com.maubis.scarlet.base.note.copyToClipboard
 import com.maubis.scarlet.base.note.share
@@ -22,7 +22,7 @@ import com.maubis.scarlet.base.note.share
 object NoteViewBottomBarSpec {
   @OnCreateLayout
   fun onCreate(context: ComponentContext, @Prop colorConfig: ToolbarColorConfig): Component {
-    val activity = context.androidContext as ViewAdvancedNoteActivity
+    val activity = context.androidContext as ViewNoteActivity
     val note = activity.note()
     val row = Row.create(context)
       .widthPercent(100f)

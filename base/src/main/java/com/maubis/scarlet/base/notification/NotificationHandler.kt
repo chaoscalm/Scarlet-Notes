@@ -15,7 +15,7 @@ import com.maubis.scarlet.base.common.utils.OsVersionUtils
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.editor.EditNoteActivity
 import com.maubis.scarlet.base.editor.INTENT_KEY_NOTE_ID
-import com.maubis.scarlet.base.editor.ViewAdvancedNoteActivity
+import com.maubis.scarlet.base.editor.ViewNoteActivity
 import com.maubis.scarlet.base.home.MainActivity
 import com.maubis.scarlet.base.note.getDisplayTime
 import com.maubis.scarlet.base.note.getTextForSharing
@@ -55,7 +55,7 @@ class NotificationHandler(private val context: Context) {
   }
 
   fun openNotification(config: NotificationConfig) {
-    val pendingIntent = getPendingActivityIntent(config, ViewAdvancedNoteActivity.makePreferenceAwareIntent(context.applicationContext, config.note), 1)
+    val pendingIntent = getPendingActivityIntent(config, ViewNoteActivity.makePreferenceAwareIntent(context.applicationContext, config.note), 1)
     val contentView = getRemoteView(config)
     val notificationBuilder = NotificationCompat.Builder(context, config.channel)
       .setSmallIcon(R.drawable.ic_format_quote_white_48dp)
@@ -139,7 +139,7 @@ class NotificationHandler(private val context: Context) {
   }
 
   private fun getNoteOpenIntent(config: NotificationConfig): Intent {
-    val intent = Intent(context, ViewAdvancedNoteActivity::class.java)
+    val intent = Intent(context, ViewNoteActivity::class.java)
     intent.putExtra(INTENT_KEY_NOTE_ID, config.note.uid)
     return intent
   }

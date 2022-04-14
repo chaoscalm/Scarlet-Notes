@@ -15,7 +15,7 @@ import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.ScarletApp.Companion.data
-import com.maubis.scarlet.base.ScarletIntentHandlerActivity
+import com.maubis.scarlet.base.ShortcutIntentHandlerActivity
 import com.maubis.scarlet.base.common.sheets.ColorPickerBottomSheet
 import com.maubis.scarlet.base.common.sheets.ColorPickerDefaultController
 import com.maubis.scarlet.base.common.sheets.openSheet
@@ -319,7 +319,7 @@ class NoteActionsBottomSheet : ThemedBottomSheetFragment() {
             .setShortLabel(title)
             .setLongLabel(title)
             .setIcon(Icon.createWithResource(activity, R.mipmap.open_note_launcher))
-            .setIntent(ScarletIntentHandlerActivity.viewShortcutIntent(note))
+            .setIntent(ShortcutIntentHandlerActivity.viewShortcutIntent(note))
             .build()
           addShortcut(activity, shortcut)
         }

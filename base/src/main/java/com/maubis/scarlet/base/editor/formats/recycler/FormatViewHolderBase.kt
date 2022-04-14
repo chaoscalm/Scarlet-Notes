@@ -13,7 +13,7 @@ import com.maubis.scarlet.base.common.ui.Theme
 import com.maubis.scarlet.base.common.ui.ThemeColorType
 import com.maubis.scarlet.base.common.utils.ColorUtil
 import com.maubis.scarlet.base.editor.INTENT_KEY_NOTE_ID
-import com.maubis.scarlet.base.editor.ViewAdvancedNoteActivity
+import com.maubis.scarlet.base.editor.ViewNoteActivity
 import com.maubis.scarlet.base.editor.formats.Format
 import com.maubis.scarlet.base.editor.formats.FormatType
 import com.maubis.scarlet.base.settings.STORE_KEY_TEXT_SIZE
@@ -40,7 +40,7 @@ data class FormatViewHolderConfig(
 
 abstract class FormatViewHolderBase(context: Context, view: View) : RecyclerViewHolder<Format>(context, view) {
 
-  protected val activity: ViewAdvancedNoteActivity = context as ViewAdvancedNoteActivity
+  protected val activity: ViewNoteActivity = context as ViewNoteActivity
 
   override fun populate(data: Format, extra: Bundle?) {
     val noteColor: Int = extra?.getInt(KEY_NOTE_COLOR) ?: sNoteDefaultColor

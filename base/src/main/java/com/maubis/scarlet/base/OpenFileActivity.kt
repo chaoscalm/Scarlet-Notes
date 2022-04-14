@@ -16,7 +16,7 @@ import com.maubis.scarlet.base.common.ui.SecuredActivity
 import com.maubis.scarlet.base.common.ui.ThemeColorType
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.databinding.ActivityExternalIntentBinding
-import com.maubis.scarlet.base.editor.ViewAdvancedNoteActivity
+import com.maubis.scarlet.base.editor.ViewNoteActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -59,7 +59,7 @@ class OpenFileActivity : SecuredActivity() {
       lifecycleScope.launch {
         val note = Note.create(title = "", description = contentText)
         withContext(Dispatchers.IO) { note.save(this@OpenFileActivity) }
-        startActivity(ViewAdvancedNoteActivity.makeIntent(this@OpenFileActivity, note))
+        startActivity(ViewNoteActivity.makeIntent(this@OpenFileActivity, note))
         finish()
       }
     }

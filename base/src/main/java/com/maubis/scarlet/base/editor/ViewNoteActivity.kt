@@ -44,7 +44,7 @@ data class NoteViewColorConfig(
   var toolbarIconColor: Int = Color.BLACK,
   var statusBarColor: Int = Color.BLACK)
 
-open class ViewAdvancedNoteActivity : SecuredActivity(), INoteActionsActivity, IFormatRecyclerViewActivity {
+open class ViewNoteActivity : SecuredActivity(), INoteActionsActivity, IFormatRecyclerViewActivity {
 
   var focusedFormat: Format? = null
 
@@ -180,7 +180,7 @@ open class ViewAdvancedNoteActivity : SecuredActivity(), INoteActionsActivity, I
   }
 
   fun openMoreOptions() {
-    NoteActionsBottomSheet.openSheet(this@ViewAdvancedNoteActivity, note)
+    NoteActionsBottomSheet.openSheet(this@ViewNoteActivity, note)
   }
 
   fun openEditor() {
@@ -267,13 +267,13 @@ open class ViewAdvancedNoteActivity : SecuredActivity(), INoteActionsActivity, I
 
   companion object {
     fun makeIntent(context: Context, note: Note): Intent {
-      val intent = Intent(context, ViewAdvancedNoteActivity::class.java)
+      val intent = Intent(context, ViewNoteActivity::class.java)
       intent.putExtra(INTENT_KEY_NOTE_ID, note.uid)
       return intent
     }
 
     fun makePendingIntentWithStack(context: Context, note: Note): PendingIntent {
-      val intent = Intent(context, ViewAdvancedNoteActivity::class.java)
+      val intent = Intent(context, ViewNoteActivity::class.java)
       intent.putExtra(INTENT_KEY_NOTE_ID, note.uid)
       return getPendingIntentWithStack(context, 5000 + note.uid, intent)
     }
@@ -283,7 +283,7 @@ open class ViewAdvancedNoteActivity : SecuredActivity(), INoteActionsActivity, I
         return EditNoteActivity.makeEditNoteIntent(context, note)
       }
 
-      return Intent(context, ViewAdvancedNoteActivity::class.java)
+      return Intent(context, ViewNoteActivity::class.java)
         .putExtra(INTENT_KEY_NOTE_ID, note.uid)
     }
   }
