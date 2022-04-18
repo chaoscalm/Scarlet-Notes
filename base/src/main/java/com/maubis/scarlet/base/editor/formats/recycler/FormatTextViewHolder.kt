@@ -21,14 +21,13 @@ import com.maubis.scarlet.base.editor.formats.Format
 import com.maubis.scarlet.base.editor.formats.FormatType
 import com.maubis.scarlet.base.editor.sheet.FormatActionBottomSheet
 import com.maubis.scarlet.base.settings.sEditorLiveMarkdown
-import com.maubis.scarlet.base.settings.sEditorMoveHandles
 import kotlin.math.min
 
 open class FormatTextViewHolder(context: Context, view: View) : FormatViewHolderBase(context, view), TextWatcher {
 
   protected val text: TextView = root.findViewById(R.id.text)
   protected val edit: EditText = root.findViewById(R.id.edit)
-  protected val actionMove: ImageView = root.findViewById(R.id.action_move_icon)
+  private val dragHandle: ImageView = root.findViewById(R.id.action_move_icon)
 
   protected lateinit var format: Format
 
@@ -76,16 +75,13 @@ open class FormatTextViewHolder(context: Context, view: View) : FormatViewHolder
       else -> text.text = data.text
     }
 
-    actionMove.setColorFilter(config.iconColor)
-    actionMove.isVisible = config.editable
-    actionMove.setOnClickListener {
+    dragHandle.setColorFilter(config.iconColor)
+    dragHandle.isVisible = config.editable
+    dragHandle.setOnClickListener {
       openSheet(activity, FormatActionBottomSheet().apply {
         noteUUID = config.noteUUID
         format = data
       })
-    }
-    if (config.editable && !sEditorMoveHandles) {
-      actionMove.visibility = View.INVISIBLE
     }
   }
 

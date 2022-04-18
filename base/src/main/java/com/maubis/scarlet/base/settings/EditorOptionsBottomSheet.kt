@@ -20,10 +20,6 @@ var sEditorSkipNoteViewer: Boolean
   get() = appPreferences.getBoolean("skip_note_viewer", false)
   set(value) = appPreferences.edit { putBoolean("skip_note_viewer", value) }
 
-var sEditorMoveHandles: Boolean
-  get() = appPreferences.getBoolean("editor_move_handles", true)
-  set(value) = appPreferences.edit { putBoolean("editor_move_handles", value) }
-
 var sNoteDefaultColor: Int
   get() = appPreferences.getInt("KEY_NOTE_DEFAULT_COLOR", (0xFFD32F2F).toInt())
   set(value) = appPreferences.edit { putInt("KEY_NOTE_DEFAULT_COLOR", value) }
@@ -83,17 +79,6 @@ class EditorOptionsBottomSheet : LithoOptionBottomSheet() {
       isSelectable = true,
       listener = {
         sEditorMoveChecked = !sEditorMoveChecked
-        refresh(componentContext.androidContext, dialog)
-      }
-    ))
-    items.add(LithoOptionsItem(
-      title = R.string.editor_option_enable_move_handle,
-      subtitle = R.string.editor_option_enable_move_handle_description,
-      icon = R.drawable.icon_drag_indicator,
-      selected = sEditorMoveHandles,
-      isSelectable = true,
-      listener = {
-        sEditorMoveHandles = !sEditorMoveHandles
         refresh(componentContext.androidContext, dialog)
       }
     ))

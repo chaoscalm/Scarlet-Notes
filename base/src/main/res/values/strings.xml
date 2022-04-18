@@ -239,9 +239,6 @@
   <string name="editor_option_move_checked_items">Move Checked Items</string>
   <string name="editor_option_move_checked_items_description">Checked items move to the bottom of the list. Uncheck does not reset position.</string>
 
-  <string name="editor_option_enable_move_handle">Show Movement Handles</string>
-  <string name="editor_option_enable_move_handle_description">Show the handle to move items up or down. You can still move things around by touching the corner.</string>
-
   <string name="markdown_help_sheet_title">Markdown Examples</string>
   <!-- End: Editor Option Sheet -->
 
