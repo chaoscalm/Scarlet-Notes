@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:background="@color/transparent"
@@ -52,7 +53,7 @@
         android:layout_height="@dimen/icon_size_xlarge"
         android:padding="@dimen/spacing_xsmall"
         android:src="@drawable/ic_list_white_48dp"
-        android:tint="@color/white" />
+        app:tint="@color/white" />
 
       <ImageView
         android:id="@+id/add_note"
@@ -60,7 +61,7 @@
         android:layout_height="@dimen/icon_size_xlarge"
         android:padding="@dimen/spacing_xsmall"
         android:src="@drawable/ic_add_new_note"
-        android:tint="@color/white" />
+        app:tint="@color/white" />
     </LinearLayout>
 
   </LinearLayout>
