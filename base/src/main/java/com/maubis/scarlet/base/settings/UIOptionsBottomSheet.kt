@@ -6,9 +6,7 @@ import com.facebook.litho.ComponentContext
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appPreferences
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
-import com.maubis.scarlet.base.common.sheets.LithoOptionBottomSheet
-import com.maubis.scarlet.base.common.sheets.LithoOptionsItem
-import com.maubis.scarlet.base.common.sheets.openSheet
+import com.maubis.scarlet.base.common.sheets.*
 import com.maubis.scarlet.base.common.ui.sThemeLabel
 import com.maubis.scarlet.base.home.MainActivity
 
@@ -40,6 +38,22 @@ class UIOptionsBottomSheet : LithoOptionBottomSheet() {
                   }
               }
           })
+      }
+    ))
+    options.add(LithoOptionsItem(
+      title = R.string.note_option_default_color,
+      subtitle = R.string.note_option_default_color_subtitle,
+      icon = R.drawable.ic_action_color,
+      listener = {
+        val config = ColorPickerDefaultController(
+          title = R.string.note_option_default_color,
+          colors = listOf(
+            activity.resources.getIntArray(R.array.bright_colors),
+            activity.resources.getIntArray(R.array.bright_colors_accent)),
+          selectedColor = sNoteDefaultColor,
+          onColorSelected = { sNoteDefaultColor = it }
+        )
+        openSheet(activity, ColorPickerBottomSheet().apply { this.config = config })
       }
     ))
     val isTablet = resources.getBoolean(R.bool.is_tablet)
@@ -76,18 +90,6 @@ class UIOptionsBottomSheet : LithoOptionBottomSheet() {
         refresh(activity, dialog)
       }
     ))
-    options.add(
-      LithoOptionsItem(
-        title = R.string.note_option_font_size,
-        subtitle = 0,
-        content = activity.getString(R.string.note_option_font_size_subtitle, sEditorTextSize),
-        icon = R.drawable.ic_title_white_48dp,
-        listener = {
-            openSheet(activity, FontSizeBottomSheet())
-            refresh(activity, dialog)
-        },
-        actionIcon = 0
-      ))
     options.add(LithoOptionsItem(
       title = R.string.note_option_number_lines,
       subtitle = 0,
@@ -97,20 +99,6 @@ class UIOptionsBottomSheet : LithoOptionBottomSheet() {
         openSheet(activity, LineCountBottomSheet())
       }
     ))
-    options.add(
-      LithoOptionsItem(
-        title = R.string.ui_options_note_background_color,
-        subtitle = when (sUIUseNoteColorAsBackground) {
-          true -> R.string.ui_options_note_background_color_settings_note
-          false -> R.string.ui_options_note_background_color_settings_theme
-        },
-        icon = R.drawable.ic_action_color,
-        listener = {
-          sUIUseNoteColorAsBackground = !sUIUseNoteColorAsBackground
-          refresh(activity, dialog)
-        },
-        actionIcon = 0
-      ))
     return options
   }
 }

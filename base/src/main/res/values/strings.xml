@@ -88,9 +88,9 @@
   <string name="home_option_delete_everything">Delete Everything</string>
   <string name="home_option_delete_everything_details">Delete notes, tags and folders in the app</string>
 
-  <string name="ui_options_note_background_color">Note Viewer Background</string>
-  <string name="ui_options_note_background_color_settings_theme">Use theme color for background</string>
-  <string name="ui_options_note_background_color_settings_note">Use note color for background</string>
+  <string name="ui_options_note_background_color">Background Color</string>
+  <string name="ui_options_note_background_color_settings_theme">Use theme color</string>
+  <string name="ui_options_note_background_color_settings_note">Use note color</string>
 
   <string name="security_option_title">Security Options</string>
   <string name="security_option_set_pin_code">Pass Code</string>
@@ -181,7 +181,7 @@
   <!-- Start Note Text Size -->
   <string name="note_option_font_size">Note Font Size</string>
   <string name="note_option_font_size_example">Adjust the font size of the text in the notes page. You can see how it would look like in this preview.</string>
-  <string name="note_option_font_size_subtitle">%d size of the text in the note viewer</string>
+  <string name="note_option_font_size_subtitle">Selected text size: %d</string>
   <!-- End Note Text Size -->
 
   <!-- Start No Pincode -->
@@ -234,7 +234,7 @@
   <string name="editor_option_skip_view_note_details">Skip the note viewer and jump to the note editor directly</string>
 
   <string name="editor_option_enable_live_markdown">Realtime Markdown</string>
-  <string name="editor_option_enable_live_markdown_description">Choose if you want markdown to be visible as your type. Enabling can effect performance on large notes.</string>
+  <string name="editor_option_enable_live_markdown_description">Choose if you want Markdown formatting to be visible as you type. Enabling can affect performance on large notes.</string>
 
   <string name="editor_option_move_checked_items">Move Checked Items</string>
   <string name="editor_option_move_checked_items_description">Checked items move to the bottom of the list. Uncheck does not reset position.</string>

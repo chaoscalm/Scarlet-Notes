@@ -5,7 +5,9 @@ import androidx.core.content.edit
 import com.facebook.litho.ComponentContext
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appPreferences
-import com.maubis.scarlet.base.common.sheets.*
+import com.maubis.scarlet.base.common.sheets.LithoOptionBottomSheet
+import com.maubis.scarlet.base.common.sheets.LithoOptionsItem
+import com.maubis.scarlet.base.common.sheets.openSheet
 import com.maubis.scarlet.base.home.MainActivity
 
 var sEditorLiveMarkdown: Boolean
@@ -31,23 +33,32 @@ class EditorOptionsBottomSheet : LithoOptionBottomSheet() {
   override fun getOptions(componentContext: ComponentContext, dialog: Dialog): List<LithoOptionsItem> {
     val items = ArrayList<LithoOptionsItem>()
     val activity = context as MainActivity
-    items.add(LithoOptionsItem(
-      title = R.string.note_option_default_color,
-      subtitle = R.string.note_option_default_color_subtitle,
-      icon = R.drawable.ic_action_color,
-      listener = {
-        val config = ColorPickerDefaultController(
-          title = R.string.note_option_default_color,
-          colors = listOf(
-            activity.resources.getIntArray(R.array.bright_colors),
-            activity.resources.getIntArray(R.array.bright_colors_accent)),
-          selectedColor = sNoteDefaultColor,
-          onColorSelected = { sNoteDefaultColor = it }
-        )
-        openSheet(activity, ColorPickerBottomSheet().apply { this.config = config })
-        dismiss()
-      }
-    ))
+    items.add(
+      LithoOptionsItem(
+        title = R.string.ui_options_note_background_color,
+        subtitle = when (sUIUseNoteColorAsBackground) {
+          true -> R.string.ui_options_note_background_color_settings_note
+          false -> R.string.ui_options_note_background_color_settings_theme
+        },
+        icon = R.drawable.ic_action_color,
+        listener = {
+          sUIUseNoteColorAsBackground = !sUIUseNoteColorAsBackground
+          refresh(activity, dialog)
+        },
+        actionIcon = 0
+      ))
+    items.add(
+      LithoOptionsItem(
+        title = R.string.note_option_font_size,
+        subtitle = 0,
+        content = activity.getString(R.string.note_option_font_size_subtitle, sEditorTextSize),
+        icon = R.drawable.ic_title_white_48dp,
+        listener = {
+          openSheet(activity, FontSizeBottomSheet())
+          refresh(activity, dialog)
+        },
+        actionIcon = 0
+      ))
     items.add(LithoOptionsItem(
       title = R.string.editor_option_enable_live_markdown,
       subtitle = R.string.editor_option_enable_live_markdown_description,

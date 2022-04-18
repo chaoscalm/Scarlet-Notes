@@ -71,10 +71,8 @@
   <string name="tag_sheet_new_tag_button">Crea un nuovo tag</string>
   <string name="tag_sheet_choose_tag">Scegli un tag&#8230;</string>
 
-  <!-- Added in Release v3.7.9 -->
   <string name="import_to_app">Importa</string>
 
-  <!-- Added in release v3.8.4 -->
   <string name="change_tags">Cambia tag</string>
   <string name="home_option_order_notes">Ordine note</string>
   <string name="reminder_sheet_reminder_date">Data del promemoria</string>
@@ -84,11 +82,11 @@
   <string name="sort_sheet_newest_first">Prima i più nuovi</string>
   <string name="sort_sheet_oldest_first">Prima i più vecchi</string>
   <string name="sort_sheet_last_modified">Più recentemente modificato</string>
+  <string name="sort_sheet_alphabetical">Alfabetico</string>
   <string name="reminder">Promemoria</string>
   <string name="pin_note">Fissa in alto</string>
   <string name="unpin_note">Rilascia</string>
 
-  <!-- Added in release v3.9.0 -->
   <string name="home_option_ui_experience">Interfaccia ed esperienza utente</string>
   <string name="home_option_ui_experience_subtitle">Modifica l\'aspetto dell\'app</string>
   <string name="home_option_about">Informazioni sull\'app</string>
@@ -99,14 +97,11 @@
   <string name="home_option_backup_options">Backup e dati</string>
   <string name="home_option_backup_options_subtitle">Importa, esporta o elimina le tue note</string>
 
-  <!-- Added in release v4.0.0 -->
-  <!-- No PinCode Sheet -->
   <string name="no_pincode_sheet_title">Nessun PIN impostato</string>
   <string name="no_pincode_sheet_details">Non hai impostato il PIN per accedere alle note protette. Vuoi impostarlo ora?</string>
   <string name="no_pincode_sheet_not_now">Più tardi</string>
   <string name="no_pincode_sheet_set_up">Imposta</string>
 
-  <!-- Added for 4.1.0 -->
   <string name="duplicate">Duplica</string>
   <string name="delete_sheet_are_you_sure">Sei sicuro?</string>
   <string name="delete_sheet_delete_trash">Vuoi eliminare definitivamente le note dal cestino?</string>
@@ -114,8 +109,6 @@
   <string name="delete_sheet_delete_trash_yes">Elimina</string>
   <string name="delete_sheet_delete_trash_no">Annulla</string>
 
-
-  <!-- Added for 4.3.7 -->
   <string name="shortcut_add_note">Aggiungi nota</string>
   <string name="shortcut_add_list">Aggiungi lista</string>
   <string name="select_a_note_title">Seleziona una nota</string>
@@ -124,12 +117,8 @@
   <string name="widget_no_valid_note">Nota eliminata o protetta</string>
   <string name="note_option_font_size">Dimensione carattere</string>
   <string name="note_option_font_size_example">Regola le dimensioni del carattere del testo delle note. Puoi vedere come apparirà in questa anteprima.</string>
-  <string name="note_option_font_size_subtitle">Dimensione del testo nel visualizzatore note: %d</string>
+  <string name="note_option_font_size_subtitle">Dimensione del testo selezionata: %d</string>
 
-
-  <!-- Added for 4.3.8 -->
-
-  <!-- Added for 4.5.3 -->
   <string name="format_action_copy">Copia</string>
   <string name="format_action_title">Azioni blocco di testo</string>
   <string name="format_action_gallery">Galleria</string>
@@ -141,14 +130,12 @@
   <string name="home_option_auto_export_subtitle">Crea regolarmente un backup di tutti i dati nella memoria interna del dispositivo</string>
   <string name="format_hint_image">Clicca per aggiungere o cambiare immagine</string>
 
-  <!-- Added for 4.7.0 -->
   <string name="reminder_frequency_once">Solo una volta</string>
   <string name="reminder_frequency_daily">Quotidiano</string>
   <string name="notification_reminder_channel_label">Promemoria e sveglie</string>
   <string name="about_page_description">%s è una semplice app per prendere appunti. Permette di inserire rapidamente testo formattato senza rendere complicata l\'esperienza utente. Rende il multi-tasking un gioco da ragazzi.</string>
   <string name="note_option_number_lines_subtitle">%d linee sulla schermata principale</string>
 
-  <!-- Added for 6.6.1 -->
   <string name="home_option_theme_color">Tema dell\'app</string>
   <string name="home_option_theme_color_subtitle">Seleziona il colore di sfondo per il tema</string>
   <string name="theme_page_title">Seleziona il tema dell\'app</string>
@@ -176,16 +163,14 @@
   <string name="home_option_delete_all_tags_details">Elimina tutti i tag nell\'app</string>
   <string name="home_option_delete_everything">Elimina tutto</string>
   <string name="home_option_delete_everything_details">Elimina note, tag e cartelle nell\'app</string>
-  <string name="ui_options_note_background_color">Sfondo visualizzatore note</string>
+  <string name="ui_options_note_background_color">Colore dello sfondo</string>
+  <string name="ui_options_note_background_color_settings_theme">Usa il colore del tema</string>
+  <string name="ui_options_note_background_color_settings_note">Usa il colore della nota</string>
 
-  <!-- Added for 7.0.4 -->
   <string name="merge_notes">Unisci note</string>
-  <string name="home_option_export_markdown">Esporta come Markdown</string>
+  <string name="home_option_export_markdown">Esporta in Markdown</string>
   <string name="home_option_export_markdown_subtitle">Esporta le note in formato Markdown (non è possibile importarle nuovamente nell\'app)</string>
-  <string name="ui_options_note_background_color_settings_theme">Usa il colore del tema per lo sfondo</string>
-  <string name="ui_options_note_background_color_settings_note">Usa il colore della nota per lo sfondo</string>
   <string name="import_export_locked">Esporta note protette</string>
-  <string name="sort_sheet_alphabetical">Alfabetico</string>
   <string name="import_export_locked_details">Effettua anche il backup delle note che sono protette</string>
   <string name="home_option_editor_options_title">Opzioni dell\'editor</string>
   <string name="home_option_editor_options_description">Modifica le impostazioni dell\'editor delle note</string>
@@ -219,7 +204,6 @@
   <string name="widget_option_show_toolbar">Mostra barra delle azioni</string>
   <string name="widget_option_show_toolbar_details">Mostra la barra delle azioni nel widget multi-nota</string>
 
-  <!-- Added for 7.5.0 -->
   <string name="folder_delete_option_sheet_title">Opzioni di rimozione</string>
   <string name="folder_delete_option_sheet_remove_folder">Rimuovi il blocco note</string>
   <string name="folder_delete_option_sheet_remove_folder_details">Rimuovi solo il blocco note. Le note al suo interno verranno spostate al di fuori di esso.</string>
