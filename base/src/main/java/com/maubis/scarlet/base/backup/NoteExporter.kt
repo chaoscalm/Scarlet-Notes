@@ -112,11 +112,7 @@ object NoteExporter {
         FormatType.IMAGE -> "<image>$text</image>"
         FormatType.SEPARATOR -> "\n---\n"
         FormatType.TEXT -> text
-
-        // NOTE: All the following states should never happen at this place
-
         FormatType.TAG -> ""
-        FormatType.EMPTY -> ""
       }
       markdownBuilder.append(formatMarkdown)
       markdownBuilder.append("\n")

@@ -122,12 +122,11 @@ open class ViewNoteActivity : SecuredActivity(), INoteActionsActivity, IFormatRe
     adapter.addItems(formats)
 
     if (!editModeValue) {
-      maybeAddTags()
-      maybeAddEmptySpace()
+      addTagsIndicatorIfNeeded()
     }
   }
 
-  private fun maybeAddTags() {
+  private fun addTagsIndicatorIfNeeded() {
     val tagLabel = note.getTagString()
     if (tagLabel.isEmpty()) {
       return
@@ -135,10 +134,6 @@ open class ViewNoteActivity : SecuredActivity(), INoteActionsActivity, IFormatRe
 
     val format = Format(FormatType.TAG, tagLabel)
     adapter.addItem(format)
-  }
-
-  private fun maybeAddEmptySpace() {
-    adapter.addItem(Format(FormatType.EMPTY))
   }
 
   private fun setRecyclerView() {

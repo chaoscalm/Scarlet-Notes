@@ -91,11 +91,5 @@ fun getFormatControllerItems(): List<MultiRecyclerViewControllerItem<Format>> {
       .layoutFile(R.layout.item_format_separator)
       .holderClass(FormatSeparatorViewHolder::class.java)
       .build())
-  list.add(
-    MultiRecyclerViewControllerItem.Builder<Format>()
-      .viewType(FormatType.EMPTY.ordinal)
-      .layoutFile(R.layout.item_format_fab_space)
-      .holderClass(NullFormatHolder::class.java)
-      .build())
   return list
 }

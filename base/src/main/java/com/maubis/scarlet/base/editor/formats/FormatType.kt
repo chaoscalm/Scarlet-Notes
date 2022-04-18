@@ -15,8 +15,7 @@ enum class FormatType {
   CHECKLIST_CHECKED,
   CODE,
   QUOTE,
-  SEPARATOR,
-  EMPTY;
+  SEPARATOR;
 
   fun getNextFormatType(): FormatType {
     return when (this) {
