@@ -25,5 +25,14 @@ class FormatSeparatorViewHolder(context: Context, view: View) : FormatViewHolder
         format = data
       })
     }
+    dragHandle.setOnLongClickListener {
+      activity.startFormatDrag(this)
+      true
+    }
+
+    itemView.setOnLongClickListener {
+      activity.startFormatDrag(this)
+      true
+    }
   }
 }

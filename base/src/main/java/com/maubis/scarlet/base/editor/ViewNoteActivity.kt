@@ -7,6 +7,7 @@ import android.graphics.Color
 import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.facebook.litho.ComponentContext
 import com.facebook.litho.LithoView
 import com.github.bijoysingh.starter.recyclerview.MultiRecyclerViewControllerItem
@@ -216,9 +217,9 @@ open class ViewNoteActivity : SecuredActivity(), INoteActionsActivity, IFormatRe
           .build()))
   }
 
-  protected open fun setNoteColor(color: Int) {
+  protected open fun setNoteColor(color: Int) {}
 
-  }
+  open fun startFormatDrag(viewHolder: RecyclerView.ViewHolder) {}
 
   protected fun saveNoteIfNeeded() {
     if (note.getFormats().isEmpty() && note.isNotPersisted()) {

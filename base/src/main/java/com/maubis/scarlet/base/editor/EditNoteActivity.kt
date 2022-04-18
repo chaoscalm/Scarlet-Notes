@@ -20,7 +20,7 @@ import com.maubis.scarlet.base.common.specs.ToolbarColorConfig
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.editor.recycler.FormatImageViewHolder
 import com.maubis.scarlet.base.editor.recycler.FormatTextViewHolder
-import com.maubis.scarlet.base.editor.recycler.SimpleItemTouchHelper
+import com.maubis.scarlet.base.editor.recycler.FormatTouchHelperCallback
 import com.maubis.scarlet.base.editor.specs.NoteEditorBottomBar
 import pl.aprilapps.easyphotopicker.DefaultCallback
 import pl.aprilapps.easyphotopicker.EasyImage
@@ -37,11 +37,13 @@ open class EditNoteActivity : ViewNoteActivity() {
   private var historyModified = false
   private val history: MutableList<Note> = mutableListOf<Note>()
 
+  private lateinit var formatsTouchHelper: ItemTouchHelper
+
   override val editModeValue: Boolean get() = true
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setTouchListener()
+    setDragHandlesTouchListener()
     startHandler()
   }
 
@@ -66,10 +68,9 @@ open class EditNoteActivity : ViewNoteActivity() {
     note.folder = folder.uuid
   }
 
-  private fun setTouchListener() {
-    val callback = SimpleItemTouchHelper(adapter)
-    val touchHelper = ItemTouchHelper(callback)
-    touchHelper.attachToRecyclerView(views.formatsRecyclerView)
+  private fun setDragHandlesTouchListener() {
+    formatsTouchHelper = ItemTouchHelper(FormatTouchHelperCallback(adapter))
+    formatsTouchHelper.attachToRecyclerView(views.formatsRecyclerView)
   }
 
   override fun displayNote() {
@@ -328,6 +329,10 @@ open class EditNoteActivity : ViewNoteActivity() {
       }
     }
     return holder
+  }
+
+  override fun startFormatDrag(viewHolder: RecyclerView.ViewHolder) {
+    formatsTouchHelper.startDrag(viewHolder)
   }
 
   override fun setNoteColor(color: Int) {

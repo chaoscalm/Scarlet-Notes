@@ -83,6 +83,10 @@ open class FormatTextViewHolder(context: Context, view: View) : FormatViewHolder
         format = data
       })
     }
+    dragHandle.setOnLongClickListener {
+      activity.startFormatDrag(this)
+      true
+    }
   }
 
   override fun beforeTextChanged(text: CharSequence, start: Int, count: Int, after: Int) {
