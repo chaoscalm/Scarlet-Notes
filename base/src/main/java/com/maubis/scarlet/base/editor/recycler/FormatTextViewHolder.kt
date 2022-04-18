@@ -1,4 +1,4 @@
-package com.maubis.scarlet.base.editor.formats.recycler
+package com.maubis.scarlet.base.editor.recycler
 
 import android.content.Context
 import android.text.Editable
@@ -16,9 +16,9 @@ import com.maubis.markdown.spannable.clearMarkdownSpans
 import com.maubis.markdown.spannable.setFormats
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.common.sheets.openSheet
+import com.maubis.scarlet.base.editor.Format
+import com.maubis.scarlet.base.editor.FormatType
 import com.maubis.scarlet.base.editor.MarkdownFormatting
-import com.maubis.scarlet.base.editor.formats.Format
-import com.maubis.scarlet.base.editor.formats.FormatType
 import com.maubis.scarlet.base.editor.sheet.FormatActionBottomSheet
 import com.maubis.scarlet.base.settings.sEditorLiveMarkdown
 import kotlin.math.min
@@ -148,17 +148,17 @@ open class FormatTextViewHolder(context: Context, view: View) : FormatViewHolder
 
   private fun Format.getHint(): String {
     return when (type) {
-      FormatType.TEXT, FormatType.TAG -> context.getString(R.string.format_hint_text)
-      FormatType.HEADING,
-      FormatType.SUB_HEADING,
-      FormatType.HEADING_3
+      com.maubis.scarlet.base.editor.FormatType.TEXT, com.maubis.scarlet.base.editor.FormatType.TAG -> context.getString(R.string.format_hint_text)
+      com.maubis.scarlet.base.editor.FormatType.HEADING,
+      com.maubis.scarlet.base.editor.FormatType.SUB_HEADING,
+      com.maubis.scarlet.base.editor.FormatType.HEADING_3
       -> context.getString(R.string.format_hint_heading)
-      FormatType.NUMBERED_LIST,
-      FormatType.CHECKLIST_UNCHECKED,
-      FormatType.CHECKLIST_CHECKED
+      com.maubis.scarlet.base.editor.FormatType.NUMBERED_LIST,
+      com.maubis.scarlet.base.editor.FormatType.CHECKLIST_UNCHECKED,
+      com.maubis.scarlet.base.editor.FormatType.CHECKLIST_CHECKED
       -> context.getString(R.string.format_hint_list)
-      FormatType.CODE -> context.getString(R.string.format_hint_code)
-      FormatType.QUOTE -> context.getString(R.string.format_hint_quote)
+      com.maubis.scarlet.base.editor.FormatType.CODE -> context.getString(R.string.format_hint_code)
+      com.maubis.scarlet.base.editor.FormatType.QUOTE -> context.getString(R.string.format_hint_quote)
       else -> ""
     }
   }

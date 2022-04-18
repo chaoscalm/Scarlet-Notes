@@ -14,7 +14,7 @@ import com.maubis.scarlet.base.backup.ui.sBackupLockedNotes
 import com.maubis.scarlet.base.backup.ui.sBackupMarkdown
 import com.maubis.scarlet.base.common.utils.formatTimestamp
 import com.maubis.scarlet.base.database.entities.Note
-import com.maubis.scarlet.base.editor.formats.FormatType
+import com.maubis.scarlet.base.editor.FormatType
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

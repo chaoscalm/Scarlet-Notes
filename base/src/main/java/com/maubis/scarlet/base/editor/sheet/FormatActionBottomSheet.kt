@@ -9,9 +9,9 @@ import com.maubis.scarlet.base.common.specs.GridSectionItem
 import com.maubis.scarlet.base.common.specs.GridSectionOptionItem
 import com.maubis.scarlet.base.common.utils.copyTextToClipboard
 import com.maubis.scarlet.base.common.utils.shareText
+import com.maubis.scarlet.base.editor.Format
+import com.maubis.scarlet.base.editor.FormatType
 import com.maubis.scarlet.base.editor.ViewNoteActivity
-import com.maubis.scarlet.base.editor.formats.Format
-import com.maubis.scarlet.base.editor.formats.FormatType
 import pl.aprilapps.easyphotopicker.EasyImage
 
 class FormatActionBottomSheet : GridOptionBottomSheet() {

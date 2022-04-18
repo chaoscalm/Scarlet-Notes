@@ -1,12 +1,12 @@
-package com.maubis.scarlet.base.editor.formats.recycler
+package com.maubis.scarlet.base.editor.recycler
 
 import android.content.Context
 import android.view.View
 import android.widget.ImageView
 import androidx.core.view.isVisible
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.editor.formats.Format
-import com.maubis.scarlet.base.editor.formats.FormatType
+import com.maubis.scarlet.base.editor.Format
+import com.maubis.scarlet.base.editor.FormatType
 
 class FormatBulletViewHolder(context: Context, view: View) : FormatTextViewHolder(context, view) {
 

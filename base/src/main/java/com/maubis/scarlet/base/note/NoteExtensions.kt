@@ -10,7 +10,7 @@ import com.maubis.scarlet.base.common.ui.ThemedActivity
 import com.maubis.scarlet.base.common.utils.*
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.editor.EditNoteActivity
-import com.maubis.scarlet.base.editor.formats.FormatType
+import com.maubis.scarlet.base.editor.FormatType
 import com.maubis.scarlet.base.security.PinLockController.needsLockCheck
 import com.maubis.scarlet.base.security.PincodeBottomSheet
 import com.maubis.scarlet.base.settings.sInternalShowUUID

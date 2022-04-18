@@ -17,8 +17,8 @@ import com.maubis.scarlet.base.common.ui.ThemeColorType
 import com.maubis.scarlet.base.common.ui.ThemedActivity
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.database.entities.NoteState
+import com.maubis.scarlet.base.editor.Format
 import com.maubis.scarlet.base.editor.ViewNoteActivity
-import com.maubis.scarlet.base.editor.formats.Format
 import com.maubis.scarlet.base.home.MainActivity
 
 data class AlertSheetConfig(

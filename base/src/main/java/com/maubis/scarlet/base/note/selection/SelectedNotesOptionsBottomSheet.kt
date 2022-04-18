@@ -11,8 +11,8 @@ import com.maubis.scarlet.base.common.specs.GridSectionOptionItem
 import com.maubis.scarlet.base.common.utils.copyTextToClipboard
 import com.maubis.scarlet.base.common.utils.shareText
 import com.maubis.scarlet.base.database.entities.NoteState
-import com.maubis.scarlet.base.editor.formats.Formats
-import com.maubis.scarlet.base.editor.formats.sectionPreservingSort
+import com.maubis.scarlet.base.editor.Formats
+import com.maubis.scarlet.base.editor.sectionPreservingSort
 import com.maubis.scarlet.base.home.sheets.AlertBottomSheet
 import com.maubis.scarlet.base.home.sheets.AlertSheetConfig
 import com.maubis.scarlet.base.note.folder.sheet.MultipleNotesFolderChooserBottomSheet

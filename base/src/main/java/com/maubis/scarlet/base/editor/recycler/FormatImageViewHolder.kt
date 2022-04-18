@@ -1,4 +1,4 @@
-package com.maubis.scarlet.base.editor.formats.recycler
+package com.maubis.scarlet.base.editor.recycler
 
 import android.content.Context
 import android.util.Log
@@ -14,7 +14,7 @@ import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.imageStorage
 import com.maubis.scarlet.base.common.sheets.openSheet
 import com.maubis.scarlet.base.common.utils.ImageLoadCallback
-import com.maubis.scarlet.base.editor.formats.Format
+import com.maubis.scarlet.base.editor.Format
 import com.maubis.scarlet.base.editor.sheet.FormatActionBottomSheet
 import com.maubis.scarlet.base.home.sheets.openDeleteFormatDialog
 import pl.aprilapps.easyphotopicker.EasyImage

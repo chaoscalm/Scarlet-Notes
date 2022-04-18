@@ -8,8 +8,8 @@ import android.view.View
 import android.widget.ImageView
 import com.github.bijoysingh.starter.util.RandomHelper
 import com.maubis.scarlet.base.database.entities.Note
-import com.maubis.scarlet.base.editor.formats.Format
-import com.maubis.scarlet.base.editor.formats.FormatType
+import com.maubis.scarlet.base.editor.Format
+import com.maubis.scarlet.base.editor.FormatType
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

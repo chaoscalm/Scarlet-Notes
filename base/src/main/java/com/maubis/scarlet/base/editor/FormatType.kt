@@ -1,4 +1,4 @@
-package com.maubis.scarlet.base.editor.formats
+package com.maubis.scarlet.base.editor
 
 enum class FormatType {
   TAG,

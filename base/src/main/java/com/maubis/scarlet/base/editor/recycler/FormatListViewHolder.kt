@@ -1,4 +1,4 @@
-package com.maubis.scarlet.base.editor.formats.recycler
+package com.maubis.scarlet.base.editor.recycler
 
 import android.content.Context
 import android.graphics.Paint
@@ -9,8 +9,8 @@ import android.widget.ImageView
 import androidx.core.view.isVisible
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.common.utils.getEditorActionListener
-import com.maubis.scarlet.base.editor.formats.Format
-import com.maubis.scarlet.base.editor.formats.FormatType
+import com.maubis.scarlet.base.editor.Format
+import com.maubis.scarlet.base.editor.FormatType
 
 class FormatListViewHolder(context: Context, view: View) : FormatTextViewHolder(context, view) {
 

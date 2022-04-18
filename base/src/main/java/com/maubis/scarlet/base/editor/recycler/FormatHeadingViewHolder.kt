@@ -1,4 +1,4 @@
-package com.maubis.scarlet.base.editor.formats.recycler
+package com.maubis.scarlet.base.editor.recycler
 
 import android.content.Context
 import android.text.InputType

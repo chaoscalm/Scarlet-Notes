@@ -1,4 +1,4 @@
-package com.maubis.scarlet.base.editor.formats.recycler
+package com.maubis.scarlet.base.editor.recycler
 
 import android.content.Context
 import android.graphics.Typeface
@@ -12,10 +12,10 @@ import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.common.ui.Theme
 import com.maubis.scarlet.base.common.ui.ThemeColorType
 import com.maubis.scarlet.base.common.utils.ColorUtil
+import com.maubis.scarlet.base.editor.Format
+import com.maubis.scarlet.base.editor.FormatType
 import com.maubis.scarlet.base.editor.INTENT_KEY_NOTE_ID
 import com.maubis.scarlet.base.editor.ViewNoteActivity
-import com.maubis.scarlet.base.editor.formats.Format
-import com.maubis.scarlet.base.editor.formats.FormatType
 import com.maubis.scarlet.base.settings.STORE_KEY_TEXT_SIZE
 import com.maubis.scarlet.base.settings.TEXT_SIZE_DEFAULT
 import com.maubis.scarlet.base.settings.sNoteDefaultColor

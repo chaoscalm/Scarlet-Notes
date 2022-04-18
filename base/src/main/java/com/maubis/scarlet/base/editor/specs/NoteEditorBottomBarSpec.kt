@@ -13,8 +13,8 @@ import com.maubis.scarlet.base.common.specs.ToolbarColorConfig
 import com.maubis.scarlet.base.common.specs.bottomBarCard
 import com.maubis.scarlet.base.common.specs.bottomBarRoundIcon
 import com.maubis.scarlet.base.editor.EditNoteActivity
+import com.maubis.scarlet.base.editor.FormatType
 import com.maubis.scarlet.base.editor.MarkdownFormatting
-import com.maubis.scarlet.base.editor.formats.FormatType
 import com.maubis.scarlet.base.editor.sheet.MarkdownHelpBottomSheet
 
 enum class NoteEditorBottomBarType {

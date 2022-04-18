@@ -1,4 +1,4 @@
-package com.maubis.scarlet.base.editor.formats
+package com.maubis.scarlet.base.editor
 
 import com.maubis.scarlet.base.settings.sEditorMoveChecked
 import org.json.JSONObject

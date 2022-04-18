@@ -4,9 +4,9 @@ import android.content.Context
 import androidx.room.*
 import com.google.gson.Gson
 import com.maubis.scarlet.base.ScarletApp
-import com.maubis.scarlet.base.editor.formats.Format
-import com.maubis.scarlet.base.editor.formats.FormatType
-import com.maubis.scarlet.base.editor.formats.Formats
+import com.maubis.scarlet.base.editor.Format
+import com.maubis.scarlet.base.editor.FormatType
+import com.maubis.scarlet.base.editor.Formats
 import com.maubis.scarlet.base.reminders.Reminder
 import com.maubis.scarlet.base.settings.sNoteDefaultColor
 import java.util.*

@@ -1,4 +1,4 @@
-package com.maubis.scarlet.base.common.recycler
+package com.maubis.scarlet.base.editor.recycler
 
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView

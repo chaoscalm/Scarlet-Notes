@@ -8,10 +8,10 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.maubis.scarlet.base.ScarletApp.Companion.imageStorage
 import com.maubis.scarlet.base.database.entities.Note
+import com.maubis.scarlet.base.editor.Format
+import com.maubis.scarlet.base.editor.FormatType
+import com.maubis.scarlet.base.editor.Formats
 import com.maubis.scarlet.base.editor.ViewNoteActivity
-import com.maubis.scarlet.base.editor.formats.Format
-import com.maubis.scarlet.base.editor.formats.FormatType
-import com.maubis.scarlet.base.editor.formats.Formats
 import java.io.File
 
 class SharingIntentHandlerActivity : AppCompatActivity() {

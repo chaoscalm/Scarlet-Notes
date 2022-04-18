@@ -1,8 +1,7 @@
-package com.maubis.scarlet.base.editor.formats.recycler
+package com.maubis.scarlet.base.editor.recycler
 
 import com.github.bijoysingh.starter.recyclerview.MultiRecyclerViewAdapter
-import com.maubis.scarlet.base.common.recycler.ItemTouchHelperAdapter
-import com.maubis.scarlet.base.editor.formats.Format
+import com.maubis.scarlet.base.editor.Format
 import java.util.*
 
 class FormatAdapter(val formatActivity: IFormatRecyclerViewActivity)
