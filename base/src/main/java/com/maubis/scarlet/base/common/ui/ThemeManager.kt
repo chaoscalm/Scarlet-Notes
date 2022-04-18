@@ -3,9 +3,10 @@ package com.maubis.scarlet.base.common.ui
 import android.content.Context
 import android.content.res.Configuration
 import android.graphics.Color
+import android.util.TypedValue
+import android.util.TypedValue.COMPLEX_UNIT_DIP
 import androidx.core.content.ContextCompat
 import androidx.core.content.edit
-import com.github.bijoysingh.starter.util.DimensionManager
 import com.maubis.markdown.MarkdownConfig
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appPreferences
@@ -13,6 +14,7 @@ import com.maubis.scarlet.base.common.utils.ColorUtil
 import com.maubis.scarlet.base.common.utils.OsVersionUtils
 import com.maubis.scarlet.base.common.utils.logNonCriticalError
 import java.lang.ref.WeakReference
+import kotlin.math.roundToInt
 
 var sThemeLabel: String
   get() = appPreferences.getString("KEY_APP_THEME", Theme.DARK.name)!!
@@ -74,7 +76,7 @@ class ThemeManager {
   fun notifyChange(context: Context) {
     theme = getThemeFromStore()
     for (colorType in ThemeColorType.values()) {
-      colors[colorType] = load(context, colorType)
+      colors[colorType] = load(context, theme, colorType)
     }
 
     if (colors[ThemeColorType.TOOLBAR_BACKGROUND] == colors[ThemeColorType.BACKGROUND]) {
@@ -95,16 +97,16 @@ class ThemeManager {
   private fun setMarkdownConfig(context: Context) {
     MarkdownConfig.spanConfig.codeTextColor = get(ThemeColorType.SECONDARY_TEXT)
     MarkdownConfig.spanConfig.codeBackgroundColor = get(context, R.color.code_light, R.color.code_dark)
-    MarkdownConfig.spanConfig.codeBlockLeadingMargin = DimensionManager.dpToPixels(context, 8)
+    MarkdownConfig.spanConfig.codeBlockLeadingMargin = 8.dpToPixels(context)
     MarkdownConfig.spanConfig.quoteColor = MarkdownConfig.spanConfig.codeBackgroundColor
     MarkdownConfig.spanConfig.separatorColor = MarkdownConfig.spanConfig.codeBackgroundColor
-    MarkdownConfig.spanConfig.quoteWidth = DimensionManager.dpToPixels(context, 4)
-    MarkdownConfig.spanConfig.separatorWidth = DimensionManager.dpToPixels(context, 2)
-    MarkdownConfig.spanConfig.quoteBlockLeadingMargin = DimensionManager.dpToPixels(context, 8)
+    MarkdownConfig.spanConfig.quoteWidth = 4.dpToPixels(context)
+    MarkdownConfig.spanConfig.separatorWidth = 2.dpToPixels(context)
+    MarkdownConfig.spanConfig.quoteBlockLeadingMargin = 8.dpToPixels(context)
   }
 
-  private fun load(context: Context, type: ThemeColorType): Int {
-    return load(context, theme, type)
+  private fun Int.dpToPixels(context: Context): Int {
+    return TypedValue.applyDimension(COMPLEX_UNIT_DIP, this.toFloat(), context.resources.displayMetrics).roundToInt()
   }
 
   private fun load(context: Context, theme: Theme, type: ThemeColorType): Int {
