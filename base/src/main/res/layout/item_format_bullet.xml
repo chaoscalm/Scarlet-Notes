@@ -7,20 +7,20 @@
 
   <View
     android:id="@+id/first_margin"
-    android:layout_width="24dp"
-    android:layout_height="24dp" />
+    android:layout_width="16dp"
+    android:layout_height="match_parent" />
 
   <View
     android:id="@+id/second_margin"
-    android:layout_width="24dp"
-    android:layout_height="24dp" />
+    android:layout_width="16dp"
+    android:layout_height="match_parent" />
 
   <ImageView
     android:id="@+id/icon"
     android:layout_width="8dp"
     android:layout_height="8dp"
     android:layout_gravity="top"
-    android:layout_marginTop="@dimen/spacing_normal"
+    android:layout_marginTop="12dp"
     android:layout_marginStart="@dimen/spacing_large"
     android:src="@drawable/icon_bullet_1"
     app:tint="@color/material_blue_grey_500" />
@@ -30,6 +30,7 @@
     style="@style/FormatText"
     android:autoLink="web"
     android:linksClickable="true"
+    android:paddingTop="4dp"
     android:layout_marginStart="@dimen/spacing_xsmall" />
 
   <EditText
