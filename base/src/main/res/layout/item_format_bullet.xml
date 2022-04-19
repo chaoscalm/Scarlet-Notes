@@ -3,8 +3,6 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   style="@style/FormatLayout">
 
-  <include layout="@layout/layout_format_drag_handle" />
-
   <View
     android:id="@+id/first_margin"
     android:layout_width="16dp"
@@ -32,8 +30,4 @@
     android:linksClickable="true"
     android:paddingTop="4dp"
     android:layout_marginStart="@dimen/spacing_xsmall" />
-
-  <EditText
-    android:id="@+id/edit"
-    style="@style/FormatText" />
 </LinearLayout>

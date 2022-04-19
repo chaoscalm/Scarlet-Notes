@@ -3,7 +3,9 @@ package com.maubis.scarlet.base.editor.recycler
 import android.content.Context
 import android.graphics.Typeface
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.View
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.github.bijoysingh.starter.recyclerview.RecyclerViewHolder
 import com.maubis.scarlet.base.R
@@ -109,6 +111,15 @@ abstract class FormatViewHolderBase(context: Context, view: View) : RecyclerView
     )
 
     populate(data, config)
+  }
+
+  protected fun TextView.setAppearanceFromConfig(config: FormatViewHolderConfig) {
+    setTextSize(TypedValue.COMPLEX_UNIT_SP, config.fontSize)
+    setTextColor(config.secondaryTextColor)
+    setHintTextColor(config.hintTextColor)
+    setBackgroundColor(config.backgroundColor)
+    setLinkTextColor(config.accentColor)
+    setTypeface(config.typeface, config.typefaceStyle)
   }
 
   abstract fun populate(data: Format, config: FormatViewHolderConfig)

@@ -51,20 +51,13 @@ open class FormatTextViewHolder(context: Context, view: View) : FormatViewHolder
       FormatType.HEADING_3 -> config.fontSize * 1.25f
       else -> config.fontSize
     }
-
+    text.setAppearanceFromConfig(config)
     text.setTextSize(TypedValue.COMPLEX_UNIT_SP, fontSize)
-    text.setTextColor(config.secondaryTextColor)
-    text.setBackgroundColor(config.backgroundColor)
-    text.setLinkTextColor(config.accentColor)
     text.setTextIsSelectable(true)
-    text.setTypeface(config.typeface, config.typefaceStyle)
     text.isVisible = !config.editable
 
+    edit.setAppearanceFromConfig(config)
     edit.setTextSize(TypedValue.COMPLEX_UNIT_SP, fontSize)
-    edit.setTextColor(config.secondaryTextColor)
-    edit.setHintTextColor(config.hintTextColor)
-    edit.setBackgroundColor(config.backgroundColor)
-    edit.setTypeface(config.typeface, config.typefaceStyle)
     edit.isVisible = config.editable
     edit.isEnabled = config.editable
     showHintWhenTextIsEmpty()
