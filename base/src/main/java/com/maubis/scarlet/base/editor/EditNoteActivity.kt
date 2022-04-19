@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.facebook.litho.ComponentContext
 import com.facebook.litho.LithoView
+import com.github.bijoysingh.starter.recyclerview.MultiRecyclerViewControllerItem
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.ScarletApp.Companion.imageStorage
@@ -18,9 +19,7 @@ import com.maubis.scarlet.base.common.sheets.ColorPickerBottomSheet
 import com.maubis.scarlet.base.common.sheets.ColorPickerDefaultController
 import com.maubis.scarlet.base.common.specs.ToolbarColorConfig
 import com.maubis.scarlet.base.database.entities.Note
-import com.maubis.scarlet.base.editor.recycler.FormatImageViewHolder
-import com.maubis.scarlet.base.editor.recycler.FormatTextViewHolder
-import com.maubis.scarlet.base.editor.recycler.FormatTouchHelperCallback
+import com.maubis.scarlet.base.editor.recycler.*
 import com.maubis.scarlet.base.editor.specs.NoteEditorBottomBar
 import pl.aprilapps.easyphotopicker.DefaultCallback
 import pl.aprilapps.easyphotopicker.EasyImage
@@ -391,6 +390,61 @@ open class EditNoteActivity : ViewNoteActivity() {
       newPosition < formats.size -> focus(position + 1)
       else -> addEmptyItemAtFocused(format.type.getNextFormatType())
     }
+  }
+
+  override fun controllerItems(): List<MultiRecyclerViewControllerItem<Format>> {
+    return listOf(
+      MultiRecyclerViewControllerItem.Builder<Format>()
+        .viewType(FormatType.TEXT.ordinal)
+        .layoutFile(R.layout.item_format_text)
+        .holderClass(FormatTextViewHolder::class.java)
+        .build(),
+      MultiRecyclerViewControllerItem.Builder<Format>()
+        .viewType(FormatType.HEADING.ordinal)
+        .layoutFile(R.layout.item_format_heading)
+        .holderClass(FormatHeadingViewHolder::class.java)
+        .build(),
+      MultiRecyclerViewControllerItem.Builder<Format>()
+        .viewType(FormatType.SUB_HEADING.ordinal)
+        .layoutFile(R.layout.item_format_heading)
+        .holderClass(FormatHeadingViewHolder::class.java)
+        .build(),
+      MultiRecyclerViewControllerItem.Builder<Format>()
+        .viewType(FormatType.HEADING_3.ordinal)
+        .layoutFile(R.layout.item_format_heading)
+        .holderClass(FormatHeadingViewHolder::class.java)
+        .build(),
+      MultiRecyclerViewControllerItem.Builder<Format>()
+        .viewType(FormatType.QUOTE.ordinal)
+        .layoutFile(R.layout.item_format_quote)
+        .holderClass(FormatQuoteViewHolder::class.java)
+        .build(),
+      MultiRecyclerViewControllerItem.Builder<Format>()
+        .viewType(FormatType.CODE.ordinal)
+        .layoutFile(R.layout.item_format_code)
+        .holderClass(FormatTextViewHolder::class.java)
+        .build(),
+      MultiRecyclerViewControllerItem.Builder<Format>()
+        .viewType(FormatType.CHECKLIST_CHECKED.ordinal)
+        .layoutFile(R.layout.item_format_list)
+        .holderClass(FormatListViewHolder::class.java)
+        .build(),
+      MultiRecyclerViewControllerItem.Builder<Format>()
+        .viewType(FormatType.CHECKLIST_UNCHECKED.ordinal)
+        .layoutFile(R.layout.item_format_list)
+        .holderClass(FormatListViewHolder::class.java)
+        .build(),
+      MultiRecyclerViewControllerItem.Builder<Format>()
+        .viewType(FormatType.IMAGE.ordinal)
+        .layoutFile(R.layout.item_format_image)
+        .holderClass(FormatImageViewHolder::class.java)
+        .build(),
+      MultiRecyclerViewControllerItem.Builder<Format>()
+        .viewType(FormatType.SEPARATOR.ordinal)
+        .layoutFile(R.layout.item_format_separator)
+        .holderClass(FormatSeparatorViewHolder::class.java)
+        .build()
+    )
   }
 
   companion object {
