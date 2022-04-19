@@ -12,6 +12,7 @@ import com.maubis.scarlet.base.editor.sheet.FormatActionBottomSheet
 class FormatSeparatorViewHolder(context: Context, view: View) : FormatViewHolderBase(context, view) {
 
   private val separator: View = root.findViewById(R.id.separator)
+  private val extraMargin: View = root.findViewById(R.id.extra_margin)
   private val dragHandle: ImageView = root.findViewById(R.id.action_move_icon)
 
   override fun populate(data: Format, config: FormatViewHolderConfig) {
@@ -30,6 +31,7 @@ class FormatSeparatorViewHolder(context: Context, view: View) : FormatViewHolder
       true
     }
 
+    extraMargin.isVisible = !config.editable
     itemView.setOnLongClickListener {
       activity.startFormatDrag(this)
       true

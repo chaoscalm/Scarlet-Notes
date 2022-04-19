@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   style="@style/FormatLayout">
 
-  <include layout="@layout/layout_modify_format" />
+  <include layout="@layout/layout_format_drag_handle" />
 
   <TextView
     android:id="@+id/text"
@@ -13,8 +13,9 @@
 
   <EditText
     android:id="@+id/edit"
-    style="@style/FormatText"
-    android:padding="@dimen/spacing_normal"
+    style="@style/FormatEdit"
+    android:layout_marginStart="@dimen/spacing_xxsmall"
+    android:paddingVertical="@dimen/spacing_normal"
     android:paddingStart="@dimen/spacing_small"
     android:paddingEnd="@dimen/spacing_small" />
 </LinearLayout>

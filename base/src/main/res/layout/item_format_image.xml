@@ -11,11 +11,11 @@
     android:gravity="center_vertical"
     android:orientation="horizontal">
 
-    <include layout="@layout/layout_modify_format" />
+    <include layout="@layout/layout_format_drag_handle" />
 
     <TextView
       android:id="@+id/text"
-      style="@style/FormatText"
+      style="@style/FormatEdit"
       android:ellipsize="end"
       android:maxLines="1"
       android:text="@string/format_hint_image" />

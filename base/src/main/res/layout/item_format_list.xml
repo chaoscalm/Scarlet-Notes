@@ -3,35 +3,38 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   style="@style/FormatLayout">
 
-  <include layout="@layout/layout_modify_format" />
+  <include layout="@layout/layout_format_drag_handle" />
+
+  <View
+    android:id="@+id/extra_margin"
+    android:layout_width="@dimen/spacing_normal"
+    android:layout_height="match_parent" />
 
   <com.google.android.material.checkbox.MaterialCheckBox
     android:id="@+id/icon"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center_vertical"
-    android:layout_marginStart="@dimen/spacing_large"
     app:buttonTint="@color/material_blue_grey_500" />
 
   <TextView
     android:id="@+id/text"
-    style="@style/FormatEdit"
-    android:paddingStart="@dimen/spacing_xsmall"
-    android:paddingEnd="@dimen/spacing_xsmall"
+    style="@style/FormatText"
+    android:layout_marginStart="@dimen/spacing_xsmall"
     android:autoLink="web"
     android:linksClickable="true" />
 
   <EditText
     android:id="@+id/edit"
-    style="@style/FormatText"
-    android:paddingStart="@dimen/spacing_xsmall"
-    android:paddingEnd="@dimen/spacing_xsmall" />
+    style="@style/FormatEdit"
+    android:layout_marginStart="@dimen/spacing_xsmall"
+    android:layout_marginEnd="@dimen/spacing_small"/>
 
   <ImageView
     android:id="@+id/close"
     style="@style/BorderlessBackgroundView"
-    android:layout_width="@dimen/icon_size_normal"
-    android:layout_height="@dimen/icon_size_normal"
+    android:layout_width="24dp"
+    android:layout_height="24dp"
     android:padding="@dimen/spacing_xxsmall"
     android:layout_gravity="center_vertical"
     android:layout_marginEnd="@dimen/spacing_large"

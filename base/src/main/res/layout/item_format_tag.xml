@@ -3,7 +3,7 @@
   style="@style/FormatLayout"
   android:paddingTop="@dimen/spacing_large">
 
-  <include layout="@layout/layout_modify_format" />
+  <include layout="@layout/layout_format_drag_handle" />
 
   <TextView
     android:id="@+id/text"

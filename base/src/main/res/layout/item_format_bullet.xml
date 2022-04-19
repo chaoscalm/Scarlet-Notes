@@ -3,7 +3,7 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   style="@style/FormatLayout">
 
-  <include layout="@layout/layout_modify_format" />
+  <include layout="@layout/layout_format_drag_handle" />
 
   <View
     android:id="@+id/first_margin"
@@ -27,13 +27,10 @@
 
   <TextView
     android:id="@+id/text"
-    style="@style/FormatEdit"
+    style="@style/FormatText"
     android:autoLink="web"
     android:linksClickable="true"
-    android:paddingStart="@dimen/spacing_xxsmall"
-    android:paddingEnd="@dimen/spacing_xxsmall"
-    android:paddingTop="@dimen/spacing_xsmall"
-    android:paddingBottom="@dimen/spacing_xsmall" />
+    android:layout_marginStart="@dimen/spacing_xsmall" />
 
   <EditText
     android:id="@+id/edit"

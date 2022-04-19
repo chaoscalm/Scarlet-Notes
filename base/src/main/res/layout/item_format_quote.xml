@@ -2,13 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   style="@style/FormatLayout">
 
-  <include layout="@layout/layout_modify_format" />
+  <include layout="@layout/layout_format_drag_handle" />
+
+  <View
+    android:id="@+id/extra_margin"
+    android:layout_width="@dimen/spacing_normal"
+    android:layout_height="match_parent" />
 
   <View
     android:id="@+id/quoteColorView"
     android:layout_width="3dp"
     android:layout_height="match_parent"
-    android:layout_marginStart="@dimen/spacing_large"
+    android:layout_marginStart="@dimen/spacing_xxsmall"
     android:layout_marginTop="@dimen/spacing_xxsmall"
     android:background="@color/light_hint_text"
     android:layout_marginBottom="@dimen/spacing_xxsmall" />
@@ -18,11 +23,11 @@
     style="@style/FormatText"
     android:autoLink="web"
     android:linksClickable="true"
-    android:paddingStart="@dimen/spacing_xxsmall"
-    android:paddingBottom="@dimen/spacing_small" />
+    android:layout_marginStart="@dimen/spacing_small" />
 
   <EditText
     android:id="@+id/edit"
-    style="@style/FormatEdit" />
+    style="@style/FormatText"
+    android:layout_marginStart="@dimen/spacing_small" />
 
 </LinearLayout>

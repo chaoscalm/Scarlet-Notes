@@ -3,12 +3,19 @@
   style="@style/FormatLayout"
   android:gravity="center_vertical">
 
-  <include layout="@layout/layout_modify_format" />
+  <include layout="@layout/layout_format_drag_handle" />
+
+  <View
+    android:id="@+id/extra_margin"
+    android:layout_width="@dimen/spacing_small"
+    android:layout_height="match_parent" />
 
   <View
     android:id="@+id/separator"
     android:layout_width="0dp"
     android:layout_height="1dp"
-    android:layout_margin="@dimen/spacing_normal"
+    android:layout_marginVertical="@dimen/spacing_normal"
+    android:layout_marginEnd="@dimen/spacing_normal"
+    android:layout_marginStart="@dimen/spacing_xxsmall"
     android:layout_weight="1" />
 </LinearLayout>
