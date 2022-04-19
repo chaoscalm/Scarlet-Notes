@@ -14,5 +14,5 @@
   <EditText
     android:id="@+id/edit"
     style="@style/FormatEdit"
-    android:minLines="3" />
+    android:minLines="2" />
 </LinearLayout>
