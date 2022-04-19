@@ -1,10 +1,12 @@
 package com.maubis.scarlet.base.editor.recycler
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.graphics.Paint
 import android.text.InputType
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import android.widget.CheckBox
 import android.widget.ImageView
 import androidx.core.view.isVisible
 import com.maubis.scarlet.base.R
@@ -14,7 +16,7 @@ import com.maubis.scarlet.base.editor.FormatType
 
 class FormatListViewHolder(context: Context, view: View) : FormatTextViewHolder(context, view) {
 
-  private val icon: ImageView = root.findViewById(R.id.icon)
+  private val checkBox: CheckBox = root.findViewById(R.id.icon)
   private val close: ImageView = root.findViewById(R.id.close)
 
   init {
@@ -31,16 +33,14 @@ class FormatListViewHolder(context: Context, view: View) : FormatTextViewHolder(
 
   override fun populate(data: Format, config: FormatViewHolderConfig) {
     super.populate(data, config)
-    icon.setColorFilter(config.iconColor)
-
     when (data.type) {
       FormatType.CHECKLIST_CHECKED -> {
-        icon.setImageResource(R.drawable.ic_check_box_white_24dp)
+        checkBox.isChecked = true
         text.paintFlags = text.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
         itemView.alpha = 0.5f
       }
       FormatType.CHECKLIST_UNCHECKED -> {
-        icon.setImageResource(R.drawable.ic_check_box_outline_blank_white_24dp)
+        checkBox.isChecked = false
         text.paintFlags = text.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
         itemView.alpha = 1f
       }
@@ -55,12 +55,8 @@ class FormatListViewHolder(context: Context, view: View) : FormatTextViewHolder(
       activity.deleteFormat(format)
     }
 
-    itemView.setOnClickListener {
-      if (!config.editable) {
-        activity.setFormatChecked(data, data.type != FormatType.CHECKLIST_CHECKED)
-      }
-    }
-    icon.setOnClickListener {
+    checkBox.buttonTintList = ColorStateList.valueOf(config.iconColor)
+    checkBox.setOnClickListener {
       activity.setFormatChecked(data, data.type != FormatType.CHECKLIST_CHECKED)
     }
   }

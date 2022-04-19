@@ -162,8 +162,6 @@ open class ViewNoteActivity : SecuredActivity(), INoteActionsActivity, IFormatRe
 
     format.type = if (checked) FormatType.CHECKLIST_CHECKED else FormatType.CHECKLIST_UNCHECKED
     formats[position] = format
-    adapter.updateItem(format, position)
-
     trueFormats[truePosition] = format
 
     note.content = Formats.getEnhancedNoteContent(sectionPreservingSort(trueFormats))

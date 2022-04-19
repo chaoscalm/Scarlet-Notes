@@ -22,7 +22,7 @@
     android:layout_gravity="top"
     android:layout_marginTop="@dimen/spacing_normal"
     android:layout_marginStart="@dimen/spacing_large"
-    android:src="@drawable/ic_check_box_outline_blank_white_24dp"
+    android:src="@drawable/icon_bullet_1"
     app:tint="@color/material_blue_grey_500" />
 
   <TextView
