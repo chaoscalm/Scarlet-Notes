@@ -27,7 +27,7 @@ class FormatImageViewHolder(context: Context, view: View) : FormatViewHolderBase
 
   private val actionCamera: ImageView = root.findViewById(R.id.action_camera)
   private val actionGallery: ImageView = root.findViewById(R.id.action_gallery)
-  private val actionMove: ImageView = root.findViewById(R.id.action_move_icon)
+  private val dragHandle: ImageView = root.findViewById(R.id.action_move_icon)
   private val imageToolbar: View = root.findViewById(R.id.image_toolbar)
   private val noImageMessage: UITextView = root.findViewById(R.id.no_image_message)
 
@@ -68,12 +68,16 @@ class FormatImageViewHolder(context: Context, view: View) : FormatViewHolderBase
         Log.e("Scarlet", "Error while opening gallery picker", e)
       }
     }
-    actionMove.setColorFilter(config.iconColor)
-    actionMove.setOnClickListener {
+    dragHandle.setColorFilter(config.iconColor)
+    dragHandle.setOnClickListener {
       openSheet(activity, FormatActionBottomSheet().apply {
         noteUUID = config.noteUUID
         format = data
       })
+    }
+    dragHandle.setOnLongClickListener {
+      activity.startFormatDrag(this)
+      true
     }
     imageToolbar.isVisible = config.editable
 
