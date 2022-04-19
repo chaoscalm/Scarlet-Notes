@@ -103,6 +103,7 @@ abstract class FormatViewHolderBase(context: Context, view: View) : RecyclerView
         },
         typefaceStyle = when (data.type) {
           FormatType.HEADING, FormatType.SUB_HEADING, FormatType.HEADING_3 -> Typeface.BOLD
+          FormatType.QUOTE -> Typeface.ITALIC
           else -> Typeface.NORMAL
         }
     )
