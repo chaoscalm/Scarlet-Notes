@@ -33,6 +33,10 @@ android {
         viewBinding true
     }
 
+    lint {
+        disable 'ContentDescription', 'Autofill', 'LabelFor', 'IconLocation'
+    }
+
     signingConfigs {
         release {
             def signingConfigFile = new File('signing.properties')

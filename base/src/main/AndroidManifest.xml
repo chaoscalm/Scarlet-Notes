@@ -60,7 +60,7 @@
       android:name=".editor.CreateListNoteActivity"
       android:configChanges="uiMode"
       android:windowSoftInputMode="stateHidden" />
-    <activity android:name=".ShortcutIntentHandlerActivity">
+    <activity android:name=".ShortcutIntentHandlerActivity" android:exported="true">
       <intent-filter android:label="Open Note in App">
         <action android:name="android.intent.action.VIEW" />
 
@@ -72,7 +72,7 @@
           android:scheme="scarlet" />
       </intent-filter>
     </activity>
-    <activity android:name=".SharingIntentHandlerActivity">
+    <activity android:name=".SharingIntentHandlerActivity" android:exported="true">
       <intent-filter>
         <action android:name="android.intent.action.SEND_MULTIPLE" />
         <category android:name="android.intent.category.DEFAULT" />
@@ -86,7 +86,7 @@
         <data android:mimeType="image/jpeg" />
       </intent-filter>
     </activity>
-    <activity android:name=".OpenFileActivity">
+    <activity android:name=".OpenFileActivity" android:exported="true">
       <intent-filter>
         <action android:name="android.intent.action.VIEW" />
 
