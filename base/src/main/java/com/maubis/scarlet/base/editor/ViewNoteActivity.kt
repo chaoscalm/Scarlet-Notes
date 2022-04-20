@@ -52,8 +52,7 @@ open class ViewNoteActivity : SecuredActivity(), INoteActionsActivity, IFormatRe
   protected lateinit var views: ActivityAdvancedNoteBinding
   protected lateinit var adapter: FormatAdapter
 
-  val colorConfig = NoteViewColorConfig()
-  var lastKnownNoteColor = 0
+  protected val colorConfig = NoteViewColorConfig()
 
   protected open val editModeValue: Boolean = false
   private val noteSaveDispatcher = Dispatchers.IO.limitedParallelism(1)
@@ -76,7 +75,6 @@ open class ViewNoteActivity : SecuredActivity(), INoteActionsActivity, IFormatRe
     resetBundle()
     displayNote()
     notifyThemeChange()
-    onCreationFinished()
   }
 
   override fun onResume() {
@@ -85,8 +83,6 @@ open class ViewNoteActivity : SecuredActivity(), INoteActionsActivity, IFormatRe
     onResumeAction()
     notifyThemeChange()
   }
-
-  protected open fun onCreationFinished() {}
 
   protected open fun onResumeAction() {
     lifecycleScope.launch(Dispatchers.IO) {
@@ -110,7 +106,6 @@ open class ViewNoteActivity : SecuredActivity(), INoteActionsActivity, IFormatRe
   }
 
   protected open fun displayNote() {
-    setNoteColor(note.color)
     adapter.clearItems()
 
     formats = when (editModeValue) {
@@ -178,7 +173,7 @@ open class ViewNoteActivity : SecuredActivity(), INoteActionsActivity, IFormatRe
     startActivity(EditNoteActivity.makeEditNoteIntent(this, note))
   }
 
-  protected open fun notifyToolbarColor() {
+  protected fun notifyToolbarColor() {
     val noteColor = note.adjustedColor()
     when {
       sUIUseNoteColorAsBackground -> {
@@ -215,8 +210,6 @@ open class ViewNoteActivity : SecuredActivity(), INoteActionsActivity, IFormatRe
           .colorConfig(ToolbarColorConfig(colorConfig.toolbarBackgroundColor, colorConfig.toolbarIconColor))
           .build()))
   }
-
-  protected open fun setNoteColor(color: Int) {}
 
   open fun startFormatDrag(viewHolder: RecyclerView.ViewHolder) {}
 

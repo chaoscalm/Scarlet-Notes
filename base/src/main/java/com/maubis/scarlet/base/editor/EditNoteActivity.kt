@@ -47,12 +47,8 @@ open class EditNoteActivity : ViewNoteActivity() {
     super.onCreate(savedInstanceState)
     setDragHandlesTouchListener()
     startBackgroundNoteAutosave()
-  }
-
-  override fun onCreationFinished() {
-    super.onCreationFinished()
-    history.add(note.shallowCopy())
     setFolderFromIntent()
+    history.add(note.shallowCopy())
   }
 
   private fun setFolderFromIntent() {
@@ -107,11 +103,6 @@ open class EditNoteActivity : ViewNoteActivity() {
 
   protected open fun addDefaultItem() {
     addEmptyItem(FormatType.TEXT)
-  }
-
-  override fun notifyToolbarColor() {
-    super.notifyToolbarColor()
-    setBottomToolbar()
   }
 
   override fun setBottomToolbar() {
@@ -321,13 +312,12 @@ open class EditNoteActivity : ViewNoteActivity() {
     formatsTouchHelper.startDrag(viewHolder)
   }
 
-  override fun setNoteColor(color: Int) {
-    if (lastKnownNoteColor == color) {
+  private fun setNoteColor(color: Int) {
+    if (note.color == color) {
       return
     }
     note.color = color
     notifyToolbarColor()
-    lastKnownNoteColor = color
   }
 
   override fun setFormat(format: Format) {
