@@ -37,7 +37,6 @@ open class EditNoteActivity : ViewNoteActivity() {
 
   private val history: MutableList<Note> = mutableListOf<Note>()
   private var currentHistoryPosition = 0
-  private var undoOrRedoJustPerformed = false
 
   private lateinit var formatsTouchHelper: ItemTouchHelper
 
@@ -76,7 +75,7 @@ open class EditNoteActivity : ViewNoteActivity() {
       repeatOnLifecycle(Lifecycle.State.RESUMED) {
         while (true) {
           delay(NOTE_AUTOSAVE_INTERVAL)
-          updateNoteIfNeeded()
+          updateNote()
         }
       }
     }
@@ -139,7 +138,7 @@ open class EditNoteActivity : ViewNoteActivity() {
 
   override fun onPause() {
     super.onPause()
-    updateNoteIfNeeded()
+    updateNote()
     deleteIfEmpty()
   }
 
@@ -161,25 +160,22 @@ open class EditNoteActivity : ViewNoteActivity() {
     }
   }
 
-  private fun updateNoteIfNeeded() {
-    val lastNoteSnapshot = history.getOrNull(currentHistoryPosition) ?: note
+  private fun updateNote() {
     note.content = Formats.getEnhancedNoteContent(formats)
-
-    // Ignore update if nothing changed. It allows for one undo per few seconds
-    when {
-      !undoOrRedoJustPerformed && note.isEqual(lastNoteSnapshot) -> return
-      !undoOrRedoJustPerformed -> addSnapshotToHistory(note.shallowCopy())
-      else -> undoOrRedoJustPerformed = false
-    }
+    addSnapshotToHistoryIfNeeded()
     saveNoteIfNeeded()
   }
 
-  private fun addSnapshotToHistory(note: Note) {
-    while (currentHistoryPosition != history.size - 1) {
+  private fun addSnapshotToHistoryIfNeeded() {
+    val currentHistorySnapshot = history.getOrNull(currentHistoryPosition) ?: note
+    if (note.isEqual(currentHistorySnapshot))
+      return
+
+    while (currentHistoryPosition < history.lastIndex) {
       history.removeLast()
     }
 
-    history.add(note)
+    history.add(note.shallowCopy())
     currentHistoryPosition += 1
 
     if (history.size >= 25) {
@@ -261,10 +257,10 @@ open class EditNoteActivity : ViewNoteActivity() {
   }
 
   fun performUndo() {
+    updateNote()
     currentHistoryPosition = (currentHistoryPosition - 1).coerceAtLeast(0)
     note = history[currentHistoryPosition].shallowCopy()
     displayNote()
-    undoOrRedoJustPerformed = true
   }
 
   fun performRedo() {
@@ -272,7 +268,6 @@ open class EditNoteActivity : ViewNoteActivity() {
     currentHistoryPosition = (currentHistoryPosition + 1).coerceAtMost(maxHistoryIndex)
     note = history[currentHistoryPosition].shallowCopy()
     displayNote()
-    undoOrRedoJustPerformed = true
   }
 
   fun onColorChangeClick() {
@@ -338,7 +333,7 @@ open class EditNoteActivity : ViewNoteActivity() {
         Collections.swap(formats, i, i - 1)
       }
     }
-    updateNoteIfNeeded()
+    updateNote()
   }
 
   override fun deleteFormat(format: Format) {
@@ -349,7 +344,7 @@ open class EditNoteActivity : ViewNoteActivity() {
     focusedFormat = if (focusedFormat == null || focusedFormat!!.uid == format.uid) null else focusedFormat
     formats.removeAt(position)
     adapter.removeItem(position)
-    updateNoteIfNeeded()
+    updateNote()
   }
 
   override fun createOrChangeToNextFormat(format: Format) {
