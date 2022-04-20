@@ -41,7 +41,7 @@ open class EditNoteActivity : ViewNoteActivity() {
 
   private lateinit var formatsTouchHelper: ItemTouchHelper
 
-  override val editModeValue: Boolean get() = true
+  override val editModeValue: Boolean = true
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)

@@ -55,8 +55,8 @@ open class ViewNoteActivity : SecuredActivity(), INoteActionsActivity, IFormatRe
   val colorConfig = NoteViewColorConfig()
   var lastKnownNoteColor = 0
 
-  protected open val editModeValue: Boolean
-    get() = false
+  protected open val editModeValue: Boolean = false
+  private val noteSaveDispatcher = Dispatchers.IO.limitedParallelism(1)
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -225,7 +225,7 @@ open class ViewNoteActivity : SecuredActivity(), INoteActionsActivity, IFormatRe
       return
     }
     note.updateTimestamp = System.currentTimeMillis()
-    note.save(this)
+    lifecycleScope.launch(noteSaveDispatcher) { note.save(this@ViewNoteActivity) }
   }
 
   private fun notifyNoteChange() {
