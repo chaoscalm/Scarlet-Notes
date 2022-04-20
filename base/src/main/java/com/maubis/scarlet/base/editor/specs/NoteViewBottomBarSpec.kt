@@ -11,7 +11,7 @@ import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.common.specs.EmptySpec
 import com.maubis.scarlet.base.common.specs.ToolbarColorConfig
-import com.maubis.scarlet.base.common.specs.bottomBarCard
+import com.maubis.scarlet.base.common.specs.bottomBar
 import com.maubis.scarlet.base.common.specs.bottomBarRoundIcon
 import com.maubis.scarlet.base.database.entities.NoteState
 import com.maubis.scarlet.base.editor.ViewNoteActivity
@@ -58,6 +58,6 @@ object NoteViewBottomBarSpec {
           .iconRes(R.drawable.ic_edit_white_48dp)
           .onClick { activity.openEditor() })
     }
-    return bottomBarCard(context, row.build(), colorConfig).build()
+    return bottomBar(context, row.build(), colorConfig).build()
   }
 }

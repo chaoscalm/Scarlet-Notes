@@ -54,7 +54,7 @@ fun bottomBarRoundIcon(context: ComponentContext, colorConfig: ToolbarColorConfi
     .bgAlpha(15)
 }
 
-fun bottomBarCard(context: ComponentContext, child: Component, colorConfig: ToolbarColorConfig): Column.Builder {
+fun bottomBar(context: ComponentContext, child: Component, colorConfig: ToolbarColorConfig): Column.Builder {
   return Column.create(context)
     .widthPercent(100f)
     .paddingDip(YogaEdge.ALL, 0f)

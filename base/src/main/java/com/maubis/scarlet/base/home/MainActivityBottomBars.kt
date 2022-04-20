@@ -17,7 +17,7 @@ import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.common.sheets.openSheet
 import com.maubis.scarlet.base.common.specs.EmptySpec
 import com.maubis.scarlet.base.common.specs.ToolbarColorConfig
-import com.maubis.scarlet.base.common.specs.bottomBarCard
+import com.maubis.scarlet.base.common.specs.bottomBar
 import com.maubis.scarlet.base.common.specs.bottomBarRoundIcon
 import com.maubis.scarlet.base.common.utils.ColorUtil
 import com.maubis.scarlet.base.database.entities.Folder
@@ -82,7 +82,7 @@ object MainActivityBottomBarSpec {
             activity.startActivity(intent)
           })
     }
-    return bottomBarCard(context, row.build(), colorConfig).build()
+    return bottomBar(context, row.build(), colorConfig).build()
   }
 }
 
@@ -119,7 +119,7 @@ object MainActivityFolderBottomBarSpec {
                 .isClickDisabled(true)
                 .clickHandler(MainActivityFolderBottomBar.onClickEvent(context))
                 .onClick {})
-    return bottomBarCard(context, row.build(), colorConfig).build()
+    return bottomBar(context, row.build(), colorConfig).build()
   }
 
   @OnEvent(ClickEvent::class)

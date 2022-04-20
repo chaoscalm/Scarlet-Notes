@@ -10,7 +10,7 @@ import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.common.sheets.openSheet
 import com.maubis.scarlet.base.common.specs.EmptySpec
 import com.maubis.scarlet.base.common.specs.ToolbarColorConfig
-import com.maubis.scarlet.base.common.specs.bottomBarCard
+import com.maubis.scarlet.base.common.specs.bottomBar
 import com.maubis.scarlet.base.common.specs.bottomBarRoundIcon
 import com.maubis.scarlet.base.editor.EditNoteActivity
 import com.maubis.scarlet.base.editor.FormatType
@@ -96,7 +96,7 @@ object NoteEditorBottomBarSpec {
       else -> EmptyComponent.create(context)
     }
     row.child(moreIcon)
-    return bottomBarCard(context, row.build(), colorConfig).build()
+    return bottomBar(context, row.build(), colorConfig).build()
   }
 
   @OnEvent(ClickEvent::class)
