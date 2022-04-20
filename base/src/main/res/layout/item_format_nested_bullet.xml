@@ -3,14 +3,19 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   style="@style/FormatLayout">
 
+  <View
+    android:id="@+id/extra_margin"
+    android:layout_width="16dp"
+    android:layout_height="match_parent" />
+
   <ImageView
     android:id="@+id/icon"
     android:layout_width="8dp"
     android:layout_height="8dp"
     android:layout_gravity="top"
-    android:layout_marginTop="@dimen/spacing_normal"
-    android:layout_marginStart="@dimen/spacing_large"
-    android:src="@drawable/icon_bullet_1"
+    android:layout_marginTop="12dp"
+    android:layout_marginStart="@dimen/icon_size_slarge"
+    android:src="@drawable/icon_bullet_2"
     app:tint="@color/material_blue_grey_500" />
 
   <TextView
@@ -18,5 +23,6 @@
     style="@style/FormatText"
     android:autoLink="web"
     android:linksClickable="true"
+    android:paddingTop="4dp"
     android:layout_marginStart="@dimen/spacing_xsmall" />
 </LinearLayout>

@@ -363,12 +363,12 @@ open class ViewNoteActivity : SecuredActivity(), INoteActionsActivity, IFormatRe
         .build(),
       MultiRecyclerViewControllerItem.Builder<Format>()
         .viewType(FormatType.BULLET_2.ordinal)
-        .layoutFile(R.layout.item_format_bullet)
+        .layoutFile(R.layout.item_format_nested_bullet)
         .holderClass(FormatBulletViewHolder::class.java)
         .build(),
       MultiRecyclerViewControllerItem.Builder<Format>()
         .viewType(FormatType.BULLET_3.ordinal)
-        .layoutFile(R.layout.item_format_bullet)
+        .layoutFile(R.layout.item_format_nested_bullet)
         .holderClass(FormatBulletViewHolder::class.java)
         .build(),
       MultiRecyclerViewControllerItem.Builder<Format>()

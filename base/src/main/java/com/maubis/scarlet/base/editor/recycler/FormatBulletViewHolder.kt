@@ -12,10 +12,9 @@ import com.maubis.scarlet.base.editor.FormatType
 
 class FormatBulletViewHolder(context: Context, view: View) : FormatViewHolderBase(context, view) {
 
-  private val textView: TextView = root.findViewById(R.id.text)
-  private val firstMargin: View = root.findViewById(R.id.first_margin)
-  private val secondMargin: View = root.findViewById(R.id.second_margin)
+  private val extraMargin: View? = root.findViewById(R.id.extra_margin)
   private val bulletIcon: ImageView = root.findViewById(R.id.icon)
+  private val textView: TextView = root.findViewById(R.id.text)
 
   override fun populate(data: Format, config: FormatViewHolderConfig) {
     textView.setAppearanceFromConfig(config)
@@ -26,18 +25,15 @@ class FormatBulletViewHolder(context: Context, view: View) : FormatViewHolderBas
     when (data.type) {
       FormatType.BULLET_1 -> {
         bulletIcon.setImageResource(R.drawable.icon_bullet_1)
-        firstMargin.isVisible = false
-        secondMargin.isVisible = false
+        extraMargin?.isVisible = false
       }
       FormatType.BULLET_2 -> {
         bulletIcon.setImageResource(R.drawable.icon_bullet_2)
-        firstMargin.isVisible = false
-        secondMargin.isVisible = true
+        extraMargin?.isVisible = false
       }
       FormatType.BULLET_3 -> {
         bulletIcon.setImageResource(R.drawable.icon_bullet_3)
-        firstMargin.isVisible = true
-        secondMargin.isVisible = true
+        extraMargin?.isVisible = true
       }
       else -> {} // Ignore other cases
     }
