@@ -7,6 +7,9 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.widget.Toast
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.facebook.litho.ComponentContext
@@ -21,6 +24,8 @@ import com.maubis.scarlet.base.common.specs.ToolbarColorConfig
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.editor.recycler.*
 import com.maubis.scarlet.base.editor.specs.NoteEditorBottomBar
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import pl.aprilapps.easyphotopicker.DefaultCallback
 import pl.aprilapps.easyphotopicker.EasyImage
 import java.io.File
@@ -28,7 +33,6 @@ import java.util.*
 
 open class EditNoteActivity : ViewNoteActivity() {
 
-  private var active = false
   private var maxUid = 0
 
   private var historyIndex = 0
@@ -43,7 +47,7 @@ open class EditNoteActivity : ViewNoteActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setDragHandlesTouchListener()
-    startHandler()
+    startBackgroundNoteAutosave()
   }
 
   override fun onCreationFinished() {
@@ -70,6 +74,17 @@ open class EditNoteActivity : ViewNoteActivity() {
   private fun setDragHandlesTouchListener() {
     formatsTouchHelper = ItemTouchHelper(FormatTouchHelperCallback(adapter))
     formatsTouchHelper.attachToRecyclerView(views.formatsRecyclerView)
+  }
+
+  private fun startBackgroundNoteAutosave() {
+    lifecycleScope.launch {
+      repeatOnLifecycle(Lifecycle.State.RESUMED) {
+        while (true) {
+          delay(NOTE_AUTOSAVE_INTERVAL)
+          updateNoteIfNeeded()
+        }
+      }
+    }
   }
 
   override fun displayNote() {
@@ -134,7 +149,6 @@ open class EditNoteActivity : ViewNoteActivity() {
 
   override fun onPause() {
     super.onPause()
-    active = false
     updateNoteIfNeeded()
     deleteIfEmpty()
   }
@@ -142,11 +156,6 @@ open class EditNoteActivity : ViewNoteActivity() {
   override fun onBackPressed() {
     super.onBackPressed()
     tryClosingTheKeyboard()
-  }
-
-  override fun onResume() {
-    super.onResume()
-    active = true
   }
 
   override fun onResumeAction() {
@@ -162,7 +171,7 @@ open class EditNoteActivity : ViewNoteActivity() {
     }
   }
 
-  protected fun updateNoteIfNeeded() {
+  private fun updateNoteIfNeeded() {
     val vLastNoteInstance = history.getOrNull(historyIndex) ?: note
     note.content = Formats.getEnhancedNoteContent(formats)
 
@@ -192,19 +201,6 @@ open class EditNoteActivity : ViewNoteActivity() {
       historySize -= item.content.length
       historyIndex -= 1
     }
-  }
-
-  private fun startHandler() {
-    val handler = Handler(Looper.getMainLooper())
-    handler.postDelayed(object : Runnable {
-      override fun run() {
-        if (active) {
-          updateNoteIfNeeded()
-          fullScreenView()
-          handler.postDelayed(this, HANDLER_UPDATE_TIME.toLong())
-        }
-      }
-    }, HANDLER_UPDATE_TIME.toLong())
   }
 
   protected fun addEmptyItem(type: FormatType) {
@@ -448,7 +444,7 @@ open class EditNoteActivity : ViewNoteActivity() {
   }
 
   companion object {
-    private const val HANDLER_UPDATE_TIME = 4000
+    private const val NOTE_AUTOSAVE_INTERVAL: Long = 4000
     private const val INTENT_KEY_FOLDER = "key_folder"
 
     fun makeNewNoteIntent(context: Context, folderUuid: UUID?): Intent {
