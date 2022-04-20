@@ -35,9 +35,9 @@ open class EditNoteActivity : ViewNoteActivity() {
 
   private var maxUid = 0
 
-  private var historyIndex = 0
-  private var historyModified = false
   private val history: MutableList<Note> = mutableListOf<Note>()
+  private var currentHistoryPosition = 0
+  private var undoOrRedoJustPerformed = false
 
   private lateinit var formatsTouchHelper: ItemTouchHelper
 
@@ -171,29 +171,29 @@ open class EditNoteActivity : ViewNoteActivity() {
   }
 
   private fun updateNoteIfNeeded() {
-    val vLastNoteInstance = history.getOrNull(historyIndex) ?: note
+    val lastNoteSnapshot = history.getOrNull(currentHistoryPosition) ?: note
     note.content = Formats.getEnhancedNoteContent(formats)
 
     // Ignore update if nothing changed. It allows for one undo per few seconds
     when {
-      !historyModified && note.isEqual(vLastNoteInstance) -> return
-      !historyModified -> addNoteToHistory(note.shallowCopy())
-      else -> historyModified = false
+      !undoOrRedoJustPerformed && note.isEqual(lastNoteSnapshot) -> return
+      !undoOrRedoJustPerformed -> addSnapshotToHistory(note.shallowCopy())
+      else -> undoOrRedoJustPerformed = false
     }
     saveNoteIfNeeded()
   }
 
-  private fun addNoteToHistory(note: Note) {
-    while (historyIndex != history.size - 1) {
-      history.removeAt(historyIndex)
+  private fun addSnapshotToHistory(note: Note) {
+    while (currentHistoryPosition != history.size - 1) {
+      history.removeLast()
     }
 
     history.add(note)
-    historyIndex += 1
+    currentHistoryPosition += 1
 
     if (history.size >= 25) {
       history.removeAt(0)
-      historyIndex -= 1
+      currentHistoryPosition -= 1
     }
   }
 
@@ -269,22 +269,19 @@ open class EditNoteActivity : ViewNoteActivity() {
     setFormat(formatToChange)
   }
 
-  fun onHistoryClick(undo: Boolean) {
-    when (undo) {
-      true -> {
-        historyIndex = if (historyIndex == 0) 0 else (historyIndex - 1)
-        note = history[historyIndex].shallowCopy()
-        displayNote()
-        historyModified = true
-      }
-      false -> {
-        val maxHistoryIndex = history.size - 1
-        historyIndex = if (historyIndex == maxHistoryIndex) maxHistoryIndex else (historyIndex + 1)
-        note = history[historyIndex].shallowCopy()
-        displayNote()
-        historyModified = true
-      }
-    }
+  fun performUndo() {
+    currentHistoryPosition = (currentHistoryPosition - 1).coerceAtLeast(0)
+    note = history[currentHistoryPosition].shallowCopy()
+    displayNote()
+    undoOrRedoJustPerformed = true
+  }
+
+  fun performRedo() {
+    val maxHistoryIndex = history.size - 1
+    currentHistoryPosition = (currentHistoryPosition + 1).coerceAtMost(maxHistoryIndex)
+    note = history[currentHistoryPosition].shallowCopy()
+    displayNote()
+    undoOrRedoJustPerformed = true
   }
 
   fun onColorChangeClick() {

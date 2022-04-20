@@ -138,7 +138,7 @@ object NoteEditorOptionsBottomBarSpec {
         .child(EmptySpec.create(context).heightDip(1f).flexGrow(1f))
         .child(bottomBarRoundIcon(context, colorConfig)
             .iconRes(R.drawable.ic_undo_history)
-            .onClick { activity.onHistoryClick(true) })
+            .onClick { activity.performUndo() })
         .child(bottomBarRoundIcon(context, colorConfig)
             .bgColor(activity.note().color)
             .bgAlpha(255)
@@ -149,7 +149,7 @@ object NoteEditorOptionsBottomBarSpec {
             .iconSizeRes(R.dimen.toolbar_round_small_icon_size))
         .child(bottomBarRoundIcon(context, colorConfig)
             .iconRes(R.drawable.ic_redo_history)
-            .onClick { activity.onHistoryClick(false) })
+            .onClick { activity.performRedo() })
         .child(EmptySpec.create(context).heightDip(1f).flexGrow(1f))
         .build()
   }
