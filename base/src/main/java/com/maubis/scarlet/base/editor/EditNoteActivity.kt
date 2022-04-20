@@ -36,7 +36,6 @@ open class EditNoteActivity : ViewNoteActivity() {
   private var maxUid = 0
 
   private var historyIndex = 0
-  private var historySize = 0L
   private var historyModified = false
   private val history: MutableList<Note> = mutableListOf<Note>()
 
@@ -181,24 +180,19 @@ open class EditNoteActivity : ViewNoteActivity() {
       !historyModified -> addNoteToHistory(note.shallowCopy())
       else -> historyModified = false
     }
-    note.updateTimestamp = System.currentTimeMillis()
     saveNoteIfNeeded()
   }
 
-  @Synchronized
   private fun addNoteToHistory(note: Note) {
     while (historyIndex != history.size - 1) {
       history.removeAt(historyIndex)
     }
 
     history.add(note)
-    historySize += note.content.length
     historyIndex += 1
 
-    // 0.5MB limit on history
-    if (historySize >= 1024 * 512 || history.size >= 15) {
-      val item = history.removeAt(0)
-      historySize -= item.content.length
+    if (history.size >= 25) {
+      history.removeAt(0)
       historyIndex -= 1
     }
   }
@@ -444,7 +438,7 @@ open class EditNoteActivity : ViewNoteActivity() {
   }
 
   companion object {
-    private const val NOTE_AUTOSAVE_INTERVAL: Long = 4000
+    private const val NOTE_AUTOSAVE_INTERVAL: Long = 3000
     private const val INTENT_KEY_FOLDER = "key_folder"
 
     fun makeNewNoteIntent(context: Context, folderUuid: UUID?): Intent {
