@@ -47,7 +47,20 @@ open class EditNoteActivity : ViewNoteActivity() {
     setDragHandlesTouchListener()
     startBackgroundNoteAutosave()
     setFolderFromIntent()
-    history.add(note.content)
+    if (savedInstanceState == null)
+      history.add(note.content)
+  }
+
+  override fun onSaveInstanceState(savedInstanceState: Bundle) {
+    super.onSaveInstanceState(savedInstanceState)
+    savedInstanceState.putStringArrayList(KEY_HISTORY, ArrayList(history))
+    savedInstanceState.putInt(KEY_HISTORY_POSITION, currentHistoryPosition)
+  }
+
+  override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+    super.onRestoreInstanceState(savedInstanceState)
+    history.addAll(savedInstanceState.getStringArrayList(KEY_HISTORY)!!)
+    currentHistoryPosition = savedInstanceState.getInt(KEY_HISTORY_POSITION)
   }
 
   private fun setFolderFromIntent() {
@@ -429,6 +442,8 @@ open class EditNoteActivity : ViewNoteActivity() {
   companion object {
     private const val NOTE_AUTOSAVE_INTERVAL: Long = 3000
     private const val INTENT_KEY_FOLDER = "key_folder"
+    private const val KEY_HISTORY = "note_history"
+    private const val KEY_HISTORY_POSITION = "history_position"
 
     fun makeNewNoteIntent(context: Context, folderUuid: UUID?): Intent {
       val intent = Intent(context, EditNoteActivity::class.java)
