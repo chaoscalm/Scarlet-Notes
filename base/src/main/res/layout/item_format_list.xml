@@ -27,6 +27,7 @@
   <EditText
     android:id="@+id/edit"
     style="@style/FormatEdit"
+    android:imeOptions="actionNext|flagNoExtractUi"
     android:layout_marginStart="@dimen/spacing_xsmall"
     android:layout_marginEnd="@dimen/spacing_small"/>
 

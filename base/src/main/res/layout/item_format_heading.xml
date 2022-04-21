@@ -12,5 +12,6 @@
   <EditText
     android:id="@+id/edit"
     style="@style/FormatEdit"
+    android:imeOptions="actionNext|flagNoExtractUi"
     android:textStyle="bold" />
 </LinearLayout>

@@ -5,7 +5,6 @@ import android.content.res.ColorStateList
 import android.graphics.Paint
 import android.text.InputType
 import android.view.View
-import android.view.inputmethod.EditorInfo
 import android.widget.CheckBox
 import android.widget.ImageView
 import androidx.core.view.isVisible
@@ -28,7 +27,6 @@ class FormatListViewHolder(context: Context, view: View) : FormatTextViewHolder(
       },
       preConditions = { !edit.isFocused }
     ))
-    edit.imeOptions = EditorInfo.IME_ACTION_DONE
     edit.setRawInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES or InputType.TYPE_TEXT_VARIATION_LONG_MESSAGE)
   }
 

@@ -28,6 +28,7 @@
   <EditText
     android:id="@+id/edit"
     style="@style/FormatText"
+    android:imeOptions="flagNoExtractUi"
     android:layout_marginStart="@dimen/spacing_small" />
 
 </LinearLayout>
