@@ -38,6 +38,8 @@ class Note() {
         return this.uid == 0
     }
 
+    fun isEmpty(): Boolean = contentAsFormats().isEmpty()
+
     fun contentAsFormats(): List<Format> {
         return Formats.fromNoteContent(this.content)
     }

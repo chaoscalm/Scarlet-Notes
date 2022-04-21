@@ -161,8 +161,13 @@ open class ViewNoteActivity : SecuredActivity(), INoteActionsActivity, IFormatRe
     trueFormats[truePosition] = format
 
     note.content = Formats.getEnhancedNoteContent(Formats.sortChecklistsPreservingSections(trueFormats))
+    saveNote()
     displayNote()
-    saveNoteIfNeeded()
+  }
+
+  protected fun saveNote() {
+    note.updateTimestamp = System.currentTimeMillis()
+    lifecycleScope.launch(noteSaveDispatcher) { note.save(this@ViewNoteActivity) }
   }
 
   fun openMoreOptions() {
@@ -212,14 +217,6 @@ open class ViewNoteActivity : SecuredActivity(), INoteActionsActivity, IFormatRe
   }
 
   open fun startFormatDrag(viewHolder: RecyclerView.ViewHolder) {}
-
-  protected fun saveNoteIfNeeded() {
-    if (note.contentAsFormats().isEmpty() && note.isNotPersisted()) {
-      return
-    }
-    note.updateTimestamp = System.currentTimeMillis()
-    lifecycleScope.launch(noteSaveDispatcher) { note.save(this@ViewNoteActivity) }
-  }
 
   private fun notifyNoteChange() {
     notifyToolbarColor()

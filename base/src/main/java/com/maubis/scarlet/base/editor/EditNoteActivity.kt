@@ -75,7 +75,8 @@ open class EditNoteActivity : ViewNoteActivity() {
       repeatOnLifecycle(Lifecycle.State.RESUMED) {
         while (true) {
           delay(NOTE_AUTOSAVE_INTERVAL)
-          updateNote()
+          addSnapshotToHistoryIfNeeded()
+          saveNoteIfNeeded()
         }
       }
     }
@@ -138,8 +139,24 @@ open class EditNoteActivity : ViewNoteActivity() {
 
   override fun onPause() {
     super.onPause()
-    updateNote()
-    deleteIfEmpty()
+    saveOrDeleteNote()
+  }
+
+  private fun saveOrDeleteNote() {
+    note.content = Formats.getEnhancedNoteContent(formats)
+    if (note.isEmpty()) {
+      note.delete(this)
+    } else {
+      saveNote()
+    }
+  }
+
+  private fun saveNoteIfNeeded() {
+    note.content = Formats.getEnhancedNoteContent(formats)
+    if (note.isEmpty() && note.isNotPersisted()) {
+      return
+    }
+    saveNote()
   }
 
   override fun onBackPressed() {
@@ -149,21 +166,6 @@ open class EditNoteActivity : ViewNoteActivity() {
 
   override fun onResumeAction() {
     // do nothing
-  }
-
-  private fun deleteIfEmpty() {
-    if (note.isNotPersisted()) {
-      return
-    }
-    if (note.contentAsFormats().isEmpty()) {
-      note.delete(this)
-    }
-  }
-
-  private fun updateNote() {
-    note.content = Formats.getEnhancedNoteContent(formats)
-    addSnapshotToHistoryIfNeeded()
-    saveNoteIfNeeded()
   }
 
   private fun addSnapshotToHistoryIfNeeded() {
