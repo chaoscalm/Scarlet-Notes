@@ -35,7 +35,7 @@ open class EditNoteActivity : ViewNoteActivity() {
 
   private var maxUid = 0
 
-  private val history: MutableList<Note> = mutableListOf<Note>()
+  private val history = mutableListOf<String>()
   private var currentHistoryPosition = 0
 
   private lateinit var formatsTouchHelper: ItemTouchHelper
@@ -47,7 +47,7 @@ open class EditNoteActivity : ViewNoteActivity() {
     setDragHandlesTouchListener()
     startBackgroundNoteAutosave()
     setFolderFromIntent()
-    history.add(note.shallowCopy())
+    history.add(note.content)
   }
 
   private fun setFolderFromIntent() {
@@ -167,15 +167,15 @@ open class EditNoteActivity : ViewNoteActivity() {
   }
 
   private fun addSnapshotToHistoryIfNeeded() {
-    val currentHistorySnapshot = history.getOrNull(currentHistoryPosition) ?: note
-    if (note.isEqual(currentHistorySnapshot))
+    val currentNoteContent = Formats.getEnhancedNoteContent(formats)
+    if (currentNoteContent == history[currentHistoryPosition])
       return
 
     while (currentHistoryPosition < history.lastIndex) {
       history.removeLast()
     }
 
-    history.add(note.shallowCopy())
+    history.add(currentNoteContent)
     currentHistoryPosition += 1
 
     if (history.size >= 25) {
@@ -257,16 +257,16 @@ open class EditNoteActivity : ViewNoteActivity() {
   }
 
   fun performUndo() {
-    updateNote()
+    addSnapshotToHistoryIfNeeded()
     currentHistoryPosition = (currentHistoryPosition - 1).coerceAtLeast(0)
-    note = history[currentHistoryPosition].shallowCopy()
+    note.content = history[currentHistoryPosition]
     displayNote()
   }
 
   fun performRedo() {
     val maxHistoryIndex = history.size - 1
     currentHistoryPosition = (currentHistoryPosition + 1).coerceAtMost(maxHistoryIndex)
-    note = history[currentHistoryPosition].shallowCopy()
+    note.content = history[currentHistoryPosition]
     displayNote()
   }
 
@@ -333,7 +333,7 @@ open class EditNoteActivity : ViewNoteActivity() {
         Collections.swap(formats, i, i - 1)
       }
     }
-    updateNote()
+    addSnapshotToHistoryIfNeeded()
   }
 
   override fun deleteFormat(format: Format) {
@@ -344,7 +344,7 @@ open class EditNoteActivity : ViewNoteActivity() {
     focusedFormat = if (focusedFormat == null || focusedFormat!!.uid == format.uid) null else focusedFormat
     formats.removeAt(position)
     adapter.removeItem(position)
-    updateNote()
+    addSnapshotToHistoryIfNeeded()
   }
 
   override fun createOrChangeToNextFormat(format: Format) {

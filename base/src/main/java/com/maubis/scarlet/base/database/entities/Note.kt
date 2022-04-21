@@ -38,18 +38,6 @@ class Note() {
         return this.uid == 0
     }
 
-    fun isEqual(note: Note): Boolean {
-        return this.content == note.content
-                && this.uuid == note.uuid
-                && this.tags == note.tags
-                && this.timestamp == note.timestamp
-                && this.color == note.color
-                && this.state == note.state
-                && this.locked == note.locked
-                && this.pinned == note.pinned
-                && this.folder == note.folder
-    }
-
     fun contentAsFormats(): List<Format> {
         return Formats.fromNoteContent(this.content)
     }
