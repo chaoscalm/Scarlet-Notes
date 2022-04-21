@@ -7,6 +7,7 @@ import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.editor.Format
 import com.maubis.scarlet.base.editor.FormatType
 import com.maubis.scarlet.base.editor.Formats
+import com.maubis.scarlet.base.editor.Formats.toNoteContent
 import com.maubis.scarlet.base.reminders.Reminder
 import com.maubis.scarlet.base.settings.sNoteDefaultColor
 import java.util.*
@@ -17,7 +18,7 @@ class Note() {
     @PrimaryKey(autoGenerate = true)
     var uid: Int = 0
     var uuid: UUID = UUID.randomUUID()
-    var content: String = Formats.getNoteContent(emptyList())
+    var content: String = emptyList<Format>().toNoteContent()
     var color: Int = sNoteDefaultColor
     var state: NoteState = NoteState.DEFAULT
     var timestamp: Long = System.currentTimeMillis()
@@ -49,8 +50,8 @@ class Note() {
                 && this.folder == note.folder
     }
 
-    fun getFormats(): List<Format> {
-        return Formats.getFormatsFromNoteContent(this.content)
+    fun contentAsFormats(): List<Format> {
+        return Formats.fromNoteContent(this.content)
     }
 
     fun toggleTag(tag: Tag) {
@@ -108,7 +109,7 @@ class Note() {
                 formats.add(Format(FormatType.HEADING, title))
             }
             formats.add(Format(FormatType.TEXT, description))
-            note.content = Formats.getNoteContent(formats)
+            note.content = formats.toNoteContent()
             return note
         }
     }

@@ -155,7 +155,7 @@ open class EditNoteActivity : ViewNoteActivity() {
     if (note.isNotPersisted()) {
       return
     }
-    if (note.getFormats().isEmpty()) {
+    if (note.contentAsFormats().isEmpty()) {
       note.delete(this)
     }
   }

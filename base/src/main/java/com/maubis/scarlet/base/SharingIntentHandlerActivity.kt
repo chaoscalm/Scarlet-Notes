@@ -53,7 +53,7 @@ class SharingIntentHandlerActivity : AppCompatActivity() {
         Log.w("Scarlet", "Unable to save image $uri", e)
       }
     }
-    val formats = note.getFormats().toMutableList()
+    val formats = note.contentAsFormats().toMutableList()
     for (image in images.reversed()) {
       formats.add(0, Format(FormatType.IMAGE, image.name))
     }

@@ -94,7 +94,7 @@ object NoteExporter {
    */
   private fun Note.toExportedMarkdown(): String {
     val markdownBuilder = StringBuilder()
-    getFormats().forEach { format ->
+    contentAsFormats().forEach { format ->
       val text = format.text
       val formatMarkdown = when (format.type) {
         FormatType.NUMBERED_LIST -> "- $text"

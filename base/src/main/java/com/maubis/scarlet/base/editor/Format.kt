@@ -1,8 +1,6 @@
 package com.maubis.scarlet.base.editor
 
-import com.maubis.scarlet.base.settings.sEditorMoveChecked
 import org.json.JSONObject
-import java.util.*
 
 class Format(var type: FormatType) {
 
@@ -57,34 +55,29 @@ class Format(var type: FormatType) {
   }
 }
 
-fun sectionPreservingSort(formats: List<Format>): List<Format> {
-  if (!sEditorMoveChecked) {
-    return formats
-  }
+enum class FormatType {
+  TAG,
+  TEXT,
+  NUMBERED_LIST,
+  BULLET_1,
+  BULLET_2,
+  BULLET_3,
+  IMAGE,
+  HEADING,// HEADING_1
+  SUB_HEADING, // HEADING_2
+  HEADING_3,
+  CHECKLIST_UNCHECKED,
+  CHECKLIST_CHECKED,
+  CODE,
+  QUOTE,
+  SEPARATOR;
 
-  val mutableFormats = formats.toMutableList()
-  var index = 0
-  while (index < formats.size - 1) {
-    val currentItem = mutableFormats[index]
-    val nextItem = mutableFormats[index + 1]
-
-    if (currentItem.type == FormatType.CHECKLIST_CHECKED
-      && nextItem.type == FormatType.CHECKLIST_UNCHECKED) {
-      Collections.swap(mutableFormats, index, index + 1)
-      continue
+  fun getNextFormatType(): FormatType {
+    return when (this) {
+      HEADING, SUB_HEADING, HEADING_3 -> TEXT
+      CHECKLIST_CHECKED, CHECKLIST_UNCHECKED -> CHECKLIST_UNCHECKED
+      NUMBERED_LIST -> NUMBERED_LIST
+      else -> TEXT
     }
-    index += 1
   }
-  while (index > 0) {
-    val currentItem = mutableFormats[index]
-    val nextItem = mutableFormats[index - 1]
-
-    if (currentItem.type == FormatType.CHECKLIST_UNCHECKED
-      && nextItem.type == FormatType.CHECKLIST_CHECKED) {
-      Collections.swap(mutableFormats, index, index - 1)
-      continue
-    }
-    index -= 1
-  }
-  return mutableFormats
 }

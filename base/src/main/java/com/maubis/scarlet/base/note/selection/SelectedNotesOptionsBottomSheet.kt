@@ -12,7 +12,7 @@ import com.maubis.scarlet.base.common.utils.copyTextToClipboard
 import com.maubis.scarlet.base.common.utils.shareText
 import com.maubis.scarlet.base.database.entities.NoteState
 import com.maubis.scarlet.base.editor.Formats
-import com.maubis.scarlet.base.editor.sectionPreservingSort
+import com.maubis.scarlet.base.editor.Formats.toNoteContent
 import com.maubis.scarlet.base.home.sheets.AlertBottomSheet
 import com.maubis.scarlet.base.home.sheets.AlertSheetConfig
 import com.maubis.scarlet.base.note.folder.sheet.MultipleNotesFolderChooserBottomSheet
@@ -256,13 +256,13 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
           return@lockAwareFunctionRunner
         }
 
-        val formats = note.getFormats().toMutableList()
+        val formats = note.contentAsFormats().toMutableList()
         selectedNotes.removeAt(0)
         for (noteToAdd in selectedNotes) {
-          formats.addAll(noteToAdd.getFormats())
+          formats.addAll(noteToAdd.contentAsFormats())
           noteToAdd.delete(activity)
         }
-        note.content = Formats.getNoteContent(sectionPreservingSort(formats))
+        note.content = Formats.sortChecklistsPreservingSections(formats).toNoteContent()
         note.save(activity)
         activity.finish()
       }

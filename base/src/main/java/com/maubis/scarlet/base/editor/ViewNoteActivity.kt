@@ -109,8 +109,8 @@ open class ViewNoteActivity : SecuredActivity(), INoteActionsActivity, IFormatRe
     adapter.clearItems()
 
     formats = when (editModeValue) {
-      true -> note.getFormats()
-      false -> Formats.getEnhancedFormatsForNoteView(note.getFormats())
+      true -> note.contentAsFormats()
+      false -> Formats.getEnhancedFormatsForNoteView(note.contentAsFormats())
     }.toMutableList()
     adapter.addItems(formats)
 
@@ -145,7 +145,7 @@ open class ViewNoteActivity : SecuredActivity(), INoteActionsActivity, IFormatRe
   }
 
   open fun setFormatChecked(format: Format, checked: Boolean) {
-    val trueFormats = note.getFormats().toMutableList()
+    val trueFormats = note.contentAsFormats().toMutableList()
     val truePosition = trueFormats.indexOfFirst { it.uid == format.uid }
     if (truePosition == -1) {
       return
@@ -160,7 +160,7 @@ open class ViewNoteActivity : SecuredActivity(), INoteActionsActivity, IFormatRe
     formats[position] = format
     trueFormats[truePosition] = format
 
-    note.content = Formats.getEnhancedNoteContent(sectionPreservingSort(trueFormats))
+    note.content = Formats.getEnhancedNoteContent(Formats.sortChecklistsPreservingSections(trueFormats))
     displayNote()
     saveNoteIfNeeded()
   }
@@ -214,7 +214,7 @@ open class ViewNoteActivity : SecuredActivity(), INoteActionsActivity, IFormatRe
   open fun startFormatDrag(viewHolder: RecyclerView.ViewHolder) {}
 
   protected fun saveNoteIfNeeded() {
-    if (note.getFormats().isEmpty() && note.isNotPersisted()) {
+    if (note.contentAsFormats().isEmpty() && note.isNotPersisted()) {
       return
     }
     note.updateTimestamp = System.currentTimeMillis()

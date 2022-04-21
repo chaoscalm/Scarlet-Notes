@@ -3,16 +3,18 @@ package com.maubis.scarlet.base.editor
 import com.maubis.markdown.segmenter.MarkdownSegmentType
 import com.maubis.markdown.segmenter.TextSegmenter
 import com.maubis.scarlet.base.common.utils.logNonCriticalError
+import com.maubis.scarlet.base.settings.sEditorMoveChecked
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
+import java.util.*
 
 object Formats {
   private const val JSON_KEY_NOTE = "note"
 
-  fun getNoteContent(formats: List<Format>): String {
+  fun List<Format>.toNoteContent(): String {
     val array = JSONArray()
-    for (format in formats) {
+    for (format in this) {
       val json = format.toJson()
       if (json != null) array.put(json)
     }
@@ -20,7 +22,7 @@ object Formats {
     return JSONObject().put(JSON_KEY_NOTE, array).toString()
   }
 
-  fun getFormatsFromNoteContent(noteContent: String): List<Format> {
+  fun fromNoteContent(noteContent: String): List<Format> {
     val formats = ArrayList<Format>()
     try {
       val array = JSONObject(noteContent).getJSONArray(JSON_KEY_NOTE)
@@ -37,6 +39,38 @@ object Formats {
       logNonCriticalError(exception)
     }
     return formats
+  }
+
+  fun sortChecklistsPreservingSections(formats: List<Format>): List<Format> {
+    if (!sEditorMoveChecked) {
+      return formats
+    }
+
+    val mutableFormats = formats.toMutableList()
+    var index = 0
+    while (index < formats.size - 1) {
+      val currentItem = mutableFormats[index]
+      val nextItem = mutableFormats[index + 1]
+
+      if (currentItem.type == FormatType.CHECKLIST_CHECKED
+        && nextItem.type == FormatType.CHECKLIST_UNCHECKED) {
+        Collections.swap(mutableFormats, index, index + 1)
+        continue
+      }
+      index += 1
+    }
+    while (index > 0) {
+      val currentItem = mutableFormats[index]
+      val nextItem = mutableFormats[index - 1]
+
+      if (currentItem.type == FormatType.CHECKLIST_UNCHECKED
+        && nextItem.type == FormatType.CHECKLIST_CHECKED) {
+        Collections.swap(mutableFormats, index, index - 1)
+        continue
+      }
+      index -= 1
+    }
+    return mutableFormats
   }
 
   fun getEnhancedFormatsForNoteView(formats: List<Format>): List<Format> {
@@ -59,7 +93,7 @@ object Formats {
 
   fun getEnhancedNoteContent(formats: List<Format>): String {
     val enhancedFormats = enhanceTextFormats(formats)
-    return getNoteContent(enhancedFormats)
+    return enhancedFormats.toNoteContent()
   }
 
   private fun enhanceTextFormats(formats: List<Format>): List<Format> {

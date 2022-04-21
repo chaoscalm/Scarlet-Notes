@@ -30,7 +30,7 @@ fun Note.getFullTextForDirectMarkdownRender(): String {
 }
 
 fun Note.getTitleForSharing(): String {
-  val formats = getFormats()
+  val formats = contentAsFormats()
   if (formats.isEmpty()) {
     return ""
   }
@@ -43,7 +43,7 @@ fun Note.getTitleForSharing(): String {
 }
 
 fun Note.getTextForSharing(): String {
-  val formats = getFormats().toMutableList()
+  val formats = contentAsFormats().toMutableList()
   if (formats.isEmpty()) {
     return ""
   }
@@ -70,13 +70,13 @@ fun Note.getTextForSharing(): String {
 }
 
 fun Note.getImageFile(): String {
-  val formats = getFormats()
+  val formats = contentAsFormats()
   val format = formats.find { it.type === FormatType.IMAGE }
   return format?.text ?: ""
 }
 
 fun Note.getFullText(): String {
-  val fullText = getFormats().joinToString(separator = "\n") { it.markdownText }.trim()
+  val fullText = contentAsFormats().joinToString(separator = "\n") { it.markdownText }.trim()
   if (sInternalShowUUID) {
     return "`$uuid`\n$fullText"
   }
@@ -135,12 +135,12 @@ fun Note.edit(context: Context) {
 }
 
 fun Note.hasImages(): Boolean {
-  val imageFormats = getFormats().filter { it.type == FormatType.IMAGE }
+  val imageFormats = contentAsFormats().filter { it.type == FormatType.IMAGE }
   return imageFormats.isNotEmpty()
 }
 
 fun Note.shareImages(context: Context) {
-  val imageFormats = getFormats().filter { it.type == FormatType.IMAGE }
+  val imageFormats = contentAsFormats().filter { it.type == FormatType.IMAGE }
   val imageFileUris = imageFormats
     .map { ScarletApp.imageStorage.getImage(uuid.toString(), it) }
     .filter { it.exists() }
