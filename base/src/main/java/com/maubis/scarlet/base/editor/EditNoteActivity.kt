@@ -258,14 +258,19 @@ open class EditNoteActivity : ViewNoteActivity() {
 
   fun performUndo() {
     addSnapshotToHistoryIfNeeded()
-    currentHistoryPosition = (currentHistoryPosition - 1).coerceAtLeast(0)
+    if (currentHistoryPosition == 0)
+      return
+
+    currentHistoryPosition -= 1
     note.content = history[currentHistoryPosition]
     displayNote()
   }
 
   fun performRedo() {
-    val maxHistoryIndex = history.size - 1
-    currentHistoryPosition = (currentHistoryPosition + 1).coerceAtMost(maxHistoryIndex)
+    if (currentHistoryPosition == history.lastIndex)
+      return
+
+    currentHistoryPosition += 1
     note.content = history[currentHistoryPosition]
     displayNote()
   }
