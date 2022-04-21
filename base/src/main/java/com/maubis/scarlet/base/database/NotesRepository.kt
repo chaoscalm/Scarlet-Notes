@@ -64,6 +64,7 @@ class NotesRepository(private val database: NoteDao, private val notificationHan
     }
     database.delete(note)
     notes.remove(note.uuid)
+    note.uid = 0
     onNoteDestroyed(note, context)
   }
 
