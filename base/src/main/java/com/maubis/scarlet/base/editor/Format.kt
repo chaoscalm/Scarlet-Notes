@@ -20,9 +20,10 @@ class Format(var type: FormatType) {
       return when (type) {
         FormatType.NUMBERED_LIST -> "- $text"
         FormatType.HEADING -> "# $text"
+        FormatType.SUB_HEADING -> "## $text"
+        FormatType.HEADING_3 -> "### $text"
         FormatType.CHECKLIST_CHECKED -> "[x] $text"
         FormatType.CHECKLIST_UNCHECKED -> "[ ] $text"
-        FormatType.SUB_HEADING -> "## $text"
         FormatType.CODE -> "```\n$text\n```"
         FormatType.QUOTE -> "> $text"
         FormatType.IMAGE -> ""
