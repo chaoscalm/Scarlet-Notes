@@ -1,42 +1,31 @@
-# Material Notes / Scarlet / Scarlet Pro on Android
-This is the code which powers the Material Notes / Scarlet Notes app on Android by Maubis Apps.
+# Fs00's personal Scarlet Notes fork
 
-Material Notes is the fully offline FDroid version of the applications
-Scarlet / Scarlet Notes is the note apps available on the Play Store
+A more polished and lightweight fork of [Scarlet Notes](https://github.com/BijoySingh/Scarlet-Notes) that works completely offline.
 
-This app is meant for a simple yet powerful rich text experience. It's still being built and improved.
+I've decided to develop this fork because I really like the overall experience of Scarlet, but I've never got used to some design choices and usability issues of the original app, even after using it for a few years.  
+Furthermore, Scarlet Notes development stopped a few years ago and there seem to be very little chances that it will ever resume.
 
-<a href="https://f-droid.org/packages/com.bijoysingh.quicknote/" target="_blank">
-<img src="https://f-droid.org/badge/get-it-on.png" alt="Get it on F-Droid" height="80"/></a>
+All credit for the development of the original Scarlet Notes app goes to its creator [Bijoy Singh](https://github.com/BijoySingh).
 
-<a href="https://play.google.com/store/apps/details?id=com.bijoysingh.quicknote" target="_blank">
-<img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" alt="Get it on Google Play" height="80"/></a>
+## Differences from upstream Scarlet Notes
+- Changed app logo (the one from an older Scarlet version is used)
+- Removed cloud sync with Google Drive
+- Removed several half-broken features (floating bubble, sync to local folder, text-to-speech, automatic trash emptying in background)
+- Removed almost all translations (many of them were of low quality, often made with an automatic translation software)
+- Made app much smaller compared to the Play Store version (now takes ~4MB once installed)
+- Improved note editing experience (more intuitive bottom bar, smarter Markdown -> text block conversions, fixed undo/redo, and more)
+- Slightly revamped and reorganized UI
+- Leveraged Android built-in file picker for importing/exporting backups more easily
+- Fixed lots of bugs
+- Under the hood improvements and optimizations
 
-<a href="https://play.google.com/store/apps/details?id=com.bijoysingh.quicknote.pro" target="_blank">
-<img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" alt="Get it on Google Play" height="80"/></a>
+## Compatibility
+You can import backups made with the upstream version of Scarlet Notes (including Scarlet Pro) into this fork.  
+The reverse is possible and should work just fine, but I can't guarantee that it will always continue to work without issues.
 
-<a href="https://scarlet.maubis.com/" target="_blank">
-<img src="https://scarlet.maubis.com/assets/scarlet_try_it_icon.png" alt="Try it on Scarlet Web" height="80"/></a>
+## Development and contributions
+Being a project aimed at personal use, don't expect any continued development or frequent releases.  
+Requests for new features won't be taken into account, as I'm not willing to add more functionality to the app.
 
-
-# Highlights of the application features
-- Fully Offline: The application doesnot store anything online, no logs, etc.
-- Choice of Grid / List layouts
-- Rich Note Input: Add rich notes - lists, headings, quotes and more.
-- Markdown Support: The text elements have markdown support
-- Simple UX: Simplistic and straight forward UI.
-- Archived, Favourites, and more
-- Set color to your notes
-- Night Mode: view notes in night mode, for your eyes and screens
-- Lock Notes: lock the notes with a pincode
-- Ad Free: Now and always ad-free.
-- Note-ifications: Notes can be kept in the notifications list of your phone.
-- Floating Heads: Quickly take notes while doing other stuff.
-
-# Google Play Store Beta Program
-The app is improving fast. As we grow, a lot of new features will not be realeased publically till it's tested on alpha/beta channels. If you would like to get the new features faster, join the beta program here:
-https://play.google.com/apps/testing/com.bijoysingh.quicknote
-
-# Survey Link
-If you have used the app, here is a survey which helps me understand how to make the app better.
-https://goo.gl/forms/UbE2lARpp89CNIbl2
+That said, you're welcome to use this fork and report any bugs (I don't guarantee I'll take the time to fix them though) or propose any improvements to existing features.  
+I'll gladly accept any PR that fixes some bugs or adds a new translation (please only translate into languages that you know very well!).
