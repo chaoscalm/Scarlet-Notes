@@ -104,10 +104,10 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1'
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1"
 
-    def litho_version = "0.41.1"
+    def litho_version = "0.41.2"
     implementation "com.facebook.litho:litho-core:$litho_version"
     implementation "com.facebook.litho:litho-widget:$litho_version"
     compileOnly "com.facebook.litho:litho-annotations:$litho_version"
     kapt "com.facebook.litho:litho-processor:$litho_version"
-    implementation 'com.facebook.soloader:soloader:0.10.1'
+    implementation 'com.facebook.soloader:soloader:0.10.3'
 }
