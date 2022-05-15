@@ -134,8 +134,6 @@
   <string name="import_export_locked">Export locked notes</string>
   <string name="import_export_locked_details">Also backup the notes which are locked</string>
 
-  <string name="about_page_app_version">App Version</string>
-
   <string name="reminder_sheet_reminder_date">Reminder Date</string>
   <string name="reminder_sheet_reminder_time">Reminder Time</string>
   <string name="reminder_sheet_repeat">Repeat Frequency</string>
@@ -145,8 +143,12 @@
   <string name="notification_channel_label">Note Notifications</string>
   <string name="notification_reminder_channel_label">Reminders and Alarms</string>
 
+  <string name="about_page_license">License</string>
+  <string name="about_page_license_description">This app is free software: you can redistribute or modify it under the terms of the GNU General Public License (GPL) version 3 or later.</string>
+  <string name="about_page_app_version">Version</string>
+  <string name="about_page_app_version_number">%s (Fs00\'s fork)</string>
   <string name="about_page_description">
-    %s is a simple note taking app. It allows quick Rich Text input without making the experience very difficult to use. It makes multi-tasking a breeze.
+    %s is an offline, feature-rich app for taking notes.\nIt allows to write rich, Markdown-formatted text without making the user experience difficult.
   </string>
 
   <string name="tag_sheet_create_title">Add New Tag&#8230;</string>

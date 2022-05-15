@@ -19,7 +19,6 @@ class AboutBottomSheet : LithoBottomSheet() {
   override fun getComponent(componentContext: ComponentContext, dialog: Dialog): Component {
     val appName = getString(R.string.app_name)
     val aboutAppDetails = getString(R.string.about_page_description, appName)
-
     val component = Column.create(componentContext)
       .widthPercent(100f)
       .paddingDip(YogaEdge.VERTICAL, 8f)
@@ -47,7 +46,21 @@ class AboutBottomSheet : LithoBottomSheet() {
           .typeface(appTypeface.text())
           .textSizeRes(R.dimen.font_size_large)
           .marginDip(YogaEdge.BOTTOM, 16f)
-          .text(BuildConfig.VERSION_NAME)
+          .text(getString(R.string.about_page_app_version_number, BuildConfig.VERSION_NAME))
+          .textColor(appTheme.get(ThemeColorType.TERTIARY_TEXT)))
+      .child(
+        Text.create(componentContext)
+          .textSizeRes(R.dimen.font_size_xlarge)
+          .marginDip(YogaEdge.BOTTOM, 4f)
+          .textRes(R.string.about_page_license)
+          .typeface(appTypeface.title())
+          .textColor(appTheme.get(ThemeColorType.SECTION_HEADER)))
+      .child(
+        Text.create(componentContext)
+          .typeface(appTypeface.text())
+          .textSizeRes(R.dimen.font_size_large)
+          .marginDip(YogaEdge.BOTTOM, 16f)
+          .textRes(R.string.about_page_license_description)
           .textColor(appTheme.get(ThemeColorType.TERTIARY_TEXT)))
     return component.build()
   }

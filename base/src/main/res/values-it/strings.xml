@@ -29,7 +29,6 @@
   <string name="import_export_layout_export_action">Esporta</string>
   <string name="action_done">Ok</string>
   <string name="action_share">Condividi</string>
-  <string name="about_page_app_version">Versione dell\'app</string>
   <string name="search_notes">Cerca note&#8230;</string>
   <string name="lock_note">Proteggi</string>
   <string name="unlock_note">Sblocca</string>
@@ -133,9 +132,14 @@
   <string name="reminder_frequency_once">Solo una volta</string>
   <string name="reminder_frequency_daily">Quotidiano</string>
   <string name="notification_reminder_channel_label">Promemoria e sveglie</string>
-  <string name="about_page_description">%s è una semplice app per prendere appunti. Permette di inserire rapidamente testo formattato senza rendere complicata l\'esperienza utente. Rende il multi-tasking un gioco da ragazzi.</string>
-  <string name="note_option_number_lines_subtitle">%d linee sulla schermata principale</string>
 
+  <string name="about_page_license">Licenza</string>
+  <string name="about_page_license_description">Questa app è un software libero: puoi ridistribuirla o modificarla secondo i termini della GNU General Public License (GPL) versione 3 o successiva.</string>
+  <string name="about_page_app_version">Versione</string>
+  <string name="about_page_app_version_number">%s (fork di Fs00)</string>
+  <string name="about_page_description">%s è un\'app offline ricca di funzionalità per prendere appunti.\nPermette di scrivere testo formattato in Markdown senza rendere complicata l\'esperienza utente.</string>
+
+  <string name="note_option_number_lines_subtitle">%d linee sulla schermata principale</string>
   <string name="home_option_theme_color">Tema dell\'app</string>
   <string name="home_option_theme_color_subtitle">Seleziona il colore di sfondo per il tema</string>
   <string name="theme_page_title">Seleziona il tema dell\'app</string>
