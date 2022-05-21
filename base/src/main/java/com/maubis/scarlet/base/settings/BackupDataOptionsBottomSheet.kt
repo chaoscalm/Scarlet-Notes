@@ -94,7 +94,7 @@ class BackupDataOptionsBottomSheet : LithoOptionBottomSheet() {
 
   private suspend fun showImportOutcome(@StringRes messageTextRes: Int) {
     withContext(Dispatchers.Main) {
-      Toast.makeText(requireContext(), messageTextRes, Toast.LENGTH_SHORT).show()
+      Toast.makeText(requireContext(), messageTextRes, Toast.LENGTH_LONG).show()
       (activity as MainActivity).resetAndLoadData()
     }
   }
