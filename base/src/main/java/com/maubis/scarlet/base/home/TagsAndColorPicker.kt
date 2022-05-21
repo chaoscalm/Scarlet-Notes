@@ -12,54 +12,45 @@ import com.maubis.scarlet.base.common.ui.ColorView
 import com.maubis.scarlet.base.common.ui.ThemeColorType
 import com.maubis.scarlet.base.database.entities.Tag
 
-class TagsAndColorPickerViewHolder(
-        val activity: MainActivity,
-        val flexbox: FlexboxLayout,
-        val onTagClick: (Tag) -> Unit,
-        val onColorClick: (Int) -> Unit) {
+class TagsAndColorPicker(
+  private val activity: MainActivity,
+  private val flexbox: FlexboxLayout,
+  private val onTagClick: (Tag) -> Unit,
+  private val onColorClick: (Int) -> Unit) {
 
-  val tags = emptySet<Tag>().toMutableSet()
-  val colors = emptySet<Int>().toMutableSet()
+  private val tags = mutableSetOf<Tag>()
+  private val colors = mutableSetOf<Int>()
 
-  fun reset() {
+  fun loadData() {
     tags.clear()
-    tags.addAll(data.tags.search(""))
+    tags.addAll(data.tags.getAll())
 
     colors.clear()
     colors.addAll(data.notes.getAll().map { it.color })
   }
 
-  fun notifyChanged() {
-    setViews()
-  }
-
-  @Synchronized
-  fun setViews() {
+  fun refreshUI() {
     flexbox.removeAllViews()
-    setTags()
-    setColors()
+    populateTags()
+    populateColors()
   }
 
-  private fun setTags() {
-    tags.toList()
-      .subList(0, tags.size.coerceAtMost(6))
-      .forEach { tag ->
-        val tagView = buildViewForTag(tag)
-        flexbox.addView(tagView)
-      }
+  private fun populateTags() {
+    tags.forEach { tag ->
+      val tagView = buildViewForTag(tag)
+      flexbox.addView(tagView)
+    }
   }
 
-  private fun setColors() {
-    colors.toList()
-      .subList(0, colors.size.coerceAtMost(6))
-      .forEach { color ->
-        val colorView = buildViewForColor(color)
-        flexbox.addView(colorView)
-      }
+  private fun populateColors() {
+    colors.forEach { color ->
+      val colorView = buildViewForColor(color)
+      flexbox.addView(colorView)
+    }
   }
 
   private fun buildViewForTag(tag: Tag): View {
-    val tagView = View.inflate(activity, R.layout.layout_flexbox_tag_item, null) as View
+    val tagView = View.inflate(activity, R.layout.layout_flexbox_tag_item, null)
     val text = tagView.findViewById<TextView>(R.id.tag_text)
     text.text = tag.title
     text.typeface = appTypeface.title()

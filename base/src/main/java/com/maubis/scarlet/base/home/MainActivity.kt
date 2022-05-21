@@ -54,7 +54,7 @@ class MainActivity : SecuredActivity(), INoteActionsActivity {
   private lateinit var views: ActivityMainBinding
   private lateinit var adapter: NoteAppAdapter
   private lateinit var snackbar: NoteDeletionSnackbar
-  private lateinit var tagAndColorPicker: TagsAndColorPickerViewHolder
+  private lateinit var tagAndColorPicker: TagsAndColorPicker
 
   val state: SearchState = SearchState(mode = HomeNavigationMode.DEFAULT)
   var isInSearchMode: Boolean = false
@@ -104,19 +104,17 @@ class MainActivity : SecuredActivity(), INoteActionsActivity {
     snackbar = NoteDeletionSnackbar(views.bottomSnackbar) { refreshList() }
     views.searchToolbar.backButton.setOnClickListener { onBackPressed() }
     views.searchToolbar.closeIcon.setOnClickListener { onBackPressed() }
-    tagAndColorPicker = TagsAndColorPickerViewHolder(
+    tagAndColorPicker = TagsAndColorPicker(
       this,
       views.searchToolbar.tagsFlexBox,
       onTagClick = { tag ->
         if (state.isFilteringByTag(tag)) {
           state.tags.removeAll { it.uuid == tag.uuid }
-          startSearch(views.searchToolbar.textField.text.toString())
-          tagAndColorPicker.notifyChanged()
         } else {
           state.tags.add(tag)
-          startSearch(views.searchToolbar.textField.text.toString())
-          tagAndColorPicker.notifyChanged()
         }
+        tagAndColorPicker.refreshUI()
+        startSearch(views.searchToolbar.textField.text.toString())
       },
       onColorClick = { color ->
         if (state.colors.contains(color)) {
@@ -124,7 +122,7 @@ class MainActivity : SecuredActivity(), INoteActionsActivity {
         } else {
           state.colors.add(color)
         }
-        tagAndColorPicker.notifyChanged()
+        tagAndColorPicker.refreshUI()
         startSearch(views.searchToolbar.textField.text.toString())
       })
   }
@@ -288,8 +286,8 @@ class MainActivity : SecuredActivity(), INoteActionsActivity {
     views.searchToolbar.textField.requestFocus()
     tryOpeningTheKeyboard(views.searchToolbar.textField)
     lifecycleScope.launch {
-      withContext(Dispatchers.IO) { tagAndColorPicker.reset() }
-      tagAndColorPicker.notifyChanged()
+      withContext(Dispatchers.IO) { tagAndColorPicker.loadData() }
+      tagAndColorPicker.refreshUI()
     }
   }
 

@@ -32,11 +32,6 @@ class TagsRepository(private val database: TagDao) {
     return tags[uuid]
   }
 
-  fun search(string: String): List<Tag> {
-    return tags.values
-            .filter { string.isBlank() || it.title.contains(string, true) }
-  }
-
   private fun loadTagsFromDB(): ConcurrentHashMap<UUID, Tag> {
     val tagsMap = ConcurrentHashMap<UUID, Tag>()
     database.getAll().forEach { tagsMap[it.uuid] = it }
