@@ -134,7 +134,8 @@
   <string name="notification_reminder_channel_label">Promemoria e sveglie</string>
 
   <string name="about_page_license">Licenza</string>
-  <string name="about_page_license_description">Questa app è un software libero: puoi ridistribuirla o modificarla secondo i termini della GNU General Public License (GPL) versione 3 o successiva.</string>
+  <string name="about_page_license_description">Questa app è un software libero: puoi ridistribuirla e/o modificarla secondo i termini della GNU General Public License (GPL) versione 3 o successiva.</string>
+  <string name="about_page_license_read_full">Leggi la licenza</string>
   <string name="about_page_app_version">Versione</string>
   <string name="about_page_app_version_number">%s (fork di Fs00)</string>
   <string name="about_page_description">%s è un\'app offline ricca di funzionalità per prendere appunti.\nPermette di scrivere testo formattato in Markdown senza rendere complicata l\'esperienza utente.</string>
@@ -233,7 +234,8 @@
   <string name="share_images">Condividi immagini</string>
   <string name="share_image">Condividi immagine</string>
   <string name="image_picker_error">Si è verificato un errore nel recuperare l\'immagine selezionata.</string>
-  <string name="file_picker_missing">Sembra che il selettore file di Android non sia installato sul dispositivo. Dovresti reinstallarlo ;)</string>
+  <string name="file_picker_missing">Sembra che il selettore file di Android non sia installato sul dispositivo. Se lo hai rimosso, dovresti reinstallarlo.</string>
+  <string name="web_browser_missing">Non è installato alcun browser web sul dispositivo.</string>
   <string name="notice_import_successful">Importazione riuscita</string>
   <string name="notice_import_failed_empty_file">Importazione fallita: il file di backup è vuoto.</string>
   <string name="notice_import_completed_with_error">Importazione completata con errori: i dati potrebbero essere stati importati parzialmente.</string>

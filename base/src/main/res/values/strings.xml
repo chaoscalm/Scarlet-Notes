@@ -144,7 +144,8 @@
   <string name="notification_reminder_channel_label">Reminders and Alarms</string>
 
   <string name="about_page_license">License</string>
-  <string name="about_page_license_description">This app is free software: you can redistribute or modify it under the terms of the GNU General Public License (GPL) version 3 or later.</string>
+  <string name="about_page_license_description">This app is free software: you can redistribute and/or modify it under the terms of the GNU General Public License (GPL) version 3 or later.</string>
+  <string name="about_page_license_read_full">Read the license</string>
   <string name="about_page_app_version">Version</string>
   <string name="about_page_app_version_number">%s (Fs00\'s fork)</string>
   <string name="about_page_description">
@@ -294,7 +295,8 @@
   <string name="folder_delete_option_sheet_remove_folder_content">Remove Notes</string>
   <string name="folder_delete_option_sheet_remove_folder_content_details">Keep the notebook but all notes will be moved to trash.</string>
   <string name="image_picker_error">An error occurred while retrieving the selected image.</string>
-  <string name="file_picker_missing">The Android file chooser appears to be missing on this device. You should reinstall it ;)</string>
+  <string name="file_picker_missing">The Android file chooser appears to be missing on this device. You should reinstall it if you have removed it.</string>
+  <string name="web_browser_missing">No web browsers are installed on this device.</string>
   <string name="notice_import_successful">Import successful</string>
   <string name="notice_import_failed_empty_file">Import failed: backup file is empty.</string>
   <string name="notice_import_completed_with_error">Import completed with errors: data may have been partially imported.</string>
