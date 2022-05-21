@@ -46,7 +46,7 @@ class BackupDataOptionsBottomSheet : LithoOptionBottomSheet() {
       icon = R.drawable.ic_import,
       listener = {
         try {
-          filePickerLauncher.launch(arrayOf("text/*"))
+          filePickerLauncher.launch(arrayOf("text/*", "application/json"))
         } catch (_: ActivityNotFoundException) {
           Toast.makeText(context, R.string.file_picker_missing, Toast.LENGTH_LONG).show()
         }
