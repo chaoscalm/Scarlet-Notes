@@ -24,12 +24,10 @@ import java.io.FileOutputStream
 
 const val KEY_AUTO_BACKUP_LAST_TIMESTAMP = "KEY_AUTO_BACKUP_LAST_TIMESTAMP"
 
-const val EXPORT_NOTE_SEPARATOR = ">S>C>A>R>L>E>T>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>N>O>T>E>S>"
+const val EXPORT_NOTE_SEPARATOR = "----------------------------------------"
 const val EXPORT_VERSION = 6
 
-const val MANUAL_BACKUP_FILENAME = "manual_backup"
 const val AUTO_BACKUP_FOLDER = "ScarletNotes"
-const val AUTO_BACKUP_FILENAME = "auto_backup"
 const val AUTO_BACKUP_INTERVAL_MS = 1000 * 60 * 60 * 6 // 6 hours update
 
 object NoteExporter {
@@ -54,7 +52,11 @@ object NoteExporter {
   }
 
   fun getDefaultManualBackupFileName(): String {
-    return "$MANUAL_BACKUP_FILENAME ${getFormattedDateWithTime()}.txt"
+    return "Scarlet_backup_${getFormattedDateWithTime()}.txt"
+  }
+
+  fun getDefaultMarkdownExportFileName(): String {
+    return "Scarlet_notes_export_${getFormattedDateWithTime()}.md"
   }
 
   fun exportNotesToFile(file: FileDescriptor) {
@@ -120,15 +122,15 @@ object NoteExporter {
     return markdownBuilder.toString().trim()
   }
 
-  private fun getFormattedDate(): String = formatTimestamp(System.currentTimeMillis(), "dd_MMM_yyyy")
-  private fun getFormattedDateWithTime(): String = formatTimestamp(System.currentTimeMillis(), "dd_MMM_yyyy HH_mm")
+  private fun getFormattedDate(): String = formatTimestamp(System.currentTimeMillis(), "yyyy-MM-dd")
+  private fun getFormattedDateWithTime(): String = formatTimestamp(System.currentTimeMillis(), "yyyy-MM-dd_HH.mm")
 
   private fun getFileForAutomaticExport(): File? {
     val folder = createBackupFolder()
     if (folder === null) {
       return null
     }
-    return File(folder, "$AUTO_BACKUP_FILENAME ${getFormattedDate()}.txt")
+    return File(folder, "auto_backup_${getFormattedDate()}.txt")
   }
 
   private fun createBackupFolder(): File? {

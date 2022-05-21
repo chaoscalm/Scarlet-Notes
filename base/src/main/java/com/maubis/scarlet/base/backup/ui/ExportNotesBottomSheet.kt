@@ -70,7 +70,12 @@ class ExportNotesBottomSheet : LithoBottomSheet() {
         .primaryActionRes(R.string.import_export_layout_export_action)
         .onPrimaryClick {
           try {
-            saveFileLauncher.launch(NoteExporter.getDefaultManualBackupFileName())
+            val suggestedFileName = if (sBackupMarkdown) {
+              NoteExporter.getDefaultMarkdownExportFileName()
+            } else {
+              NoteExporter.getDefaultManualBackupFileName()
+            }
+            saveFileLauncher.launch(suggestedFileName)
           } catch (_: ActivityNotFoundException) {
             Toast.makeText(context, R.string.file_picker_missing, Toast.LENGTH_LONG).show()
           }
