@@ -5,6 +5,7 @@ plugins {
 
 android {
     compileSdk rootProject.ext.compile_sdk_version
+    namespace 'com.maubis.markdown'
 
     defaultConfig {
         minSdk rootProject.ext.min_sdk_version

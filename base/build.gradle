@@ -6,6 +6,7 @@ plugins {
 
 android {
     compileSdk rootProject.ext.compile_sdk_version
+    namespace 'com.maubis.scarlet.base'
 
     defaultConfig {
         applicationId "fs00.scarletnotes"
@@ -13,8 +14,7 @@ android {
         targetSdk rootProject.ext.target_sdk_version
         versionCode 1
         versionName '8.0.0'
-
-        resConfigs "en", "it"
+        resConfigs 'en', 'it'
 
         javaCompileOptions {
             annotationProcessorOptions {
@@ -50,7 +50,7 @@ android {
             }
         }
     }
-    
+
     buildTypes {
         debug {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
