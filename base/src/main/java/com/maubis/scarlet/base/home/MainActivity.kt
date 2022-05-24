@@ -58,7 +58,7 @@ class MainActivity : SecuredActivity(), INoteActionsActivity {
   private lateinit var tagAndColorPicker: TagsAndColorPicker
 
   val state: SearchState = SearchState(mode = HomeNavigationMode.DEFAULT)
-  var isInSearchMode: Boolean = false
+  private var isInSearchMode: Boolean = false
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -91,8 +91,8 @@ class MainActivity : SecuredActivity(), INoteActionsActivity {
 
     isInSearchMode = savedInstanceState.getBoolean(IS_IN_SEARCH_MODE)
     state.text = savedInstanceState.getString(SEARCH_TEXT, "")
-    state.colors = savedInstanceState.getIntegerArrayList(SEARCH_COLORS) ?: ArrayList()
     state.mode = HomeNavigationMode.values()[savedInstanceState.getInt(NAVIGATION_MODE)]
+    state.colors.addAll(savedInstanceState.getIntegerArrayList(SEARCH_COLORS) ?: emptyList())
     savedInstanceState.getSerializable(CURRENT_FOLDER_UUID)?.let {
       state.currentFolder = data.folders.getByUUID(it as UUID)
     }

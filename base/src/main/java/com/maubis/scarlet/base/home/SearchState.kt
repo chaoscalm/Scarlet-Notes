@@ -10,12 +10,11 @@ import com.maubis.scarlet.base.note.getFullText
 import com.maubis.scarlet.base.note.isLockedButAppUnlocked
 import com.maubis.scarlet.base.settings.notesSortingTechniquePref
 
-class SearchState(
-    var text: String = "",
-    var mode: HomeNavigationMode = HomeNavigationMode.DEFAULT,
-    var currentFolder: Folder? = null,
-    var colors: MutableList<Int> = mutableListOf<Int>(),
-    var tags: MutableList<Tag> = mutableListOf<Tag>()) {
+class SearchState(var mode: HomeNavigationMode = HomeNavigationMode.DEFAULT) {
+  var text: String = ""
+  var currentFolder: Folder? = null
+  val colors = mutableListOf<Int>()
+  val tags = mutableListOf<Tag>()
 
   fun hasFilter(): Boolean {
     return currentFolder != null

@@ -101,8 +101,7 @@ object MainActivityFolderBottomBarSpec {
         .flexGrow(1f)
         .text(folder.title)
         .textSizeRes(R.dimen.font_size_normal)
-        .textColor(colorConfig.toolbarIconColor)
-        .clickHandler(MainActivityFolderBottomBar.onClickEvent(context)))
+        .textColor(colorConfig.toolbarIconColor))
     row.child(bottomBarRoundIcon(context, colorConfig)
                 .iconRes(R.drawable.ic_edit_white_48dp)
                 .isClickDisabled(true)
@@ -114,8 +113,6 @@ object MainActivityFolderBottomBarSpec {
   @OnEvent(ClickEvent::class)
   fun onClickEvent(context: ComponentContext, @Prop folder: Folder) {
     val activity = context.androidContext as MainActivity
-    if (activity.state.currentFolder != null) {
-      CreateOrEditFolderBottomSheet.openSheet(activity, folder) { activity.refreshList() }
-    }
+    CreateOrEditFolderBottomSheet.openSheet(activity, folder) { activity.refreshList() }
   }
 }
