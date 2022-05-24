@@ -1,4 +1,4 @@
--dontwarn com.facebook.litho.DefaultInternalNode$ReconciliationMode
+-dontwarn com.facebook.litho.LithoNode$ReconciliationMode
 -dontwarn com.facebook.proguard.annotations.DoNotStrip
 
 -dontobfuscate
