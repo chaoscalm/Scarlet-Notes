@@ -16,12 +16,12 @@ import com.facebook.litho.ComponentContext
 import com.facebook.litho.LithoView
 import com.github.bijoysingh.starter.recyclerview.MultiRecyclerViewControllerItem
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.ScarletApp.Companion.imageStorage
 import com.maubis.scarlet.base.common.sheets.ColorPickerBottomSheet
 import com.maubis.scarlet.base.common.sheets.ColorPickerDefaultController
 import com.maubis.scarlet.base.common.specs.ToolbarColorConfig
 import com.maubis.scarlet.base.database.entities.Note
+import com.maubis.scarlet.base.database.entities.NoteState
 import com.maubis.scarlet.base.editor.recycler.*
 import com.maubis.scarlet.base.editor.specs.NoteEditorBottomBar
 import kotlinx.coroutines.delay
@@ -46,7 +46,8 @@ open class EditNoteActivity : ViewNoteActivity() {
     super.onCreate(savedInstanceState)
     setDragHandlesTouchListener()
     startBackgroundNoteAutosave()
-    setFolderFromIntent()
+    if (note.isNotPersisted())
+      setNoteDataFromIntent()
     if (savedInstanceState == null)
       history.add(note.content)
   }
@@ -63,19 +64,13 @@ open class EditNoteActivity : ViewNoteActivity() {
     currentHistoryPosition = savedInstanceState.getInt(KEY_HISTORY_POSITION)
   }
 
-  private fun setFolderFromIntent() {
-    if (intent === null) {
+  private fun setNoteDataFromIntent() {
+    if (intent == null) {
       return
     }
-    val folderUuid = intent.getSerializableExtra(INTENT_KEY_FOLDER) as UUID?
-    if (folderUuid === null) {
-      return
-    }
-    val folder = data.folders.getByUUID(folderUuid)
-    if (folder === null) {
-      return
-    }
-    note.folder = folder.uuid
+    note.folder = intent.getSerializableExtra(INTENT_KEY_NOTE_FOLDER) as UUID?
+    note.locked = intent.getBooleanExtra(INTENT_KEY_NOTE_LOCKED, false)
+    note.state = NoteState.valueOf(intent.getStringExtra(INTENT_KEY_NOTE_STATE) ?: NoteState.DEFAULT.toString())
   }
 
   private fun setDragHandlesTouchListener() {
@@ -440,21 +435,30 @@ open class EditNoteActivity : ViewNoteActivity() {
   }
 
   companion object {
+    private const val INTENT_KEY_NOTE_FOLDER = "key_folder"
+    private const val INTENT_KEY_NOTE_LOCKED = "key_locked"
+    private const val INTENT_KEY_NOTE_STATE = "key_note_state"
+
     private const val NOTE_AUTOSAVE_INTERVAL: Long = 3000
-    private const val INTENT_KEY_FOLDER = "key_folder"
     private const val KEY_HISTORY = "note_history"
     private const val KEY_HISTORY_POSITION = "history_position"
 
-    fun makeNewNoteIntent(context: Context, folderUuid: UUID?): Intent {
+    fun makeNewNoteIntent(context: Context, folderUuid: UUID?, noteState: NoteState, locked: Boolean): Intent {
       val intent = Intent(context, EditNoteActivity::class.java)
-      intent.putExtra(INTENT_KEY_FOLDER, folderUuid)
-      return intent
+      return intentWithNoteData(intent, folderUuid, noteState, locked)
     }
 
-    fun makeNewChecklistNoteIntent(context: Context, folderUuid: UUID?): Intent {
+    fun makeNewChecklistNoteIntent(context: Context, folderUuid: UUID?, noteState: NoteState, locked: Boolean): Intent {
       val intent = Intent(context, CreateListNoteActivity::class.java)
-      intent.putExtra(INTENT_KEY_FOLDER, folderUuid)
-      return intent
+      return intentWithNoteData(intent, folderUuid, noteState, locked)
+    }
+
+    private fun intentWithNoteData(intent: Intent, folderUuid: UUID?, noteState: NoteState, locked: Boolean): Intent {
+      return intent.apply {
+        putExtra(INTENT_KEY_NOTE_FOLDER, folderUuid)
+        putExtra(INTENT_KEY_NOTE_LOCKED, locked)
+        putExtra(INTENT_KEY_NOTE_STATE, noteState.toString())
+      }
     }
 
     fun makeEditNoteIntent(context: Context, note: Note): Intent {

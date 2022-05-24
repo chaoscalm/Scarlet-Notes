@@ -26,6 +26,7 @@ import com.maubis.scarlet.base.database.entities.Folder
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.database.entities.NoteState
 import com.maubis.scarlet.base.databinding.ActivityMainBinding
+import com.maubis.scarlet.base.editor.EditNoteActivity
 import com.maubis.scarlet.base.home.recycler.NoNotesRecyclerItem
 import com.maubis.scarlet.base.note.actions.INoteActionsActivity
 import com.maubis.scarlet.base.note.folder.FolderRecyclerItem
@@ -347,9 +348,33 @@ class MainActivity : SecuredActivity(), INoteActionsActivity {
     }
   }
 
-  /**
-   * Start : INoteOptionSheetActivity Functions
-   */
+  fun launchNewNoteEditor() {
+    val intent = EditNoteActivity.makeNewNoteIntent(
+      this,
+      state.currentFolder?.uuid,
+      newNoteStateForNavigationMode(state.mode),
+      locked = state.mode == HomeNavigationMode.LOCKED)
+    startActivity(intent)
+  }
+
+  fun launchNewChecklistNoteEditor() {
+    val intent = EditNoteActivity.makeNewChecklistNoteIntent(
+      this,
+      state.currentFolder?.uuid,
+      newNoteStateForNavigationMode(state.mode),
+      locked = state.mode == HomeNavigationMode.LOCKED)
+    startActivity(intent)
+  }
+
+  private fun newNoteStateForNavigationMode(navigationMode: HomeNavigationMode): NoteState {
+    return when (navigationMode) {
+      HomeNavigationMode.DEFAULT, HomeNavigationMode.LOCKED -> NoteState.DEFAULT
+      HomeNavigationMode.FAVOURITE -> NoteState.FAVOURITE
+      HomeNavigationMode.ARCHIVED -> NoteState.ARCHIVED
+      HomeNavigationMode.TRASH -> NoteState.TRASH
+    }
+  }
+
   override fun updateNote(note: Note) {
     note.save(this)
     refreshList()
@@ -375,8 +400,4 @@ class MainActivity : SecuredActivity(), INoteActionsActivity {
   }
 
   override fun lockedContentIsHidden() = true
-
-  /**
-   * End : INoteOptionSheetActivity
-   */
 }

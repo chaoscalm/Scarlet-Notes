@@ -21,7 +21,6 @@ import com.maubis.scarlet.base.common.specs.bottomBar
 import com.maubis.scarlet.base.common.specs.bottomBarRoundIcon
 import com.maubis.scarlet.base.common.utils.ColorUtil
 import com.maubis.scarlet.base.database.entities.Folder
-import com.maubis.scarlet.base.editor.EditNoteActivity
 import com.maubis.scarlet.base.home.sheets.HomeOptionsBottomSheet
 import com.maubis.scarlet.base.home.sheets.openDeleteTrashSheet
 import com.maubis.scarlet.base.note.folder.sheet.CreateOrEditFolderBottomSheet
@@ -67,20 +66,10 @@ object MainActivityBottomBarSpec {
       }
       row.child(bottomBarRoundIcon(context, colorConfig)
           .iconRes(R.drawable.icon_add_list)
-          .onClick {
-            val intent = EditNoteActivity.makeNewChecklistNoteIntent(
-                activity,
-                activity.state.currentFolder?.uuid)
-            activity.startActivity(intent)
-          })
+          .onClick { activity.launchNewChecklistNoteEditor() })
       row.child(bottomBarRoundIcon(context, colorConfig)
           .iconRes(R.drawable.icon_add_note)
-          .onClick {
-            val intent = EditNoteActivity.makeNewNoteIntent(
-                activity,
-                activity.state.currentFolder?.uuid)
-            activity.startActivity(intent)
-          })
+          .onClick { activity.launchNewNoteEditor() })
     }
     return bottomBar(context, row.build(), colorConfig).build()
   }

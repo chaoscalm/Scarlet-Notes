@@ -269,10 +269,6 @@ open class ViewNoteActivity : SecuredActivity(), INoteActionsActivity, IFormatRe
     }
   }
 
-  /**
-   * Start : INoteOptionSheetActivity Functions
-   */
-
   override fun updateNote(note: Note) {
     note.save(this)
     notifyNoteChange()
@@ -296,14 +292,6 @@ open class ViewNoteActivity : SecuredActivity(), INoteActionsActivity, IFormatRe
   }
 
   override fun lockedContentIsHidden() = false
-
-  /**
-   * End : INoteOptionSheetActivity
-   */
-
-  /**
-   * Start : IFormatRecyclerView Functions
-   */
 
   override fun context(): Context {
     return this
@@ -391,9 +379,4 @@ open class ViewNoteActivity : SecuredActivity(), INoteActionsActivity, IFormatRe
   override fun moveFormat(fromPosition: Int, toPosition: Int) {
     // do nothing
   }
-
-  /**
-   * End : IFormatRecyclerView
-   */
-
 }
