@@ -7,7 +7,6 @@ import com.maubis.scarlet.base.common.utils.logNonCriticalError
 import com.maubis.scarlet.base.database.entities.NoteState
 import com.maubis.scarlet.base.editor.INTENT_KEY_NOTE_ID
 import com.maubis.scarlet.base.note.copyToClipboard
-import com.maubis.scarlet.base.note.share
 
 const val INTENT_KEY_ACTION = "ACTION"
 
@@ -40,7 +39,6 @@ class NotificationIntentService : IntentService("NotificationIntentService") {
 
     when (action) {
       NoteAction.COPY -> note.copyToClipboard(context)
-      NoteAction.SHARE -> note.share(context)
       NoteAction.DELETE -> {
         note.updateState(NoteState.TRASH, context)
         NotificationHandler(context).cancelNotification(note.uid)
@@ -63,7 +61,6 @@ class NotificationIntentService : IntentService("NotificationIntentService") {
 
   enum class NoteAction {
     COPY,
-    SHARE,
     DELETE,
   }
 }

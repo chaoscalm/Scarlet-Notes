@@ -95,7 +95,7 @@ class NotificationHandler(private val context: Context) {
     notificationManager.createNotificationChannel(channelForReminder)
   }
 
-  fun getRemoteView(config: NotificationConfig): RemoteViews {
+  private fun getRemoteView(config: NotificationConfig): RemoteViews {
     val contentView = RemoteViews(context.packageName, R.layout.notification_note_layout)
     val hasTitle = config.note.getTitleForSharing().isNotEmpty()
     contentView.setViewVisibility(R.id.title, if (hasTitle) VISIBLE else GONE)
@@ -115,7 +115,6 @@ class NotificationHandler(private val context: Context) {
     val iconColor = appTheme.get(ThemeColorType.TOOLBAR_ICON)
     contentView.setInt(R.id.options_button, "setColorFilter", iconColor)
     contentView.setInt(R.id.copy_button, "setColorFilter", iconColor)
-    contentView.setInt(R.id.share_button, "setColorFilter", iconColor)
     contentView.setInt(R.id.delete_button, "setColorFilter", iconColor)
     contentView.setInt(R.id.edit_button, "setColorFilter", iconColor)
 
@@ -128,9 +127,6 @@ class NotificationHandler(private val context: Context) {
     contentView.setOnClickPendingIntent(
       R.id.copy_button,
       getPendingServiceIntent(config, getNoteActionIntent(config, NotificationIntentService.NoteAction.COPY), 4))
-    contentView.setOnClickPendingIntent(
-      R.id.share_button,
-      getPendingServiceIntent(config, getNoteActionIntent(config, NotificationIntentService.NoteAction.SHARE), 5))
     contentView.setOnClickPendingIntent(
       R.id.delete_button,
       getPendingServiceIntent(config, getNoteActionIntent(config, NotificationIntentService.NoteAction.DELETE), 6))

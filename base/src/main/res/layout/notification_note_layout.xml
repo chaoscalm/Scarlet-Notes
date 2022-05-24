@@ -73,11 +73,6 @@
       android:src="@drawable/ic_content_copy_white_48dp" />
 
     <ImageView
-      android:id="@+id/share_button"
-      style="@style/NoteNotificationItemActionIcon"
-      android:src="@drawable/ic_share_white_48dp" />
-
-    <ImageView
       android:id="@+id/edit_button"
       style="@style/NoteNotificationItemActionIcon"
       android:src="@drawable/ic_edit_white_48dp" />
