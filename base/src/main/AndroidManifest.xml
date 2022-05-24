@@ -45,8 +45,6 @@
         android:resource="@xml/provider_paths" />
     </provider>
 
-    <service android:name=".notification.NotificationIntentService" />
-
     <activity
       android:name=".editor.ViewNoteActivity"
       android:configChanges="uiMode"
@@ -142,6 +140,8 @@
         android:name="android.appwidget.provider"
         android:resource="@xml/all_notes_widget_info" />
     </receiver>
+
+    <receiver android:name=".notification.NotificationActionReceiver" android:exported="false" />
   </application>
 
 </manifest>

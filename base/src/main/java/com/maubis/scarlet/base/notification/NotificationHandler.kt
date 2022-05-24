@@ -55,7 +55,7 @@ class NotificationHandler(private val context: Context) {
   }
 
   fun openNotification(config: NotificationConfig) {
-    val pendingIntent = getPendingActivityIntent(config, ViewNoteActivity.makePreferenceAwareIntent(context.applicationContext, config.note), 1)
+    val pendingIntent = buildActivityPendingIntent(config, ViewNoteActivity.makePreferenceAwareIntent(context.applicationContext, config.note), 1)
     val contentView = getRemoteView(config)
     val notificationBuilder = NotificationCompat.Builder(context, config.channel)
       .setSmallIcon(R.drawable.ic_format_quote_white_48dp)
@@ -120,16 +120,16 @@ class NotificationHandler(private val context: Context) {
 
     contentView.setOnClickPendingIntent(
       R.id.options_button,
-      getPendingActivityIntent(config, getNoteOpenIntent(config), 2))
+      buildActivityPendingIntent(config, getNoteOpenIntent(config), 2))
     contentView.setOnClickPendingIntent(
       R.id.edit_button,
-      getPendingActivityIntent(config, getNoteEditIntent(config), 3))
+      buildActivityPendingIntent(config, getNoteEditIntent(config), 3))
     contentView.setOnClickPendingIntent(
       R.id.copy_button,
-      getPendingServiceIntent(config, getNoteActionIntent(config, NotificationIntentService.NoteAction.COPY), 4))
+      buildBroadcastPendingIntent(config, getNoteActionIntent(config, NotificationActionReceiver.ACTION_COPY), 4))
     contentView.setOnClickPendingIntent(
       R.id.delete_button,
-      getPendingServiceIntent(config, getNoteActionIntent(config, NotificationIntentService.NoteAction.DELETE), 6))
+      buildBroadcastPendingIntent(config, getNoteActionIntent(config, NotificationActionReceiver.ACTION_DELETE), 6))
 
     return contentView
   }
@@ -146,10 +146,7 @@ class NotificationHandler(private val context: Context) {
     return intent
   }
 
-  private fun getPendingActivityIntent(
-    config: NotificationConfig,
-    intent: Intent,
-    requestCode: Int): PendingIntent {
+  private fun buildActivityPendingIntent(config: NotificationConfig, intent: Intent, requestCode: Int): PendingIntent {
     val stackBuilder = TaskStackBuilder.create(context)
     stackBuilder.addParentStack(MainActivity::class.java)
     stackBuilder.addNextIntent(intent)
@@ -158,20 +155,18 @@ class NotificationHandler(private val context: Context) {
       PendingIntent.FLAG_UPDATE_CURRENT)
   }
 
-  private fun getNoteActionIntent(
-    config: NotificationConfig,
-    action: NotificationIntentService.NoteAction): Intent {
-    val intent = Intent(context, NotificationIntentService::class.java)
+  private fun getNoteActionIntent(config: NotificationConfig, action: String): Intent {
+    val intent = Intent(context, NotificationActionReceiver::class.java)
     intent.putExtra(INTENT_KEY_NOTE_ID, config.note.uid)
-    intent.putExtra(INTENT_KEY_ACTION, action.name)
+    intent.action = action
     return intent
   }
 
-  private fun getPendingServiceIntent(
+  private fun buildBroadcastPendingIntent(
     config: NotificationConfig,
     intent: Intent,
     requestCode: Int): PendingIntent {
-    return PendingIntent.getService(
+    return PendingIntent.getBroadcast(
       context,
       REQUEST_CODE_BASE + config.note.uid + requestCode * REQUEST_CODE_MULTIPLIER,
       intent,
