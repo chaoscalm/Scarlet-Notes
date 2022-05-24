@@ -6,7 +6,6 @@ import android.graphics.BitmapFactory
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
-import com.github.bijoysingh.starter.util.RandomHelper
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.editor.Format
 import com.maubis.scarlet.base.editor.FormatType
@@ -17,6 +16,8 @@ import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
+import java.math.BigInteger
+import java.util.*
 
 interface ImageLoadCallback {
   fun onSuccess()
@@ -45,7 +46,7 @@ class ImageStore(context: Context, private val thumbnailsCache: ImageCache) {
   }
 
   private fun newDestinationFile(note: Note): File {
-    val targetFile = getImageFile(note.uuid.toString(), RandomHelper.getRandom() + ".jpg")
+    val targetFile = getImageFile(note.uuid.toString(), "${generateRandomName(16)}.jpg")
     targetFile.mkdirs()
     targetFile.deleteIfExists()
     return targetFile
@@ -164,4 +165,6 @@ class ImageStore(context: Context, private val thumbnailsCache: ImageCache) {
     if (exists())
        delete()
   }
+
+  private fun generateRandomName(length: Int) = BigInteger(length * 5, Random()).toString(32)
 }
