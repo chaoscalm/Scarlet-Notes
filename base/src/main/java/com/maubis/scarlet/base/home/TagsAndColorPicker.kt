@@ -26,7 +26,7 @@ class TagsAndColorPicker(
     tags.addAll(data.tags.getAll())
 
     colors.clear()
-    colors.addAll(data.notes.getAll().map { it.color })
+    colors.addAll(data.notes.getAll().map { it.color }.sorted())
   }
 
   fun refreshUI() {
