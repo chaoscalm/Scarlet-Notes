@@ -22,7 +22,8 @@
       android:layout_marginEnd="@dimen/spacing_xsmall"
       android:padding="@dimen/spacing_xsmall"
       android:src="@drawable/ic_arrow_back_white_48dp"
-      app:tint="@color/light_tertiary_text" />
+      app:tint="@color/light_tertiary_text"
+      style="@style/BorderlessBackgroundView" />
 
     <EditText
       android:id="@+id/textField"
@@ -41,7 +42,8 @@
       android:layout_height="@dimen/icon_size_large"
       android:padding="@dimen/spacing_xsmall"
       android:src="@drawable/ic_close_white_48dp"
-      app:tint="@color/light_tertiary_text" />
+      app:tint="@color/light_tertiary_text"
+      style="@style/BorderlessBackgroundView" />
 
   </LinearLayout>
 
