@@ -58,7 +58,9 @@ class MainActivity : SecuredActivity(), INoteActionsActivity {
   private lateinit var tagAndColorPicker: TagsAndColorPicker
 
   val state: SearchState = SearchState(mode = HomeNavigationMode.DEFAULT)
-  private var isInSearchMode: Boolean = false
+  var isInSearchMode: Boolean = false
+    private set
+  val isInTrash: Boolean get() = state.mode == HomeNavigationMode.TRASH
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)

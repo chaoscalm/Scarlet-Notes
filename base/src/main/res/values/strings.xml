@@ -11,8 +11,11 @@
   <string name="share_using">Share using&#8230;</string>
   <string name="share_image">Share Image</string>
 
-  <string name="main_no_notes">No Notes</string>
-  <string name="main_no_notes_hint">It seems you have not added any notes. Click to add a note.</string>
+  <string name="main_no_notes">No notes</string>
+  <string name="main_no_notes_hint">It seems you haven\'t added any notes. Tap here to add one.</string>
+  <string name="main_no_notes_found">We couldn\'t find any notes matching your search criteria.</string>
+  <string name="main_trash_empty">Trash is empty</string>
+  <string name="main_trash_empty_hint">Come back once you have deleted some notes.</string>
 
   <string name="shortcut_add_note">Add Note</string>
   <string name="shortcut_add_list">Add Checklist</string>

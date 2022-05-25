@@ -4,7 +4,10 @@
   <string name="save">Salva</string>
   <string name="share_using">Condividi con&#8230;</string>
   <string name="main_no_notes">Nessuna nota</string>
-  <string name="main_no_notes_hint">Sembra che non hai aggiunto alcuna nota. Fai clic per aggiungere una nota.</string>
+  <string name="main_no_notes_hint">Sembra che tu non abbia aggiunto alcuna nota. Tocca qui per crearne una.</string>
+  <string name="main_no_notes_found">Non sono state trovate note corrispondenti alla tua ricerca.</string>
+  <string name="main_trash_empty">Il cestino è vuoto</string>
+  <string name="main_trash_empty_hint">Torna quando avrai eliminato qualche nota.</string>
   <string name="edit_note">Modifica</string>
   <string name="copy_note">Copia</string>
   <string name="send_note">Invia</string>
