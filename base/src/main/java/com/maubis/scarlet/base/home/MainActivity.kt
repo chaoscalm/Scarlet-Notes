@@ -245,14 +245,18 @@ class MainActivity : SecuredActivity(), INoteActionsActivity {
         .map { NoteRecyclerItem(this, it) }
     }
 
-    val allNotes = findMatchingNotesIgnoringFolder(state)
+    val allMatchingNotes = findMatchingNotesIgnoringFolder(state)
     val matchingFolders = findMatchingFolders(state)
     val allItems = mutableListOf<RecyclerItem>()
     allItems.addAll(
       data.folders.getAll()
         .filter { folder ->
-          val notesInFolder = allNotes.count { it.folder == folder.uuid }
-          !state.hasFilter() || notesInFolder != 0 || matchingFolders.contains(folder)
+          val isFolderNotEmpty = allMatchingNotes.any { it.folder == folder.uuid }
+          when {
+            isInTrash -> isFolderNotEmpty && matchingFolders.contains(folder)
+            state.hasFilter() -> isFolderNotEmpty || matchingFolders.contains(folder)
+            else -> true
+          }
         }
         .map { folder ->
           FolderRecyclerItem(
@@ -263,10 +267,10 @@ class MainActivity : SecuredActivity(), INoteActionsActivity {
               CreateOrEditFolderBottomSheet.openSheet(this, folder) { refreshList() }
             },
             selected = state.currentFolder?.uuid == folder.uuid,
-            notesCount = allNotes.count { it.folder == folder.uuid })
+            notesCount = allMatchingNotes.count { it.folder == folder.uuid })
         }
     )
-    allItems.addAll(excludeNotesInFolders(allNotes).map { NoteRecyclerItem(this, it) })
+    allItems.addAll(excludeNotesInFolders(allMatchingNotes).map { NoteRecyclerItem(this, it) })
     return allItems
   }
 
