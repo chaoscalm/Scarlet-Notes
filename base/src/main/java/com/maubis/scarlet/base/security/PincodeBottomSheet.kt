@@ -8,6 +8,7 @@ import android.text.Layout
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
+import androidx.annotation.StringRes
 import com.facebook.litho.*
 import com.facebook.litho.annotations.*
 import com.facebook.litho.widget.*
@@ -31,8 +32,8 @@ import com.maubis.scarlet.base.settings.sSecurityAppLockEnabled
 import com.maubis.scarlet.base.settings.sSecurityCode
 
 data class PincodeSheetData(
-  val title: Int,
-  val actionTitle: Int,
+  @StringRes val title: Int,
+  @StringRes val actionTitle: Int,
   val onSuccess: () -> Unit,
   val onFailure: () -> Unit = {},
   val isFingerprintEnabled: Boolean = false,
@@ -68,13 +69,6 @@ object PincodeSheetViewSpec {
         getLithoBottomSheetTitle(context)
           .textRes(data.title)
           .marginDip(YogaEdge.HORIZONTAL, 0f))
-      .child(
-        Text.create(context)
-          .typeface(appTypeface.text())
-          .textSizeRes(R.dimen.font_size_large)
-          .textRes(R.string.app_lock_details)
-          .marginDip(YogaEdge.BOTTOM, 16f)
-          .textColor(appTheme.get(ThemeColorType.TERTIARY_TEXT)))
       .child(
         TextInput.create(context)
           .backgroundRes(editBackground)

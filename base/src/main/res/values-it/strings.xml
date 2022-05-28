@@ -42,7 +42,7 @@
   <string name="security_option_set_pin_code_edit">Cambia il PIN</string>
   <string name="security_option_set_pin_code_subtitle">Imposta un PIN di 4 cifre per accedere alle note protette</string>
   <string name="security_sheet_enter_new_pin_title">Inserisci il nuovo PIN</string>
-  <string name="security_sheet_enter_pin_to_unlock_title">Inserisci il PIN per sbloccare</string>
+  <string name="security_sheet_enter_pin_to_unlock_title">Inserisci il PIN per accedere</string>
   <string name="security_sheet_enter_current_pin_title">Inserisci il PIN corrente</string>
   <string name="security_sheet_wrong_pin">Il PIN inserito è errato</string>
   <string name="security_sheet_button_verify">Verifica</string>
@@ -202,8 +202,7 @@
   <string name="internal_settings_show_uuid_description">Mostra gli ID univoci delle note nella schermata principale</string>
   <string name="delete_sheet_delete_selected_notes_permanently">Vuoi eliminare definitivamente queste note?</string>
   <string name="app_lock_title">Sblocca l\'app</string>
-  <string name="app_lock_details_no_fingerprint">Inserisci il PIN di 4 cifre per effettuare lo sblocco</string>
-  <string name="app_lock_details">Inserisci il PIN di 4 cifre o usa l\'impronta per effettuare lo sblocco</string>
+  <string name="app_lock_details">Inserisci il PIN per sbloccare l\'app e accedere a tutte le note</string>
   <string name="security_option_ask_pin_always">Richiedi sempre il PIN</string>
   <string name="security_option_ask_pin_always_details">Richiedi il PIN per ciascuna nota protetta, anche se è stato già inserito</string>
   <string name="security_option_lock_app">Abilita blocco dell\'applicazione</string>

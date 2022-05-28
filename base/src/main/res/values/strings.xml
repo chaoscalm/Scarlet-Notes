@@ -109,11 +109,14 @@
   <string name="biometric_prompt_unlock_note">Unlock Note</string>
   <string name="biometric_prompt_unlock_note_details">Use device fingerprint or biometrics to unlock the note and access.</string>
 
+  <string name="app_lock_title">Unlock App</string>
+  <string name="app_lock_details">Enter the PIN to unlock the app and access all notes</string>
+
   <string name="biometric_prompt_unlock_app">Unlock App</string>
   <string name="biometric_prompt_unlock_app_details">Use device fingerprint or biometrics to unlock the app and access all notes.</string>
 
   <string name="security_sheet_enter_new_pin_title">Enter new PIN</string>
-  <string name="security_sheet_enter_pin_to_unlock_title">Enter PIN to unlock</string>
+  <string name="security_sheet_enter_pin_to_unlock_title">Enter PIN to proceed</string>
   <string name="security_sheet_enter_current_pin_title">Enter current PIN</string>
   <string name="security_sheet_wrong_pin">The entered PIN is wrong</string>
   <string name="security_sheet_button_verify">Verify</string>
@@ -275,14 +278,7 @@
   <string name="internal_settings_show_uuid_title">Show Note UUIDs</string>
   <string name="internal_settings_show_uuid_description">Show the unique ids of the notes in the home screen view</string>
 
-  <!-- Start: App Lock Activity -->
-  <string name="app_lock_title">Unlock App</string>
-  <string name="app_lock_details">Enter 4 digit PIN or use biometrics to unlock</string>
-  <string name="app_lock_details_no_fingerprint">Enter 4 digit PIN to unlock</string>
-  <!-- End: App Lock Activity -->
-
-  <!-- Start: Theme Color Sheet -->
-  <string name="theme_use_system_theme">Use System Theme</string>
+  <string name="theme_use_system_theme">Use system theme</string>
   <string name="theme_use_system_theme_details">Use the light or dark theme from the system</string>
 
   <string name="theme_dark_notes">Dark Notes</string>

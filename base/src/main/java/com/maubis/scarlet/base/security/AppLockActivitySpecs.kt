@@ -30,7 +30,6 @@ object AppLockViewSpec {
       .backgroundColor(appTheme.get(ThemeColorType.BACKGROUND))
       .child(
         AppLockContentView.create(context)
-          .fingerprintEnabled(fingerprintEnabled)
           .onTextChange(onTextChange)
           .onClick(onClick)
           .flexGrow(1f))
@@ -74,11 +73,7 @@ object AppLockViewSpec {
 object AppLockContentViewSpec {
 
   @OnCreateLayout
-  fun onCreate(context: ComponentContext, @Prop fingerprintEnabled: Boolean): Component {
-    val description = when {
-      fingerprintEnabled -> R.string.app_lock_details
-      else -> R.string.app_lock_details_no_fingerprint
-    }
+  fun onCreate(context: ComponentContext): Component {
     val editBackground = when {
       appTheme.isNightTheme() -> R.drawable.light_secondary_rounded_bg
       else -> R.drawable.secondary_rounded_bg
@@ -97,7 +92,7 @@ object AppLockContentViewSpec {
         Text.create(context)
           .textSizeRes(R.dimen.font_size_large)
           .textColor(appTheme.get(ThemeColorType.SECONDARY_TEXT))
-          .textRes(description)
+          .textRes(R.string.app_lock_details)
           .typeface(appTypeface.title()))
       .child(EmptySpec.create(context).flexGrow(1f))
       .child(
