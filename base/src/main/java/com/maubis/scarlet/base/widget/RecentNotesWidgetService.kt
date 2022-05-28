@@ -19,15 +19,14 @@ import com.maubis.scarlet.base.settings.notesSortingTechniquePref
 import com.maubis.scarlet.base.settings.sWidgetShowArchivedNotes
 import com.maubis.scarlet.base.settings.sWidgetShowLockedNotes
 
-fun getWidgetNotes(): List<Note> {
+fun getAvailableNotesForWidgets(): List<Note> {
   val states = mutableListOf(NoteState.DEFAULT, NoteState.FAVOURITE)
   if (sWidgetShowArchivedNotes) {
     states.add(NoteState.ARCHIVED)
   }
 
-  val availableNotesForWidget = ScarletApp.data.notes.getByNoteState(*states.toTypedArray())
+  return ScarletApp.data.notes.getByNoteState(*states.toTypedArray())
     .filter { note -> (!note.locked || sWidgetShowLockedNotes) }
-  return sort(availableNotesForWidget, notesSortingTechniquePref)
 }
 
 class AllNotesWidgetService : RemoteViewsService() {
@@ -52,7 +51,9 @@ class AllNotesRemoteViewsFactory(val context: Context) : RemoteViewsService.Remo
   }
 
   override fun onDataSetChanged() {
-    notes = getWidgetNotes().take(15)
+    notes = getAvailableNotesForWidgets()
+      .sortedByDescending { it.updateTimestamp }
+      .take(15)
   }
 
   override fun hasStableIds(): Boolean {

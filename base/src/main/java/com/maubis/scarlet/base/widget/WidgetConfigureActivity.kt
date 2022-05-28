@@ -13,12 +13,14 @@ import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.common.utils.ColorUtil
+import com.maubis.scarlet.base.common.utils.sort
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.database.entities.Widget
 import com.maubis.scarlet.base.editor.ViewNoteActivity
 import com.maubis.scarlet.base.note.getTextForWidget
 import com.maubis.scarlet.base.note.selection.INoteSelectorActivity
 import com.maubis.scarlet.base.note.selection.SelectableNotesActivityBase
+import com.maubis.scarlet.base.settings.notesSortingTechniquePref
 import com.maubis.scarlet.base.settings.sWidgetShowLockedNotes
 
 class WidgetConfigureActivity : SelectableNotesActivityBase(), INoteSelectorActivity {
@@ -46,7 +48,7 @@ class WidgetConfigureActivity : SelectableNotesActivityBase(), INoteSelectorActi
   }
 
   override fun getNotes(): List<Note> {
-    return getWidgetNotes()
+    return sort(getAvailableNotesForWidgets(), notesSortingTechniquePref)
   }
 
   override fun onNoteClicked(note: Note) {
