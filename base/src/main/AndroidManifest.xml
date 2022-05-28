@@ -99,7 +99,9 @@
       </intent-filter>
     </activity>
 
-    <receiver android:name=".widget.NoteWidgetProvider">
+    <receiver
+      android:name=".widget.NoteWidgetProvider"
+      android:label="@string/widget_single_note">
       <intent-filter>
         <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
       </intent-filter>
@@ -108,7 +110,9 @@
         android:name="android.appwidget.provider"
         android:resource="@xml/widget_info" />
     </receiver>
-    <receiver android:name=".widget.CreateNoteWidgetProvider">
+    <receiver
+      android:name=".widget.CreateNoteWidgetProvider"
+      android:label="@string/widget_quick_actions">
       <intent-filter>
         <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
       </intent-filter>
@@ -116,6 +120,17 @@
       <meta-data
         android:name="android.appwidget.provider"
         android:resource="@xml/create_note_widget_info" />
+    </receiver>
+    <receiver
+      android:name=".widget.AllNotesWidgetProvider"
+      android:label="@string/widget_recent_notes">
+      <intent-filter>
+        <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+      </intent-filter>
+
+      <meta-data
+        android:name="android.appwidget.provider"
+        android:resource="@xml/all_notes_widget_info" />
     </receiver>
 
     <activity android:name=".widget.WidgetConfigureActivity">
@@ -130,16 +145,6 @@
     <service
       android:name=".widget.AllNotesWidgetService"
       android:permission="android.permission.BIND_REMOTEVIEWS" />
-
-    <receiver android:name=".widget.AllNotesWidgetProvider">
-      <intent-filter>
-        <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-      </intent-filter>
-
-      <meta-data
-        android:name="android.appwidget.provider"
-        android:resource="@xml/all_notes_widget_info" />
-    </receiver>
 
     <receiver android:name=".notification.NotificationActionReceiver" android:exported="false" />
   </application>

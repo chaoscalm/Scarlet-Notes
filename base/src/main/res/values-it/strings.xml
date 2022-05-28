@@ -166,7 +166,11 @@
   <string name="folder_sheet_edit_note">Modifica blocco note</string>
   <string name="folder_sheet_add_note_detail">Nome del blocco note</string>
   <string name="folder_option_change_notebook">Sposta in…</string>
-  <string name="recent_notes">Note recenti</string>
+
+  <string name="widget_recent_notes">Note recenti</string>
+  <string name="widget_single_note">Nota singola</string>
+  <string name="widget_quick_actions">Azioni rapide</string>
+
   <string name="home_option_delete_notes_and_more">Elimina dati</string>
   <string name="home_option_delete_notes_and_more_details">Elimina note, tag e altri dati nell\'app</string>
   <string name="home_option_delete_all_notes">Elimina tutte le note</string>

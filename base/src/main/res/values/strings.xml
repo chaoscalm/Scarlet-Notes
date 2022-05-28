@@ -222,7 +222,9 @@
 
   <string name="folder_option_change_notebook">Move to…</string>
 
-  <string name="recent_notes">Recent Notes</string>
+  <string name="widget_recent_notes">Recent notes</string>
+  <string name="widget_single_note">Single note</string>
+  <string name="widget_quick_actions">Quick actions</string>
 
   <string name="home_option_editor_options_title">Editor Options</string>
   <string name="home_option_editor_options_description">Change the appearance and behavior of the note editor</string>
