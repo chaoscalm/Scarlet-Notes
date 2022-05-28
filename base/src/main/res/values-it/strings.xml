@@ -12,18 +12,20 @@
   <string name="copy_note">Copia</string>
   <string name="send_note">Invia</string>
   <string name="choose_action">Scegli un\'azione&#8230;</string>
+
   <string name="format_hint_text">Aggiungi contenuto&#8230;</string>
   <string name="format_hint_heading">Aggiungi intestazione&#8230;</string>
   <string name="format_hint_quote">Aggiungi testo citato&#8230;</string>
   <string name="format_hint_list">Aggiungi elemento&#8230;</string>
   <string name="format_hint_code">Aggiungi codice&#8230;</string>
+
   <string name="home_option_sheet_title">Impostazioni</string>
   <string name="home_option_export">Esporta dati</string>
   <string name="home_option_export_subtitle">Crea un backup dei tuoi dati</string>
   <string name="home_option_import">Importa dati</string>
   <string name="home_option_import_subtitle">Importa tutti i dati da un backup esistente</string>
   <string name="home_option_about_page">Informazioni sull\'app</string>
-  <string name="storage_permission_dialog_title">Concedi permessi</string>
+  <string name="storage_permission_dialog_title">Permessi richiesti</string>
   <string name="storage_permission_dialog_details">L\'esportazione automatica richiede l\'accesso allo spazio di archiviazione interno. Concedi l\'autorizzazione quando viene richiesta.</string>
   <string name="storage_permission_dialog_action_allow">Concedi</string>
   <string name="import_export_layout_exported">Esportato nel file</string>
@@ -35,8 +37,9 @@
   <string name="search_notes">Cerca note&#8230;</string>
   <string name="lock_note">Proteggi</string>
   <string name="unlock_note">Sblocca</string>
+
   <string name="home_option_security">Sicurezza</string>
-  <string name="home_option_security_subtitle">Blocco delle note e opzioni di sicurezza</string>
+  <string name="home_option_security_subtitle">Configura l\'autenticazione e l\'accesso alle note protette</string>
   <string name="security_option_title">Opzioni di sicurezza</string>
   <string name="security_option_set_pin_code_configure">Configura PIN</string>
   <string name="security_option_set_pin_code_edit">Cambia il PIN</string>
@@ -50,6 +53,7 @@
   <string name="security_sheet_button_unlock">Sblocca</string>
   <string name="security_sheet_button_set">Imposta</string>
   <string name="security_sheet_button_remove">Rimuovi</string>
+
   <string name="home_option_enable_list_view">Abilita layout ad elenco</string>
   <string name="home_option_enable_list_view_subtitle">Mostra le note in una singola colonna</string>
   <string name="home_option_enable_grid_view">Abilita layout a griglia</string>
@@ -79,11 +83,11 @@
   <string name="import_to_app">Importa</string>
 
   <string name="change_tags">Cambia tag</string>
-  <string name="home_option_order_notes">Ordine note</string>
+  <string name="home_option_order_notes">Ordine delle note</string>
   <string name="reminder_sheet_reminder_date">Data del promemoria</string>
   <string name="reminder_sheet_reminder_time">Ora del promemoria</string>
   <string name="reminder_sheet_repeat">Frequenza ripetizione</string>
-  <string name="sort_sheet_title">Ordina note per</string>
+  <string name="sort_sheet_title">Ordinamento delle note</string>
   <string name="sort_sheet_newest_first">Prima i più nuovi</string>
   <string name="sort_sheet_oldest_first">Prima i più vecchi</string>
   <string name="sort_sheet_last_modified">Più recentemente modificato</string>
@@ -132,7 +136,7 @@
   <string name="image_cannot_be_loaded">L\'immagine non può essere caricata</string>
   <string name="home_option_auto_export">Esporta automaticamente</string>
   <string name="home_option_auto_export_subtitle">Crea regolarmente un backup di tutti i dati nella memoria interna del dispositivo</string>
-  <string name="format_hint_image">Clicca per aggiungere o cambiare immagine</string>
+  <string name="format_hint_image">Tocca per aggiungere o cambiare immagine</string>
 
   <string name="reminder_frequency_once">Solo una volta</string>
   <string name="reminder_frequency_daily">Quotidiano</string>
@@ -147,7 +151,7 @@
 
   <string name="note_option_number_lines_subtitle">%d linee sulla schermata principale</string>
   <string name="home_option_theme_color">Tema dell\'app</string>
-  <string name="home_option_theme_color_subtitle">Seleziona il colore di sfondo per il tema</string>
+  <string name="home_option_theme_color_subtitle">Modifica l\'aspetto complessivo dell\'app</string>
   <string name="theme_page_title">Seleziona il tema dell\'app</string>
   <string name="select_action">Seleziona</string>
   <string name="recent_to_trash_message">La nota è stata spostata nel cestino</string>
@@ -183,11 +187,11 @@
   <string name="import_export_locked">Esporta note protette</string>
   <string name="import_export_locked_details">Effettua anche il backup delle note che sono protette</string>
   <string name="home_option_editor_options_title">Opzioni dell\'editor</string>
-  <string name="home_option_editor_options_description">Modifica le impostazioni dell\'editor delle note</string>
+  <string name="home_option_editor_options_description">Modifica l\'aspetto e il comportamento dell\'editor delle note</string>
   <string name="editor_option_enable_live_markdown">Formattazione Markdown in tempo reale</string>
   <string name="editor_option_enable_live_markdown_description">La formattazione Markdown verrà applicata mentre scrivi. Può influire sulle prestazioni su note di grandi dimensioni.</string>
   <string name="editor_option_move_checked_items">Riordina elementi selezionati</string>
-  <string name="editor_option_move_checked_items_description">Gli elementi selezionati verranno spostati in fondo all\'elenco</string>
+  <string name="editor_option_move_checked_items_description">Gli elementi selezionati verranno spostati in fondo all\'elenco. Deselezionandoli la loro posizione non cambierà.</string>
   <string name="markdown_help_sheet_title">Esempi di formattazione Markdown</string>
   <string name="home_option_widget_options_title">Impostazioni dei widget</string>
   <string name="home_option_widget_options_description">Modifica le impostazioni per i widget della schermata principale</string>
@@ -195,12 +199,14 @@
   <string name="widget_option_show_locked_notes_details">Consenti alle note protette di essere visualizzate nei widget della schermata principale</string>
   <string name="widget_option_show_archived_notes">Mostra note archiviate</string>
   <string name="widget_option_show_archived_notes_details">Consenti alle note archiviate di essere visualizzate nei widget della schermata principale</string>
+
   <string name="internal_settings_title">Opzioni sviluppatore</string>
   <string name="internal_settings_description">Modifica le impostazioni interne utilizzate per il debug</string>
   <string name="internal_settings_enable_fullscreen_title">Abilita modalità schermo intero</string>
   <string name="internal_settings_enable_fullscreen_description">Rendi l\'app a schermo intero per consentire screenshot e registrazioni</string>
   <string name="internal_settings_show_uuid_title">Mostra UUID note</string>
   <string name="internal_settings_show_uuid_description">Mostra gli ID univoci delle note nella schermata principale</string>
+
   <string name="delete_sheet_delete_selected_notes_permanently">Vuoi eliminare definitivamente queste note?</string>
   <string name="app_lock_title">Sblocca l\'app</string>
   <string name="app_lock_details">Inserisci il PIN per sbloccare l\'app e accedere a tutte le note</string>
@@ -209,9 +215,9 @@
   <string name="security_option_lock_app">Abilita blocco dell\'applicazione</string>
   <string name="security_option_lock_app_details">Usa il PIN per sbloccare l\'applicazione</string>
   <string name="widget_option_background_color">Sfondo del widget</string>
-  <string name="widget_option_background_color_details">Scegli il colore di sfondo per il widget multi-nota</string>
+  <string name="widget_option_background_color_details">Scegli il colore di sfondo per il widget delle note recenti</string>
   <string name="widget_option_show_toolbar">Mostra barra delle azioni</string>
-  <string name="widget_option_show_toolbar_details">Mostra la barra delle azioni nel widget multi-nota</string>
+  <string name="widget_option_show_toolbar_details">Mostra la barra delle azioni nel widget delle note recenti</string>
 
   <string name="folder_delete_option_sheet_title">Opzioni di rimozione</string>
   <string name="folder_delete_option_sheet_remove_folder">Rimuovi il blocco note</string>
@@ -220,10 +226,12 @@
   <string name="folder_delete_option_sheet_remove_folder_and_content_details">Rimuovi il blocco note. Tutte le note al suo interno verranno spostate nel cestino.</string>
   <string name="folder_delete_option_sheet_remove_folder_content">Rimuovi note</string>
   <string name="folder_delete_option_sheet_remove_folder_content_details">Mantieni il blocco note, ma sposta nel cestino tutte le note al suo interno.</string>
+
   <string name="theme_use_system_theme">Usa tema di sistema</string>
   <string name="theme_use_system_theme_details">Usa il tema chiaro o scuro impostato dal sistema</string>
-  <string name="theme_dark_notes">Note scure</string>
+  <string name="theme_dark_notes">Colori scuri</string>
   <string name="theme_dark_notes_details">Rende automaticamente più scuri i colori delle note e delle cartelle</string>
+
   <string name="editor_option_skip_view_note">Salta visualizzatore note</string>
   <string name="editor_option_skip_view_note_details">Salta il visualizzatore delle note e passa direttamente all\'editor</string>
   <string name="security_option_biometrics">Sblocca con autenticazione biometrica</string>
