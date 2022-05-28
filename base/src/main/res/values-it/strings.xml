@@ -38,8 +38,9 @@
   <string name="home_option_security">Sicurezza</string>
   <string name="home_option_security_subtitle">Blocco delle note e opzioni di sicurezza</string>
   <string name="security_option_title">Opzioni di sicurezza</string>
-  <string name="security_option_set_pin_code">Codice di accesso</string>
-  <string name="security_option_set_pin_code_subtitle">Imposta un PIN di 4 cifre per proteggere le note</string>
+  <string name="security_option_set_pin_code_configure">Configura PIN</string>
+  <string name="security_option_set_pin_code_edit">Cambia il PIN</string>
+  <string name="security_option_set_pin_code_subtitle">Imposta un PIN di 4 cifre per accedere alle note protette</string>
   <string name="security_sheet_enter_new_pin_title">Inserisci il nuovo PIN</string>
   <string name="security_sheet_enter_pin_to_unlock_title">Inserisci il PIN per sbloccare</string>
   <string name="security_sheet_enter_current_pin_title">Inserisci il PIN corrente</string>

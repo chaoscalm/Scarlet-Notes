@@ -8,13 +8,13 @@ import com.maubis.scarlet.base.settings.sSecurityCode
 object PinLockController {
   private var sLastLoginTimeMs = 0L
 
-  fun isPinCodeEnabled(): Boolean {
+  fun isPinCodeConfigured(): Boolean {
     return sSecurityCode.isNotEmpty()
   }
 
   fun needsAppLock(): Boolean {
     // App lock enabled
-    if (isPinCodeEnabled() && sSecurityAppLockEnabled) {
+    if (isPinCodeConfigured() && sSecurityAppLockEnabled) {
       return needsLockCheckImpl()
     }
     return false

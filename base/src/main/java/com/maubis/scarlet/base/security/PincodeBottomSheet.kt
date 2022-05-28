@@ -25,7 +25,7 @@ import com.maubis.scarlet.base.common.ui.ThemedActivity
 import com.maubis.scarlet.base.common.utils.isBiometricEnabled
 import com.maubis.scarlet.base.common.utils.showBiometricPrompt
 import com.maubis.scarlet.base.home.MainActivity
-import com.maubis.scarlet.base.security.PinLockController.isPinCodeEnabled
+import com.maubis.scarlet.base.security.PinLockController.isPinCodeConfigured
 import com.maubis.scarlet.base.security.PinLockController.needsLockCheck
 import com.maubis.scarlet.base.settings.sSecurityAppLockEnabled
 import com.maubis.scarlet.base.settings.sSecurityCode
@@ -208,7 +208,7 @@ class PincodeBottomSheet : LithoBottomSheet() {
           title = R.string.security_sheet_enter_new_pin_title,
           actionTitle = R.string.security_sheet_button_set,
           isFingerprintEnabled = false,
-          isRemoveButtonEnabled = isPinCodeEnabled(),
+          isRemoveButtonEnabled = isPinCodeConfigured(),
           onRemoveButtonClick = {
             sSecurityCode = ""
             sSecurityAppLockEnabled = false
@@ -245,7 +245,7 @@ class PincodeBottomSheet : LithoBottomSheet() {
     }
 
     fun openForUnlock(activity: ThemedActivity, onUnlockSuccess: () -> Unit, onUnlockFailure: () -> Unit) {
-      if (!isPinCodeEnabled()) {
+      if (!isPinCodeConfigured()) {
         openSheet(activity, NoPincodeBottomSheet().apply {
           this.onSuccess = onUnlockSuccess
         })

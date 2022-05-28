@@ -96,9 +96,10 @@
   <string name="ui_options_note_background_color_settings_note">Use note color</string>
 
   <string name="security_option_title">Security Options</string>
-  <string name="security_option_set_pin_code">Pass Code</string>
-  <string name="security_option_set_pin_code_subtitle">Set a 4 digit PIN to lock notes</string>
-  <string name="security_option_lock_app">Enable App Lock</string>
+  <string name="security_option_set_pin_code_configure">Configure PIN</string>
+  <string name="security_option_set_pin_code_edit">Change PIN</string>
+  <string name="security_option_set_pin_code_subtitle">Set a 4-digit PIN to access locked notes</string>
+  <string name="security_option_lock_app">Enable app lock</string>
   <string name="security_option_lock_app_details">Use PIN to unlock the whole application</string>
   <string name="security_option_ask_pin_always">Always ask for PIN</string>
   <string name="security_option_ask_pin_always_details">Enter PIN for all notes, even if it was previously entered</string>

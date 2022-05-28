@@ -9,7 +9,7 @@ import com.maubis.scarlet.base.common.sheets.LithoOptionBottomSheet
 import com.maubis.scarlet.base.common.sheets.LithoOptionsItem
 import com.maubis.scarlet.base.common.ui.ThemedActivity
 import com.maubis.scarlet.base.common.utils.isBiometricAuthAvailable
-import com.maubis.scarlet.base.security.PinLockController.isPinCodeEnabled
+import com.maubis.scarlet.base.security.PinLockController.isPinCodeConfigured
 import com.maubis.scarlet.base.security.PincodeBottomSheet
 
 const val KEY_SECURITY_CODE = "KEY_SECURITY_CODE"
@@ -38,17 +38,19 @@ class SecurityOptionsBottomSheet : LithoOptionBottomSheet() {
     val options = ArrayList<LithoOptionsItem>()
     options.add(
       LithoOptionsItem(
-        title = R.string.security_option_set_pin_code,
+        title = if (isPinCodeConfigured()) {
+          R.string.security_option_set_pin_code_edit
+        } else {
+          R.string.security_option_set_pin_code_configure
+        },
         subtitle = R.string.security_option_set_pin_code_subtitle,
         icon = R.drawable.ic_option_security,
         listener = {
           when {
-            isPinCodeEnabled() -> openResetPasswordDialog(dialog)
-            else -> openCreatePasswordDialog(dialog)
+            isPinCodeConfigured() -> openResetPinDialog(dialog)
+            else -> openCreatePinDialog(dialog)
           }
-        },
-        isSelectable = true,
-        selected = isPinCodeEnabled()
+        }
       ))
 
     options.add(
@@ -58,7 +60,7 @@ class SecurityOptionsBottomSheet : LithoOptionBottomSheet() {
         icon = R.drawable.ic_apps_white_48dp,
         listener = {
           when {
-            isPinCodeEnabled() -> {
+            isPinCodeConfigured() -> {
               PincodeBottomSheet.openForVerification(activity,
                 onVerifySuccess = {
                   sSecurityAppLockEnabled = !sSecurityAppLockEnabled
@@ -66,7 +68,7 @@ class SecurityOptionsBottomSheet : LithoOptionBottomSheet() {
                 }
               )
             }
-            else -> openCreatePasswordDialog(dialog)
+            else -> openCreatePinDialog(dialog)
           }
         },
         isSelectable = true,
@@ -81,7 +83,7 @@ class SecurityOptionsBottomSheet : LithoOptionBottomSheet() {
         icon = R.drawable.ic_action_grid,
         listener = {
           when {
-            isPinCodeEnabled() -> {
+            isPinCodeConfigured() -> {
               PincodeBottomSheet.openForVerification(activity,
                 onVerifySuccess = {
                   sSecurityAskPinAlways = !sSecurityAskPinAlways
@@ -89,7 +91,7 @@ class SecurityOptionsBottomSheet : LithoOptionBottomSheet() {
                 }
               )
             }
-            else -> openCreatePasswordDialog(dialog)
+            else -> openCreatePinDialog(dialog)
           }
         },
         isSelectable = true,
@@ -104,7 +106,7 @@ class SecurityOptionsBottomSheet : LithoOptionBottomSheet() {
         icon = R.drawable.ic_option_fingerprint,
         listener = {
           when {
-            isPinCodeEnabled() -> {
+            isPinCodeConfigured() -> {
               PincodeBottomSheet.openForVerification(activity,
                 onVerifySuccess = {
                   sSecurityBiometricEnabled = false
@@ -125,20 +127,20 @@ class SecurityOptionsBottomSheet : LithoOptionBottomSheet() {
     return options
   }
 
-  private fun openCreatePasswordDialog(dialog: Dialog) {
+  private fun openCreatePinDialog(dialog: Dialog) {
     val activity = context as ThemedActivity
     PincodeBottomSheet.openForPincodeSetup(activity,
       onCreateSuccess = { refresh(dialog.context, dialog) })
   }
 
-  private fun openResetPasswordDialog(dialog: Dialog) {
+  private fun openResetPinDialog(dialog: Dialog) {
     val activity = context as ThemedActivity
     PincodeBottomSheet.openForVerification(activity,
       onVerifySuccess = {
-        openCreatePasswordDialog(dialog)
+        openCreatePinDialog(dialog)
       },
       onVerifyFailure = {
-        openResetPasswordDialog(dialog)
+        openResetPinDialog(dialog)
       })
   }
 }

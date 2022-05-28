@@ -17,7 +17,7 @@ import com.maubis.scarlet.base.common.sheets.LithoOptionsItem
 import com.maubis.scarlet.base.common.sheets.openSheet
 import com.maubis.scarlet.base.common.ui.ThemedActivity
 import com.maubis.scarlet.base.home.MainActivity
-import com.maubis.scarlet.base.security.PinLockController.isPinCodeEnabled
+import com.maubis.scarlet.base.security.PinLockController.isPinCodeConfigured
 import com.maubis.scarlet.base.security.PincodeBottomSheet
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -100,7 +100,7 @@ class BackupDataOptionsBottomSheet : LithoOptionBottomSheet() {
   }
 
   private fun openExportSheet(activity: MainActivity) {
-    if (!isPinCodeEnabled()) {
+    if (!isPinCodeConfigured()) {
       openSheet(activity, ExportNotesBottomSheet())
       return
     }
