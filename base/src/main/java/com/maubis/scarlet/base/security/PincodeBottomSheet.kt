@@ -4,14 +4,17 @@ import android.app.Dialog
 import android.content.res.ColorStateList
 import android.text.InputFilter
 import android.text.InputType
-import android.text.Layout
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.annotation.StringRes
-import com.facebook.litho.*
+import com.facebook.litho.Column
+import com.facebook.litho.Component
+import com.facebook.litho.ComponentContext
 import com.facebook.litho.annotations.*
-import com.facebook.litho.widget.*
+import com.facebook.litho.widget.EditorActionEvent
+import com.facebook.litho.widget.TextChangedEvent
+import com.facebook.litho.widget.TextInput
 import com.facebook.yoga.YogaAlign
 import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.R
@@ -20,7 +23,7 @@ import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.common.sheets.LithoBottomSheet
 import com.maubis.scarlet.base.common.sheets.getLithoBottomSheetTitle
 import com.maubis.scarlet.base.common.sheets.openSheet
-import com.maubis.scarlet.base.common.specs.EmptySpec
+import com.maubis.scarlet.base.common.specs.BottomSheetBar
 import com.maubis.scarlet.base.common.ui.ThemeColorType
 import com.maubis.scarlet.base.common.ui.ThemedActivity
 import com.maubis.scarlet.base.common.utils.isBiometricEnabled
@@ -55,12 +58,28 @@ private var sPincodeSheetPasscodeEntered = ""
 object PincodeSheetViewSpec {
 
   @OnCreateLayout
-  fun onCreate(context: ComponentContext, @Prop data: PincodeSheetData): Component {
+  fun onCreate(context: ComponentContext, @Prop data: PincodeSheetData, @Prop dismiss: () -> Unit): Component {
     val editBackground = when {
       appTheme.isNightTheme() -> R.drawable.light_secondary_rounded_bg
       else -> R.drawable.secondary_rounded_bg
     }
 
+    val bottomBar = BottomSheetBar.create(context)
+      .primaryActionRes(data.actionTitle)
+      .onPrimaryClick {
+        data.onActionClicked(sPincodeSheetPasscodeEntered)
+        sPincodeSheetPasscodeEntered = ""
+        dismiss()
+      }
+    if (data.isRemoveButtonEnabled) {
+      bottomBar
+        .secondaryActionRes(R.string.security_sheet_button_remove)
+        .onSecondaryClick {
+          data.onRemoveButtonClick()
+          sPincodeSheetPasscodeEntered = ""
+          dismiss()
+        }
+    }
     val component = Column.create(context)
       .widthPercent(100f)
       .paddingDip(YogaEdge.VERTICAL, 8f)
@@ -83,49 +102,11 @@ object PincodeSheetViewSpec {
           .textColorStateList(ColorStateList.valueOf(appTheme.get(ThemeColorType.PRIMARY_TEXT)))
           .paddingDip(YogaEdge.HORIZONTAL, 22f)
           .paddingDip(YogaEdge.VERTICAL, 6f)
-          .marginDip(YogaEdge.VERTICAL, 8f)
+          .marginDip(YogaEdge.VERTICAL, 16f)
           .imeOptions(EditorInfo.IME_ACTION_DONE)
           .editorActionEventHandler(PincodeSheetView.onPinEditorAction(context))
           .textChangedEventHandler(PincodeSheetView.onTextChangeListener(context)))
-      .child(
-        Row.create(context)
-          .alignItems(YogaAlign.CENTER)
-          .paddingDip(YogaEdge.HORIZONTAL, 8f)
-          .paddingDip(YogaEdge.VERTICAL, 8f)
-          .child(
-            when {
-              data.isFingerprintEnabled -> Image.create(context)
-                .drawableRes(R.drawable.ic_option_fingerprint)
-                .heightDip(36f)
-              else -> null
-            }
-          )
-          .child(
-            when {
-              data.isRemoveButtonEnabled -> Text.create(context)
-                .textSizeRes(R.dimen.font_size_large)
-                .textColor(appTheme.get(ThemeColorType.HINT_TEXT))
-                .textRes(R.string.security_sheet_button_remove)
-                .textAlignment(Layout.Alignment.ALIGN_CENTER)
-                .paddingDip(YogaEdge.VERTICAL, 12f)
-                .paddingDip(YogaEdge.HORIZONTAL, 20f)
-                .typeface(appTypeface.title())
-                .clickHandler(PincodeSheetView.onRemoveClick(context))
-              else -> null
-            }
-          )
-          .child(EmptySpec.create(context).flexGrow(1f))
-          .child(
-            Text.create(context)
-              .backgroundRes(R.drawable.accent_rounded_bg)
-              .textSizeRes(R.dimen.font_size_large)
-              .textColorRes(android.R.color.white)
-              .textRes(data.actionTitle)
-              .textAlignment(Layout.Alignment.ALIGN_CENTER)
-              .paddingDip(YogaEdge.VERTICAL, 12f)
-              .paddingDip(YogaEdge.HORIZONTAL, 20f)
-              .typeface(appTypeface.title())
-              .clickHandler(PincodeSheetView.onActionClick(context))))
+      .child(bottomBar)
     return component.build()
   }
 
@@ -143,28 +124,6 @@ object PincodeSheetViewSpec {
   @OnEvent(TextChangedEvent::class)
   fun onTextChangeListener(context: ComponentContext, @FromEvent text: String) {
     sPincodeSheetPasscodeEntered = text
-  }
-
-  @Suppress("UNUSED_PARAMETER")
-  @OnEvent(ClickEvent::class)
-  fun onActionClick(
-          context: ComponentContext,
-          @Prop data: PincodeSheetData,
-          @Prop dismiss: () -> Unit) {
-    data.onActionClicked(sPincodeSheetPasscodeEntered)
-    sPincodeSheetPasscodeEntered = ""
-    dismiss()
-  }
-
-  @Suppress("UNUSED_PARAMETER")
-  @OnEvent(ClickEvent::class)
-  fun onRemoveClick(
-          context: ComponentContext,
-          @Prop data: PincodeSheetData,
-          @Prop dismiss: () -> Unit) {
-    data.onRemoveButtonClick()
-    sPincodeSheetPasscodeEntered = ""
-    dismiss()
   }
 }
 

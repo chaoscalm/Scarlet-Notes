@@ -8,7 +8,10 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import com.facebook.litho.*
 import com.facebook.litho.annotations.*
-import com.facebook.litho.widget.*
+import com.facebook.litho.widget.EditorActionEvent
+import com.facebook.litho.widget.Text
+import com.facebook.litho.widget.TextChangedEvent
+import com.facebook.litho.widget.TextInput
 import com.facebook.yoga.YogaAlign
 import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.R
@@ -39,14 +42,6 @@ object AppLockViewSpec {
           .paddingDip(YogaEdge.HORIZONTAL, 12f)
           .paddingDip(YogaEdge.VERTICAL, 8f)
           .marginDip(YogaEdge.ALL, 16f)
-          .child(
-            when {
-              fingerprintEnabled -> Image.create(context)
-                .drawableRes(R.drawable.ic_option_fingerprint)
-                .heightDip(36f)
-              else -> null
-            }
-          )
           .child(EmptySpec.create(context).flexGrow(1f))
           .child(
             Text.create(context)
