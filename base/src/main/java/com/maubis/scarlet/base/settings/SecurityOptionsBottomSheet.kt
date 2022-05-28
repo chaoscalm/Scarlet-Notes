@@ -8,7 +8,7 @@ import com.maubis.scarlet.base.ScarletApp.Companion.appPreferences
 import com.maubis.scarlet.base.common.sheets.LithoOptionBottomSheet
 import com.maubis.scarlet.base.common.sheets.LithoOptionsItem
 import com.maubis.scarlet.base.common.ui.ThemedActivity
-import com.maubis.scarlet.base.common.utils.deviceHasBiometricEnabled
+import com.maubis.scarlet.base.common.utils.isBiometricAuthAvailable
 import com.maubis.scarlet.base.security.PinLockController.isPinCodeEnabled
 import com.maubis.scarlet.base.security.PincodeBottomSheet
 
@@ -97,11 +97,10 @@ class SecurityOptionsBottomSheet : LithoOptionBottomSheet() {
         actionIcon = R.drawable.ic_done_white_48dp
       ))
 
-    val hasFingerprint = deviceHasBiometricEnabled(requireContext())
     options.add(
       LithoOptionsItem(
-        title = R.string.security_option_biometrics_enabled,
-        subtitle = R.string.security_option_biometrics_enabled_subtitle,
+        title = R.string.security_option_biometrics,
+        subtitle = R.string.security_option_biometrics_subtitle,
         icon = R.drawable.ic_option_fingerprint,
         listener = {
           when {
@@ -119,32 +118,9 @@ class SecurityOptionsBottomSheet : LithoOptionBottomSheet() {
             }
           }
         },
-        visible = sSecurityBiometricEnabled && hasFingerprint,
+        visible = isBiometricAuthAvailable(requireContext()),
         isSelectable = true,
-        selected = true
-      ))
-    options.add(
-      LithoOptionsItem(
-        title = R.string.security_option_biometrics_disabled,
-        subtitle = R.string.security_option_biometrics_disabled_subtitle,
-        icon = R.drawable.ic_option_fingerprint,
-        listener = {
-          when {
-            isPinCodeEnabled() -> {
-              PincodeBottomSheet.openForVerification(activity,
-                onVerifySuccess = {
-                  sSecurityBiometricEnabled = true
-                  refresh(componentContext.androidContext, dialog)
-                }
-              )
-            }
-            else -> {
-              sSecurityBiometricEnabled = true
-              refresh(componentContext.androidContext, dialog)
-            }
-          }
-        },
-        visible = !sSecurityBiometricEnabled && hasFingerprint
+        selected = sSecurityBiometricEnabled
       ))
     return options
   }

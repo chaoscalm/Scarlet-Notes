@@ -11,12 +11,12 @@ import androidx.fragment.app.FragmentActivity
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.settings.sSecurityBiometricEnabled
 
-fun deviceHasBiometricEnabled(context: Context): Boolean {
+fun isBiometricAuthAvailable(context: Context): Boolean {
   val biometricManager = BiometricManager.from(context)
   return biometricManager.canAuthenticate(BIOMETRIC_WEAK) == BiometricManager.BIOMETRIC_SUCCESS
 }
 
-fun isBiometricEnabled(context: Context) = sSecurityBiometricEnabled && deviceHasBiometricEnabled(context)
+fun isBiometricEnabled(context: Context) = sSecurityBiometricEnabled && isBiometricAuthAvailable(context)
 
 fun showBiometricPrompt(
   @StringRes title: Int,

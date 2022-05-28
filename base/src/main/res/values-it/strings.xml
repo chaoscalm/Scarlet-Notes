@@ -224,10 +224,8 @@
   <string name="theme_dark_notes_details">Rende automaticamente più scuri i colori delle note e delle cartelle</string>
   <string name="editor_option_skip_view_note">Salta visualizzatore note</string>
   <string name="editor_option_skip_view_note_details">Salta il visualizzatore delle note e passa direttamente all\'editor</string>
-  <string name="security_option_biometrics_enabled">Sblocca con autenticazione biometrica</string>
-  <string name="security_option_biometrics_enabled_subtitle">Consenti lo sblocco con un\'impronta digitale o altri identificatori biometrici</string>
-  <string name="security_option_biometrics_disabled">Autenticazione biometrica disabilitata</string>
-  <string name="security_option_biometrics_disabled_subtitle">Non consentire lo sblocco con impronta digitale o altri identificatori biometrici</string>
+  <string name="security_option_biometrics">Sblocca con autenticazione biometrica</string>
+  <string name="security_option_biometrics_subtitle">Consenti l\'autenticazione con un\'impronta digitale o altri identificatori biometrici</string>
   <string name="biometric_prompt_unlock_note">Sblocca nota</string>
   <string name="biometric_prompt_unlock_note_details">Usa l\'impronta digitale o l\'identificatore biometrico configurato per sbloccare la nota e accedervi.</string>
   <string name="biometric_prompt_unlock_app">Sblocca app</string>

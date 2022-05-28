@@ -101,11 +101,9 @@
   <string name="security_option_lock_app">Enable App Lock</string>
   <string name="security_option_lock_app_details">Use PIN to unlock the whole application</string>
   <string name="security_option_ask_pin_always">Always ask for PIN</string>
-  <string name="security_option_ask_pin_always_details">Enter PIN for all notes, even if previously entered</string>
-  <string name="security_option_biometrics_enabled">Unlock with Biometrics</string>
-  <string name="security_option_biometrics_enabled_subtitle">Allow unlock with a fingerprint or other biometrics</string>
-  <string name="security_option_biometrics_disabled">Biometrics disabled</string>
-  <string name="security_option_biometrics_disabled_subtitle">Do not allow unlock with a fingerprint or other biometrics</string>
+  <string name="security_option_ask_pin_always_details">Enter PIN for all notes, even if it was previously entered</string>
+  <string name="security_option_biometrics">Unlock with biometrics</string>
+  <string name="security_option_biometrics_subtitle">Allow authentication with a fingerprint or other biometrics</string>
 
   <string name="biometric_prompt_unlock_note">Unlock Note</string>
   <string name="biometric_prompt_unlock_note_details">Use device fingerprint or biometrics to unlock the note and access.</string>
