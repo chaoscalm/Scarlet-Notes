@@ -10,12 +10,10 @@ import androidx.core.content.ContextCompat
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.common.utils.ColorUtil
-import com.maubis.scarlet.base.common.utils.sort
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.database.entities.NoteState
 import com.maubis.scarlet.base.editor.INTENT_KEY_NOTE_ID
 import com.maubis.scarlet.base.note.getTextForWidget
-import com.maubis.scarlet.base.settings.notesSortingTechniquePref
 import com.maubis.scarlet.base.settings.sWidgetShowArchivedNotes
 import com.maubis.scarlet.base.settings.sWidgetShowLockedNotes
 
@@ -29,18 +27,16 @@ fun getAvailableNotesForWidgets(): List<Note> {
     .filter { note -> (!note.locked || sWidgetShowLockedNotes) }
 }
 
-class AllNotesWidgetService : RemoteViewsService() {
+class RecentNotesWidgetService : RemoteViewsService() {
   override fun onGetViewFactory(intent: Intent?): RemoteViewsFactory {
-    return AllNotesRemoteViewsFactory(applicationContext)
+    return RecentNotesRemoteViewsFactory(applicationContext)
   }
 }
 
-class AllNotesRemoteViewsFactory(val context: Context) : RemoteViewsService.RemoteViewsFactory {
+class RecentNotesRemoteViewsFactory(val context: Context) : RemoteViewsService.RemoteViewsFactory {
+  private var notes = emptyList<Note>()
 
-  var notes = emptyList<Note>()
-
-  override fun onCreate() {
-  }
+  override fun onCreate() {}
 
   override fun getLoadingView(): RemoteViews? {
     return null
@@ -66,9 +62,7 @@ class AllNotesRemoteViewsFactory(val context: Context) : RemoteViewsService.Remo
     }
 
     val note = notes[position]
-
     val views = RemoteViews(context.packageName, R.layout.item_widget_note)
-
     views.setTextViewText(R.id.description, note.getTextForWidget())
     views.setInt(R.id.container_layout, "setBackgroundColor", note.color)
 
@@ -93,16 +87,9 @@ class AllNotesRemoteViewsFactory(val context: Context) : RemoteViewsService.Remo
     return views
   }
 
-  override fun getCount(): Int {
-    return notes.size
-  }
+  override fun getCount(): Int = notes.size
 
-  override fun getViewTypeCount(): Int {
-    return 1
-  }
+  override fun getViewTypeCount(): Int = 1
 
-  override fun onDestroy() {
-
-  }
-
+  override fun onDestroy() {}
 }

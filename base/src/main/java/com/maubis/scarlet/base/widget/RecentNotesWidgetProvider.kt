@@ -19,19 +19,13 @@ import com.maubis.scarlet.base.home.MainActivity
 import com.maubis.scarlet.base.settings.sWidgetBackgroundColor
 import com.maubis.scarlet.base.settings.sWidgetShowToolbar
 
-class AllNotesWidgetProvider : AppWidgetProvider() {
+class RecentNotesWidgetProvider : AppWidgetProvider() {
 
   override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
-    val N = appWidgetIds.size
-    for (i in 0 until N) {
-      val appWidgetId = appWidgetIds[i]
-
-      val views = RemoteViews(
-        context.packageName,
-        R.layout.widget_layout_all_notes
-      )
-      val intent = Intent(context, AllNotesWidgetService::class.java)
-      intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetIds[i])
+    for (appWidgetId in appWidgetIds) {
+      val views = RemoteViews(context.packageName, R.layout.widget_layout_all_notes)
+      val intent = Intent(context, RecentNotesWidgetService::class.java)
+      intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
       intent.data = Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME))
       views.setRemoteAdapter(R.id.list, intent)
 
@@ -39,7 +33,7 @@ class AllNotesWidgetProvider : AppWidgetProvider() {
       views.setViewVisibility(R.id.toolbar, if (sWidgetShowToolbar) VISIBLE else GONE)
 
       val noteIntent = Intent(context, ViewNoteActivity::class.java)
-      noteIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetIds[i])
+      noteIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
       val notePendingIntent = getPendingIntentWithStack(context, 0, noteIntent)
       views.setPendingIntentTemplate(R.id.list, notePendingIntent)
 
@@ -63,7 +57,7 @@ class AllNotesWidgetProvider : AppWidgetProvider() {
     fun notifyAllChanged(context: Context) {
       val application: Application = context.applicationContext as Application
       val ids = AppWidgetManager.getInstance(application).getAppWidgetIds(
-        ComponentName(application, AllNotesWidgetProvider::class.java))
+        ComponentName(application, RecentNotesWidgetProvider::class.java))
       if (ids.isEmpty()) {
         return
       }

@@ -12,8 +12,8 @@ import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appPreferences
 import com.maubis.scarlet.base.common.sheets.*
 import com.maubis.scarlet.base.home.MainActivity
-import com.maubis.scarlet.base.widget.AllNotesWidgetProvider
 import com.maubis.scarlet.base.widget.NoteWidgetProvider
+import com.maubis.scarlet.base.widget.RecentNotesWidgetProvider
 
 const val STORE_KEY_WIDGET_SHOW_LOCKED_NOTES = "widget_show_locked_notes"
 var sWidgetShowLockedNotes: Boolean
@@ -113,16 +113,16 @@ class WidgetOptionsBottomSheet : LithoOptionBottomSheet() {
     singleNoteBroadcastIntent.action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
     singleNoteBroadcastIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids)
 
-    AllNotesWidgetProvider.notifyAllChanged(activity)
+    RecentNotesWidgetProvider.notifyAllChanged(activity)
     activity.sendBroadcast(singleNoteBroadcastIntent)
   }
 
   private fun notifyAllNotesConfigChanged(activity: MainActivity) {
     val application: Application = activity.applicationContext as Application
     val ids = AppWidgetManager.getInstance(application).getAppWidgetIds(
-      ComponentName(application, AllNotesWidgetProvider::class.java))
+      ComponentName(application, RecentNotesWidgetProvider::class.java))
 
-    val allNotesBroadcastIntent = Intent(application, AllNotesWidgetProvider::class.java)
+    val allNotesBroadcastIntent = Intent(application, RecentNotesWidgetProvider::class.java)
     allNotesBroadcastIntent.action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
     allNotesBroadcastIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids)
     activity.sendBroadcast(allNotesBroadcastIntent)

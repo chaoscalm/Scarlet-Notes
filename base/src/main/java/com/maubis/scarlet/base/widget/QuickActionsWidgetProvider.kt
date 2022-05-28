@@ -12,13 +12,10 @@ import com.maubis.scarlet.base.editor.CreateListNoteActivity
 import com.maubis.scarlet.base.editor.EditNoteActivity
 import com.maubis.scarlet.base.home.MainActivity
 
-class CreateNoteWidgetProvider : AppWidgetProvider() {
+class QuickActionsWidgetProvider : AppWidgetProvider() {
 
   override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
-    val N = appWidgetIds.size
-    for (i in 0 until N) {
-      val appWidgetId = appWidgetIds[i]
-
+    for (appWidgetId in appWidgetIds) {
       val views = RemoteViews(context.packageName, R.layout.add_note_widget_layout)
       views.setOnClickPendingIntent(R.id.add_note, getPendingIntent(context, EditNoteActivity::class.java, 23100))
 

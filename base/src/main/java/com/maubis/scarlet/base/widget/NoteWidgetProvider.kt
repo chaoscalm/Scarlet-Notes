@@ -8,13 +8,8 @@ import com.maubis.scarlet.base.ScarletApp
 class NoteWidgetProvider : AppWidgetProvider() {
 
   override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
-    val N = appWidgetIds.size
-    for (i in 0 until N) {
-      val appWidgetId = appWidgetIds[i]
-      val widget = ScarletApp.data.widgets.getByID(appWidgetId)
-      if (widget === null) {
-        continue
-      }
+    for (appWidgetId in appWidgetIds) {
+      val widget = ScarletApp.data.widgets.getByID(appWidgetId) ?: continue
       WidgetConfigureActivity.createNoteWidget(context, widget)
     }
   }
@@ -22,13 +17,11 @@ class NoteWidgetProvider : AppWidgetProvider() {
   override fun onDeleted(context: Context?, appWidgetIds: IntArray?) {
     super.onDeleted(context, appWidgetIds)
 
-    if (appWidgetIds === null) {
+    if (appWidgetIds == null) {
       return
     }
 
-    val N = appWidgetIds.size
-    for (i in 0 until N) {
-      val appWidgetId = appWidgetIds[i]
+    for (appWidgetId in appWidgetIds) {
       val widget = ScarletApp.data.widgets.getByID(appWidgetId)
       if (widget === null) {
         continue

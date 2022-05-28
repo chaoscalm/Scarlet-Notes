@@ -10,7 +10,7 @@ import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.database.entities.NoteState
 import com.maubis.scarlet.base.notification.NotificationConfig
 import com.maubis.scarlet.base.notification.NotificationHandler
-import com.maubis.scarlet.base.widget.AllNotesWidgetProvider
+import com.maubis.scarlet.base.widget.RecentNotesWidgetProvider
 import com.maubis.scarlet.base.widget.WidgetConfigureActivity
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
@@ -70,13 +70,13 @@ class NotesRepository(private val database: NoteDao, private val notificationHan
 
   private fun onNoteUpdated(note: Note, context: Context) {
     WidgetConfigureActivity.notifyNoteChange(context, note)
-    AllNotesWidgetProvider.notifyAllChanged(context)
+    RecentNotesWidgetProvider.notifyAllChanged(context)
     notificationHandler.updateExistingNotification(NotificationConfig(note))
   }
 
   private fun onNoteDestroyed(note: Note, context: Context) {
     WidgetConfigureActivity.notifyNoteChange(context, note)
-    AllNotesWidgetProvider.notifyAllChanged(context)
+    RecentNotesWidgetProvider.notifyAllChanged(context)
     notificationHandler.cancelNotification(note.uid)
     if (OsVersionUtils.canAddLauncherShortcuts())
       ShortcutHandler.disableLauncherShortcuts(context, note, R.string.recent_to_delete_message)

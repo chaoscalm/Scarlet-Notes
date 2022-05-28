@@ -10,7 +10,6 @@ import android.os.Bundle
 import android.widget.RemoteViews
 import androidx.core.content.ContextCompat
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.common.utils.ColorUtil
 import com.maubis.scarlet.base.common.utils.sort
@@ -53,7 +52,7 @@ class WidgetConfigureActivity : SelectableNotesActivityBase(), INoteSelectorActi
 
   override fun onNoteClicked(note: Note) {
     val widget = Widget(appWidgetId, note.uuid)
-    ScarletApp.data.widgets.insert(widget)
+    data.widgets.insert(widget)
     createWidget(widget)
   }
 
@@ -61,7 +60,7 @@ class WidgetConfigureActivity : SelectableNotesActivityBase(), INoteSelectorActi
     return true
   }
 
-  fun createWidget(widget: Widget) {
+  private fun createWidget(widget: Widget) {
     createNoteWidget(this, widget)
 
     val resultValue = Intent()
@@ -105,8 +104,8 @@ class WidgetConfigureActivity : SelectableNotesActivityBase(), INoteSelectorActi
       val application: Application = context.applicationContext as Application
       val ids = AppWidgetManager.getInstance(application).getAppWidgetIds(
         ComponentName(application, NoteWidgetProvider::class.java))
-      val widgets = ScarletApp.data.widgets.getByNote(note.uuid)
 
+      val widgets = data.widgets.getByNote(note.uuid)
       val widgetIds = ArrayList<Int>()
       for (widget in widgets) {
         if (ids.contains(widget.widgetId)) {
@@ -118,11 +117,9 @@ class WidgetConfigureActivity : SelectableNotesActivityBase(), INoteSelectorActi
         return null
       }
 
-      val intentIds = IntArray(widgetIds.size, { index -> widgetIds[index] })
-
       val intent = Intent(application, NoteWidgetProvider::class.java)
       intent.action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
-      intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, intentIds)
+      intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, widgetIds.toIntArray())
       return intent
     }
 
