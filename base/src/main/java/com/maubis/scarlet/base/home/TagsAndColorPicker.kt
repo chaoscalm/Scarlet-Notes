@@ -43,7 +43,7 @@ class TagsAndColorPicker(
   }
 
   private fun populateColors() {
-    colors.forEach { color ->
+    colors.take(12).forEach { color ->
       val colorView = buildViewForColor(color)
       flexbox.addView(colorView)
     }
