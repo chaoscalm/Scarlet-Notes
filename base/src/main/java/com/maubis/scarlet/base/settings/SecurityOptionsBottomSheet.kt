@@ -46,9 +46,10 @@ class SecurityOptionsBottomSheet : LithoOptionBottomSheet() {
         subtitle = R.string.security_option_set_pin_code_subtitle,
         icon = R.drawable.ic_option_security,
         listener = {
-          when {
-            isPinCodeConfigured() -> openResetPinDialog(dialog)
-            else -> openCreatePinDialog(dialog)
+          if (isPinCodeConfigured()) {
+            openResetPinDialog(dialog)
+          } else {
+            openCreatePinDialog(dialog)
           }
         }
       ))
@@ -59,17 +60,12 @@ class SecurityOptionsBottomSheet : LithoOptionBottomSheet() {
         subtitle = R.string.security_option_lock_app_details,
         icon = R.drawable.ic_apps_white_48dp,
         listener = {
-          when {
-            isPinCodeConfigured() -> {
-              PincodeBottomSheet.openForVerification(activity,
-                onVerifySuccess = {
-                  sSecurityAppLockEnabled = !sSecurityAppLockEnabled
-                  refresh(componentContext.androidContext, dialog)
-                }
-              )
+          PincodeBottomSheet.openForVerification(activity,
+            onVerifySuccess = {
+              sSecurityAppLockEnabled = !sSecurityAppLockEnabled
+              refresh(componentContext.androidContext, dialog)
             }
-            else -> openCreatePinDialog(dialog)
-          }
+          )
         },
         isSelectable = true,
         selected = sSecurityAppLockEnabled,
@@ -82,17 +78,12 @@ class SecurityOptionsBottomSheet : LithoOptionBottomSheet() {
         subtitle = R.string.security_option_ask_pin_always_details,
         icon = R.drawable.ic_action_grid,
         listener = {
-          when {
-            isPinCodeConfigured() -> {
-              PincodeBottomSheet.openForVerification(activity,
-                onVerifySuccess = {
-                  sSecurityAskPinAlways = !sSecurityAskPinAlways
-                  refresh(componentContext.androidContext, dialog)
-                }
-              )
+          PincodeBottomSheet.openForVerification(activity,
+            onVerifySuccess = {
+              sSecurityAskPinAlways = !sSecurityAskPinAlways
+              refresh(componentContext.androidContext, dialog)
             }
-            else -> openCreatePinDialog(dialog)
-          }
+          )
         },
         isSelectable = true,
         selected = sSecurityAskPinAlways,
@@ -105,20 +96,12 @@ class SecurityOptionsBottomSheet : LithoOptionBottomSheet() {
         subtitle = R.string.security_option_biometrics_subtitle,
         icon = R.drawable.ic_option_fingerprint,
         listener = {
-          when {
-            isPinCodeConfigured() -> {
-              PincodeBottomSheet.openForVerification(activity,
-                onVerifySuccess = {
-                  sSecurityBiometricEnabled = false
-                  refresh(componentContext.androidContext, dialog)
-                }
-              )
-            }
-            else -> {
-              sSecurityBiometricEnabled = false
+          PincodeBottomSheet.openForVerification(activity,
+            onVerifySuccess = {
+              sSecurityBiometricEnabled = !sSecurityBiometricEnabled
               refresh(componentContext.androidContext, dialog)
             }
-          }
+          )
         },
         visible = isBiometricAuthAvailable(requireContext()),
         isSelectable = true,

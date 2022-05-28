@@ -102,7 +102,7 @@
   <string name="home_option_backup_options_subtitle">Importa, esporta o elimina le tue note</string>
 
   <string name="no_pincode_sheet_title">Nessun PIN impostato</string>
-  <string name="no_pincode_sheet_details">Non hai impostato il PIN per accedere alle note protette. Vuoi impostarlo ora?</string>
+  <string name="no_pincode_sheet_details">Per continuare, è necessario impostare il PIN per accedere alle note protette. Vuoi farlo ora?</string>
   <string name="no_pincode_sheet_not_now">Più tardi</string>
   <string name="no_pincode_sheet_set_up">Imposta</string>
 

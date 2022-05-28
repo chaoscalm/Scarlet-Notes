@@ -183,6 +183,13 @@ class PincodeBottomSheet : LithoBottomSheet() {
     }
 
     fun openForVerification(activity: ThemedActivity, onVerifySuccess: () -> Unit) {
+      if (!isPinCodeConfigured()) {
+        openSheet(activity, NoPincodeBottomSheet().apply {
+          this.onSuccess = onVerifySuccess
+        })
+        return
+      }
+
       openSheet(activity, PincodeBottomSheet().apply {
         data = PincodeSheetData(
           title = R.string.security_sheet_enter_current_pin_title,
