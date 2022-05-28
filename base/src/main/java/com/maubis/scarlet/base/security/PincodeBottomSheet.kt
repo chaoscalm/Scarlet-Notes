@@ -7,6 +7,7 @@ import android.text.InputType
 import android.text.Layout
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import android.widget.Toast
 import com.facebook.litho.*
 import com.facebook.litho.annotations.*
 import com.facebook.litho.widget.*
@@ -228,13 +229,16 @@ class PincodeBottomSheet : LithoBottomSheet() {
       })
     }
 
-    fun openForVerification(activity: ThemedActivity, onVerifySuccess: () -> Unit, onVerifyFailure: () -> Unit = {}) {
+    fun openForVerification(activity: ThemedActivity, onVerifySuccess: () -> Unit, onVerifyFailure: (() -> Unit)? = null) {
+      val onPinFailure = onVerifyFailure ?: {
+        Toast.makeText(activity, R.string.security_sheet_wrong_pin, Toast.LENGTH_SHORT).show()
+      }
       openSheet(activity, PincodeBottomSheet().apply {
         data = PincodeSheetData(
           title = R.string.security_sheet_enter_current_pin_title,
           actionTitle = R.string.security_sheet_button_verify,
           onSuccess = onVerifySuccess,
-          onFailure = onVerifyFailure,
+          onFailure = onPinFailure,
           isFingerprintEnabled = isBiometricEnabled(activity)
         )
       })
