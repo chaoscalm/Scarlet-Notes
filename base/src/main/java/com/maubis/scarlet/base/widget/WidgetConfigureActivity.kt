@@ -80,7 +80,7 @@ class WidgetConfigureActivity : SelectableNotesActivityBase(), INoteSelectorActi
       }
 
       val pendingIntent = ViewNoteActivity.makePendingIntentWithStack(context, note)
-      val views = RemoteViews(context.packageName, R.layout.widget_layout)
+      val views = RemoteViews(context.packageName, R.layout.widget_note)
 
       views.setTextViewText(R.id.description, note.getTextForWidget())
       views.setInt(R.id.container_layout, "setBackgroundColor", note.color)

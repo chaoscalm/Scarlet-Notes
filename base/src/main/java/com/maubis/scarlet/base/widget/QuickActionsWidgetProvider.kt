@@ -16,7 +16,7 @@ class QuickActionsWidgetProvider : AppWidgetProvider() {
 
   override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
     for (appWidgetId in appWidgetIds) {
-      val views = RemoteViews(context.packageName, R.layout.add_note_widget_layout)
+      val views = RemoteViews(context.packageName, R.layout.widget_quick_actions)
       views.setOnClickPendingIntent(R.id.add_note, getPendingIntent(context, EditNoteActivity::class.java, 23100))
 
       val pendingIntentList = getPendingIntent(context, CreateListNoteActivity::class.java, 23101)

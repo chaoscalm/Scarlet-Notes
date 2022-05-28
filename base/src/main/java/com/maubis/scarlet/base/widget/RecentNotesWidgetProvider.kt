@@ -23,7 +23,7 @@ class RecentNotesWidgetProvider : AppWidgetProvider() {
 
   override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
     for (appWidgetId in appWidgetIds) {
-      val views = RemoteViews(context.packageName, R.layout.widget_layout_all_notes)
+      val views = RemoteViews(context.packageName, R.layout.widget_recent_notes)
       val intent = Intent(context, RecentNotesWidgetService::class.java)
       intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
       intent.data = Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME))
