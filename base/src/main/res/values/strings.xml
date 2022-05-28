@@ -106,14 +106,14 @@
   <string name="security_option_biometrics">Unlock with biometrics</string>
   <string name="security_option_biometrics_subtitle">Allow authentication with a fingerprint or other biometrics</string>
 
-  <string name="biometric_prompt_unlock_note">Unlock Note</string>
-  <string name="biometric_prompt_unlock_note_details">Use device fingerprint or biometrics to unlock the note and access.</string>
-
   <string name="app_lock_title">Unlock App</string>
   <string name="app_lock_details">Enter the PIN to unlock the app and access all notes</string>
 
-  <string name="biometric_prompt_unlock_app">Unlock App</string>
+  <string name="biometric_prompt_unlock_app">Unlock app</string>
   <string name="biometric_prompt_unlock_app_details">Use device fingerprint or biometrics to unlock the app and access all notes.</string>
+
+  <string name="biometric_prompt_unlock_note">Access locked note</string>
+  <string name="biometric_prompt_auth_required">Authentication required</string>
 
   <string name="security_sheet_enter_new_pin_title">Enter new PIN</string>
   <string name="security_sheet_enter_pin_to_unlock_title">Enter PIN to proceed</string>

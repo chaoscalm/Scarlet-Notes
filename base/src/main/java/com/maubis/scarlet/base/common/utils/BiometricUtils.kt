@@ -20,7 +20,7 @@ fun isBiometricEnabled(context: Context) = sSecurityBiometricEnabled && isBiomet
 
 fun showBiometricPrompt(
   @StringRes title: Int,
-  @StringRes subtitle: Int,
+  @StringRes subtitle: Int? = null,
   activity: FragmentActivity,
   fragment: Fragment? = null,
   onSuccess: () -> Unit = {},
@@ -45,12 +45,12 @@ fun showBiometricPrompt(
   }
 
   val prompt = when {
-    fragment !== null -> BiometricPrompt(fragment, executor, callback)
+    fragment != null -> BiometricPrompt(fragment, executor, callback)
     else -> BiometricPrompt(activity, executor, callback)
   }
   val promptInfo = BiometricPrompt.PromptInfo.Builder()
     .setTitle(activity.getString(title))
-    .setDescription(activity.getString(subtitle))
+    .setDescription(subtitle?.let { activity.getString(subtitle) })
     .setAllowedAuthenticators(BIOMETRIC_WEAK)
     .setNegativeButtonText(activity.getString(R.string.delete_sheet_delete_trash_no))
     .build()

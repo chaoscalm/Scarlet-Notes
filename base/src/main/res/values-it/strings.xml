@@ -227,8 +227,8 @@
   <string name="editor_option_skip_view_note_details">Salta il visualizzatore delle note e passa direttamente all\'editor</string>
   <string name="security_option_biometrics">Sblocca con autenticazione biometrica</string>
   <string name="security_option_biometrics_subtitle">Consenti l\'autenticazione con un\'impronta digitale o altri identificatori biometrici</string>
-  <string name="biometric_prompt_unlock_note">Sblocca nota</string>
-  <string name="biometric_prompt_unlock_note_details">Usa l\'impronta digitale o l\'identificatore biometrico configurato per sbloccare la nota e accedervi.</string>
+  <string name="biometric_prompt_unlock_note">Accedi alla nota protetta</string>
+  <string name="biometric_prompt_auth_required">Autenticazione richiesta</string>
   <string name="biometric_prompt_unlock_app">Sblocca app</string>
   <string name="biometric_prompt_unlock_app_details">Usa l\'impronta digitale o l\'identificatore biometrico configurato per sbloccare l\'app e accedere a tutte le note.</string>
   <string name="pin_to_launcher">Scorciatoia nel launcher</string>

@@ -37,9 +37,10 @@ import com.maubis.scarlet.base.settings.sSecurityCode
 data class PincodeSheetData(
   @StringRes val title: Int,
   @StringRes val actionTitle: Int,
+  @StringRes val biometricTitle: Int = R.string.biometric_prompt_auth_required,
   val onSuccess: () -> Unit,
   val onFailure: () -> Unit = {},
-  val isFingerprintEnabled: Boolean = false,
+  val isBiometricEnabled: Boolean = false,
   val onActionClicked: (String) -> Unit = { password ->
     when {
       password != "" && password == sSecurityCode -> {
@@ -140,10 +141,9 @@ class PincodeBottomSheet : LithoBottomSheet() {
 
   override fun onResume() {
     super.onResume()
-    if (data.isFingerprintEnabled) {
+    if (data.isBiometricEnabled) {
       showBiometricPrompt(
-        title = R.string.biometric_prompt_unlock_note,
-        subtitle = R.string.biometric_prompt_unlock_note_details,
+        title = data.biometricTitle,
         activity = requireActivity(),
         fragment = this,
         onSuccess = {
@@ -160,7 +160,7 @@ class PincodeBottomSheet : LithoBottomSheet() {
         data = PincodeSheetData(
           title = R.string.security_sheet_enter_new_pin_title,
           actionTitle = R.string.security_sheet_button_set,
-          isFingerprintEnabled = false,
+          isBiometricEnabled = false,
           isRemoveButtonEnabled = isPinCodeConfigured(),
           onRemoveButtonClick = {
             sSecurityCode = ""
@@ -191,7 +191,7 @@ class PincodeBottomSheet : LithoBottomSheet() {
           onFailure = {
             Toast.makeText(activity, R.string.security_sheet_wrong_pin, Toast.LENGTH_SHORT).show()
           },
-          isFingerprintEnabled = isBiometricEnabled(activity)
+          isBiometricEnabled = isBiometricEnabled(activity)
         )
       })
     }
@@ -210,10 +210,11 @@ class PincodeBottomSheet : LithoBottomSheet() {
       openSheet(activity, PincodeBottomSheet().apply {
         data = PincodeSheetData(
           title = R.string.security_sheet_enter_pin_to_unlock_title,
+          biometricTitle = R.string.biometric_prompt_unlock_note,
           actionTitle = R.string.security_sheet_button_unlock,
           onSuccess = onUnlockSuccess,
           onFailure = onUnlockFailure,
-          isFingerprintEnabled = isBiometricEnabled(activity)
+          isBiometricEnabled = isBiometricEnabled(activity)
         )
       })
     }
