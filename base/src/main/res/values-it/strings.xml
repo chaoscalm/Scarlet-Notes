@@ -125,8 +125,7 @@
   <string name="format_action_title">Azioni blocco di testo</string>
   <string name="format_action_gallery">Galleria</string>
   <string name="format_action_camera">Fotocamera</string>
-  <string name="image_delete_all_devices">La cancellazione di questo elemento eliminerà l\'immagine da tutti i dispositivi.</string>
-  <string name="image_not_on_current_device">Immagine non presente su questo dispositivo</string>
+  <string name="image_not_found">Immagine non trovata</string>
   <string name="image_cannot_be_loaded">L\'immagine non può essere caricata</string>
   <string name="home_option_auto_export">Esporta automaticamente</string>
   <string name="home_option_auto_export_subtitle">Crea regolarmente un backup di tutti i dati nella memoria interna del dispositivo</string>

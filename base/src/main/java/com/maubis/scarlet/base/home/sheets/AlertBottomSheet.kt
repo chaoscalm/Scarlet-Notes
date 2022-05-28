@@ -17,8 +17,6 @@ import com.maubis.scarlet.base.common.ui.ThemeColorType
 import com.maubis.scarlet.base.common.ui.ThemedActivity
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.database.entities.NoteState
-import com.maubis.scarlet.base.editor.Format
-import com.maubis.scarlet.base.editor.ViewNoteActivity
 import com.maubis.scarlet.base.home.MainActivity
 
 data class AlertSheetConfig(
@@ -85,20 +83,6 @@ fun openDeleteAllXSheet(activity: MainActivity, subtitle: Int, onSuccess: () -> 
       negativeText = R.string.delete_sheet_delete_trash_no,
       onPositiveClick = {
         onSuccess()
-      },
-      onNegativeClick = {})
-  })
-}
-
-fun openDeleteFormatDialog(activity: ViewNoteActivity, format: Format) {
-  openSheet(activity, AlertBottomSheet().apply {
-    this.config = AlertSheetConfig(
-      title = R.string.delete_sheet_are_you_sure,
-      description = R.string.image_delete_all_devices,
-      positiveText = R.string.delete_sheet_delete_trash_yes,
-      negativeText = R.string.delete_sheet_delete_trash_no,
-      onPositiveClick = {
-        activity.deleteFormat(format)
       },
       onNegativeClick = {})
   })

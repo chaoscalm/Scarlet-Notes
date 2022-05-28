@@ -180,8 +180,7 @@
   <string name="format_action_gallery">Gallery</string>
   <string name="format_action_camera">Camera</string>
 
-  <string name="image_delete_all_devices">Deleting this item will delete the image from all the devices.</string>
-  <string name="image_not_on_current_device">Image not on this device</string>
+  <string name="image_not_found">Image not found</string>
   <string name="image_cannot_be_loaded">Image cannot be loaded</string>
 
   <!-- Start Note Text Size -->

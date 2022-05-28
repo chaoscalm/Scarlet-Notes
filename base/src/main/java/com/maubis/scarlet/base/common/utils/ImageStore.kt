@@ -19,12 +19,6 @@ import java.io.InputStream
 import java.math.BigInteger
 import java.util.*
 
-interface ImageLoadCallback {
-  fun onSuccess()
-
-  fun onError()
-}
-
 class ImageStore(context: Context, private val thumbnailsCache: ImageCache) {
 
   private val rootFolder = File(context.filesDir, "images")
@@ -79,33 +73,6 @@ class ImageStore(context: Context, private val thumbnailsCache: ImageCache) {
     }
   }
 
-  fun loadImageToImageView(image: ImageView, file: File, callback: ImageLoadCallback? = null) {
-    GlobalScope.launch {
-      if (!file.exists()) {
-        withContext(Dispatchers.Main) {
-          image.visibility = View.GONE
-          callback?.onError()
-        }
-        return@launch
-      }
-
-      val bitmap = loadBitmap(file)
-      if (bitmap === null) {
-        file.deleteIfExists()
-        withContext(Dispatchers.Main) {
-          image.visibility = View.GONE
-          callback?.onError()
-        }
-        return@launch
-      }
-
-      withContext(Dispatchers.Main) {
-        image.visibility = View.VISIBLE
-        image.setImageBitmap(bitmap)
-      }
-    }
-  }
-
   fun loadThumbnailToImageView(noteUUID: String, imageUuid: String, image: ImageView) {
     GlobalScope.launch {
       val thumbnailFile = thumbnailsCache.thumbnailFile(noteUUID, imageUuid)
@@ -146,7 +113,7 @@ class ImageStore(context: Context, private val thumbnailsCache: ImageCache) {
     }
   }
 
-  private fun loadBitmap(imageFile: File): Bitmap? {
+  fun loadBitmap(imageFile: File): Bitmap? {
     if (imageFile.exists()) {
       val options = BitmapFactory.Options()
       options.inPreferredConfig = Bitmap.Config.ARGB_8888

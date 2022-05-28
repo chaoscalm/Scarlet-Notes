@@ -9,14 +9,16 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import com.github.bijoysingh.uibasics.views.UITextView
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.lifecycleScope
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.imageStorage
 import com.maubis.scarlet.base.common.sheets.openSheet
-import com.maubis.scarlet.base.common.utils.ImageLoadCallback
 import com.maubis.scarlet.base.editor.Format
 import com.maubis.scarlet.base.editor.sheet.FormatActionBottomSheet
-import com.maubis.scarlet.base.home.sheets.openDeleteFormatDialog
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import pl.aprilapps.easyphotopicker.EasyImage
 import java.io.File
 
@@ -29,7 +31,7 @@ class FormatImageViewHolder(context: Context, view: View) : FormatViewHolderBase
   private val actionGallery: ImageView = root.findViewById(R.id.action_gallery)
   private val dragHandle: ImageView = root.findViewById(R.id.action_move_icon)
   private val imageToolbar: View = root.findViewById(R.id.image_toolbar)
-  private val noImageMessage: UITextView = root.findViewById(R.id.no_image_message)
+  private val noImageIcon: ImageView = root.findViewById(R.id.no_image_icon)
 
   private var format: Format? = null
 
@@ -42,14 +44,8 @@ class FormatImageViewHolder(context: Context, view: View) : FormatViewHolderBase
       EasyImage.openGallery(context as AppCompatActivity, data.uid)
     }
 
-    noImageMessage.visibility = View.GONE
-    noImageMessage.setTextColor(config.tertiaryTextColor)
-    noImageMessage.setOnClickListener {
-      openDeleteFormatDialog(activity, data)
-    }
-
     val iconColor = config.iconColor
-    noImageMessage.setImageTint(iconColor)
+    noImageIcon.setColorFilter(iconColor)
     actionCamera.setColorFilter(iconColor)
     actionGallery.setColorFilter(iconColor)
     actionCamera.setOnClickListener {
@@ -83,36 +79,37 @@ class FormatImageViewHolder(context: Context, view: View) : FormatViewHolderBase
 
     val imageToolbarBg = config.backgroundColor
     imageToolbar.setBackgroundColor(imageToolbarBg)
-    noImageMessage.setBackgroundColor(imageToolbarBg)
 
     val fileName = data.text
     when {
       fileName.isBlank() -> image.visibility = View.GONE
       else -> {
         val file = imageStorage.getImage(config.noteUUID, data)
-        when (file.exists()) {
-          true -> populateFile(file)
-          false -> {
-            noImageMessage.setText(R.string.image_not_on_current_device)
-            noImageMessage.isVisible = config.editable
-            image.visibility = View.GONE
-            imageToolbar.visibility = View.GONE
-          }
+        if (file.exists()) {
+          populateFile(file)
+        } else {
+          text.setText(R.string.image_not_found)
+          noImageIcon.isVisible = config.editable
+          image.visibility = View.GONE
         }
       }
     }
   }
 
   fun populateFile(file: File) {
-    imageStorage.loadImageToImageView(image, file, object : ImageLoadCallback {
-      override fun onSuccess() {
-        noImageMessage.visibility = View.GONE
+    (context as LifecycleOwner).lifecycleScope.launch {
+      val bitmap = withContext(Dispatchers.IO) { imageStorage.loadBitmap(file) }
+      if (bitmap == null) {
+        image.visibility = View.GONE
+        noImageIcon.visibility = View.VISIBLE
+        text.setText(R.string.image_cannot_be_loaded)
+        return@launch
       }
 
-      override fun onError() {
-        noImageMessage.visibility = View.VISIBLE
-        noImageMessage.setText(R.string.image_cannot_be_loaded)
-      }
-    })
+      noImageIcon.visibility = View.GONE
+      text.setText(R.string.format_hint_image)
+      image.visibility = View.VISIBLE
+      image.setImageBitmap(bitmap)
+    }
   }
 }
