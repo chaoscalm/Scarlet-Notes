@@ -182,16 +182,15 @@ class PincodeBottomSheet : LithoBottomSheet() {
       })
     }
 
-    fun openForVerification(activity: ThemedActivity, onVerifySuccess: () -> Unit, onVerifyFailure: (() -> Unit)? = null) {
-      val onPinFailure = onVerifyFailure ?: {
-        Toast.makeText(activity, R.string.security_sheet_wrong_pin, Toast.LENGTH_SHORT).show()
-      }
+    fun openForVerification(activity: ThemedActivity, onVerifySuccess: () -> Unit) {
       openSheet(activity, PincodeBottomSheet().apply {
         data = PincodeSheetData(
           title = R.string.security_sheet_enter_current_pin_title,
           actionTitle = R.string.security_sheet_button_verify,
           onSuccess = onVerifySuccess,
-          onFailure = onPinFailure,
+          onFailure = {
+            Toast.makeText(activity, R.string.security_sheet_wrong_pin, Toast.LENGTH_SHORT).show()
+          },
           isFingerprintEnabled = isBiometricEnabled(activity)
         )
       })

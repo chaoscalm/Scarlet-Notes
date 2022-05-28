@@ -136,11 +136,6 @@ class SecurityOptionsBottomSheet : LithoOptionBottomSheet() {
   private fun openResetPinDialog(dialog: Dialog) {
     val activity = context as ThemedActivity
     PincodeBottomSheet.openForVerification(activity,
-      onVerifySuccess = {
-        openCreatePinDialog(dialog)
-      },
-      onVerifyFailure = {
-        openResetPinDialog(dialog)
-      })
+      onVerifySuccess = { openCreatePinDialog(dialog) })
   }
 }
