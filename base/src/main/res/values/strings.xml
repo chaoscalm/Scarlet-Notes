@@ -119,6 +119,7 @@
   <string name="security_sheet_enter_pin_to_unlock_title">Enter PIN to proceed</string>
   <string name="security_sheet_enter_current_pin_title">Enter current PIN</string>
   <string name="security_sheet_wrong_pin">The entered PIN is wrong</string>
+  <string name="security_sheet_pin_not_created">PIN must be 4 digits long</string>
   <string name="security_sheet_button_verify">Verify</string>
   <string name="security_sheet_button_unlock">Unlock</string>
   <string name="security_sheet_button_set">Set</string>

@@ -45,6 +45,7 @@
   <string name="security_sheet_enter_pin_to_unlock_title">Inserisci il PIN per accedere</string>
   <string name="security_sheet_enter_current_pin_title">Inserisci il PIN corrente</string>
   <string name="security_sheet_wrong_pin">Il PIN inserito è errato</string>
+  <string name="security_sheet_pin_not_created">Il PIN dev\'essere di 4 cifre</string>
   <string name="security_sheet_button_verify">Verifica</string>
   <string name="security_sheet_button_unlock">Sblocca</string>
   <string name="security_sheet_button_set">Imposta</string>

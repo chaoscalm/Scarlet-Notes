@@ -175,6 +175,8 @@ class PincodeBottomSheet : LithoBottomSheet() {
             if (password.length == 4 && password.toIntOrNull() !== null) {
               sSecurityCode = password
               onCreateSuccess()
+            } else {
+              Toast.makeText(activity, R.string.security_sheet_pin_not_created, Toast.LENGTH_LONG).show()
             }
           },
           onSuccess = {}
