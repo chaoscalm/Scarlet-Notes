@@ -33,7 +33,9 @@ open class FormatTextViewHolder(context: Context, view: View) : FormatViewHolder
 
   init {
     edit.addTextChangedListener(this)
-    edit.onFocusChangeListener = View.OnFocusChangeListener { _, _ -> activity.focusedFormat = format }
+    edit.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
+      activity.focusedFormat = if (hasFocus) format else null
+    }
     edit.setRawInputType(
       InputType.TYPE_TEXT_FLAG_CAP_SENTENCES
         or InputType.TYPE_TEXT_FLAG_MULTI_LINE
