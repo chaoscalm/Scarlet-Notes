@@ -36,12 +36,12 @@ class FormatListViewHolder(context: Context, view: View) : FormatTextViewHolder(
       FormatType.CHECKLIST_CHECKED -> {
         checkBox.isChecked = true
         text.paintFlags = text.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
-        itemView.alpha = 0.5f
+        setContentAlpha(0.6f)
       }
       FormatType.CHECKLIST_UNCHECKED -> {
         checkBox.isChecked = false
         text.paintFlags = text.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
-        itemView.alpha = 1f
+        setContentAlpha(1f)
       }
       else -> {
       } // Ignore other cases
@@ -59,5 +59,11 @@ class FormatListViewHolder(context: Context, view: View) : FormatTextViewHolder(
     checkBox.setOnClickListener {
       activity.setFormatChecked(data, data.type != FormatType.CHECKLIST_CHECKED)
     }
+  }
+
+  private fun setContentAlpha(alpha: Float) {
+    text.alpha = alpha
+    edit.alpha = alpha
+    checkBox.alpha = alpha
   }
 }
