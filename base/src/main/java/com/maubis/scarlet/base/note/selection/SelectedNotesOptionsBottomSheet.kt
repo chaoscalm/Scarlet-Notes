@@ -262,7 +262,7 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
           formats.addAll(noteToAdd.contentAsFormats())
           noteToAdd.delete(activity)
         }
-        note.content = Formats.sortChecklistsPreservingSections(formats).toNoteContent()
+        note.content = Formats.sortChecklistsIfAllowed(formats).toNoteContent()
         note.save(activity)
         activity.finish()
       }

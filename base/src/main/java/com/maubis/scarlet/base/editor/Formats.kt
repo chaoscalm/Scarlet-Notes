@@ -41,7 +41,7 @@ object Formats {
     return formats
   }
 
-  fun sortChecklistsPreservingSections(formats: List<Format>): List<Format> {
+  fun sortChecklistsIfAllowed(formats: List<Format>): List<Format> {
     if (!sEditorMoveChecked) {
       return formats
     }

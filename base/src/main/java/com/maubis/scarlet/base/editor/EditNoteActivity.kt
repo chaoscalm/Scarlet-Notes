@@ -379,6 +379,14 @@ open class EditNoteActivity : ViewNoteActivity() {
     }
   }
 
+  override fun setFormatChecked(format: Format, checked: Boolean) {
+    format.type = if (checked) FormatType.CHECKLIST_CHECKED else FormatType.CHECKLIST_UNCHECKED
+    note.content = Formats.getEnhancedNoteContent(Formats.sortChecklistsIfAllowed(formats))
+    saveNote()
+    displayNote()
+    addSnapshotToHistoryIfNeeded()
+  }
+
   override fun controllerItems(): List<MultiRecyclerViewControllerItem<Format>> {
     return listOf(
       MultiRecyclerViewControllerItem.Builder<Format>()

@@ -145,22 +145,16 @@ open class ViewNoteActivity : SecuredActivity(), INoteActionsActivity, IFormatRe
   }
 
   open fun setFormatChecked(format: Format, checked: Boolean) {
-    val trueFormats = note.contentAsFormats().toMutableList()
-    val truePosition = trueFormats.indexOfFirst { it.uid == format.uid }
-    if (truePosition == -1) {
-      return
-    }
-
-    val position = getFormatIndex(format)
+    val actualFormats = note.contentAsFormats().toMutableList()
+    val position = actualFormats.indexOfFirst { it.uid == format.uid }
     if (position == -1) {
       return
     }
 
     format.type = if (checked) FormatType.CHECKLIST_CHECKED else FormatType.CHECKLIST_UNCHECKED
-    formats[position] = format
-    trueFormats[truePosition] = format
+    actualFormats[position] = format
 
-    note.content = Formats.getEnhancedNoteContent(Formats.sortChecklistsPreservingSections(trueFormats))
+    note.content = Formats.getEnhancedNoteContent(Formats.sortChecklistsIfAllowed(actualFormats))
     saveNote()
     displayNote()
   }
