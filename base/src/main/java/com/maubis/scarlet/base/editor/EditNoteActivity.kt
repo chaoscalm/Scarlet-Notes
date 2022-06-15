@@ -338,16 +338,8 @@ open class EditNoteActivity : ViewNoteActivity() {
     formats[position] = format
   }
 
-  override fun moveFormat(fromPosition: Int, toPosition: Int) {
-    if (fromPosition < toPosition) {
-      for (i in fromPosition until toPosition) {
-        Collections.swap(formats, i, i + 1)
-      }
-    } else {
-      for (i in fromPosition downTo toPosition + 1) {
-        Collections.swap(formats, i, i - 1)
-      }
-    }
+  override fun onFormatMoved(fromPosition: Int, toPosition: Int) {
+    Collections.swap(formats, fromPosition, toPosition)
   }
 
   override fun deleteFormat(format: Format) {

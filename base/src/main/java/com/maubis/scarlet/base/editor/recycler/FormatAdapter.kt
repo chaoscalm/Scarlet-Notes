@@ -12,17 +12,9 @@ class FormatAdapter(private val formatActivity: IFormatRecyclerViewActivity)
   }
 
   fun onItemMove(fromPosition: Int, toPosition: Int): Boolean {
-    if (fromPosition < toPosition) {
-      for (i in fromPosition until toPosition) {
-        Collections.swap(items, i, i + 1)
-      }
-    } else {
-      for (i in fromPosition downTo toPosition + 1) {
-        Collections.swap(items, i, i - 1)
-      }
-    }
+    Collections.swap(items, fromPosition, toPosition)
     notifyItemMoved(fromPosition, toPosition)
-    formatActivity.moveFormat(fromPosition, toPosition)
+    formatActivity.onFormatMoved(fromPosition, toPosition)
     return true
   }
 }

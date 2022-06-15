@@ -11,5 +11,5 @@ interface IFormatRecyclerViewActivity {
 
   fun controllerItems(): List<MultiRecyclerViewControllerItem<Format>>
 
-  fun moveFormat(fromPosition: Int, toPosition: Int)
+  fun onFormatMoved(fromPosition: Int, toPosition: Int)
 }

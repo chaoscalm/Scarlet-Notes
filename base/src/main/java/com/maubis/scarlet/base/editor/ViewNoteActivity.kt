@@ -370,7 +370,7 @@ open class ViewNoteActivity : SecuredActivity(), INoteActionsActivity, IFormatRe
     // do nothing
   }
 
-  override fun moveFormat(fromPosition: Int, toPosition: Int) {
+  override fun onFormatMoved(fromPosition: Int, toPosition: Int) {
     // do nothing
   }
 }
