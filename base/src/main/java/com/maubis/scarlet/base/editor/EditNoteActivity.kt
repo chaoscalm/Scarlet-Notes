@@ -348,7 +348,6 @@ open class EditNoteActivity : ViewNoteActivity() {
         Collections.swap(formats, i, i - 1)
       }
     }
-    addSnapshotToHistoryIfNeeded()
   }
 
   override fun deleteFormat(format: Format) {
