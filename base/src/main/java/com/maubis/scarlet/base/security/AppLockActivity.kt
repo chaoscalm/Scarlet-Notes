@@ -29,7 +29,6 @@ class AppLockActivity : ThemedActivity() {
 
   private fun setView() {
     component = AppLockView.create(componentContext)
-      .fingerprintEnabled(isBiometricEnabled(this))
       .onTextChange { text ->
         passCodeEntered = text
       }

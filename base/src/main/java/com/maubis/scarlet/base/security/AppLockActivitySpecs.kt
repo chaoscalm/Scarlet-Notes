@@ -26,7 +26,6 @@ object AppLockViewSpec {
   @OnCreateLayout
   fun onCreate(
     context: ComponentContext,
-    @Prop fingerprintEnabled: Boolean,
     @Prop onTextChange: (String) -> Unit,
     @Prop onClick: () -> Unit): Component {
     return Column.create(context)
