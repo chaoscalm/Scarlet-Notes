@@ -42,7 +42,7 @@ data class NoteViewColorConfig(
   var toolbarIconColor: Int = Color.BLACK,
   var statusBarColor: Int = Color.BLACK)
 
-open class ViewNoteActivity : SecuredActivity(), INoteActionsActivity, IFormatRecyclerViewActivity {
+open class ViewNoteActivity : SecuredActivity(), INoteActionsActivity {
 
   var focusedFormat: Format? = null
 
@@ -54,27 +54,38 @@ open class ViewNoteActivity : SecuredActivity(), INoteActionsActivity, IFormatRe
 
   protected val colorConfig = NoteViewColorConfig()
 
-  protected open val editModeValue: Boolean = false
+  protected open val isEditingMode: Boolean = false
   private val noteSaveDispatcher = Dispatchers.IO.limitedParallelism(1)
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     views = ActivityAdvancedNoteBinding.inflate(layoutInflater)
     setContentView(views.root)
-    setRecyclerView()
 
+    note = loadNote(savedInstanceState)
+    setupRecyclerView()
+    displayNote()
+    notifyThemeChange()
+  }
+
+  private fun loadNote(savedInstanceState: Bundle?): Note {
     var noteId = intent.getIntExtra(INTENT_KEY_NOTE_ID, 0)
     if (noteId == 0 && savedInstanceState != null) {
       noteId = savedInstanceState.getInt(INTENT_KEY_NOTE_ID, 0)
     }
-    note = if (noteId != 0) {
+    return if (noteId != 0) {
       data.notes.getByID(noteId) ?: Note(sNoteDefaultColor)
     } else {
       Note(sNoteDefaultColor)
     }
-    resetBundle()
-    displayNote()
-    notifyThemeChange()
+  }
+
+  private fun setupRecyclerView() {
+    adapter = FormatAdapter(this)
+    views.formatsRecyclerView.adapter = adapter
+    views.formatsRecyclerView.layoutManager = LinearLayoutManager(this)
+    views.formatsRecyclerView.setHasFixedSize(true)
+    resetAdapterBundle()
   }
 
   override fun onResume() {
@@ -96,25 +107,26 @@ open class ViewNoteActivity : SecuredActivity(), INoteActionsActivity, IFormatRe
     }
   }
 
-  private fun resetBundle() {
-    val bundle = Bundle()
-    bundle.putBoolean(KEY_EDITABLE, editModeValue)
-    bundle.putInt(STORE_KEY_TEXT_SIZE, sEditorTextSize)
-    bundle.putInt(KEY_NOTE_COLOR, note.adjustedColor())
-    bundle.putString(INTENT_KEY_NOTE_ID, note.uuid.toString())
+  private fun resetAdapterBundle() {
+    val bundle = Bundle().apply {
+      putBoolean(KEY_EDITABLE, isEditingMode)
+      putInt(STORE_KEY_TEXT_SIZE, sEditorTextSize)
+      putInt(KEY_NOTE_COLOR, note.adjustedColor())
+      putString(INTENT_KEY_NOTE_ID, note.uuid.toString())
+    }
     adapter.setExtra(bundle)
   }
 
   protected open fun displayNote() {
     adapter.clearItems()
 
-    formats = when (editModeValue) {
+    formats = when (isEditingMode) {
       true -> note.contentAsFormats()
       false -> Formats.getEnhancedFormatsForNoteView(note.contentAsFormats())
     }.toMutableList()
     adapter.addItems(formats)
 
-    if (!editModeValue) {
+    if (!isEditingMode) {
       addTagsIndicatorIfNeeded()
     }
   }
@@ -127,13 +139,6 @@ open class ViewNoteActivity : SecuredActivity(), INoteActionsActivity, IFormatRe
 
     val format = Format(FormatType.TAG, tagLabel)
     adapter.addItem(format)
-  }
-
-  private fun setRecyclerView() {
-    adapter = FormatAdapter(this)
-    views.formatsRecyclerView.adapter = adapter
-    views.formatsRecyclerView.layoutManager = LinearLayoutManager(this)
-    views.formatsRecyclerView.setHasFixedSize(true)
   }
 
   open fun setFormat(format: Format) {
@@ -193,7 +198,7 @@ open class ViewNoteActivity : SecuredActivity(), INoteActionsActivity, IFormatRe
     views.root.setBackgroundColor(colorConfig.backgroundColor)
     views.formatsRecyclerView.setBackgroundColor(colorConfig.backgroundColor)
 
-    resetBundle()
+    resetAdapterBundle()
     adapter.notifyDataSetChanged()
 
     setBottomToolbar()
@@ -287,11 +292,15 @@ open class ViewNoteActivity : SecuredActivity(), INoteActionsActivity, IFormatRe
 
   override fun lockedContentIsHidden() = false
 
-  override fun context(): Context {
-    return this
+  open fun deleteFormat(format: Format) {
+    // do nothing
   }
 
-  override fun controllerItems(): List<MultiRecyclerViewControllerItem<Format>> {
+  open fun onFormatMoved(fromPosition: Int, toPosition: Int) {
+    // do nothing
+  }
+
+  open fun controllerItems(): List<MultiRecyclerViewControllerItem<Format>> {
     return listOf(
       MultiRecyclerViewControllerItem.Builder<Format>()
         .viewType(FormatType.TAG.ordinal)
@@ -364,13 +373,5 @@ open class ViewNoteActivity : SecuredActivity(), INoteActionsActivity, IFormatRe
         .holderClass(FormatSeparatorViewHolder::class.java)
         .build()
     )
-  }
-
-  override fun deleteFormat(format: Format) {
-    // do nothing
-  }
-
-  override fun onFormatMoved(fromPosition: Int, toPosition: Int) {
-    // do nothing
   }
 }

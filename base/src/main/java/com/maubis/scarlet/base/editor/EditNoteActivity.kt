@@ -40,7 +40,7 @@ open class EditNoteActivity : ViewNoteActivity() {
 
   private lateinit var formatsTouchHelper: ItemTouchHelper
 
-  override val editModeValue: Boolean = true
+  override val isEditingMode: Boolean = true
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -106,7 +106,7 @@ open class EditNoteActivity : ViewNoteActivity() {
         addEmptyItem(0, FormatType.HEADING)
       }
     }
-    focus(0)
+    focusTextFormat(0)
   }
 
   protected open fun addDefaultItem() {
@@ -222,10 +222,10 @@ open class EditNoteActivity : ViewNoteActivity() {
     val newPosition = position + 1
     addEmptyItem(newPosition, type)
     views.formatsRecyclerView.layoutManager?.scrollToPosition(newPosition)
-    focus(newPosition)
+    focusTextFormat(newPosition)
   }
 
-  fun focus(position: Int) {
+  private fun focusTextFormat(position: Int) {
     val handler = Handler(Looper.getMainLooper())
     handler.postDelayed(Runnable {
       val holder = findTextViewHolderAtPosition(position) ?: return@Runnable
@@ -365,7 +365,7 @@ open class EditNoteActivity : ViewNoteActivity() {
     val newPosition = position + 1
     when {
       isCheckList -> addEmptyItemAtFocused(FormatType.CHECKLIST_UNCHECKED.getNextFormatType())
-      newPosition < formats.size -> focus(position + 1)
+      newPosition < formats.size -> focusTextFormat(position + 1)
       else -> addEmptyItemAtFocused(format.type.getNextFormatType())
     }
   }
