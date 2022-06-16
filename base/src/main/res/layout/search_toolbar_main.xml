@@ -15,22 +15,14 @@
     android:orientation="horizontal"
     android:padding="@dimen/spacing_xsmall">
 
-    <ImageView
-      android:id="@+id/backButton"
-      android:layout_width="@dimen/icon_size_large"
-      android:layout_height="@dimen/icon_size_large"
-      android:layout_marginEnd="@dimen/spacing_xsmall"
-      android:padding="@dimen/spacing_xsmall"
-      android:src="@drawable/ic_arrow_back_white_48dp"
-      app:tint="@color/light_tertiary_text"
-      style="@style/BorderlessBackgroundView" />
-
     <EditText
       android:id="@+id/textField"
       android:layout_width="0dp"
       android:layout_height="match_parent"
       android:layout_weight="1"
+      android:paddingHorizontal="@dimen/spacing_small"
       android:background="@color/transparent"
+      android:singleLine="true"
       android:hint="@string/search_notes"
       android:textColor="@color/light_tertiary_text"
       android:textColorHint="@color/light_tertiary_text"

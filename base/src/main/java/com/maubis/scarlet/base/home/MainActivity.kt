@@ -105,7 +105,6 @@ class MainActivity : SecuredActivity(), INoteActionsActivity {
 
   private fun setListeners() {
     snackbar = NoteDeletionSnackbar(views.bottomSnackbar) { refreshList() }
-    views.searchToolbar.backButton.setOnClickListener { onBackPressed() }
     views.searchToolbar.closeIcon.setOnClickListener { onBackPressed() }
     tagAndColorPicker = TagsAndColorPicker(
       this,
@@ -148,7 +147,6 @@ class MainActivity : SecuredActivity(), INoteActionsActivity {
     views.searchToolbar.textField.setTextColor(titleColor)
     views.searchToolbar.textField.setHintTextColor(hintColor)
     views.searchToolbar.separator.setBackgroundColor(hintColor)
-    views.searchToolbar.backButton.setColorFilter(titleColor)
     views.searchToolbar.closeIcon.setColorFilter(titleColor)
   }
 
