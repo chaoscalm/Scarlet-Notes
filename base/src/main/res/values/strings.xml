@@ -25,7 +25,7 @@
   <string name="share_images">Share images</string>
   <string name="delete_note_permanently">Delete permanently</string>
   <string name="copy_note">Copy</string>
-  <string name="send_note">Send</string>
+  <string name="share_note">Share</string>
   <string name="unarchive_note">Unarchive</string>
   <string name="archive_note">Archive</string>
   <string name="not_favourite_note">Unmark favourite</string>
@@ -85,12 +85,12 @@
   <string name="home_option_delete_notes_and_more_details">Delete notes, tags and other data in the app</string>
   <string name="home_option_delete_all_notes">Delete all notes</string>
   <string name="home_option_delete_all_notes_details">Delete all the notes in the app</string>
-  <string name="home_option_delete_all_folders">Delete all folders</string>
-  <string name="home_option_delete_all_folders_details">Delete all the folders in the app</string>
+  <string name="home_option_delete_all_folders">Delete all notebooks</string>
+  <string name="home_option_delete_all_folders_details">Delete all the notebooks in the app</string>
   <string name="home_option_delete_all_tags">Delete all tags</string>
   <string name="home_option_delete_all_tags_details">Delete all the tags in the app</string>
   <string name="home_option_delete_everything">Delete everything</string>
-  <string name="home_option_delete_everything_details">Delete notes, tags and folders in the app</string>
+  <string name="home_option_delete_everything_details">Delete all notes, tags and notebooks in the app</string>
 
   <string name="ui_options_note_background_color">Background color</string>
   <string name="ui_options_note_background_color_settings_theme">Use theme color</string>
@@ -196,7 +196,7 @@
   <string name="no_pincode_sheet_set_up">Set up</string>
 
   <string name="delete_sheet_are_you_sure">Are you sure?</string>
-  <string name="delete_sheet_delete_trash">Would you like to permanently delete the notes in the trash folder?</string>
+  <string name="delete_sheet_delete_trash">Would you like to permanently delete the notes in the trash?</string>
   <string name="delete_sheet_delete_note_permanently">Would you like to permanently delete this note?</string>
   <string name="delete_sheet_delete_selected_notes_permanently">Would you like to permanently delete these notes?</string>
   <string name="delete_sheet_delete_trash_yes">Delete</string>
@@ -258,7 +258,7 @@
   <string name="theme_use_system_theme">Use system theme</string>
   <string name="theme_use_system_theme_details">Use the light or dark theme from the system</string>
   <string name="theme_dark_notes">Darker colors</string>
-  <string name="theme_dark_notes_details">Automatically darken note and folder colors</string>
+  <string name="theme_dark_notes_details">Automatically darken note and notebook colors</string>
 
   <string name="folder_delete_option_sheet_title">Removal Options</string>
   <string name="folder_delete_option_sheet_remove_folder">Remove notebook</string>

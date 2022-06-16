@@ -10,7 +10,7 @@
   <string name="main_trash_empty_hint">Torna quando avrai eliminato qualche nota.</string>
   <string name="edit_note">Modifica</string>
   <string name="copy_note">Copia</string>
-  <string name="send_note">Invia</string>
+  <string name="share_note">Condividi</string>
   <string name="choose_action">Scegli un\'azione&#8230;</string>
 
   <string name="format_hint_text">Aggiungi contenuto&#8230;</string>
@@ -149,7 +149,7 @@
   <string name="about_page_app_version_number">%s (fork di Fs00)</string>
   <string name="about_page_description">%s è un\'app offline ricca di funzionalità per prendere appunti.\nPermette di scrivere testo formattato in Markdown senza rendere complicata l\'esperienza utente.</string>
 
-  <string name="note_option_number_lines_subtitle">%d linee sulla schermata principale</string>
+  <string name="note_option_number_lines_subtitle">%d righe sulla schermata principale</string>
   <string name="home_option_theme_color">Tema dell\'app</string>
   <string name="home_option_theme_color_subtitle">Modifica l\'aspetto complessivo dell\'app</string>
   <string name="theme_page_title">Seleziona il tema dell\'app</string>
@@ -175,12 +175,12 @@
   <string name="home_option_delete_notes_and_more_details">Elimina note, tag e altri dati nell\'app</string>
   <string name="home_option_delete_all_notes">Elimina tutte le note</string>
   <string name="home_option_delete_all_notes_details">Elimina tutte le note nell\'app</string>
-  <string name="home_option_delete_all_folders">Elimina tutte le cartelle</string>
-  <string name="home_option_delete_all_folders_details">Elimina tutte le cartelle nell\'app</string>
+  <string name="home_option_delete_all_folders">Elimina tutti i blocchi note</string>
+  <string name="home_option_delete_all_folders_details">Elimina tutti i blocchi note nell\'app</string>
   <string name="home_option_delete_all_tags">Elimina tutti i tag</string>
   <string name="home_option_delete_all_tags_details">Elimina tutti i tag nell\'app</string>
   <string name="home_option_delete_everything">Elimina tutto</string>
-  <string name="home_option_delete_everything_details">Elimina note, tag e cartelle nell\'app</string>
+  <string name="home_option_delete_everything_details">Elimina tutte le note, i tag e i blocchi note nell\'app</string>
   <string name="ui_options_note_background_color">Colore dello sfondo</string>
   <string name="ui_options_note_background_color_settings_theme">Usa il colore del tema</string>
   <string name="ui_options_note_background_color_settings_note">Usa il colore della nota</string>
@@ -234,7 +234,7 @@
   <string name="theme_use_system_theme">Usa tema di sistema</string>
   <string name="theme_use_system_theme_details">Usa il tema chiaro o scuro impostato dal sistema</string>
   <string name="theme_dark_notes">Colori scuri</string>
-  <string name="theme_dark_notes_details">Rende automaticamente più scuri i colori delle note e delle cartelle</string>
+  <string name="theme_dark_notes_details">Rende automaticamente più scuri i colori delle note e dei blocchi note</string>
 
   <string name="editor_option_skip_view_note">Salta visualizzatore note</string>
   <string name="editor_option_skip_view_note_details">Salta il visualizzatore delle note e passa direttamente all\'editor</string>

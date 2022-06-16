@@ -115,7 +115,7 @@ class NoteActionsBottomSheet : ThemedBottomSheetFragment() {
       })
     actions.add(
       NoteActionItem(
-        title = R.string.send_note,
+        title = R.string.share_note,
         icon = R.drawable.ic_share_white_48dp,
         invalid = activity.lockedContentIsHidden() && note.locked
       ) {

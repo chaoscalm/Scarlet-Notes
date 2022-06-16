@@ -100,7 +100,7 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
         visible = !allItemsInArchived
       ))
     options.add(GridSectionOptionItem(
-      label = R.string.send_note,
+      label = R.string.share_note,
       icon = R.drawable.ic_share_white_48dp,
       listener = lockAwareFunctionRunner(activity) {
         activity.runTextFunction { shareText(activity, it) }
