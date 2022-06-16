@@ -73,7 +73,7 @@ class HomeOptionsBottomSheet : LithoBottomSheet() {
     ))
     options.add(LithoLabelOptionsItem(
       title = R.string.nav_archived,
-      icon = R.drawable.ic_archive_white_48dp,
+      icon = R.drawable.ic_archive,
       listener = {
         activity.onModeChange(HomeNavigationMode.ARCHIVED)
         dismiss()
@@ -81,7 +81,7 @@ class HomeOptionsBottomSheet : LithoBottomSheet() {
     ))
     options.add(LithoLabelOptionsItem(
       title = R.string.nav_trash,
-      icon = R.drawable.ic_delete_white_48dp,
+      icon = R.drawable.ic_delete,
       listener = {
         activity.onModeChange(HomeNavigationMode.TRASH)
         dismiss()
@@ -89,7 +89,7 @@ class HomeOptionsBottomSheet : LithoBottomSheet() {
     ))
     options.add(LithoLabelOptionsItem(
       title = R.string.nav_settings,
-      icon = R.drawable.ic_action_settings,
+      icon = R.drawable.ic_settings,
       listener = {
         SettingsBottomSheet.openSheet(activity)
         dismiss()

@@ -27,7 +27,7 @@ class SettingsBottomSheet : LithoOptionBottomSheet() {
     options.add(LithoOptionsItem(
       title = R.string.home_option_editor_options_title,
       subtitle = R.string.home_option_editor_options_description,
-      icon = R.drawable.ic_edit_white_48dp,
+      icon = R.drawable.ic_edit,
       listener = {
         openSheet(activity, EditorOptionsBottomSheet())
       }

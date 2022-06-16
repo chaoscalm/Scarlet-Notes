@@ -85,7 +85,7 @@ object TagItemLayoutSpec {
 
     if (tagItem.isEditable) {
       row.child(RoundIcon.create(context)
-                  .iconRes(R.drawable.ic_edit_white_48dp)
+                  .iconRes(R.drawable.ic_edit)
                   .bgColor(titleColor)
                   .bgAlpha(15)
                   .iconAlpha(0.9f)

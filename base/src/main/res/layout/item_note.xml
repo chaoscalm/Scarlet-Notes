@@ -81,7 +81,7 @@
         android:layout_width="@dimen/spacing_normal"
         android:layout_height="@dimen/spacing_normal"
         android:alpha="0.7"
-        android:src="@drawable/ic_action_backup_no"
+        android:src="@drawable/ic_backup_exclude"
         android:visibility="gone" />
 
       <ImageView
@@ -117,22 +117,22 @@
       <ImageView
         android:id="@+id/delete_button"
         style="@style/NoteItemActionIcon"
-        android:src="@drawable/ic_delete_white_48dp" />
+        android:src="@drawable/ic_delete" />
 
       <ImageView
         android:id="@+id/copy_button"
         style="@style/NoteItemActionIcon"
-        android:src="@drawable/ic_content_copy_white_48dp" />
+        android:src="@drawable/ic_copy" />
 
       <ImageView
         android:id="@+id/share_button"
         style="@style/NoteItemActionIcon"
-        android:src="@drawable/ic_share_white_48dp" />
+        android:src="@drawable/ic_share" />
 
       <ImageView
         android:id="@+id/edit_button"
         style="@style/NoteItemActionIcon"
-        android:src="@drawable/ic_edit_white_48dp" />
+        android:src="@drawable/ic_edit" />
 
       <ImageView
         android:id="@+id/options_button"

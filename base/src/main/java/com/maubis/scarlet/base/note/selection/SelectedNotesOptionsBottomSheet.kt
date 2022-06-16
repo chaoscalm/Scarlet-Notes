@@ -78,7 +78,7 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
     options.add(
       GridSectionOptionItem(
         label = R.string.unarchive_note,
-        icon = R.drawable.ic_archive_white_48dp,
+        icon = R.drawable.ic_archive,
         listener = lockAwareFunctionRunner(activity) {
           activity.forEachNote {
             it.updateState(NoteState.DEFAULT, activity)
@@ -90,7 +90,7 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
     options.add(
       GridSectionOptionItem(
         label = R.string.archive_note,
-        icon = R.drawable.ic_archive_white_48dp,
+        icon = R.drawable.ic_archive,
         listener = lockAwareFunctionRunner(activity) {
           activity.forEachNote {
             it.updateState(NoteState.ARCHIVED, activity)
@@ -101,14 +101,14 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
       ))
     options.add(GridSectionOptionItem(
       label = R.string.share_note,
-      icon = R.drawable.ic_share_white_48dp,
+      icon = R.drawable.ic_share,
       listener = lockAwareFunctionRunner(activity) {
         activity.runTextFunction { shareText(activity, it) }
       }
     ))
     options.add(GridSectionOptionItem(
       label = R.string.copy_note,
-      icon = R.drawable.ic_content_copy_white_48dp,
+      icon = R.drawable.ic_copy,
       listener = lockAwareFunctionRunner(activity) {
         activity.runTextFunction {
           copyTextToClipboard(activity, it)
@@ -119,7 +119,7 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
     options.add(
       GridSectionOptionItem(
         label = R.string.trash_note,
-        icon = R.drawable.ic_delete_white_48dp,
+        icon = R.drawable.ic_delete,
         listener = lockAwareFunctionRunner(activity) {
           activity.forEachNote {
             it.updateState(NoteState.TRASH, activity)
@@ -290,7 +290,7 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
     options.add(
       GridSectionOptionItem(
         label = R.string.backup_note_include,
-        icon = R.drawable.ic_action_backup,
+        icon = R.drawable.ic_backup_include,
         listener = lockAwareFunctionRunner(activity) {
           activity.forEachNote {
             it.excludeFromBackup = false
@@ -303,7 +303,7 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
     options.add(
       GridSectionOptionItem(
         label = R.string.backup_note_exclude,
-        icon = R.drawable.ic_action_backup_no,
+        icon = R.drawable.ic_backup_exclude,
         listener = lockAwareFunctionRunner(activity) {
           activity.forEachNote {
             it.excludeFromBackup = true

@@ -87,7 +87,7 @@ class NoteActionsBottomSheet : ThemedBottomSheetFragment() {
     actions.add(
       NoteActionItem(
         title = R.string.edit_note,
-        icon = R.drawable.ic_edit_white_48dp,
+        icon = R.drawable.ic_edit,
         visible = note.state != NoteState.TRASH
       ) {
         note.edit(activity)
@@ -96,7 +96,7 @@ class NoteActionsBottomSheet : ThemedBottomSheetFragment() {
     actions.add(
       NoteActionItem(
         title = R.string.select_action,
-        icon = R.drawable.ic_action_select,
+        icon = R.drawable.ic_select,
       ) {
         val intent = Intent(context, NotesSelectionActivity::class.java)
         intent.putExtra(KEY_EXTRA_SELECTED_NOTE_STATE, note.state.name)
@@ -107,7 +107,7 @@ class NoteActionsBottomSheet : ThemedBottomSheetFragment() {
     actions.add(
       NoteActionItem(
         title = R.string.copy_note,
-        icon = R.drawable.ic_content_copy_white_48dp,
+        icon = R.drawable.ic_copy,
         invalid = activity.lockedContentIsHidden() && note.locked
       ) {
         note.copyToClipboard(activity)
@@ -116,7 +116,7 @@ class NoteActionsBottomSheet : ThemedBottomSheetFragment() {
     actions.add(
       NoteActionItem(
         title = R.string.share_note,
-        icon = R.drawable.ic_share_white_48dp,
+        icon = R.drawable.ic_share,
         invalid = activity.lockedContentIsHidden() && note.locked
       ) {
         note.share(activity)
@@ -125,7 +125,7 @@ class NoteActionsBottomSheet : ThemedBottomSheetFragment() {
     actions.add(
       NoteActionItem(
         title = R.string.unarchive_note,
-        icon = R.drawable.ic_archive_white_48dp,
+        icon = R.drawable.ic_unarchive,
         visible = note.state == NoteState.ARCHIVED
       ) {
         activity.updateNoteState(note, NoteState.DEFAULT)
@@ -134,7 +134,7 @@ class NoteActionsBottomSheet : ThemedBottomSheetFragment() {
     actions.add(
       NoteActionItem(
         title = R.string.archive_note,
-        icon = R.drawable.ic_archive_white_48dp,
+        icon = R.drawable.ic_archive,
         visible = note.state != NoteState.ARCHIVED
       ) {
         activity.updateNoteState(note, NoteState.ARCHIVED)
@@ -153,7 +153,7 @@ class NoteActionsBottomSheet : ThemedBottomSheetFragment() {
     actions.add(
       NoteActionItem(
         title = R.string.trash_note,
-        icon = R.drawable.ic_delete_white_48dp,
+        icon = R.drawable.ic_delete,
         visible = note.state != NoteState.TRASH,
         invalid = activity.lockedContentIsHidden() && note.locked
       ) {
@@ -325,7 +325,7 @@ class NoteActionsBottomSheet : ThemedBottomSheetFragment() {
     actions.add(
       NoteActionItem(
         title = R.string.backup_note_include,
-        icon = R.drawable.ic_action_backup,
+        icon = R.drawable.ic_backup_include,
         visible = note.excludeFromBackup,
         invalid = activity.lockedContentIsHidden() && note.locked
       ) {
@@ -337,7 +337,7 @@ class NoteActionsBottomSheet : ThemedBottomSheetFragment() {
     actions.add(
       NoteActionItem(
         title = R.string.backup_note_exclude,
-        icon = R.drawable.ic_action_backup_no,
+        icon = R.drawable.ic_backup_exclude,
         visible = !note.excludeFromBackup,
         invalid = activity.lockedContentIsHidden() && note.locked
       ) {

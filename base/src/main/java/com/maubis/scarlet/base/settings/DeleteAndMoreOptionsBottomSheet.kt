@@ -64,7 +64,7 @@ class DeleteAndMoreOptionsBottomSheet : LithoOptionBottomSheet() {
     options.add(LithoOptionsItem(
       title = R.string.home_option_delete_everything,
       subtitle = R.string.home_option_delete_everything_details,
-      icon = R.drawable.ic_delete_permanently,
+      icon = R.drawable.ic_delete_all,
       listener = {
         openDeleteAllXSheet(activity, R.string.home_option_delete_everything_details) {
           activity.lifecycleScope.launch {

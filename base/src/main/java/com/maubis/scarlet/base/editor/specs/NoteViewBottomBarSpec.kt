@@ -36,14 +36,14 @@ object NoteViewBottomBarSpec {
 
     if (note.state != NoteState.TRASH) {
       row.child(bottomBarRoundIcon(context, colorConfig)
-          .iconRes(R.drawable.icon_delete)
+          .iconRes(R.drawable.ic_delete)
           .onClick { activity.moveNoteToTrashOrDelete(note) })
     }
     row.child(bottomBarRoundIcon(context, colorConfig)
-                .iconRes(R.drawable.ic_content_copy_white_48dp)
+                .iconRes(R.drawable.ic_copy)
                 .onClick { note.copyToClipboard(activity) })
     row.child(bottomBarRoundIcon(context, colorConfig)
-                .iconRes(R.drawable.ic_share_white_48dp)
+                .iconRes(R.drawable.ic_share)
                 .onClick { note.share(activity) })
 
     row.child(EmptySpec.create(context).heightDip(1f).flexGrow(1f))
@@ -55,7 +55,7 @@ object NoteViewBottomBarSpec {
           })
     } else {
       row.child(bottomBarRoundIcon(context, colorConfig)
-          .iconRes(R.drawable.ic_edit_white_48dp)
+          .iconRes(R.drawable.ic_edit)
           .onClick { activity.openEditor() })
     }
     return bottomBar(context, row.build(), colorConfig).build()

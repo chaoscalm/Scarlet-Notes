@@ -86,11 +86,11 @@ open class NoteRecyclerViewHolderBase(context: Context, view: View) : RecyclerVi
       }
       NoteState.ARCHIVED -> {
         stateIndicator.visibility = VISIBLE
-        stateIndicator.setImageResource(R.drawable.ic_archive_white_48dp)
+        stateIndicator.setImageResource(R.drawable.ic_archive)
       }
       NoteState.TRASH -> {
         stateIndicator.visibility = VISIBLE
-        stateIndicator.setImageResource(R.drawable.ic_delete_white_48dp)
+        stateIndicator.setImageResource(R.drawable.ic_delete)
       }
       NoteState.DEFAULT -> stateIndicator.visibility = GONE
     }

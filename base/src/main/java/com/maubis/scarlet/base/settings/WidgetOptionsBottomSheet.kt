@@ -58,7 +58,7 @@ class WidgetOptionsBottomSheet : LithoOptionBottomSheet() {
       LithoOptionsItem(
         title = R.string.widget_option_show_archived_notes,
         subtitle = R.string.widget_option_show_archived_notes_details,
-        icon = R.drawable.ic_archive_white_48dp,
+        icon = R.drawable.ic_archive,
         listener = {
           sWidgetShowArchivedNotes = !sWidgetShowArchivedNotes
           notifyWidgetConfigChanged(activity)

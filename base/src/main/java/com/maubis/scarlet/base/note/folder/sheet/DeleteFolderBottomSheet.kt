@@ -30,7 +30,7 @@ class DeleteFolderBottomSheet : LithoOptionBottomSheet() {
     options.add(LithoOptionsItem(
       title = R.string.folder_delete_option_sheet_remove_folder,
       subtitle = R.string.folder_delete_option_sheet_remove_folder_details,
-      icon = R.drawable.icon_delete,
+      icon = R.drawable.ic_delete_outline,
       listener = {
         forEachNoteInFolder(folder) {
           it.folder = null
@@ -44,7 +44,7 @@ class DeleteFolderBottomSheet : LithoOptionBottomSheet() {
     options.add(LithoOptionsItem(
       title = R.string.folder_delete_option_sheet_remove_folder_content,
       subtitle = R.string.folder_delete_option_sheet_remove_folder_content_details,
-      icon = R.drawable.icon_delete_content,
+      icon = R.drawable.ic_delete,
       listener = {
         forEachNoteInFolder(folder) {
           it.folder = null
@@ -57,7 +57,7 @@ class DeleteFolderBottomSheet : LithoOptionBottomSheet() {
     options.add(LithoOptionsItem(
       title = R.string.folder_delete_option_sheet_remove_folder_and_content,
       subtitle = R.string.folder_delete_option_sheet_remove_folder_and_content_details,
-      icon = R.drawable.ic_delete_permanently,
+      icon = R.drawable.ic_delete_all,
       listener = {
         forEachNoteInFolder(folder) {
           it.folder = null

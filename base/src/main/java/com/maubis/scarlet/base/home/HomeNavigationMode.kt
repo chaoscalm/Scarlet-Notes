@@ -12,7 +12,7 @@ enum class HomeNavigationMode {
   },
   TRASH {
     override val toolbarTitleResourceId: Int = R.string.nav_trash
-    override val toolbarIconResourceId: Int = R.drawable.ic_delete_white_48dp
+    override val toolbarIconResourceId: Int = R.drawable.ic_delete
   },
   FAVOURITE {
     override val toolbarTitleResourceId: Int = R.string.nav_favourites
@@ -20,7 +20,7 @@ enum class HomeNavigationMode {
   },
   ARCHIVED {
     override val toolbarTitleResourceId: Int = R.string.nav_archived
-    override val toolbarIconResourceId: Int = R.drawable.ic_archive_white_48dp
+    override val toolbarIconResourceId: Int = R.drawable.ic_archive
   },
   LOCKED {
     override val toolbarTitleResourceId: Int = R.string.nav_locked

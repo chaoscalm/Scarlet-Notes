@@ -70,7 +70,7 @@
       android:id="@+id/primary_fab_action"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:src="@drawable/ic_share_white_48dp"
+      android:src="@drawable/ic_share"
       app:backgroundTint="@color/fabColor"
       app:elevation="8dp"
       app:fabSize="normal" />

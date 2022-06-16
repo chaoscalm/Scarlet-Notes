@@ -55,7 +55,7 @@ class BackupDataOptionsBottomSheet : LithoOptionBottomSheet() {
     options.add(LithoOptionsItem(
       title = R.string.home_option_delete_notes_and_more,
       subtitle = R.string.home_option_delete_notes_and_more_details,
-      icon = R.drawable.ic_delete_permanently,
+      icon = R.drawable.ic_delete_all,
       listener = {
         openSheet(activity, DeleteAndMoreOptionsBottomSheet())
         dismiss()

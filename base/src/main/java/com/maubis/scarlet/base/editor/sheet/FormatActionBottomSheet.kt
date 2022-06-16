@@ -35,7 +35,7 @@ class FormatActionBottomSheet : GridOptionBottomSheet() {
     options.add(
       GridSectionOptionItem(
         label = R.string.action_share,
-        icon = R.drawable.ic_share_white_48dp,
+        icon = R.drawable.ic_share,
         listener = {
           shareText(activity, format.text)
           dismiss()
@@ -45,7 +45,7 @@ class FormatActionBottomSheet : GridOptionBottomSheet() {
     options.add(
       GridSectionOptionItem(
         label = R.string.format_action_copy,
-        icon = R.drawable.ic_content_copy_white_48dp,
+        icon = R.drawable.ic_copy,
         listener = {
           copyTextToClipboard(requireContext(), format.text)
           dismiss()
@@ -72,7 +72,7 @@ class FormatActionBottomSheet : GridOptionBottomSheet() {
       ))
     options.add(GridSectionOptionItem(
       label = R.string.delete_sheet_delete_trash_yes,
-      icon = R.drawable.ic_delete_white_48dp,
+      icon = R.drawable.ic_delete,
       listener = {
         activity.deleteFormat(format)
         if (format.type === FormatType.IMAGE && format.text.isNotBlank()) {

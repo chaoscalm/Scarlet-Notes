@@ -103,7 +103,7 @@ object MainActivityFolderBottomBarSpec {
         .textSizeRes(R.dimen.font_size_normal)
         .textColor(colorConfig.toolbarIconColor))
     row.child(bottomBarRoundIcon(context, colorConfig)
-                .iconRes(R.drawable.ic_edit_white_48dp)
+                .iconRes(R.drawable.ic_edit)
                 .isClickDisabled(true)
                 .clickHandler(MainActivityFolderBottomBar.onClickEvent(context))
                 .onClick {})
