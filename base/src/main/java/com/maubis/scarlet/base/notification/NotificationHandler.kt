@@ -58,7 +58,7 @@ class NotificationHandler(private val context: Context) {
     val pendingIntent = buildActivityPendingIntent(config, ViewNoteActivity.makePreferenceAwareIntent(context.applicationContext, config.note), 1)
     val contentView = getRemoteView(config)
     val notificationBuilder = NotificationCompat.Builder(context, config.channel)
-      .setSmallIcon(R.drawable.ic_format_quote_white_48dp)
+      .setSmallIcon(R.drawable.ic_quote)
       .setContentTitle(config.note.getTitleForSharing())
       .setColor(config.note.color)
       .setCategory(NotificationCompat.CATEGORY_EVENT)

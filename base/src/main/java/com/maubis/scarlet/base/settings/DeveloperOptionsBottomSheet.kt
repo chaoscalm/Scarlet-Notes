@@ -41,7 +41,7 @@ class DeveloperOptionsBottomSheet : LithoOptionBottomSheet() {
       LithoOptionsItem(
         title = R.string.internal_settings_show_uuid_title,
         subtitle = R.string.internal_settings_show_uuid_description,
-        icon = R.drawable.ic_code_white_48dp,
+        icon = R.drawable.ic_code_inline,
         listener = {
           sInternalShowUUID = !sInternalShowUUID
           refresh(activity, dialog)

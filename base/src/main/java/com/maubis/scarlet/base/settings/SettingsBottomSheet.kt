@@ -68,7 +68,7 @@ class SettingsBottomSheet : LithoOptionBottomSheet() {
       options.add(LithoOptionsItem(
         title = R.string.internal_settings_title,
         subtitle = R.string.internal_settings_description,
-        icon = R.drawable.icon_code_block,
+        icon = R.drawable.ic_code_block,
         listener = {
           openSheet(activity, DeveloperOptionsBottomSheet())
         }

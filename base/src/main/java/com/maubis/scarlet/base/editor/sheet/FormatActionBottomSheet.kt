@@ -55,7 +55,7 @@ class FormatActionBottomSheet : GridOptionBottomSheet() {
     options.add(
       GridSectionOptionItem(
         label = R.string.format_action_camera,
-        icon = R.drawable.ic_image_camera,
+        icon = R.drawable.ic_camera,
         listener = {
           EasyImage.openCameraForImage(activity, format.uid)
         },
@@ -64,7 +64,7 @@ class FormatActionBottomSheet : GridOptionBottomSheet() {
     options.add(
       GridSectionOptionItem(
         label = R.string.format_action_gallery,
-        icon = R.drawable.ic_image_gallery,
+        icon = R.drawable.ic_image,
         listener = {
           EasyImage.openGallery(activity, format.uid)
         },

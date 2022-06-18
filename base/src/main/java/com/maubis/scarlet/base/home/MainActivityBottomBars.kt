@@ -92,7 +92,7 @@ object MainActivityFolderBottomBarSpec {
       .alignItems(YogaAlign.CENTER)
       .paddingDip(YogaEdge.HORIZONTAL, 6f)
     row.child(bottomBarRoundIcon(context, colorConfig)
-                .iconRes(R.drawable.ic_arrow_back_white_48dp)
+                .iconRes(R.drawable.ic_back)
                 .onClick { activity.onFolderChange(null) })
     row.child(
       Text.create(context)

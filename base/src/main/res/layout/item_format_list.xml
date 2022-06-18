@@ -39,7 +39,7 @@
     android:padding="@dimen/spacing_xxsmall"
     android:layout_gravity="center_vertical"
     android:layout_marginEnd="@dimen/spacing_normal"
-    android:src="@drawable/ic_close_white_48dp"
+    android:src="@drawable/ic_close"
     android:visibility="gone"
     app:tint="@color/material_blue_grey_500" />
 

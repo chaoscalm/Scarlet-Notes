@@ -52,7 +52,7 @@ class EditorOptionsBottomSheet : LithoOptionBottomSheet() {
         title = R.string.note_option_font_size,
         subtitle = 0,
         content = activity.getString(R.string.note_option_font_size_subtitle, sEditorTextSize),
-        icon = R.drawable.ic_title_white_48dp,
+        icon = R.drawable.ic_title,
         listener = {
           openSheet(activity, FontSizeBottomSheet())
           refresh(activity, dialog)
@@ -74,7 +74,7 @@ class EditorOptionsBottomSheet : LithoOptionBottomSheet() {
     items.add(LithoOptionsItem(
       title = R.string.editor_option_skip_view_note,
       subtitle = R.string.editor_option_skip_view_note_details,
-      icon = R.drawable.ic_redo_history,
+      icon = R.drawable.ic_redo,
       selected = sEditorSkipNoteViewer,
       isSelectable = true,
       listener = {
@@ -85,7 +85,7 @@ class EditorOptionsBottomSheet : LithoOptionBottomSheet() {
     items.add(LithoOptionsItem(
       title = R.string.editor_option_move_checked_items,
       subtitle = R.string.editor_option_move_checked_items_description,
-      icon = R.drawable.ic_check_box_white_24dp,
+      icon = R.drawable.ic_checkbox,
       selected = sEditorMoveChecked,
       isSelectable = true,
       listener = {

@@ -15,7 +15,7 @@
     <ImageView
       android:id="@+id/no_image_icon"
       style="@style/FormatActionButtons"
-      android:src="@drawable/ic_action_no_image"
+      android:src="@drawable/ic_no_image"
       android:visibility="gone" />
 
     <TextView
@@ -28,12 +28,12 @@
     <ImageView
       android:id="@+id/action_camera"
       style="@style/FormatActionButtons"
-      android:src="@drawable/ic_image_camera" />
+      android:src="@drawable/ic_camera" />
 
     <ImageView
       android:id="@+id/action_gallery"
       style="@style/FormatActionButtons"
-      android:src="@drawable/ic_image_gallery" />
+      android:src="@drawable/ic_image" />
 
   </LinearLayout>
 

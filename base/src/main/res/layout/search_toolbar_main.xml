@@ -33,7 +33,7 @@
       android:layout_width="@dimen/icon_size_large"
       android:layout_height="@dimen/icon_size_large"
       android:padding="@dimen/spacing_xsmall"
-      android:src="@drawable/ic_close_white_48dp"
+      android:src="@drawable/ic_close"
       app:tint="@color/light_tertiary_text"
       style="@style/BorderlessBackgroundView" />
 

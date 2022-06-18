@@ -138,7 +138,7 @@
       <ImageView
         android:id="@+id/options_button"
         style="@style/NoteItemActionIcon"
-        android:src="@drawable/ic_more_horiz_white_48dp" />
+        android:src="@drawable/ic_more_dots" />
 
     </LinearLayout>
   </LinearLayout>

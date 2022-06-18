@@ -13,7 +13,7 @@
     android:layout_width="48dp"
     android:layout_height="48dp"
     android:padding="12dp"
-    android:src="@drawable/ic_format_quote_white_48dp"
+    android:src="@drawable/ic_quote"
     android:tint="@color/colorAccent"
     tools:ignore="UseAppTint" />
 

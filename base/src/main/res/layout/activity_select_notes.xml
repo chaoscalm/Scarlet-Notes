@@ -23,7 +23,7 @@
         android:layout_height="@dimen/icon_size_large"
         android:layout_marginEnd="4dp"
         android:padding="@dimen/spacing_xsmall"
-        android:src="@drawable/ic_close_white_48dp"
+        android:src="@drawable/ic_close"
         app:tint="@color/dark_tertiary_text" />
 
       <TextView
@@ -59,7 +59,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginBottom="@dimen/spacing_normal"
-      android:src="@drawable/ic_more_horiz_white_48dp"
+      android:src="@drawable/ic_more_dots"
       android:tint="@color/dark_tertiary_text"
       app:backgroundTint="@color/white"
       app:elevation="8dp"

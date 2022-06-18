@@ -13,7 +13,7 @@
     android:layout_height="@dimen/icon_size_large"
     style="@style/BorderlessBackgroundView"
     android:padding="@dimen/spacing_xsmall"
-    android:src="@drawable/ic_close_white_48dp"
+    android:src="@drawable/ic_close"
     ui:tint="@color/material_grey_600" />
 
   <TextView
