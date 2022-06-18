@@ -57,7 +57,7 @@ class HomeOptionsBottomSheet : LithoBottomSheet() {
     ))
     options.add(LithoLabelOptionsItem(
       title = R.string.nav_favourites,
-      icon = R.drawable.ic_favorite_white_48dp,
+      icon = R.drawable.ic_favorite,
       listener = {
         activity.onModeChange(HomeNavigationMode.FAVOURITE)
         dismiss()
@@ -65,7 +65,7 @@ class HomeOptionsBottomSheet : LithoBottomSheet() {
     ))
     options.add(LithoLabelOptionsItem(
       title = R.string.nav_locked,
-      icon = R.drawable.ic_action_lock,
+      icon = R.drawable.ic_lock,
       listener = {
         activity.onModeChange(HomeNavigationMode.LOCKED)
         dismiss()

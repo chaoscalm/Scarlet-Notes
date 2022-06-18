@@ -88,7 +88,7 @@ class ThemeColorPickerBottomSheet : LithoBottomSheet() {
             LithoOptionsItem(
               title = R.string.theme_use_system_theme,
               subtitle = R.string.theme_use_system_theme_details,
-              icon = R.drawable.ic_action_color,
+              icon = R.drawable.ic_color_picker,
               listener = {},
               isSelectable = true,
               selected = sThemeIsAutomatic,

@@ -36,7 +36,7 @@ class DeleteAndMoreOptionsBottomSheet : LithoOptionBottomSheet() {
     options.add(LithoOptionsItem(
       title = R.string.home_option_delete_all_tags,
       subtitle = R.string.home_option_delete_all_tags_details,
-      icon = R.drawable.ic_action_tags,
+      icon = R.drawable.ic_tag,
       listener = {
         openDeleteAllXSheet(activity, R.string.home_option_delete_all_tags_details) {
           activity.lifecycleScope.launch {
@@ -50,7 +50,7 @@ class DeleteAndMoreOptionsBottomSheet : LithoOptionBottomSheet() {
     options.add(LithoOptionsItem(
       title = R.string.home_option_delete_all_folders,
       subtitle = R.string.home_option_delete_all_folders_details,
-      icon = R.drawable.ic_folder,
+      icon = R.drawable.ic_notebook,
       listener = {
         openDeleteAllXSheet(activity, R.string.home_option_delete_all_folders_details) {
           activity.lifecycleScope.launch {

@@ -29,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/default_padding"
-        app:icon="@drawable/ic_folder"
+        app:icon="@drawable/ic_notebook"
         app:iconSize="18sp"
         app:iconTextGap="@dimen/spacing_small"
         app:iconTint="@color/light_secondary_text"

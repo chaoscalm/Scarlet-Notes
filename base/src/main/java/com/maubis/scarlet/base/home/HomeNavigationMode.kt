@@ -16,7 +16,7 @@ enum class HomeNavigationMode {
   },
   FAVOURITE {
     override val toolbarTitleResourceId: Int = R.string.nav_favourites
-    override val toolbarIconResourceId: Int = R.drawable.ic_favorite_white_48dp
+    override val toolbarIconResourceId: Int = R.drawable.ic_favorite
   },
   ARCHIVED {
     override val toolbarTitleResourceId: Int = R.string.nav_archived
@@ -24,7 +24,7 @@ enum class HomeNavigationMode {
   },
   LOCKED {
     override val toolbarTitleResourceId: Int = R.string.nav_locked
-    override val toolbarIconResourceId: Int = R.drawable.ic_action_lock
+    override val toolbarIconResourceId: Int = R.drawable.ic_lock
   };
 
   abstract val toolbarTitleResourceId: Int

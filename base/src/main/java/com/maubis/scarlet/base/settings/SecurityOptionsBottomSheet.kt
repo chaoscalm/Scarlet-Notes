@@ -44,7 +44,7 @@ class SecurityOptionsBottomSheet : LithoOptionBottomSheet() {
           R.string.security_option_set_pin_code_configure
         },
         subtitle = R.string.security_option_set_pin_code_subtitle,
-        icon = R.drawable.ic_option_security,
+        icon = R.drawable.ic_pincode,
         listener = {
           if (isPinCodeConfigured()) {
             openResetPinDialog(dialog)
@@ -58,7 +58,7 @@ class SecurityOptionsBottomSheet : LithoOptionBottomSheet() {
       LithoOptionsItem(
         title = R.string.security_option_lock_app,
         subtitle = R.string.security_option_lock_app_details,
-        icon = R.drawable.ic_apps_white_48dp,
+        icon = R.drawable.ic_app_lock,
         listener = {
           PincodeBottomSheet.openForVerification(activity,
             onVerifySuccess = {
@@ -76,7 +76,7 @@ class SecurityOptionsBottomSheet : LithoOptionBottomSheet() {
       LithoOptionsItem(
         title = R.string.security_option_ask_pin_always,
         subtitle = R.string.security_option_ask_pin_always_details,
-        icon = R.drawable.ic_action_grid,
+        icon = R.drawable.ic_lock,
         listener = {
           PincodeBottomSheet.openForVerification(activity,
             onVerifySuccess = {
@@ -94,7 +94,7 @@ class SecurityOptionsBottomSheet : LithoOptionBottomSheet() {
       LithoOptionsItem(
         title = R.string.security_option_biometrics,
         subtitle = R.string.security_option_biometrics_subtitle,
-        icon = R.drawable.ic_option_fingerprint,
+        icon = R.drawable.ic_fingerprint,
         listener = {
           PincodeBottomSheet.openForVerification(activity,
             onVerifySuccess = {

@@ -40,7 +40,7 @@ class EditorOptionsBottomSheet : LithoOptionBottomSheet() {
           true -> R.string.ui_options_note_background_color_settings_note
           false -> R.string.ui_options_note_background_color_settings_theme
         },
-        icon = R.drawable.ic_action_color,
+        icon = R.drawable.ic_color_picker,
         listener = {
           sUIUseNoteColorAsBackground = !sUIUseNoteColorAsBackground
           refresh(activity, dialog)

@@ -43,7 +43,7 @@ class UIOptionsBottomSheet : LithoOptionBottomSheet() {
     options.add(LithoOptionsItem(
       title = R.string.note_option_default_color,
       subtitle = R.string.note_option_default_color_subtitle,
-      icon = R.drawable.ic_action_color,
+      icon = R.drawable.ic_color_picker,
       listener = {
         val config = ColorPickerDefaultController(
           title = R.string.note_option_default_color,

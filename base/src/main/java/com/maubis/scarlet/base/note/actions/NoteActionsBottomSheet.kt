@@ -172,7 +172,7 @@ class NoteActionsBottomSheet : ThemedBottomSheetFragment() {
     val actions = ArrayList<NoteActionItem>()
     actions.add(NoteActionItem(
       title = R.string.folder_option_change_notebook,
-      icon = R.drawable.ic_folder,
+      icon = R.drawable.ic_notebook,
       listener = {
         FolderChooserBottomSheet.openSheet(activity, note)
         dismiss()
@@ -180,7 +180,7 @@ class NoteActionsBottomSheet : ThemedBottomSheetFragment() {
     ))
     actions.add(NoteActionItem(
       title = R.string.choose_note_color,
-      icon = R.drawable.ic_action_color,
+      icon = R.drawable.ic_color_picker,
       listener = {
         val config = ColorPickerDefaultController(
           title = R.string.choose_note_color,
@@ -199,7 +199,7 @@ class NoteActionsBottomSheet : ThemedBottomSheetFragment() {
     ))
     actions.add(NoteActionItem(
       title = R.string.change_tags,
-      icon = R.drawable.ic_action_tags,
+      icon = R.drawable.ic_tag,
       listener = {
         TagChooserBottomSheet.openSheet(activity, note)
         dismiss()
@@ -208,7 +208,7 @@ class NoteActionsBottomSheet : ThemedBottomSheetFragment() {
     actions.add(
       NoteActionItem(
         title = R.string.not_favourite_note,
-        icon = R.drawable.ic_favorite_white_48dp,
+        icon = R.drawable.ic_favorite_outline,
         visible = note.state == NoteState.FAVOURITE
       ) {
         activity.updateNoteState(note, NoteState.DEFAULT)
@@ -217,7 +217,7 @@ class NoteActionsBottomSheet : ThemedBottomSheetFragment() {
     actions.add(
       NoteActionItem(
         title = R.string.favourite_note,
-        icon = R.drawable.ic_favorite_border_white_48dp,
+        icon = R.drawable.ic_favorite,
         visible = note.state != NoteState.FAVOURITE,
         listener = {
           activity.updateNoteState(note, NoteState.FAVOURITE)
@@ -237,7 +237,7 @@ class NoteActionsBottomSheet : ThemedBottomSheetFragment() {
     actions.add(
       NoteActionItem(
         title = R.string.lock_note,
-        icon = R.drawable.ic_action_lock,
+        icon = R.drawable.ic_lock,
         visible = !note.locked,
         listener = {
           note.locked = true
@@ -248,7 +248,7 @@ class NoteActionsBottomSheet : ThemedBottomSheetFragment() {
     actions.add(
       NoteActionItem(
         title = R.string.unlock_note,
-        icon = R.drawable.ic_action_unlock,
+        icon = R.drawable.ic_unlock,
         visible = note.locked,
         listener = {
           PincodeBottomSheet.openForUnlock(activity,
@@ -273,7 +273,7 @@ class NoteActionsBottomSheet : ThemedBottomSheetFragment() {
     actions.add(
       NoteActionItem(
         title = R.string.share_images,
-        icon = R.drawable.icon_share_image,
+        icon = R.drawable.ic_share_images,
         visible = note.hasImages(),
         invalid = activity.lockedContentIsHidden() && note.locked
       ) {
@@ -283,7 +283,7 @@ class NoteActionsBottomSheet : ThemedBottomSheetFragment() {
     actions.add(
       NoteActionItem(
         title = R.string.open_in_notification,
-        icon = R.drawable.ic_action_notification,
+        icon = R.drawable.ic_notification,
         invalid = activity.lockedContentIsHidden() && note.locked
       ) {
         val handler = NotificationHandler(requireContext())
@@ -293,7 +293,7 @@ class NoteActionsBottomSheet : ThemedBottomSheetFragment() {
     actions.add(
       NoteActionItem(
         title = R.string.reminder,
-        icon = R.drawable.ic_action_reminder_icon,
+        icon = R.drawable.ic_reminder,
         invalid = activity.lockedContentIsHidden() && note.locked
       ) {
         ReminderBottomSheet.openSheet(activity, note)
@@ -302,7 +302,7 @@ class NoteActionsBottomSheet : ThemedBottomSheetFragment() {
     actions.add(
       NoteActionItem(
         title = R.string.pin_to_launcher,
-        icon = R.drawable.icon_shortcut,
+        icon = R.drawable.ic_launcher_shortcut,
         visible = OsVersionUtils.canAddLauncherShortcuts(),
         invalid = activity.lockedContentIsHidden() && note.locked
       ) {

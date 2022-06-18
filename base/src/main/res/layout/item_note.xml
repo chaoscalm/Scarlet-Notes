@@ -73,7 +73,7 @@
         android:layout_width="@dimen/spacing_normal"
         android:layout_height="@dimen/spacing_normal"
         android:alpha="0.7"
-        android:src="@drawable/ic_action_reminder_icon"
+        android:src="@drawable/ic_reminder"
         android:visibility="gone" />
 
       <ImageView
@@ -89,7 +89,7 @@
         android:layout_width="@dimen/spacing_normal"
         android:layout_height="@dimen/spacing_normal"
         android:alpha="0.7"
-        android:src="@drawable/ic_action_lock"
+        android:src="@drawable/ic_lock"
         android:visibility="gone" />
 
     </LinearLayout>

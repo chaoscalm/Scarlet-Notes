@@ -47,14 +47,14 @@ object FolderItemLayoutSpec {
     val typeface: Typeface
     when (option.isSelected) {
       true -> {
-        icon = R.drawable.ic_folder
+        icon = R.drawable.ic_notebook
         bgColor = selectedColor
         bgAlpha = 200
         textColor = selectedColor
         typeface = appTypeface.subHeading()
       }
       false -> {
-        icon = R.drawable.ic_folder
+        icon = R.drawable.ic_notebook
         bgColor = titleColor
         bgAlpha = 15
         textColor = titleColor

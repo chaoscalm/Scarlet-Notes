@@ -45,7 +45,7 @@ class WidgetOptionsBottomSheet : LithoOptionBottomSheet() {
       LithoOptionsItem(
         title = R.string.widget_option_show_locked_notes,
         subtitle = R.string.widget_option_show_locked_notes_details,
-        icon = R.drawable.ic_action_lock,
+        icon = R.drawable.ic_lock,
         listener = {
           sWidgetShowLockedNotes = !sWidgetShowLockedNotes
           notifyWidgetConfigChanged(activity)
@@ -85,7 +85,7 @@ class WidgetOptionsBottomSheet : LithoOptionBottomSheet() {
       LithoOptionsItem(
         title = R.string.widget_option_background_color,
         subtitle = R.string.widget_option_background_color_details,
-        icon = R.drawable.ic_action_color,
+        icon = R.drawable.ic_color_picker,
         listener = {
           openSheet(activity, ColorPickerBottomSheet().apply {
             config = ColorPickerDefaultController(

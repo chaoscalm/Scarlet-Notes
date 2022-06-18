@@ -82,7 +82,7 @@ open class NoteRecyclerViewHolderBase(context: Context, view: View) : RecyclerVi
     when (item.note.state) {
       NoteState.FAVOURITE -> {
         stateIndicator.visibility = VISIBLE
-        stateIndicator.setImageResource(R.drawable.ic_favorite_white_48dp)
+        stateIndicator.setImageResource(R.drawable.ic_favorite)
       }
       NoteState.ARCHIVED -> {
         stateIndicator.visibility = VISIBLE

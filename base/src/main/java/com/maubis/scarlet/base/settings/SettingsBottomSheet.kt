@@ -43,7 +43,7 @@ class SettingsBottomSheet : LithoOptionBottomSheet() {
     options.add(LithoOptionsItem(
       title = R.string.home_option_security,
       subtitle = R.string.home_option_security_subtitle,
-      icon = R.drawable.ic_option_security,
+      icon = R.drawable.ic_lock,
       listener = {
         openSheet(activity, SecurityOptionsBottomSheet())
       }

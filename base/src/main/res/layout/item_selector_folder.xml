@@ -16,7 +16,7 @@
     android:layout_height="@dimen/icon_size_large"
     android:layout_gravity="center_vertical"
     android:padding="@dimen/spacing_small"
-    android:src="@drawable/ic_folder" />
+    android:src="@drawable/ic_notebook" />
 
   <TextView
     android:id="@+id/folder_title"

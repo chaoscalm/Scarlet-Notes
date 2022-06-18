@@ -43,14 +43,14 @@ object TagItemLayoutSpec {
     val typeface: Typeface
     when (tagItem.isSelected) {
       true -> {
-        icon = R.drawable.ic_action_label
+        icon = R.drawable.ic_tag
         bgColor = selectedColor
         bgAlpha = 200
         textColor = selectedColor
         typeface = ScarletApp.appTypeface.subHeading()
       }
       false -> {
-        icon = R.drawable.ic_action_label_unselected
+        icon = R.drawable.ic_tag_outline
         bgColor = titleColor
         bgAlpha = 15
         textColor = titleColor

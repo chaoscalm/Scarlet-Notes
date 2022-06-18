@@ -52,7 +52,7 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
     options.add(
       GridSectionOptionItem(
         label = R.string.not_favourite_note,
-        icon = R.drawable.ic_favorite_white_48dp,
+        icon = R.drawable.ic_favorite,
         listener = lockAwareFunctionRunner(activity) {
           activity.forEachNote {
             it.updateState(NoteState.DEFAULT, activity)
@@ -64,7 +64,7 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
     options.add(
       GridSectionOptionItem(
         label = R.string.favourite_note,
-        icon = R.drawable.ic_favorite_border_white_48dp,
+        icon = R.drawable.ic_favorite_outline,
         listener = lockAwareFunctionRunner(activity) {
           activity.forEachNote {
             it.updateState(NoteState.FAVOURITE, activity)
@@ -140,7 +140,7 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
 
     options.add(GridSectionOptionItem(
       label = R.string.change_tags,
-      icon = R.drawable.ic_action_tags,
+      icon = R.drawable.ic_tag,
       listener = lockAwareFunctionRunner(activity) {
         openSheet(activity, SelectedTagChooserBottomSheet().apply {
           onActionListener = { tag, selectTag ->
@@ -160,7 +160,7 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
 
     options.add(GridSectionOptionItem(
       label = R.string.folder_option_change_notebook,
-      icon = R.drawable.ic_folder,
+      icon = R.drawable.ic_notebook,
       listener = lockAwareFunctionRunner(activity) {
         openSheet(activity, MultipleNotesFolderChooserBottomSheet().apply {
           this.onActionListener = { folder, selectFolder ->
@@ -181,7 +181,7 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
     options.add(
       GridSectionOptionItem(
         label = R.string.lock_note,
-        icon = R.drawable.ic_action_lock,
+        icon = R.drawable.ic_lock,
         listener = lockAwareFunctionRunner(activity) {
           activity.forEachNote {
             it.locked = true
@@ -194,7 +194,7 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
     options.add(
       GridSectionOptionItem(
         label = R.string.unlock_note,
-        icon = R.drawable.ic_action_unlock,
+        icon = R.drawable.ic_unlock,
         listener = lockAwareFunctionRunner(activity) {
           activity.forEachNote {
             it.locked = false

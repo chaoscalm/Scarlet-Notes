@@ -102,7 +102,7 @@ class ExportNotesBottomSheet : LithoBottomSheet() {
       LithoOptionsItem(
         title = R.string.import_export_locked,
         subtitle = R.string.import_export_locked_details,
-        icon = R.drawable.ic_action_lock,
+        icon = R.drawable.ic_lock,
         listener = { sBackupLockedNotes = !sBackupLockedNotes },
         isSelectable = true,
         selected = sBackupLockedNotes
