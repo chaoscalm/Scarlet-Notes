@@ -19,7 +19,7 @@ class SettingsBottomSheet : LithoOptionBottomSheet() {
     options.add(LithoOptionsItem(
       title = R.string.home_option_ui_experience,
       subtitle = R.string.home_option_ui_experience_subtitle,
-      icon = R.drawable.ic_action_grid,
+      icon = R.drawable.ic_staggered_grid,
       listener = {
         openSheet(activity, UIOptionsBottomSheet())
       }
@@ -51,7 +51,7 @@ class SettingsBottomSheet : LithoOptionBottomSheet() {
     options.add(LithoOptionsItem(
       title = R.string.home_option_widget_options_title,
       subtitle = R.string.home_option_widget_options_description,
-      icon = R.drawable.icon_widget,
+      icon = R.drawable.ic_widgets,
       listener = {
         openSheet(activity, WidgetOptionsBottomSheet())
       }

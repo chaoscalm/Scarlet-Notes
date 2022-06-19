@@ -69,7 +69,7 @@ class SecurityOptionsBottomSheet : LithoOptionBottomSheet() {
         },
         isSelectable = true,
         selected = sSecurityAppLockEnabled,
-        actionIcon = R.drawable.ic_done_white_48dp
+        actionIcon = R.drawable.ic_selected
       ))
 
     options.add(
@@ -87,7 +87,7 @@ class SecurityOptionsBottomSheet : LithoOptionBottomSheet() {
         },
         isSelectable = true,
         selected = sSecurityAskPinAlways,
-        actionIcon = R.drawable.ic_done_white_48dp
+        actionIcon = R.drawable.ic_selected
       ))
 
     options.add(

@@ -22,7 +22,7 @@ class DeleteAndMoreOptionsBottomSheet : LithoOptionBottomSheet() {
     options.add(LithoOptionsItem(
       title = R.string.home_option_delete_all_notes,
       subtitle = R.string.home_option_delete_all_notes_details,
-      icon = R.drawable.ic_note_white_48dp,
+      icon = R.drawable.ic_note,
       listener = {
         openDeleteAllXSheet(activity, R.string.home_option_delete_all_notes_details) {
           activity.lifecycleScope.launch {

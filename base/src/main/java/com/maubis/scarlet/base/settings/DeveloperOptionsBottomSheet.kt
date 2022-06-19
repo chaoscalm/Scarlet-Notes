@@ -29,7 +29,7 @@ class DeveloperOptionsBottomSheet : LithoOptionBottomSheet() {
       LithoOptionsItem(
         title = R.string.internal_settings_enable_fullscreen_title,
         subtitle = R.string.internal_settings_enable_fullscreen_description,
-        icon = R.drawable.ic_action_grid,
+        icon = R.drawable.ic_staggered_grid,
         listener = {
           sInternalEnableFullScreen = !sInternalEnableFullScreen
           refresh(activity, dialog)

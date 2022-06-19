@@ -29,7 +29,7 @@ object CounterChooserSpec {
       .alignItems(YogaAlign.CENTER)
       .child(EmptySpec.create(context).flexGrow(1f))
       .child(bottomBarRoundIcon(context, ToolbarColorConfig())
-               .iconRes(R.drawable.icon_less_counter)
+               .iconRes(R.drawable.ic_size_decrease)
                .onClick { onValueChange(max(value - 1, minValue)) })
       .child(
         Text.create(context)
@@ -39,7 +39,7 @@ object CounterChooserSpec {
           .paddingDip(YogaEdge.HORIZONTAL, 12f)
           .textColor(appTheme.get(ThemeColorType.TERTIARY_TEXT)))
       .child(bottomBarRoundIcon(context, ToolbarColorConfig())
-               .iconRes(R.drawable.icon_more_counter)
+               .iconRes(R.drawable.ic_size_increase)
                .onClick { onValueChange(min(value + 1, maxValue)) })
       .child(EmptySpec.create(context).flexGrow(1f))
     return row.build()

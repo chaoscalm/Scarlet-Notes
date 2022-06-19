@@ -8,4 +8,4 @@
   android:layout_gravity="center_vertical"
   android:paddingStart="4dp"
   android:paddingEnd="12dp"
-  android:src="@drawable/icon_drag_indicator" />
+  android:src="@drawable/ic_drag_handle" />

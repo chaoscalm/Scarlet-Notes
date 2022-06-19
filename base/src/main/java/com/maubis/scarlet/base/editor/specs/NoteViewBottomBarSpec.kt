@@ -30,7 +30,7 @@ object NoteViewBottomBarSpec {
       .paddingDip(YogaEdge.HORIZONTAL, 4f)
       .alignItems(YogaAlign.CENTER)
     row.child(bottomBarRoundIcon(context, colorConfig)
-                .iconRes(R.drawable.ic_apps_white_48dp)
+                .iconRes(R.drawable.ic_bottom_menu)
                 .onClick { activity.openMoreOptions() })
     row.child(EmptySpec.create(context).heightDip(1f).flexGrow(1f))
 

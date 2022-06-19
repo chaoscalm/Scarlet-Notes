@@ -35,8 +35,8 @@ object ColorPickerItemSpec {
       .child(RoundIcon.create(context)
                .iconRes(
                  when {
-                   isSelected -> R.drawable.ic_done_white_48dp
-                   color == Color.TRANSPARENT -> R.drawable.icon_no_color
+                   isSelected -> R.drawable.ic_selected
+                   color == Color.TRANSPARENT -> R.drawable.ic_no_color
                    else -> R.drawable.ic_empty
                  })
                .bgColor(color)

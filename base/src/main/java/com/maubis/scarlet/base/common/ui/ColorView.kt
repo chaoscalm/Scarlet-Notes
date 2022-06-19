@@ -48,7 +48,7 @@ class ColorView : LinearLayout {
   }
 
   fun setColor(color: Int, selected: Boolean) {
-    this.icon.setImageResource(if (selected) R.drawable.ic_done_white_48dp else 0)
+    this.icon.setImageResource(if (selected) R.drawable.ic_selected else 0)
     this.icon.background = CircleDrawable(color)
     this.icon.setColorFilter(Color.WHITE)
   }

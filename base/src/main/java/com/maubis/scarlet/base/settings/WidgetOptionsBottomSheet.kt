@@ -71,7 +71,7 @@ class WidgetOptionsBottomSheet : LithoOptionBottomSheet() {
       LithoOptionsItem(
         title = R.string.widget_option_show_toolbar,
         subtitle = R.string.widget_option_show_toolbar_details,
-        icon = R.drawable.ic_action_grid,
+        icon = R.drawable.ic_staggered_grid,
         listener = {
           sWidgetShowToolbar = !sWidgetShowToolbar
           notifyAllNotesConfigChanged(activity)

@@ -93,7 +93,7 @@ class ExportNotesBottomSheet : LithoBottomSheet() {
       LithoOptionsItem(
         title = R.string.home_option_export_markdown,
         subtitle = R.string.home_option_export_markdown_subtitle,
-        icon = R.drawable.ic_markdown_logo,
+        icon = R.drawable.ic_markdown,
         listener = { sBackupMarkdown = !sBackupMarkdown },
         isSelectable = true,
         selected = sBackupMarkdown

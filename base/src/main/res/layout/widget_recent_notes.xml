@@ -51,7 +51,7 @@
         android:id="@+id/add_list"
         android:layout_width="@dimen/icon_size_xlarge"
         android:layout_height="@dimen/icon_size_xlarge"
-        android:padding="@dimen/spacing_xsmall"
+        android:padding="8dp"
         android:src="@drawable/ic_list_white_48dp"
         android:tint="@color/white"
         tools:ignore="UseAppTint" />
@@ -60,8 +60,8 @@
         android:id="@+id/add_note"
         android:layout_width="@dimen/icon_size_xlarge"
         android:layout_height="@dimen/icon_size_xlarge"
-        android:padding="@dimen/spacing_xsmall"
-        android:src="@drawable/ic_add_new_note"
+        android:padding="12dp"
+        android:src="@drawable/icon_add_note"
         android:tint="@color/white"
         tools:ignore="UseAppTint" />
     </LinearLayout>

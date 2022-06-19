@@ -41,7 +41,7 @@ object MainActivityBottomBarSpec {
       .alignItems(YogaAlign.CENTER)
       .paddingDip(YogaEdge.HORIZONTAL, 6f)
     row.child(bottomBarRoundIcon(context, colorConfig)
-                .iconRes(R.drawable.ic_apps_white_48dp)
+                .iconRes(R.drawable.ic_bottom_menu)
                 .onClick {
                   openSheet(activity, HomeOptionsBottomSheet())
                 })

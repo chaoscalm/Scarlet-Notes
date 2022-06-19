@@ -78,7 +78,7 @@ object OptionItemLayoutSpec {
 
     if (option.isSelectable) {
       row.child(RoundIcon.create(context)
-                  .iconRes(if (option.actionIcon == 0) R.drawable.ic_done_white_48dp else option.actionIcon)
+                  .iconRes(if (option.actionIcon == 0) R.drawable.ic_selected else option.actionIcon)
                   .bgColor(if (option.selected) selectedColor else titleColor)
                   .bgAlpha(if (option.selected) 200 else 25)
                   .iconAlpha(if (option.selected) 1f else 0.6f)

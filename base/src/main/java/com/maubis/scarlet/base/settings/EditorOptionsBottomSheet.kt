@@ -62,7 +62,7 @@ class EditorOptionsBottomSheet : LithoOptionBottomSheet() {
     items.add(LithoOptionsItem(
       title = R.string.editor_option_enable_live_markdown,
       subtitle = R.string.editor_option_enable_live_markdown_description,
-      icon = R.drawable.icon_realtime_markdown,
+      icon = R.drawable.ic_realtime_formatting,
       selected = sEditorLiveMarkdown,
       isSelectable = true,
       listener = {

@@ -27,7 +27,7 @@ class UIOptionsBottomSheet : LithoOptionBottomSheet() {
     options.add(LithoOptionsItem(
       title = R.string.home_option_theme_color,
       subtitle = R.string.home_option_theme_color_subtitle,
-      icon = if (appTheme.isNightTheme()) R.drawable.night_mode_white_48dp else R.drawable.ic_action_day_mode,
+      icon = R.drawable.ic_day_night,
       listener = {
           openSheet(activity, ThemeColorPickerBottomSheet().apply {
               this.onThemeChange = { theme ->
@@ -61,7 +61,7 @@ class UIOptionsBottomSheet : LithoOptionBottomSheet() {
       LithoOptionsItem(
         title = R.string.home_option_enable_list_view,
         subtitle = R.string.home_option_enable_list_view_subtitle,
-        icon = R.drawable.ic_action_list,
+        icon = R.drawable.ic_list_layout,
         listener = {
           sUIUseGridView = false
           activity.notifyAdapterExtraChanged()
@@ -73,7 +73,7 @@ class UIOptionsBottomSheet : LithoOptionBottomSheet() {
       LithoOptionsItem(
         title = R.string.home_option_enable_grid_view,
         subtitle = R.string.home_option_enable_grid_view_subtitle,
-        icon = R.drawable.ic_action_grid,
+        icon = R.drawable.ic_staggered_grid,
         listener = {
           sUIUseGridView = true
           activity.notifyAdapterExtraChanged()

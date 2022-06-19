@@ -45,7 +45,7 @@ object ChooseOptionItemLayoutSpec {
           .textColor(titleColor)
           .flexGrow(1f))
       .child(RoundIcon.create(context)
-               .iconRes(R.drawable.ic_done_white_48dp)
+               .iconRes(R.drawable.ic_selected)
                .bgColor(if (option.selected) selectedColor else titleColor)
                .bgAlpha(if (option.selected) 200 else 25)
                .iconAlpha(if (option.selected) 1f else 0.6f)

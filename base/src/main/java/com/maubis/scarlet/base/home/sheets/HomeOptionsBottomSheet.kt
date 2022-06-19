@@ -49,7 +49,7 @@ class HomeOptionsBottomSheet : LithoBottomSheet() {
     val options = ArrayList<LithoLabelOptionsItem>()
     options.add(LithoLabelOptionsItem(
       title = R.string.nav_home,
-      icon = R.drawable.ic_home_white_48dp,
+      icon = R.drawable.ic_home,
       listener = {
         activity.onModeChange(HomeNavigationMode.DEFAULT)
         dismiss()

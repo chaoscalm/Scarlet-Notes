@@ -244,7 +244,7 @@ class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
 
     options.add(GridSectionOptionItem(
       label = R.string.merge_notes,
-      icon = R.drawable.ic_merge_note,
+      icon = R.drawable.ic_merge,
       listener = lockAwareFunctionRunner(activity) {
         val selectedNotes = activity.getOrderedSelectedNotes().toMutableList()
         if (selectedNotes.isEmpty()) {

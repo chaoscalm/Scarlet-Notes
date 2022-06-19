@@ -42,10 +42,10 @@ object ThemeColorPickerItemSpec {
       .flexGrow(1f)
       .isClickDisabled(true)
     when (isSelected) {
-      true -> icon.iconRes(R.drawable.ic_done_white_48dp)
+      true -> icon.iconRes(R.drawable.ic_selected)
         .bgColorRes(R.color.colorAccent)
         .iconColor(Color.WHITE)
-      false -> icon.iconRes(R.drawable.icon_realtime_markdown)
+      false -> icon.iconRes(R.drawable.ic_realtime_formatting)
         .bgColorRes(theme.background)
         .iconColorRes(theme.primaryText)
     }
@@ -112,7 +112,7 @@ class ThemeColorPickerBottomSheet : LithoBottomSheet() {
             LithoOptionsItem(
               title = R.string.theme_dark_notes,
               subtitle = R.string.theme_dark_notes_details,
-              icon = R.drawable.night_mode_white_48dp,
+              icon = R.drawable.ic_dark_mode,
               listener = {},
               isSelectable = true,
               selected = sThemeDarkenCustomColors,
