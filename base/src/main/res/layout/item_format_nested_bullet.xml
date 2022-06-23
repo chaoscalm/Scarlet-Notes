@@ -15,7 +15,7 @@
     android:layout_gravity="top"
     android:layout_marginTop="12dp"
     android:layout_marginStart="@dimen/icon_size_slarge"
-    android:src="@drawable/icon_bullet_2"
+    android:src="@drawable/bullet_2"
     app:tint="@color/material_blue_grey_500" />
 
   <TextView

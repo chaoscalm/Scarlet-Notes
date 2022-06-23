@@ -57,7 +57,7 @@ object MainActivityBottomBarSpec {
     else {
       if (!isInsideFolder) {
         row.child(bottomBarRoundIcon(context, colorConfig)
-          .iconRes(R.drawable.icon_add_notebook)
+          .iconRes(R.drawable.ic_add_folder)
           .onClick {
             CreateOrEditFolderBottomSheet.openSheet(activity, Folder(sNoteDefaultColor)) {
               activity.refreshList()
@@ -65,10 +65,10 @@ object MainActivityBottomBarSpec {
           })
       }
       row.child(bottomBarRoundIcon(context, colorConfig)
-          .iconRes(R.drawable.icon_add_list)
+          .iconRes(R.drawable.ic_add_list)
           .onClick { activity.launchNewChecklistNoteEditor() })
       row.child(bottomBarRoundIcon(context, colorConfig)
-          .iconRes(R.drawable.icon_add_note)
+          .iconRes(R.drawable.ic_add_note)
           .onClick { activity.launchNewNoteEditor() })
     }
     return bottomBar(context, row.build(), colorConfig).build()

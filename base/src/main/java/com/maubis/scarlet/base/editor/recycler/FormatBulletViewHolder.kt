@@ -24,15 +24,15 @@ class FormatBulletViewHolder(context: Context, view: View) : FormatViewHolderBas
 
     when (data.type) {
       FormatType.BULLET_1 -> {
-        bulletIcon.setImageResource(R.drawable.icon_bullet_1)
+        bulletIcon.setImageResource(R.drawable.bullet_1)
         extraMargin?.isVisible = false
       }
       FormatType.BULLET_2 -> {
-        bulletIcon.setImageResource(R.drawable.icon_bullet_2)
+        bulletIcon.setImageResource(R.drawable.bullet_2)
         extraMargin?.isVisible = false
       }
       FormatType.BULLET_3 -> {
-        bulletIcon.setImageResource(R.drawable.icon_bullet_3)
+        bulletIcon.setImageResource(R.drawable.bullet_3)
         extraMargin?.isVisible = true
       }
       else -> {} // Ignore other cases

@@ -38,7 +38,7 @@ class SelectedTagChooserBottomSheet : LithoBottomSheet() {
     val addTag = LithoOptionsItem(
       title = R.string.tag_sheet_new_tag_button,
       subtitle = 0,
-      icon = R.drawable.icon_add_note,
+      icon = R.drawable.ic_add_note,
       listener = {
           CreateOrEditTagBottomSheet.openSheet(activity, Tag()) { tag ->
             onActionListener(tag, true)

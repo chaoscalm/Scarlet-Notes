@@ -123,7 +123,7 @@ abstract class FolderChooserBottomSheetBase : LithoBottomSheet() {
     val addTag = LithoOptionsItem(
       title = R.string.folder_sheet_add_note,
       subtitle = 0,
-      icon = R.drawable.icon_add_notebook,
+      icon = R.drawable.ic_add_folder,
       listener = {
         CreateOrEditFolderBottomSheet.openSheet(activity, Folder(sNoteDefaultColor)) { folder ->
           onFolderSelected(folder)

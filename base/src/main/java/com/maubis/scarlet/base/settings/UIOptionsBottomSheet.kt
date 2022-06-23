@@ -94,7 +94,7 @@ class UIOptionsBottomSheet : LithoOptionBottomSheet() {
       title = R.string.note_option_number_lines,
       subtitle = 0,
       content = activity.getString(R.string.note_option_number_lines_subtitle, sNoteItemLineCount),
-      icon = R.drawable.ic_action_list,
+      icon = R.drawable.ic_text_content,
       listener = {
         openSheet(activity, LineCountBottomSheet())
       }

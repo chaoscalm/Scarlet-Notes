@@ -45,14 +45,14 @@
         android:maxLines="1"
         android:text="@string/widget_recent_notes"
         android:textColor="@color/light_secondary_text"
-        android:textSize="@dimen/font_size_xlarge" />
+        android:textSize="@dimen/font_size_large" />
 
       <ImageView
         android:id="@+id/add_list"
         android:layout_width="@dimen/icon_size_xlarge"
         android:layout_height="@dimen/icon_size_xlarge"
-        android:padding="8dp"
-        android:src="@drawable/ic_list_white_48dp"
+        android:padding="12dp"
+        android:src="@drawable/ic_add_list"
         android:tint="@color/white"
         tools:ignore="UseAppTint" />
 
@@ -61,7 +61,7 @@
         android:layout_width="@dimen/icon_size_xlarge"
         android:layout_height="@dimen/icon_size_xlarge"
         android:padding="12dp"
-        android:src="@drawable/icon_add_note"
+        android:src="@drawable/ic_add_note"
         android:tint="@color/white"
         tools:ignore="UseAppTint" />
     </LinearLayout>

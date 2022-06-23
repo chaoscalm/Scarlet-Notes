@@ -13,17 +13,7 @@
     android:layout_width="48dp"
     android:layout_height="48dp"
     android:padding="12dp"
-    android:src="@drawable/ic_quote"
-    android:tint="@color/colorAccent"
-    tools:ignore="UseAppTint" />
-
-  <ImageView
-    android:id="@+id/add_note"
-    android:layout_width="48dp"
-    android:layout_height="48dp"
-    android:padding="12dp"
-    android:src="@drawable/ic_note"
-    android:tint="@color/dark_tertiary_text"
+    android:src="@mipmap/ic_launcher"
     tools:ignore="UseAppTint" />
 
   <ImageView
@@ -31,8 +21,16 @@
     android:layout_width="48dp"
     android:layout_height="48dp"
     android:padding="12dp"
-    android:src="@drawable/ic_list_white_48dp"
+    android:src="@drawable/ic_add_list"
     android:tint="@color/dark_tertiary_text"
     tools:ignore="UseAppTint" />
 
+  <ImageView
+    android:id="@+id/add_note"
+    android:layout_width="48dp"
+    android:layout_height="48dp"
+    android:padding="12dp"
+    android:src="@drawable/ic_add_note"
+    android:tint="@color/dark_tertiary_text"
+    tools:ignore="UseAppTint" />
 </LinearLayout>

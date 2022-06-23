@@ -6,7 +6,7 @@
   <shortcut
     android:shortcutId="create_note"
     android:enabled="true"
-    android:icon="@drawable/ic_shortcut_note_add"
+    android:icon="@drawable/ic_shortcut_add_note"
     android:shortcutShortLabel="@string/shortcut_add_note"
     android:shortcutLongLabel="@string/shortcut_add_note"
     android:shortcutDisabledMessage="@string/main_no_notes">
@@ -20,7 +20,7 @@
   <shortcut
     android:shortcutId="create_list"
     android:enabled="true"
-    android:icon="@drawable/ic_shortcut_format_list_bulleted"
+    android:icon="@drawable/ic_shortcut_add_list"
     android:shortcutShortLabel="@string/shortcut_add_list"
     android:shortcutLongLabel="@string/shortcut_add_list"
     android:shortcutDisabledMessage="@string/main_no_notes">
