@@ -219,7 +219,7 @@ class PincodeBottomSheet : LithoBottomSheet() {
       openSheet(activity, PincodeBottomSheet().apply {
         data = PincodeSheetData(
           title = R.string.security_sheet_enter_pin_to_unlock_title,
-          biometricTitle = R.string.biometric_prompt_unlock_note,
+          biometricTitle = R.string.biometric_prompt_unlock,
           actionTitle = R.string.security_sheet_button_unlock,
           onSuccess = onUnlockSuccess,
           onFailure = onUnlockFailure,
