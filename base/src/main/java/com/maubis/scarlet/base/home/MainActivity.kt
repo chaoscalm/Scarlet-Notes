@@ -260,12 +260,12 @@ class MainActivity : SecuredActivity(), INoteActionsActivity {
           FolderRecyclerItem(
             context = this,
             folder = folder,
+            notesCount = allMatchingNotes.count { it.folder == folder.uuid },
             click = { onFolderChange(folder) },
             longClick = {
               CreateOrEditFolderBottomSheet.openSheet(this, folder) { refreshList() }
-            },
-            selected = state.currentFolder?.uuid == folder.uuid,
-            notesCount = allMatchingNotes.count { it.folder == folder.uuid })
+            }
+          )
         }
     )
     allItems.addAll(excludeNotesInFolders(allMatchingNotes).map { NoteRecyclerItem(this, it) })
