@@ -11,6 +11,7 @@ import com.maubis.scarlet.base.common.utils.ImageCache
 import com.maubis.scarlet.base.common.utils.ImageStore
 import com.maubis.scarlet.base.database.ApplicationData
 import com.maubis.scarlet.base.reminders.ReminderJobCreator
+import com.maubis.scarlet.base.settings.AppPreferences
 
 class ScarletApp : Application() {
   override fun onCreate() {
@@ -18,6 +19,7 @@ class ScarletApp : Application() {
     data = ApplicationData(this)
 
     appPreferences = getSharedPreferences("scarlet_prefs", MODE_PRIVATE)
+    preferences = AppPreferences(appPreferences)
 
     SoLoader.init(this, false)
     try {
@@ -40,6 +42,7 @@ class ScarletApp : Application() {
     lateinit var imageStorage: ImageStore
 
     lateinit var appPreferences: SharedPreferences
+    lateinit var preferences: AppPreferences
 
     lateinit var appTheme: ThemeManager
     lateinit var appTypeface: TypefaceController

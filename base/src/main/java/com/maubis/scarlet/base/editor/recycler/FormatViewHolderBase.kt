@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.github.bijoysingh.starter.recyclerview.RecyclerViewHolder
 import com.maubis.scarlet.base.R
+import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.common.ui.Theme
@@ -18,13 +19,12 @@ import com.maubis.scarlet.base.editor.Format
 import com.maubis.scarlet.base.editor.FormatType
 import com.maubis.scarlet.base.editor.INTENT_KEY_NOTE_ID
 import com.maubis.scarlet.base.editor.ViewNoteActivity
-import com.maubis.scarlet.base.settings.STORE_KEY_TEXT_SIZE
-import com.maubis.scarlet.base.settings.TEXT_SIZE_DEFAULT
-import com.maubis.scarlet.base.settings.sNoteDefaultColor
+import com.maubis.scarlet.base.settings.AppPreferences.Companion.DEFAULT_TEXT_SIZE
 import com.maubis.scarlet.base.settings.sUIUseNoteColorAsBackground
 
 const val KEY_EDITABLE = "KEY_EDITABLE"
 const val KEY_NOTE_COLOR = "KEY_NOTE_COLOR"
+const val KEY_TEXT_SIZE = "KEY_TEXT_SIZE"
 
 data class FormatViewHolderConfig(
   val editable: Boolean,
@@ -45,7 +45,7 @@ abstract class FormatViewHolderBase(context: Context, view: View) : RecyclerView
   protected val activity: ViewNoteActivity = context as ViewNoteActivity
 
   override fun populate(data: Format, extra: Bundle?) {
-    val noteColor: Int = extra?.getInt(KEY_NOTE_COLOR) ?: sNoteDefaultColor
+    val noteColor: Int = extra?.getInt(KEY_NOTE_COLOR) ?: ScarletApp.preferences.noteDefaultColor
     val secondaryTextColor: Int
     val tertiaryTextColor: Int
     val iconColor: Int
@@ -75,7 +75,7 @@ abstract class FormatViewHolderBase(context: Context, view: View) : RecyclerView
         linkColor = ContextCompat.getColor(context, R.color.colorAccentYellowDark)
       }
     }
-    val fontSize = extra?.getInt(STORE_KEY_TEXT_SIZE, TEXT_SIZE_DEFAULT) ?: TEXT_SIZE_DEFAULT
+    val fontSize = extra?.getInt(KEY_TEXT_SIZE, DEFAULT_TEXT_SIZE) ?: DEFAULT_TEXT_SIZE
     val config = FormatViewHolderConfig(
         editable = !(extra != null
           && extra.containsKey(KEY_EDITABLE)

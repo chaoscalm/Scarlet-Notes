@@ -2,8 +2,8 @@ package com.maubis.scarlet.base.editor
 
 import com.maubis.markdown.segmenter.MarkdownSegmentType
 import com.maubis.markdown.segmenter.TextSegmenter
+import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.common.utils.logNonCriticalError
-import com.maubis.scarlet.base.settings.sEditorMoveChecked
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
@@ -42,7 +42,7 @@ object Formats {
   }
 
   fun sortChecklistsIfAllowed(formats: List<Format>): List<Format> {
-    if (!sEditorMoveChecked) {
+    if (!ScarletApp.preferences.moveCheckedItems) {
       return formats
     }
 

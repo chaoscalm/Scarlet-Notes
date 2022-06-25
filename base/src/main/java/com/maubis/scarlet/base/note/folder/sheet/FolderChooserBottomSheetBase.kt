@@ -12,6 +12,7 @@ import com.facebook.litho.widget.Text
 import com.facebook.yoga.YogaAlign
 import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.R
+import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.ScarletApp.Companion.data
@@ -23,7 +24,6 @@ import com.maubis.scarlet.base.common.specs.RoundIcon
 import com.maubis.scarlet.base.common.ui.ThemeColorType
 import com.maubis.scarlet.base.common.ui.ThemedActivity
 import com.maubis.scarlet.base.database.entities.Folder
-import com.maubis.scarlet.base.settings.sNoteDefaultColor
 
 data class FolderOptionsItem(
         val folder: Folder,
@@ -125,7 +125,7 @@ abstract class FolderChooserBottomSheetBase : LithoBottomSheet() {
       subtitle = 0,
       icon = R.drawable.ic_add_folder,
       listener = {
-        CreateOrEditFolderBottomSheet.openSheet(activity, Folder(sNoteDefaultColor)) { folder ->
+        CreateOrEditFolderBottomSheet.openSheet(activity, Folder(ScarletApp.preferences.noteDefaultColor)) { folder ->
           onFolderSelected(folder)
           refresh(activity, dialog)
         }

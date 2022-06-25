@@ -1,23 +1,12 @@
 package com.maubis.scarlet.base.settings
 
 import android.app.Dialog
-import androidx.core.content.edit
 import com.facebook.litho.ComponentContext
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.ScarletApp.Companion.appPreferences
+import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.common.sheets.LithoOptionBottomSheet
 import com.maubis.scarlet.base.common.sheets.LithoOptionsItem
 import com.maubis.scarlet.base.home.MainActivity
-
-const val KEY_INTERNAL_ENABLE_FULL_SCREEN = "internal_enable_full_screen"
-var sInternalEnableFullScreen: Boolean
-  get() = appPreferences.getBoolean(KEY_INTERNAL_ENABLE_FULL_SCREEN, false)
-  set(value) = appPreferences.edit { putBoolean(KEY_INTERNAL_ENABLE_FULL_SCREEN, value) }
-
-const val KEY_INTERNAL_SHOW_UUID = "internal_show_uuid"
-var sInternalShowUUID: Boolean
-  get() = appPreferences.getBoolean(KEY_INTERNAL_SHOW_UUID, false)
-  set(value) = appPreferences.edit { putBoolean(KEY_INTERNAL_SHOW_UUID, value) }
 
 class DeveloperOptionsBottomSheet : LithoOptionBottomSheet() {
   override fun title(): Int = R.string.internal_settings_title
@@ -31,11 +20,11 @@ class DeveloperOptionsBottomSheet : LithoOptionBottomSheet() {
         subtitle = R.string.internal_settings_enable_fullscreen_description,
         icon = R.drawable.ic_staggered_grid,
         listener = {
-          sInternalEnableFullScreen = !sInternalEnableFullScreen
+          ScarletApp.preferences.enableFullscreen = !ScarletApp.preferences.enableFullscreen
           refresh(activity, dialog)
         },
         isSelectable = true,
-        selected = sInternalEnableFullScreen
+        selected = ScarletApp.preferences.enableFullscreen
       ))
     options.add(
       LithoOptionsItem(
@@ -43,11 +32,11 @@ class DeveloperOptionsBottomSheet : LithoOptionBottomSheet() {
         subtitle = R.string.internal_settings_show_uuid_description,
         icon = R.drawable.ic_code_inline,
         listener = {
-          sInternalShowUUID = !sInternalShowUUID
+          ScarletApp.preferences.showNotesUuids = !ScarletApp.preferences.showNotesUuids
           refresh(activity, dialog)
         },
         isSelectable = true,
-        selected = sInternalShowUUID
+        selected = ScarletApp.preferences.showNotesUuids
       ))
     return options
   }

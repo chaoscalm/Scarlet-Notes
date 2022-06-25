@@ -13,7 +13,6 @@ import com.maubis.scarlet.base.editor.EditNoteActivity
 import com.maubis.scarlet.base.editor.FormatType
 import com.maubis.scarlet.base.security.PinLockController.needsLockCheck
 import com.maubis.scarlet.base.security.PincodeBottomSheet
-import com.maubis.scarlet.base.settings.sInternalShowUUID
 import com.maubis.scarlet.base.settings.sSecurityAppLockEnabled
 import com.maubis.scarlet.base.settings.sWidgetShowLockedNotes
 
@@ -63,7 +62,7 @@ fun Note.getTextForSharing(): String {
   }
 
   val text = stringBuilder.toString().trim()
-  if (sInternalShowUUID) {
+  if (ScarletApp.preferences.showNotesUuids) {
     return "`$uuid`\n\n$text"
   }
   return text
@@ -77,7 +76,7 @@ fun Note.getImageFile(): String {
 
 fun Note.getFullText(): String {
   val fullText = contentAsFormats().joinToString(separator = "\n") { it.markdownText }.trim()
-  if (sInternalShowUUID) {
+  if (ScarletApp.preferences.showNotesUuids) {
     return "`$uuid`\n$fullText"
   }
   return fullText

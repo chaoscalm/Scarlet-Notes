@@ -9,7 +9,6 @@ import com.maubis.scarlet.base.editor.FormatType
 import com.maubis.scarlet.base.editor.Formats
 import com.maubis.scarlet.base.editor.Formats.toNoteContent
 import com.maubis.scarlet.base.reminders.Reminder
-import com.maubis.scarlet.base.settings.sNoteDefaultColor
 import java.util.*
 
 @Entity(tableName = "note", indices = [Index("uuid", unique = true)])
@@ -19,7 +18,7 @@ class Note() {
     var uid: Int = 0
     var uuid: UUID = UUID.randomUUID()
     var content: String = emptyList<Format>().toNoteContent()
-    var color: Int = sNoteDefaultColor
+    var color: Int = ScarletApp.preferences.noteDefaultColor
     var state: NoteState = NoteState.DEFAULT
     var timestamp: Long = System.currentTimeMillis()
     var updateTimestamp: Long = timestamp

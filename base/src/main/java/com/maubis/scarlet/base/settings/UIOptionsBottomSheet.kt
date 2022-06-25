@@ -4,6 +4,7 @@ import android.app.Dialog
 import androidx.core.content.edit
 import com.facebook.litho.ComponentContext
 import com.maubis.scarlet.base.R
+import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.ScarletApp.Companion.appPreferences
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.common.sheets.*
@@ -50,8 +51,8 @@ class UIOptionsBottomSheet : LithoOptionBottomSheet() {
           colors = listOf(
             activity.resources.getIntArray(R.array.bright_colors),
             activity.resources.getIntArray(R.array.bright_colors_accent)),
-          selectedColor = sNoteDefaultColor,
-          onColorSelected = { sNoteDefaultColor = it }
+          selectedColor = ScarletApp.preferences.noteDefaultColor,
+          onColorSelected = { ScarletApp.preferences.noteDefaultColor = it }
         )
         openSheet(activity, ColorPickerBottomSheet().apply { this.config = config })
       }

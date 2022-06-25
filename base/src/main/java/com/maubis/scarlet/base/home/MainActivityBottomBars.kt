@@ -13,6 +13,7 @@ import com.facebook.litho.widget.Text
 import com.facebook.yoga.YogaAlign
 import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.R
+import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.common.sheets.openSheet
 import com.maubis.scarlet.base.common.specs.EmptySpec
@@ -24,7 +25,6 @@ import com.maubis.scarlet.base.database.entities.Folder
 import com.maubis.scarlet.base.home.sheets.HomeOptionsBottomSheet
 import com.maubis.scarlet.base.home.sheets.openDeleteTrashSheet
 import com.maubis.scarlet.base.note.folder.sheet.CreateOrEditFolderBottomSheet
-import com.maubis.scarlet.base.settings.sNoteDefaultColor
 
 @LayoutSpec
 object MainActivityBottomBarSpec {
@@ -59,7 +59,7 @@ object MainActivityBottomBarSpec {
         row.child(bottomBarRoundIcon(context, colorConfig)
           .iconRes(R.drawable.ic_add_folder)
           .onClick {
-            CreateOrEditFolderBottomSheet.openSheet(activity, Folder(sNoteDefaultColor)) {
+            CreateOrEditFolderBottomSheet.openSheet(activity, Folder(ScarletApp.preferences.noteDefaultColor)) {
               activity.refreshList()
             }
           })

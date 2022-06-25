@@ -7,10 +7,10 @@ import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
+import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.common.utils.ColorUtil
 import com.maubis.scarlet.base.common.utils.OsVersionUtils
-import com.maubis.scarlet.base.settings.sInternalEnableFullScreen
 
 abstract class ThemedActivity : AppCompatActivity(), ThemeChangeListener {
 
@@ -45,7 +45,7 @@ abstract class ThemedActivity : AppCompatActivity(), ThemeChangeListener {
   }
 
   fun fullScreenView() {
-    if (!sInternalEnableFullScreen) {
+    if (!ScarletApp.preferences.enableFullscreen) {
       return
     }
 

@@ -12,6 +12,7 @@ import com.facebook.litho.ComponentContext
 import com.facebook.litho.LithoView
 import com.github.bijoysingh.starter.recyclerview.MultiRecyclerViewControllerItem
 import com.maubis.scarlet.base.R
+import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.common.specs.ToolbarColorConfig
@@ -28,7 +29,7 @@ import com.maubis.scarlet.base.note.actions.INoteActionsActivity
 import com.maubis.scarlet.base.note.actions.NoteActionsBottomSheet
 import com.maubis.scarlet.base.note.adjustedColor
 import com.maubis.scarlet.base.note.getTagString
-import com.maubis.scarlet.base.settings.*
+import com.maubis.scarlet.base.settings.sUIUseNoteColorAsBackground
 import com.maubis.scarlet.base.widget.getPendingIntentWithStack
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -74,9 +75,9 @@ open class ViewNoteActivity : SecuredActivity(), INoteActionsActivity {
       noteId = savedInstanceState.getInt(INTENT_KEY_NOTE_ID, 0)
     }
     return if (noteId != 0) {
-      data.notes.getByID(noteId) ?: Note(sNoteDefaultColor)
+      data.notes.getByID(noteId) ?: Note(ScarletApp.preferences.noteDefaultColor)
     } else {
-      Note(sNoteDefaultColor)
+      Note(ScarletApp.preferences.noteDefaultColor)
     }
   }
 
@@ -110,7 +111,7 @@ open class ViewNoteActivity : SecuredActivity(), INoteActionsActivity {
   private fun resetAdapterBundle() {
     val bundle = Bundle().apply {
       putBoolean(KEY_EDITABLE, isEditingMode)
-      putInt(STORE_KEY_TEXT_SIZE, sEditorTextSize)
+      putInt(KEY_TEXT_SIZE, ScarletApp.preferences.editorTextSize)
       putInt(KEY_NOTE_COLOR, note.adjustedColor())
       putString(INTENT_KEY_NOTE_ID, note.uuid.toString())
     }
@@ -259,7 +260,7 @@ open class ViewNoteActivity : SecuredActivity(), INoteActionsActivity {
     }
 
     fun makePreferenceAwareIntent(context: Context, note: Note): Intent {
-      if (sEditorSkipNoteViewer) {
+      if (ScarletApp.preferences.skipNoteViewer) {
         return EditNoteActivity.makeEditNoteIntent(context, note)
       }
 
