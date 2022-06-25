@@ -91,7 +91,7 @@ class WidgetOptionsBottomSheet : LithoOptionBottomSheet() {
             config = ColorPickerDefaultController(
               title = R.string.widget_option_background_color,
               selectedColor = sWidgetBackgroundColor,
-              colors = listOf(intArrayOf(Color.TRANSPARENT, Color.WHITE, Color.LTGRAY, 0x65000000, Color.DKGRAY, Color.BLACK)),
+              colors = listOf(intArrayOf(Color.TRANSPARENT, 0x30000000, 0x65000000, 0xA0000000.toInt(), 0xC0000000.toInt())),
               onColorSelected = {
                 sWidgetBackgroundColor = it
                 notifyAllNotesConfigChanged(activity)
