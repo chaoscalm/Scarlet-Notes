@@ -3,7 +3,7 @@
   android:minWidth="144dp"
   android:minHeight="48dp"
   android:updatePeriodMillis="86400000"
-  android:previewImage="@drawable/lorem_ipsum_widget"
+  android:previewImage="@drawable/single_note_widget_preview"
   android:initialLayout="@layout/widget_note"
   android:configure="com.maubis.scarlet.base.widget.WidgetConfigureActivity"
   android:resizeMode="horizontal|vertical"
