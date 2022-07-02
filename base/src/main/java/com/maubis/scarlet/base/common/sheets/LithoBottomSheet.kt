@@ -23,7 +23,7 @@ import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.common.ui.BottomSheetTabletDialog
-import com.maubis.scarlet.base.common.ui.ThemeColorType
+import com.maubis.scarlet.base.common.ui.ThemeColor
 
 fun openSheet(activity: AppCompatActivity, sheet: LithoBottomSheet) {
   sheet.show(activity.supportFragmentManager, sheet.tag)
@@ -37,7 +37,7 @@ fun getLithoBottomSheetTitle(context: ComponentContext): Text.Builder {
     .marginDip(YogaEdge.TOP, 18f)
     .marginDip(YogaEdge.BOTTOM, 8f)
     .textStyle(Typeface.BOLD)
-    .textColor(appTheme.get(ThemeColorType.PRIMARY_TEXT))
+    .textColor(appTheme.getColor(ThemeColor.PRIMARY_TEXT))
 }
 
 fun getLithoBottomSheetButton(context: ComponentContext): Text.Builder {
@@ -115,7 +115,7 @@ abstract class LithoBottomSheet : BottomSheetDialogFragment() {
 
   abstract fun getComponent(componentContext: ComponentContext, dialog: Dialog): Component
 
-  open fun backgroundColor(componentContext: ComponentContext) = appTheme.get(ThemeColorType.BACKGROUND)
+  open fun backgroundColor(componentContext: ComponentContext) = appTheme.getColor(ThemeColor.BACKGROUND)
 
   open fun topMargin() = 16f
 

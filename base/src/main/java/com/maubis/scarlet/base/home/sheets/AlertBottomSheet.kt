@@ -13,7 +13,7 @@ import com.maubis.scarlet.base.common.sheets.LithoBottomSheet
 import com.maubis.scarlet.base.common.sheets.getLithoBottomSheetTitle
 import com.maubis.scarlet.base.common.sheets.openSheet
 import com.maubis.scarlet.base.common.specs.BottomSheetBar
-import com.maubis.scarlet.base.common.ui.ThemeColorType
+import com.maubis.scarlet.base.common.ui.ThemeColor
 import com.maubis.scarlet.base.common.ui.ThemedActivity
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.database.entities.NoteState
@@ -59,7 +59,7 @@ class AlertBottomSheet : LithoBottomSheet() {
           .textSizeRes(R.dimen.font_size_large)
           .textRes(config.description)
           .marginDip(YogaEdge.BOTTOM, 16f)
-          .textColor(appTheme.get(ThemeColorType.TERTIARY_TEXT)))
+          .textColor(appTheme.getColor(ThemeColor.TERTIARY_TEXT)))
       .child(BottomSheetBar.create(componentContext)
                .primaryActionRes(config.positiveText)
                .onPrimaryClick {

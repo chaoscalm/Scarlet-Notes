@@ -21,7 +21,7 @@ import com.maubis.scarlet.base.common.sheets.LithoOptionsItem
 import com.maubis.scarlet.base.common.sheets.OptionItemLayout
 import com.maubis.scarlet.base.common.sheets.getLithoBottomSheetTitle
 import com.maubis.scarlet.base.common.specs.RoundIcon
-import com.maubis.scarlet.base.common.ui.ThemeColorType
+import com.maubis.scarlet.base.common.ui.ThemeColor
 import com.maubis.scarlet.base.common.ui.ThemedActivity
 import com.maubis.scarlet.base.database.entities.Folder
 
@@ -34,7 +34,7 @@ data class FolderOptionsItem(
 object FolderItemLayoutSpec {
   @OnCreateLayout
   fun onCreate(context: ComponentContext, @Prop option: FolderOptionsItem): Component {
-    val titleColor = appTheme.get(ThemeColorType.SECONDARY_TEXT)
+    val titleColor = appTheme.getColor(ThemeColor.SECONDARY_TEXT)
     val selectedColor = when (appTheme.isNightTheme()) {
       true -> context.getColor(com.github.bijoysingh.uibasics.R.color.material_blue_400)
       false -> context.getColor(com.github.bijoysingh.uibasics.R.color.material_blue_700)

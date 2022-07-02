@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.core.content.ContextCompat
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.common.recycler.RecyclerItem
-import com.maubis.scarlet.base.common.ui.ThemeColorType
+import com.maubis.scarlet.base.common.ui.ThemeColor
 import com.maubis.scarlet.base.common.utils.ColorUtil
 import com.maubis.scarlet.base.database.entities.Folder
 
@@ -12,7 +12,7 @@ class SelectorFolderRecyclerItem(context: Context, val folder: Folder) : Recycle
 
   val isLightShaded = ColorUtil.isLightColor(folder.color)
   val title = folder.title
-  val titleColor = appTheme.get(ThemeColorType.TERTIARY_TEXT)
+  val titleColor = appTheme.getColor(ThemeColor.TERTIARY_TEXT)
 
   val folderColor = folder.color
   val iconColor = when (isLightShaded) {

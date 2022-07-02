@@ -18,7 +18,7 @@ import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.common.specs.EmptySpec
-import com.maubis.scarlet.base.common.ui.ThemeColorType
+import com.maubis.scarlet.base.common.ui.ThemeColor
 
 @LayoutSpec
 object AppLockViewSpec {
@@ -29,7 +29,7 @@ object AppLockViewSpec {
     @Prop onTextChange: (String) -> Unit,
     @Prop onClick: () -> Unit): Component {
     return Column.create(context)
-      .backgroundColor(appTheme.get(ThemeColorType.BACKGROUND))
+      .backgroundColor(appTheme.getColor(ThemeColor.BACKGROUND))
       .child(
         AppLockContentView.create(context)
           .onTextChange(onTextChange)
@@ -75,17 +75,17 @@ object AppLockContentViewSpec {
 
     return Column.create(context)
       .paddingDip(YogaEdge.ALL, 16f)
-      .backgroundColor(appTheme.get(ThemeColorType.BACKGROUND))
+      .backgroundColor(appTheme.getColor(ThemeColor.BACKGROUND))
       .child(
         Text.create(context)
           .textSizeRes(R.dimen.font_size_xxlarge)
           .textRes(R.string.app_lock_title)
-          .textColor(appTheme.get(ThemeColorType.SECONDARY_TEXT))
+          .textColor(appTheme.getColor(ThemeColor.SECONDARY_TEXT))
           .typeface(appTypeface.heading()))
       .child(
         Text.create(context)
           .textSizeRes(R.dimen.font_size_large)
-          .textColor(appTheme.get(ThemeColorType.SECONDARY_TEXT))
+          .textColor(appTheme.getColor(ThemeColor.SECONDARY_TEXT))
           .textRes(R.string.app_lock_details)
           .typeface(appTypeface.title()))
       .child(EmptySpec.create(context).flexGrow(1f))
@@ -100,7 +100,7 @@ object AppLockContentViewSpec {
           .inputType(InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_VARIATION_PASSWORD)
           .textAlignment(View.TEXT_ALIGNMENT_CENTER)
           .typeface(appTypeface.text())
-          .textColorStateList(ColorStateList.valueOf(appTheme.get(ThemeColorType.PRIMARY_TEXT)))
+          .textColorStateList(ColorStateList.valueOf(appTheme.getColor(ThemeColor.PRIMARY_TEXT)))
           .paddingDip(YogaEdge.HORIZONTAL, 22f)
           .paddingDip(YogaEdge.VERTICAL, 6f)
           .imeOptions(EditorInfo.IME_ACTION_DONE)

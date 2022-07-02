@@ -15,7 +15,7 @@ import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.common.sheets.LithoBottomSheet
 import com.maubis.scarlet.base.common.sheets.getLithoBottomSheetTitle
 import com.maubis.scarlet.base.common.specs.BottomSheetBar
-import com.maubis.scarlet.base.common.ui.ThemeColorType
+import com.maubis.scarlet.base.common.ui.ThemeColor
 
 class StoragePermissionBottomSheet : LithoBottomSheet() {
   private val permissionRequestLauncher = registerForActivityResult(RequestMultiplePermissions(), this::notifyRequestOutcome)
@@ -35,7 +35,7 @@ class StoragePermissionBottomSheet : LithoBottomSheet() {
           .textSizeRes(R.dimen.font_size_large)
           .marginDip(YogaEdge.BOTTOM, 16f)
           .textRes(R.string.storage_permission_dialog_details)
-          .textColor(appTheme.get(ThemeColorType.TERTIARY_TEXT)))
+          .textColor(appTheme.getColor(ThemeColor.TERTIARY_TEXT)))
       .child(
         BottomSheetBar.create(componentContext)
           .primaryActionRes(R.string.storage_permission_dialog_action_allow)

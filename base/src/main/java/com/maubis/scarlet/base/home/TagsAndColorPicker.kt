@@ -9,7 +9,7 @@ import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.common.ui.ColorView
-import com.maubis.scarlet.base.common.ui.ThemeColorType
+import com.maubis.scarlet.base.common.ui.ThemeColor
 import com.maubis.scarlet.base.database.entities.Tag
 
 class TagsAndColorPicker(
@@ -66,7 +66,7 @@ class TagsAndColorPicker(
       backgroundDrawable.setTint(accentColor)
       text.setTextColor(accentColor)
     } else {
-      val themeColor = appTheme.get(ThemeColorType.TERTIARY_TEXT)
+      val themeColor = appTheme.getColor(ThemeColor.TERTIARY_TEXT)
       backgroundDrawable.setTint(themeColor)
       text.setTextColor(themeColor)
     }

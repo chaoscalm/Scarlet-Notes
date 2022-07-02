@@ -43,7 +43,7 @@ abstract class ThemedBottomSheetFragment : BottomSheetDialogFragment() {
   }
 
   private fun resetBackground(dialog: Dialog) {
-    val backgroundColor = appTheme.get(ThemeColorType.BACKGROUND)
+    val backgroundColor = appTheme.getColor(ThemeColor.BACKGROUND)
     val containerLayout = dialog.findViewById<View>(getBackgroundView())
     containerLayout.setBackgroundColor(backgroundColor)
     for (viewId in getBackgroundCardViewIds()) {

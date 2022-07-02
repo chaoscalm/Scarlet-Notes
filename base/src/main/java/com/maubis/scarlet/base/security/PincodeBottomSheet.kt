@@ -25,7 +25,7 @@ import com.maubis.scarlet.base.common.sheets.LithoBottomSheet
 import com.maubis.scarlet.base.common.sheets.getLithoBottomSheetTitle
 import com.maubis.scarlet.base.common.sheets.openSheet
 import com.maubis.scarlet.base.common.specs.BottomSheetBar
-import com.maubis.scarlet.base.common.ui.ThemeColorType
+import com.maubis.scarlet.base.common.ui.ThemeColor
 import com.maubis.scarlet.base.common.ui.ThemedActivity
 import com.maubis.scarlet.base.common.utils.isBiometricEnabled
 import com.maubis.scarlet.base.common.utils.showBiometricPrompt
@@ -99,7 +99,7 @@ object PincodeSheetViewSpec {
           .inputType(InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_VARIATION_PASSWORD)
           .textAlignment(View.TEXT_ALIGNMENT_CENTER)
           .typeface(appTypeface.text())
-          .textColorStateList(ColorStateList.valueOf(appTheme.get(ThemeColorType.PRIMARY_TEXT)))
+          .textColorStateList(ColorStateList.valueOf(appTheme.getColor(ThemeColor.PRIMARY_TEXT)))
           .paddingDip(YogaEdge.HORIZONTAL, 22f)
           .paddingDip(YogaEdge.VERTICAL, 6f)
           .marginDip(YogaEdge.VERTICAL, 16f)

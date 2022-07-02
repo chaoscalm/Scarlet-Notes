@@ -12,7 +12,7 @@ import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.common.sheets.LithoBottomSheet
 import com.maubis.scarlet.base.common.sheets.getLithoBottomSheetTitle
 import com.maubis.scarlet.base.common.specs.BottomSheetBar
-import com.maubis.scarlet.base.common.ui.ThemeColorType
+import com.maubis.scarlet.base.common.ui.ThemeColor
 import com.maubis.scarlet.base.common.ui.ThemedActivity
 
 class NoPincodeBottomSheet : LithoBottomSheet() {
@@ -34,7 +34,7 @@ class NoPincodeBottomSheet : LithoBottomSheet() {
           .textSizeRes(R.dimen.font_size_large)
           .textRes(R.string.no_pincode_sheet_details)
           .marginDip(YogaEdge.BOTTOM, 16f)
-          .textColor(appTheme.get(ThemeColorType.TERTIARY_TEXT)))
+          .textColor(appTheme.getColor(ThemeColor.TERTIARY_TEXT)))
       .child(BottomSheetBar.create(componentContext)
                .primaryActionRes(R.string.no_pincode_sheet_set_up)
                .onPrimaryClick {

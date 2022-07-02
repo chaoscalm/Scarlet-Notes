@@ -10,7 +10,7 @@ import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
-import com.maubis.scarlet.base.common.ui.ThemeColorType
+import com.maubis.scarlet.base.common.ui.ThemeColor
 import com.maubis.scarlet.base.common.utils.OsVersionUtils
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.editor.EditNoteActivity
@@ -103,16 +103,16 @@ class NotificationHandler(private val context: Context) {
     contentView.setTextViewText(R.id.description, config.note.getTextForSharing())
     contentView.setTextViewText(R.id.timestamp, config.note.getDisplayTime(context))
 
-    val titleColor = appTheme.get(ThemeColorType.SECONDARY_TEXT)
-    val descColor = appTheme.get(ThemeColorType.TERTIARY_TEXT)
+    val titleColor = appTheme.getColor(ThemeColor.SECONDARY_TEXT)
+    val descColor = appTheme.getColor(ThemeColor.TERTIARY_TEXT)
     contentView.setTextColor(R.id.title, titleColor)
     contentView.setTextColor(R.id.description, titleColor)
     contentView.setTextColor(R.id.timestamp, descColor)
 
-    val backgroundColor = appTheme.get(ThemeColorType.BACKGROUND)
+    val backgroundColor = appTheme.getColor(ThemeColor.BACKGROUND)
     contentView.setInt(R.id.root_layout, "setBackgroundColor", backgroundColor)
 
-    val iconColor = appTheme.get(ThemeColorType.TOOLBAR_ICON)
+    val iconColor = appTheme.getColor(ThemeColor.TOOLBAR_ICON)
     contentView.setInt(R.id.options_button, "setColorFilter", iconColor)
     contentView.setInt(R.id.copy_button, "setColorFilter", iconColor)
     contentView.setInt(R.id.delete_button, "setColorFilter", iconColor)

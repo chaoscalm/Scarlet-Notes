@@ -20,10 +20,7 @@ abstract class ThemedActivity : AppCompatActivity(), ThemeChangeListener {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    if (ScarletApp.prefs.useSystemTheme) {
-      setThemeFromSystem(this)
-      appTheme.reload(this)
-    }
+    useSystemThemeIfNeeded()
     appTheme.registerChangeListener(this)
   }
 
@@ -39,6 +36,10 @@ abstract class ThemedActivity : AppCompatActivity(), ThemeChangeListener {
 
   override fun onConfigurationChanged(configuration: Configuration) {
     super.onConfigurationChanged(configuration)
+    useSystemThemeIfNeeded()
+  }
+
+  private fun useSystemThemeIfNeeded() {
     if (ScarletApp.prefs.useSystemTheme) {
       setThemeFromSystem(this)
       appTheme.reload(this)
@@ -71,9 +72,9 @@ abstract class ThemedActivity : AppCompatActivity(), ThemeChangeListener {
     }
   }
 
-  fun getThemeColor(): Int = appTheme.get(ThemeColorType.BACKGROUND)
+  fun getThemeColor(): Int = appTheme.getColor(ThemeColor.BACKGROUND)
 
-  fun getStatusBarColor(): Int = appTheme.get(ThemeColorType.STATUS_BAR)
+  fun getStatusBarColor(): Int = appTheme.getColor(ThemeColor.STATUS_BAR)
 
   fun tryClosingTheKeyboard() {
     try {

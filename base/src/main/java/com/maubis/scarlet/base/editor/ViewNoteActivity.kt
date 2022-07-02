@@ -18,7 +18,7 @@ import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.common.specs.ToolbarColorConfig
 import com.maubis.scarlet.base.common.ui.SecuredActivity
 import com.maubis.scarlet.base.common.ui.Theme
-import com.maubis.scarlet.base.common.ui.ThemeColorType
+import com.maubis.scarlet.base.common.ui.ThemeColor
 import com.maubis.scarlet.base.common.utils.ColorUtil.darkerColor
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.database.entities.NoteState
@@ -182,15 +182,15 @@ open class ViewNoteActivity : SecuredActivity(), INoteActionsActivity {
     when {
       ScarletApp.prefs.useNoteColorAsBackground -> {
         colorConfig.backgroundColor = noteColor
-        colorConfig.toolbarIconColor = appTheme.get(this, Theme.DARK, ThemeColorType.TOOLBAR_ICON)
+        colorConfig.toolbarIconColor = appTheme.getColor(this, Theme.DARK, ThemeColor.TOOLBAR_ICON)
         colorConfig.statusBarColor = noteColor
         colorConfig.toolbarBackgroundColor = darkerColor(noteColor)
       }
       else -> {
-        colorConfig.backgroundColor = appTheme.get(ThemeColorType.BACKGROUND)
-        colorConfig.toolbarIconColor = appTheme.get(ThemeColorType.TOOLBAR_ICON)
-        colorConfig.statusBarColor = appTheme.get(ThemeColorType.STATUS_BAR)
-        colorConfig.toolbarBackgroundColor = appTheme.get(ThemeColorType.TOOLBAR_BACKGROUND)
+        colorConfig.backgroundColor = appTheme.getColor(ThemeColor.BACKGROUND)
+        colorConfig.toolbarIconColor = appTheme.getColor(ThemeColor.TOOLBAR_ICON)
+        colorConfig.statusBarColor = appTheme.getColor(ThemeColor.STATUS_BAR)
+        colorConfig.toolbarBackgroundColor = appTheme.getColor(ThemeColor.TOOLBAR_BACKGROUND)
       }
     }
 

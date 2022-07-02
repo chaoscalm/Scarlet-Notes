@@ -12,7 +12,7 @@ import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.common.sheets.LithoBottomSheet
 import com.maubis.scarlet.base.common.sheets.getLithoBottomSheetTitle
-import com.maubis.scarlet.base.common.ui.ThemeColorType
+import com.maubis.scarlet.base.common.ui.ThemeColor
 
 class MarkdownHelpBottomSheet : LithoBottomSheet() {
   override fun getComponent(componentContext: ComponentContext, dialog: Dialog): Component {
@@ -33,7 +33,7 @@ class MarkdownHelpBottomSheet : LithoBottomSheet() {
             .textSizeRes(R.dimen.font_size_normal)
             .marginDip(YogaEdge.HORIZONTAL, 20f)
             .paddingDip(YogaEdge.VERTICAL, 4f)
-            .textColor(appTheme.get(ThemeColorType.SECONDARY_TEXT)))
+            .textColor(appTheme.getColor(ThemeColor.SECONDARY_TEXT)))
     }
 
     return column.build()

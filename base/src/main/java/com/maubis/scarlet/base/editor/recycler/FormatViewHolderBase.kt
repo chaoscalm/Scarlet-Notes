@@ -13,7 +13,7 @@ import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.common.ui.Theme
-import com.maubis.scarlet.base.common.ui.ThemeColorType
+import com.maubis.scarlet.base.common.ui.ThemeColor
 import com.maubis.scarlet.base.common.utils.ColorUtil
 import com.maubis.scarlet.base.editor.Format
 import com.maubis.scarlet.base.editor.FormatType
@@ -53,24 +53,24 @@ abstract class FormatViewHolderBase(context: Context, view: View) : RecyclerView
     val linkColor: Int
     when {
       !ScarletApp.prefs.useNoteColorAsBackground -> {
-        secondaryTextColor = appTheme.get(ThemeColorType.SECONDARY_TEXT)
-        tertiaryTextColor = appTheme.get(ThemeColorType.TERTIARY_TEXT)
-        iconColor = appTheme.get(ThemeColorType.TOOLBAR_ICON)
-        hintTextColor = appTheme.get(ThemeColorType.HINT_TEXT)
-        linkColor = appTheme.get(ThemeColorType.ACCENT_TEXT)
+        secondaryTextColor = appTheme.getColor(ThemeColor.SECONDARY_TEXT)
+        tertiaryTextColor = appTheme.getColor(ThemeColor.TERTIARY_TEXT)
+        iconColor = appTheme.getColor(ThemeColor.TOOLBAR_ICON)
+        hintTextColor = appTheme.getColor(ThemeColor.HINT_TEXT)
+        linkColor = appTheme.getColor(ThemeColor.ACCENT_TEXT)
       }
       isLightBackground -> {
-        secondaryTextColor = appTheme.get(context, Theme.LIGHT, ThemeColorType.SECONDARY_TEXT)
-        tertiaryTextColor = appTheme.get(context, Theme.LIGHT, ThemeColorType.TERTIARY_TEXT)
-        iconColor = appTheme.get(context, Theme.LIGHT, ThemeColorType.TOOLBAR_ICON)
-        hintTextColor = appTheme.get(context, Theme.LIGHT, ThemeColorType.HINT_TEXT)
+        secondaryTextColor = appTheme.getColor(context, Theme.LIGHT, ThemeColor.SECONDARY_TEXT)
+        tertiaryTextColor = appTheme.getColor(context, Theme.LIGHT, ThemeColor.TERTIARY_TEXT)
+        iconColor = appTheme.getColor(context, Theme.LIGHT, ThemeColor.TOOLBAR_ICON)
+        hintTextColor = appTheme.getColor(context, Theme.LIGHT, ThemeColor.HINT_TEXT)
         linkColor = ContextCompat.getColor(context, R.color.colorAccentYellowLight)
       }
       else -> {
-        secondaryTextColor = appTheme.get(context, Theme.DARK, ThemeColorType.SECONDARY_TEXT)
-        tertiaryTextColor = appTheme.get(context, Theme.DARK, ThemeColorType.TERTIARY_TEXT)
-        iconColor = appTheme.get(context, Theme.DARK, ThemeColorType.TOOLBAR_ICON)
-        hintTextColor = appTheme.get(context, Theme.DARK, ThemeColorType.HINT_TEXT)
+        secondaryTextColor = appTheme.getColor(context, Theme.DARK, ThemeColor.SECONDARY_TEXT)
+        tertiaryTextColor = appTheme.getColor(context, Theme.DARK, ThemeColor.TERTIARY_TEXT)
+        iconColor = appTheme.getColor(context, Theme.DARK, ThemeColor.TOOLBAR_ICON)
+        hintTextColor = appTheme.getColor(context, Theme.DARK, ThemeColor.HINT_TEXT)
         linkColor = ContextCompat.getColor(context, R.color.colorAccentYellowDark)
       }
     }
@@ -86,7 +86,7 @@ abstract class FormatViewHolderBase(context: Context, view: View) : RecyclerView
           else -> fontSize.toFloat()
         },
         backgroundColor = when (data.type) {
-          FormatType.CODE, FormatType.IMAGE -> appTheme.get(context, R.color.code_light, R.color.code_dark)
+          FormatType.CODE, FormatType.IMAGE -> appTheme.getLightOrDarkColor(context, R.color.code_light, R.color.code_dark)
           else -> ContextCompat.getColor(context, android.R.color.transparent)
         },
         secondaryTextColor = secondaryTextColor,

@@ -12,7 +12,7 @@ import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
-import com.maubis.scarlet.base.common.ui.ThemeColorType
+import com.maubis.scarlet.base.common.ui.ThemeColor
 
 data class GridSectionItem(
   val title: Int = 0,
@@ -88,7 +88,7 @@ object GridSectionViewSpec {
     @Prop(optional = true) maxLines: Int?,
     @Prop(optional = true) showSeparator: Boolean?): Component {
     val column = Column.create(context)
-    val primaryColor = appTheme.get(ThemeColorType.SECONDARY_TEXT)
+    val primaryColor = appTheme.getColor(ThemeColor.SECONDARY_TEXT)
 
     if (section.title != 0) {
       column.child(
@@ -141,7 +141,7 @@ object GridSectionViewSpec {
     if (showSeparator == true) {
       column.child(
         SolidColor.create(context)
-          .color(appTheme.get(ThemeColorType.PRIMARY_TEXT))
+          .color(appTheme.getColor(ThemeColor.PRIMARY_TEXT))
           .heightDip(1.5f)
           .widthDip(196f)
           .alignSelf(YogaAlign.CENTER)

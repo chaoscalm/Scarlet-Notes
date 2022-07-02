@@ -15,7 +15,7 @@ import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.common.specs.RoundIcon
-import com.maubis.scarlet.base.common.ui.ThemeColorType
+import com.maubis.scarlet.base.common.ui.ThemeColor
 
 class LithoOptionsItem(
   val title: Int,
@@ -34,9 +34,9 @@ object OptionItemLayoutSpec {
   fun onCreate(
     context: ComponentContext,
     @Prop option: LithoOptionsItem): Component {
-    val titleColor = appTheme.get(ThemeColorType.SECONDARY_TEXT)
-    val subtitleColor = appTheme.get(ThemeColorType.HINT_TEXT)
-    val selectedColor = appTheme.get(ThemeColorType.ACCENT_TEXT)
+    val titleColor = appTheme.getColor(ThemeColor.SECONDARY_TEXT)
+    val subtitleColor = appTheme.getColor(ThemeColor.HINT_TEXT)
+    val selectedColor = appTheme.getColor(ThemeColor.ACCENT_TEXT)
 
     val subtitle = when (option.subtitle) {
       0 -> option.content
@@ -125,7 +125,7 @@ object OptionLabelItemLayoutSpec {
   fun onCreate(
     context: ComponentContext,
     @Prop option: LithoLabelOptionsItem): Component {
-    val titleColor = appTheme.get(ThemeColorType.SECONDARY_TEXT)
+    val titleColor = appTheme.getColor(ThemeColor.SECONDARY_TEXT)
 
     val row = Column.create(context)
       .widthPercent(100f)

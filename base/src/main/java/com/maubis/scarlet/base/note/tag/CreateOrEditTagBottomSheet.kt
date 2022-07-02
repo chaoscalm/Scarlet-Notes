@@ -10,7 +10,7 @@ import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.ScarletApp.Companion.data
-import com.maubis.scarlet.base.common.ui.ThemeColorType
+import com.maubis.scarlet.base.common.ui.ThemeColor
 import com.maubis.scarlet.base.common.ui.ThemedActivity
 import com.maubis.scarlet.base.common.ui.ThemedBottomSheetFragment
 import com.maubis.scarlet.base.common.utils.getEditorActionListener
@@ -31,13 +31,13 @@ class CreateOrEditTagBottomSheet : ThemedBottomSheetFragment() {
     }
 
     val title = dialog.findViewById<TextView>(R.id.options_title)
-    title.setTextColor(appTheme.get(ThemeColorType.SECONDARY_TEXT))
+    title.setTextColor(appTheme.getColor(ThemeColor.SECONDARY_TEXT))
     title.setText(if (tag.isNotPersisted()) R.string.tag_sheet_create_title else R.string.tag_sheet_edit_title)
     title.typeface = appTypeface.title()
 
     val enterTag = dialog.findViewById<EditText>(R.id.enter_tag)
-    enterTag.setTextColor(appTheme.get(ThemeColorType.SECONDARY_TEXT))
-    enterTag.setHintTextColor(appTheme.get(ThemeColorType.HINT_TEXT))
+    enterTag.setTextColor(appTheme.getColor(ThemeColor.SECONDARY_TEXT))
+    enterTag.setHintTextColor(appTheme.getColor(ThemeColor.HINT_TEXT))
     enterTag.typeface = appTypeface.text()
 
     val action = dialog.findViewById<TextView>(R.id.action_button)

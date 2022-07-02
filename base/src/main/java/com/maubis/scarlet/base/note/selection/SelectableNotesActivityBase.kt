@@ -15,7 +15,7 @@ import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.common.recycler.RecyclerItem
 import com.maubis.scarlet.base.common.ui.SecuredActivity
-import com.maubis.scarlet.base.common.ui.ThemeColorType
+import com.maubis.scarlet.base.common.ui.ThemeColor
 import com.maubis.scarlet.base.common.utils.sort
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.home.recycler.NoNotesRecyclerItem
@@ -96,7 +96,7 @@ abstract class SelectableNotesActivityBase : SecuredActivity(), INoteSelectorAct
     val containerLayout = findViewById<View>(R.id.container_layout)
     containerLayout.setBackgroundColor(getThemeColor())
 
-    val toolbarIconColor = appTheme.get(ThemeColorType.TOOLBAR_ICON)
+    val toolbarIconColor = appTheme.getColor(ThemeColor.TOOLBAR_ICON)
     findViewById<ImageView>(R.id.back_button).setColorFilter(toolbarIconColor)
     findViewById<TextView>(R.id.toolbar_title).setTextColor(toolbarIconColor)
   }

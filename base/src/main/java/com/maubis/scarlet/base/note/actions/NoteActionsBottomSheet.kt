@@ -16,7 +16,7 @@ import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.common.sheets.ColorPickerBottomSheet
 import com.maubis.scarlet.base.common.sheets.ColorPickerDefaultController
 import com.maubis.scarlet.base.common.sheets.openSheet
-import com.maubis.scarlet.base.common.ui.ThemeColorType
+import com.maubis.scarlet.base.common.ui.ThemeColor
 import com.maubis.scarlet.base.common.ui.ThemedActivity
 import com.maubis.scarlet.base.common.ui.ThemedBottomSheetFragment
 import com.maubis.scarlet.base.common.utils.OsVersionUtils
@@ -367,7 +367,7 @@ class NoteActionsBottomSheet : ThemedBottomSheetFragment() {
 
   private fun setActionTitle(dialog: Dialog, title: Int) {
     val titleView = dialog.findViewById<TextView>(R.id.options_title)
-    titleView.setTextColor(appTheme.get(ThemeColorType.SECONDARY_TEXT))
+    titleView.setTextColor(appTheme.getColor(ThemeColor.SECONDARY_TEXT))
     titleView.setText(title)
   }
 

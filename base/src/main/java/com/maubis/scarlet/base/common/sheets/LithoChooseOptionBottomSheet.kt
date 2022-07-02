@@ -15,7 +15,7 @@ import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.common.specs.RoundIcon
-import com.maubis.scarlet.base.common.ui.ThemeColorType
+import com.maubis.scarlet.base.common.ui.ThemeColor
 
 class LithoChooseOptionsItem(
   val title: Int,
@@ -28,7 +28,7 @@ object ChooseOptionItemLayoutSpec {
   fun onCreate(
     context: ComponentContext,
     @Prop option: LithoChooseOptionsItem): Component {
-    val titleColor = appTheme.get(ThemeColorType.SECONDARY_TEXT)
+    val titleColor = appTheme.getColor(ThemeColor.SECONDARY_TEXT)
     val selectedColor = context.getColor(R.color.colorAccent)
 
     val row = Row.create(context)

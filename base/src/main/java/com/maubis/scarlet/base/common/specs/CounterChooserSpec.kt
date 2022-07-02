@@ -12,7 +12,7 @@ import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
-import com.maubis.scarlet.base.common.ui.ThemeColorType
+import com.maubis.scarlet.base.common.ui.ThemeColor
 import kotlin.math.max
 import kotlin.math.min
 
@@ -37,7 +37,7 @@ object CounterChooserSpec {
           .typeface(appTypeface.title())
           .textSizeRes(R.dimen.font_size_xxxlarge)
           .paddingDip(YogaEdge.HORIZONTAL, 12f)
-          .textColor(appTheme.get(ThemeColorType.TERTIARY_TEXT)))
+          .textColor(appTheme.getColor(ThemeColor.TERTIARY_TEXT)))
       .child(bottomBarRoundIcon(context, ToolbarColorConfig())
                .iconRes(R.drawable.ic_size_increase)
                .onClick { onValueChange(min(value + 1, maxValue)) })

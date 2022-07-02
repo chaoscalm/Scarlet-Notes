@@ -13,7 +13,7 @@ import com.maubis.markdown.spannable.clearMarkdownSpans
 import com.maubis.markdown.spannable.setFormats
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.common.ui.SecuredActivity
-import com.maubis.scarlet.base.common.ui.ThemeColorType
+import com.maubis.scarlet.base.common.ui.ThemeColor
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.databinding.ActivityExternalIntentBinding
 import com.maubis.scarlet.base.editor.ViewNoteActivity
@@ -89,14 +89,14 @@ class OpenFileActivity : SecuredActivity() {
     val containerLayout = findViewById<View>(R.id.container_layout)
     containerLayout.setBackgroundColor(getThemeColor())
 
-    val toolbarIconColor = appTheme.get(ThemeColorType.TOOLBAR_ICON)
+    val toolbarIconColor = appTheme.getColor(ThemeColor.TOOLBAR_ICON)
     views.toolbar.backButton.setColorFilter(toolbarIconColor)
 
-    val textColor = appTheme.get(ThemeColorType.SECONDARY_TEXT)
+    val textColor = appTheme.getColor(ThemeColor.SECONDARY_TEXT)
     views.toolbar.fileName.setTextColor(textColor)
     views.content.setTextColor(textColor)
 
-    val actionColor = appTheme.get(ThemeColorType.TOOLBAR_ICON)
+    val actionColor = appTheme.getColor(ThemeColor.TOOLBAR_ICON)
     views.toolbar.importButton.setImageTint(actionColor)
     views.toolbar.importButton.setTextColor(actionColor)
   }

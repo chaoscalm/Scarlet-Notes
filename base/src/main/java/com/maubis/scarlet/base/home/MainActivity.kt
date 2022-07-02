@@ -19,7 +19,7 @@ import com.maubis.scarlet.base.backup.PermissionUtils
 import com.maubis.scarlet.base.common.recycler.RecyclerItem
 import com.maubis.scarlet.base.common.specs.ToolbarColorConfig
 import com.maubis.scarlet.base.common.ui.SecuredActivity
-import com.maubis.scarlet.base.common.ui.ThemeColorType
+import com.maubis.scarlet.base.common.ui.ThemeColor
 import com.maubis.scarlet.base.database.entities.Folder
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.database.entities.NoteState
@@ -129,8 +129,8 @@ class MainActivity : SecuredActivity(), INoteActionsActivity {
       SettingsBottomSheet.openSheet(this)
     }
 
-    val titleColor = appTheme.get(ThemeColorType.SECONDARY_TEXT)
-    val hintColor = appTheme.get(ThemeColorType.TERTIARY_TEXT)
+    val titleColor = appTheme.getColor(ThemeColor.SECONDARY_TEXT)
+    val hintColor = appTheme.getColor(ThemeColor.TERTIARY_TEXT)
     views.mainToolbar.title.setTextColor(titleColor)
     views.mainToolbar.title.typeface = ScarletApp.appTypeface.heading()
     views.mainToolbar.searchIcon.setColorFilter(titleColor)
@@ -308,7 +308,7 @@ class MainActivity : SecuredActivity(), INoteActionsActivity {
     views.mainToolbar.title.text = getString(state.mode.toolbarTitleResourceId)
     views.mainToolbar.leftIcon.setImageDrawable(getDrawable(state.mode.toolbarIconResourceId))
     if (state.mode != HomeNavigationMode.DEFAULT) {
-      val iconColor = appTheme.get(ThemeColorType.SECONDARY_TEXT)
+      val iconColor = appTheme.getColor(ThemeColor.SECONDARY_TEXT)
       views.mainToolbar.leftIcon.setColorFilter(iconColor)
     } else
       views.mainToolbar.leftIcon.clearColorFilter()

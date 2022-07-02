@@ -12,7 +12,7 @@ import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.common.sheets.getLithoBottomSheetButton
-import com.maubis.scarlet.base.common.ui.ThemeColorType
+import com.maubis.scarlet.base.common.ui.ThemeColor
 
 @LayoutSpec
 object BottomSheetBarSpec {
@@ -37,7 +37,7 @@ object BottomSheetBarSpec {
           .textSizeRes(R.dimen.font_size_large)
           .paddingDip(YogaEdge.VERTICAL, 6f)
           .paddingDip(YogaEdge.HORIZONTAL, 16f)
-          .textColor(appTheme.get(ThemeColorType.TERTIARY_TEXT))
+          .textColor(appTheme.getColor(ThemeColor.TERTIARY_TEXT))
           .clickHandler(BottomSheetBar.onSecondaryClickEvent(context)))
     }
     row.child(EmptySpec.create(context).flexGrow(1f))
@@ -50,7 +50,7 @@ object BottomSheetBarSpec {
           .textSizeRes(R.dimen.font_size_large)
           .paddingDip(YogaEdge.VERTICAL, 6f)
           .paddingDip(YogaEdge.HORIZONTAL, 16f)
-          .textColor(appTheme.get(ThemeColorType.TERTIARY_TEXT))
+          .textColor(appTheme.getColor(ThemeColor.TERTIARY_TEXT))
           .clickHandler(BottomSheetBar.onTertiaryClickEvent(context)))
     }
 

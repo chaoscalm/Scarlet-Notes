@@ -16,7 +16,7 @@ import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.common.sheets.OptionItemLayout
 import com.maubis.scarlet.base.common.specs.RoundIcon
-import com.maubis.scarlet.base.common.ui.ThemeColorType
+import com.maubis.scarlet.base.common.ui.ThemeColor
 import com.maubis.scarlet.base.database.entities.Tag
 
 class TagItem(
@@ -30,7 +30,7 @@ class TagItem(
 object TagItemLayoutSpec {
   @OnCreateLayout
   fun onCreate(context: ComponentContext, @Prop tagItem: TagItem): Component {
-    val titleColor = ScarletApp.appTheme.get(ThemeColorType.SECONDARY_TEXT)
+    val titleColor = ScarletApp.appTheme.getColor(ThemeColor.SECONDARY_TEXT)
     val selectedColor = when (ScarletApp.appTheme.isNightTheme()) {
       true -> context.getColor(com.github.bijoysingh.uibasics.R.color.material_blue_400)
       false -> context.getColor(com.github.bijoysingh.uibasics.R.color.material_blue_700)

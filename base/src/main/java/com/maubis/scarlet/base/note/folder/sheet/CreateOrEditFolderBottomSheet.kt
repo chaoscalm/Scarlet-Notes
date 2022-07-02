@@ -12,7 +12,7 @@ import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.common.sheets.openSheet
 import com.maubis.scarlet.base.common.ui.ColorView
-import com.maubis.scarlet.base.common.ui.ThemeColorType
+import com.maubis.scarlet.base.common.ui.ThemeColor
 import com.maubis.scarlet.base.common.ui.ThemedActivity
 import com.maubis.scarlet.base.common.ui.ThemedBottomSheetFragment
 import com.maubis.scarlet.base.common.utils.getEditorActionListener
@@ -39,15 +39,15 @@ class CreateOrEditFolderBottomSheet : ThemedBottomSheetFragment() {
 
   private fun setupTitle(dialog: Dialog) {
     val title = dialog.findViewById<TextView>(R.id.options_title)
-    title.setTextColor(appTheme.get(ThemeColorType.SECONDARY_TEXT))
+    title.setTextColor(appTheme.getColor(ThemeColor.SECONDARY_TEXT))
     title.typeface = appTypeface.title()
     title.setText(if (folder.isNotPersisted()) R.string.folder_sheet_add_note else R.string.folder_sheet_edit_note)
   }
 
   private fun setupNameTextField(dialog: Dialog): EditText {
     val folderNameTextField = dialog.findViewById<EditText>(R.id.enter_folder)
-    folderNameTextField.setTextColor(appTheme.get(ThemeColorType.SECONDARY_TEXT))
-    folderNameTextField.setHintTextColor(appTheme.get(ThemeColorType.HINT_TEXT))
+    folderNameTextField.setTextColor(appTheme.getColor(ThemeColor.SECONDARY_TEXT))
+    folderNameTextField.setHintTextColor(appTheme.getColor(ThemeColor.HINT_TEXT))
     folderNameTextField.typeface = appTypeface.text()
     folderNameTextField.setText(folder.title)
     folderNameTextField.setOnEditorActionListener(getEditorActionListener(

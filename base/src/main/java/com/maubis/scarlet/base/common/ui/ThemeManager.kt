@@ -28,7 +28,7 @@ fun setThemeFromSystem(context: Context) {
 class ThemeManager {
   private lateinit var theme: Theme
   private var listeners = HashSet<WeakReference<ThemeChangeListener>>()
-  private var colors = HashMap<ThemeColorType, Int>()
+  private var colors = HashMap<ThemeColor, Int>()
 
   fun setup(context: Context) {
     theme = getThemeFromPrefs()
@@ -47,40 +47,37 @@ class ThemeManager {
 
   fun shouldDarkenCustomColors() = isNightTheme() && ScarletApp.prefs.darkenCustomColors
 
-  fun get(type: ThemeColorType): Int = colors[type] ?: Color.WHITE
+  fun getColor(type: ThemeColor): Int = colors[type] ?: Color.WHITE
 
-  fun get(context: Context, lightColor: Int, darkColor: Int): Int {
-    return ContextCompat.getColor(context, if (isNightTheme()) darkColor else lightColor)
+  fun getColor(context: Context, theme: Theme, color: ThemeColor): Int {
+    return load(context, theme, color)
   }
 
-  fun get(context: Context, theme: Theme, type: ThemeColorType): Int {
-    return load(context, theme, type)
+  fun getLightOrDarkColor(context: Context, lightColorRes: Int, darkColorRes: Int): Int {
+    return ContextCompat.getColor(context, if (isNightTheme()) darkColorRes else lightColorRes)
   }
 
   fun reload(context: Context) {
     theme = getThemeFromPrefs()
-    for (colorType in ThemeColorType.values()) {
-      colors[colorType] = load(context, theme, colorType)
+    for (color in ThemeColor.values()) {
+      colors[color] = load(context, theme, color)
     }
 
-    if (colors[ThemeColorType.TOOLBAR_BACKGROUND] == colors[ThemeColorType.BACKGROUND]) {
-      colors[ThemeColorType.TOOLBAR_BACKGROUND] = ColorUtil.darkerColor(
-        colors[ThemeColorType.TOOLBAR_BACKGROUND] ?: 0
+    if (colors[ThemeColor.TOOLBAR_BACKGROUND] == colors[ThemeColor.BACKGROUND]) {
+      colors[ThemeColor.TOOLBAR_BACKGROUND] = ColorUtil.darkerColor(
+        colors[ThemeColor.TOOLBAR_BACKGROUND] ?: 0
       )
     }
 
     setMarkdownConfig(context)
-    for (reference in listeners) {
-      val listener = reference.get()
-      if (listener !== null) {
-        listener.onThemeChange(theme)
-      }
+    for (listener in listeners) {
+      listener.get()?.onThemeChange(theme)
     }
   }
 
   private fun setMarkdownConfig(context: Context) {
-    MarkdownConfig.spanConfig.codeTextColor = get(ThemeColorType.SECONDARY_TEXT)
-    MarkdownConfig.spanConfig.codeBackgroundColor = get(context, R.color.code_light, R.color.code_dark)
+    MarkdownConfig.spanConfig.codeTextColor = getColor(ThemeColor.SECONDARY_TEXT)
+    MarkdownConfig.spanConfig.codeBackgroundColor = getLightOrDarkColor(context, R.color.code_light, R.color.code_dark)
     MarkdownConfig.spanConfig.codeBlockLeadingMargin = 8.dpToPixels(context)
     MarkdownConfig.spanConfig.quoteColor = MarkdownConfig.spanConfig.codeBackgroundColor
     MarkdownConfig.spanConfig.separatorColor = MarkdownConfig.spanConfig.codeBackgroundColor
@@ -93,22 +90,22 @@ class ThemeManager {
     return TypedValue.applyDimension(COMPLEX_UNIT_DIP, this.toFloat(), context.resources.displayMetrics).roundToInt()
   }
 
-  private fun load(context: Context, theme: Theme, type: ThemeColorType): Int {
-    val colorResource = when (type) {
-      ThemeColorType.BACKGROUND -> theme.background
-      ThemeColorType.STATUS_BAR -> {
+  private fun load(context: Context, theme: Theme, color: ThemeColor): Int {
+    val colorResource = when (color) {
+      ThemeColor.BACKGROUND -> theme.background
+      ThemeColor.STATUS_BAR -> {
         if (OsVersionUtils.canSetStatusBarTheme()) theme.background
         else theme.statusBarColorFallback ?: theme.background
       }
-      ThemeColorType.PRIMARY_TEXT -> theme.primaryText
-      ThemeColorType.SECONDARY_TEXT -> theme.secondaryText
-      ThemeColorType.TERTIARY_TEXT -> theme.tertiaryText
-      ThemeColorType.HINT_TEXT -> theme.hintText
-      ThemeColorType.DISABLED_TEXT -> theme.disabledText
-      ThemeColorType.ACCENT_TEXT -> theme.accentText
-      ThemeColorType.SECTION_HEADER -> theme.sectionHeader
-      ThemeColorType.TOOLBAR_BACKGROUND -> theme.toolbarBackground
-      ThemeColorType.TOOLBAR_ICON -> theme.toolbarIcon
+      ThemeColor.PRIMARY_TEXT -> theme.primaryText
+      ThemeColor.SECONDARY_TEXT -> theme.secondaryText
+      ThemeColor.TERTIARY_TEXT -> theme.tertiaryText
+      ThemeColor.HINT_TEXT -> theme.hintText
+      ThemeColor.DISABLED_TEXT -> theme.disabledText
+      ThemeColor.ACCENT_TEXT -> theme.accentText
+      ThemeColor.SECTION_HEADER -> theme.sectionHeader
+      ThemeColor.TOOLBAR_BACKGROUND -> theme.toolbarBackground
+      ThemeColor.TOOLBAR_ICON -> theme.toolbarIcon
     }
     return ContextCompat.getColor(context, colorResource)
   }

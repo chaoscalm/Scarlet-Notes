@@ -17,7 +17,7 @@ import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.common.sheets.LithoBottomSheet
 import com.maubis.scarlet.base.common.sheets.getLithoBottomSheetTitle
 import com.maubis.scarlet.base.common.specs.BottomSheetBar
-import com.maubis.scarlet.base.common.ui.ThemeColorType
+import com.maubis.scarlet.base.common.ui.ThemeColor
 
 class AboutBottomSheet : LithoBottomSheet() {
 
@@ -40,35 +40,35 @@ class AboutBottomSheet : LithoBottomSheet() {
           .textSizeRes(R.dimen.font_size_large)
           .marginDip(YogaEdge.BOTTOM, 16f)
           .text(aboutAppDetails)
-          .textColor(appTheme.get(ThemeColorType.TERTIARY_TEXT)))
+          .textColor(appTheme.getColor(ThemeColor.TERTIARY_TEXT)))
       .child(
         Text.create(componentContext)
           .textSizeRes(R.dimen.font_size_xlarge)
           .marginDip(YogaEdge.BOTTOM, 4f)
           .textRes(R.string.about_page_app_version)
           .typeface(appTypeface.title())
-          .textColor(appTheme.get(ThemeColorType.SECTION_HEADER)))
+          .textColor(appTheme.getColor(ThemeColor.SECTION_HEADER)))
       .child(
         Text.create(componentContext)
           .typeface(appTypeface.text())
           .textSizeRes(R.dimen.font_size_large)
           .marginDip(YogaEdge.BOTTOM, 16f)
           .text(getString(R.string.about_page_app_version_number, BuildConfig.VERSION_NAME))
-          .textColor(appTheme.get(ThemeColorType.TERTIARY_TEXT)))
+          .textColor(appTheme.getColor(ThemeColor.TERTIARY_TEXT)))
       .child(
         Text.create(componentContext)
           .textSizeRes(R.dimen.font_size_xlarge)
           .marginDip(YogaEdge.BOTTOM, 4f)
           .textRes(R.string.about_page_license)
           .typeface(appTypeface.title())
-          .textColor(appTheme.get(ThemeColorType.SECTION_HEADER)))
+          .textColor(appTheme.getColor(ThemeColor.SECTION_HEADER)))
       .child(
         Text.create(componentContext)
           .typeface(appTypeface.text())
           .textSizeRes(R.dimen.font_size_large)
           .marginDip(YogaEdge.BOTTOM, 16f)
           .textRes(R.string.about_page_license_description)
-          .textColor(appTheme.get(ThemeColorType.TERTIARY_TEXT)))
+          .textColor(appTheme.getColor(ThemeColor.TERTIARY_TEXT)))
       .child(
         BottomSheetBar.create(componentContext)
           .primaryActionRes(R.string.about_page_license_read_full)
