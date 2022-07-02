@@ -1,17 +1,13 @@
 package com.maubis.scarlet.base.backup
 
 import android.os.Environment
-import androidx.core.content.edit
 import com.google.gson.Gson
-import com.maubis.scarlet.base.ScarletApp.Companion.appPreferences
+import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.backup.data.ExportFileFormat
 import com.maubis.scarlet.base.backup.data.ExportedFolder
 import com.maubis.scarlet.base.backup.data.ExportedNote
 import com.maubis.scarlet.base.backup.data.ExportedTag
-import com.maubis.scarlet.base.backup.ui.sAutoBackupMode
-import com.maubis.scarlet.base.backup.ui.sBackupLockedNotes
-import com.maubis.scarlet.base.backup.ui.sBackupMarkdown
 import com.maubis.scarlet.base.common.utils.formatTimestamp
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.editor.FormatType
@@ -22,8 +18,6 @@ import java.io.File
 import java.io.FileDescriptor
 import java.io.FileOutputStream
 
-const val KEY_AUTO_BACKUP_LAST_TIMESTAMP = "KEY_AUTO_BACKUP_LAST_TIMESTAMP"
-
 const val EXPORT_NOTE_SEPARATOR = "----------------------------------------"
 const val EXPORT_VERSION = 6
 
@@ -33,12 +27,11 @@ const val AUTO_BACKUP_INTERVAL_MS = 1000 * 60 * 60 * 6 // 6 hours update
 object NoteExporter {
   fun tryAutoExport() {
     GlobalScope.launch(Dispatchers.IO) {
-      if (!sAutoBackupMode) {
+      if (!ScarletApp.prefs.performAutomaticBackups) {
         return@launch
       }
-      val lastBackup = appPreferences.getLong(KEY_AUTO_BACKUP_LAST_TIMESTAMP, 0L)
       val lastTimestamp = data.notes.getLastTimestamp()
-      if (lastBackup + AUTO_BACKUP_INTERVAL_MS >= lastTimestamp) {
+      if (ScarletApp.prefs.lastAutomaticBackup + AUTO_BACKUP_INTERVAL_MS >= lastTimestamp) {
         return@launch
       }
 
@@ -47,7 +40,7 @@ object NoteExporter {
         return@launch
       }
       exportFile.writeText(getBackupFileContent())
-      appPreferences.edit { putLong(KEY_AUTO_BACKUP_LAST_TIMESTAMP, System.currentTimeMillis()) }
+      ScarletApp.prefs.lastAutomaticBackup = System.currentTimeMillis()
     }
   }
 
@@ -66,10 +59,10 @@ object NoteExporter {
 
   private fun getBackupFileContent(): String {
     val notesToBeExported = data.notes.getAll()
-      .filter { sBackupLockedNotes || !it.locked }
+      .filter { ScarletApp.prefs.backupLockedNotes || !it.locked }
       .filter { !it.excludeFromBackup }
 
-    if (sBackupMarkdown) {
+    if (ScarletApp.prefs.backupInMarkdown) {
       return getMarkdownBackupFileContent(notesToBeExported)
     }
 

@@ -125,7 +125,7 @@ abstract class FolderChooserBottomSheetBase : LithoBottomSheet() {
       subtitle = 0,
       icon = R.drawable.ic_add_folder,
       listener = {
-        CreateOrEditFolderBottomSheet.openSheet(activity, Folder(ScarletApp.preferences.noteDefaultColor)) { folder ->
+        CreateOrEditFolderBottomSheet.openSheet(activity, Folder(ScarletApp.prefs.noteDefaultColor)) { folder ->
           onFolderSelected(folder)
           refresh(activity, dialog)
         }

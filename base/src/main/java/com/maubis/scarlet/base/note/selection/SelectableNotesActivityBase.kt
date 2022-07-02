@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.maubis.scarlet.base.R
+import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.common.recycler.RecyclerItem
@@ -22,10 +23,6 @@ import com.maubis.scarlet.base.note.folder.SelectorFolderRecyclerItem
 import com.maubis.scarlet.base.note.recycler.NoteAppAdapter
 import com.maubis.scarlet.base.note.recycler.NoteRecyclerItem
 import com.maubis.scarlet.base.note.recycler.getSelectableRecyclerItemControllerList
-import com.maubis.scarlet.base.settings.STORE_KEY_LINE_COUNT
-import com.maubis.scarlet.base.settings.notesSortingTechniquePref
-import com.maubis.scarlet.base.settings.sNoteItemLineCount
-import com.maubis.scarlet.base.settings.sUIUseGridView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -52,7 +49,7 @@ abstract class SelectableNotesActivityBase : SecuredActivity(), INoteSelectorAct
 
   private fun loadNotes() {
     lifecycleScope.launch(Dispatchers.IO) {
-      val notes = sort(getNotes(), notesSortingTechniquePref)
+      val notes = sort(getNotes(), ScarletApp.prefs.notesSortingTechnique)
         .sortedBy { it.folder }
         .map { NoteRecyclerItem(this@SelectableNotesActivityBase, it) }
 
@@ -86,14 +83,10 @@ abstract class SelectableNotesActivityBase : SecuredActivity(), INoteSelectorAct
 
   private fun setupRecyclerView() {
     val isTablet = resources.getBoolean(R.bool.is_tablet)
-    val adapterExtra = Bundle()
-    adapterExtra.putInt(STORE_KEY_LINE_COUNT, sNoteItemLineCount)
-
-    adapter = NoteAppAdapter(this, getSelectableRecyclerItemControllerList(sUIUseGridView, isTablet))
-    adapter.setExtra(adapterExtra)
+    adapter = NoteAppAdapter(this, getSelectableRecyclerItemControllerList(ScarletApp.prefs.displayNotesListAsGrid, isTablet))
     recyclerView = findViewById(R.id.recycler_view)
     recyclerView.adapter = adapter
-    recyclerView.layoutManager = getLayoutManager(sUIUseGridView, isTablet)
+    recyclerView.layoutManager = getLayoutManager(ScarletApp.prefs.displayNotesListAsGrid, isTablet)
     recyclerView.setHasFixedSize(true)
   }
 

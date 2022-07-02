@@ -19,13 +19,13 @@ class EditorOptionsBottomSheet : LithoOptionBottomSheet() {
     items.add(
       LithoOptionsItem(
         title = R.string.ui_options_note_background_color,
-        subtitle = when (sUIUseNoteColorAsBackground) {
+        subtitle = when (ScarletApp.prefs.useNoteColorAsBackground) {
           true -> R.string.ui_options_note_background_color_settings_note
           false -> R.string.ui_options_note_background_color_settings_theme
         },
         icon = R.drawable.ic_color_picker,
         listener = {
-          sUIUseNoteColorAsBackground = !sUIUseNoteColorAsBackground
+          ScarletApp.prefs.useNoteColorAsBackground = !ScarletApp.prefs.useNoteColorAsBackground
           refresh(activity, dialog)
         },
         actionIcon = 0
@@ -34,7 +34,7 @@ class EditorOptionsBottomSheet : LithoOptionBottomSheet() {
       LithoOptionsItem(
         title = R.string.note_option_font_size,
         subtitle = 0,
-        content = activity.getString(R.string.note_option_font_size_subtitle, ScarletApp.preferences.editorTextSize),
+        content = activity.getString(R.string.note_option_font_size_subtitle, ScarletApp.prefs.editorTextSize),
         icon = R.drawable.ic_title,
         listener = {
           openSheet(activity, FontSizeBottomSheet())
@@ -46,10 +46,10 @@ class EditorOptionsBottomSheet : LithoOptionBottomSheet() {
       title = R.string.editor_option_enable_live_markdown,
       subtitle = R.string.editor_option_enable_live_markdown_description,
       icon = R.drawable.ic_realtime_formatting,
-      selected = ScarletApp.preferences.liveMarkdownInEditor,
+      selected = ScarletApp.prefs.liveMarkdownInEditor,
       isSelectable = true,
       listener = {
-        ScarletApp.preferences.liveMarkdownInEditor = !ScarletApp.preferences.liveMarkdownInEditor
+        ScarletApp.prefs.liveMarkdownInEditor = !ScarletApp.prefs.liveMarkdownInEditor
         refresh(componentContext.androidContext, dialog)
       }
     ))
@@ -58,10 +58,10 @@ class EditorOptionsBottomSheet : LithoOptionBottomSheet() {
       title = R.string.editor_option_skip_view_note,
       subtitle = R.string.editor_option_skip_view_note_details,
       icon = R.drawable.ic_redo,
-      selected = ScarletApp.preferences.skipNoteViewer,
+      selected = ScarletApp.prefs.skipNoteViewer,
       isSelectable = true,
       listener = {
-        ScarletApp.preferences.skipNoteViewer = !ScarletApp.preferences.skipNoteViewer
+        ScarletApp.prefs.skipNoteViewer = !ScarletApp.prefs.skipNoteViewer
         refresh(componentContext.androidContext, dialog)
       }
     ))
@@ -69,10 +69,10 @@ class EditorOptionsBottomSheet : LithoOptionBottomSheet() {
       title = R.string.editor_option_move_checked_items,
       subtitle = R.string.editor_option_move_checked_items_description,
       icon = R.drawable.ic_checkbox,
-      selected = ScarletApp.preferences.moveCheckedItems,
+      selected = ScarletApp.prefs.moveCheckedItems,
       isSelectable = true,
       listener = {
-        ScarletApp.preferences.moveCheckedItems = !ScarletApp.preferences.moveCheckedItems
+        ScarletApp.prefs.moveCheckedItems = !ScarletApp.prefs.moveCheckedItems
         refresh(componentContext.androidContext, dialog)
       }
     ))

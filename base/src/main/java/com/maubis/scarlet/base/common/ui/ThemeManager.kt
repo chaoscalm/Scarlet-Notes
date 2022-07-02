@@ -6,27 +6,14 @@ import android.graphics.Color
 import android.util.TypedValue
 import android.util.TypedValue.COMPLEX_UNIT_DIP
 import androidx.core.content.ContextCompat
-import androidx.core.content.edit
 import com.maubis.markdown.MarkdownConfig
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.ScarletApp.Companion.appPreferences
+import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.common.utils.ColorUtil
 import com.maubis.scarlet.base.common.utils.OsVersionUtils
 import com.maubis.scarlet.base.common.utils.logNonCriticalError
 import java.lang.ref.WeakReference
 import kotlin.math.roundToInt
-
-var sThemeLabel: String
-  get() = appPreferences.getString("KEY_APP_THEME", Theme.DARK.name)!!
-  set(value) = appPreferences.edit { putString("KEY_APP_THEME", value) }
-
-var sThemeIsAutomatic: Boolean
-  get() = appPreferences.getBoolean("automatic_theme", false)
-  set(value) = appPreferences.edit { putBoolean("automatic_theme", value) }
-
-var sThemeDarkenCustomColors: Boolean
-  get() = appPreferences.getBoolean("darken_note_color", false)
-  set(value) = appPreferences.edit { putBoolean("darken_note_color", value) }
 
 fun setThemeFromSystem(context: Context) {
   val configuration = context.resources.configuration
@@ -35,10 +22,10 @@ fun setThemeFromSystem(context: Context) {
     Configuration.UI_MODE_NIGHT_YES -> Theme.VERY_DARK.name
     else -> Theme.VERY_DARK.name
   }
-  if (systemBasedTheme === sThemeLabel) {
+  if (systemBasedTheme === ScarletApp.prefs.selectedTheme) {
     return
   }
-  sThemeLabel = systemBasedTheme
+  ScarletApp.prefs.selectedTheme = systemBasedTheme
 }
 
 class ThemeManager {
@@ -61,7 +48,7 @@ class ThemeManager {
 
   fun isNightTheme() = theme.isNightTheme
 
-  fun shouldDarkenCustomColors() = isNightTheme() && sThemeDarkenCustomColors
+  fun shouldDarkenCustomColors() = isNightTheme() && ScarletApp.prefs.darkenCustomColors
 
   fun get(type: ThemeColorType): Int = colors[type] ?: Color.WHITE
 
@@ -132,7 +119,7 @@ class ThemeManager {
   companion object {
     fun getThemeFromStore(): Theme {
       return try {
-        Theme.valueOf(sThemeLabel)
+        Theme.valueOf(ScarletApp.prefs.selectedTheme)
       } catch (exception: Exception) {
         logNonCriticalError(exception)
         Theme.DARK

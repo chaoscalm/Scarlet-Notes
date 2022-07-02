@@ -20,7 +20,6 @@ import com.maubis.scarlet.base.common.recycler.RecyclerItem
 import com.maubis.scarlet.base.common.specs.ToolbarColorConfig
 import com.maubis.scarlet.base.common.ui.SecuredActivity
 import com.maubis.scarlet.base.common.ui.ThemeColorType
-import com.maubis.scarlet.base.common.ui.sThemeIsAutomatic
 import com.maubis.scarlet.base.common.ui.setThemeFromSystem
 import com.maubis.scarlet.base.database.entities.Folder
 import com.maubis.scarlet.base.database.entities.Note
@@ -33,10 +32,7 @@ import com.maubis.scarlet.base.note.folder.FolderRecyclerItem
 import com.maubis.scarlet.base.note.folder.sheet.CreateOrEditFolderBottomSheet
 import com.maubis.scarlet.base.note.recycler.NoteAppAdapter
 import com.maubis.scarlet.base.note.recycler.NoteRecyclerItem
-import com.maubis.scarlet.base.settings.STORE_KEY_LINE_COUNT
 import com.maubis.scarlet.base.settings.SettingsBottomSheet
-import com.maubis.scarlet.base.settings.sNoteItemLineCount
-import com.maubis.scarlet.base.settings.sUIUseGridView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -67,7 +63,7 @@ class MainActivity : SecuredActivity(), INoteActionsActivity {
     views = ActivityMainBinding.inflate(layoutInflater)
     setContentView(views.root)
 
-    if (sThemeIsAutomatic) {
+    if (ScarletApp.prefs.useSystemTheme) {
       setThemeFromSystem(this)
     }
     appTheme.notifyChange(this)
@@ -152,12 +148,8 @@ class MainActivity : SecuredActivity(), INoteActionsActivity {
 
   private fun setupRecyclerView() {
     val isTablet = resources.getBoolean(R.bool.is_tablet)
-    val adapterExtra = Bundle().apply {
-      putInt(STORE_KEY_LINE_COUNT, sNoteItemLineCount)
-    }
-    adapter = NoteAppAdapter(this, sUIUseGridView, isTablet)
-    adapter.setExtra(adapterExtra)
-    views.recyclerView.layoutManager = getLayoutManager(sUIUseGridView, isTablet)
+    adapter = NoteAppAdapter(this, ScarletApp.prefs.displayNotesListAsGrid, isTablet)
+    views.recyclerView.layoutManager = getLayoutManager(ScarletApp.prefs.displayNotesListAsGrid, isTablet)
     views.recyclerView.adapter = adapter
     views.recyclerView.setHasFixedSize(true)
   }

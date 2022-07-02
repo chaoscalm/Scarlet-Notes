@@ -18,7 +18,7 @@ class Note() {
     var uid: Int = 0
     var uuid: UUID = UUID.randomUUID()
     var content: String = emptyList<Format>().toNoteContent()
-    var color: Int = ScarletApp.preferences.noteDefaultColor
+    var color: Int = ScarletApp.prefs.noteDefaultColor
     var state: NoteState = NoteState.DEFAULT
     var timestamp: Long = System.currentTimeMillis()
     var updateTimestamp: Long = timestamp

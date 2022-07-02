@@ -1,27 +1,25 @@
 package com.maubis.scarlet.base.security
 
 import android.os.SystemClock
-import com.maubis.scarlet.base.settings.sSecurityAppLockEnabled
-import com.maubis.scarlet.base.settings.sSecurityAskPinAlways
-import com.maubis.scarlet.base.settings.sSecurityCode
+import com.maubis.scarlet.base.ScarletApp
 
 object PinLockController {
   private var sLastLoginTimeMs = 0L
 
   fun isPinCodeConfigured(): Boolean {
-    return sSecurityCode.isNotEmpty()
+    return ScarletApp.prefs.pinCode.isNotEmpty()
   }
 
   fun needsAppLock(): Boolean {
     // App lock enabled
-    if (isPinCodeConfigured() && sSecurityAppLockEnabled) {
+    if (isPinCodeConfigured() && ScarletApp.prefs.lockApp) {
       return needsLockCheckImpl()
     }
     return false
   }
 
   fun needsLockCheck(): Boolean {
-    if (sSecurityAskPinAlways) {
+    if (ScarletApp.prefs.alwaysNeedToAuthenticate) {
       return true
     }
 

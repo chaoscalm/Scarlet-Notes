@@ -18,6 +18,7 @@ import com.facebook.litho.widget.TextInput
 import com.facebook.yoga.YogaAlign
 import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.R
+import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.common.sheets.LithoBottomSheet
@@ -31,8 +32,6 @@ import com.maubis.scarlet.base.common.utils.showBiometricPrompt
 import com.maubis.scarlet.base.home.MainActivity
 import com.maubis.scarlet.base.security.PinLockController.isPinCodeConfigured
 import com.maubis.scarlet.base.security.PinLockController.needsLockCheck
-import com.maubis.scarlet.base.settings.sSecurityAppLockEnabled
-import com.maubis.scarlet.base.settings.sSecurityCode
 
 data class PincodeSheetData(
   @StringRes val title: Int,
@@ -43,7 +42,7 @@ data class PincodeSheetData(
   val isBiometricEnabled: Boolean = false,
   val onActionClicked: (String) -> Unit = { password ->
     when {
-      password != "" && password == sSecurityCode -> {
+      password != "" && password == ScarletApp.prefs.pinCode -> {
         PinLockController.notifyPinVerified()
         onSuccess()
       }
@@ -163,8 +162,8 @@ class PincodeBottomSheet : LithoBottomSheet() {
           isBiometricEnabled = false,
           isRemoveButtonEnabled = isPinCodeConfigured(),
           onRemoveButtonClick = {
-            sSecurityCode = ""
-            sSecurityAppLockEnabled = false
+            ScarletApp.prefs.pinCode = ""
+            ScarletApp.prefs.lockApp = false
             onCreateSuccess()
 
             if (activity is MainActivity) {
@@ -173,7 +172,7 @@ class PincodeBottomSheet : LithoBottomSheet() {
           },
           onActionClicked = { password: String ->
             if (password.length == 4 && password.toIntOrNull() !== null) {
-              sSecurityCode = password
+              ScarletApp.prefs.pinCode = password
               onCreateSuccess()
             } else {
               Toast.makeText(activity, R.string.security_sheet_pin_not_created, Toast.LENGTH_LONG).show()

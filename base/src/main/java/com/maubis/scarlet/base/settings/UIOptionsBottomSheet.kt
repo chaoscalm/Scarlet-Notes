@@ -1,23 +1,12 @@
 package com.maubis.scarlet.base.settings
 
 import android.app.Dialog
-import androidx.core.content.edit
 import com.facebook.litho.ComponentContext
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp
-import com.maubis.scarlet.base.ScarletApp.Companion.appPreferences
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.common.sheets.*
-import com.maubis.scarlet.base.common.ui.sThemeLabel
 import com.maubis.scarlet.base.home.MainActivity
-
-var sUIUseGridView: Boolean
-  get() = appPreferences.getBoolean("KEY_LIST_VIEW", true)
-  set(isGrid) = appPreferences.edit { putBoolean("KEY_LIST_VIEW", isGrid) }
-
-var sUIUseNoteColorAsBackground: Boolean
-  get() = appPreferences.getBoolean("KEY_NOTE_VIEWER_BG_COLOR", false)
-  set(value) = appPreferences.edit { putBoolean("KEY_NOTE_VIEWER_BG_COLOR", value) }
 
 class UIOptionsBottomSheet : LithoOptionBottomSheet() {
   override fun title(): Int = R.string.home_option_ui_experience
@@ -32,8 +21,8 @@ class UIOptionsBottomSheet : LithoOptionBottomSheet() {
       listener = {
           openSheet(activity, ThemeColorPickerBottomSheet().apply {
               this.onThemeChange = { theme ->
-                  if (sThemeLabel != theme.name) {
-                      sThemeLabel = theme.name
+                  if (ScarletApp.prefs.selectedTheme != theme.name) {
+                      ScarletApp.prefs.selectedTheme = theme.name
                       appTheme.notifyChange(activity)
                       activity.recreate()
                   }
@@ -51,8 +40,8 @@ class UIOptionsBottomSheet : LithoOptionBottomSheet() {
           colors = listOf(
             activity.resources.getIntArray(R.array.bright_colors),
             activity.resources.getIntArray(R.array.bright_colors_accent)),
-          selectedColor = ScarletApp.preferences.noteDefaultColor,
-          onColorSelected = { ScarletApp.preferences.noteDefaultColor = it }
+          selectedColor = ScarletApp.prefs.noteDefaultColor,
+          onColorSelected = { ScarletApp.prefs.noteDefaultColor = it }
         )
         openSheet(activity, ColorPickerBottomSheet().apply { this.config = config })
       }
@@ -64,11 +53,11 @@ class UIOptionsBottomSheet : LithoOptionBottomSheet() {
         subtitle = R.string.home_option_enable_list_view_subtitle,
         icon = R.drawable.ic_list_layout,
         listener = {
-          sUIUseGridView = false
+          ScarletApp.prefs.displayNotesListAsGrid = false
           activity.notifyAdapterExtraChanged()
           refresh(activity, dialog)
         },
-        visible = !isTablet && sUIUseGridView
+        visible = !isTablet && ScarletApp.prefs.displayNotesListAsGrid
       ))
     options.add(
       LithoOptionsItem(
@@ -76,15 +65,15 @@ class UIOptionsBottomSheet : LithoOptionBottomSheet() {
         subtitle = R.string.home_option_enable_grid_view_subtitle,
         icon = R.drawable.ic_staggered_grid,
         listener = {
-          sUIUseGridView = true
+          ScarletApp.prefs.displayNotesListAsGrid = true
           activity.notifyAdapterExtraChanged()
           refresh(activity, dialog)
         },
-        visible = !isTablet && !sUIUseGridView
+        visible = !isTablet && !ScarletApp.prefs.displayNotesListAsGrid
       ))
     options.add(LithoOptionsItem(
       title = R.string.home_option_order_notes,
-      subtitle = notesSortingTechniquePref.label,
+      subtitle = ScarletApp.prefs.notesSortingTechnique.label,
       icon = R.drawable.ic_sort,
       listener = {
         SortingOptionsBottomSheet.openSheet(activity)
@@ -94,7 +83,7 @@ class UIOptionsBottomSheet : LithoOptionBottomSheet() {
     options.add(LithoOptionsItem(
       title = R.string.note_option_number_lines,
       subtitle = 0,
-      content = activity.getString(R.string.note_option_number_lines_subtitle, sNoteItemLineCount),
+      content = activity.getString(R.string.note_option_number_lines_subtitle, ScarletApp.prefs.notePreviewLines),
       icon = R.drawable.ic_text_content,
       listener = {
         openSheet(activity, LineCountBottomSheet())

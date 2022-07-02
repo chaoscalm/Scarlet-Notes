@@ -14,17 +14,15 @@ import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.database.entities.NoteState
 import com.maubis.scarlet.base.editor.INTENT_KEY_NOTE_ID
 import com.maubis.scarlet.base.note.getTextForWidget
-import com.maubis.scarlet.base.settings.sWidgetShowArchivedNotes
-import com.maubis.scarlet.base.settings.sWidgetShowLockedNotes
 
 fun getAvailableNotesForWidgets(): List<Note> {
   val states = mutableListOf(NoteState.DEFAULT, NoteState.FAVOURITE)
-  if (sWidgetShowArchivedNotes) {
+  if (ScarletApp.prefs.showArchivedNotesInWidgets) {
     states.add(NoteState.ARCHIVED)
   }
 
   return ScarletApp.data.notes.getByNoteState(*states.toTypedArray())
-    .filter { note -> (!note.locked || sWidgetShowLockedNotes) }
+    .filter { note -> (!note.locked || ScarletApp.prefs.showLockedNotesInWidgets) }
 }
 
 class RecentNotesWidgetService : RemoteViewsService() {

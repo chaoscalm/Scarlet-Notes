@@ -109,7 +109,7 @@ open class FormatTextViewHolder(context: Context, view: View) : FormatViewHolder
 
   override fun afterTextChanged(text: Editable) {
     text.clearMarkdownSpans()
-    if (ScarletApp.preferences.liveMarkdownInEditor && format.type != FormatType.CODE) {
+    if (ScarletApp.prefs.liveMarkdownInEditor && format.type != FormatType.CODE) {
       text.setFormats(Markdown.getSpanInfo(format.text).spans)
     }
   }

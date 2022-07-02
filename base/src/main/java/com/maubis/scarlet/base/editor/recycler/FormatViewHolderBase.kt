@@ -20,7 +20,6 @@ import com.maubis.scarlet.base.editor.FormatType
 import com.maubis.scarlet.base.editor.INTENT_KEY_NOTE_ID
 import com.maubis.scarlet.base.editor.ViewNoteActivity
 import com.maubis.scarlet.base.settings.AppPreferences.Companion.DEFAULT_TEXT_SIZE
-import com.maubis.scarlet.base.settings.sUIUseNoteColorAsBackground
 
 const val KEY_EDITABLE = "KEY_EDITABLE"
 const val KEY_NOTE_COLOR = "KEY_NOTE_COLOR"
@@ -45,7 +44,7 @@ abstract class FormatViewHolderBase(context: Context, view: View) : RecyclerView
   protected val activity: ViewNoteActivity = context as ViewNoteActivity
 
   override fun populate(data: Format, extra: Bundle?) {
-    val noteColor: Int = extra?.getInt(KEY_NOTE_COLOR) ?: ScarletApp.preferences.noteDefaultColor
+    val noteColor: Int = extra?.getInt(KEY_NOTE_COLOR) ?: ScarletApp.prefs.noteDefaultColor
     val secondaryTextColor: Int
     val tertiaryTextColor: Int
     val iconColor: Int
@@ -53,7 +52,7 @@ abstract class FormatViewHolderBase(context: Context, view: View) : RecyclerView
     val isLightBackground = ColorUtil.isLightColor(noteColor)
     val linkColor: Int
     when {
-      !sUIUseNoteColorAsBackground -> {
+      !ScarletApp.prefs.useNoteColorAsBackground -> {
         secondaryTextColor = appTheme.get(ThemeColorType.SECONDARY_TEXT)
         tertiaryTextColor = appTheme.get(ThemeColorType.TERTIARY_TEXT)
         iconColor = appTheme.get(ThemeColorType.TOOLBAR_ICON)

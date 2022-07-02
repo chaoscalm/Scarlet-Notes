@@ -37,7 +37,7 @@ abstract class ThemedActivity : AppCompatActivity(), ThemeChangeListener {
 
   override fun onConfigurationChanged(configuration: Configuration) {
     super.onConfigurationChanged(configuration)
-    if (!sThemeIsAutomatic) {
+    if (!ScarletApp.prefs.useSystemTheme) {
       return
     }
     setThemeFromSystem(this)
@@ -45,7 +45,7 @@ abstract class ThemedActivity : AppCompatActivity(), ThemeChangeListener {
   }
 
   fun fullScreenView() {
-    if (!ScarletApp.preferences.enableFullscreen) {
+    if (!ScarletApp.prefs.enableFullscreen) {
       return
     }
 

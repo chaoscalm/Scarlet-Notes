@@ -1,34 +1,15 @@
 package com.maubis.scarlet.base.settings
 
 import android.app.Dialog
-import androidx.core.content.edit
 import com.facebook.litho.ComponentContext
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.ScarletApp.Companion.appPreferences
+import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.common.sheets.LithoOptionBottomSheet
 import com.maubis.scarlet.base.common.sheets.LithoOptionsItem
 import com.maubis.scarlet.base.common.ui.ThemedActivity
 import com.maubis.scarlet.base.common.utils.isBiometricAuthAvailable
 import com.maubis.scarlet.base.security.PinLockController.isPinCodeConfigured
 import com.maubis.scarlet.base.security.PincodeBottomSheet
-
-const val KEY_SECURITY_CODE = "KEY_SECURITY_CODE"
-const val KEY_FINGERPRINT_ENABLED = "KEY_FINGERPRINT_ENABLED"
-const val KEY_APP_LOCK_ENABLED = "app_lock_enabled"
-const val KEY_ASK_PIN_ALWAYS = "ask_pin_always"
-
-var sSecurityCode: String
-  get() = appPreferences.getString(KEY_SECURITY_CODE, "")!!
-  set(value) = appPreferences.edit { putString(KEY_SECURITY_CODE, value) }
-var sSecurityBiometricEnabled: Boolean
-  get() = appPreferences.getBoolean(KEY_FINGERPRINT_ENABLED, true)
-  set(value) = appPreferences.edit { putBoolean(KEY_FINGERPRINT_ENABLED, value) }
-var sSecurityAppLockEnabled: Boolean
-  get() = appPreferences.getBoolean(KEY_APP_LOCK_ENABLED, false)
-  set(value) = appPreferences.edit { putBoolean(KEY_APP_LOCK_ENABLED, value) }
-var sSecurityAskPinAlways: Boolean
-  get() = appPreferences.getBoolean(KEY_ASK_PIN_ALWAYS, true)
-  set(value) = appPreferences.edit { putBoolean(KEY_ASK_PIN_ALWAYS, value) }
 
 class SecurityOptionsBottomSheet : LithoOptionBottomSheet() {
   override fun title(): Int = R.string.security_option_title
@@ -62,13 +43,13 @@ class SecurityOptionsBottomSheet : LithoOptionBottomSheet() {
         listener = {
           PincodeBottomSheet.openForVerification(activity,
             onVerifySuccess = {
-              sSecurityAppLockEnabled = !sSecurityAppLockEnabled
+              ScarletApp.prefs.lockApp = !ScarletApp.prefs.lockApp
               refresh(componentContext.androidContext, dialog)
             }
           )
         },
         isSelectable = true,
-        selected = sSecurityAppLockEnabled,
+        selected = ScarletApp.prefs.lockApp,
         actionIcon = R.drawable.ic_selected
       ))
 
@@ -80,13 +61,13 @@ class SecurityOptionsBottomSheet : LithoOptionBottomSheet() {
         listener = {
           PincodeBottomSheet.openForVerification(activity,
             onVerifySuccess = {
-              sSecurityAskPinAlways = !sSecurityAskPinAlways
+              ScarletApp.prefs.alwaysNeedToAuthenticate = !ScarletApp.prefs.alwaysNeedToAuthenticate
               refresh(componentContext.androidContext, dialog)
             }
           )
         },
         isSelectable = true,
-        selected = sSecurityAskPinAlways,
+        selected = ScarletApp.prefs.alwaysNeedToAuthenticate,
         actionIcon = R.drawable.ic_selected
       ))
 
@@ -98,14 +79,14 @@ class SecurityOptionsBottomSheet : LithoOptionBottomSheet() {
         listener = {
           PincodeBottomSheet.openForVerification(activity,
             onVerifySuccess = {
-              sSecurityBiometricEnabled = !sSecurityBiometricEnabled
+              ScarletApp.prefs.authenticateWithBiometric = !ScarletApp.prefs.authenticateWithBiometric
               refresh(componentContext.androidContext, dialog)
             }
           )
         },
         visible = isBiometricAuthAvailable(requireContext()),
         isSelectable = true,
-        selected = sSecurityBiometricEnabled
+        selected = ScarletApp.prefs.authenticateWithBiometric
       ))
     return options
   }

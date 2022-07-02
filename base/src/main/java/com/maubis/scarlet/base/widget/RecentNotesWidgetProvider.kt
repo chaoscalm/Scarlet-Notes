@@ -12,12 +12,11 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.RemoteViews
 import com.maubis.scarlet.base.R
+import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.editor.CreateListNoteActivity
 import com.maubis.scarlet.base.editor.EditNoteActivity
 import com.maubis.scarlet.base.editor.ViewNoteActivity
 import com.maubis.scarlet.base.home.MainActivity
-import com.maubis.scarlet.base.settings.sWidgetBackgroundColor
-import com.maubis.scarlet.base.settings.sWidgetShowToolbar
 
 class RecentNotesWidgetProvider : AppWidgetProvider() {
 
@@ -29,8 +28,8 @@ class RecentNotesWidgetProvider : AppWidgetProvider() {
       intent.data = Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME))
       views.setRemoteAdapter(R.id.list, intent)
 
-      views.setInt(R.id.widget_background, "setBackgroundColor", sWidgetBackgroundColor)
-      views.setViewVisibility(R.id.toolbar, if (sWidgetShowToolbar) VISIBLE else GONE)
+      views.setInt(R.id.widget_background, "setBackgroundColor", ScarletApp.prefs.recentNotesWidgetBackground)
+      views.setViewVisibility(R.id.toolbar, if (ScarletApp.prefs.recentNotesWidgetShowToolbar) VISIBLE else GONE)
 
       val noteIntent = Intent(context, ViewNoteActivity::class.java)
       noteIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)

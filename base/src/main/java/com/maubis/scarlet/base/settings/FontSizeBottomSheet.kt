@@ -31,17 +31,17 @@ class FontSizeBottomSheet : LithoBottomSheet() {
           .marginDip(YogaEdge.HORIZONTAL, 0f))
       .child(
         Text.create(componentContext)
-          .textSizeDip(ScarletApp.preferences.editorTextSize.toFloat())
+          .textSizeDip(ScarletApp.prefs.editorTextSize.toFloat())
           .marginDip(YogaEdge.BOTTOM, 16f)
           .typeface(appTypeface.text())
           .textRes(R.string.note_option_font_size_example)
           .textColor(appTheme.get(ThemeColorType.TERTIARY_TEXT)))
       .child(CounterChooser.create(componentContext)
-               .value(ScarletApp.preferences.editorTextSize)
+               .value(ScarletApp.prefs.editorTextSize)
                .minValue(12)
                .maxValue(24)
                .onValueChange { value ->
-                 ScarletApp.preferences.editorTextSize = value
+                 ScarletApp.prefs.editorTextSize = value
                  refresh(activity, dialog)
                }
                .paddingDip(YogaEdge.VERTICAL, 16f))

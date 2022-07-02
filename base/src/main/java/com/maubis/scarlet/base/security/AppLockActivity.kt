@@ -6,10 +6,10 @@ import com.facebook.litho.Component
 import com.facebook.litho.ComponentContext
 import com.facebook.litho.LithoView
 import com.maubis.scarlet.base.R
+import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.common.ui.ThemedActivity
 import com.maubis.scarlet.base.common.utils.isBiometricEnabled
 import com.maubis.scarlet.base.common.utils.showBiometricPrompt
-import com.maubis.scarlet.base.settings.sSecurityCode
 
 class AppLockActivity : ThemedActivity() {
   lateinit var context: Context
@@ -33,7 +33,7 @@ class AppLockActivity : ThemedActivity() {
         passCodeEntered = text
       }
       .onClick {
-        if (passCodeEntered.length == 4 && sSecurityCode == passCodeEntered) {
+        if (passCodeEntered.length == 4 && ScarletApp.prefs.pinCode == passCodeEntered) {
           PinLockController.notifyPinVerified()
           tryClosingTheKeyboard()
           finish()

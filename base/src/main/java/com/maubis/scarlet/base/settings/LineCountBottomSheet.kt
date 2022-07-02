@@ -1,27 +1,17 @@
 package com.maubis.scarlet.base.settings
 
 import android.app.Dialog
-import androidx.core.content.edit
 import com.facebook.litho.Column
 import com.facebook.litho.Component
 import com.facebook.litho.ComponentContext
 import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.ScarletApp.Companion.appPreferences
+import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.common.sheets.LithoBottomSheet
 import com.maubis.scarlet.base.common.sheets.getLithoBottomSheetTitle
 import com.maubis.scarlet.base.common.specs.BottomSheetBar
 import com.maubis.scarlet.base.common.specs.CounterChooser
 import com.maubis.scarlet.base.home.MainActivity
-
-const val STORE_KEY_LINE_COUNT = "KEY_LINE_COUNT"
-const val LINE_COUNT_DEFAULT = 7
-const val LINE_COUNT_MIN = 2
-const val LINE_COUNT_MAX = 15
-
-var sNoteItemLineCount: Int
-  get() = appPreferences.getInt(STORE_KEY_LINE_COUNT, LINE_COUNT_DEFAULT)
-  set(value) = appPreferences.edit { putInt(STORE_KEY_LINE_COUNT, value) }
 
 class LineCountBottomSheet : LithoBottomSheet() {
 
@@ -36,11 +26,11 @@ class LineCountBottomSheet : LithoBottomSheet() {
           .textRes(R.string.note_option_number_lines)
           .marginDip(YogaEdge.HORIZONTAL, 0f))
       .child(CounterChooser.create(componentContext)
-               .value(sNoteItemLineCount)
-               .minValue(LINE_COUNT_MIN)
-               .maxValue(LINE_COUNT_MAX)
+               .value(ScarletApp.prefs.notePreviewLines)
+               .minValue(2)
+               .maxValue(15)
                .onValueChange { value ->
-                 sNoteItemLineCount = value
+                 ScarletApp.prefs.notePreviewLines = value
                  refresh(activity, dialog)
                  activity.notifyAdapterExtraChanged()
                }

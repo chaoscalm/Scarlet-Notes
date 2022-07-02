@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.widget.RemoteViews
 import androidx.core.content.ContextCompat
 import com.maubis.scarlet.base.R
+import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.common.utils.ColorUtil
 import com.maubis.scarlet.base.common.utils.sort
@@ -19,8 +20,6 @@ import com.maubis.scarlet.base.editor.ViewNoteActivity
 import com.maubis.scarlet.base.note.getTextForWidget
 import com.maubis.scarlet.base.note.selection.INoteSelectorActivity
 import com.maubis.scarlet.base.note.selection.SelectableNotesActivityBase
-import com.maubis.scarlet.base.settings.notesSortingTechniquePref
-import com.maubis.scarlet.base.settings.sWidgetShowLockedNotes
 
 class WidgetConfigureActivity : SelectableNotesActivityBase(), INoteSelectorActivity {
 
@@ -47,7 +46,7 @@ class WidgetConfigureActivity : SelectableNotesActivityBase(), INoteSelectorActi
   }
 
   override fun getNotes(): List<Note> {
-    return sort(getAvailableNotesForWidgets(), notesSortingTechniquePref)
+    return sort(getAvailableNotesForWidgets(), ScarletApp.prefs.notesSortingTechnique)
   }
 
   override fun onNoteClicked(note: Note) {
@@ -73,7 +72,7 @@ class WidgetConfigureActivity : SelectableNotesActivityBase(), INoteSelectorActi
     fun createNoteWidget(context: Context, widget: Widget) {
       val note = data.notes.getByUUID(widget.noteUuid)
       val appWidgetManager = AppWidgetManager.getInstance(context)
-      if (note === null || (note.locked && !sWidgetShowLockedNotes)) {
+      if (note === null || (note.locked && !ScarletApp.prefs.showLockedNotesInWidgets)) {
         val views = RemoteViews(context.packageName, R.layout.widget_invalid_note)
         appWidgetManager.updateAppWidget(widget.widgetId, views)
         return

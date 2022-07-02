@@ -15,6 +15,7 @@ import com.maubis.markdown.Markdown
 import com.maubis.markdown.MarkdownConfig
 import com.maubis.markdown.spannable.*
 import com.maubis.scarlet.base.R
+import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.ScarletApp.Companion.imageStorage
 import com.maubis.scarlet.base.common.recycler.RecyclerItem
@@ -23,7 +24,6 @@ import com.maubis.scarlet.base.database.entities.NoteState
 import com.maubis.scarlet.base.note.getFullTextForDirectMarkdownRender
 import com.maubis.scarlet.base.note.getTitleForSharing
 import com.maubis.scarlet.base.note.isLockedButAppUnlocked
-import com.maubis.scarlet.base.settings.sNoteItemLineCount
 
 open class NoteRecyclerViewHolderBase(context: Context, view: View) : RecyclerViewHolder<RecyclerItem>(context, view) {
 
@@ -63,7 +63,7 @@ open class NoteRecyclerViewHolderBase(context: Context, view: View) : RecyclerVi
   private fun setContent(item: NoteRecyclerItem) {
     content.setTypeface(appTypeface.text(), Typeface.NORMAL)
     content.text = getLockedAwarePreviewText(item.note)
-    content.maxLines = sNoteItemLineCount
+    content.maxLines = ScarletApp.prefs.notePreviewLines
     content.setTextColor(item.contentColor)
   }
 

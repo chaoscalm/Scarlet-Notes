@@ -1,7 +1,6 @@
 package com.maubis.scarlet.base
 
 import android.app.Application
-import android.content.SharedPreferences
 import android.util.Log
 import com.evernote.android.job.JobManager
 import com.facebook.soloader.SoLoader
@@ -17,9 +16,7 @@ class ScarletApp : Application() {
   override fun onCreate() {
     super.onCreate()
     data = ApplicationData(this)
-
-    appPreferences = getSharedPreferences("scarlet_prefs", MODE_PRIVATE)
-    preferences = AppPreferences(appPreferences)
+    prefs = AppPreferences(getSharedPreferences("scarlet_prefs", MODE_PRIVATE))
 
     SoLoader.init(this, false)
     try {
@@ -41,8 +38,7 @@ class ScarletApp : Application() {
     lateinit var data: ApplicationData
     lateinit var imageStorage: ImageStore
 
-    lateinit var appPreferences: SharedPreferences
-    lateinit var preferences: AppPreferences
+    lateinit var prefs: AppPreferences
 
     lateinit var appTheme: ThemeManager
     lateinit var appTypeface: TypefaceController

@@ -11,6 +11,7 @@ import com.facebook.litho.annotations.Prop
 import com.facebook.yoga.YogaAlign
 import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.R
+import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.common.sheets.LithoBottomSheet
 import com.maubis.scarlet.base.common.sheets.LithoOptionsItem
@@ -21,8 +22,6 @@ import com.maubis.scarlet.base.common.specs.EmptySpec
 import com.maubis.scarlet.base.common.specs.RoundIcon
 import com.maubis.scarlet.base.common.ui.Theme
 import com.maubis.scarlet.base.common.ui.ThemeManager.Companion.getThemeFromStore
-import com.maubis.scarlet.base.common.ui.sThemeDarkenCustomColors
-import com.maubis.scarlet.base.common.ui.sThemeIsAutomatic
 import com.maubis.scarlet.base.common.ui.setThemeFromSystem
 import com.maubis.scarlet.base.common.utils.OsVersionUtils
 
@@ -91,13 +90,13 @@ class ThemeColorPickerBottomSheet : LithoBottomSheet() {
               icon = R.drawable.ic_color_picker,
               listener = {},
               isSelectable = true,
-              selected = sThemeIsAutomatic,
+              selected = ScarletApp.prefs.useSystemTheme,
               actionIcon = 0
             ))
           .onClick {
             val context = componentContext.androidContext as AppCompatActivity
-            sThemeIsAutomatic = !sThemeIsAutomatic
-            if (sThemeIsAutomatic) {
+            ScarletApp.prefs.useSystemTheme = !ScarletApp.prefs.useSystemTheme
+            if (ScarletApp.prefs.useSystemTheme) {
               setThemeFromSystem(context)
               onThemeChange(appTheme.get())
             }
@@ -115,17 +114,17 @@ class ThemeColorPickerBottomSheet : LithoBottomSheet() {
               icon = R.drawable.ic_dark_mode,
               listener = {},
               isSelectable = true,
-              selected = sThemeDarkenCustomColors,
+              selected = ScarletApp.prefs.darkenCustomColors,
               actionIcon = 0
             ))
           .onClick {
             val activity = componentContext.androidContext as AppCompatActivity
-            sThemeDarkenCustomColors = !sThemeDarkenCustomColors
+            ScarletApp.prefs.darkenCustomColors = !ScarletApp.prefs.darkenCustomColors
             activity.recreate()
           })
     }
 
-    if (!sThemeIsAutomatic) {
+    if (!ScarletApp.prefs.useSystemTheme) {
       var flex: Row.Builder? = null
       Theme.values().forEachIndexed { index, theme ->
         if (index % 4 == 0) {

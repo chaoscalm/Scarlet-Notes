@@ -13,8 +13,6 @@ import com.maubis.scarlet.base.editor.EditNoteActivity
 import com.maubis.scarlet.base.editor.FormatType
 import com.maubis.scarlet.base.security.PinLockController.needsLockCheck
 import com.maubis.scarlet.base.security.PincodeBottomSheet
-import com.maubis.scarlet.base.settings.sSecurityAppLockEnabled
-import com.maubis.scarlet.base.settings.sWidgetShowLockedNotes
 
 /**************************************************************************************
  ************* Content and Display Information Functions Functions ********************
@@ -62,7 +60,7 @@ fun Note.getTextForSharing(): String {
   }
 
   val text = stringBuilder.toString().trim()
-  if (ScarletApp.preferences.showNotesUuids) {
+  if (ScarletApp.prefs.showNotesUuids) {
     return "`$uuid`\n\n$text"
   }
   return text
@@ -76,18 +74,18 @@ fun Note.getImageFile(): String {
 
 fun Note.getFullText(): String {
   val fullText = contentAsFormats().joinToString(separator = "\n") { it.markdownText }.trim()
-  if (ScarletApp.preferences.showNotesUuids) {
+  if (ScarletApp.prefs.showNotesUuids) {
     return "`$uuid`\n$fullText"
   }
   return fullText
 }
 
 fun Note.isLockedButAppUnlocked(): Boolean {
-  return this.locked && !needsLockCheck() && sSecurityAppLockEnabled
+  return this.locked && !needsLockCheck() && ScarletApp.prefs.lockApp
 }
 
 fun Note.getTextForWidget(): CharSequence {
-  if (locked && !sWidgetShowLockedNotes) {
+  if (locked && !ScarletApp.prefs.showLockedNotesInWidgets) {
     return "*********************************************"
   }
 

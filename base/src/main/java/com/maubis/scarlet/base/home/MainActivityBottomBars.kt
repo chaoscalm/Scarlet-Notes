@@ -59,7 +59,7 @@ object MainActivityBottomBarSpec {
         row.child(bottomBarRoundIcon(context, colorConfig)
           .iconRes(R.drawable.ic_add_folder)
           .onClick {
-            CreateOrEditFolderBottomSheet.openSheet(activity, Folder(ScarletApp.preferences.noteDefaultColor)) {
+            CreateOrEditFolderBottomSheet.openSheet(activity, Folder(ScarletApp.prefs.noteDefaultColor)) {
               activity.refreshList()
             }
           })

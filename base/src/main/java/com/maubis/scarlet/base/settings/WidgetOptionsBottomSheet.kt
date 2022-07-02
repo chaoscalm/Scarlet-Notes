@@ -6,34 +6,13 @@ import android.appwidget.AppWidgetManager
 import android.content.ComponentName
 import android.content.Intent
 import android.graphics.Color
-import androidx.core.content.edit
 import com.facebook.litho.ComponentContext
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.ScarletApp.Companion.appPreferences
+import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.common.sheets.*
 import com.maubis.scarlet.base.home.MainActivity
 import com.maubis.scarlet.base.widget.NoteWidgetProvider
 import com.maubis.scarlet.base.widget.RecentNotesWidgetProvider
-
-const val STORE_KEY_WIDGET_SHOW_LOCKED_NOTES = "widget_show_locked_notes"
-var sWidgetShowLockedNotes: Boolean
-  get() = appPreferences.getBoolean(STORE_KEY_WIDGET_SHOW_LOCKED_NOTES, false)
-  set(value) = appPreferences.edit { putBoolean(STORE_KEY_WIDGET_SHOW_LOCKED_NOTES, value) }
-
-const val STORE_KEY_WIDGET_SHOW_ARCHIVED_NOTES = "widget_show_archived_notes"
-var sWidgetShowArchivedNotes: Boolean
-  get() = appPreferences.getBoolean(STORE_KEY_WIDGET_SHOW_ARCHIVED_NOTES, true)
-  set(value) = appPreferences.edit { putBoolean(STORE_KEY_WIDGET_SHOW_ARCHIVED_NOTES, value) }
-
-const val STORE_KEY_WIDGET_BACKGROUND_COLOR = "widget_background_color_v1"
-var sWidgetBackgroundColor: Int
-  get() = appPreferences.getInt(STORE_KEY_WIDGET_BACKGROUND_COLOR, 0x65000000)
-  set(value) = appPreferences.edit { putInt(STORE_KEY_WIDGET_BACKGROUND_COLOR, value) }
-
-const val STORE_KEY_WIDGET_SHOW_TOOLBAR = "widget_show_toolbar"
-var sWidgetShowToolbar: Boolean
-  get() = appPreferences.getBoolean(STORE_KEY_WIDGET_SHOW_TOOLBAR, true)
-  set(value) = appPreferences.edit { putBoolean(STORE_KEY_WIDGET_SHOW_TOOLBAR, value) }
 
 class WidgetOptionsBottomSheet : LithoOptionBottomSheet() {
   override fun title(): Int = R.string.home_option_widget_options_title
@@ -47,12 +26,12 @@ class WidgetOptionsBottomSheet : LithoOptionBottomSheet() {
         subtitle = R.string.widget_option_show_locked_notes_details,
         icon = R.drawable.ic_lock,
         listener = {
-          sWidgetShowLockedNotes = !sWidgetShowLockedNotes
+          ScarletApp.prefs.showLockedNotesInWidgets = !ScarletApp.prefs.showLockedNotesInWidgets
           notifyWidgetConfigChanged(activity)
           refresh(activity, dialog)
         },
         isSelectable = true,
-        selected = sWidgetShowLockedNotes
+        selected = ScarletApp.prefs.showLockedNotesInWidgets
       ))
     options.add(
       LithoOptionsItem(
@@ -60,12 +39,12 @@ class WidgetOptionsBottomSheet : LithoOptionBottomSheet() {
         subtitle = R.string.widget_option_show_archived_notes_details,
         icon = R.drawable.ic_archive,
         listener = {
-          sWidgetShowArchivedNotes = !sWidgetShowArchivedNotes
+          ScarletApp.prefs.showArchivedNotesInWidgets = !ScarletApp.prefs.showArchivedNotesInWidgets
           notifyWidgetConfigChanged(activity)
           refresh(activity, dialog)
         },
         isSelectable = true,
-        selected = sWidgetShowArchivedNotes
+        selected = ScarletApp.prefs.showArchivedNotesInWidgets
       ))
     options.add(
       LithoOptionsItem(
@@ -73,12 +52,12 @@ class WidgetOptionsBottomSheet : LithoOptionBottomSheet() {
         subtitle = R.string.widget_option_show_toolbar_details,
         icon = R.drawable.ic_staggered_grid,
         listener = {
-          sWidgetShowToolbar = !sWidgetShowToolbar
+          ScarletApp.prefs.recentNotesWidgetShowToolbar = !ScarletApp.prefs.recentNotesWidgetShowToolbar
           notifyAllNotesConfigChanged(activity)
           refresh(activity, dialog)
         },
         isSelectable = true,
-        selected = sWidgetShowToolbar
+        selected = ScarletApp.prefs.recentNotesWidgetShowToolbar
       ))
 
     options.add(
@@ -90,10 +69,10 @@ class WidgetOptionsBottomSheet : LithoOptionBottomSheet() {
           openSheet(activity, ColorPickerBottomSheet().apply {
             config = ColorPickerDefaultController(
               title = R.string.widget_option_background_color,
-              selectedColor = sWidgetBackgroundColor,
+              selectedColor = ScarletApp.prefs.recentNotesWidgetBackground,
               colors = listOf(intArrayOf(Color.TRANSPARENT, 0x30000000, 0x65000000, 0xA0000000.toInt(), 0xC0000000.toInt())),
               onColorSelected = {
-                sWidgetBackgroundColor = it
+                ScarletApp.prefs.recentNotesWidgetBackground = it
                 notifyAllNotesConfigChanged(activity)
               },
               columns = 6)

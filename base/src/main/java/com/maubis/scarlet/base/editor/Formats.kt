@@ -42,7 +42,7 @@ object Formats {
   }
 
   fun sortChecklistsIfAllowed(formats: List<Format>): List<Format> {
-    if (!ScarletApp.preferences.moveCheckedItems) {
+    if (!ScarletApp.prefs.moveCheckedItems) {
       return formats
     }
 

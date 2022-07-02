@@ -20,11 +20,11 @@ class DeveloperOptionsBottomSheet : LithoOptionBottomSheet() {
         subtitle = R.string.internal_settings_enable_fullscreen_description,
         icon = R.drawable.ic_staggered_grid,
         listener = {
-          ScarletApp.preferences.enableFullscreen = !ScarletApp.preferences.enableFullscreen
+          ScarletApp.prefs.enableFullscreen = !ScarletApp.prefs.enableFullscreen
           refresh(activity, dialog)
         },
         isSelectable = true,
-        selected = ScarletApp.preferences.enableFullscreen
+        selected = ScarletApp.prefs.enableFullscreen
       ))
     options.add(
       LithoOptionsItem(
@@ -32,11 +32,11 @@ class DeveloperOptionsBottomSheet : LithoOptionBottomSheet() {
         subtitle = R.string.internal_settings_show_uuid_description,
         icon = R.drawable.ic_code_inline,
         listener = {
-          ScarletApp.preferences.showNotesUuids = !ScarletApp.preferences.showNotesUuids
+          ScarletApp.prefs.showNotesUuids = !ScarletApp.prefs.showNotesUuids
           refresh(activity, dialog)
         },
         isSelectable = true,
-        selected = ScarletApp.preferences.showNotesUuids
+        selected = ScarletApp.prefs.showNotesUuids
       ))
     return options
   }

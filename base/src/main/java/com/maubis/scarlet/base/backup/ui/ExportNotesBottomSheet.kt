@@ -6,7 +6,6 @@ import android.net.Uri
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts.CreateDocument
-import androidx.core.content.edit
 import androidx.lifecycle.lifecycleScope
 import com.facebook.litho.Column
 import com.facebook.litho.Component
@@ -22,21 +21,6 @@ import com.maubis.scarlet.base.home.MainActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-
-const val STORE_KEY_BACKUP_MARKDOWN = "KEY_BACKUP_MARKDOWN"
-var sBackupMarkdown: Boolean
-  get() = ScarletApp.appPreferences.getBoolean(STORE_KEY_BACKUP_MARKDOWN, false)
-  set(value) = ScarletApp.appPreferences.edit { putBoolean(STORE_KEY_BACKUP_MARKDOWN, value) }
-
-const val STORE_KEY_BACKUP_LOCKED = "KEY_BACKUP_LOCKED"
-var sBackupLockedNotes: Boolean
-  get() = ScarletApp.appPreferences.getBoolean(STORE_KEY_BACKUP_LOCKED, true)
-  set(value) = ScarletApp.appPreferences.edit { putBoolean(STORE_KEY_BACKUP_LOCKED, value) }
-
-const val STORE_KEY_AUTO_BACKUP_MODE = "KEY_AUTO_BACKUP_MODE"
-var sAutoBackupMode: Boolean
-  get() = ScarletApp.appPreferences.getBoolean(STORE_KEY_AUTO_BACKUP_MODE, false)
-  set(value) = ScarletApp.appPreferences.edit { putBoolean(STORE_KEY_AUTO_BACKUP_MODE, value) }
 
 class ExportNotesBottomSheet : LithoBottomSheet() {
   private val saveFileLauncher = registerForActivityResult(CreateDocument(), this::performManualBackup)
@@ -70,7 +54,7 @@ class ExportNotesBottomSheet : LithoBottomSheet() {
         .primaryActionRes(R.string.import_export_layout_export_action)
         .onPrimaryClick {
           try {
-            val suggestedFileName = if (sBackupMarkdown) {
+            val suggestedFileName = if (ScarletApp.prefs.backupInMarkdown) {
               NoteExporter.getDefaultMarkdownExportFileName()
             } else {
               NoteExporter.getDefaultManualBackupFileName()
@@ -94,18 +78,18 @@ class ExportNotesBottomSheet : LithoBottomSheet() {
         title = R.string.home_option_export_markdown,
         subtitle = R.string.home_option_export_markdown_subtitle,
         icon = R.drawable.ic_markdown,
-        listener = { sBackupMarkdown = !sBackupMarkdown },
+        listener = { ScarletApp.prefs.backupInMarkdown = !ScarletApp.prefs.backupInMarkdown },
         isSelectable = true,
-        selected = sBackupMarkdown
+        selected = ScarletApp.prefs.backupInMarkdown
       ))
     options.add(
       LithoOptionsItem(
         title = R.string.import_export_locked,
         subtitle = R.string.import_export_locked_details,
         icon = R.drawable.ic_lock,
-        listener = { sBackupLockedNotes = !sBackupLockedNotes },
+        listener = { ScarletApp.prefs.backupLockedNotes = !ScarletApp.prefs.backupLockedNotes },
         isSelectable = true,
-        selected = sBackupLockedNotes
+        selected = ScarletApp.prefs.backupLockedNotes
       ))
     options.add(
       LithoOptionsItem(
@@ -115,13 +99,13 @@ class ExportNotesBottomSheet : LithoBottomSheet() {
         listener = {
           val hasRequiredPermissions = PermissionUtils.hasExternalStorageAccess(requireContext())
           when {
-            sAutoBackupMode -> sAutoBackupMode = false
-            hasRequiredPermissions -> sAutoBackupMode = true
+            ScarletApp.prefs.performAutomaticBackups -> ScarletApp.prefs.performAutomaticBackups = false
+            hasRequiredPermissions -> ScarletApp.prefs.performAutomaticBackups = true
             else -> openSheet(activity, StoragePermissionBottomSheet())
           }
         },
         isSelectable = true,
-        selected = sAutoBackupMode
+        selected = ScarletApp.prefs.performAutomaticBackups
       ))
     return options
   }
