@@ -16,7 +16,7 @@ class NoNotesNoticeRecyclerHolder(context: Context, itemView: View) : RecyclerVi
   private val title: TextView = itemView.findViewById(R.id.title)
   private val description: TextView = itemView.findViewById(R.id.description)
 
-  override fun populate(data: RecyclerItem, extra: Bundle) {
+  override fun populate(data: RecyclerItem, extra: Bundle?) {
     setFullSpan()
     setHeaderText()
     setDescriptionText()
