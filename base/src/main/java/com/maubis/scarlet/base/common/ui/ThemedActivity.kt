@@ -7,10 +7,10 @@ import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.WindowCompat
 import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.common.utils.ColorUtil
-import com.maubis.scarlet.base.common.utils.OsVersionUtils
 
 abstract class ThemedActivity : AppCompatActivity(), ThemeChangeListener {
 
@@ -24,9 +24,10 @@ abstract class ThemedActivity : AppCompatActivity(), ThemeChangeListener {
     appTheme.registerChangeListener(this)
   }
 
-  fun updateStatusBarTheme(backgroundColor: Int = getStatusBarColor()) {
-    setStatusBarColor(backgroundColor)
-    setStatusBarTextColor(backgroundColor)
+  fun updateStatusBarTheme(backgroundColor: Int = appTheme.getColor(ThemeColor.STATUS_BAR)) {
+    val insetsController = WindowCompat.getInsetsController(window, window.decorView)
+    insetsController.isAppearanceLightStatusBars = ColorUtil.isLightColor(backgroundColor)
+    window.statusBarColor = backgroundColor
   }
 
   override fun onResume() {
@@ -57,24 +58,7 @@ abstract class ThemedActivity : AppCompatActivity(), ThemeChangeListener {
         View.SYSTEM_UI_FLAG_FULLSCREEN
   }
 
-  private fun setStatusBarColor(color: Int) {
-    window.statusBarColor = color
-  }
-
-  private fun setStatusBarTextColor(backgroundColor: Int) {
-    if (OsVersionUtils.canSetStatusBarTheme()) {
-      val view = window.decorView
-      val visibilityFlags = if (ColorUtil.isLightColor(backgroundColor))
-        view.systemUiVisibility or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-      else
-        view.systemUiVisibility and View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR.inv()
-      view.systemUiVisibility = visibilityFlags
-    }
-  }
-
   fun getThemeColor(): Int = appTheme.getColor(ThemeColor.BACKGROUND)
-
-  fun getStatusBarColor(): Int = appTheme.getColor(ThemeColor.STATUS_BAR)
 
   fun tryClosingTheKeyboard() {
     try {
