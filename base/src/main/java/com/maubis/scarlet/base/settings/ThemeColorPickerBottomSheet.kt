@@ -21,7 +21,7 @@ import com.maubis.scarlet.base.common.specs.BottomSheetBar
 import com.maubis.scarlet.base.common.specs.EmptySpec
 import com.maubis.scarlet.base.common.specs.RoundIcon
 import com.maubis.scarlet.base.common.ui.Theme
-import com.maubis.scarlet.base.common.ui.ThemeManager.Companion.getThemeFromStore
+import com.maubis.scarlet.base.common.ui.ThemeManager.Companion.getThemeFromPrefs
 import com.maubis.scarlet.base.common.ui.setThemeFromSystem
 import com.maubis.scarlet.base.common.utils.OsVersionUtils
 
@@ -138,7 +138,7 @@ class ThemeColorPickerBottomSheet : LithoBottomSheet() {
         flex?.child(
           ThemeColorPickerItem.create(componentContext)
             .theme(theme)
-            .isSelected(theme.name == getThemeFromStore().name)
+            .isSelected(theme.name == getThemeFromPrefs().name)
             .onThemeSelected { newTheme ->
               onThemeChange(newTheme)
             }

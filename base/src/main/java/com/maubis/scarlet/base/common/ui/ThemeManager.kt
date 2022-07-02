@@ -22,9 +22,6 @@ fun setThemeFromSystem(context: Context) {
     Configuration.UI_MODE_NIGHT_YES -> Theme.VERY_DARK.name
     else -> Theme.VERY_DARK.name
   }
-  if (systemBasedTheme === ScarletApp.prefs.selectedTheme) {
-    return
-  }
   ScarletApp.prefs.selectedTheme = systemBasedTheme
 }
 
@@ -34,15 +31,15 @@ class ThemeManager {
   private var colors = HashMap<ThemeColorType, Int>()
 
   fun setup(context: Context) {
-    theme = getThemeFromStore()
-    notifyChange(context)
+    theme = getThemeFromPrefs()
+    reload(context)
   }
 
   fun get(): Theme {
     return theme
   }
 
-  fun register(listener: ThemeChangeListener) {
+  fun registerChangeListener(listener: ThemeChangeListener) {
     listeners.add(WeakReference(listener))
   }
 
@@ -60,8 +57,8 @@ class ThemeManager {
     return load(context, theme, type)
   }
 
-  fun notifyChange(context: Context) {
-    theme = getThemeFromStore()
+  fun reload(context: Context) {
+    theme = getThemeFromPrefs()
     for (colorType in ThemeColorType.values()) {
       colors[colorType] = load(context, theme, colorType)
     }
@@ -117,7 +114,7 @@ class ThemeManager {
   }
 
   companion object {
-    fun getThemeFromStore(): Theme {
+    fun getThemeFromPrefs(): Theme {
       return try {
         Theme.valueOf(ScarletApp.prefs.selectedTheme)
       } catch (exception: Exception) {

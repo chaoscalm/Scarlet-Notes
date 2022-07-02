@@ -24,7 +24,7 @@ class AppLockActivity : ThemedActivity() {
     componentContext = ComponentContext(context)
 
     setView()
-    notifyThemeChange()
+    applyTheming()
   }
 
   private fun setView() {
@@ -67,7 +67,7 @@ class AppLockActivity : ThemedActivity() {
 
   }
 
-  override fun notifyThemeChange() {
+  override fun applyTheming() {
     updateStatusBarTheme()
   }
 }

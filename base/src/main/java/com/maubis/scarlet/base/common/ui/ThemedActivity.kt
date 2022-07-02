@@ -14,15 +14,17 @@ import com.maubis.scarlet.base.common.utils.OsVersionUtils
 
 abstract class ThemedActivity : AppCompatActivity(), ThemeChangeListener {
 
-  abstract fun notifyThemeChange()
+  abstract fun applyTheming()
 
-  override fun onThemeChange(theme: Theme) {
-    notifyThemeChange()
-  }
+  override fun onThemeChange(theme: Theme) = applyTheming()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    appTheme.register(this)
+    if (ScarletApp.prefs.useSystemTheme) {
+      setThemeFromSystem(this)
+      appTheme.reload(this)
+    }
+    appTheme.registerChangeListener(this)
   }
 
   fun updateStatusBarTheme(backgroundColor: Int = getStatusBarColor()) {
@@ -37,14 +39,13 @@ abstract class ThemedActivity : AppCompatActivity(), ThemeChangeListener {
 
   override fun onConfigurationChanged(configuration: Configuration) {
     super.onConfigurationChanged(configuration)
-    if (!ScarletApp.prefs.useSystemTheme) {
-      return
+    if (ScarletApp.prefs.useSystemTheme) {
+      setThemeFromSystem(this)
+      appTheme.reload(this)
     }
-    setThemeFromSystem(this)
-    appTheme.notifyChange(this)
   }
 
-  fun fullScreenView() {
+  private fun fullScreenView() {
     if (!ScarletApp.prefs.enableFullscreen) {
       return
     }

@@ -39,7 +39,7 @@ abstract class SelectableNotesActivityBase : SecuredActivity(), INoteSelectorAct
   }
 
   open fun initUI() {
-    notifyThemeChange()
+    applyTheming()
     setupRecyclerView()
     loadNotes()
     findViewById<View>(R.id.back_button).setOnClickListener {
@@ -90,7 +90,7 @@ abstract class SelectableNotesActivityBase : SecuredActivity(), INoteSelectorAct
     recyclerView.setHasFixedSize(true)
   }
 
-  override fun notifyThemeChange() {
+  override fun applyTheming() {
     updateStatusBarTheme()
 
     val containerLayout = findViewById<View>(R.id.container_layout)

@@ -20,7 +20,6 @@ import com.maubis.scarlet.base.common.recycler.RecyclerItem
 import com.maubis.scarlet.base.common.specs.ToolbarColorConfig
 import com.maubis.scarlet.base.common.ui.SecuredActivity
 import com.maubis.scarlet.base.common.ui.ThemeColorType
-import com.maubis.scarlet.base.common.ui.setThemeFromSystem
 import com.maubis.scarlet.base.database.entities.Folder
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.database.entities.NoteState
@@ -63,14 +62,10 @@ class MainActivity : SecuredActivity(), INoteActionsActivity {
     views = ActivityMainBinding.inflate(layoutInflater)
     setContentView(views.root)
 
-    if (ScarletApp.prefs.useSystemTheme) {
-      setThemeFromSystem(this)
-    }
-    appTheme.notifyChange(this)
-
     setupMainToolbar()
     setupRecyclerView()
     setListeners()
+    applyTheming()
   }
 
   override fun onSaveInstanceState(outState: Bundle) {
@@ -303,7 +298,7 @@ class MainActivity : SecuredActivity(), INoteActionsActivity {
     refreshList()
   }
 
-  override fun notifyThemeChange() {
+  override fun applyTheming() {
     updateStatusBarTheme()
     views.containerLayoutMain.setBackgroundColor(getThemeColor())
     updateBottomToolbar()

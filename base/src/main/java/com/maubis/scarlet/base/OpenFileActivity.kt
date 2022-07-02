@@ -39,7 +39,7 @@ class OpenFileActivity : SecuredActivity() {
     views = ActivityExternalIntentBinding.inflate(layoutInflater)
     setContentView(views.root)
     setupListeners()
-    notifyThemeChange()
+    applyTheming()
 
     val spannable = SpannableString(contentText)
     spannable.setFormats(Markdown.getSpanInfo(contentText).spans)
@@ -83,7 +83,7 @@ class OpenFileActivity : SecuredActivity() {
     }
   }
 
-  override fun notifyThemeChange() {
+  override fun applyTheming() {
     updateStatusBarTheme()
 
     val containerLayout = findViewById<View>(R.id.container_layout)

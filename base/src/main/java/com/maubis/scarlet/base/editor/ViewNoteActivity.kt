@@ -65,7 +65,7 @@ open class ViewNoteActivity : SecuredActivity(), INoteActionsActivity {
     note = loadNote(savedInstanceState)
     setupRecyclerView()
     displayNote()
-    notifyThemeChange()
+    applyTheming()
   }
 
   private fun loadNote(savedInstanceState: Bundle?): Note {
@@ -92,7 +92,7 @@ open class ViewNoteActivity : SecuredActivity(), INoteActionsActivity {
     super.onResume()
 
     onResumeAction()
-    notifyThemeChange()
+    applyTheming()
   }
 
   protected open fun onResumeAction() {
@@ -234,7 +234,7 @@ open class ViewNoteActivity : SecuredActivity(), INoteActionsActivity {
     return -1
   }
 
-  override fun notifyThemeChange() {
+  override fun applyTheming() {
     notifyToolbarColor()
   }
 

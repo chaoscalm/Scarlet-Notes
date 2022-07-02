@@ -23,7 +23,7 @@ class UIOptionsBottomSheet : LithoOptionBottomSheet() {
               this.onThemeChange = { theme ->
                   if (ScarletApp.prefs.selectedTheme != theme.name) {
                       ScarletApp.prefs.selectedTheme = theme.name
-                      appTheme.notifyChange(activity)
+                      appTheme.reload(activity)
                       activity.recreate()
                   }
               }
