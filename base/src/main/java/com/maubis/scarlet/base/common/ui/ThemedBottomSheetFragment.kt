@@ -16,6 +16,7 @@ import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 abstract class ThemedBottomSheetFragment : BottomSheetDialogFragment() {
 
   override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+    @Suppress("DEPRECATION")
     retainInstance = true
     val isTablet = context?.resources?.getBoolean(R.bool.is_tablet) ?: false
     val dialog = when {

@@ -53,6 +53,7 @@ fun getLithoBottomSheetButton(context: ComponentContext): Text.Builder {
 abstract class LithoBottomSheet : BottomSheetDialogFragment() {
 
   override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+    @Suppress("DEPRECATION")
     retainInstance = true
     val ctx = requireContext()
     val isTablet = ctx.resources.getBoolean(R.bool.is_tablet)
