@@ -221,7 +221,10 @@ class PincodeBottomSheet : LithoBottomSheet() {
           biometricTitle = R.string.biometric_prompt_unlock,
           actionTitle = R.string.security_sheet_button_unlock,
           onSuccess = onUnlockSuccess,
-          onFailure = onUnlockFailure,
+          onFailure = {
+            Toast.makeText(activity, R.string.security_sheet_wrong_pin, Toast.LENGTH_SHORT).show()
+            onUnlockFailure()
+          },
           isBiometricEnabled = isBiometricEnabled(activity)
         )
       })
