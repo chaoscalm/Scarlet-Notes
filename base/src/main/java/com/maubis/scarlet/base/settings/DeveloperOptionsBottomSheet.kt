@@ -21,6 +21,9 @@ class DeveloperOptionsBottomSheet : LithoOptionBottomSheet() {
         icon = R.drawable.ic_staggered_grid,
         listener = {
           ScarletApp.prefs.enableFullscreen = !ScarletApp.prefs.enableFullscreen
+          if (ScarletApp.prefs.enableFullscreen) {
+            activity.enterFullScreen()
+          }
           refresh(activity, dialog)
         },
         isSelectable = true,

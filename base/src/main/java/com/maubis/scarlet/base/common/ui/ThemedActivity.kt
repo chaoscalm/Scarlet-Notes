@@ -8,6 +8,8 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.common.utils.ColorUtil
@@ -32,7 +34,9 @@ abstract class ThemedActivity : AppCompatActivity(), ThemeChangeListener {
 
   override fun onResume() {
     super.onResume()
-    fullScreenView()
+    if (ScarletApp.prefs.enableFullscreen) {
+      enterFullScreen()
+    }
   }
 
   override fun onConfigurationChanged(configuration: Configuration) {
@@ -47,15 +51,10 @@ abstract class ThemedActivity : AppCompatActivity(), ThemeChangeListener {
     }
   }
 
-  private fun fullScreenView() {
-    if (!ScarletApp.prefs.enableFullscreen) {
-      return
-    }
-
-    window.decorView.systemUiVisibility =
-        View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY or
-        View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or
-        View.SYSTEM_UI_FLAG_FULLSCREEN
+  fun enterFullScreen() {
+    val insetsController = WindowCompat.getInsetsController(window, window.decorView)
+    insetsController.hide(WindowInsetsCompat.Type.statusBars())
+    insetsController.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
   }
 
   fun getThemeColor(): Int = appTheme.getColor(ThemeColor.BACKGROUND)
