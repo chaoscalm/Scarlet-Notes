@@ -24,6 +24,7 @@ import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.common.ui.BottomSheetTabletDialog
 import com.maubis.scarlet.base.common.ui.ThemeColor
+import com.maubis.scarlet.base.common.utils.enterFullScreenIfEnabled
 
 fun openSheet(activity: AppCompatActivity, sheet: LithoBottomSheet) {
   sheet.show(activity.supportFragmentManager, sheet.tag)
@@ -68,6 +69,7 @@ abstract class LithoBottomSheet : BottomSheetDialogFragment() {
         skipCollapsed = true
       }
     }
+    dialog.window?.enterFullScreenIfEnabled()
     return dialog
   }
 

@@ -12,6 +12,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
+import com.maubis.scarlet.base.common.utils.enterFullScreenIfEnabled
 
 abstract class ThemedBottomSheetFragment : BottomSheetDialogFragment() {
 
@@ -24,6 +25,7 @@ abstract class ThemedBottomSheetFragment : BottomSheetDialogFragment() {
       else -> super.onCreateDialog(savedInstanceState)
     }
     dialog.setContentView(View.inflate(context, getLayout(), null))
+    dialog.window?.enterFullScreenIfEnabled()
     resetBackground(dialog)
     setupDialogViews(dialog)
     return dialog

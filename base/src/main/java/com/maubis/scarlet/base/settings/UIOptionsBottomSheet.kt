@@ -19,16 +19,28 @@ class UIOptionsBottomSheet : LithoOptionBottomSheet() {
       subtitle = R.string.home_option_theme_color_subtitle,
       icon = R.drawable.ic_day_night,
       listener = {
-          openSheet(activity, ThemeColorPickerBottomSheet().apply {
-              this.onThemeChange = { theme ->
-                  if (ScarletApp.prefs.selectedTheme != theme.name) {
-                      ScarletApp.prefs.selectedTheme = theme.name
-                      appTheme.reload(activity)
-                      activity.recreate()
-                  }
-              }
-          })
+        openSheet(activity, ThemeColorPickerBottomSheet().apply {
+          this.onThemeChange = { theme ->
+            if (ScarletApp.prefs.selectedTheme != theme.name) {
+              ScarletApp.prefs.selectedTheme = theme.name
+              appTheme.reload(activity)
+              activity.recreate()
+            }
+          }
+        })
       }
+    ))
+    options.add(LithoOptionsItem(
+      title = R.string.option_enable_fullscreen_title,
+      subtitle = R.string.option_enable_fullscreen_description,
+      icon = R.drawable.ic_fullscreen,
+      listener = {
+        ScarletApp.prefs.enableFullscreen = !ScarletApp.prefs.enableFullscreen
+        activity.recreate()
+        refresh(activity, dialog)
+      },
+      isSelectable = true,
+      selected = ScarletApp.prefs.enableFullscreen
     ))
     options.add(LithoOptionsItem(
       title = R.string.note_option_default_color,

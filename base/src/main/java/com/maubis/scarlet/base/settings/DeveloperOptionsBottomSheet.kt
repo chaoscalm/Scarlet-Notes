@@ -16,21 +16,6 @@ class DeveloperOptionsBottomSheet : LithoOptionBottomSheet() {
     val options = ArrayList<LithoOptionsItem>()
     options.add(
       LithoOptionsItem(
-        title = R.string.internal_settings_enable_fullscreen_title,
-        subtitle = R.string.internal_settings_enable_fullscreen_description,
-        icon = R.drawable.ic_staggered_grid,
-        listener = {
-          ScarletApp.prefs.enableFullscreen = !ScarletApp.prefs.enableFullscreen
-          if (ScarletApp.prefs.enableFullscreen) {
-            activity.enterFullScreen()
-          }
-          refresh(activity, dialog)
-        },
-        isSelectable = true,
-        selected = ScarletApp.prefs.enableFullscreen
-      ))
-    options.add(
-      LithoOptionsItem(
         title = R.string.internal_settings_show_uuid_title,
         subtitle = R.string.internal_settings_show_uuid_description,
         icon = R.drawable.ic_code_inline,

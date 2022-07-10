@@ -206,8 +206,8 @@
 
   <string name="internal_settings_title">Opzioni sviluppatore</string>
   <string name="internal_settings_description">Modifica le impostazioni interne utilizzate per il debug</string>
-  <string name="internal_settings_enable_fullscreen_title">Abilita modalità schermo intero</string>
-  <string name="internal_settings_enable_fullscreen_description">Rendi l\'app a schermo intero per consentire screenshot e registrazioni</string>
+  <string name="option_enable_fullscreen_title">Abilita modalità a schermo intero</string>
+  <string name="option_enable_fullscreen_description">Nascondi la barra delle notifiche per sfruttare più spazio</string>
   <string name="internal_settings_show_uuid_title">Mostra UUID note</string>
   <string name="internal_settings_show_uuid_description">Mostra gli ID univoci delle note nella schermata principale</string>
 

@@ -250,8 +250,8 @@
 
   <string name="internal_settings_title">Developer Options</string>
   <string name="internal_settings_description">Change internal settings to the application used for debugging</string>
-  <string name="internal_settings_enable_fullscreen_title">Enable fullscreen</string>
-  <string name="internal_settings_enable_fullscreen_description">Make the app in fullscreen to allow screenshots and recordings</string>
+  <string name="option_enable_fullscreen_title">Enable fullscreen</string>
+  <string name="option_enable_fullscreen_description">Hide the notification bar to use more screen space</string>
   <string name="internal_settings_show_uuid_title">Show note UUIDs</string>
   <string name="internal_settings_show_uuid_description">Show the unique IDs of the notes in the home screen</string>
 
