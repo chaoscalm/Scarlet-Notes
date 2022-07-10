@@ -24,17 +24,21 @@ abstract class ThemedBottomSheetFragment : BottomSheetDialogFragment() {
       isTablet -> BottomSheetTabletDialog(requireContext(), theme)
       else -> super.onCreateDialog(savedInstanceState)
     }
-    dialog.setContentView(View.inflate(context, getLayout(), null))
+    val layoutRes = getLayout()
+    val inflatedView = if (layoutRes != null) View.inflate(context, layoutRes, null) else inflateLayout()
+    dialog.setContentView(inflatedView)
     dialog.window?.enterFullScreenIfEnabled()
     resetBackground(dialog)
     setupDialogViews(dialog)
     return dialog
   }
 
+  open fun inflateLayout(): View = null!!
+
   abstract fun setupDialogViews(dialog: Dialog)
 
   @LayoutRes
-  abstract fun getLayout(): Int
+  open fun getLayout(): Int? = null
 
   private fun getBackgroundView(): Int = R.id.container_layout
 

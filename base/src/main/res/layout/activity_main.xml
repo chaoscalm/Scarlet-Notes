@@ -16,7 +16,7 @@
 
     <include
       android:id="@+id/searchToolbar"
-      layout="@layout/search_toolbar_main"
+      layout="@layout/toolbar_search_main"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginStart="@dimen/spacing_xxsmall"

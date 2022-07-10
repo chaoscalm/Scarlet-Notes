@@ -4,9 +4,8 @@ import android.app.DatePickerDialog
 import android.app.Dialog
 import android.app.TimePickerDialog
 import android.os.Bundle
-import android.view.View.GONE
-import android.widget.TextView
-import com.github.bijoysingh.uibasics.views.UIActionView
+import android.view.View
+import androidx.core.view.isVisible
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.data
@@ -17,6 +16,7 @@ import com.maubis.scarlet.base.common.ui.ThemedActivity
 import com.maubis.scarlet.base.common.ui.ThemedBottomSheetFragment
 import com.maubis.scarlet.base.common.utils.readableTime
 import com.maubis.scarlet.base.database.entities.Note
+import com.maubis.scarlet.base.databinding.BottomSheetReminderBinding
 import com.maubis.scarlet.base.note.actions.INoteActionsActivity
 import java.util.*
 
@@ -25,6 +25,8 @@ class ReminderBottomSheet : ThemedBottomSheetFragment() {
     val noteId = requireArguments().getInt(KEY_NOTE_ID)
     data.notes.getByID(noteId) ?: throw IllegalArgumentException("Invalid note ID")
   }
+
+  private lateinit var views: BottomSheetReminderBinding
 
   private var reminder: Reminder = Reminder(
     0,
@@ -44,44 +46,44 @@ class ReminderBottomSheet : ThemedBottomSheetFragment() {
       }
       reminder.timestamp = calendar.timeInMillis
     }
-    setColors(dialog)
-    setContent(dialog, reminder)
-    setListeners(dialog, isNewReminder)
+    setColors()
+    setContent(reminder)
+    setListeners(isNewReminder)
     makeBackgroundTransparent(dialog, R.id.root_layout)
     setAlwaysExpanded(dialog)
   }
 
-  private fun setListeners(dialog: Dialog, isNewReminder: Boolean) {
-    val reminderDate = dialog.findViewById<UIActionView>(R.id.reminder_date)
-    val reminderTime = dialog.findViewById<UIActionView>(R.id.reminder_time)
-    val reminderRepeat = dialog.findViewById<UIActionView>(R.id.reminder_repeat)
+  override fun inflateLayout(): View {
+    views = BottomSheetReminderBinding.inflate(layoutInflater)
+    return views.root
+  }
 
-    reminderDate.setOnClickListener {
+  private fun setListeners(isNewReminder: Boolean) {
+    views.reminderDate.setOnClickListener {
       if (reminder.interval == ReminderInterval.ONCE) {
         openDatePickerDialog()
       }
     }
-    reminderTime.setOnClickListener {
+    views.reminderTime.setOnClickListener {
       openTimePickerDialog()
     }
-    reminderRepeat.setOnClickListener {
+    views.reminderRepeat.setOnClickListener {
       openFrequencyDialog()
     }
 
-    val removeAlarmBtn = dialog.findViewById<TextView>(R.id.remove_alarm)
-    val setAlarmBtn = dialog.findViewById<TextView>(R.id.set_alarm)
     val activity = requireActivity() as INoteActionsActivity
     if (isNewReminder) {
-      removeAlarmBtn.visibility = GONE
+      views.removeAlarmButton.isVisible = false
+    } else {
+      views.removeAlarmButton.setOnClickListener {
+        ReminderJob.cancelJob(reminder.uid)
+        note.reminder = null
+        note.save(requireContext())
+        activity.updateNote(note)
+        dismiss()
+      }
     }
-    removeAlarmBtn.setOnClickListener {
-      ReminderJob.cancelJob(reminder.uid)
-      note.reminder = null
-      note.save(requireContext())
-      activity.updateNote(note)
-      dismiss()
-    }
-    setAlarmBtn.setOnClickListener {
+    views.setAlarmButton.setOnClickListener {
       if (Calendar.getInstance().after(reminder.toCalendar())) {
         dismiss()
         return@setOnClickListener
@@ -123,7 +125,7 @@ class ReminderBottomSheet : ThemedBottomSheetFragment() {
             title = getReminderIntervalLabel(ReminderInterval.ONCE),
             listener = {
               reminder.interval = ReminderInterval.ONCE
-              setContent(requireDialog(), reminder)
+              setContent(reminder)
               dismiss()
             },
             selected = isSelected(ReminderInterval.ONCE)
@@ -132,7 +134,7 @@ class ReminderBottomSheet : ThemedBottomSheetFragment() {
             title = getReminderIntervalLabel(ReminderInterval.DAILY),
             listener = {
               reminder.interval = ReminderInterval.DAILY
-              setContent(requireDialog(), reminder)
+              setContent(reminder)
               dismiss()
             },
             selected = isSelected(ReminderInterval.DAILY)
@@ -152,7 +154,7 @@ class ReminderBottomSheet : ThemedBottomSheetFragment() {
         calendar.set(Calendar.MONTH, month)
         calendar.set(Calendar.DAY_OF_MONTH, day)
         reminder.timestamp = calendar.timeInMillis
-        setContent(requireDialog(), reminder)
+        setContent(reminder)
       },
       calendar.get(Calendar.YEAR),
       calendar.get(Calendar.MONTH),
@@ -170,7 +172,7 @@ class ReminderBottomSheet : ThemedBottomSheetFragment() {
         calendar.set(Calendar.MINUTE, minute)
         calendar.set(Calendar.SECOND, 0)
         reminder.timestamp = calendar.timeInMillis
-        setContent(requireDialog(), reminder)
+        setContent(reminder)
       },
       calendar.get(Calendar.HOUR_OF_DAY),
       calendar.get(Calendar.MINUTE),
@@ -178,43 +180,25 @@ class ReminderBottomSheet : ThemedBottomSheetFragment() {
     dialog.show()
   }
 
-  private fun setContent(dialog: Dialog, reminder: Reminder) {
-    val reminderDate = dialog.findViewById<UIActionView>(R.id.reminder_date)
-    val reminderTime = dialog.findViewById<UIActionView>(R.id.reminder_time)
-    val reminderRepeat = dialog.findViewById<UIActionView>(R.id.reminder_repeat)
-
-    reminderRepeat.setSubtitle(getReminderIntervalLabel(reminder.interval))
-    reminderTime.setSubtitle(readableTime(reminder.timestamp, "hh:mm a", requireContext()))
-    reminderDate.setSubtitle(readableTime(reminder.timestamp, "dd MMM yyyy", requireContext()))
-    reminderDate.alpha = if (reminder.interval == ReminderInterval.ONCE) 1.0f else 0.5f
+  private fun setContent(reminder: Reminder) {
+    views.reminderRepeat.setSubtitle(getReminderIntervalLabel(reminder.interval))
+    views.reminderTime.setSubtitle(readableTime(reminder.timestamp, "hh:mm a", requireContext()))
+    views.reminderDate.setSubtitle(readableTime(reminder.timestamp, "dd MMM yyyy", requireContext()))
+    views.reminderDate.alpha = if (reminder.interval == ReminderInterval.ONCE) 1.0f else 0.5f
   }
 
-  private fun setColors(dialog: Dialog) {
-    val reminderDate = dialog.findViewById<UIActionView>(R.id.reminder_date)
-    val reminderTime = dialog.findViewById<UIActionView>(R.id.reminder_time)
-    val reminderRepeat = dialog.findViewById<UIActionView>(R.id.reminder_repeat)
-
+  private fun setColors() {
     val iconColor = appTheme.getColor(ThemeColor.TOOLBAR_ICON)
     val textColor = appTheme.getColor(ThemeColor.TERTIARY_TEXT)
     val titleColor = appTheme.getColor(ThemeColor.SECTION_HEADER)
 
-    reminderDate.setTitleColor(titleColor)
-    reminderDate.setSubtitleColor(textColor)
-    reminderDate.setImageTint(iconColor)
-    reminderDate.setActionTint(iconColor)
-
-    reminderTime.setTitleColor(titleColor)
-    reminderTime.setSubtitleColor(textColor)
-    reminderTime.setImageTint(iconColor)
-    reminderTime.setActionTint(iconColor)
-
-    reminderRepeat.setTitleColor(titleColor)
-    reminderRepeat.setSubtitleColor(textColor)
-    reminderRepeat.setImageTint(iconColor)
-    reminderRepeat.setActionTint(iconColor)
+    arrayOf(views.reminderDate, views.reminderTime, views.reminderRepeat).forEach {
+      it.setTitleColor(titleColor)
+      it.setSubtitleColor(textColor)
+      it.setImageTint(iconColor)
+      it.setActionTint(iconColor)
+    }
   }
-
-  override fun getLayout(): Int = R.layout.bottom_sheet_reminder
 
   override fun getBackgroundCardViewIds(): Array<Int> = arrayOf(R.id.card_layout)
 

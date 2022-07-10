@@ -99,7 +99,7 @@
         android:padding="@dimen/spacing_xsmall">
 
         <TextView
-          android:id="@+id/remove_alarm"
+          android:id="@+id/remove_alarm_button"
           style="@style/BorderedBackgroundView"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
@@ -111,7 +111,7 @@
           android:textSize="@dimen/font_size_small" />
 
         <TextView
-          android:id="@+id/set_alarm"
+          android:id="@+id/set_alarm_button"
           style="@style/BorderedBackgroundView"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
