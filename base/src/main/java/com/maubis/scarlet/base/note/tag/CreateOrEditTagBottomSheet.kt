@@ -1,10 +1,8 @@
 package com.maubis.scarlet.base.note.tag
 
 import android.app.Dialog
-import android.view.View.GONE
-import android.view.View.VISIBLE
-import android.widget.EditText
-import android.widget.TextView
+import android.view.View
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
@@ -15,63 +13,74 @@ import com.maubis.scarlet.base.common.ui.ThemedActivity
 import com.maubis.scarlet.base.common.ui.ThemedBottomSheetFragment
 import com.maubis.scarlet.base.common.utils.getEditorActionListener
 import com.maubis.scarlet.base.database.entities.Tag
+import com.maubis.scarlet.base.databinding.BottomSheetCreateEditTagBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class CreateOrEditTagBottomSheet : ThemedBottomSheetFragment() {
+  private lateinit var tag: Tag
+  private var onTagSaveListener: (Tag) -> Unit = { _ -> }
 
-  var selectedTag: Tag? = null
-  var sheetOnTagListener: (Tag) -> Unit = { _ -> }
+  private lateinit var views: BottomSheetCreateEditTagBinding
 
   override fun setupDialogViews(dialog: Dialog) {
-    val tag = selectedTag
-    if (tag == null) {
-      dismiss()
-      return
-    }
+    setAlwaysExpanded(dialog)
 
-    val title = dialog.findViewById<TextView>(R.id.options_title)
-    title.setTextColor(appTheme.getColor(ThemeColor.SECONDARY_TEXT))
-    title.setText(if (tag.isNotPersisted()) R.string.tag_sheet_create_title else R.string.tag_sheet_edit_title)
-    title.typeface = appTypeface.title()
-
-    val enterTag = dialog.findViewById<EditText>(R.id.enter_tag)
-    enterTag.setTextColor(appTheme.getColor(ThemeColor.SECONDARY_TEXT))
-    enterTag.setHintTextColor(appTheme.getColor(ThemeColor.HINT_TEXT))
-    enterTag.typeface = appTypeface.text()
-
-    val action = dialog.findViewById<TextView>(R.id.action_button)
-    action.setOnClickListener {
-      onActionClick(tag, enterTag.text.toString())
-      sheetOnTagListener(tag)
-      dismiss()
-    }
-
-    val removeBtn = dialog.findViewById<TextView>(R.id.action_remove_button)
-    removeBtn.visibility = if (tag.isNotPersisted()) GONE else VISIBLE
-    removeBtn.setOnClickListener {
-      tag.delete()
-      removeDeletedTagFromAllNotes(tag)
-      sheetOnTagListener(tag)
-      dismiss()
-    }
-    enterTag.setText(tag.title)
-    enterTag.setOnEditorActionListener(getEditorActionListener(
-      runnable = {
-        onActionClick(tag, enterTag.text.toString())
-        sheetOnTagListener(tag)
-        dismiss()
-        return@getEditorActionListener true
-      }))
+    setupTitle()
+    setupNameTextField()
+    setupSaveButton()
+    setupRemoveButton()
     makeBackgroundTransparent(dialog, R.id.root_layout)
   }
 
-  private fun onActionClick(tag: Tag, title: String) {
+  override fun inflateLayout(): View {
+    views = BottomSheetCreateEditTagBinding.inflate(layoutInflater)
+    return views.root
+  }
+
+  private fun setupTitle() {
+    views.dialogTitle.setTextColor(appTheme.getColor(ThemeColor.SECONDARY_TEXT))
+    views.dialogTitle.setText(if (tag.isPersisted()) R.string.tag_sheet_edit_title else R.string.tag_sheet_create_title)
+    views.dialogTitle.typeface = appTypeface.title()
+  }
+
+  private fun setupNameTextField() {
+    views.tagNameTextField.setTextColor(appTheme.getColor(ThemeColor.SECONDARY_TEXT))
+    views.tagNameTextField.setHintTextColor(appTheme.getColor(ThemeColor.HINT_TEXT))
+    views.tagNameTextField.typeface = appTypeface.text()
+    views.tagNameTextField.setText(tag.title)
+    views.tagNameTextField.setOnEditorActionListener(getEditorActionListener(
+      runnable = {
+        updateTagName(views.tagNameTextField.text.toString())
+        dismiss()
+        return@getEditorActionListener true
+      }))
+  }
+
+  private fun setupSaveButton() {
+    views.saveButton.setOnClickListener {
+      updateTagName(views.tagNameTextField.text.toString())
+      dismiss()
+    }
+  }
+
+  private fun setupRemoveButton() {
+    views.removeButton.isVisible = tag.isPersisted()
+    views.removeButton.setOnClickListener {
+      tag.delete()
+      removeDeletedTagFromAllNotes(tag)
+      onTagSaveListener(tag)
+      dismiss()
+    }
+  }
+
+  private fun updateTagName(title: String) {
     if (title.isBlank()) {
       return
     }
     tag.title = title
     tag.save()
+    onTagSaveListener(tag)
   }
 
   private fun removeDeletedTagFromAllNotes(tag: Tag) {
@@ -86,16 +95,14 @@ class CreateOrEditTagBottomSheet : ThemedBottomSheetFragment() {
     }
   }
 
-  override fun getLayout(): Int = R.layout.bottom_sheet_create_or_edit_tag
-
   override fun getBackgroundCardViewIds(): Array<Int> = arrayOf(R.id.content_card)
 
   companion object {
     fun openSheet(activity: ThemedActivity, tag: Tag, listener: (Tag) -> Unit) {
       val sheet = CreateOrEditTagBottomSheet()
-      sheet.selectedTag = tag
-      sheet.sheetOnTagListener = listener
-      sheet.show(activity.supportFragmentManager, sheet.tag)
+      sheet.tag = tag
+      sheet.onTagSaveListener = listener
+      sheet.show(activity.supportFragmentManager, sheet.getTag())
     }
   }
 }

@@ -7,7 +7,7 @@ import java.util.*
 
 @Entity(tableName = "tag")
 class Tag(@PrimaryKey var uuid: UUID = UUID.randomUUID(), var title: String = "") {
-    fun isNotPersisted(): Boolean = !ScarletApp.data.tags.exists(uuid)
+    fun isPersisted(): Boolean = ScarletApp.data.tags.exists(uuid)
 
     fun save() {
         ScarletApp.data.tags.save(this)

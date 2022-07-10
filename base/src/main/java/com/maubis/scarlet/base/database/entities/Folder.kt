@@ -18,7 +18,7 @@ class Folder() {
         this.color = color
     }
 
-    fun isNotPersisted(): Boolean = !ScarletApp.data.folders.exists(uuid)
+    fun isPersisted(): Boolean = ScarletApp.data.folders.exists(uuid)
 
     fun save() {
         ScarletApp.data.folders.save(this)

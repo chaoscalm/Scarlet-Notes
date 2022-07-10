@@ -4,7 +4,6 @@ import android.app.Dialog
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
-import androidx.annotation.LayoutRes
 import androidx.cardview.widget.CardView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -23,21 +22,16 @@ abstract class ThemedBottomSheetFragment : BottomSheetDialogFragment() {
       isTablet -> BottomSheetTabletDialog(requireContext(), theme)
       else -> super.onCreateDialog(savedInstanceState)
     }
-    val layoutRes = getLayout()
-    val inflatedView = if (layoutRes != null) View.inflate(context, layoutRes, null) else inflateLayout()
-    dialog.setContentView(inflatedView)
+    dialog.setContentView(inflateLayout())
     dialog.window?.enterFullScreenIfEnabled()
     resetBackground(dialog)
     setupDialogViews(dialog)
     return dialog
   }
 
-  open fun inflateLayout(): View = null!!
+  abstract fun inflateLayout(): View
 
   abstract fun setupDialogViews(dialog: Dialog)
-
-  @LayoutRes
-  open fun getLayout(): Int? = null
 
   private fun getBackgroundView(): Int = R.id.container_layout
 
