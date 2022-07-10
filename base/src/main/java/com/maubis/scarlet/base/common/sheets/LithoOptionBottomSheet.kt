@@ -58,6 +58,7 @@ object OptionItemLayoutSpec {
           .bgAlpha(15)
           .onClick { }
           .isClickDisabled(true)
+          .flexShrink(0f)
           .marginDip(YogaEdge.END, 16f))
       .child(
         Column.create(context)

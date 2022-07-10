@@ -2,10 +2,12 @@ package com.maubis.scarlet.base.common.specs
 
 import android.graphics.Color
 import android.graphics.drawable.Drawable
-import com.facebook.litho.*
+import com.facebook.litho.ClickEvent
+import com.facebook.litho.Component
+import com.facebook.litho.ComponentContext
+import com.facebook.litho.LongClickEvent
 import com.facebook.litho.annotations.*
 import com.facebook.litho.widget.Image
-import com.facebook.yoga.YogaAlign
 import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.common.ui.LithoCircleDrawable
 
@@ -44,10 +46,7 @@ object RoundIconSpec {
     if (isLongClickEnabled !== null && isLongClickEnabled) {
       image.longClickHandler(RoundIcon.onLongClickEvent(context))
     }
-    return Column.create(context)
-      .alignItems(YogaAlign.CENTER)
-      .child(image)
-      .build()
+    return image.build()
   }
 
   @Suppress("UNUSED_PARAMETER")
