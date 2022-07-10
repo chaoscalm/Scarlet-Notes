@@ -9,6 +9,7 @@ import com.facebook.litho.annotations.*
 import com.facebook.litho.widget.Image
 import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.common.ui.LithoCircleDrawable
+import kotlin.math.roundToInt
 
 @LayoutSpec
 object RoundIconSpec {
@@ -26,6 +27,8 @@ object RoundIconSpec {
     @Prop(optional = true) bgAlpha: Int?,
     @Prop(optional = true) onClick: (() -> Unit)?,
     @Prop(optional = true) showBorder: Boolean?): Component {
+    val alphaMultiplier = if (isInactive == true) 0.6f else 0.9f
+    icon.alpha = (255 * alphaMultiplier).roundToInt()
     val image = Image.create(context)
       .heightPx(iconSize)
       .widthPx(iconSize)
@@ -33,7 +36,6 @@ object RoundIconSpec {
       .marginPx(YogaEdge.VERTICAL, iconMarginVertical ?: 0)
       .marginPx(YogaEdge.HORIZONTAL, iconMarginHorizontal ?: 0)
       .drawable(icon.color(iconColor))
-      .alpha(if (isInactive == true) 0.6f else 0.9f)
       .background(
         LithoCircleDrawable(
           bgColor, bgAlpha ?: Color.alpha(bgColor), showBorder

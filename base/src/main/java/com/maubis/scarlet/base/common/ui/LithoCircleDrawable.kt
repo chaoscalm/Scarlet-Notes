@@ -56,5 +56,6 @@ class LithoCircleDrawable(color: Int, alpha: Int = 255, val showBorder: Boolean 
     return other is LithoCircleDrawable
       && other.mRadius == mRadius
       && other.mPaint.color == mPaint.color
+      && other.mPaint.alpha == mPaint.alpha
   }
 }
