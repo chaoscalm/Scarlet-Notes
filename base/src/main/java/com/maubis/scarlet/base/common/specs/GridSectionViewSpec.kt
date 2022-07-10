@@ -51,7 +51,6 @@ object GridOptionSpec {
           .iconPaddingRes(R.dimen.primary_round_icon_padding)
           .iconMarginVerticalRes(R.dimen.toolbar_round_icon_margin_vertical)
           .iconMarginHorizontalRes(R.dimen.toolbar_round_icon_margin_horizontal)
-          .isClickDisabled(true)
           .bgAlpha(if (solidSectionColor) 255 else 15)
       )
       .child(

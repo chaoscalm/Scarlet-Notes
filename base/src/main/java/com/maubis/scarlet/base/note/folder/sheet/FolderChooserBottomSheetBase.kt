@@ -75,8 +75,6 @@ object FolderItemLayoutSpec {
           .iconSizeRes(R.dimen.toolbar_round_icon_size)
           .iconPaddingRes(R.dimen.toolbar_round_icon_padding)
           .bgAlpha(bgAlpha)
-          .onClick { }
-          .isClickDisabled(true)
           .marginDip(YogaEdge.END, 16f))
       .child(
         Text.create(context)

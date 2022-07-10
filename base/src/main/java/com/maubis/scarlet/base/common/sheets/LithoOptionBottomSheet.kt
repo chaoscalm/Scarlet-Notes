@@ -56,8 +56,6 @@ object OptionItemLayoutSpec {
           .iconSizeRes(R.dimen.toolbar_round_icon_size)
           .iconPaddingRes(R.dimen.toolbar_round_icon_padding)
           .bgAlpha(15)
-          .onClick { }
-          .isClickDisabled(true)
           .flexShrink(0f)
           .marginDip(YogaEdge.END, 16f))
       .child(
@@ -82,24 +80,19 @@ object OptionItemLayoutSpec {
                   .iconRes(if (option.actionIcon == 0) R.drawable.ic_selected else option.actionIcon)
                   .bgColor(if (option.selected) selectedColor else titleColor)
                   .bgAlpha(if (option.selected) 200 else 25)
-                  .iconAlpha(if (option.selected) 1f else 0.6f)
+                  .isInactive(!option.selected)
                   .iconColor(if (option.selected) Color.WHITE else titleColor)
                   .iconSizeRes(R.dimen.toolbar_round_small_icon_size)
                   .iconPaddingRes(R.dimen.toolbar_round_small_icon_padding)
-                  .onClick { }
-                  .isClickDisabled(true)
                   .marginDip(YogaEdge.START, 12f))
     } else if (!option.isSelectable && option.actionIcon != 0) {
       row.child(RoundIcon.create(context)
                   .iconRes(option.actionIcon)
                   .bgColor(titleColor)
                   .bgAlpha(25)
-                  .iconAlpha(0.9f)
                   .iconColor(titleColor)
                   .iconSizeRes(R.dimen.toolbar_round_small_icon_size)
                   .iconPaddingRes(R.dimen.toolbar_round_small_icon_padding)
-                  .onClick { }
-                  .isClickDisabled(true)
                   .marginDip(YogaEdge.START, 12f))
     }
 
@@ -140,8 +133,6 @@ object OptionLabelItemLayoutSpec {
           .iconSizeRes(R.dimen.toolbar_round_icon_size)
           .iconPaddingRes(R.dimen.toolbar_round_icon_padding)
           .bgAlpha(15)
-          .onClick { }
-          .isClickDisabled(true)
           .marginDip(YogaEdge.BOTTOM, 4f))
       .child(
         Text.create(context)

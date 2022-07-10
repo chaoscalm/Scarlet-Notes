@@ -48,12 +48,10 @@ object ChooseOptionItemLayoutSpec {
                .iconRes(R.drawable.ic_selected)
                .bgColor(if (option.selected) selectedColor else titleColor)
                .bgAlpha(if (option.selected) 200 else 25)
-               .iconAlpha(if (option.selected) 1f else 0.6f)
+               .isInactive(!option.selected)
                .iconColor(if (option.selected) Color.WHITE else titleColor)
                .iconSizeRes(R.dimen.toolbar_round_small_icon_size)
                .iconPaddingRes(R.dimen.toolbar_round_small_icon_padding)
-               .onClick { }
-               .isClickDisabled(true)
                .marginDip(YogaEdge.START, 12f))
     row.clickHandler(ChooseOptionItemLayout.onItemClick(context))
     return row.build()

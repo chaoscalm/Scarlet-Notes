@@ -37,9 +37,7 @@ object ThemeColorPickerItemSpec {
       .showBorder(true)
       .iconSizeDip(64f)
       .iconPaddingDip(16f)
-      .onClick { }
       .flexGrow(1f)
-      .isClickDisabled(true)
     when (isSelected) {
       true -> icon.iconRes(R.drawable.ic_selected)
         .bgColorRes(R.color.colorAccent)

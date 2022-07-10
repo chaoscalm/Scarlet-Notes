@@ -48,9 +48,7 @@ object ColorPickerItemSpec {
                    com.github.bijoysingh.uibasics.R.color.light_secondary_text
                )
                .iconSizeRes(R.dimen.toolbar_round_icon_size)
-               .iconPaddingRes(R.dimen.toolbar_round_icon_padding)
-               .onClick { }
-               .isClickDisabled(true))
+               .iconPaddingRes(R.dimen.toolbar_round_icon_padding))
     row.clickHandler(ColorPickerItem.onItemClick(context))
     return row.build()
   }

@@ -71,8 +71,6 @@ object TagItemLayoutSpec {
           .iconSizeRes(R.dimen.toolbar_round_icon_size)
           .iconPaddingRes(R.dimen.toolbar_round_icon_padding)
           .bgAlpha(bgAlpha)
-          .onClick { }
-          .isClickDisabled(true)
           .marginDip(YogaEdge.END, 16f))
       .child(
         Text.create(context)
@@ -88,12 +86,10 @@ object TagItemLayoutSpec {
                   .iconRes(R.drawable.ic_edit)
                   .bgColor(titleColor)
                   .bgAlpha(15)
-                  .iconAlpha(0.9f)
                   .iconColor(titleColor)
                   .iconSizeRes(R.dimen.toolbar_round_icon_size)
                   .iconPaddingRes(R.dimen.toolbar_round_icon_padding)
                   .onClick { tagItem.editListener() }
-                  .isClickDisabled(false)
                   .marginDip(YogaEdge.START, 12f))
     }
 

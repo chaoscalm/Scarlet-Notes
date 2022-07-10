@@ -67,18 +67,15 @@ object NoteEditorBottomBarSpec {
     }
     row.child(content)
 
-    val extraRoundIcon = bottomBarRoundIcon(context, colorConfig)
-        .onClick { }
-        .isClickDisabled(true)
     val icon = when (state) {
-      NoteEditorBottomBarType.COMMON_FORMATTING -> extraRoundIcon
-          .iconRes(R.drawable.ic_add)
-          .clickHandler(NoteEditorBottomBar.onStateChangeClick(context, NoteEditorBottomBarType.ALL_BLOCKS))
+      NoteEditorBottomBarType.COMMON_FORMATTING -> bottomBarRoundIcon(context, colorConfig)
+        .iconRes(R.drawable.ic_add)
+        .clickHandler(NoteEditorBottomBar.onStateChangeClick(context, NoteEditorBottomBarType.ALL_BLOCKS))
       NoteEditorBottomBarType.ALL_BLOCKS,
-      NoteEditorBottomBarType.ALL_FORMATTING -> extraRoundIcon
-          .marginDip(YogaEdge.HORIZONTAL, 4f)
-          .iconRes(R.drawable.ic_close)
-          .clickHandler(NoteEditorBottomBar.onStateChangeClick(context, NoteEditorBottomBarType.COMMON_FORMATTING))
+      NoteEditorBottomBarType.ALL_FORMATTING -> bottomBarRoundIcon(context, colorConfig)
+        .marginDip(YogaEdge.HORIZONTAL, 4f)
+        .iconRes(R.drawable.ic_close)
+        .clickHandler(NoteEditorBottomBar.onStateChangeClick(context, NoteEditorBottomBarType.COMMON_FORMATTING))
       NoteEditorBottomBarType.OPTIONS -> EmptyComponent.create(context)
     }
     row.child(icon)
@@ -87,8 +84,6 @@ object NoteEditorBottomBarSpec {
       NoteEditorBottomBarType.COMMON_FORMATTING, NoteEditorBottomBarType.OPTIONS ->
         bottomBarRoundIcon(context, colorConfig)
             .iconRes(R.drawable.ic_more_options)
-            .onClick { }
-            .isClickDisabled(true)
             .clickHandler(NoteEditorBottomBar.onStateChangeClick(context, NoteEditorBottomBarType.OPTIONS))
       else -> EmptyComponent.create(context)
     }
@@ -176,8 +171,6 @@ object NoteEditorCommonFormattingBottomBarSpec {
             .onClick { activity.triggerMarkdown(MarkdownFormatting.UNORDERED) })
         .child(bottomBarRoundIcon(context, colorConfig)
             .iconRes(R.drawable.ic_chevron_right)
-            .onClick { }
-            .isClickDisabled(true)
             .clickHandler(toggleButtonClick))
         .build()
   }

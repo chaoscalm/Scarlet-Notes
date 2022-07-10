@@ -104,9 +104,7 @@ object MainActivityFolderBottomBarSpec {
         .textColor(colorConfig.toolbarIconColor))
     row.child(bottomBarRoundIcon(context, colorConfig)
                 .iconRes(R.drawable.ic_edit)
-                .isClickDisabled(true)
-                .clickHandler(MainActivityFolderBottomBar.onClickEvent(context))
-                .onClick {})
+                .clickHandler(MainActivityFolderBottomBar.onClickEvent(context)))
     return bottomBar(context, row.build(), colorConfig).build()
   }
 
