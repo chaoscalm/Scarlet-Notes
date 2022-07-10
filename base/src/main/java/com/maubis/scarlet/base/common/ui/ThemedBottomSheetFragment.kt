@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.cardview.widget.CardView
-import androidx.core.content.ContextCompat
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -57,16 +56,6 @@ abstract class ThemedBottomSheetFragment : BottomSheetDialogFragment() {
       val cardView = dialog.findViewById<CardView>(viewId)
       cardView.setCardBackgroundColor(backgroundColor)
     }
-  }
-
-  open fun getOptionsTitleColor(selected: Boolean): Int {
-    val colorResource = when {
-      appTheme.isNightTheme() && selected -> com.github.bijoysingh.uibasics.R.color.material_blue_300
-      appTheme.isNightTheme() -> com.github.bijoysingh.uibasics.R.color.light_secondary_text
-      selected -> com.github.bijoysingh.uibasics.R.color.material_blue_700
-      else -> com.github.bijoysingh.uibasics.R.color.dark_secondary_text
-    }
-    return ContextCompat.getColor(requireContext(), colorResource)
   }
 
   open fun getBackgroundCardViewIds(): Array<Int> = emptyArray()

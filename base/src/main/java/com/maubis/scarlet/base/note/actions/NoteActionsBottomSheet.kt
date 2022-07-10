@@ -5,24 +5,22 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.GridLayout
-import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.github.bijoysingh.uibasics.views.UILabelView
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.common.sheets.ColorPickerBottomSheet
 import com.maubis.scarlet.base.common.sheets.ColorPickerDefaultController
 import com.maubis.scarlet.base.common.sheets.openSheet
-import com.maubis.scarlet.base.common.ui.ThemeColor
 import com.maubis.scarlet.base.common.ui.ThemedActivity
 import com.maubis.scarlet.base.common.ui.ThemedBottomSheetFragment
 import com.maubis.scarlet.base.common.utils.OsVersionUtils
 import com.maubis.scarlet.base.common.utils.ShortcutHandler
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.database.entities.NoteState
+import com.maubis.scarlet.base.databinding.BottomSheetNoteActionsBinding
 import com.maubis.scarlet.base.home.sheets.openDeleteNotePermanentlySheet
 import com.maubis.scarlet.base.note.*
 import com.maubis.scarlet.base.note.folder.sheet.FolderChooserBottomSheet
@@ -42,29 +40,29 @@ class NoteActionsBottomSheet : ThemedBottomSheetFragment() {
     data.notes.getByID(noteId) ?: throw IllegalArgumentException("Invalid note ID")
   }
 
+  private lateinit var views: BottomSheetNoteActionsBinding
+
   override fun setupDialogViews(dialog: Dialog) {
-    setActionTitle(dialog, R.string.choose_action)
-    setupGrid(dialog)
+    setupGrids()
     makeBackgroundTransparent(dialog, R.id.root_layout)
   }
 
-  private fun setupGrid(dialog: Dialog) {
-    val gridLayoutIds = arrayOf(
-      R.id.quick_actions_properties,
-      R.id.note_properties,
-      R.id.grid_layout)
+  override fun inflateLayout(): View {
+    views = BottomSheetNoteActionsBinding.inflate(layoutInflater)
+    return views.root
+  }
 
-    val gridOptionFunctions = arrayOf(
-      this::getQuickActions,
-      this::getNotePropertyActions,
-      this::getExtraActions)
-    gridOptionFunctions.forEachIndexed { index, function ->
-      val items = function()
-      val optionsGrid: GridLayout = dialog.findViewById(gridLayoutIds[index])
+  private fun setupGrids() {
+    val gridLayouts = arrayOf(views.quickActionsGrid, views.notePropertiesGrid, views.extraActionsGrid)
+    val gridItemsCreators = arrayOf(this::getQuickActions, this::getNotePropertyActions, this::getExtraActions)
+
+    gridItemsCreators.forEachIndexed { index, itemCreator ->
+      val items = itemCreator()
+      val grid = gridLayouts[index]
       if (items.isEmpty())
-        optionsGrid.isVisible = false
+        grid.isVisible = false
       else
-        setActions(optionsGrid, items)
+        setActions(grid, items)
     }
   }
 
@@ -108,7 +106,7 @@ class NoteActionsBottomSheet : ThemedBottomSheetFragment() {
       NoteActionItem(
         title = R.string.copy_note,
         icon = R.drawable.ic_copy,
-        invalid = activity.lockedContentIsHidden() && note.locked
+        disabled = activity.lockedContentIsHidden() && note.locked
       ) {
         note.copyToClipboard(activity)
         dismiss()
@@ -117,7 +115,7 @@ class NoteActionsBottomSheet : ThemedBottomSheetFragment() {
       NoteActionItem(
         title = R.string.share_note,
         icon = R.drawable.ic_share,
-        invalid = activity.lockedContentIsHidden() && note.locked
+        disabled = activity.lockedContentIsHidden() && note.locked
       ) {
         note.share(activity)
         dismiss()
@@ -145,7 +143,7 @@ class NoteActionsBottomSheet : ThemedBottomSheetFragment() {
         title = R.string.delete_note_permanently,
         icon = R.drawable.ic_delete_permanently,
         visible = note.state == NoteState.TRASH,
-        invalid = activity.lockedContentIsHidden() && note.locked
+        disabled = activity.lockedContentIsHidden() && note.locked
       ) {
         openDeleteNotePermanentlySheet(activity, note) { activity.notifyResetOrDismiss() }
         dismiss()
@@ -155,7 +153,7 @@ class NoteActionsBottomSheet : ThemedBottomSheetFragment() {
         title = R.string.trash_note,
         icon = R.drawable.ic_delete,
         visible = note.state != NoteState.TRASH,
-        invalid = activity.lockedContentIsHidden() && note.locked
+        disabled = activity.lockedContentIsHidden() && note.locked
       ) {
         activity.moveNoteToTrashOrDelete(note)
         dismiss()
@@ -275,7 +273,7 @@ class NoteActionsBottomSheet : ThemedBottomSheetFragment() {
         title = R.string.share_images,
         icon = R.drawable.ic_share_images,
         visible = note.hasImages(),
-        invalid = activity.lockedContentIsHidden() && note.locked
+        disabled = activity.lockedContentIsHidden() && note.locked
       ) {
         note.shareImages(activity)
         dismiss()
@@ -284,7 +282,7 @@ class NoteActionsBottomSheet : ThemedBottomSheetFragment() {
       NoteActionItem(
         title = R.string.open_in_notification,
         icon = R.drawable.ic_notification,
-        invalid = activity.lockedContentIsHidden() && note.locked
+        disabled = activity.lockedContentIsHidden() && note.locked
       ) {
         val handler = NotificationHandler(requireContext())
         handler.openNotification(NotificationConfig(note = note))
@@ -294,7 +292,7 @@ class NoteActionsBottomSheet : ThemedBottomSheetFragment() {
       NoteActionItem(
         title = R.string.reminder,
         icon = R.drawable.ic_reminder,
-        invalid = activity.lockedContentIsHidden() && note.locked
+        disabled = activity.lockedContentIsHidden() && note.locked
       ) {
         ReminderBottomSheet.openSheet(activity, note)
         dismiss()
@@ -304,7 +302,7 @@ class NoteActionsBottomSheet : ThemedBottomSheetFragment() {
         title = R.string.pin_to_launcher,
         icon = R.drawable.ic_launcher_shortcut,
         visible = OsVersionUtils.canAddLauncherShortcuts(),
-        invalid = activity.lockedContentIsHidden() && note.locked
+        disabled = activity.lockedContentIsHidden() && note.locked
       ) {
         if (OsVersionUtils.canAddLauncherShortcuts())
           ShortcutHandler.addLauncherShortcut(activity, note)
@@ -313,7 +311,7 @@ class NoteActionsBottomSheet : ThemedBottomSheetFragment() {
       NoteActionItem(
         title = R.string.duplicate,
         icon = R.drawable.ic_duplicate,
-        invalid = activity.lockedContentIsHidden() && note.locked
+        disabled = activity.lockedContentIsHidden() && note.locked
       ) {
         val copiedNote = note.shallowCopy()
         copiedNote.uid = 0
@@ -327,7 +325,7 @@ class NoteActionsBottomSheet : ThemedBottomSheetFragment() {
         title = R.string.backup_note_include,
         icon = R.drawable.ic_backup_include,
         visible = note.excludeFromBackup,
-        invalid = activity.lockedContentIsHidden() && note.locked
+        disabled = activity.lockedContentIsHidden() && note.locked
       ) {
         note.excludeFromBackup = false
         note.save(activity)
@@ -339,7 +337,7 @@ class NoteActionsBottomSheet : ThemedBottomSheetFragment() {
         title = R.string.backup_note_exclude,
         icon = R.drawable.ic_backup_exclude,
         visible = !note.excludeFromBackup,
-        invalid = activity.lockedContentIsHidden() && note.locked
+        disabled = activity.lockedContentIsHidden() && note.locked
       ) {
         note.excludeFromBackup = true
         note.save(activity)
@@ -351,7 +349,7 @@ class NoteActionsBottomSheet : ThemedBottomSheetFragment() {
         title = R.string.delete_note_permanently,
         icon = R.drawable.ic_delete_permanently,
         visible = note.state != NoteState.TRASH,
-        invalid = activity.lockedContentIsHidden() && note.locked
+        disabled = activity.lockedContentIsHidden() && note.locked
       ) {
         openDeleteNotePermanentlySheet(activity, note) { activity.notifyResetOrDismiss() }
         dismiss()
@@ -359,41 +357,37 @@ class NoteActionsBottomSheet : ThemedBottomSheetFragment() {
     return actions
   }
 
-  override fun getLayout(): Int = R.layout.bottom_sheet_note_options
-
-  override fun getOptionsTitleColor(selected: Boolean): Int {
-    return ContextCompat.getColor(requireContext(), com.github.bijoysingh.uibasics.R.color.light_primary_text)
-  }
-
-  private fun setActionTitle(dialog: Dialog, title: Int) {
-    val titleView = dialog.findViewById<TextView>(R.id.options_title)
-    titleView.setTextColor(appTheme.getColor(ThemeColor.SECONDARY_TEXT))
-    titleView.setText(title)
-  }
-
-  private fun setActions(layoutGrid: GridLayout, options: List<NoteActionItem>) {
-    val context = layoutGrid.context
-    layoutGrid.columnCount = if (context.resources.getBoolean(R.bool.is_tablet)) 4 else 3
-    for (option in options) {
-      if (!option.visible) {
+  private fun setActions(grid: GridLayout, items: List<NoteActionItem>) {
+    val actionColor = ContextCompat.getColor(requireContext(), com.github.bijoysingh.uibasics.R.color.light_primary_text)
+    grid.columnCount = if (requireContext().resources.getBoolean(R.bool.is_tablet)) 4 else 3
+    for (item in items) {
+      if (!item.visible) {
         continue
       }
 
       val contentView = View.inflate(context, R.layout.layout_grid_item, null) as UILabelView
       contentView.label.typeface = appTypeface.title()
-      contentView.setText(option.title)
-      contentView.setImageResource(option.icon)
-      contentView.setTextColor(getOptionsTitleColor(option.selected))
-      contentView.setImageTint(getOptionsTitleColor(option.selected))
+      contentView.setText(item.title)
+      contentView.setImageResource(item.icon)
+      contentView.setTextColor(actionColor)
+      contentView.setImageTint(actionColor)
 
-      if (!option.invalid) {
-        contentView.setOnClickListener(option.listener)
+      if (!item.disabled) {
+        contentView.setOnClickListener(item.listener)
       } else {
         contentView.alpha = 0.4f
       }
-      layoutGrid.addView(contentView)
+      grid.addView(contentView)
     }
   }
+
+  private class NoteActionItem(
+    val title: Int,
+    val icon: Int,
+    val visible: Boolean = true,
+    val disabled: Boolean = false,
+    val listener: View.OnClickListener
+  )
 
   companion object {
     private const val KEY_NOTE_ID = "note_id"

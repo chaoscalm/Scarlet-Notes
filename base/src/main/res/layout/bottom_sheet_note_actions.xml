@@ -13,22 +13,12 @@
     android:background="@color/transparent"
     android:orientation="vertical">
 
-    <TextView
-      android:id="@+id/options_title"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginBottom="@dimen/spacing_large"
-      android:text="@string/choose_note_color"
-      android:textColor="@color/dark_tertiary_text"
-      android:textSize="@dimen/font_size_large"
-      android:visibility="gone" />
-
     <androidx.cardview.widget.CardView
       style="@style/BottomSheetCardView"
       app:cardBackgroundColor="@color/material_blue_800">
 
       <GridLayout
-        android:id="@+id/quick_actions_properties"
+        android:id="@+id/quick_actions_grid"
         style="@style/NoteOptionGridLayout"
         android:padding="@dimen/spacing_small">
 
@@ -40,18 +30,17 @@
       app:cardBackgroundColor="@color/material_red_800">
 
       <GridLayout
-        android:id="@+id/note_properties"
+        android:id="@+id/note_properties_grid"
         style="@style/NoteOptionGridLayout"
         android:padding="@dimen/spacing_small" />
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-      android:id="@+id/expanding_note_actions"
       style="@style/BottomSheetCardView"
       app:cardBackgroundColor="@color/material_cyan_900">
 
         <GridLayout
-          android:id="@+id/grid_layout"
+          android:id="@+id/extra_actions_grid"
           style="@style/NoteOptionGridLayout"
           android:padding="@dimen/spacing_small" />
 
