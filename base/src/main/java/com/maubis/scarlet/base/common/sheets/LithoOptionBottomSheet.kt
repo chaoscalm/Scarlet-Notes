@@ -24,7 +24,6 @@ class LithoOptionsItem(
   val icon: Int,
   val isSelectable: Boolean = false,
   val selected: Boolean = false,
-  val actionIcon: Int = 0,
   val visible: Boolean = true,
   val listener: () -> Unit)
 
@@ -77,22 +76,14 @@ object OptionItemLayoutSpec {
 
     if (option.isSelectable) {
       row.child(RoundIcon.create(context)
-                  .iconRes(if (option.actionIcon == 0) R.drawable.ic_selected else option.actionIcon)
+                  .iconRes(R.drawable.ic_selected)
                   .bgColor(if (option.selected) selectedColor else titleColor)
                   .bgAlpha(if (option.selected) 200 else 25)
                   .isInactive(!option.selected)
                   .iconColor(if (option.selected) Color.WHITE else titleColor)
                   .iconSizeRes(R.dimen.toolbar_round_small_icon_size)
                   .iconPaddingRes(R.dimen.toolbar_round_small_icon_padding)
-                  .marginDip(YogaEdge.START, 12f))
-    } else if (!option.isSelectable && option.actionIcon != 0) {
-      row.child(RoundIcon.create(context)
-                  .iconRes(option.actionIcon)
-                  .bgColor(titleColor)
-                  .bgAlpha(25)
-                  .iconColor(titleColor)
-                  .iconSizeRes(R.dimen.toolbar_round_small_icon_size)
-                  .iconPaddingRes(R.dimen.toolbar_round_small_icon_padding)
+                  .flexShrink(0f)
                   .marginDip(YogaEdge.START, 12f))
     }
 

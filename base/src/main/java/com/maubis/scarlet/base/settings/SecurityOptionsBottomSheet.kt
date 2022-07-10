@@ -49,8 +49,7 @@ class SecurityOptionsBottomSheet : LithoOptionBottomSheet() {
           )
         },
         isSelectable = true,
-        selected = ScarletApp.prefs.lockApp,
-        actionIcon = R.drawable.ic_selected
+        selected = ScarletApp.prefs.lockApp
       ))
 
     options.add(
@@ -67,8 +66,7 @@ class SecurityOptionsBottomSheet : LithoOptionBottomSheet() {
           )
         },
         isSelectable = true,
-        selected = ScarletApp.prefs.alwaysNeedToAuthenticate,
-        actionIcon = R.drawable.ic_selected
+        selected = ScarletApp.prefs.alwaysNeedToAuthenticate
       ))
 
     options.add(

@@ -77,8 +77,7 @@ class WidgetOptionsBottomSheet : LithoOptionBottomSheet() {
               },
               columns = 6)
           })
-        },
-        actionIcon = 0
+        }
       ))
     return options
   }

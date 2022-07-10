@@ -27,8 +27,7 @@ class EditorOptionsBottomSheet : LithoOptionBottomSheet() {
         listener = {
           ScarletApp.prefs.useNoteColorAsBackground = !ScarletApp.prefs.useNoteColorAsBackground
           refresh(activity, dialog)
-        },
-        actionIcon = 0
+        }
       ))
     items.add(
       LithoOptionsItem(
@@ -39,8 +38,7 @@ class EditorOptionsBottomSheet : LithoOptionBottomSheet() {
         listener = {
           openSheet(activity, FontSizeBottomSheet())
           refresh(activity, dialog)
-        },
-        actionIcon = 0
+        }
       ))
     items.add(LithoOptionsItem(
       title = R.string.editor_option_enable_live_markdown,

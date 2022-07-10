@@ -88,8 +88,7 @@ class ThemeColorPickerBottomSheet : LithoBottomSheet() {
               icon = R.drawable.ic_color_picker,
               listener = {},
               isSelectable = true,
-              selected = ScarletApp.prefs.useSystemTheme,
-              actionIcon = 0
+              selected = ScarletApp.prefs.useSystemTheme
             ))
           .onClick {
             val context = componentContext.androidContext as AppCompatActivity
@@ -112,8 +111,7 @@ class ThemeColorPickerBottomSheet : LithoBottomSheet() {
               icon = R.drawable.ic_dark_mode,
               listener = {},
               isSelectable = true,
-              selected = ScarletApp.prefs.darkenCustomColors,
-              actionIcon = 0
+              selected = ScarletApp.prefs.darkenCustomColors
             ))
           .onClick {
             val activity = componentContext.androidContext as AppCompatActivity
