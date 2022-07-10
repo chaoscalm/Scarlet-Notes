@@ -7,22 +7,19 @@ import com.maubis.scarlet.base.common.utils.SortingTechnique
 import kotlin.reflect.KProperty
 
 class AppPreferences(private val sharedPrefs: SharedPreferences) {
-  var enableFullscreen: Boolean by BooleanPreference("internal_enable_full_screen", false)
-  var showNotesUuids: Boolean by BooleanPreference("internal_show_uuid", false)
-
-  var noteDefaultColor: Int by IntPreference("KEY_NOTE_DEFAULT_COLOR", 0xFFD32F2F.toInt())
   var useNoteColorAsBackground: Boolean by BooleanPreference("KEY_NOTE_VIEWER_BG_COLOR", false)
   var skipNoteViewer: Boolean by BooleanPreference("skip_note_viewer", false)
   var editorTextSize: Int by IntPreference("KEY_TEXT_SIZE", DEFAULT_TEXT_SIZE)
   var liveMarkdownInEditor: Boolean by BooleanPreference("editor_live_markdown", true)
   var moveCheckedItems: Boolean by BooleanPreference("editor_move_checked_items", false)
 
+  var enableFullscreen: Boolean by BooleanPreference("enable_full_screen", false)
+  var noteDefaultColor: Int by IntPreference("KEY_NOTE_DEFAULT_COLOR", 0xFFD32F2F.toInt())
+  var notePreviewLines: Int by IntPreference("KEY_LINE_COUNT", 7)
+  var displayNotesListAsGrid: Boolean by BooleanPreference("KEY_LIST_VIEW", true)
   var notesSortingTechnique: SortingTechnique
     get() = SortingTechnique.valueOf(sharedPrefs.getString("notes_sorting_technique", SortingTechnique.LAST_MODIFIED.name)!!)
     set(value) = sharedPrefs.edit { putString("notes_sorting_technique", value.name) }
-
-  var notePreviewLines: Int by IntPreference("KEY_LINE_COUNT", 7)
-  var displayNotesListAsGrid: Boolean by BooleanPreference("KEY_LIST_VIEW", true)
 
   var selectedTheme: String by StringPreference("KEY_APP_THEME", Theme.DARK.name)
   var useSystemTheme: Boolean by BooleanPreference("automatic_theme", false)

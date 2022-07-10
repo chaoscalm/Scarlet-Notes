@@ -2,7 +2,6 @@ package com.maubis.scarlet.base.settings
 
 import android.app.Dialog
 import com.facebook.litho.ComponentContext
-import com.maubis.scarlet.base.BuildConfig
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.common.sheets.LithoOptionBottomSheet
 import com.maubis.scarlet.base.common.sheets.LithoOptionsItem
@@ -64,16 +63,6 @@ class SettingsBottomSheet : LithoOptionBottomSheet() {
         openSheet(activity, AboutBottomSheet())
       }
     ))
-    if (BuildConfig.DEBUG) {
-      options.add(LithoOptionsItem(
-        title = R.string.internal_settings_title,
-        subtitle = R.string.internal_settings_description,
-        icon = R.drawable.ic_code_block,
-        listener = {
-          openSheet(activity, DeveloperOptionsBottomSheet())
-        }
-      ))
-    }
     return options
   }
 

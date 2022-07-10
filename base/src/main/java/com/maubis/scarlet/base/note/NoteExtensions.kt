@@ -58,12 +58,7 @@ fun Note.getTextForSharing(): String {
       stringBuilder.append("\n")
     }
   }
-
-  val text = stringBuilder.toString().trim()
-  if (ScarletApp.prefs.showNotesUuids) {
-    return "`$uuid`\n\n$text"
-  }
-  return text
+  return stringBuilder.toString().trim()
 }
 
 fun Note.getImageFile(): String {
@@ -73,11 +68,9 @@ fun Note.getImageFile(): String {
 }
 
 fun Note.getFullText(): String {
-  val fullText = contentAsFormats().joinToString(separator = "\n") { it.markdownText }.trim()
-  if (ScarletApp.prefs.showNotesUuids) {
-    return "`$uuid`\n$fullText"
-  }
-  return fullText
+  return contentAsFormats()
+    .joinToString(separator = "\n") { it.markdownText }
+    .trim()
 }
 
 fun Note.isLockedButAppUnlocked(): Boolean {
