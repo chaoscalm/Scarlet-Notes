@@ -46,7 +46,7 @@ class NotesSelectionActivity : SelectableNotesActivityBase() {
       runTextFunction { text -> shareText(this, text) }
     }
     views.secondaryFabAction.setOnClickListener {
-      openSheet(this, SelectedNotesOptionsBottomSheet())
+      openSheet(this, SelectedNotesActionsBottomSheet())
     }
     recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
       override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {

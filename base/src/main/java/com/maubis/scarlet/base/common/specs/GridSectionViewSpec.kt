@@ -88,6 +88,7 @@ object GridSectionViewSpec {
     @Prop(optional = true) showSeparator: Boolean?): Component {
     val column = Column.create(context)
     val primaryColor = appTheme.getColor(ThemeColor.SECONDARY_TEXT)
+    val iconColor = appTheme.getColor(ThemeColor.ICON)
 
     if (section.title != 0) {
       column.child(
@@ -114,7 +115,7 @@ object GridSectionViewSpec {
           .labelColor(primaryColor)
           .maxLines(maxLines ?: 2)
           .iconSizePx(iconSize)
-          .iconColor(if (section.sectionColor == 0) primaryColor else Color.WHITE)
+          .iconColor(if (section.sectionColor == 0) iconColor else Color.WHITE)
           .sectionColor(if (section.sectionColor == 0) primaryColor else section.sectionColor)
           .option(visibleOptions[index])
           .build()

@@ -188,7 +188,7 @@ class ReminderBottomSheet : ThemedBottomSheetFragment() {
   }
 
   private fun setColors() {
-    val iconColor = appTheme.getColor(ThemeColor.TOOLBAR_ICON)
+    val iconColor = appTheme.getColor(ThemeColor.ICON)
     val textColor = appTheme.getColor(ThemeColor.TERTIARY_TEXT)
     val titleColor = appTheme.getColor(ThemeColor.SECTION_HEADER)
 

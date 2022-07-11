@@ -31,6 +31,7 @@ object TagItemLayoutSpec {
   @OnCreateLayout
   fun onCreate(context: ComponentContext, @Prop tagItem: TagItem): Component {
     val titleColor = ScarletApp.appTheme.getColor(ThemeColor.SECONDARY_TEXT)
+    val iconColor = ScarletApp.appTheme.getColor(ThemeColor.ICON)
     val selectedColor = when (ScarletApp.appTheme.isNightTheme()) {
       true -> context.getColor(com.github.bijoysingh.uibasics.R.color.material_blue_400)
       false -> context.getColor(com.github.bijoysingh.uibasics.R.color.material_blue_700)
@@ -67,7 +68,7 @@ object TagItemLayoutSpec {
         RoundIcon.create(context)
           .iconRes(icon)
           .bgColor(bgColor)
-          .iconColor(titleColor)
+          .iconColor(iconColor)
           .iconSizeRes(R.dimen.toolbar_round_icon_size)
           .iconPaddingRes(R.dimen.toolbar_round_icon_padding)
           .bgAlpha(bgAlpha)
@@ -86,7 +87,7 @@ object TagItemLayoutSpec {
                   .iconRes(R.drawable.ic_edit)
                   .bgColor(titleColor)
                   .bgAlpha(15)
-                  .iconColor(titleColor)
+                  .iconColor(iconColor)
                   .iconSizeRes(R.dimen.toolbar_round_icon_size)
                   .iconPaddingRes(R.dimen.toolbar_round_icon_padding)
                   .onClick { tagItem.editListener() }

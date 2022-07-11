@@ -4,7 +4,7 @@ import android.app.Dialog
 import androidx.core.content.ContextCompat
 import com.facebook.litho.ComponentContext
 import com.maubis.scarlet.base.R
-import com.maubis.scarlet.base.common.sheets.GridOptionBottomSheet
+import com.maubis.scarlet.base.common.sheets.GridActionsBottomSheet
 import com.maubis.scarlet.base.common.sheets.openSheet
 import com.maubis.scarlet.base.common.specs.GridSectionItem
 import com.maubis.scarlet.base.common.specs.GridSectionOptionItem
@@ -19,15 +19,15 @@ import com.maubis.scarlet.base.note.folder.sheet.MultipleNotesFolderChooserBotto
 import com.maubis.scarlet.base.note.tag.SelectedTagChooserBottomSheet
 import com.maubis.scarlet.base.security.PincodeBottomSheet
 
-class SelectedNotesOptionsBottomSheet : GridOptionBottomSheet() {
+class SelectedNotesActionsBottomSheet : GridActionsBottomSheet() {
   override fun title(): Int = R.string.choose_action
 
-  override fun getOptions(componentContext: ComponentContext, dialog: Dialog): List<GridSectionItem> {
-    val options = ArrayList<GridSectionItem>()
-    options.add(getQuickActions(componentContext))
-    options.add(getSecondaryActions(componentContext))
-    options.add(getTertiaryActions(componentContext))
-    return options
+  override fun getItems(componentContext: ComponentContext, dialog: Dialog): List<GridSectionItem> {
+    val items = ArrayList<GridSectionItem>()
+    items.add(getQuickActions(componentContext))
+    items.add(getSecondaryActions(componentContext))
+    items.add(getTertiaryActions(componentContext))
+    return items
   }
 
   private fun getQuickActions(componentContext: ComponentContext): GridSectionItem {

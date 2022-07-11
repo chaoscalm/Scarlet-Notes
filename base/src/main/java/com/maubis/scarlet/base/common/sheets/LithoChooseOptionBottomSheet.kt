@@ -29,6 +29,7 @@ object ChooseOptionItemLayoutSpec {
     context: ComponentContext,
     @Prop option: LithoChooseOptionsItem): Component {
     val titleColor = appTheme.getColor(ThemeColor.SECONDARY_TEXT)
+    val iconColor = appTheme.getColor(ThemeColor.ICON)
     val selectedColor = context.getColor(R.color.colorAccent)
 
     val row = Row.create(context)
@@ -49,7 +50,7 @@ object ChooseOptionItemLayoutSpec {
                .bgColor(if (option.selected) selectedColor else titleColor)
                .bgAlpha(if (option.selected) 200 else 25)
                .isInactive(!option.selected)
-               .iconColor(if (option.selected) Color.WHITE else titleColor)
+               .iconColor(if (option.selected) Color.WHITE else iconColor)
                .iconSizeRes(R.dimen.toolbar_round_small_icon_size)
                .iconPaddingRes(R.dimen.toolbar_round_small_icon_padding)
                .marginDip(YogaEdge.START, 12f))

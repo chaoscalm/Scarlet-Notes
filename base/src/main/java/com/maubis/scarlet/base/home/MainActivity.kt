@@ -131,14 +131,15 @@ class MainActivity : SecuredActivity(), INoteActionsActivity {
 
     val titleColor = appTheme.getColor(ThemeColor.SECONDARY_TEXT)
     val hintColor = appTheme.getColor(ThemeColor.TERTIARY_TEXT)
+    val iconColor = appTheme.getColor(ThemeColor.ICON)
     views.mainToolbar.title.setTextColor(titleColor)
     views.mainToolbar.title.typeface = ScarletApp.appTypeface.heading()
-    views.mainToolbar.searchIcon.setColorFilter(titleColor)
-    views.mainToolbar.settingsIcon.setColorFilter(titleColor)
+    views.mainToolbar.searchIcon.setColorFilter(iconColor)
+    views.mainToolbar.settingsIcon.setColorFilter(iconColor)
     views.searchToolbar.textField.setTextColor(titleColor)
     views.searchToolbar.textField.setHintTextColor(hintColor)
     views.searchToolbar.separator.setBackgroundColor(hintColor)
-    views.searchToolbar.closeIcon.setColorFilter(titleColor)
+    views.searchToolbar.closeIcon.setColorFilter(iconColor)
   }
 
   private fun setupRecyclerView() {

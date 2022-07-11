@@ -182,13 +182,13 @@ open class ViewNoteActivity : SecuredActivity(), INoteActionsActivity {
     when {
       ScarletApp.prefs.useNoteColorAsBackground -> {
         colorConfig.backgroundColor = noteColor
-        colorConfig.toolbarIconColor = appTheme.getColor(this, Theme.DARK, ThemeColor.TOOLBAR_ICON)
+        colorConfig.toolbarIconColor = appTheme.getColor(this, Theme.DARK, ThemeColor.ICON)
         colorConfig.statusBarColor = noteColor
         colorConfig.toolbarBackgroundColor = darkerColor(noteColor)
       }
       else -> {
         colorConfig.backgroundColor = appTheme.getColor(ThemeColor.BACKGROUND)
-        colorConfig.toolbarIconColor = appTheme.getColor(ThemeColor.TOOLBAR_ICON)
+        colorConfig.toolbarIconColor = appTheme.getColor(ThemeColor.ICON)
         colorConfig.statusBarColor = appTheme.getColor(ThemeColor.STATUS_BAR)
         colorConfig.toolbarBackgroundColor = appTheme.getColor(ThemeColor.TOOLBAR_BACKGROUND)
       }

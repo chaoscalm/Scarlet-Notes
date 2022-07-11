@@ -34,6 +34,7 @@ object OptionItemLayoutSpec {
     context: ComponentContext,
     @Prop option: LithoOptionsItem): Component {
     val titleColor = appTheme.getColor(ThemeColor.SECONDARY_TEXT)
+    val iconColor = appTheme.getColor(ThemeColor.ICON)
     val subtitleColor = appTheme.getColor(ThemeColor.HINT_TEXT)
     val selectedColor = appTheme.getColor(ThemeColor.ACCENT_TEXT)
 
@@ -51,7 +52,7 @@ object OptionItemLayoutSpec {
         RoundIcon.create(context)
           .iconRes(option.icon)
           .bgColor(titleColor)
-          .iconColor(titleColor)
+          .iconColor(iconColor)
           .iconSizeRes(R.dimen.toolbar_round_icon_size)
           .iconPaddingRes(R.dimen.toolbar_round_icon_padding)
           .bgAlpha(15)
@@ -80,7 +81,7 @@ object OptionItemLayoutSpec {
                   .bgColor(if (option.selected) selectedColor else titleColor)
                   .bgAlpha(if (option.selected) 200 else 25)
                   .isInactive(!option.selected)
-                  .iconColor(if (option.selected) Color.WHITE else titleColor)
+                  .iconColor(if (option.selected) Color.WHITE else iconColor)
                   .iconSizeRes(R.dimen.toolbar_round_small_icon_size)
                   .iconPaddingRes(R.dimen.toolbar_round_small_icon_padding)
                   .flexShrink(0f)
@@ -111,6 +112,7 @@ object OptionLabelItemLayoutSpec {
     context: ComponentContext,
     @Prop option: LithoLabelOptionsItem): Component {
     val titleColor = appTheme.getColor(ThemeColor.SECONDARY_TEXT)
+    val iconColor = appTheme.getColor(ThemeColor.ICON)
 
     val row = Column.create(context)
       .widthPercent(100f)
@@ -120,7 +122,7 @@ object OptionLabelItemLayoutSpec {
         RoundIcon.create(context)
           .iconRes(option.icon)
           .bgColor(titleColor)
-          .iconColor(titleColor)
+          .iconColor(iconColor)
           .iconSizeRes(R.dimen.toolbar_round_icon_size)
           .iconPaddingRes(R.dimen.toolbar_round_icon_padding)
           .bgAlpha(15)

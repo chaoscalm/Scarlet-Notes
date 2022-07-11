@@ -89,15 +89,13 @@ class OpenFileActivity : SecuredActivity() {
     val containerLayout = findViewById<View>(R.id.container_layout)
     containerLayout.setBackgroundColor(getThemeColor())
 
-    val toolbarIconColor = appTheme.getColor(ThemeColor.TOOLBAR_ICON)
-    views.toolbar.backButton.setColorFilter(toolbarIconColor)
-
     val textColor = appTheme.getColor(ThemeColor.SECONDARY_TEXT)
     views.toolbar.fileName.setTextColor(textColor)
     views.content.setTextColor(textColor)
 
-    val actionColor = appTheme.getColor(ThemeColor.TOOLBAR_ICON)
-    views.toolbar.importButton.setImageTint(actionColor)
-    views.toolbar.importButton.setTextColor(actionColor)
+    val iconColor = appTheme.getColor(ThemeColor.ICON)
+    views.toolbar.backButton.setColorFilter(iconColor)
+    views.toolbar.importButton.setImageTint(iconColor)
+    views.toolbar.importButton.setTextColor(iconColor)
   }
 }

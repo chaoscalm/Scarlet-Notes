@@ -35,6 +35,7 @@ object FolderItemLayoutSpec {
   @OnCreateLayout
   fun onCreate(context: ComponentContext, @Prop option: FolderOptionsItem): Component {
     val titleColor = appTheme.getColor(ThemeColor.SECONDARY_TEXT)
+    val iconColor = appTheme.getColor(ThemeColor.ICON)
     val selectedColor = when (appTheme.isNightTheme()) {
       true -> context.getColor(com.github.bijoysingh.uibasics.R.color.material_blue_400)
       false -> context.getColor(com.github.bijoysingh.uibasics.R.color.material_blue_700)
@@ -71,7 +72,7 @@ object FolderItemLayoutSpec {
         RoundIcon.create(context)
           .iconRes(icon)
           .bgColor(bgColor)
-          .iconColor(titleColor)
+          .iconColor(iconColor)
           .iconSizeRes(R.dimen.toolbar_round_icon_size)
           .iconPaddingRes(R.dimen.toolbar_round_icon_padding)
           .bgAlpha(bgAlpha)

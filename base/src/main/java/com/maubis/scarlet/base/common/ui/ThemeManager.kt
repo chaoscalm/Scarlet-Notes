@@ -105,7 +105,7 @@ class ThemeManager {
       ThemeColor.ACCENT_TEXT -> theme.accentText
       ThemeColor.SECTION_HEADER -> theme.sectionHeader
       ThemeColor.TOOLBAR_BACKGROUND -> theme.toolbarBackground
-      ThemeColor.TOOLBAR_ICON -> theme.toolbarIcon
+      ThemeColor.ICON -> theme.icon
     }
     return ContextCompat.getColor(context, colorResource)
   }
@@ -134,7 +134,7 @@ enum class Theme(
   val accentText: Int,
   val sectionHeader: Int,
   val toolbarBackground: Int,
-  val toolbarIcon: Int,
+  val icon: Int,
   val statusBarColorFallback: Int? = null) {
   LIGHT(
     isNightTheme = false,
@@ -147,7 +147,7 @@ enum class Theme(
     accentText = R.color.colorAccent,
     sectionHeader = com.github.bijoysingh.uibasics.R.color.material_blue_grey_600,
     toolbarBackground = com.github.bijoysingh.uibasics.R.color.material_grey_50,
-    toolbarIcon = com.github.bijoysingh.uibasics.R.color.dark_secondary_text,
+    icon = com.github.bijoysingh.uibasics.R.color.dark_secondary_text,
     statusBarColorFallback = com.github.bijoysingh.uibasics.R.color.material_grey_500),
   BEIGE(
     isNightTheme = false,
@@ -160,7 +160,7 @@ enum class Theme(
     accentText = R.color.colorAccent,
     sectionHeader = com.github.bijoysingh.uibasics.R.color.material_blue_grey_700,
     toolbarBackground = R.color.app_theme_beige_dark,
-    toolbarIcon = com.github.bijoysingh.uibasics.R.color.dark_secondary_text,
+    icon = com.github.bijoysingh.uibasics.R.color.dark_secondary_text,
     statusBarColorFallback = R.color.app_theme_beige_dark),
   ROSE(
     isNightTheme = false,
@@ -173,7 +173,7 @@ enum class Theme(
     accentText = R.color.colorAccent,
     sectionHeader = com.github.bijoysingh.uibasics.R.color.material_blue_grey_700,
     toolbarBackground = R.color.app_theme_rose_dark,
-    toolbarIcon = com.github.bijoysingh.uibasics.R.color.dark_secondary_text,
+    icon = com.github.bijoysingh.uibasics.R.color.dark_secondary_text,
     statusBarColorFallback = R.color.app_theme_rose_dark),
   SKY(
     isNightTheme = false,
@@ -186,7 +186,7 @@ enum class Theme(
     accentText = com.github.bijoysingh.uibasics.R.color.material_pink_accent_100,
     sectionHeader = com.github.bijoysingh.uibasics.R.color.material_blue_grey_600,
     toolbarBackground = com.github.bijoysingh.uibasics.R.color.material_blue_200,
-    toolbarIcon = com.github.bijoysingh.uibasics.R.color.dark_secondary_text),
+    icon = com.github.bijoysingh.uibasics.R.color.dark_secondary_text),
   PURPLE(
     isNightTheme = false,
     background = com.github.bijoysingh.uibasics.R.color.material_purple_100,
@@ -198,7 +198,7 @@ enum class Theme(
     accentText = R.color.colorAccent,
     sectionHeader = com.github.bijoysingh.uibasics.R.color.material_blue_grey_600,
     toolbarBackground = com.github.bijoysingh.uibasics.R.color.material_purple_200,
-    toolbarIcon = com.github.bijoysingh.uibasics.R.color.dark_secondary_text),
+    icon = com.github.bijoysingh.uibasics.R.color.dark_secondary_text),
   DARK(
     isNightTheme = true,
     background = com.github.bijoysingh.uibasics.R.color.material_grey_850,
@@ -210,7 +210,7 @@ enum class Theme(
     accentText = com.github.bijoysingh.uibasics.R.color.material_pink_accent_100,
     sectionHeader = com.github.bijoysingh.uibasics.R.color.material_blue_grey_200,
     toolbarBackground = com.github.bijoysingh.uibasics.R.color.material_grey_900,
-    toolbarIcon = android.R.color.white),
+    icon = android.R.color.white),
   VERY_DARK(
     isNightTheme = true,
     background = com.github.bijoysingh.uibasics.R.color.material_grey_900,
@@ -222,7 +222,7 @@ enum class Theme(
     accentText = com.github.bijoysingh.uibasics.R.color.material_pink_accent_100,
     sectionHeader = com.github.bijoysingh.uibasics.R.color.material_blue_grey_200,
     toolbarBackground = com.github.bijoysingh.uibasics.R.color.material_grey_900,
-    toolbarIcon = android.R.color.white),
+    icon = android.R.color.white),
   BLACK(
     isNightTheme = true,
     background = android.R.color.black,
@@ -234,5 +234,5 @@ enum class Theme(
     accentText = com.github.bijoysingh.uibasics.R.color.material_pink_accent_100,
     sectionHeader = com.github.bijoysingh.uibasics.R.color.material_blue_grey_200,
     toolbarBackground = android.R.color.black,
-    toolbarIcon = android.R.color.white),
+    icon = android.R.color.white),
 }

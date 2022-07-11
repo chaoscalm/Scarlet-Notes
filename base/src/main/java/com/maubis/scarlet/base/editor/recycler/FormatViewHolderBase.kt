@@ -55,21 +55,21 @@ abstract class FormatViewHolderBase(context: Context, view: View) : RecyclerView
       !ScarletApp.prefs.useNoteColorAsBackground -> {
         secondaryTextColor = appTheme.getColor(ThemeColor.SECONDARY_TEXT)
         tertiaryTextColor = appTheme.getColor(ThemeColor.TERTIARY_TEXT)
-        iconColor = appTheme.getColor(ThemeColor.TOOLBAR_ICON)
+        iconColor = appTheme.getColor(ThemeColor.ICON)
         hintTextColor = appTheme.getColor(ThemeColor.HINT_TEXT)
         linkColor = appTheme.getColor(ThemeColor.ACCENT_TEXT)
       }
       isLightBackground -> {
         secondaryTextColor = appTheme.getColor(context, Theme.LIGHT, ThemeColor.SECONDARY_TEXT)
         tertiaryTextColor = appTheme.getColor(context, Theme.LIGHT, ThemeColor.TERTIARY_TEXT)
-        iconColor = appTheme.getColor(context, Theme.LIGHT, ThemeColor.TOOLBAR_ICON)
+        iconColor = appTheme.getColor(context, Theme.LIGHT, ThemeColor.ICON)
         hintTextColor = appTheme.getColor(context, Theme.LIGHT, ThemeColor.HINT_TEXT)
         linkColor = ContextCompat.getColor(context, R.color.colorAccentYellowLight)
       }
       else -> {
         secondaryTextColor = appTheme.getColor(context, Theme.DARK, ThemeColor.SECONDARY_TEXT)
         tertiaryTextColor = appTheme.getColor(context, Theme.DARK, ThemeColor.TERTIARY_TEXT)
-        iconColor = appTheme.getColor(context, Theme.DARK, ThemeColor.TOOLBAR_ICON)
+        iconColor = appTheme.getColor(context, Theme.DARK, ThemeColor.ICON)
         hintTextColor = appTheme.getColor(context, Theme.DARK, ThemeColor.HINT_TEXT)
         linkColor = ContextCompat.getColor(context, R.color.colorAccentYellowDark)
       }

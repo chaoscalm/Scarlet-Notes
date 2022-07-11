@@ -9,10 +9,10 @@ import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.common.specs.GridSectionItem
 import com.maubis.scarlet.base.common.specs.GridSectionView
 
-abstract class GridOptionBottomSheet : LithoBottomSheet() {
+abstract class GridActionsBottomSheet : LithoBottomSheet() {
 
   abstract fun title(): Int
-  abstract fun getOptions(componentContext: ComponentContext, dialog: Dialog): List<GridSectionItem>
+  abstract fun getItems(componentContext: ComponentContext, dialog: Dialog): List<GridSectionItem>
 
   override fun getComponent(componentContext: ComponentContext, dialog: Dialog): Component {
     val column = Column.create(componentContext)
@@ -20,16 +20,16 @@ abstract class GridOptionBottomSheet : LithoBottomSheet() {
       .paddingDip(YogaEdge.VERTICAL, 8f)
       .child(getLithoBottomSheetTitle(componentContext).textRes(title()))
 
-    val options = getOptions(componentContext, dialog)
+    val items = getItems(componentContext, dialog)
     var index = 0
-    options.forEach {
+    items.forEach {
       index++
       column.child(
         GridSectionView.create(componentContext)
           .marginDip(YogaEdge.HORIZONTAL, 12f)
           .marginDip(YogaEdge.VERTICAL, 8f)
           .iconSizeRes(R.dimen.primary_round_icon_size)
-          .showSeparator(index != options.size)
+          .showSeparator(index != items.size)
           .section(it))
     }
 

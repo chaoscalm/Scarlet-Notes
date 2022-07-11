@@ -112,7 +112,7 @@ class NotificationHandler(private val context: Context) {
     val backgroundColor = appTheme.getColor(ThemeColor.BACKGROUND)
     contentView.setInt(R.id.root_layout, "setBackgroundColor", backgroundColor)
 
-    val iconColor = appTheme.getColor(ThemeColor.TOOLBAR_ICON)
+    val iconColor = appTheme.getColor(ThemeColor.ICON)
     contentView.setInt(R.id.options_button, "setColorFilter", iconColor)
     contentView.setInt(R.id.copy_button, "setColorFilter", iconColor)
     contentView.setInt(R.id.delete_button, "setColorFilter", iconColor)

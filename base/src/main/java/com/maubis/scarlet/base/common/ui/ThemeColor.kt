@@ -11,5 +11,5 @@ enum class ThemeColor {
   ACCENT_TEXT,
   SECTION_HEADER,
   TOOLBAR_BACKGROUND,
-  TOOLBAR_ICON,
+  ICON,
 }
