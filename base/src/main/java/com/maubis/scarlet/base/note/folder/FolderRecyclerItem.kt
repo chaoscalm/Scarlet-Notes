@@ -14,7 +14,8 @@ class FolderRecyclerItem(
   val click: () -> Unit = {},
   val longClick: () -> Unit = {}) : RecyclerItem() {
 
-  val isLightShaded = ColorUtil.isLightColor(folder.color)
+  private val isLightShaded = ColorUtil.isLightColor(folder.color)
+
   val title = folder.title
   val titleColor = when (isLightShaded) {
     true -> ContextCompat.getColor(context, com.github.bijoysingh.uibasics.R.color.dark_secondary_text)

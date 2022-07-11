@@ -1,9 +1,6 @@
 package com.maubis.scarlet.base.common.specs
 
 import android.graphics.Color
-import android.graphics.PorterDuff
-import android.graphics.PorterDuffColorFilter
-import android.graphics.drawable.Drawable
 import com.facebook.litho.Column
 import com.facebook.litho.Component
 import com.facebook.litho.ComponentContext
@@ -20,12 +17,6 @@ object EmptySpec {
     return SolidColor.create(context)
       .color(Color.TRANSPARENT)
   }
-}
-
-fun Drawable.color(tint: Int): Drawable {
-  val drawableCopy = mutate().constantState?.newDrawable()
-  drawableCopy?.colorFilter = PorterDuffColorFilter(tint, PorterDuff.Mode.MULTIPLY)
-  return drawableCopy ?: this
 }
 
 fun separatorSpec(context: ComponentContext): Component.Builder<*> {

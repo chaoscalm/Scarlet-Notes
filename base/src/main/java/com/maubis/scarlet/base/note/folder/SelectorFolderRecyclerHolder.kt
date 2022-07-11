@@ -11,6 +11,7 @@ import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.common.recycler.RecyclerItem
 import com.maubis.scarlet.base.common.recycler.setFullSpan
 import com.maubis.scarlet.base.common.ui.CircleDrawable
+import com.maubis.scarlet.base.common.utils.setIconTint
 
 class SelectorFolderRecyclerHolder(context: Context, view: View) : RecyclerViewHolder<RecyclerItem>(context, view) {
 
@@ -24,10 +25,8 @@ class SelectorFolderRecyclerHolder(context: Context, view: View) : RecyclerViewH
     title.text = item.title
     title.setTextColor(item.titleColor)
     title.typeface = appTypeface.title()
-    title.alpha = 0.8f
 
-    icon.setColorFilter(item.iconColor)
+    icon.setIconTint(item.iconColor)
     icon.background = CircleDrawable(item.folderColor, false)
-    icon.alpha = 0.8f
   }
 }

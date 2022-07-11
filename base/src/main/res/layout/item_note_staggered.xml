@@ -70,7 +70,6 @@
         android:id="@+id/pin_icon"
         android:layout_width="@dimen/spacing_normal"
         android:layout_height="@dimen/spacing_normal"
-        android:alpha="0.7"
         android:src="@drawable/ic_pin"
         android:visibility="gone" />
 
@@ -78,7 +77,6 @@
         android:id="@+id/state_icon"
         android:layout_width="@dimen/spacing_normal"
         android:layout_height="@dimen/spacing_normal"
-        android:alpha="0.7"
         android:src="@drawable/ic_pin"
         android:visibility="gone" />
 
@@ -86,7 +84,6 @@
         android:id="@+id/reminder_icon"
         android:layout_width="@dimen/spacing_normal"
         android:layout_height="@dimen/spacing_normal"
-        android:alpha="0.7"
         android:src="@drawable/ic_reminder"
         android:visibility="gone" />
 
@@ -94,7 +91,6 @@
         android:id="@+id/backup_icon"
         android:layout_width="@dimen/spacing_normal"
         android:layout_height="@dimen/spacing_normal"
-        android:alpha="0.7"
         android:src="@drawable/ic_backup_exclude"
         android:visibility="gone" />
 
@@ -102,7 +98,6 @@
         android:id="@+id/unlock_icon"
         android:layout_width="@dimen/spacing_normal"
         android:layout_height="@dimen/spacing_normal"
-        android:alpha="0.7"
         android:src="@drawable/ic_lock"
         android:visibility="gone" />
     </LinearLayout>

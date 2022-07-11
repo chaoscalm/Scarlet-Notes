@@ -19,6 +19,7 @@ import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.ScarletApp.Companion.imageStorage
 import com.maubis.scarlet.base.common.recycler.RecyclerItem
+import com.maubis.scarlet.base.common.utils.setIconTint
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.database.entities.NoteState
 import com.maubis.scarlet.base.note.getFullTextForDirectMarkdownRender
@@ -96,11 +97,11 @@ open class NoteRecyclerViewHolderBase(context: Context, view: View) : RecyclerVi
     }
     unlockIndicator.isVisible = item.note.locked
 
-    pinIndicator.setColorFilter(item.indicatorColor)
-    stateIndicator.setColorFilter(item.indicatorColor)
-    reminderIndicator.setColorFilter(item.indicatorColor)
-    backupIndicator.setColorFilter(item.indicatorColor)
-    unlockIndicator.setColorFilter(item.indicatorColor)
+    pinIndicator.setIconTint(item.indicatorColor)
+    stateIndicator.setIconTint(item.indicatorColor)
+    reminderIndicator.setIconTint(item.indicatorColor)
+    backupIndicator.setIconTint(item.indicatorColor)
+    unlockIndicator.setIconTint(item.indicatorColor)
   }
 
   private fun setMetaText(item: NoteRecyclerItem) {
@@ -129,11 +130,11 @@ open class NoteRecyclerViewHolderBase(context: Context, view: View) : RecyclerVi
     copy.setOnClickListener { copyIconClick(item.note, extra) }
     moreOptions.setOnClickListener { moreOptionsIconClick(item.note, extra) }
 
-    delete.setColorFilter(item.actionBarIconColor)
-    share.setColorFilter(item.actionBarIconColor)
-    edit.setColorFilter(item.actionBarIconColor)
-    copy.setColorFilter(item.actionBarIconColor)
-    moreOptions.setColorFilter(item.actionBarIconColor)
+    delete.setIconTint(item.actionBarIconColor)
+    share.setIconTint(item.actionBarIconColor)
+    edit.setIconTint(item.actionBarIconColor)
+    copy.setIconTint(item.actionBarIconColor)
+    moreOptions.setIconTint(item.actionBarIconColor)
   }
 
   private fun getLockedAwarePreviewText(note: Note): CharSequence {

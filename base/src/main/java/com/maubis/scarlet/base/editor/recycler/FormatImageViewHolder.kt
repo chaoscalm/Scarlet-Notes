@@ -14,6 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.imageStorage
 import com.maubis.scarlet.base.common.sheets.openSheet
+import com.maubis.scarlet.base.common.utils.setIconTint
 import com.maubis.scarlet.base.editor.Format
 import com.maubis.scarlet.base.editor.sheet.FormatActionBottomSheet
 import kotlinx.coroutines.Dispatchers
@@ -44,10 +45,9 @@ class FormatImageViewHolder(context: Context, view: View) : FormatViewHolderBase
       EasyImage.openGallery(context as AppCompatActivity, data.uid)
     }
 
-    val iconColor = config.iconColor
-    noImageIcon.setColorFilter(iconColor)
-    actionCamera.setColorFilter(iconColor)
-    actionGallery.setColorFilter(iconColor)
+    noImageIcon.setIconTint(config.iconColor)
+    actionCamera.setIconTint(config.iconColor)
+    actionGallery.setIconTint(config.iconColor)
     actionCamera.setOnClickListener {
       try {
         EasyImage.openCameraForImage(context as AppCompatActivity, data.uid)

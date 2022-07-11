@@ -1,7 +1,6 @@
 package com.maubis.scarlet.base.note.folder
 
 import android.content.Context
-import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
@@ -13,6 +12,7 @@ import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.common.recycler.RecyclerItem
 import com.maubis.scarlet.base.common.utils.ColorUtil.darkerColor
+import com.maubis.scarlet.base.common.utils.setIconTint
 
 class FolderRecyclerHolder(context: Context, view: View) : RecyclerViewHolder<RecyclerItem>(context, view) {
 
@@ -27,7 +27,7 @@ class FolderRecyclerHolder(context: Context, view: View) : RecyclerViewHolder<Re
     title.setTextColor(item.titleColor)
     title.typeface = appTypeface.title()
 
-    icon.imageTintList = ColorStateList.valueOf(item.labelColor)
+    icon.setIconTint(item.labelColor)
     notesCountText.text = item.label
     notesCountText.setTextColor(item.labelColor)
     notesCountText.typeface = appTypeface.text()

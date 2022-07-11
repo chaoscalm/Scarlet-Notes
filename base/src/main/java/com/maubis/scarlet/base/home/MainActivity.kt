@@ -20,6 +20,8 @@ import com.maubis.scarlet.base.common.recycler.RecyclerItem
 import com.maubis.scarlet.base.common.specs.ToolbarColorConfig
 import com.maubis.scarlet.base.common.ui.SecuredActivity
 import com.maubis.scarlet.base.common.ui.ThemeColor
+import com.maubis.scarlet.base.common.utils.resetIconTint
+import com.maubis.scarlet.base.common.utils.setIconTint
 import com.maubis.scarlet.base.database.entities.Folder
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.database.entities.NoteState
@@ -134,12 +136,12 @@ class MainActivity : SecuredActivity(), INoteActionsActivity {
     val iconColor = appTheme.getColor(ThemeColor.ICON)
     views.mainToolbar.title.setTextColor(titleColor)
     views.mainToolbar.title.typeface = ScarletApp.appTypeface.heading()
-    views.mainToolbar.searchIcon.setColorFilter(iconColor)
-    views.mainToolbar.settingsIcon.setColorFilter(iconColor)
+    views.mainToolbar.searchIcon.setIconTint(iconColor)
+    views.mainToolbar.settingsIcon.setIconTint(iconColor)
     views.searchToolbar.textField.setTextColor(titleColor)
     views.searchToolbar.textField.setHintTextColor(hintColor)
     views.searchToolbar.separator.setBackgroundColor(hintColor)
-    views.searchToolbar.closeIcon.setColorFilter(iconColor)
+    views.searchToolbar.closeIcon.setIconTint(iconColor)
   }
 
   private fun setupRecyclerView() {
@@ -310,9 +312,9 @@ class MainActivity : SecuredActivity(), INoteActionsActivity {
     views.mainToolbar.leftIcon.setImageDrawable(getDrawable(state.mode.toolbarIconResourceId))
     if (state.mode != HomeNavigationMode.DEFAULT) {
       val iconColor = appTheme.getColor(ThemeColor.SECONDARY_TEXT)
-      views.mainToolbar.leftIcon.setColorFilter(iconColor)
+      views.mainToolbar.leftIcon.setIconTint(iconColor)
     } else
-      views.mainToolbar.leftIcon.clearColorFilter()
+      views.mainToolbar.leftIcon.resetIconTint()
   }
 
   private fun updateBottomToolbar() {

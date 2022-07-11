@@ -2,6 +2,7 @@
 <androidx.cardview.widget.CardView
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   android:layout_marginHorizontal="2dp"
@@ -9,7 +10,8 @@
   app:cardCornerRadius="8dp"
   app:cardElevation="4dp"
   app:cardUseCompatPadding="true"
-  app:cardPreventCornerOverlap="false">
+  app:cardPreventCornerOverlap="false"
+  tools:cardBackgroundColor="@color/colorAccent">
 
   <LinearLayout
     android:id="@+id/note_panel"
@@ -56,41 +58,41 @@
         android:id="@+id/pin_icon"
         android:layout_width="@dimen/spacing_normal"
         android:layout_height="@dimen/spacing_normal"
-        android:alpha="0.7"
         android:src="@drawable/ic_pin"
-        android:visibility="gone" />
+        android:visibility="gone"
+        tools:visibility="visible" />
 
       <ImageView
         android:id="@+id/state_icon"
         android:layout_width="@dimen/spacing_normal"
         android:layout_height="@dimen/spacing_normal"
-        android:alpha="0.7"
-        android:src="@drawable/ic_pin"
-        android:visibility="gone" />
+        android:src="@drawable/ic_favorite"
+        android:visibility="gone"
+        tools:visibility="visible"/>
 
       <ImageView
         android:id="@+id/reminder_icon"
         android:layout_width="@dimen/spacing_normal"
         android:layout_height="@dimen/spacing_normal"
-        android:alpha="0.7"
         android:src="@drawable/ic_reminder"
-        android:visibility="gone" />
+        android:visibility="gone"
+        tools:visibility="visible" />
 
       <ImageView
         android:id="@+id/backup_icon"
         android:layout_width="@dimen/spacing_normal"
         android:layout_height="@dimen/spacing_normal"
-        android:alpha="0.7"
         android:src="@drawable/ic_backup_exclude"
-        android:visibility="gone" />
+        android:visibility="gone"
+        tools:visibility="visible" />
 
       <ImageView
         android:id="@+id/unlock_icon"
         android:layout_width="@dimen/spacing_normal"
         android:layout_height="@dimen/spacing_normal"
-        android:alpha="0.7"
         android:src="@drawable/ic_lock"
-        android:visibility="gone" />
+        android:visibility="gone"
+        tools:visibility="visible" />
 
     </LinearLayout>
 
