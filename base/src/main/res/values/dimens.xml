@@ -7,8 +7,7 @@
   <dimen name="toolbar_round_icon_padding_subsize">12dp</dimen>
   <dimen name="toolbar_round_icon_margin_vertical">4dp</dimen>
   <dimen name="toolbar_round_icon_margin_horizontal">4dp</dimen>
-  <dimen name="toolbar_round_small_icon_size">28dp</dimen>
-  <dimen name="toolbar_round_small_icon_margin_horizontal">8dp</dimen>
+  <dimen name="toolbar_round_small_icon_size">24dp</dimen>
   <dimen name="toolbar_round_small_icon_padding">4dp</dimen>
 
   <dimen name="app_name_size">22sp</dimen>

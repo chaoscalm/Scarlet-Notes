@@ -137,8 +137,8 @@ object NoteEditorOptionsBottomBarSpec {
             .iconRes(R.drawable.ic_empty)
             .onClick { activity.onColorChangeClick() }
             .showBorder(true)
-            .iconMarginHorizontalRes(R.dimen.toolbar_round_small_icon_margin_horizontal)
-            .iconSizeRes(R.dimen.toolbar_round_small_icon_size))
+            .iconMarginHorizontalDip(8f)
+            .iconSizeDip(28f))
         .child(bottomBarRoundIcon(context, colorConfig)
             .iconRes(R.drawable.ic_redo)
             .onClick { activity.performRedo() })
