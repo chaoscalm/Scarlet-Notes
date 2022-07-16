@@ -22,7 +22,7 @@ import com.maubis.scarlet.base.common.specs.bottomBar
 import com.maubis.scarlet.base.common.specs.bottomBarRoundIcon
 import com.maubis.scarlet.base.common.utils.ColorUtil
 import com.maubis.scarlet.base.database.entities.Folder
-import com.maubis.scarlet.base.home.sheets.HomeOptionsBottomSheet
+import com.maubis.scarlet.base.home.sheets.HomeMenuBottomSheet
 import com.maubis.scarlet.base.home.sheets.openDeleteTrashSheet
 import com.maubis.scarlet.base.note.folder.sheet.CreateOrEditFolderBottomSheet
 
@@ -43,7 +43,7 @@ object MainActivityBottomBarSpec {
     row.child(bottomBarRoundIcon(context, colorConfig)
                 .iconRes(R.drawable.ic_bottom_menu)
                 .onClick {
-                  openSheet(activity, HomeOptionsBottomSheet())
+                  openSheet(activity, HomeMenuBottomSheet())
                 })
     row.child(EmptySpec.create(context).heightDip(1f).flexGrow(1f))
 
