@@ -35,7 +35,7 @@ fun getLithoBottomSheetTitle(context: ComponentContext): Text.Builder {
     .textSizeRes(R.dimen.font_size_xxxlarge)
     .typeface(appTypeface.heading())
     .marginDip(YogaEdge.HORIZONTAL, 20f)
-    .marginDip(YogaEdge.TOP, 18f)
+    .marginDip(YogaEdge.TOP, 12f)
     .marginDip(YogaEdge.BOTTOM, 8f)
     .textStyle(Typeface.BOLD)
     .textColor(appTheme.getColor(ThemeColor.PRIMARY_TEXT))

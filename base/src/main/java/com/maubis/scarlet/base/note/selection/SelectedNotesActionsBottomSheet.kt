@@ -20,7 +20,7 @@ import com.maubis.scarlet.base.note.tag.SelectedTagChooserBottomSheet
 import com.maubis.scarlet.base.security.PincodeBottomSheet
 
 class SelectedNotesActionsBottomSheet : GridActionsBottomSheet() {
-  override fun title(): Int = R.string.choose_action
+  override fun titleRes(): Int? = null
 
   override fun getItems(componentContext: ComponentContext, dialog: Dialog): List<GridSectionItem> {
     val items = ArrayList<GridSectionItem>()

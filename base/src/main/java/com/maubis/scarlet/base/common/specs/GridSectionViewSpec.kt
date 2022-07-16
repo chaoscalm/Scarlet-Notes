@@ -15,7 +15,6 @@ import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.common.ui.ThemeColor
 
 data class GridSectionItem(
-  val title: Int = 0,
   val sectionColor: Int = 0,
   val options: List<GridSectionOptionItem>)
 
@@ -35,7 +34,6 @@ object GridOptionSpec {
     @Prop(resType = ResType.COLOR) labelColor: Int,
     @Prop(resType = ResType.COLOR) iconColor: Int,
     @Prop(resType = ResType.DIMEN_SIZE) iconSize: Int,
-    @Prop(resType = ResType.COLOR) maxLines: Int,
     @Prop(resType = ResType.COLOR) sectionColor: Int): Component {
     return Column.create(context)
       .alignItems(YogaAlign.CENTER)
@@ -49,8 +47,6 @@ object GridOptionSpec {
           .iconRes(option.icon)
           .iconSizePx(iconSize)
           .iconPaddingRes(R.dimen.primary_round_icon_padding)
-          .iconMarginVerticalRes(R.dimen.toolbar_round_icon_margin_vertical)
-          .iconMarginHorizontalRes(R.dimen.toolbar_round_icon_margin_horizontal)
           .bgAlpha(if (solidSectionColor) 255 else 15)
       )
       .child(
@@ -60,9 +56,9 @@ object GridOptionSpec {
           .typeface(appTypeface.title())
           .textSizeRes(R.dimen.font_size_small)
           .paddingDip(YogaEdge.VERTICAL, 8f)
-          .paddingDip(YogaEdge.HORIZONTAL, 16f)
-          .minLines(maxLines)
-          .maxLines(maxLines)
+          .paddingDip(YogaEdge.HORIZONTAL, 12f)
+          .minLines(1)
+          .maxLines(2)
           .ellipsize(TextUtils.TruncateAt.END)
           .textColor(labelColor))
       .clickHandler(GridOption.onClick(context))
@@ -84,22 +80,10 @@ object GridSectionViewSpec {
     @Prop section: GridSectionItem,
     @Prop(resType = ResType.DIMEN_SIZE) iconSize: Int,
     @Prop(optional = true) numColumns: Int?,
-    @Prop(optional = true) maxLines: Int?,
     @Prop(optional = true) showSeparator: Boolean?): Component {
     val column = Column.create(context)
     val primaryColor = appTheme.getColor(ThemeColor.SECONDARY_TEXT)
     val iconColor = appTheme.getColor(ThemeColor.ICON)
-
-    if (section.title != 0) {
-      column.child(
-        Text.create(context)
-          .textRes(section.title)
-          .typeface(appTypeface.title())
-          .textSizeRes(R.dimen.font_size_normal)
-          .maxLines(1)
-          .ellipsize(TextUtils.TruncateAt.END)
-          .textColor(primaryColor))
-    }
 
     val visibleOptions = section.options.filter { it.visible }
     val getComponentAtIndex: (Int) -> Component = { index ->
@@ -113,7 +97,6 @@ object GridSectionViewSpec {
           .flexBasisDip(1f)
           .solidSectionColor(section.sectionColor != 0)
           .labelColor(primaryColor)
-          .maxLines(maxLines ?: 2)
           .iconSizePx(iconSize)
           .iconColor(if (section.sectionColor == 0) iconColor else Color.WHITE)
           .sectionColor(if (section.sectionColor == 0) primaryColor else section.sectionColor)
@@ -145,7 +128,7 @@ object GridSectionViewSpec {
           .heightDip(1.5f)
           .widthDip(196f)
           .alignSelf(YogaAlign.CENTER)
-          .marginDip(YogaEdge.VERTICAL, 16f)
+          .marginDip(YogaEdge.VERTICAL, 12f)
           .alpha(0.1f))
     }
     return column.build()

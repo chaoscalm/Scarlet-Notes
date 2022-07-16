@@ -11,7 +11,6 @@
   <string name="edit_note">Modifica</string>
   <string name="copy_note">Copia</string>
   <string name="share_note">Condividi</string>
-  <string name="choose_action">Scegli un\'azione&#8230;</string>
 
   <string name="format_hint_text">Aggiungi contenuto&#8230;</string>
   <string name="format_hint_heading">Aggiungi intestazione&#8230;</string>

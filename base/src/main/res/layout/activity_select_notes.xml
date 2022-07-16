@@ -24,6 +24,7 @@
         android:layout_marginEnd="4dp"
         android:padding="@dimen/spacing_xsmall"
         android:src="@drawable/ic_close"
+        style="@style/BorderlessBackgroundView"
         app:tint="@color/dark_tertiary_text" />
 
       <TextView

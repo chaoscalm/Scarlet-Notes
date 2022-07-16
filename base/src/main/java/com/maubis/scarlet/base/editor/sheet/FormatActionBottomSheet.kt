@@ -19,7 +19,7 @@ class FormatActionBottomSheet : GridActionsBottomSheet() {
   var noteUUID: String = "default"
   var format: Format? = null
 
-  override fun title(): Int = R.string.format_action_title
+  override fun titleRes(): Int = R.string.format_action_title
 
   override fun getItems(componentContext: ComponentContext, dialog: Dialog): List<GridSectionItem> {
     val activity = componentContext.androidContext as ViewNoteActivity
