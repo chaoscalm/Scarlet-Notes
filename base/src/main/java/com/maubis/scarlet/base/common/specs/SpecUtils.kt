@@ -1,11 +1,13 @@
 package com.maubis.scarlet.base.common.specs
 
 import android.graphics.Color
+import android.os.Handler
 import com.facebook.litho.Column
 import com.facebook.litho.Component
 import com.facebook.litho.ComponentContext
 import com.facebook.litho.widget.Card
 import com.facebook.litho.widget.SolidColor
+import com.facebook.litho.widget.TouchableFeedback
 import com.facebook.yoga.YogaAlign
 import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.R
@@ -28,6 +30,18 @@ fun separatorSpec(context: ComponentContext): Component.Builder<*> {
     .marginDip(YogaEdge.HORIZONTAL, 32f)
     .marginDip(YogaEdge.TOP, 16f)
     .marginDip(YogaEdge.BOTTOM, 16f)
+}
+
+fun rippleWrapper(context: ComponentContext, component: Component.Builder<*>): TouchableFeedback.Builder {
+  val rippleColor = if (appTheme.isNightTheme()) 0x40ffffff else 0x40000000
+  return TouchableFeedback.create(context)
+    .color(Color.TRANSPARENT)
+    .highlightColor(rippleColor)
+    .content(component)
+}
+
+fun delayForRippleEffect(context: ComponentContext, function: () -> Unit) {
+  Handler(context.mainLooper).postDelayed(function, 90)
 }
 
 data class ToolbarColorConfig(

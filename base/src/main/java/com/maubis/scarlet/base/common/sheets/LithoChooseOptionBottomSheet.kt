@@ -15,6 +15,8 @@ import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.common.specs.RoundIcon
+import com.maubis.scarlet.base.common.specs.delayForRippleEffect
+import com.maubis.scarlet.base.common.specs.rippleWrapper
 import com.maubis.scarlet.base.common.ui.ThemeColor
 
 class LithoChooseOptionsItem(
@@ -55,13 +57,13 @@ object ChooseOptionItemLayoutSpec {
                .iconPaddingRes(R.dimen.toolbar_round_small_icon_padding)
                .marginDip(YogaEdge.START, 12f))
     row.clickHandler(ChooseOptionItemLayout.onItemClick(context))
-    return row.build()
+    return rippleWrapper(context, row).build()
   }
 
   @Suppress("UNUSED_PARAMETER")
   @OnEvent(ClickEvent::class)
   fun onItemClick(context: ComponentContext, @Prop onClick: () -> Unit) {
-    onClick()
+    delayForRippleEffect(context) { onClick() }
   }
 }
 
