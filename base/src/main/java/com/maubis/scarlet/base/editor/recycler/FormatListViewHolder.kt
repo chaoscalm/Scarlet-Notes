@@ -16,7 +16,7 @@ import com.maubis.scarlet.base.editor.FormatType
 class FormatListViewHolder(context: Context, view: View) : FormatTextViewHolder(context, view) {
 
   private val checkBox: CheckBox = root.findViewById(R.id.icon)
-  private val closeButton: ImageView = root.findViewById(R.id.close)
+  private val removeButton: ImageView = root.findViewById(R.id.close)
   private val extraMargin: View = root.findViewById(R.id.extra_margin)
 
   init {
@@ -47,10 +47,10 @@ class FormatListViewHolder(context: Context, view: View) : FormatTextViewHolder(
       } // Ignore other cases
     }
 
-    closeButton.isVisible = config.editable
-    closeButton.setColorFilter(config.iconColor)
-    closeButton.alpha = 0.8f
-    closeButton.setOnClickListener {
+    removeButton.isVisible = config.editable
+    removeButton.setColorFilter(config.iconColor)
+    removeButton.alpha = 0.7f
+    removeButton.setOnClickListener {
       activity.deleteFormat(format)
     }
 
