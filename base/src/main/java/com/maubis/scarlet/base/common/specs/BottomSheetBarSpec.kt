@@ -21,38 +21,28 @@ object BottomSheetBarSpec {
     context: ComponentContext,
     @Prop(resType = ResType.STRING) primaryAction: String,
     @Prop(optional = true) isActionNegative: Boolean?,
-    @Prop(resType = ResType.STRING, optional = true) secondaryAction: String?,
-    @Prop(resType = ResType.STRING, optional = true) tertiaryAction: String?): Component {
+    @Prop(resType = ResType.STRING, optional = true) secondaryAction: String?): Component {
     val actionNegative = isActionNegative ?: false
 
     val row = Row.create(context)
       .alignItems(YogaAlign.CENTER)
 
-
-    if (secondaryAction !== null && secondaryAction.isNotBlank()) {
+    if (secondaryAction != null) {
       row.child(
-        Text.create(context)
-          .text(secondaryAction)
-          .typeface(appTypeface.title())
-          .textSizeRes(R.dimen.font_size_large)
-          .paddingDip(YogaEdge.VERTICAL, 6f)
-          .paddingDip(YogaEdge.HORIZONTAL, 16f)
-          .textColor(appTheme.getColor(ThemeColor.TERTIARY_TEXT))
-          .clickHandler(BottomSheetBar.onSecondaryClickEvent(context)))
+        rippleWrapper(
+          context,
+          Text.create(context)
+            .text(secondaryAction)
+            .typeface(appTypeface.title())
+            .textSizeRes(R.dimen.font_size_large)
+            .paddingDip(YogaEdge.VERTICAL, 12f)
+            .paddingDip(YogaEdge.HORIZONTAL, 16f)
+            .textColor(appTheme.getColor(ThemeColor.TERTIARY_TEXT))
+            .clickHandler(BottomSheetBar.onSecondaryClickEvent(context))
+        )
+      )
     }
     row.child(EmptySpec.create(context).flexGrow(1f))
-
-    if (tertiaryAction !== null && tertiaryAction.isNotBlank()) {
-      row.child(
-        Text.create(context)
-          .text(tertiaryAction)
-          .typeface(appTypeface.title())
-          .textSizeRes(R.dimen.font_size_large)
-          .paddingDip(YogaEdge.VERTICAL, 6f)
-          .paddingDip(YogaEdge.HORIZONTAL, 16f)
-          .textColor(appTheme.getColor(ThemeColor.TERTIARY_TEXT))
-          .clickHandler(BottomSheetBar.onTertiaryClickEvent(context)))
-    }
 
     row.child(
       getLithoBottomSheetButton(context)
@@ -68,16 +58,9 @@ object BottomSheetBarSpec {
     onPrimaryClick()
   }
 
-  @Suppress("UNUSED_PARAMETER")
   @OnEvent(ClickEvent::class)
   fun onSecondaryClickEvent(context: ComponentContext, @Prop(optional = true) onSecondaryClick: () -> Unit) {
-    onSecondaryClick()
-  }
-
-  @Suppress("UNUSED_PARAMETER")
-  @OnEvent(ClickEvent::class)
-  fun onTertiaryClickEvent(context: ComponentContext, @Prop(optional = true) onTertiaryClick: () -> Unit) {
-    onTertiaryClick()
+    delayForRippleEffect(context) { onSecondaryClick() }
   }
 }
 
