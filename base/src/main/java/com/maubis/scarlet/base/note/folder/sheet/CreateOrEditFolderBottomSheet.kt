@@ -1,12 +1,14 @@
 package com.maubis.scarlet.base.note.folder.sheet
 
 import android.app.Dialog
+import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
+import com.maubis.scarlet.base.ScarletApp.Companion.data
 import com.maubis.scarlet.base.common.sheets.openSheet
 import com.maubis.scarlet.base.common.ui.ColorView
 import com.maubis.scarlet.base.common.ui.ThemeColor
@@ -15,9 +17,13 @@ import com.maubis.scarlet.base.common.ui.ThemedBottomSheetFragment
 import com.maubis.scarlet.base.common.utils.getEditorActionListener
 import com.maubis.scarlet.base.database.entities.Folder
 import com.maubis.scarlet.base.databinding.BottomSheetCreateEditFolderBinding
+import java.util.*
 
 class CreateOrEditFolderBottomSheet : ThemedBottomSheetFragment() {
-  private lateinit var folder: Folder
+  private val folder: Folder by lazy {
+    val folderUuid = UUID.fromString(requireArguments().getString(KEY_FOLDER_UUID))
+    data.folders.getByUUID(folderUuid) ?: throw IllegalArgumentException("Invalid folder UUID")
+  }
   private var onFolderSaveListener: (Folder) -> Unit = { _ -> }
 
   private var selectedColor: Int = 0
@@ -108,9 +114,11 @@ class CreateOrEditFolderBottomSheet : ThemedBottomSheetFragment() {
   override fun getBackgroundCardViewIds(): Array<Int> = arrayOf(R.id.content_card, R.id.core_color_card)
 
   companion object {
+    const val KEY_FOLDER_UUID = "folder_uuid"
+
     fun openSheet(activity: ThemedActivity, folder: Folder, listener: (Folder) -> Unit) {
       val sheet = CreateOrEditFolderBottomSheet()
-      sheet.folder = folder
+      sheet.arguments = Bundle().apply { putString(KEY_FOLDER_UUID, folder.uuid.toString()) }
       sheet.onFolderSaveListener = listener
       sheet.show(activity.supportFragmentManager, sheet.tag)
     }

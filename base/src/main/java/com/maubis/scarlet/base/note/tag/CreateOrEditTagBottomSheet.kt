@@ -1,6 +1,7 @@
 package com.maubis.scarlet.base.note.tag
 
 import android.app.Dialog
+import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
@@ -16,9 +17,13 @@ import com.maubis.scarlet.base.database.entities.Tag
 import com.maubis.scarlet.base.databinding.BottomSheetCreateEditTagBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.*
 
 class CreateOrEditTagBottomSheet : ThemedBottomSheetFragment() {
-  private lateinit var tag: Tag
+  private val tag: Tag by lazy {
+    val tagUuid = UUID.fromString(requireArguments().getString(KEY_TAG_UUID))
+    data.tags.getByUUID(tagUuid) ?: throw IllegalArgumentException("Invalid tag UUID")
+  }
   private var onTagSaveListener: (Tag) -> Unit = { _ -> }
 
   private lateinit var views: BottomSheetCreateEditTagBinding
@@ -98,9 +103,11 @@ class CreateOrEditTagBottomSheet : ThemedBottomSheetFragment() {
   override fun getBackgroundCardViewIds(): Array<Int> = arrayOf(R.id.content_card)
 
   companion object {
+    const val KEY_TAG_UUID = "tag_uuid"
+
     fun openSheet(activity: ThemedActivity, tag: Tag, listener: (Tag) -> Unit) {
       val sheet = CreateOrEditTagBottomSheet()
-      sheet.tag = tag
+      sheet.arguments = Bundle().apply { putString(KEY_TAG_UUID, tag.uuid.toString()) }
       sheet.onTagSaveListener = listener
       sheet.show(activity.supportFragmentManager, sheet.getTag())
     }
