@@ -18,7 +18,6 @@ import com.maubis.scarlet.base.common.sheets.LithoOptionsItem
 import com.maubis.scarlet.base.common.sheets.OptionItemLayout
 import com.maubis.scarlet.base.common.sheets.getLithoBottomSheetTitle
 import com.maubis.scarlet.base.common.specs.BottomSheetBar
-import com.maubis.scarlet.base.common.specs.EmptySpec
 import com.maubis.scarlet.base.common.specs.RoundIcon
 import com.maubis.scarlet.base.common.ui.Theme
 import com.maubis.scarlet.base.common.ui.ThemeManager.Companion.getThemeFromPrefs
@@ -67,6 +66,8 @@ object ThemeColorPickerItemSpec {
 class ThemeColorPickerBottomSheet : LithoBottomSheet() {
 
   var onThemeChange: (Theme) -> Unit = {}
+
+  override fun isAlwaysExpanded(): Boolean = true
 
   override fun getComponent(componentContext: ComponentContext, dialog: Dialog): Component {
     val column = Column.create(componentContext)
@@ -143,12 +144,13 @@ class ThemeColorPickerBottomSheet : LithoBottomSheet() {
       column.child(flex)
     }
 
-    column.child(EmptySpec.create(componentContext).widthPercent(100f).heightDip(24f))
     column.child(BottomSheetBar.create(componentContext)
                    .primaryActionRes(R.string.action_done)
+                   .marginDip(YogaEdge.TOP, 16f)
+                   .paddingDip(YogaEdge.VERTICAL, 8f)
                    .onPrimaryClick {
                      dismiss()
-                   }.paddingDip(YogaEdge.VERTICAL, 8f))
+                   })
     return column.build()
   }
 }
