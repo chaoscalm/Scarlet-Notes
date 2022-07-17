@@ -28,7 +28,7 @@ abstract class GridActionsBottomSheet : LithoBottomSheet() {
     } else {
       column.child(EmptySpec.create(componentContext)
         .widthPercent(100f)
-        .heightDip(12f))
+        .heightDip(8f))
     }
 
     val items = getItems(componentContext, dialog)

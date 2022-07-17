@@ -57,7 +57,6 @@ object GridOptionSpec {
           .textSizeRes(R.dimen.font_size_small)
           .paddingDip(YogaEdge.VERTICAL, 8f)
           .paddingDip(YogaEdge.HORIZONTAL, 12f)
-          .minLines(1)
           .maxLines(2)
           .ellipsize(TextUtils.TruncateAt.END)
           .textColor(labelColor))
@@ -81,7 +80,6 @@ object GridSectionViewSpec {
     @Prop(resType = ResType.DIMEN_SIZE) iconSize: Int,
     @Prop(optional = true) numColumns: Int?,
     @Prop(optional = true) showSeparator: Boolean?): Component {
-    val column = Column.create(context)
     val primaryColor = appTheme.getColor(ThemeColor.SECONDARY_TEXT)
     val iconColor = appTheme.getColor(ThemeColor.ICON)
 
@@ -105,6 +103,7 @@ object GridSectionViewSpec {
       }
     }
 
+    val column = Column.create(context)
     val numberOfColumns = numColumns ?: 3
     var index = 0
     while (true) {
@@ -128,7 +127,8 @@ object GridSectionViewSpec {
           .heightDip(1.5f)
           .widthDip(196f)
           .alignSelf(YogaAlign.CENTER)
-          .marginDip(YogaEdge.VERTICAL, 12f)
+          .marginDip(YogaEdge.TOP, 10f)
+          .marginDip(YogaEdge.BOTTOM, 4f)
           .alpha(0.1f))
     }
     return column.build()
