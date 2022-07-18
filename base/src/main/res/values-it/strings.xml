@@ -194,7 +194,7 @@
   <string name="editor_option_enable_live_markdown">Formattazione Markdown in tempo reale</string>
   <string name="editor_option_enable_live_markdown_description">La formattazione Markdown verrà applicata mentre scrivi. Può influire sulle prestazioni su note di grandi dimensioni.</string>
   <string name="editor_option_move_checked_items">Riordina elementi selezionati</string>
-  <string name="editor_option_move_checked_items_description">Gli elementi selezionati verranno spostati in fondo all\'elenco. Deselezionandoli la loro posizione non cambierà.</string>
+  <string name="editor_option_move_checked_items_description">Gli elementi selezionati verranno spostati in fondo all\'elenco</string>
   <string name="markdown_help_sheet_title">Esempi di formattazione Markdown</string>
   <string name="home_option_widget_options_title">Impostazioni dei widget</string>
   <string name="home_option_widget_options_description">Modifica le impostazioni per i widget della schermata principale</string>

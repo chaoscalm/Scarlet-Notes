@@ -232,7 +232,7 @@
   <string name="editor_option_enable_live_markdown">Real-time Markdown</string>
   <string name="editor_option_enable_live_markdown_description">Choose if you want Markdown formatting to be visible as you type. Enabling can affect performance on large notes.</string>
   <string name="editor_option_move_checked_items">Move checked items</string>
-  <string name="editor_option_move_checked_items_description">Checked items will be moved to the bottom of the list. Unchecking will not reset their position.</string>
+  <string name="editor_option_move_checked_items_description">Checked items will be moved to the bottom of the checklist</string>
 
   <string name="markdown_help_sheet_title">Markdown Examples</string>
 
