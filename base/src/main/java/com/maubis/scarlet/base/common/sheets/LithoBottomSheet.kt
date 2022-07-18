@@ -104,7 +104,9 @@ abstract class LithoBottomSheet : BottomSheetDialogFragment() {
       .child(
         VerticalScroll.create(componentContext)
           .nestedScrollingEnabled(true)
-          .childComponent(childComponent))
+          .childComponent(childComponent)
+          .verticalFadingEdgeEnabled(true)
+          .fadingEdgeLengthDip(8f))
       .build()
 
     val contentView = LithoView.create(componentContext.androidContext, baseComponent)
