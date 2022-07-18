@@ -41,7 +41,7 @@ fun rippleWrapper(context: ComponentContext, component: Component.Builder<*>): T
 }
 
 fun delayForRippleEffect(context: ComponentContext, function: () -> Unit) {
-  Handler(context.mainLooper).postDelayed(function, 90)
+  Handler(context.mainLooper).postDelayed(function, 70)
 }
 
 data class ToolbarColorConfig(
