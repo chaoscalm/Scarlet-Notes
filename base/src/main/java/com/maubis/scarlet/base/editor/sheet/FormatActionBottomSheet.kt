@@ -5,8 +5,8 @@ import com.facebook.litho.ComponentContext
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp.Companion.imageStorage
 import com.maubis.scarlet.base.common.sheets.GridActionsBottomSheet
-import com.maubis.scarlet.base.common.specs.GridSectionItem
-import com.maubis.scarlet.base.common.specs.GridSectionOptionItem
+import com.maubis.scarlet.base.common.specs.GridActionItem
+import com.maubis.scarlet.base.common.specs.GridSection
 import com.maubis.scarlet.base.common.utils.copyTextToClipboard
 import com.maubis.scarlet.base.common.utils.shareText
 import com.maubis.scarlet.base.editor.Format
@@ -21,19 +21,17 @@ class FormatActionBottomSheet : GridActionsBottomSheet() {
 
   override fun titleRes(): Int = R.string.format_action_title
 
-  override fun getItems(componentContext: ComponentContext, dialog: Dialog): List<GridSectionItem> {
+  override fun getSections(componentContext: ComponentContext, dialog: Dialog): List<GridSection> {
     val activity = componentContext.androidContext as ViewNoteActivity
 
-    val sections = ArrayList<GridSectionItem>()
-    val items = ArrayList<GridSectionOptionItem>()
-
-    if (this.format === null) {
-      return sections
+    if (this.format == null) {
+      return emptyList()
     }
 
     val format: Format = this.format!!
+    val items = ArrayList<GridActionItem>()
     items.add(
-      GridSectionOptionItem(
+      GridActionItem(
         label = R.string.action_share,
         icon = R.drawable.ic_share,
         listener = {
@@ -43,7 +41,7 @@ class FormatActionBottomSheet : GridActionsBottomSheet() {
         visible = !arrayOf(FormatType.IMAGE, FormatType.SEPARATOR).contains(format.type)
       ))
     items.add(
-      GridSectionOptionItem(
+      GridActionItem(
         label = R.string.format_action_copy,
         icon = R.drawable.ic_copy,
         listener = {
@@ -53,7 +51,7 @@ class FormatActionBottomSheet : GridActionsBottomSheet() {
         visible = !arrayOf(FormatType.IMAGE, FormatType.SEPARATOR).contains(format.type)
       ))
     items.add(
-      GridSectionOptionItem(
+      GridActionItem(
         label = R.string.format_action_camera,
         icon = R.drawable.ic_camera,
         listener = {
@@ -62,7 +60,7 @@ class FormatActionBottomSheet : GridActionsBottomSheet() {
         visible = format.type === FormatType.IMAGE
       ))
     items.add(
-      GridSectionOptionItem(
+      GridActionItem(
         label = R.string.format_action_gallery,
         icon = R.drawable.ic_image,
         listener = {
@@ -70,7 +68,7 @@ class FormatActionBottomSheet : GridActionsBottomSheet() {
         },
         visible = format.type === FormatType.IMAGE
       ))
-    items.add(GridSectionOptionItem(
+    items.add(GridActionItem(
       label = R.string.delete_sheet_delete_trash_yes,
       icon = R.drawable.ic_delete,
       listener = {
@@ -82,7 +80,6 @@ class FormatActionBottomSheet : GridActionsBottomSheet() {
       }
     ))
 
-    sections.add(GridSectionItem(options = items))
-    return sections
+    return listOf(GridSection(items))
   }
 }

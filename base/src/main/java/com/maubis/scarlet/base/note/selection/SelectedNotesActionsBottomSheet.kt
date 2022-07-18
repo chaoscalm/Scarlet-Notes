@@ -6,8 +6,8 @@ import com.facebook.litho.ComponentContext
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.common.sheets.GridActionsBottomSheet
 import com.maubis.scarlet.base.common.sheets.openSheet
-import com.maubis.scarlet.base.common.specs.GridSectionItem
-import com.maubis.scarlet.base.common.specs.GridSectionOptionItem
+import com.maubis.scarlet.base.common.specs.GridActionItem
+import com.maubis.scarlet.base.common.specs.GridSection
 import com.maubis.scarlet.base.common.utils.copyTextToClipboard
 import com.maubis.scarlet.base.common.utils.shareText
 import com.maubis.scarlet.base.database.entities.NoteState
@@ -22,21 +22,21 @@ import com.maubis.scarlet.base.security.PincodeBottomSheet
 class SelectedNotesActionsBottomSheet : GridActionsBottomSheet() {
   override fun titleRes(): Int? = null
 
-  override fun getItems(componentContext: ComponentContext, dialog: Dialog): List<GridSectionItem> {
-    val items = ArrayList<GridSectionItem>()
-    items.add(getQuickActions(componentContext))
-    items.add(getSecondaryActions(componentContext))
-    items.add(getTertiaryActions(componentContext))
-    return items
+  override fun getSections(componentContext: ComponentContext, dialog: Dialog): List<GridSection> {
+    val sections = ArrayList<GridSection>()
+    sections.add(getQuickActions(componentContext))
+    sections.add(getSecondaryActions(componentContext))
+    sections.add(getTertiaryActions(componentContext))
+    return sections
   }
 
-  private fun getQuickActions(componentContext: ComponentContext): GridSectionItem {
+  private fun getQuickActions(componentContext: ComponentContext): GridSection {
     val activity = componentContext.androidContext as NotesSelectionActivity
-    val options = ArrayList<GridSectionOptionItem>()
+    val items = ArrayList<GridActionItem>()
 
     val allItemsInTrash = !activity.getAllSelectedNotes().any { it.state != NoteState.TRASH }
-    options.add(
-      GridSectionOptionItem(
+    items.add(
+      GridActionItem(
         label = R.string.restore_note,
         icon = R.drawable.ic_restore,
         listener = lockAwareFunctionRunner(activity) {
@@ -49,8 +49,8 @@ class SelectedNotesActionsBottomSheet : GridActionsBottomSheet() {
       ))
 
     val allItemsInFavourite = !activity.getAllSelectedNotes().any { it.state != NoteState.FAVOURITE }
-    options.add(
-      GridSectionOptionItem(
+    items.add(
+      GridActionItem(
         label = R.string.not_favourite_note,
         icon = R.drawable.ic_favorite,
         listener = lockAwareFunctionRunner(activity) {
@@ -61,8 +61,8 @@ class SelectedNotesActionsBottomSheet : GridActionsBottomSheet() {
         },
         visible = allItemsInFavourite
       ))
-    options.add(
-      GridSectionOptionItem(
+    items.add(
+      GridActionItem(
         label = R.string.favourite_note,
         icon = R.drawable.ic_favorite_outline,
         listener = lockAwareFunctionRunner(activity) {
@@ -75,8 +75,8 @@ class SelectedNotesActionsBottomSheet : GridActionsBottomSheet() {
       ))
 
     val allItemsInArchived = !activity.getAllSelectedNotes().any { it.state != NoteState.ARCHIVED }
-    options.add(
-      GridSectionOptionItem(
+    items.add(
+      GridActionItem(
         label = R.string.unarchive_note,
         icon = R.drawable.ic_archive,
         listener = lockAwareFunctionRunner(activity) {
@@ -87,8 +87,8 @@ class SelectedNotesActionsBottomSheet : GridActionsBottomSheet() {
         },
         visible = allItemsInArchived
       ))
-    options.add(
-      GridSectionOptionItem(
+    items.add(
+      GridActionItem(
         label = R.string.archive_note,
         icon = R.drawable.ic_archive,
         listener = lockAwareFunctionRunner(activity) {
@@ -99,14 +99,14 @@ class SelectedNotesActionsBottomSheet : GridActionsBottomSheet() {
         },
         visible = !allItemsInArchived
       ))
-    options.add(GridSectionOptionItem(
+    items.add(GridActionItem(
       label = R.string.share_note,
       icon = R.drawable.ic_share,
       listener = lockAwareFunctionRunner(activity) {
         activity.runTextFunction { shareText(activity, it) }
       }
     ))
-    options.add(GridSectionOptionItem(
+    items.add(GridActionItem(
       label = R.string.copy_note,
       icon = R.drawable.ic_copy,
       listener = lockAwareFunctionRunner(activity) {
@@ -116,8 +116,8 @@ class SelectedNotesActionsBottomSheet : GridActionsBottomSheet() {
         activity.finish()
       }
     ))
-    options.add(
-      GridSectionOptionItem(
+    items.add(
+      GridActionItem(
         label = R.string.trash_note,
         icon = R.drawable.ic_delete,
         listener = lockAwareFunctionRunner(activity) {
@@ -129,16 +129,16 @@ class SelectedNotesActionsBottomSheet : GridActionsBottomSheet() {
         visible = !allItemsInTrash
       ))
 
-    return GridSectionItem(
-      options = options,
+    return GridSection(
+      items,
       sectionColor = ContextCompat.getColor(activity, com.github.bijoysingh.uibasics.R.color.material_blue_800))
   }
 
-  private fun getSecondaryActions(componentContext: ComponentContext): GridSectionItem {
+  private fun getSecondaryActions(componentContext: ComponentContext): GridSection {
     val activity = componentContext.androidContext as NotesSelectionActivity
-    val options = ArrayList<GridSectionOptionItem>()
+    val items = ArrayList<GridActionItem>()
 
-    options.add(GridSectionOptionItem(
+    items.add(GridActionItem(
       label = R.string.change_tags,
       icon = R.drawable.ic_tag,
       listener = lockAwareFunctionRunner(activity) {
@@ -157,8 +157,7 @@ class SelectedNotesActionsBottomSheet : GridActionsBottomSheet() {
       }
     ))
 
-
-    options.add(GridSectionOptionItem(
+    items.add(GridActionItem(
       label = R.string.folder_option_change_notebook,
       icon = R.drawable.ic_notebook,
       listener = lockAwareFunctionRunner(activity) {
@@ -178,8 +177,8 @@ class SelectedNotesActionsBottomSheet : GridActionsBottomSheet() {
     ))
 
     val allLocked = !activity.getAllSelectedNotes().any { !it.locked }
-    options.add(
-      GridSectionOptionItem(
+    items.add(
+      GridActionItem(
         label = R.string.lock_note,
         icon = R.drawable.ic_lock,
         listener = lockAwareFunctionRunner(activity) {
@@ -191,8 +190,8 @@ class SelectedNotesActionsBottomSheet : GridActionsBottomSheet() {
         },
         visible = !allLocked
       ))
-    options.add(
-      GridSectionOptionItem(
+    items.add(
+      GridActionItem(
         label = R.string.unlock_note,
         icon = R.drawable.ic_unlock,
         listener = lockAwareFunctionRunner(activity) {
@@ -205,18 +204,18 @@ class SelectedNotesActionsBottomSheet : GridActionsBottomSheet() {
         visible = allLocked
       ))
 
-    return GridSectionItem(
-      options = options,
+    return GridSection(
+      items,
       sectionColor = ContextCompat.getColor(activity, com.github.bijoysingh.uibasics.R.color.material_red_800))
   }
 
-  private fun getTertiaryActions(componentContext: ComponentContext): GridSectionItem {
+  private fun getTertiaryActions(componentContext: ComponentContext): GridSection {
     val activity = componentContext.androidContext as NotesSelectionActivity
-    val options = ArrayList<GridSectionOptionItem>()
+    val items = ArrayList<GridActionItem>()
 
     val allItemsPinned = !activity.getAllSelectedNotes().any { !it.pinned }
-    options.add(
-      GridSectionOptionItem(
+    items.add(
+      GridActionItem(
         label = R.string.pin_note,
         icon = R.drawable.ic_pin,
         listener = lockAwareFunctionRunner(activity) {
@@ -228,8 +227,8 @@ class SelectedNotesActionsBottomSheet : GridActionsBottomSheet() {
         },
         visible = !allItemsPinned
       ))
-    options.add(
-      GridSectionOptionItem(
+    items.add(
+      GridActionItem(
         label = R.string.unpin_note,
         icon = R.drawable.ic_pin,
         listener = lockAwareFunctionRunner(activity) {
@@ -242,7 +241,7 @@ class SelectedNotesActionsBottomSheet : GridActionsBottomSheet() {
         visible = allItemsPinned
       ))
 
-    options.add(GridSectionOptionItem(
+    items.add(GridActionItem(
       label = R.string.merge_notes,
       icon = R.drawable.ic_merge,
       listener = lockAwareFunctionRunner(activity) {
@@ -268,7 +267,7 @@ class SelectedNotesActionsBottomSheet : GridActionsBottomSheet() {
       }
     ))
 
-    options.add(GridSectionOptionItem(
+    items.add(GridActionItem(
       label = R.string.delete_note_permanently,
       icon = R.drawable.ic_delete_permanently,
       listener = lockAwareFunctionRunner(activity) {
@@ -287,8 +286,8 @@ class SelectedNotesActionsBottomSheet : GridActionsBottomSheet() {
     ))
 
     val allExcludedFromBackup = !activity.getAllSelectedNotes().any { !it.excludeFromBackup }
-    options.add(
-      GridSectionOptionItem(
+    items.add(
+      GridActionItem(
         label = R.string.backup_note_include,
         icon = R.drawable.ic_backup_include,
         listener = lockAwareFunctionRunner(activity) {
@@ -300,8 +299,8 @@ class SelectedNotesActionsBottomSheet : GridActionsBottomSheet() {
         },
         visible = allExcludedFromBackup
       ))
-    options.add(
-      GridSectionOptionItem(
+    items.add(
+      GridActionItem(
         label = R.string.backup_note_exclude,
         icon = R.drawable.ic_backup_exclude,
         listener = lockAwareFunctionRunner(activity) {
@@ -313,8 +312,8 @@ class SelectedNotesActionsBottomSheet : GridActionsBottomSheet() {
         },
         visible = !allExcludedFromBackup
       ))
-    return GridSectionItem(
-      options = options,
+    return GridSection(
+      items,
       sectionColor = ContextCompat.getColor(activity, com.github.bijoysingh.uibasics.R.color.material_teal_800))
   }
 

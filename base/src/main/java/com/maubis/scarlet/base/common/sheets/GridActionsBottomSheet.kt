@@ -7,13 +7,13 @@ import com.facebook.litho.ComponentContext
 import com.facebook.yoga.YogaEdge
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.common.specs.EmptySpec
-import com.maubis.scarlet.base.common.specs.GridSectionItem
+import com.maubis.scarlet.base.common.specs.GridSection
 import com.maubis.scarlet.base.common.specs.GridSectionView
 
 abstract class GridActionsBottomSheet : LithoBottomSheet() {
 
   abstract fun titleRes(): Int?
-  abstract fun getItems(componentContext: ComponentContext, dialog: Dialog): List<GridSectionItem>
+  abstract fun getSections(componentContext: ComponentContext, dialog: Dialog): List<GridSection>
 
   override fun getComponent(componentContext: ComponentContext, dialog: Dialog): Component {
     val column = Column.create(componentContext)
@@ -31,16 +31,16 @@ abstract class GridActionsBottomSheet : LithoBottomSheet() {
         .heightDip(8f))
     }
 
-    val items = getItems(componentContext, dialog)
+    val sections = getSections(componentContext, dialog)
     var index = 0
-    items.forEach {
+    sections.forEach {
       index++
       column.child(
         GridSectionView.create(componentContext)
           .marginDip(YogaEdge.HORIZONTAL, 12f)
           .marginDip(YogaEdge.VERTICAL, 8f)
           .iconSizeRes(R.dimen.primary_round_icon_size)
-          .showSeparator(index != items.size)
+          .showSeparator(index != sections.size)
           .section(it))
     }
 

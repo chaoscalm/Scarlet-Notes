@@ -14,22 +14,22 @@ import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.common.ui.ThemeColor
 
-data class GridSectionItem(
-  val sectionColor: Int = 0,
-  val options: List<GridSectionOptionItem>)
+data class GridSection(
+  val items: List<GridActionItem>,
+  val sectionColor: Int = 0)
 
-data class GridSectionOptionItem(
+data class GridActionItem(
   val icon: Int,
   val label: Int,
   val listener: () -> Unit,
   val visible: Boolean = true)
 
 @LayoutSpec
-object GridOptionSpec {
+object GridActionSpec {
   @OnCreateLayout
   fun onCreate(
     context: ComponentContext,
-    @Prop option: GridSectionOptionItem,
+    @Prop action: GridActionItem,
     @Prop solidSectionColor: Boolean,
     @Prop(resType = ResType.COLOR) labelColor: Int,
     @Prop(resType = ResType.COLOR) iconColor: Int,
@@ -44,14 +44,14 @@ object GridOptionSpec {
         RoundIcon.create(context)
           .bgColor(sectionColor)
           .iconColor(iconColor)
-          .iconRes(option.icon)
+          .iconRes(action.icon)
           .iconSizePx(iconSize)
           .iconPaddingRes(R.dimen.primary_round_icon_padding)
           .bgAlpha(if (solidSectionColor) 255 else 15)
       )
       .child(
         Text.create(context)
-          .textRes(option.label)
+          .textRes(action.label)
           .textAlignment(Layout.Alignment.ALIGN_CENTER)
           .typeface(appTypeface.title())
           .textSizeRes(R.dimen.font_size_small)
@@ -60,14 +60,14 @@ object GridOptionSpec {
           .maxLines(2)
           .ellipsize(TextUtils.TruncateAt.END)
           .textColor(labelColor))
-      .clickHandler(GridOption.onClick(context))
+      .clickHandler(GridAction.onClick(context))
       .build()
   }
 
   @Suppress("UNUSED_PARAMETER")
   @OnEvent(ClickEvent::class)
-  fun onClick(context: ComponentContext, @Prop option: GridSectionOptionItem) {
-    option.listener()
+  fun onClick(context: ComponentContext, @Prop action: GridActionItem) {
+    action.listener()
   }
 }
 
@@ -76,21 +76,21 @@ object GridSectionViewSpec {
   @OnCreateLayout
   fun onCreate(
     context: ComponentContext,
-    @Prop section: GridSectionItem,
+    @Prop section: GridSection,
     @Prop(resType = ResType.DIMEN_SIZE) iconSize: Int,
     @Prop(optional = true) numColumns: Int?,
     @Prop(optional = true) showSeparator: Boolean?): Component {
     val primaryColor = appTheme.getColor(ThemeColor.SECONDARY_TEXT)
     val iconColor = appTheme.getColor(ThemeColor.ICON)
 
-    val visibleOptions = section.options.filter { it.visible }
+    val visibleItems = section.items.filter { it.visible }
     val getComponentAtIndex: (Int) -> Component = { index ->
       when {
-        index >= visibleOptions.size -> EmptySpec.create(context)
+        index >= visibleItems.size -> EmptySpec.create(context)
           .flexGrow(1f)
           .flexBasisDip(1f)
           .build()
-        else -> GridOption.create(context)
+        else -> GridAction.create(context)
           .flexGrow(1f)
           .flexBasisDip(1f)
           .solidSectionColor(section.sectionColor != 0)
@@ -98,7 +98,7 @@ object GridSectionViewSpec {
           .iconSizePx(iconSize)
           .iconColor(if (section.sectionColor == 0) iconColor else Color.WHITE)
           .sectionColor(if (section.sectionColor == 0) primaryColor else section.sectionColor)
-          .option(visibleOptions[index])
+          .action(visibleItems[index])
           .build()
       }
     }
@@ -109,7 +109,7 @@ object GridSectionViewSpec {
     while (true) {
       val row = Row.create(context)
         .widthPercent(100f)
-      if (index >= visibleOptions.size) {
+      if (index >= visibleItems.size) {
         break
       }
 
