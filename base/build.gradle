@@ -81,7 +81,7 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.appcompat:appcompat:1.4.2'
     implementation "androidx.core:core-ktx:1.8.0"
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.1"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.5.0"
 
     implementation 'com.google.android.material:material:1.2.1'
 
@@ -101,12 +101,12 @@ dependencies {
 
     implementation 'com.github.jkwiecien:EasyImage:2.1.1'
 
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1'
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1"
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
 
     def litho_version = "0.41.2"
     implementation "com.facebook.litho:litho-core:$litho_version"
     implementation "com.facebook.litho:litho-widget:$litho_version"
     kapt "com.facebook.litho:litho-processor:$litho_version"
-    implementation 'com.facebook.soloader:soloader:0.10.3'
+    implementation 'com.facebook.soloader:soloader:0.10.4'
 }
