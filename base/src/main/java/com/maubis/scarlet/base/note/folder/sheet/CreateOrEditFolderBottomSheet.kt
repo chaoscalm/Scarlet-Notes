@@ -6,6 +6,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.maubis.scarlet.base.R
+import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
 import com.maubis.scarlet.base.ScarletApp.Companion.data
@@ -22,7 +23,7 @@ import java.util.*
 class CreateOrEditFolderBottomSheet : ThemedBottomSheetFragment() {
   private val folder: Folder by lazy {
     val folderUuid = UUID.fromString(requireArguments().getString(KEY_FOLDER_UUID))
-    data.folders.getByUUID(folderUuid) ?: throw IllegalArgumentException("Invalid folder UUID")
+    data.folders.getByUUID(folderUuid) ?: Folder(ScarletApp.prefs.noteDefaultColor)
   }
   private var onFolderSaveListener: (Folder) -> Unit = { _ -> }
 

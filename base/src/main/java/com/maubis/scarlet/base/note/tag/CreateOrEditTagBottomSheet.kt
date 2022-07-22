@@ -22,7 +22,7 @@ import java.util.*
 class CreateOrEditTagBottomSheet : ThemedBottomSheetFragment() {
   private val tag: Tag by lazy {
     val tagUuid = UUID.fromString(requireArguments().getString(KEY_TAG_UUID))
-    data.tags.getByUUID(tagUuid) ?: throw IllegalArgumentException("Invalid tag UUID")
+    data.tags.getByUUID(tagUuid) ?: Tag()
   }
   private var onTagSaveListener: (Tag) -> Unit = { _ -> }
 
