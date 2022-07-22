@@ -83,8 +83,9 @@ open class EditNoteActivity : ViewNoteActivity() {
       repeatOnLifecycle(Lifecycle.State.RESUMED) {
         while (true) {
           delay(NOTE_AUTOSAVE_INTERVAL)
-          addSnapshotToHistoryIfNeeded()
-          saveNoteIfNeeded()
+          val currentNoteContent = Formats.getEnhancedNoteContent(formats)
+          addSnapshotToHistory(currentNoteContent)
+          saveNoteIfNeeded(currentNoteContent)
         }
       }
     }
@@ -159,8 +160,11 @@ open class EditNoteActivity : ViewNoteActivity() {
     }
   }
 
-  private fun saveNoteIfNeeded() {
-    note.content = Formats.getEnhancedNoteContent(formats)
+  private fun saveNoteIfNeeded(updatedNoteContent: String) {
+    if (note.content == updatedNoteContent)
+      return
+
+    note.content = updatedNoteContent
     if (note.isEmpty() && note.isNotPersisted()) {
       return
     }
@@ -176,16 +180,15 @@ open class EditNoteActivity : ViewNoteActivity() {
     // do nothing
   }
 
-  private fun addSnapshotToHistoryIfNeeded() {
-    val currentNoteContent = Formats.getEnhancedNoteContent(formats)
-    if (currentNoteContent == history[currentHistoryPosition])
+  private fun addSnapshotToHistory(noteContent: String) {
+    if (noteContent == history[currentHistoryPosition])
       return
 
     while (currentHistoryPosition < history.lastIndex) {
       history.removeLast()
     }
 
-    history.add(currentNoteContent)
+    history.add(noteContent)
     currentHistoryPosition += 1
 
     if (history.size >= 25) {
@@ -267,7 +270,7 @@ open class EditNoteActivity : ViewNoteActivity() {
   }
 
   fun performUndo() {
-    addSnapshotToHistoryIfNeeded()
+    addSnapshotToHistory(Formats.getEnhancedNoteContent(formats))
     if (currentHistoryPosition == 0)
       return
 
@@ -350,7 +353,7 @@ open class EditNoteActivity : ViewNoteActivity() {
     focusedFormat = if (focusedFormat == null || focusedFormat!!.uid == format.uid) null else focusedFormat
     formats.removeAt(position)
     adapter.removeItem(position)
-    addSnapshotToHistoryIfNeeded()
+    addSnapshotToHistory(Formats.getEnhancedNoteContent(formats))
   }
 
   override fun createOrChangeToNextFormat(format: Format) {
@@ -375,7 +378,7 @@ open class EditNoteActivity : ViewNoteActivity() {
     note.content = Formats.getEnhancedNoteContent(Formats.sortChecklistsIfAllowed(formats))
     saveNote()
     displayNote()
-    addSnapshotToHistoryIfNeeded()
+    addSnapshotToHistory(note.content)
   }
 
   override fun controllerItems(): List<MultiRecyclerViewControllerItem<Format>> {
