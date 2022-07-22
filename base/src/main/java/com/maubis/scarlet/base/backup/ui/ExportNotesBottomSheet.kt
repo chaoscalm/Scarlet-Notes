@@ -25,8 +25,6 @@ import kotlinx.coroutines.withContext
 class ExportNotesBottomSheet : LithoBottomSheet() {
   private val saveFileLauncher = registerForActivityResult(CreateDocument(), this::performManualBackup)
 
-  override fun isAlwaysExpanded(): Boolean = true
-
   override fun getComponent(componentContext: ComponentContext, dialog: Dialog): Component {
     val component = Column.create(componentContext)
       .widthPercent(100f)

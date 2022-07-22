@@ -73,7 +73,7 @@ abstract class LithoBottomSheet : BottomSheetDialogFragment() {
     return dialog
   }
 
-  open fun isAlwaysExpanded(): Boolean = false
+  open fun isAlwaysExpanded(): Boolean = true
 
   fun refresh(context: Context, dialog: Dialog) {
     val componentContext = ComponentContext(context)

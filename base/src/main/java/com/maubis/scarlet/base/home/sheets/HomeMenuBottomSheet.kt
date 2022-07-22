@@ -22,8 +22,6 @@ import com.maubis.scarlet.base.settings.SettingsBottomSheet
 
 class HomeMenuBottomSheet : LithoBottomSheet() {
 
-  override fun isAlwaysExpanded(): Boolean = true
-
   override fun getComponent(componentContext: ComponentContext, dialog: Dialog): Component {
     val items = getItems()
     val component = Column.create(componentContext)

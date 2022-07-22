@@ -21,8 +21,6 @@ import com.maubis.scarlet.base.common.ui.ThemeColor
 
 class AboutBottomSheet : LithoBottomSheet() {
 
-  override fun isAlwaysExpanded(): Boolean = true
-
   override fun getComponent(componentContext: ComponentContext, dialog: Dialog): Component {
     val appName = getString(R.string.app_name)
     val aboutAppDetails = getString(R.string.about_page_description, appName)

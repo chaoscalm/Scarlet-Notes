@@ -105,8 +105,6 @@ abstract class LithoOptionBottomSheet : LithoBottomSheet() {
   abstract fun title(): Int
   abstract fun getOptions(componentContext: ComponentContext, dialog: Dialog): List<LithoOptionsItem>
 
-  override fun isAlwaysExpanded(): Boolean = true
-
   override fun getComponent(componentContext: ComponentContext, dialog: Dialog): Component {
     val column = Column.create(componentContext)
       .widthPercent(100f)

@@ -64,6 +64,8 @@ class ColorPickerBottomSheet : LithoBottomSheet() {
 
   var config: ColorPickerDefaultController = ColorPickerDefaultController()
 
+  override fun isAlwaysExpanded(): Boolean = false
+
   override fun getComponent(componentContext: ComponentContext, dialog: Dialog): Component {
     val column = Column.create(componentContext)
       .widthPercent(100f)

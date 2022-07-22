@@ -20,6 +20,8 @@ import com.maubis.scarlet.base.note.tag.SelectedTagChooserBottomSheet
 import com.maubis.scarlet.base.security.PincodeBottomSheet
 
 class SelectedNotesActionsBottomSheet : GridActionsBottomSheet() {
+  override fun isAlwaysExpanded(): Boolean = false
+
   override fun titleRes(): Int? = null
 
   override fun getSections(componentContext: ComponentContext, dialog: Dialog): List<GridSection> {
