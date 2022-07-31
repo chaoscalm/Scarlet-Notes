@@ -6,7 +6,7 @@ import android.widget.ImageView
 import kotlin.math.roundToInt
 
 const val INACTIVE_ICON_ALPHA = 0.6f
-const val ACTIVE_ICON_ALPHA = 0.9f
+const val ACTIVE_ICON_ALPHA = 0.85f
 
 fun ImageView.setIconTint(color: Int) {
   imageTintList = ColorStateList.valueOf(color)
