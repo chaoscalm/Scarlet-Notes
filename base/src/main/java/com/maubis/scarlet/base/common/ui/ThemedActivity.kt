@@ -62,7 +62,7 @@ abstract class ThemedActivity : AppCompatActivity(), ThemeChangeListener {
   fun tryOpeningTheKeyboard(focusedView: View) {
     try {
       val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-      inputMethodManager.showSoftInput(focusedView, InputMethodManager.SHOW_FORCED)
+      inputMethodManager.showSoftInput(focusedView, 0)
     } catch (e: Exception) {
       Log.w("Scarlet", "Unable to open the keyboard", e)
     }

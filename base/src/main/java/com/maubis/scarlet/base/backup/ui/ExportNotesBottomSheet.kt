@@ -23,7 +23,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class ExportNotesBottomSheet : LithoBottomSheet() {
-  private val saveFileLauncher = registerForActivityResult(CreateDocument(), this::performManualBackup)
+  private val saveFileLauncher = registerForActivityResult(CreateDocument("text/plain"), this::performManualBackup)
 
   override fun getComponent(componentContext: ComponentContext, dialog: Dialog): Component {
     val component = Column.create(componentContext)
