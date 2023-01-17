@@ -37,7 +37,6 @@ class BackupDataOptionsBottomSheet : LithoOptionBottomSheet() {
       icon = R.drawable.ic_export,
       listener = {
         openExportSheet(activity)
-        dismiss()
       }
     ))
     options.add(LithoOptionsItem(
@@ -102,11 +101,15 @@ class BackupDataOptionsBottomSheet : LithoOptionBottomSheet() {
   private fun openExportSheet(activity: MainActivity) {
     if (!isPinCodeConfigured()) {
       openSheet(activity, ExportNotesBottomSheet())
+      dismiss()
       return
     }
 
     PincodeBottomSheet.openForUnlock(activity as ThemedActivity,
-      onUnlockSuccess = { openSheet(activity, ExportNotesBottomSheet()) },
+      onUnlockSuccess = {
+        openSheet(activity, ExportNotesBottomSheet())
+        dismiss()
+      },
       onUnlockFailure = { openExportSheet(activity) })
   }
 }
