@@ -90,7 +90,7 @@ dependencies {
     implementation "com.github.bijoysingh:android-basics:5.1.0-x"
     implementation "com.github.bijoysingh:ui-basics:1.0.0-x"
 
-    implementation 'com.evernote:android-job:1.2.6'
+    implementation 'com.evernote:android-job:1.4.3'
 
     implementation 'com.google.android.flexbox:flexbox:3.0.0'
 
