@@ -51,6 +51,7 @@ open class FormatTextViewHolder(context: Context, view: View) : FormatViewHolder
       FormatType.HEADING -> config.fontSize * 1.75f
       FormatType.SUB_HEADING -> config.fontSize * 1.5f
       FormatType.HEADING_3 -> config.fontSize * 1.25f
+      FormatType.CODE -> config.fontSize - 1
       else -> config.fontSize
     }
     text.setAppearanceFromConfig(config)
