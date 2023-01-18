@@ -65,14 +65,14 @@ class NotesSelectionActivity : SelectableNotesActivityBase() {
     })
   }
 
-  fun forEachNote(noteFunction: (Note) -> Unit) {
+  fun forEachSelectedNote(noteFunction: (Note) -> Unit) {
     for (note in selectedNotes.values) {
       noteFunction(note)
     }
   }
 
   fun runTextFunction(textFunction: (String) -> Unit) {
-    textFunction(getText())
+    textFunction(getSelectedNotesText())
   }
 
   fun refreshSelectedNotes() {
@@ -124,7 +124,7 @@ class NotesSelectionActivity : SelectableNotesActivityBase() {
     return data.notes.getByNoteState(*noteStatesToBeIncluded(state))
   }
 
-  private fun getText(): String {
+  private fun getSelectedNotesText(): String {
     val builder = StringBuilder()
     for (note in getOrderedSelectedNotes()) {
       builder.append(note.getFullText())

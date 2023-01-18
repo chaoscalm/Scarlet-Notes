@@ -42,7 +42,7 @@ class SelectedNotesActionsBottomSheet : GridActionsBottomSheet() {
         label = R.string.restore_note,
         icon = R.drawable.ic_restore,
         listener = lockAwareFunctionRunner(activity) {
-          activity.forEachNote {
+          activity.forEachSelectedNote {
             it.updateState(NoteState.DEFAULT, activity)
           }
           activity.finish()
@@ -56,7 +56,7 @@ class SelectedNotesActionsBottomSheet : GridActionsBottomSheet() {
         label = R.string.not_favourite_note,
         icon = R.drawable.ic_favorite,
         listener = lockAwareFunctionRunner(activity) {
-          activity.forEachNote {
+          activity.forEachSelectedNote {
             it.updateState(NoteState.DEFAULT, activity)
           }
           activity.finish()
@@ -68,7 +68,7 @@ class SelectedNotesActionsBottomSheet : GridActionsBottomSheet() {
         label = R.string.favourite_note,
         icon = R.drawable.ic_favorite_outline,
         listener = lockAwareFunctionRunner(activity) {
-          activity.forEachNote {
+          activity.forEachSelectedNote {
             it.updateState(NoteState.FAVOURITE, activity)
           }
           activity.finish()
@@ -82,7 +82,7 @@ class SelectedNotesActionsBottomSheet : GridActionsBottomSheet() {
         label = R.string.unarchive_note,
         icon = R.drawable.ic_archive,
         listener = lockAwareFunctionRunner(activity) {
-          activity.forEachNote {
+          activity.forEachSelectedNote {
             it.updateState(NoteState.DEFAULT, activity)
           }
           activity.finish()
@@ -94,7 +94,7 @@ class SelectedNotesActionsBottomSheet : GridActionsBottomSheet() {
         label = R.string.archive_note,
         icon = R.drawable.ic_archive,
         listener = lockAwareFunctionRunner(activity) {
-          activity.forEachNote {
+          activity.forEachSelectedNote {
             it.updateState(NoteState.ARCHIVED, activity)
           }
           activity.finish()
@@ -123,7 +123,7 @@ class SelectedNotesActionsBottomSheet : GridActionsBottomSheet() {
         label = R.string.trash_note,
         icon = R.drawable.ic_delete,
         listener = lockAwareFunctionRunner(activity) {
-          activity.forEachNote {
+          activity.forEachSelectedNote {
             it.updateState(NoteState.TRASH, activity)
           }
           activity.finish()
@@ -146,7 +146,7 @@ class SelectedNotesActionsBottomSheet : GridActionsBottomSheet() {
       listener = lockAwareFunctionRunner(activity) {
         openSheet(activity, SelectedTagChooserBottomSheet().apply {
           onActionListener = { tag, selectTag ->
-            activity.forEachNote {
+            activity.forEachSelectedNote {
               when (selectTag) {
                 true -> it.tags.add(tag.uuid)
                 false -> it.tags.remove(tag.uuid)
@@ -165,7 +165,7 @@ class SelectedNotesActionsBottomSheet : GridActionsBottomSheet() {
       listener = lockAwareFunctionRunner(activity) {
         openSheet(activity, MultipleNotesFolderChooserBottomSheet().apply {
           this.onActionListener = { folder, selectFolder ->
-            activity.forEachNote {
+            activity.forEachSelectedNote {
               when (selectFolder) {
                 true -> it.folder = folder.uuid
                 false -> it.folder = null
@@ -184,7 +184,7 @@ class SelectedNotesActionsBottomSheet : GridActionsBottomSheet() {
         label = R.string.lock_note,
         icon = R.drawable.ic_lock,
         listener = lockAwareFunctionRunner(activity) {
-          activity.forEachNote {
+          activity.forEachSelectedNote {
             it.locked = true
             it.save(activity)
           }
@@ -197,7 +197,7 @@ class SelectedNotesActionsBottomSheet : GridActionsBottomSheet() {
         label = R.string.unlock_note,
         icon = R.drawable.ic_unlock,
         listener = lockAwareFunctionRunner(activity) {
-          activity.forEachNote {
+          activity.forEachSelectedNote {
             it.locked = false
             it.save(activity)
           }
@@ -221,7 +221,7 @@ class SelectedNotesActionsBottomSheet : GridActionsBottomSheet() {
         label = R.string.pin_note,
         icon = R.drawable.ic_pin,
         listener = lockAwareFunctionRunner(activity) {
-          activity.forEachNote {
+          activity.forEachSelectedNote {
             it.pinned = true
             it.save(activity)
           }
@@ -234,7 +234,7 @@ class SelectedNotesActionsBottomSheet : GridActionsBottomSheet() {
         label = R.string.unpin_note,
         icon = R.drawable.ic_pin,
         listener = lockAwareFunctionRunner(activity) {
-          activity.forEachNote {
+          activity.forEachSelectedNote {
             it.pinned = false
             it.save(activity)
           }
@@ -277,7 +277,7 @@ class SelectedNotesActionsBottomSheet : GridActionsBottomSheet() {
           config = AlertSheetConfig(
             description = R.string.delete_sheet_delete_selected_notes_permanently,
             onPositiveClick = {
-              activity.forEachNote {
+              activity.forEachSelectedNote {
                 it.delete(activity)
               }
               activity.finish()
@@ -293,7 +293,7 @@ class SelectedNotesActionsBottomSheet : GridActionsBottomSheet() {
         label = R.string.backup_note_include,
         icon = R.drawable.ic_backup_include,
         listener = lockAwareFunctionRunner(activity) {
-          activity.forEachNote {
+          activity.forEachSelectedNote {
             it.excludeFromBackup = false
             it.save(activity)
           }
@@ -306,7 +306,7 @@ class SelectedNotesActionsBottomSheet : GridActionsBottomSheet() {
         label = R.string.backup_note_exclude,
         icon = R.drawable.ic_backup_exclude,
         listener = lockAwareFunctionRunner(activity) {
-          activity.forEachNote {
+          activity.forEachSelectedNote {
             it.excludeFromBackup = true
             it.save(activity)
           }
