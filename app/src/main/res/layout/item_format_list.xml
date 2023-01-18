@@ -17,7 +17,7 @@
     android:layout_gravity="center_vertical"
     app:buttonTint="@color/material_blue_grey_500" />
 
-  <TextView
+  <com.maubis.scarlet.base.editor.recycler.SelectableTextView
     android:id="@+id/text"
     style="@style/FormatText"
     android:layout_marginStart="@dimen/spacing_xsmall"

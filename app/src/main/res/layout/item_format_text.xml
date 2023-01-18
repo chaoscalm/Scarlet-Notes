@@ -5,7 +5,7 @@
 
   <include layout="@layout/layout_format_drag_handle" />
 
-  <TextView
+  <com.maubis.scarlet.base.editor.recycler.SelectableTextView
     android:id="@+id/text"
     style="@style/FormatText"
     android:autoLink="web"

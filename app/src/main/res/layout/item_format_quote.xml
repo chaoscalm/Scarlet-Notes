@@ -18,7 +18,7 @@
     android:background="@color/light_hint_text"
     android:layout_marginBottom="@dimen/spacing_xxsmall" />
 
-  <TextView
+  <com.maubis.scarlet.base.editor.recycler.SelectableTextView
     android:id="@+id/text"
     style="@style/FormatText"
     android:autoLink="web"

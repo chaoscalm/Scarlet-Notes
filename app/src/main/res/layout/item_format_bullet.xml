@@ -13,7 +13,7 @@
     android:src="@drawable/bullet_1"
     app:tint="@color/material_blue_grey_500" />
 
-  <TextView
+  <com.maubis.scarlet.base.editor.recycler.SelectableTextView
     android:id="@+id/text"
     style="@style/FormatText"
     android:autoLink="web"
