@@ -3,7 +3,7 @@ package com.maubis.markdown.spans
 import android.graphics.Color
 import android.graphics.Typeface
 
-class SpanConfig() {
+class SpanConfig {
   var codeTextColor: Int = Color.BLACK
   var codeBackgroundColor: Int = Color.GRAY
   var codeBlockLeadingMargin: Int = 0

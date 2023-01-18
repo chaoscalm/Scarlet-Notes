@@ -57,33 +57,19 @@ class PhraseDelimiterInline(
 
 class TextInlineConfig(builder: Builder) {
   val configuration: List<IInlineConfig>
-  val outputConfiguration: Map<MarkdownInlineType, IInlineConfig>
 
   init {
     builder.build()
     configuration = builder.configuration
-    outputConfiguration = builder.outputConfiguration
   }
 
   class Builder {
     internal val configuration = ArrayList<IInlineConfig>()
-    internal val outputConfiguration = HashMap<MarkdownInlineType, IInlineConfig>()
-
-    fun addConfig(config: IInlineConfig) {
-      configuration.add(config)
-    }
-
-    fun setOutputConfig(config: IInlineConfig) {
-      outputConfiguration[config.type()] = config
-    }
 
     fun build() {
       MarkdownInlineType.values().forEach {
         if (!configuration.any { config -> config.type() == it }) {
           configuration.addAll(getDefaultConfig(it))
-        }
-        if (!outputConfiguration.containsKey(it)) {
-          outputConfiguration[it] = getDefaultOutputConfig(it)
         }
       }
     }
@@ -118,19 +104,6 @@ class TextInlineConfig(builder: Builder) {
         MarkdownInlineType.IGNORE_CHAR -> arrayOf(
             StartMarkerInline(MarkdownInlineType.IGNORE_CHAR, "\\")
         )
-      }
-    }
-
-    fun getDefaultOutputConfig(type: MarkdownInlineType): IInlineConfig {
-      return when (type) {
-        MarkdownInlineType.INVALID -> InvalidInline(MarkdownInlineType.INVALID)
-        MarkdownInlineType.NORMAL -> InvalidInline(MarkdownInlineType.NORMAL)
-        MarkdownInlineType.BOLD -> PhraseDelimiterInline(MarkdownInlineType.BOLD, "**", "**")
-        MarkdownInlineType.ITALICS -> PhraseDelimiterInline(MarkdownInlineType.ITALICS, "<i>", "</i>")
-        MarkdownInlineType.UNDERLINE -> PhraseDelimiterInline(MarkdownInlineType.UNDERLINE, "<u>", "</u>")
-        MarkdownInlineType.INLINE_CODE -> PhraseDelimiterInline(MarkdownInlineType.INLINE_CODE, "`", "`")
-        MarkdownInlineType.STRIKE -> PhraseDelimiterInline(MarkdownInlineType.STRIKE, "~~", "~~")
-        MarkdownInlineType.IGNORE_CHAR -> StartMarkerInline(MarkdownInlineType.IGNORE_CHAR, "\\")
       }
     }
   }

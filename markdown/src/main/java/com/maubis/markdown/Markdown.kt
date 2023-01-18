@@ -66,11 +66,4 @@ object Markdown {
     }
     return SpanResult(textBuilder.toString(), formats)
   }
-
-  fun debug(text: String): String {
-    val segments = TextSegmenter(text).get()
-    val string = StringBuilder()
-    segments.map { string.append(TextInliner(it.text()).get().debug()) }
-    return string.toString()
-  }
 }

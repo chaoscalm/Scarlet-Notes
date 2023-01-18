@@ -4,16 +4,14 @@ import com.maubis.markdown.spannable.MarkdownType
 import com.maubis.markdown.spannable.SpanInfo
 import com.maubis.markdown.spannable.map
 
-interface IMarkdownInlineBuilder {}
-
-class NormalInlineBuilder : IMarkdownInlineBuilder {
+class NormalInlineBuilder {
   val builder: StringBuilder = StringBuilder()
   fun build(): NormalInlineMarkdownSegment {
     return NormalInlineMarkdownSegment(builder.toString())
   }
 }
 
-class MarkdownInlineBuilder : IMarkdownInlineBuilder {
+class MarkdownInlineBuilder {
   val children = ArrayList<MarkdownInline>()
   var config: IInlineConfig = InvalidInline(MarkdownInlineType.INVALID)
   var paired: Boolean = false
@@ -39,8 +37,6 @@ abstract class MarkdownInline {
    * This can be overlapping information, which is needed for rendering
    */
   abstract fun allContentSpans(stripDelimiters: Boolean = false, startPosition: Int): List<SpanInfo>
-
-  abstract fun toMarkwon(): String
 
   fun debug(): String {
     if (this !is PhraseDelimiterMarkdownInline) {
@@ -68,10 +64,6 @@ class NormalInlineMarkdownSegment(val text: String) : MarkdownInline() {
 
   override fun allContentSpans(stripDelimiters: Boolean, startPosition: Int): List<SpanInfo> {
     return listOf(SpanInfo(MarkdownType.NORMAL, startPosition, startPosition + contentText(stripDelimiters).length))
-  }
-
-  override fun toMarkwon(): String {
-    return text
   }
 }
 
@@ -102,19 +94,5 @@ class PhraseDelimiterMarkdownInline(val config: IInlineConfig, val children: Lis
     }
     childrenSpans.add(SpanInfo(map(type()), startPosition, startPosition + contentText(stripDelimiters).length))
     return childrenSpans
-  }
-
-  override fun toMarkwon(): String {
-    val builder = StringBuilder()
-    val config = TextInlineConfig.getDefaultOutputConfig(type())
-    when {
-      config is PhraseDelimiterInline -> builder.append(config.startDelimiter)
-      config is StartMarkerInline -> builder.append(config.startDelimiter)
-    }
-    children.forEach { builder.append(it.toMarkwon()) }
-    if (config is PhraseDelimiterInline) {
-      builder.append(config.endDelimiter)
-    }
-    return builder.toString()
   }
 }
