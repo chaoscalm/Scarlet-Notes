@@ -2,7 +2,7 @@ package com.maubis.markdown
 
 import android.text.Spannable
 import android.text.SpannableStringBuilder
-import com.maubis.markdown.inliner.TextInliner
+import com.maubis.markdown.inline.InlineMarkdownParser
 import com.maubis.markdown.segmenter.MarkdownSegmentType
 import com.maubis.markdown.segmenter.TextSegmenter
 import com.maubis.markdown.spannable.*
@@ -27,9 +27,9 @@ object Markdown {
   }
 
   fun renderSegment(text: String, strip: Boolean = false): Spannable {
-    val inliner = TextInliner(text).get()
-    val strippedText = inliner.contentText(strip)
-    val formats = inliner.allContentSpans(strip, 0)
+    val inlineMarkdown = InlineMarkdownParser(text).parseText()
+    val strippedText = inlineMarkdown.textContent(strip)
+    val formats = inlineMarkdown.textSpans(strip, 0)
 
     val spannable = SpannableStringBuilder(strippedText)
     spannable.setFormats(formats)
@@ -51,12 +51,12 @@ object Markdown {
           formats.add(SpanInfo(map(it.type()), currentIndex, finalIndex))
         }
         else -> {
-          val inliner = TextInliner(if (stripDelimiter) it.strip() else it.text()).get()
-          strippedText = inliner.contentText(stripDelimiter)
+          val inlineMarkdown = InlineMarkdownParser(if (stripDelimiter) it.strip() else it.text()).parseText()
+          strippedText = inlineMarkdown.textContent(stripDelimiter)
           finalIndex = currentIndex + strippedText.length
 
           formats.add(SpanInfo(map(it.type()), currentIndex, finalIndex))
-          formats.addAll(inliner.allContentSpans(stripDelimiter, currentIndex))
+          formats.addAll(inlineMarkdown.textSpans(stripDelimiter, currentIndex))
         }
       }
 

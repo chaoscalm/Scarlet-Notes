@@ -1,6 +1,6 @@
 package com.maubis.markdown.spannable
 
-import com.maubis.markdown.inliner.MarkdownInlineType
+import com.maubis.markdown.inline.InlineSegmentType
 import com.maubis.markdown.segmenter.MarkdownSegmentType
 
 enum class MarkdownType {
@@ -48,15 +48,15 @@ fun map(type: MarkdownSegmentType): MarkdownType {
   }
 }
 
-fun map(type: MarkdownInlineType): MarkdownType {
+fun map(type: InlineSegmentType): MarkdownType {
   return when (type) {
-    MarkdownInlineType.INVALID -> MarkdownType.INVALID
-    MarkdownInlineType.NORMAL -> MarkdownType.NORMAL
-    MarkdownInlineType.BOLD -> MarkdownType.BOLD
-    MarkdownInlineType.ITALICS -> MarkdownType.ITALICS
-    MarkdownInlineType.UNDERLINE -> MarkdownType.UNDERLINE
-    MarkdownInlineType.INLINE_CODE -> MarkdownType.INLINE_CODE
-    MarkdownInlineType.STRIKE -> MarkdownType.STRIKE
-    MarkdownInlineType.IGNORE_CHAR -> MarkdownType.NORMAL
+    InlineSegmentType.INVALID -> MarkdownType.INVALID
+    InlineSegmentType.NORMAL -> MarkdownType.NORMAL
+    InlineSegmentType.BOLD -> MarkdownType.BOLD
+    InlineSegmentType.ITALICS -> MarkdownType.ITALICS
+    InlineSegmentType.UNDERLINE -> MarkdownType.UNDERLINE
+    InlineSegmentType.CODE -> MarkdownType.INLINE_CODE
+    InlineSegmentType.STRIKE -> MarkdownType.STRIKE
+    InlineSegmentType.IGNORE_CHAR -> MarkdownType.NORMAL
   }
 }
