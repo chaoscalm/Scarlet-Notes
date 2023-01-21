@@ -7,7 +7,7 @@ class InlineBlankTextTests : InlineMarkdownTestSuite() {
   fun testEmptyText() {
     val text = ""
     val processed = InlineMarkdownParser(text).parseText()
-    assertSegmentsAreEqual(DelimitedInlineSegment(InvalidInline(InlineSegmentType.INVALID), listOf()), processed)
+    assertSegmentsAreEqual(DelimitedInlineSegment(PlainInline(InlineSegmentType.INVALID), listOf()), processed)
   }
 
   @Test

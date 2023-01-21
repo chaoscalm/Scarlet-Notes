@@ -7,21 +7,21 @@ class InlineHtmlTextTests : InlineMarkdownTestSuite() {
   fun testEmptyText() {
     val text = "Hi<b>Hello<i>World</i></b>"
     val processed = InlineMarkdownParser(text).parseText()
-    assertSegmentsAreEqual(DelimitedInlineSegment(InvalidInline(InlineSegmentType.INVALID), listOf(
+    assertSegmentsAreEqual(DelimitedInlineSegment(PlainInline(InlineSegmentType.INVALID), listOf(
         NormalInlineSegment("Hi"),
-        DelimitedInlineSegment(InvalidInline(InlineSegmentType.BOLD), listOf(NormalInlineSegment("Hello"),
-            DelimitedInlineSegment(InvalidInline(InlineSegmentType.ITALICS), listOf(NormalInlineSegment("World"))))))), processed)
+        DelimitedInlineSegment(PlainInline(InlineSegmentType.BOLD), listOf(NormalInlineSegment("Hello"),
+            DelimitedInlineSegment(PlainInline(InlineSegmentType.ITALICS), listOf(NormalInlineSegment("World"))))))), processed)
   }
 
   @Test
   fun testMultilineText() {
     val text = "<u>Hello</u><code>World</code><em>Italics</em><strong>Strong</strong>"
     val processed = InlineMarkdownParser(text).parseText()
-    assertSegmentsAreEqual(DelimitedInlineSegment(InvalidInline(InlineSegmentType.INVALID), listOf(
-        DelimitedInlineSegment(InvalidInline(InlineSegmentType.UNDERLINE), listOf(NormalInlineSegment("Hello"))),
-        DelimitedInlineSegment(InvalidInline(InlineSegmentType.CODE), listOf(NormalInlineSegment("World"))),
-        DelimitedInlineSegment(InvalidInline(InlineSegmentType.ITALICS), listOf(NormalInlineSegment("Italics"))),
-        DelimitedInlineSegment(InvalidInline(InlineSegmentType.BOLD), listOf(NormalInlineSegment("Strong"))))), processed)
+    assertSegmentsAreEqual(DelimitedInlineSegment(PlainInline(InlineSegmentType.INVALID), listOf(
+        DelimitedInlineSegment(PlainInline(InlineSegmentType.UNDERLINE), listOf(NormalInlineSegment("Hello"))),
+        DelimitedInlineSegment(PlainInline(InlineSegmentType.CODE), listOf(NormalInlineSegment("World"))),
+        DelimitedInlineSegment(PlainInline(InlineSegmentType.ITALICS), listOf(NormalInlineSegment("Italics"))),
+        DelimitedInlineSegment(PlainInline(InlineSegmentType.BOLD), listOf(NormalInlineSegment("Strong"))))), processed)
   }
 
   @Test

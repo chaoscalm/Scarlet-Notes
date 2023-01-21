@@ -15,7 +15,7 @@ class InlineSimpleTextTests : InlineMarkdownTestSuite() {
     val text = "Hello World"
     val textToTest = "**$text**"
     val processed = InlineMarkdownParser(textToTest).parseText()
-    assertSegmentsAreEqual(DelimitedInlineSegment(InvalidInline(InlineSegmentType.BOLD),listOf(NormalInlineSegment(text))), processed)
+    assertSegmentsAreEqual(DelimitedInlineSegment(PlainInline(InlineSegmentType.BOLD),listOf(NormalInlineSegment(text))), processed)
   }
 
   @Test
@@ -23,14 +23,14 @@ class InlineSimpleTextTests : InlineMarkdownTestSuite() {
     val text = "Hello World"
     val textToTest = "_${text}_"
     val processed = InlineMarkdownParser(textToTest).parseText()
-    assertSegmentsAreEqual(DelimitedInlineSegment(InvalidInline(InlineSegmentType.UNDERLINE),listOf(NormalInlineSegment(text))), processed)
+    assertSegmentsAreEqual(DelimitedInlineSegment(PlainInline(InlineSegmentType.UNDERLINE),listOf(NormalInlineSegment(text))), processed)
   }
   @Test
   fun testStrikeThroughText() {
     val text = "Hello World"
     val textToTest = "~$text~"
     val processed = InlineMarkdownParser(textToTest).parseText()
-    assertSegmentsAreEqual(DelimitedInlineSegment(InvalidInline(InlineSegmentType.STRIKE),listOf(NormalInlineSegment(text))), processed)
+    assertSegmentsAreEqual(DelimitedInlineSegment(PlainInline(InlineSegmentType.STRIKE),listOf(NormalInlineSegment(text))), processed)
   }
 
   @Test
@@ -38,7 +38,7 @@ class InlineSimpleTextTests : InlineMarkdownTestSuite() {
     val text = "Hello World"
     val textToTest = "*$text*"
     val processed = InlineMarkdownParser(textToTest).parseText()
-    assertSegmentsAreEqual(DelimitedInlineSegment(InvalidInline(InlineSegmentType.ITALICS),listOf(NormalInlineSegment(text))), processed)
+    assertSegmentsAreEqual(DelimitedInlineSegment(PlainInline(InlineSegmentType.ITALICS),listOf(NormalInlineSegment(text))), processed)
   }
 
   @Test
@@ -46,17 +46,17 @@ class InlineSimpleTextTests : InlineMarkdownTestSuite() {
     val text = "Hello World"
     val textToTest = "`$text`"
     val processed = InlineMarkdownParser(textToTest).parseText()
-    assertSegmentsAreEqual(DelimitedInlineSegment(InvalidInline(InlineSegmentType.CODE),listOf(NormalInlineSegment(text))), processed)
+    assertSegmentsAreEqual(DelimitedInlineSegment(PlainInline(InlineSegmentType.CODE),listOf(NormalInlineSegment(text))), processed)
   }
 
   @Test
   fun testIncompleteText() {
     val textA = "aaa_bb*c"
     val processedA = InlineMarkdownParser(textA).parseText()
-    assertSegmentsAreEqual(DelimitedInlineSegment(InvalidInline(InlineSegmentType.INVALID), listOf(NormalInlineSegment(textA))), processedA)
+    assertSegmentsAreEqual(DelimitedInlineSegment(PlainInline(InlineSegmentType.INVALID), listOf(NormalInlineSegment(textA))), processedA)
 
     val textB = "aaa_"
     val processedB = InlineMarkdownParser(textB).parseText()
-    assertSegmentsAreEqual(DelimitedInlineSegment(InvalidInline(InlineSegmentType.INVALID), listOf(NormalInlineSegment(textB))), processedB)
+    assertSegmentsAreEqual(DelimitedInlineSegment(PlainInline(InlineSegmentType.INVALID), listOf(NormalInlineSegment(textB))), processedB)
   }
 }

@@ -12,7 +12,7 @@ internal class NormalInlineSegmentBuilder {
 
 internal class InlineSegmentBuilder {
   val children = ArrayList<MarkdownInlineSegment>()
-  var config: InlineConfig = InvalidInline(InlineSegmentType.INVALID)
+  var config: InlineConfig = PlainInline(InlineSegmentType.INVALID)
   var paired: Boolean = false
 
   fun build(): MarkdownInlineSegment {
@@ -21,9 +21,8 @@ internal class InlineSegmentBuilder {
 }
 
 internal abstract class MarkdownInlineSegment {
-  abstract fun type(): InlineSegmentType
-
-  abstract fun config(): InlineConfig
+  abstract val type: InlineSegmentType
+  abstract val config: InlineConfig
 
   /**
    * The original text inside an inline segment,
@@ -43,7 +42,7 @@ internal abstract class MarkdownInlineSegment {
     }
 
     val string = StringBuilder()
-    string.append("{${type().name}: ")
+    string.append("{${type.name}: ")
     children.forEach {
       string.append(it.debug())
     }
@@ -53,9 +52,8 @@ internal abstract class MarkdownInlineSegment {
 }
 
 internal class NormalInlineSegment(val text: String) : MarkdownInlineSegment() {
-  override fun type() = InlineSegmentType.NORMAL
-
-  override fun config(): InlineConfig = InvalidInline(InlineSegmentType.NORMAL)
+  override val type = InlineSegmentType.NORMAL
+  override val config = PlainInline(InlineSegmentType.NORMAL)
 
   override fun textContent(stripDelimiters: Boolean): String {
     return text
@@ -66,11 +64,8 @@ internal class NormalInlineSegment(val text: String) : MarkdownInlineSegment() {
   }
 }
 
-internal class DelimitedInlineSegment(val config: InlineConfig, val children: List<MarkdownInlineSegment>) : MarkdownInlineSegment() {
-
-  override fun type() = config.type()
-
-  override fun config(): InlineConfig = config
+internal class DelimitedInlineSegment(override val config: InlineConfig, val children: List<MarkdownInlineSegment>) : MarkdownInlineSegment() {
+  override val type = config.type
 
   override fun textContent(stripDelimiters: Boolean): String {
     val builder = StringBuilder()
@@ -91,7 +86,7 @@ internal class DelimitedInlineSegment(val config: InlineConfig, val children: Li
       childrenSpans.addAll(it.textSpans(stripDelimiters, currentIndex))
       currentIndex += it.textContent(stripDelimiters).length
     }
-    childrenSpans.add(SpanInfo(type(), startPosition, startPosition + textContent(stripDelimiters).length))
+    childrenSpans.add(SpanInfo(type, startPosition, startPosition + textContent(stripDelimiters).length))
     return childrenSpans
   }
 }

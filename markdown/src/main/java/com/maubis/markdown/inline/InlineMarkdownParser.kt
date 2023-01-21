@@ -12,7 +12,7 @@ internal class InlineMarkdownParser(val text: String) {
 
     val allInlineTypes = ArrayList<InlineConfig>()
     knownMarkdownInlines.forEach {
-      if (it.type() != InlineSegmentType.INVALID && it.type() != InlineSegmentType.NORMAL) {
+      if (it.type != InlineSegmentType.INVALID && it.type != InlineSegmentType.NORMAL) {
         allInlineTypes.add(it)
       }
     }
@@ -22,14 +22,14 @@ internal class InlineMarkdownParser(val text: String) {
     while (index < text.length) {
       val char = text[index]
 
-      if (currentInline.config.type() == InlineSegmentType.CODE
+      if (currentInline.config.type == InlineSegmentType.CODE
         && !currentInline.config.isEnd(text, index)) {
         textSegment.builder.append(char)
         index += 1
         continue
       }
 
-      if (currentInline.config.type() == InlineSegmentType.IGNORE_CHAR) {
+      if (currentInline.config.type == InlineSegmentType.IGNORE_CHAR) {
         textSegment.builder.append(char)
         addTextComponent()
         currentInline.paired = true
@@ -38,7 +38,7 @@ internal class InlineMarkdownParser(val text: String) {
         continue
       }
 
-      if (currentInline.config.type() != InlineSegmentType.INVALID
+      if (currentInline.config.type != InlineSegmentType.INVALID
         && currentInline.config.isEnd(text, index)) {
         addTextComponent()
         currentInline.paired = true
@@ -81,7 +81,7 @@ internal class InlineMarkdownParser(val text: String) {
    * the ` in the middle will fuck it up
    */
   private fun pairPoorlyPairedConfigs(config: InlineConfig): Boolean {
-    val count = processedSegments.count { it.config.identifier() == config.identifier() }
+    val count = processedSegments.count { it.config.identifier == config.identifier }
     if (count <= 1) {
       return false
     }
@@ -91,15 +91,15 @@ internal class InlineMarkdownParser(val text: String) {
     val between = ArrayList<InlineSegmentBuilder>()
     val after = ArrayList<InlineSegmentBuilder>()
     for (segment in processedSegments) {
-      if (segment.config.identifier() == config.identifier() && state == 0) {
+      if (segment.config.identifier == config.identifier && state == 0) {
         state = 1
-        segment.config = InvalidInline(InlineSegmentType.INVALID)
+        segment.config = PlainInline(InlineSegmentType.INVALID)
         between.add(segment)
         continue
       }
 
-      if (segment.config.identifier() == config.identifier() && state == 1) {
-        segment.config = InvalidInline(InlineSegmentType.INVALID)
+      if (segment.config.identifier == config.identifier && state == 1) {
+        segment.config = PlainInline(InlineSegmentType.INVALID)
         after.add(segment)
         state = 2
         continue
@@ -143,7 +143,7 @@ internal class InlineMarkdownParser(val text: String) {
         it.children.add(0, NormalInlineSegment(inlineConfig.startDelimiter))
       }
 
-      if (!it.paired || it.config.type() == InlineSegmentType.INVALID) {
+      if (!it.paired || it.config.type == InlineSegmentType.INVALID) {
         currentInline.children.addAll(it.children)
       } else {
         currentInline.children.add(it.build())
@@ -161,11 +161,11 @@ internal class InlineMarkdownParser(val text: String) {
     }
 
     val builder = InlineSegmentBuilder()
-    builder.config = markdown.config()
+    builder.config = markdown.config
     markdown.children.forEach {
       val child = removeInvalids(it)
       when {
-        child.type() == InlineSegmentType.INVALID
+        child.type == InlineSegmentType.INVALID
             && child is DelimitedInlineSegment -> builder.children.addAll(child.children)
         else -> builder.children.add(child)
       }
@@ -189,7 +189,7 @@ internal class InlineMarkdownParser(val text: String) {
   }
 
   private fun shelveSegment() {
-    if (currentInline.config.type() == InlineSegmentType.INVALID && currentInline.children.isEmpty()) {
+    if (currentInline.config.type == InlineSegmentType.INVALID && currentInline.children.isEmpty()) {
       currentInline = InlineSegmentBuilder()
       return
     }
@@ -200,8 +200,8 @@ internal class InlineMarkdownParser(val text: String) {
 
   companion object {
     private val knownMarkdownInlines = arrayOf(
-      InvalidInline(InlineSegmentType.INVALID),
-      InvalidInline(InlineSegmentType.NORMAL),
+      PlainInline(InlineSegmentType.INVALID),
+      PlainInline(InlineSegmentType.NORMAL),
       DelimitedInline(InlineSegmentType.BOLD, "**", "**"),
       DelimitedInline(InlineSegmentType.BOLD, "<b>", "</b>"),
       DelimitedInline(InlineSegmentType.BOLD, "__", "__"),
