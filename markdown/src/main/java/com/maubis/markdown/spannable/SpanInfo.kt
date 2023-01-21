@@ -25,11 +25,14 @@ enum class MarkdownType {
   IMAGE,
 }
 
-data class SpanResult(val text: String, val spans: List<SpanInfo>)
+internal data class ParseResult(val text: String, val spans: List<SpanInfo>)
 
-data class SpanInfo(val markdownType: MarkdownType, val start: Int, val end: Int)
+data class SpanInfo(val markdownType: MarkdownType, val start: Int, val end: Int) {
+  constructor(blockType: MarkdownBlockType, start: Int, end: Int) : this(map(blockType), start, end)
+  constructor(inlineType: InlineSegmentType, start: Int, end: Int) : this(map(inlineType), start, end)
+}
 
-fun map(type: MarkdownBlockType): MarkdownType {
+private fun map(type: MarkdownBlockType): MarkdownType {
   return when (type) {
     MarkdownBlockType.INVALID -> MarkdownType.INVALID
     MarkdownBlockType.HEADING_1 -> MarkdownType.HEADING_1
@@ -48,7 +51,7 @@ fun map(type: MarkdownBlockType): MarkdownType {
   }
 }
 
-fun map(type: InlineSegmentType): MarkdownType {
+private fun map(type: InlineSegmentType): MarkdownType {
   return when (type) {
     InlineSegmentType.INVALID -> MarkdownType.INVALID
     InlineSegmentType.NORMAL -> MarkdownType.NORMAL

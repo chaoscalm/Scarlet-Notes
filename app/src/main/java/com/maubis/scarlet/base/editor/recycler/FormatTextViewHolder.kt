@@ -12,8 +12,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.isVisible
 import com.maubis.markdown.Markdown
+import com.maubis.markdown.Markdown.applyMarkdownSpans
 import com.maubis.markdown.spannable.clearMarkdownSpans
-import com.maubis.markdown.spannable.setFormats
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.common.sheets.openSheet
@@ -111,7 +111,7 @@ open class FormatTextViewHolder(context: Context, view: View) : FormatViewHolder
   override fun afterTextChanged(text: Editable) {
     text.clearMarkdownSpans()
     if (ScarletApp.prefs.liveMarkdownInEditor && format.type != FormatType.CODE) {
-      text.setFormats(Markdown.getSpanInfo(format.text).spans)
+      text.applyMarkdownSpans(format.text)
     }
   }
 

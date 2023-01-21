@@ -2,7 +2,6 @@ package com.maubis.markdown.inline
 
 import com.maubis.markdown.spannable.MarkdownType
 import com.maubis.markdown.spannable.SpanInfo
-import com.maubis.markdown.spannable.map
 
 internal class NormalInlineSegmentBuilder {
   val builder: StringBuilder = StringBuilder()
@@ -92,7 +91,7 @@ internal class DelimitedInlineSegment(val config: InlineConfig, val children: Li
       childrenSpans.addAll(it.textSpans(stripDelimiters, currentIndex))
       currentIndex += it.textContent(stripDelimiters).length
     }
-    childrenSpans.add(SpanInfo(map(type()), startPosition, startPosition + textContent(stripDelimiters).length))
+    childrenSpans.add(SpanInfo(type(), startPosition, startPosition + textContent(stripDelimiters).length))
     return childrenSpans
   }
 }

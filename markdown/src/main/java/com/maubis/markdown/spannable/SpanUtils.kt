@@ -1,6 +1,5 @@
 package com.maubis.markdown.spannable
 
-import android.graphics.Color
 import android.graphics.Typeface
 import android.text.Editable
 import android.text.Spannable
@@ -17,17 +16,41 @@ fun Editable.clearMarkdownSpans() {
       || span is StyleSpan
       || span is TypefaceSpan
       || span is UnderlineSpan
-      || span is CustomMarkdownSpan
-      || span is ForegroundColorSpan
-      || span is BackgroundColorSpan) {
+      || span is CustomMarkdownSpan) {
       removeSpan(span)
     }
   }
 }
 
-fun Spannable.color(color: String, start: Int, end: Int): Spannable {
-  this.setSpan(ForegroundColorSpan(Color.parseColor(color)), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-  return this
+internal fun Spannable.setSpans(spanInfos: List<SpanInfo>) {
+  spanInfos.forEach { setSpansFor(it) }
+}
+
+internal fun Spannable.setSpansFor(info: SpanInfo) {
+  val start = info.start
+  val end = info.end
+  when (info.markdownType) {
+    MarkdownType.HEADING_1 -> relativeSize(1.75f, start, end)
+      .font(MarkdownConfig.spanConfig.headingTypeface, start, end)
+      .bold(start, end)
+    MarkdownType.HEADING_2 -> relativeSize(1.5f, start, end)
+      .font(MarkdownConfig.spanConfig.heading2Typeface, start, end)
+      .bold(start, end)
+    MarkdownType.HEADING_3 -> relativeSize(1.25f, start, end)
+      .font(MarkdownConfig.spanConfig.heading3Typeface, start, end)
+      .bold(start, end)
+    MarkdownType.CODE -> font(MarkdownConfig.spanConfig.codeTypeface, start, end)
+      .code(start, end)
+    MarkdownType.QUOTE -> quote(start, end).italic(start, end)
+    MarkdownType.BOLD -> bold(start, end)
+    MarkdownType.ITALICS -> italic(start, end)
+    MarkdownType.UNDERLINE -> underline(start, end)
+    MarkdownType.INLINE_CODE -> inlineCode(start, end)
+    MarkdownType.STRIKE -> strike(start, end)
+    MarkdownType.SEPARATOR -> separator(start, end)
+    MarkdownType.IMAGE -> monospace(start, end).code(start, end)
+    else -> {}
+  }
 }
 
 fun Spannable.bold(start: Int, end: Int): Spannable {
@@ -47,11 +70,6 @@ fun Spannable.italic(start: Int, end: Int): Spannable {
 
 fun Spannable.strike(start: Int, end: Int): Spannable {
   this.setSpan(StrikethroughSpan(), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-  return this
-}
-
-fun Spannable.background(color: Int, start: Int, end: Int): Spannable {
-  this.setSpan(BackgroundColorSpan(color), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
   return this
 }
 
@@ -88,28 +106,4 @@ fun Spannable.separator(start: Int, end: Int): Spannable {
 fun Spannable.font(font: Typeface, start: Int, end: Int): Spannable {
   this.setSpan(TypefaceSpanCompat(font), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
   return this
-}
-
-fun Spannable.setDefaultFormats(info: SpanInfo) {
-  val s = info.start
-  val e = info.end
-  when (info.markdownType) {
-    MarkdownType.HEADING_1 -> relativeSize(1.75f, s, e).font(MarkdownConfig.spanConfig.headingTypeface, s, e).bold(s, e)
-    MarkdownType.HEADING_2 -> relativeSize(1.5f, s, e).font(MarkdownConfig.spanConfig.heading2Typeface, s, e).bold(s, e)
-    MarkdownType.HEADING_3 -> relativeSize(1.25f, s, e).font(MarkdownConfig.spanConfig.heading3Typeface, s, e).bold(s, e)
-    MarkdownType.CODE -> font(MarkdownConfig.spanConfig.codeTypeface, s, e).code(s, e)
-    MarkdownType.QUOTE -> quote(s, e).italic(s, e)
-    MarkdownType.BOLD -> bold(s, e)
-    MarkdownType.ITALICS -> italic(s, e)
-    MarkdownType.UNDERLINE -> underline(s, e)
-    MarkdownType.INLINE_CODE -> inlineCode(s, e)
-    MarkdownType.STRIKE -> strike(s, e)
-    MarkdownType.SEPARATOR -> separator(s, e)
-    MarkdownType.IMAGE -> monospace(s, e).code(s, e)
-    else -> {}
-  }
-}
-
-fun Spannable.setFormats(info: List<SpanInfo>) {
-  info.forEach { setDefaultFormats(it) }
 }

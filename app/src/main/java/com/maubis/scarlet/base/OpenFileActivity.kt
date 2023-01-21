@@ -8,9 +8,8 @@ import android.view.View
 import android.widget.TextView
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.lifecycleScope
-import com.maubis.markdown.Markdown
+import com.maubis.markdown.Markdown.applyMarkdownSpans
 import com.maubis.markdown.spannable.clearMarkdownSpans
-import com.maubis.markdown.spannable.setFormats
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.common.ui.SecuredActivity
 import com.maubis.scarlet.base.common.ui.ThemeColor
@@ -43,12 +42,12 @@ class OpenFileActivity : SecuredActivity() {
     applyTheming()
 
     val spannable = SpannableString(contentText)
-    spannable.setFormats(Markdown.getSpanInfo(contentText).spans)
+    spannable.applyMarkdownSpans(contentText)
     views.content.setText(spannable, TextView.BufferType.SPANNABLE)
     views.content.doOnTextChanged { text, _, _, _ ->
       if (text is Editable) {
         text.clearMarkdownSpans()
-        text.setFormats(Markdown.getSpanInfo(text.toString()).spans)
+        text.applyMarkdownSpans(text.toString())
       }
     }
     views.toolbar.fileName.text = filenameText
