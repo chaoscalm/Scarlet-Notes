@@ -4,7 +4,7 @@ import android.text.TextPaint
 import android.text.style.MetricAffectingSpan
 import com.maubis.markdown.MarkdownConfig
 
-class CodeSpan : MetricAffectingSpan(), ICustomSpan {
+class CodeSpan : MetricAffectingSpan(), CustomMarkdownSpan {
   override fun updateMeasureState(paint: TextPaint) {
     setTextColor(paint)
   }

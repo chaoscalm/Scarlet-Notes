@@ -9,7 +9,7 @@ import com.maubis.markdown.MarkdownConfig
 import kotlin.math.max
 import kotlin.math.min
 
-class QuoteSegmentSpan : LeadingMarginSpan, ICustomSpan {
+class QuoteBlockSpan : LeadingMarginSpan, CustomMarkdownSpan {
 
   private val rect = Rect()
   private val paint = Paint()

@@ -9,7 +9,7 @@ import android.text.style.LeadingMarginSpan
 import android.text.style.MetricAffectingSpan
 import com.maubis.markdown.MarkdownConfig
 
-class CodeSegmentSpan : MetricAffectingSpan(), LeadingMarginSpan, ICustomSpan {
+class CodeBlockSpan : MetricAffectingSpan(), LeadingMarginSpan, CustomMarkdownSpan {
   private val rect = Rect()
   private val paint = Paint()
 

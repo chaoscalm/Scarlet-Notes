@@ -13,11 +13,11 @@ fun Editable.clearMarkdownSpans() {
   val spans = getSpans(0, length, Any::class.java)
   for (span in spans) {
     if (span is RelativeSizeSpan
-      || span is QuoteSpan
+      || span is QuoteBlockSpan
       || span is StyleSpan
       || span is TypefaceSpan
       || span is UnderlineSpan
-      || span is ICustomSpan
+      || span is CustomMarkdownSpan
       || span is ForegroundColorSpan
       || span is BackgroundColorSpan) {
       removeSpan(span)
@@ -66,12 +66,12 @@ fun Spannable.monospace(start: Int, end: Int): Spannable {
 }
 
 fun Spannable.quote(start: Int, end: Int): Spannable {
-  this.setSpan(QuoteSegmentSpan(), start, end, 0)
+  this.setSpan(QuoteBlockSpan(), start, end, 0)
   return this
 }
 
 fun Spannable.code(start: Int, end: Int): Spannable {
-  this.setSpan(CodeSegmentSpan(), start, end, 0)
+  this.setSpan(CodeBlockSpan(), start, end, 0)
   return this
 }
 
@@ -81,12 +81,12 @@ fun Spannable.inlineCode(start: Int, end: Int): Spannable {
 }
 
 fun Spannable.separator(start: Int, end: Int): Spannable {
-  this.setSpan(SeparatorSegmentSpan(), start, end, 0)
+  this.setSpan(SeparatorSpan(), start, end, 0)
   return this
 }
 
 fun Spannable.font(font: Typeface, start: Int, end: Int): Spannable {
-  this.setSpan(CustomTypefaceSpan(font), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+  this.setSpan(TypefaceSpanCompat(font), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
   return this
 }
 
