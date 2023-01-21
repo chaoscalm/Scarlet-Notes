@@ -1,6 +1,6 @@
-package com.maubis.markdown.segmenter
+package com.maubis.markdown.blocks
 
-enum class MarkdownSegmentType {
+enum class MarkdownBlockType {
   INVALID,
   HEADING_1,
   HEADING_2,

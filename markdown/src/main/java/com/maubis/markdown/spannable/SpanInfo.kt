@@ -1,7 +1,7 @@
 package com.maubis.markdown.spannable
 
+import com.maubis.markdown.blocks.MarkdownBlockType
 import com.maubis.markdown.inline.InlineSegmentType
-import com.maubis.markdown.segmenter.MarkdownSegmentType
 
 enum class MarkdownType {
   INVALID,
@@ -29,22 +29,22 @@ data class SpanResult(val text: String, val spans: List<SpanInfo>)
 
 data class SpanInfo(val markdownType: MarkdownType, val start: Int, val end: Int)
 
-fun map(type: MarkdownSegmentType): MarkdownType {
+fun map(type: MarkdownBlockType): MarkdownType {
   return when (type) {
-    MarkdownSegmentType.INVALID -> MarkdownType.INVALID
-    MarkdownSegmentType.HEADING_1 -> MarkdownType.HEADING_1
-    MarkdownSegmentType.HEADING_2 -> MarkdownType.HEADING_2
-    MarkdownSegmentType.HEADING_3 -> MarkdownType.HEADING_3
-    MarkdownSegmentType.NORMAL -> MarkdownType.NORMAL
-    MarkdownSegmentType.CODE -> MarkdownType.CODE
-    MarkdownSegmentType.BULLET_1 -> MarkdownType.BULLET_1
-    MarkdownSegmentType.BULLET_2 -> MarkdownType.BULLET_2
-    MarkdownSegmentType.BULLET_3 -> MarkdownType.BULLET_3
-    MarkdownSegmentType.QUOTE -> MarkdownType.QUOTE
-    MarkdownSegmentType.SEPARATOR -> MarkdownType.SEPARATOR
-    MarkdownSegmentType.CHECKLIST_UNCHECKED -> MarkdownType.CHECKLIST_UNCHECKED
-    MarkdownSegmentType.CHECKLIST_CHECKED -> MarkdownType.CHECKLIST_CHECKED
-    MarkdownSegmentType.IMAGE -> MarkdownType.IMAGE
+    MarkdownBlockType.INVALID -> MarkdownType.INVALID
+    MarkdownBlockType.HEADING_1 -> MarkdownType.HEADING_1
+    MarkdownBlockType.HEADING_2 -> MarkdownType.HEADING_2
+    MarkdownBlockType.HEADING_3 -> MarkdownType.HEADING_3
+    MarkdownBlockType.NORMAL -> MarkdownType.NORMAL
+    MarkdownBlockType.CODE -> MarkdownType.CODE
+    MarkdownBlockType.BULLET_1 -> MarkdownType.BULLET_1
+    MarkdownBlockType.BULLET_2 -> MarkdownType.BULLET_2
+    MarkdownBlockType.BULLET_3 -> MarkdownType.BULLET_3
+    MarkdownBlockType.QUOTE -> MarkdownType.QUOTE
+    MarkdownBlockType.SEPARATOR -> MarkdownType.SEPARATOR
+    MarkdownBlockType.CHECKLIST_UNCHECKED -> MarkdownType.CHECKLIST_UNCHECKED
+    MarkdownBlockType.CHECKLIST_CHECKED -> MarkdownType.CHECKLIST_CHECKED
+    MarkdownBlockType.IMAGE -> MarkdownType.IMAGE
   }
 }
 

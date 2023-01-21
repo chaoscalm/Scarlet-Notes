@@ -2,9 +2,9 @@ package com.maubis.markdown
 
 import android.text.Spannable
 import android.text.SpannableStringBuilder
+import com.maubis.markdown.blocks.MarkdownBlockParser
+import com.maubis.markdown.blocks.MarkdownBlockType
 import com.maubis.markdown.inline.InlineMarkdownParser
-import com.maubis.markdown.segmenter.MarkdownSegmentType
-import com.maubis.markdown.segmenter.TextSegmenter
 import com.maubis.markdown.spannable.*
 
 object Markdown {
@@ -37,25 +37,25 @@ object Markdown {
   }
 
   fun getSpanInfo(text: String, stripDelimiter: Boolean = false): SpanResult {
-    val segments = TextSegmenter(text).get()
+    val blocks = MarkdownBlockParser(text).parseText()
     var currentIndex = 0
     val textBuilder = StringBuilder()
     val formats = ArrayList<SpanInfo>()
-    segments.forEach {
+    blocks.forEach { block ->
       val finalIndex: Int
       val strippedText: String
-      when {
-        it.type() == MarkdownSegmentType.CODE -> {
-          strippedText = if (stripDelimiter) it.strip() else it.text()
+      when (block.type) {
+        MarkdownBlockType.CODE -> {
+          strippedText = if (stripDelimiter) block.strippedText() else block.text()
           finalIndex = currentIndex + strippedText.length
-          formats.add(SpanInfo(map(it.type()), currentIndex, finalIndex))
+          formats.add(SpanInfo(map(block.type), currentIndex, finalIndex))
         }
         else -> {
-          val inlineMarkdown = InlineMarkdownParser(if (stripDelimiter) it.strip() else it.text()).parseText()
+          val inlineMarkdown = InlineMarkdownParser(if (stripDelimiter) block.strippedText() else block.text()).parseText()
           strippedText = inlineMarkdown.textContent(stripDelimiter)
           finalIndex = currentIndex + strippedText.length
 
-          formats.add(SpanInfo(map(it.type()), currentIndex, finalIndex))
+          formats.add(SpanInfo(map(block.type), currentIndex, finalIndex))
           formats.addAll(inlineMarkdown.textSpans(stripDelimiter, currentIndex))
         }
       }

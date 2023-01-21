@@ -1,7 +1,7 @@
 package com.maubis.scarlet.base.editor
 
-import com.maubis.markdown.segmenter.MarkdownSegmentType
-import com.maubis.markdown.segmenter.TextSegmenter
+import com.maubis.markdown.blocks.MarkdownBlockParser
+import com.maubis.markdown.blocks.MarkdownBlockType
 import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.common.utils.logNonCriticalError
 import org.json.JSONArray
@@ -107,13 +107,13 @@ object Formats {
       val moreFormats = convertTextToFormats(
         format.text,
         arrayOf(
-          MarkdownSegmentType.HEADING_1,
-          MarkdownSegmentType.HEADING_2,
-          MarkdownSegmentType.HEADING_3,
-          MarkdownSegmentType.CODE,
-          MarkdownSegmentType.SEPARATOR,
-          MarkdownSegmentType.CHECKLIST_CHECKED,
-          MarkdownSegmentType.CHECKLIST_UNCHECKED))
+          MarkdownBlockType.HEADING_1,
+          MarkdownBlockType.HEADING_2,
+          MarkdownBlockType.HEADING_3,
+          MarkdownBlockType.CODE,
+          MarkdownBlockType.SEPARATOR,
+          MarkdownBlockType.CHECKLIST_CHECKED,
+          MarkdownBlockType.CHECKLIST_UNCHECKED))
       newFormats.addAll(moreFormats)
     }
     return newFormats
@@ -123,45 +123,41 @@ object Formats {
     return convertTextToFormats(
       text,
       arrayOf(
-        MarkdownSegmentType.HEADING_1,
-        MarkdownSegmentType.HEADING_2,
-        MarkdownSegmentType.HEADING_3,
-        MarkdownSegmentType.BULLET_1,
-        MarkdownSegmentType.BULLET_2,
-        MarkdownSegmentType.BULLET_3,
-        MarkdownSegmentType.CODE,
-        MarkdownSegmentType.QUOTE,
-        MarkdownSegmentType.CHECKLIST_UNCHECKED,
-        MarkdownSegmentType.CHECKLIST_CHECKED,
-        MarkdownSegmentType.SEPARATOR,
-        MarkdownSegmentType.IMAGE))
+        MarkdownBlockType.HEADING_1,
+        MarkdownBlockType.HEADING_2,
+        MarkdownBlockType.HEADING_3,
+        MarkdownBlockType.BULLET_1,
+        MarkdownBlockType.BULLET_2,
+        MarkdownBlockType.BULLET_3,
+        MarkdownBlockType.CODE,
+        MarkdownBlockType.QUOTE,
+        MarkdownBlockType.CHECKLIST_UNCHECKED,
+        MarkdownBlockType.CHECKLIST_CHECKED,
+        MarkdownBlockType.SEPARATOR,
+        MarkdownBlockType.IMAGE))
   }
 
-  /*
-   * Converts a string to the internal format types using the Markdown Segmentation Library.
-   * It's possible to pass specific formats which will be preserved in the formats
-   */
-  private fun convertTextToFormats(text: String, whitelistedSegments: Array<MarkdownSegmentType>): List<Format> {
+  private fun convertTextToFormats(text: String, allowedBlockTypes: Array<MarkdownBlockType>): List<Format> {
     val extractedFormats = mutableListOf<Format>()
-    val segments = TextSegmenter(text).get()
+    val blocks = MarkdownBlockParser(text).parseText()
 
     var lastFormat: Format? = null
-    segments.forEach { segment ->
-      val isSegmentWhitelisted = whitelistedSegments.contains(segment.type())
+    blocks.forEach { block ->
+      val isBlockAllowed = allowedBlockTypes.contains(block.type)
       val newFormat = when {
-        !isSegmentWhitelisted -> null
-        segment.type() == MarkdownSegmentType.HEADING_1 -> Format(FormatType.HEADING, segment.strip())
-        segment.type() == MarkdownSegmentType.HEADING_2 -> Format(FormatType.SUB_HEADING, segment.strip())
-        segment.type() == MarkdownSegmentType.HEADING_3 -> Format(FormatType.HEADING_3, segment.strip())
-        segment.type() == MarkdownSegmentType.BULLET_1 -> Format(FormatType.BULLET_1, segment.strip())
-        segment.type() == MarkdownSegmentType.BULLET_2 -> Format(FormatType.BULLET_2, segment.strip())
-        segment.type() == MarkdownSegmentType.BULLET_3 -> Format(FormatType.BULLET_3, segment.strip())
-        segment.type() == MarkdownSegmentType.CODE -> Format(FormatType.CODE, segment.strip())
-        segment.type() == MarkdownSegmentType.QUOTE -> Format(FormatType.QUOTE, segment.strip())
-        segment.type() == MarkdownSegmentType.CHECKLIST_UNCHECKED -> Format(FormatType.CHECKLIST_UNCHECKED, segment.strip())
-        segment.type() == MarkdownSegmentType.CHECKLIST_CHECKED -> Format(FormatType.CHECKLIST_CHECKED, segment.strip())
-        segment.type() == MarkdownSegmentType.SEPARATOR -> Format(FormatType.SEPARATOR)
-        segment.type() == MarkdownSegmentType.IMAGE -> Format(FormatType.IMAGE, segment.strip().trim())
+        !isBlockAllowed -> null
+        block.type == MarkdownBlockType.HEADING_1 -> Format(FormatType.HEADING, block.strippedText())
+        block.type == MarkdownBlockType.HEADING_2 -> Format(FormatType.SUB_HEADING, block.strippedText())
+        block.type == MarkdownBlockType.HEADING_3 -> Format(FormatType.HEADING_3, block.strippedText())
+        block.type == MarkdownBlockType.BULLET_1 -> Format(FormatType.BULLET_1, block.strippedText())
+        block.type == MarkdownBlockType.BULLET_2 -> Format(FormatType.BULLET_2, block.strippedText())
+        block.type == MarkdownBlockType.BULLET_3 -> Format(FormatType.BULLET_3, block.strippedText())
+        block.type == MarkdownBlockType.CODE -> Format(FormatType.CODE, block.strippedText())
+        block.type == MarkdownBlockType.QUOTE -> Format(FormatType.QUOTE, block.strippedText())
+        block.type == MarkdownBlockType.CHECKLIST_UNCHECKED -> Format(FormatType.CHECKLIST_UNCHECKED, block.strippedText())
+        block.type == MarkdownBlockType.CHECKLIST_CHECKED -> Format(FormatType.CHECKLIST_CHECKED, block.strippedText())
+        block.type == MarkdownBlockType.SEPARATOR -> Format(FormatType.SEPARATOR)
+        block.type == MarkdownBlockType.IMAGE -> Format(FormatType.IMAGE, block.strippedText().trim())
         else -> null
       }
 
@@ -177,11 +173,11 @@ object Formats {
         }
         tempLastFormat !== null && newFormat === null -> {
           tempLastFormat.text += "\n"
-          tempLastFormat.text += segment.text()
+          tempLastFormat.text += block.text()
           lastFormat = tempLastFormat
         }
         tempLastFormat == null && newFormat === null -> {
-          lastFormat = Format(FormatType.TEXT, segment.text())
+          lastFormat = Format(FormatType.TEXT, block.text())
         }
       }
     }
