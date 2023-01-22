@@ -10,7 +10,7 @@ class MarkdownBlockParser(val text: String) {
     val allMultilineBlockTypes = knownMarkdownBlocks.filterIsInstance<MultilineDelimitedBlock>()
     val allFullLineBlockTypes = knownMarkdownBlocks.filterIsInstance<FullLineBlock>()
     val allMultilineStartBlockTypes = knownMarkdownBlocks.filterIsInstance<MultilineStartBlock>()
-    val allSingleLineBlockTypes = knownMarkdownBlocks.filter { it is SingleLineStartBlock || it is SingleLineDelimitedBlock }
+    val allSingleLineBlockTypes = knownMarkdownBlocks.filterIsInstance<SingleLineStartBlock>()
     val lines = text.split("\n")
     for (line in lines) {
       val startCurrentConfig = currentBlock
@@ -132,9 +132,6 @@ class MarkdownBlockParser(val text: String) {
 
       SingleLineStartBlock(MarkdownBlockType.CHECKLIST_CHECKED, "[x] "),
       SingleLineStartBlock(MarkdownBlockType.CHECKLIST_CHECKED, "[X] "),
-
-      SingleLineDelimitedBlock(MarkdownBlockType.IMAGE, "<<img src=\"", "\"/>"),
-      SingleLineDelimitedBlock(MarkdownBlockType.IMAGE, "<image>", "</image>")
     )
   }
 }

@@ -133,8 +133,7 @@ object Formats {
         MarkdownBlockType.QUOTE,
         MarkdownBlockType.CHECKLIST_UNCHECKED,
         MarkdownBlockType.CHECKLIST_CHECKED,
-        MarkdownBlockType.SEPARATOR,
-        MarkdownBlockType.IMAGE))
+        MarkdownBlockType.SEPARATOR))
   }
 
   private fun convertTextToFormats(text: String, allowedBlockTypes: Array<MarkdownBlockType>): List<Format> {
@@ -157,7 +156,6 @@ object Formats {
         block.type == MarkdownBlockType.CHECKLIST_UNCHECKED -> Format(FormatType.CHECKLIST_UNCHECKED, block.strippedText())
         block.type == MarkdownBlockType.CHECKLIST_CHECKED -> Format(FormatType.CHECKLIST_CHECKED, block.strippedText())
         block.type == MarkdownBlockType.SEPARATOR -> Format(FormatType.SEPARATOR)
-        block.type == MarkdownBlockType.IMAGE -> Format(FormatType.IMAGE, block.strippedText().trim())
         else -> null
       }
 

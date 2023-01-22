@@ -8,7 +8,6 @@ internal class MarkdownBlockBuilder {
     val text = builder.toString()
     return when (val blockConfig = config) {
       is SingleLineStartBlock -> SingleLineStartMarkdownBlock(blockConfig, text)
-      is SingleLineDelimitedBlock -> SingleLineDelimitedMarkdownBlock(blockConfig, text)
       is MultilineDelimitedBlock -> MultilineDelimitedMarkdownBlock(blockConfig, text)
       is MultilineStartBlock -> MultilineStartMarkdownBlock(blockConfig, text)
       else -> NormalMarkdownBlock(blockConfig.type, text)
@@ -43,16 +42,6 @@ class SingleLineStartMarkdownBlock(val config: SingleLineStartBlock, val text: S
 
   override fun strippedText(): String {
     return text.removePrefix(config.lineStartToken)
-  }
-
-  override fun text(): String = text
-}
-
-class SingleLineDelimitedMarkdownBlock(val config: SingleLineDelimitedBlock, val text: String) : MarkdownBlock() {
-  override val type = config.type
-
-  override fun strippedText(): String {
-    return text.removePrefix(config.lineStartToken).trim().removeSuffix(config.lineEndToken)
   }
 
   override fun text(): String = text

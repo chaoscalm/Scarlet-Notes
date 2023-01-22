@@ -6,7 +6,6 @@ enum class MarkdownBlockType {
   HEADING_2,
   HEADING_3,
   NORMAL,
-  IMAGE,
   CODE,
   BULLET_1,
   BULLET_2,

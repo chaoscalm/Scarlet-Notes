@@ -22,16 +22,6 @@ class SingleLineStartBlock(override val type: MarkdownBlockType,
   }
 }
 
-class SingleLineDelimitedBlock(
-  override val type: MarkdownBlockType,
-  val lineStartToken: String,
-  val lineEndToken: String
-) : BlockConfig {
-  override fun lineIsBlock(line: String): Boolean {
-    return line.startsWith(lineStartToken) && line.trimEnd().endsWith(lineEndToken)
-  }
-}
-
 class MultilineDelimitedBlock(
   override val type: MarkdownBlockType,
   val multilineStartToken: String,

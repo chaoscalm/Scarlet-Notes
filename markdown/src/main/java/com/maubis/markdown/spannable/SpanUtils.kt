@@ -48,7 +48,6 @@ internal fun Spannable.setSpansFor(info: SpanInfo) {
     MarkdownType.INLINE_CODE -> inlineCode(start, end)
     MarkdownType.STRIKE -> strike(start, end)
     MarkdownType.SEPARATOR -> separator(start, end)
-    MarkdownType.IMAGE -> monospace(start, end).code(start, end)
     else -> {}
   }
 }
@@ -75,11 +74,6 @@ fun Spannable.strike(start: Int, end: Int): Spannable {
 
 fun Spannable.relativeSize(relativeSize: Float, start: Int, end: Int): Spannable {
   this.setSpan(RelativeSizeSpan(relativeSize), start, end, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
-  return this
-}
-
-fun Spannable.monospace(start: Int, end: Int): Spannable {
-  this.setSpan(TypefaceSpan("monospace"), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
   return this
 }
 

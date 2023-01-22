@@ -22,7 +22,6 @@ enum class MarkdownType {
   SEPARATOR,
   CHECKLIST_UNCHECKED,
   CHECKLIST_CHECKED,
-  IMAGE,
 }
 
 internal data class ParseResult(val text: String, val spans: List<SpanInfo>)
@@ -47,7 +46,6 @@ private fun map(type: MarkdownBlockType): MarkdownType {
     MarkdownBlockType.SEPARATOR -> MarkdownType.SEPARATOR
     MarkdownBlockType.CHECKLIST_UNCHECKED -> MarkdownType.CHECKLIST_UNCHECKED
     MarkdownBlockType.CHECKLIST_CHECKED -> MarkdownType.CHECKLIST_CHECKED
-    MarkdownBlockType.IMAGE -> MarkdownType.IMAGE
   }
 }
 
