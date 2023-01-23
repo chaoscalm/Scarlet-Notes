@@ -204,19 +204,16 @@ internal class InlineMarkdownParser(val text: String) {
       PlainInline(InlineSegmentType.NORMAL),
       DelimitedInline(InlineSegmentType.BOLD, "**", "**"),
       DelimitedInline(InlineSegmentType.BOLD, "<b>", "</b>"),
-      DelimitedInline(InlineSegmentType.BOLD, "__", "__"),
       DelimitedInline(InlineSegmentType.BOLD, "<strong>", "</strong>"),
       DelimitedInline(InlineSegmentType.ITALICS, "*", "*"),
       DelimitedInline(InlineSegmentType.ITALICS, "<em>", "</em>"),
       DelimitedInline(InlineSegmentType.ITALICS, "<i>", "</i>"),
       DelimitedInline(InlineSegmentType.UNDERLINE, "<u>", "</u>"),
-      DelimitedInline(InlineSegmentType.UNDERLINE, "_", "_"),
       DelimitedInline(InlineSegmentType.CODE, "<var>", "</var>"),
       DelimitedInline(InlineSegmentType.CODE, "`", "`"),
       DelimitedInline(InlineSegmentType.CODE, "<code>", "</code>"),
       DelimitedInline(InlineSegmentType.STRIKE, "~", "~"),
       DelimitedInline(InlineSegmentType.STRIKE, "~~", "~~"),
-      DelimitedInline(InlineSegmentType.STRIKE, "~", "~"),
       StartMarkerInline(InlineSegmentType.IGNORE_CHAR, "\\")
     )
   }

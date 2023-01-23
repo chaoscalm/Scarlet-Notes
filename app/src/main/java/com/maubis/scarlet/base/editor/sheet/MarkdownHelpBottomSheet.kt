@@ -22,7 +22,7 @@ class MarkdownHelpBottomSheet : LithoBottomSheet() {
       .child(getLithoBottomSheetTitle(componentContext).textRes(R.string.markdown_help_sheet_title))
 
     val examples = arrayOf(
-      "# Heading", "## Sub Heading", "```\nblock of code\n```", "> quoted text", "**bold**", "*italics*", "_underline_", "~~strike through~~",
+      "# Heading", "## Sub Heading", "```\nblock of code\n```", "> quoted text", "**bold**", "*italics*", "<u>underline</u>", "~~strike through~~",
       "`piece of code`")
     examples.forEach {
       column
