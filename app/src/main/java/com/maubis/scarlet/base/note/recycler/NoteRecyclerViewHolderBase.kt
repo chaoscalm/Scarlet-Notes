@@ -21,7 +21,7 @@ import com.maubis.scarlet.base.common.utils.setIconTint
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.database.entities.NoteState
 import com.maubis.scarlet.base.note.getFullTextForPreview
-import com.maubis.scarlet.base.note.getTitleForSharing
+import com.maubis.scarlet.base.note.getTitle
 import com.maubis.scarlet.base.note.isLockedButAppUnlocked
 import com.maubis.scarlet.base.note.renderMarkdownForNotePreview
 
@@ -145,7 +145,7 @@ open class NoteRecyclerViewHolderBase(context: Context, view: View) : RecyclerVi
         // in landscape orientation.
         note.getFullTextForPreview().take(1500)
       }
-      else -> "# ${note.getTitleForSharing()}\n\n```\n$lockedText\n```"
+      else -> "# ${note.getTitle()}\n\n```\n$lockedText\n```"
     }
   }
 

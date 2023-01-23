@@ -18,8 +18,8 @@ import com.maubis.scarlet.base.editor.INTENT_KEY_NOTE_ID
 import com.maubis.scarlet.base.editor.ViewNoteActivity
 import com.maubis.scarlet.base.home.MainActivity
 import com.maubis.scarlet.base.note.getDisplayTime
-import com.maubis.scarlet.base.note.getTextForSharing
-import com.maubis.scarlet.base.note.getTitleForSharing
+import com.maubis.scarlet.base.note.getTextWithoutTitle
+import com.maubis.scarlet.base.note.getTitle
 
 const val REQUEST_CODE_BASE = 3200
 const val REQUEST_CODE_MULTIPLIER = 250
@@ -59,7 +59,7 @@ class NotificationHandler(private val context: Context) {
     val contentView = getRemoteView(config)
     val notificationBuilder = NotificationCompat.Builder(context, config.channel)
       .setSmallIcon(R.drawable.ic_quote)
-      .setContentTitle(config.note.getTitleForSharing())
+      .setContentTitle(config.note.getTitle())
       .setColor(config.note.color)
       .setCategory(NotificationCompat.CATEGORY_EVENT)
       .setContent(contentView)
@@ -97,10 +97,10 @@ class NotificationHandler(private val context: Context) {
 
   private fun getRemoteView(config: NotificationConfig): RemoteViews {
     val contentView = RemoteViews(context.packageName, R.layout.notification_note_layout)
-    val hasTitle = config.note.getTitleForSharing().isNotEmpty()
+    val hasTitle = config.note.getTitle().isNotEmpty()
     contentView.setViewVisibility(R.id.title, if (hasTitle) VISIBLE else GONE)
-    contentView.setTextViewText(R.id.title, config.note.getTitleForSharing())
-    contentView.setTextViewText(R.id.description, config.note.getTextForSharing())
+    contentView.setTextViewText(R.id.title, config.note.getTitle())
+    contentView.setTextViewText(R.id.description, config.note.getTextWithoutTitle())
     contentView.setTextViewText(R.id.timestamp, config.note.getDisplayTime(context))
 
     val titleColor = appTheme.getColor(ThemeColor.SECONDARY_TEXT)

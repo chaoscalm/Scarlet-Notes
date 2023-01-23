@@ -16,24 +16,21 @@ import com.maubis.scarlet.base.editor.FormatType
 import com.maubis.scarlet.base.security.PinLockController.needsLockCheck
 import com.maubis.scarlet.base.security.PincodeBottomSheet
 
-/**************************************************************************************
- ************* Content and Display Information Functions Functions ********************
- **************************************************************************************/
-
-fun Note.getTitleForSharing(): String {
+fun Note.getTitle(): String {
   val formats = contentAsFormats()
   if (formats.isEmpty()) {
     return ""
   }
-  val format = formats.first()
-  val headingFormats = listOf(FormatType.HEADING, FormatType.SUB_HEADING, FormatType.HEADING_3)
-  return when {
-    headingFormats.contains(format.type) -> format.text
-    else -> ""
+  val firstFormat = formats.first()
+  if (firstFormat.type == FormatType.HEADING ||
+      firstFormat.type == FormatType.SUB_HEADING ||
+      firstFormat.type == FormatType.HEADING_3) {
+    return firstFormat.text
   }
+  return ""
 }
 
-fun Note.getTextForSharing(): String {
+fun Note.getTextWithoutTitle(): String {
   val formats = contentAsFormats().toMutableList()
   if (formats.isEmpty()) {
     return ""
@@ -53,12 +50,6 @@ fun Note.getTextForSharing(): String {
     }
   }
   return stringBuilder.toString().trim()
-}
-
-fun Note.getImageFile(): String {
-  val formats = contentAsFormats()
-  val format = formats.find { it.type === FormatType.IMAGE }
-  return format?.text ?: ""
 }
 
 fun Note.getFullText(): String {
@@ -166,11 +157,6 @@ fun Note.edit(context: Context) {
   context.startActivity(EditNoteActivity.makeEditNoteIntent(context, this))
 }
 
-fun Note.hasImages(): Boolean {
-  val imageFormats = contentAsFormats().filter { it.type == FormatType.IMAGE }
-  return imageFormats.isNotEmpty()
-}
-
 fun Note.shareImages(context: Context) {
   val imageFormats = contentAsFormats().filter { it.type == FormatType.IMAGE }
   val imageFileUris = imageFormats
@@ -188,5 +174,5 @@ fun Note.copyToClipboard(context: Context) {
 }
 
 fun Note.share(context: Context) {
-  shareText(context, getFullText(), subject = getTitleForSharing())
+  shareText(context, getFullText(), subject = getTitle())
 }

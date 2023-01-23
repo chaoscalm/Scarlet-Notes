@@ -5,9 +5,9 @@ import androidx.core.content.ContextCompat
 import com.maubis.scarlet.base.common.recycler.RecyclerItem
 import com.maubis.scarlet.base.common.utils.ColorUtil
 import com.maubis.scarlet.base.database.entities.Note
+import com.maubis.scarlet.base.editor.FormatType
 import com.maubis.scarlet.base.note.adjustedColor
 import com.maubis.scarlet.base.note.getDisplayTime
-import com.maubis.scarlet.base.note.getImageFile
 import com.maubis.scarlet.base.note.getTagString
 
 class NoteRecyclerItem(context: Context, val note: Note) : RecyclerItem() {
@@ -43,7 +43,12 @@ class NoteRecyclerItem(context: Context, val note: Note) : RecyclerItem() {
     false -> ContextCompat.getColor(context, com.github.bijoysingh.uibasics.R.color.light_hint_text)
   }
 
-  val imageSource = note.getImageFile()
+  val imageSource = getFirstImageFileName(note)
 
   override val type = Type.NOTE
+
+  private fun getFirstImageFileName(note: Note): String {
+    val format = note.contentAsFormats().firstOrNull { it.type == FormatType.IMAGE }
+    return format?.text ?: ""
+  }
 }

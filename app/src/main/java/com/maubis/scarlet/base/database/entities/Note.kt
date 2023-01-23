@@ -43,6 +43,11 @@ class Note() {
         return Formats.fromNoteContent(this.content)
     }
 
+    fun hasImages(): Boolean {
+        val imageFormats = contentAsFormats().filter { it.type == FormatType.IMAGE }
+        return imageFormats.isNotEmpty()
+    }
+
     fun toggleTag(tag: Tag) {
         if (tags.contains(tag.uuid)) {
             tags.remove(tag.uuid)

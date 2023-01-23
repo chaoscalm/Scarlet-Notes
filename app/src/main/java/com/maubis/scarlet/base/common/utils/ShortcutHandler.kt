@@ -13,12 +13,12 @@ import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ShortcutIntentHandlerActivity
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.note.getFullText
-import com.maubis.scarlet.base.note.getTitleForSharing
+import com.maubis.scarlet.base.note.getTitle
 
 @RequiresApi(Build.VERSION_CODES.O)
 object ShortcutHandler {
   fun addLauncherShortcut(context: Context, note: Note) {
-    var title = note.getTitleForSharing()
+    var title = note.getTitle()
     if (title.isBlank()) {
       title = note.getFullText().split("\n").firstOrNull() ?: "Note"
     }
