@@ -3,6 +3,8 @@ package com.maubis.scarlet.base.note
 import android.content.Context
 import androidx.core.content.FileProvider
 import com.maubis.markdown.Markdown
+import com.maubis.markdown.MarkdownConfig
+import com.maubis.markdown.spannable.*
 import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.ScarletApp.Companion.appTheme
 import com.maubis.scarlet.base.ScarletApp.Companion.data
@@ -83,7 +85,39 @@ fun Note.getTextForWidget(): CharSequence {
   }
 
   val text = getFullTextForDirectMarkdownRender()
-  return Markdown.render(text, true)
+  return renderMarkdownForNotePreview(text)
+}
+
+fun renderMarkdownForNotePreview(text: String): CharSequence {
+  return Markdown.renderWithCustomFormatting(text, strip = true) { spannable, spanInfo ->
+    val start = spanInfo.start
+    val end = spanInfo.end
+    when (spanInfo.markdownType) {
+      MarkdownType.HEADING_1 -> {
+        spannable.relativeSize(1.2f, start, end)
+          .font(MarkdownConfig.spanConfig.headingTypeface, start, end)
+          .bold(start, end)
+        true
+      }
+      MarkdownType.HEADING_2 -> {
+        spannable.relativeSize(1.1f, start, end)
+          .font(MarkdownConfig.spanConfig.headingTypeface, start, end)
+          .bold(start, end)
+        true
+      }
+      MarkdownType.HEADING_3 -> {
+        spannable.relativeSize(1.0f, start, end)
+          .font(MarkdownConfig.spanConfig.headingTypeface, start, end)
+          .bold(start, end)
+        true
+      }
+      MarkdownType.CHECKLIST_CHECKED -> {
+        spannable.strike(start, end)
+        true
+      }
+      else -> false
+    }
+  }
 }
 
 fun Note.getDisplayTime(context: Context): String {

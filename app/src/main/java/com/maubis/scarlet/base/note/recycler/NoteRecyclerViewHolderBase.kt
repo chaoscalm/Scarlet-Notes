@@ -12,8 +12,6 @@ import androidx.cardview.widget.CardView
 import androidx.core.view.isVisible
 import com.github.bijoysingh.starter.recyclerview.RecyclerViewHolder
 import com.maubis.markdown.Markdown
-import com.maubis.markdown.MarkdownConfig
-import com.maubis.markdown.spannable.*
 import com.maubis.scarlet.base.R
 import com.maubis.scarlet.base.ScarletApp
 import com.maubis.scarlet.base.ScarletApp.Companion.appTypeface
@@ -25,6 +23,7 @@ import com.maubis.scarlet.base.database.entities.NoteState
 import com.maubis.scarlet.base.note.getFullTextForDirectMarkdownRender
 import com.maubis.scarlet.base.note.getTitleForSharing
 import com.maubis.scarlet.base.note.isLockedButAppUnlocked
+import com.maubis.scarlet.base.note.renderMarkdownForNotePreview
 
 open class NoteRecyclerViewHolderBase(context: Context, view: View) : RecyclerViewHolder<RecyclerItem>(context, view) {
 
@@ -63,7 +62,7 @@ open class NoteRecyclerViewHolderBase(context: Context, view: View) : RecyclerVi
 
   private fun setContent(item: NoteRecyclerItem) {
     content.setTypeface(appTypeface.text(), Typeface.NORMAL)
-    content.text = getLockedAwarePreviewText(item.note)
+    content.text = renderMarkdownForNotePreview(getLockedAwarePreviewText(item.note))
     content.maxLines = ScarletApp.prefs.notePreviewLines
     content.setTextColor(item.contentColor)
   }
@@ -137,49 +136,16 @@ open class NoteRecyclerViewHolderBase(context: Context, view: View) : RecyclerVi
     moreOptions.setIconTint(item.actionBarIconColor)
   }
 
-  private fun getLockedAwarePreviewText(note: Note): CharSequence {
+  private fun getLockedAwarePreviewText(note: Note): String {
     val lockedText = "*********************************************"
     return when {
       note.isLockedButAppUnlocked() || !note.locked -> {
         // Avoid UI lag in notes list when note is huge.
         // 1500 characters are enough to display 15 lines of note preview on a full-width column
         // in landscape orientation.
-        val text = note.getFullTextForDirectMarkdownRender().take(1500)
-        renderMarkdownForList(text)
+        note.getFullTextForDirectMarkdownRender().take(1500)
       }
-      else -> renderMarkdownForList("# ${note.getTitleForSharing()}\n\n```\n$lockedText\n```")
-    }
-  }
-
-  private fun renderMarkdownForList(text: String): CharSequence {
-    return Markdown.renderWithCustomFormatting(text, strip = true) { spannable, spanInfo ->
-      val start = spanInfo.start
-      val end = spanInfo.end
-      when (spanInfo.markdownType) {
-        MarkdownType.HEADING_1 -> {
-          spannable.relativeSize(1.2f, start, end)
-            .font(MarkdownConfig.spanConfig.headingTypeface, start, end)
-            .bold(start, end)
-          true
-        }
-        MarkdownType.HEADING_2 -> {
-          spannable.relativeSize(1.1f, start, end)
-            .font(MarkdownConfig.spanConfig.headingTypeface, start, end)
-            .bold(start, end)
-          true
-        }
-        MarkdownType.HEADING_3 -> {
-          spannable.relativeSize(1.0f, start, end)
-            .font(MarkdownConfig.spanConfig.headingTypeface, start, end)
-            .bold(start, end)
-          true
-        }
-        MarkdownType.CHECKLIST_CHECKED -> {
-          spannable.strike(start, end)
-          true
-        }
-        else -> false
-      }
+      else -> "# ${note.getTitleForSharing()}\n\n```\n$lockedText\n```"
     }
   }
 
