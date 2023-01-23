@@ -54,7 +54,7 @@ class OpenFileActivity : SecuredActivity() {
   }
 
   private fun setupListeners() {
-    views.toolbar.backButton.setOnClickListener { onBackPressed() }
+    views.toolbar.backButton.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
     views.toolbar.importButton.setOnClickListener {
       lifecycleScope.launch {
         val note = Note.create(title = "", description = contentText)

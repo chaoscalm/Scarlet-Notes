@@ -2,6 +2,7 @@ package com.maubis.scarlet.base.security
 
 import android.content.Context
 import android.os.Bundle
+import androidx.activity.addCallback
 import com.facebook.litho.Component
 import com.facebook.litho.ComponentContext
 import com.facebook.litho.LithoView
@@ -25,6 +26,8 @@ class AppLockActivity : ThemedActivity() {
 
     setView()
     applyTheming()
+
+    onBackPressedDispatcher.addCallback(this) { finishAffinity() }
   }
 
   private fun setView() {
@@ -41,12 +44,6 @@ class AppLockActivity : ThemedActivity() {
       }
       .build()
     setContentView(LithoView.create(componentContext, component))
-  }
-
-  override fun onBackPressed() {
-    super.onBackPressed()
-    if (isFinishing)
-      finishAffinity()
   }
 
   override fun onResume() {

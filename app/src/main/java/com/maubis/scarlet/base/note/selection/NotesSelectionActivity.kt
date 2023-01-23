@@ -101,7 +101,7 @@ class NotesSelectionActivity : SelectableNotesActivityBase() {
     adapter.notifyDataSetChanged()
 
     if (selectedNotes.isEmpty()) {
-      onBackPressed()
+      onBackPressedDispatcher.onBackPressed()
     }
   }
 

@@ -44,7 +44,7 @@ abstract class SelectableNotesActivityBase : SecuredActivity(), INoteSelectorAct
     setupRecyclerView()
     loadNotes()
     findViewById<View>(R.id.back_button).setOnClickListener {
-      onBackPressed()
+      onBackPressedDispatcher.onBackPressed()
     }
   }
 

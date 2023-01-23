@@ -171,11 +171,6 @@ open class EditNoteActivity : ViewNoteActivity() {
     saveNote()
   }
 
-  override fun onBackPressed() {
-    super.onBackPressed()
-    tryClosingTheKeyboard()
-  }
-
   override fun onResumeAction() {
     // do nothing
   }
