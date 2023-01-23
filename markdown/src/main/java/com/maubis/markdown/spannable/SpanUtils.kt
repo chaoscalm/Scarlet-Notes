@@ -101,3 +101,12 @@ fun Spannable.font(font: Typeface, start: Int, end: Int): Spannable {
   this.setSpan(TypefaceSpanCompat(font), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
   return this
 }
+
+fun Spannable.bullet(nestingLevel: Int, start: Int, end: Int): Spannable {
+  val bulletMargin = 12
+  if (nestingLevel > 1) {
+    this.setSpan(LeadingMarginSpan.Standard(bulletMargin * nestingLevel), start, end, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+  }
+  this.setSpan(BulletSpan(bulletMargin), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+  return this
+}

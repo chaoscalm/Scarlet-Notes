@@ -20,7 +20,7 @@ import com.maubis.scarlet.base.common.recycler.RecyclerItem
 import com.maubis.scarlet.base.common.utils.setIconTint
 import com.maubis.scarlet.base.database.entities.Note
 import com.maubis.scarlet.base.database.entities.NoteState
-import com.maubis.scarlet.base.note.getFullTextForDirectMarkdownRender
+import com.maubis.scarlet.base.note.getFullTextForPreview
 import com.maubis.scarlet.base.note.getTitleForSharing
 import com.maubis.scarlet.base.note.isLockedButAppUnlocked
 import com.maubis.scarlet.base.note.renderMarkdownForNotePreview
@@ -143,7 +143,7 @@ open class NoteRecyclerViewHolderBase(context: Context, view: View) : RecyclerVi
         // Avoid UI lag in notes list when note is huge.
         // 1500 characters are enough to display 15 lines of note preview on a full-width column
         // in landscape orientation.
-        note.getFullTextForDirectMarkdownRender().take(1500)
+        note.getFullTextForPreview().take(1500)
       }
       else -> "# ${note.getTitleForSharing()}\n\n```\n$lockedText\n```"
     }

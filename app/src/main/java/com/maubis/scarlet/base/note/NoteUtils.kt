@@ -20,14 +20,6 @@ import com.maubis.scarlet.base.security.PincodeBottomSheet
  ************* Content and Display Information Functions Functions ********************
  **************************************************************************************/
 
-fun Note.getFullTextForDirectMarkdownRender(): String {
-  var text = getFullText()
-  text = text.replace("\n[x] ", "\n\u2611 ")
-  text = text.replace("\n[ ] ", "\n\u2610 ")
-  text = text.replace("\n- ", "\n\u2022 ")
-  return text
-}
-
 fun Note.getTitleForSharing(): String {
   val formats = contentAsFormats()
   if (formats.isEmpty()) {
@@ -75,6 +67,15 @@ fun Note.getFullText(): String {
     .trim()
 }
 
+fun Note.getFullTextForPreview(): String {
+  var text = getFullText()
+  // Ideally we'd use a custom LeadingMarginSpan to render these "fake checkboxes". However,
+  // custom spans don't seem to work in widgets so this is the best compromise we can do
+  text = text.replace("\n[x] ", "\n\u2611 ")
+  text = text.replace("\n[ ] ", "\n\u2610 ")
+  return text
+}
+
 fun Note.isLockedButAppUnlocked(): Boolean {
   return this.locked && !needsLockCheck() && ScarletApp.prefs.lockApp
 }
@@ -84,8 +85,7 @@ fun Note.getTextForWidget(): CharSequence {
     return "*********************************************"
   }
 
-  val text = getFullTextForDirectMarkdownRender()
-  return renderMarkdownForNotePreview(text)
+  return renderMarkdownForNotePreview(getFullTextForPreview())
 }
 
 fun renderMarkdownForNotePreview(text: String): CharSequence {
@@ -111,8 +111,16 @@ fun renderMarkdownForNotePreview(text: String): CharSequence {
           .bold(start, end)
         true
       }
-      MarkdownType.CHECKLIST_CHECKED -> {
-        spannable.strike(start, end)
+      MarkdownType.BULLET_1 -> {
+        spannable.bullet(1, start, end)
+        true
+      }
+      MarkdownType.BULLET_2 -> {
+        spannable.bullet(2, start, end)
+        true
+      }
+      MarkdownType.BULLET_3 -> {
+        spannable.bullet(3, start, end)
         true
       }
       else -> false
